@@ -11,10 +11,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.ImmutableMap;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -31,6 +27,19 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+
+import net.minecraft.world.biome.Biome;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.item.Item;
+import net.minecraft.block.Block;
 
 import java.util.function.Supplier;
 
