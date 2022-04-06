@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "wyrmsofnyrus:blocks/hivelight1",
+    "particle": "wyrmsofnyrus:blocks/hivelight1"
+  }
+}

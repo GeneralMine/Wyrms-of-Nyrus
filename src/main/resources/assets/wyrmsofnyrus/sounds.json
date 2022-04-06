@@ -1,0 +1,65 @@
+{
+  "wyrmclicks": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:clicking1",
+        "stream": false
+      }
+    ]
+  },
+  "wyrmclicks2": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:clicking2",
+        "stream": false
+      }
+    ]
+  },
+  "wyrmclicks3": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:clicking3",
+        "stream": false
+      }
+    ]
+  },
+  "wyrmclicks4": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:clicking4",
+        "stream": false
+      }
+    ]
+  },
+  "hiss2": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:hiss2",
+        "stream": false
+      }
+    ]
+  },
+  "grubhurt": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:gruburt",
+        "stream": false
+      }
+    ]
+  },
+  "grubidle": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:grubdle",
+        "stream": false
+      }
+    ]
+  }
+}

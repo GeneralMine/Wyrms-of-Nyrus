@@ -1,0 +1,224 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.wyrmprobermodel",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 2.5,
+        "visible_bounds_offset": [
+          0,
+          0.75,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "Body",
+          "pivot": [
+            -0.08333,
+            4.54167,
+            0.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.5,
+                5.75,
+                -5
+              ],
+              "size": [
+                5,
+                4,
+                11
+              ],
+              "uv": [
+                13,
+                23
+              ]
+            },
+            {
+              "origin": [
+                -3.5,
+                4.75,
+                -3
+              ],
+              "size": [
+                6.5,
+                2.25,
+                8
+              ],
+              "uv": [
+                0,
+                13
+              ]
+            }
+          ]
+        },
+        {
+          "name": "wingLeft",
+          "parent": "Body",
+          "pivot": [
+            2.5,
+            8.5,
+            1.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1,
+                8,
+                -1
+              ],
+              "size": [
+                9,
+                1,
+                5
+              ],
+              "uv": [
+                8,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "name": "wingRight",
+          "parent": "Body",
+          "pivot": [
+            -2.5,
+            8.5,
+            1.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -10,
+                8,
+                -1
+              ],
+              "size": [
+                9,
+                1,
+                5
+              ],
+              "uv": [
+                8,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "name": "End",
+          "parent": "Body",
+          "pivot": [
+            0,
+            7,
+            8.5
+          ],
+          "rotation": [
+            -15,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.25,
+                5,
+                3
+              ],
+              "size": [
+                4.5,
+                3.25,
+                11
+              ],
+              "uv": [
+                34,
+                13
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Body",
+          "pivot": [
+            0,
+            0,
+            -3
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                4,
+                -11
+              ],
+              "size": [
+                6,
+                6,
+                7
+              ],
+              "uv": [
+                38,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Prob",
+          "parent": "Head",
+          "pivot": [
+            0.5,
+            4.5,
+            -12.5
+          ],
+          "rotation": [
+            60,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -0.5,
+                3.61603,
+                -18.66506
+              ],
+              "size": [
+                1,
+                1,
+                7
+              ],
+              "uv": [
+                29,
+                6
+              ]
+            },
+            {
+              "origin": [
+                -1.75,
+                2.26795,
+                -12.36603
+              ],
+              "size": [
+                3.5,
+                3.5,
+                4.5
+              ],
+              "uv": [
+                22,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

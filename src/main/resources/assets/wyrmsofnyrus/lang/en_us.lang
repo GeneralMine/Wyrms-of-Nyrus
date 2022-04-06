@@ -1,0 +1,13 @@
+itemGroup.tabwyrms=Wyrms
+item.wyrmico.name=Wyrmico
+tile.hivecreepblockinactive.name=Hive Creep Block
+tile.hivecreepblock.name=Hive Creep Block
+item.creepshard.name=Creepshard
+entity.hexe_pod.name=Hexe Pod
+tile.hivecreeptopinactive.name=Hive Creep Surface
+item.metalcomb_array.name=Metalcomb Array
+tile.hivecreeptop.name=Hive Creep Surface
+entity.royalgrub.name=Royal Grub
+entity.wyrmprober.name=Wyrm Prober
+entity.wyrmling.name=Wyrmling
+tile.wyrm_lights_orange.name=Wyrm Lights Orange
