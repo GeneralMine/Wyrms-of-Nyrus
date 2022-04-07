@@ -69,7 +69,7 @@ public class EntityHexePod extends ElementswyrmsofnyrusMod.ModElement {
 	public static class EntityCustom extends EntityMob {
 		public EntityCustom(World world) {
 			super(world);
-			setSize(2f, 2f);
+			setSize(1f, 1f);
 			experienceValue = 0;
 			this.isImmuneToFire = true;
 			setNoAI(!true);
@@ -79,7 +79,8 @@ public class EntityHexePod extends ElementswyrmsofnyrusMod.ModElement {
 		@Override
 		protected void initEntityAI() {
 			super.initEntityAI();
-			this.tasks.addTask(1, new EntityAILookIdle(this));
+			// We don't need AI running for this thing. It isn't needed for droppods
+			//this.tasks.addTask(1, new EntityAILookIdle(this));
 		}
 
 		@Override
@@ -157,7 +158,7 @@ public class EntityHexePod extends ElementswyrmsofnyrusMod.ModElement {
 			if (this.getEntityAttribute(SharedMonsterAttributes.ARMOR) != null)
 				this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.5D);
 			if (this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED) != null)
-				this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+				this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.05D);
 			if (this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH) != null)
 				this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2D);
 			if (this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) != null)

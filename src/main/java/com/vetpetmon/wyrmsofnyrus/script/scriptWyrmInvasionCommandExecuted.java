@@ -19,14 +19,6 @@ public class scriptWyrmInvasionCommandExecuted extends ElementswyrmsofnyrusMod.M
 	}
 
 	public static void executescript(Map<String, Object> dependencies) {
-		if (dependencies.get("cmdparams") == null) {
-			System.err.println("Failed to load dependency cmdparams for script WyrmInvasionCommandExecuted!");
-			return;
-		}
-		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for script WyrmInvasionCommandExecuted!");
-			return;
-		}
 		HashMap cmdparams = (HashMap) dependencies.get("cmdparams");
 		World world = (World) dependencies.get("world");
 		if ((((new Object() {

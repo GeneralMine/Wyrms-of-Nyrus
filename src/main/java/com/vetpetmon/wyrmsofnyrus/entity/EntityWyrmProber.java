@@ -20,6 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.monster.EntityHusk;
 import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -131,9 +132,15 @@ public class EntityWyrmProber extends ElementswyrmsofnyrusMod.ModElement {
 					return EntityCustom.this.width * 1.5 * EntityCustom.this.height * 1.5 + attackTarget.height;
 				}
 			});
+
+
 			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayerMP.class, false, true));
-			this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityHusk.class, false, true));
-			this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityZombie.class, false, true));
+			this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityAnimal.class, false, true));
+			this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, false, true));
+
+			//this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityHusk.class, false, true));
+			//this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityZombie.class, false, true));
+
 			this.tasks.addTask(5, new EntityAIWander(this, 2, 20) {
 				@Override
 				protected Vec3d getPosition() {

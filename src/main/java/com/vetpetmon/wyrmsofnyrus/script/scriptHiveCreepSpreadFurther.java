@@ -21,22 +21,6 @@ public class scriptHiveCreepSpreadFurther extends ElementswyrmsofnyrusMod.ModEle
 	}
 
 	public static void executescript(Map<String, Object> dependencies) {
-		if (dependencies.get("x") == null) {
-			System.err.println("Failed to load dependency x for script HiveCreepSpreadFurther!");
-			return;
-		}
-		if (dependencies.get("y") == null) {
-			System.err.println("Failed to load dependency y for script HiveCreepSpreadFurther!");
-			return;
-		}
-		if (dependencies.get("z") == null) {
-			System.err.println("Failed to load dependency z for script HiveCreepSpreadFurther!");
-			return;
-		}
-		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for script HiveCreepSpreadFurther!");
-			return;
-		}
 		int x = (int) dependencies.get("x");
 		int y = (int) dependencies.get("y");
 		int z = (int) dependencies.get("z");

@@ -19,10 +19,6 @@ public class scriptWyrmsTestCommandExecuted extends ElementswyrmsofnyrusMod.ModE
 	}
 
 	public static void executescript(Map<String, Object> dependencies) {
-		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for script WyrmsTestCommandExecuted!");
-			return;
-		}
 		World world = (World) dependencies.get("world");
 		if ((world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
 			{
