@@ -1,4 +1,4 @@
-package com.vetpetmon.wyrmsofnyrus.procedure;
+package com.vetpetmon.wyrmsofnyrus.script;
 
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
@@ -12,26 +12,26 @@ import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepTop;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
-public class ProcedureHiveCreepBlockUpdateTick extends ElementswyrmsofnyrusMod.ModElement {
-	public ProcedureHiveCreepBlockUpdateTick(ElementswyrmsofnyrusMod instance) {
+public class scriptHiveCreepBlockUpdateTick extends ElementswyrmsofnyrusMod.ModElement {
+	public scriptHiveCreepBlockUpdateTick(ElementswyrmsofnyrusMod instance) {
 		super(instance, 9);
 	}
 
-	public static void executeProcedure(Map<String, Object> dependencies) {
+	public static void executescript(Map<String, Object> dependencies) {
 		if (dependencies.get("x") == null) {
-			System.err.println("Failed to load dependency x for procedure HiveCreepBlockUpdateTick!");
+			System.err.println("Failed to load dependency x for script HiveCreepBlockUpdateTick!");
 			return;
 		}
 		if (dependencies.get("y") == null) {
-			System.err.println("Failed to load dependency y for procedure HiveCreepBlockUpdateTick!");
+			System.err.println("Failed to load dependency y for script HiveCreepBlockUpdateTick!");
 			return;
 		}
 		if (dependencies.get("z") == null) {
-			System.err.println("Failed to load dependency z for procedure HiveCreepBlockUpdateTick!");
+			System.err.println("Failed to load dependency z for script HiveCreepBlockUpdateTick!");
 			return;
 		}
 		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for procedure HiveCreepBlockUpdateTick!");
+			System.err.println("Failed to load dependency world for script HiveCreepBlockUpdateTick!");
 			return;
 		}
 		int x = (int) dependencies.get("x");
@@ -58,7 +58,7 @@ public class ProcedureHiveCreepBlockUpdateTick extends ElementswyrmsofnyrusMod.M
 					$_dependencies.put("y", y);
 					$_dependencies.put("z", z);
 					$_dependencies.put("world", world);
-					ProcedureHiveCreepSpreadFurther.executeProcedure($_dependencies);
+					scriptHiveCreepSpreadFurther.executescript($_dependencies);
 				}
 			}
 		}

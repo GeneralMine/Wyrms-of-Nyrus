@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import com.vetpetmon.wyrmsofnyrus.procedure.ProcedureWyrmsTestCommandExecuted;
+import com.vetpetmon.wyrmsofnyrus.script.scriptWyrmsTestCommandExecuted;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
@@ -83,7 +83,7 @@ public class CommandWyrmsTest extends ElementswyrmsofnyrusMod.ModElement {
 				{
 					Map<String, Object> $_dependencies = new HashMap<>();
 					$_dependencies.put("world", world);
-					ProcedureWyrmsTestCommandExecuted.executeProcedure($_dependencies);
+					scriptWyrmsTestCommandExecuted.executescript($_dependencies);
 				}
 			}
 		}

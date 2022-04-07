@@ -1,4 +1,4 @@
-package com.vetpetmon.wyrmsofnyrus.procedure;
+package com.vetpetmon.wyrmsofnyrus.script;
 
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -13,14 +13,14 @@ import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrusModVariables;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
-public class ProcedureWyrmsTestCommandExecuted extends ElementswyrmsofnyrusMod.ModElement {
-	public ProcedureWyrmsTestCommandExecuted(ElementswyrmsofnyrusMod instance) {
+public class scriptWyrmsTestCommandExecuted extends ElementswyrmsofnyrusMod.ModElement {
+	public scriptWyrmsTestCommandExecuted(ElementswyrmsofnyrusMod instance) {
 		super(instance, 7);
 	}
 
-	public static void executeProcedure(Map<String, Object> dependencies) {
+	public static void executescript(Map<String, Object> dependencies) {
 		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for procedure WyrmsTestCommandExecuted!");
+			System.err.println("Failed to load dependency world for script WyrmsTestCommandExecuted!");
 			return;
 		}
 		World world = (World) dependencies.get("world");

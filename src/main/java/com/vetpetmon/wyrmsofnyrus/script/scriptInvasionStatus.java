@@ -1,4 +1,4 @@
-package com.vetpetmon.wyrmsofnyrus.procedure;
+package com.vetpetmon.wyrmsofnyrus.script;
 
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -13,16 +13,12 @@ import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrusModVariables;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
-public class ProcedureInvasionStatus extends ElementswyrmsofnyrusMod.ModElement {
-	public ProcedureInvasionStatus(ElementswyrmsofnyrusMod instance) {
+public class scriptInvasionStatus extends ElementswyrmsofnyrusMod.ModElement {
+	public scriptInvasionStatus(ElementswyrmsofnyrusMod instance) {
 		super(instance, 12);
 	}
 
-	public static void executeProcedure(Map<String, Object> dependencies) {
-		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for procedure InvasionStatus!");
-			return;
-		}
+	public static void executescript(Map<String, Object> dependencies) {
 		World world = (World) dependencies.get("world");
 		if (((wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 100)) {
 			wyrmsofnyrusModVariables.wyrmInvasionStatus = (String) "Arriving";
@@ -48,7 +44,7 @@ public class ProcedureInvasionStatus extends ElementswyrmsofnyrusMod.ModElement 
 			java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
 			dependencies.put("world", world);
 			dependencies.put("event", event);
-			this.executeProcedure(dependencies);
+			this.executescript(dependencies);
 		}
 	}
 

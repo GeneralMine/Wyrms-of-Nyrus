@@ -1,4 +1,4 @@
-package com.vetpetmon.wyrmsofnyrus.procedure;
+package com.vetpetmon.wyrmsofnyrus.script;
 
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
@@ -15,26 +15,26 @@ import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepBlock;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
-public class ProcedureHiveCreepSpreadFurther extends ElementswyrmsofnyrusMod.ModElement {
-	public ProcedureHiveCreepSpreadFurther(ElementswyrmsofnyrusMod instance) {
+public class scriptHiveCreepSpreadFurther extends ElementswyrmsofnyrusMod.ModElement {
+	public scriptHiveCreepSpreadFurther(ElementswyrmsofnyrusMod instance) {
 		super(instance, 10);
 	}
 
-	public static void executeProcedure(Map<String, Object> dependencies) {
+	public static void executescript(Map<String, Object> dependencies) {
 		if (dependencies.get("x") == null) {
-			System.err.println("Failed to load dependency x for procedure HiveCreepSpreadFurther!");
+			System.err.println("Failed to load dependency x for script HiveCreepSpreadFurther!");
 			return;
 		}
 		if (dependencies.get("y") == null) {
-			System.err.println("Failed to load dependency y for procedure HiveCreepSpreadFurther!");
+			System.err.println("Failed to load dependency y for script HiveCreepSpreadFurther!");
 			return;
 		}
 		if (dependencies.get("z") == null) {
-			System.err.println("Failed to load dependency z for procedure HiveCreepSpreadFurther!");
+			System.err.println("Failed to load dependency z for script HiveCreepSpreadFurther!");
 			return;
 		}
 		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for procedure HiveCreepSpreadFurther!");
+			System.err.println("Failed to load dependency world for script HiveCreepSpreadFurther!");
 			return;
 		}
 		int x = (int) dependencies.get("x");

@@ -1,4 +1,4 @@
-package com.vetpetmon.wyrmsofnyrus.procedure;
+package com.vetpetmon.wyrmsofnyrus.script;
 
 import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
@@ -10,30 +10,30 @@ import com.vetpetmon.wyrmsofnyrus.entity.EntityHexePod;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
-public class ProcedureHexePodEntityDies extends ElementswyrmsofnyrusMod.ModElement {
-	public ProcedureHexePodEntityDies(ElementswyrmsofnyrusMod instance) {
+public class scriptHexePodEntityDies extends ElementswyrmsofnyrusMod.ModElement {
+	public scriptHexePodEntityDies(ElementswyrmsofnyrusMod instance) {
 		super(instance, 24);
 	}
 
-	public static void executeProcedure(Map<String, Object> dependencies) {
+	public static void executescript(Map<String, Object> dependencies) {
 		if (dependencies.get("entity") == null) {
-			System.err.println("Failed to load dependency entity for procedure HexePodEntityDies!");
+			System.err.println("Failed to load dependency entity for script HexePodEntityDies!");
 			return;
 		}
 		if (dependencies.get("x") == null) {
-			System.err.println("Failed to load dependency x for procedure HexePodEntityDies!");
+			System.err.println("Failed to load dependency x for script HexePodEntityDies!");
 			return;
 		}
 		if (dependencies.get("y") == null) {
-			System.err.println("Failed to load dependency y for procedure HexePodEntityDies!");
+			System.err.println("Failed to load dependency y for script HexePodEntityDies!");
 			return;
 		}
 		if (dependencies.get("z") == null) {
-			System.err.println("Failed to load dependency z for procedure HexePodEntityDies!");
+			System.err.println("Failed to load dependency z for script HexePodEntityDies!");
 			return;
 		}
 		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for procedure HexePodEntityDies!");
+			System.err.println("Failed to load dependency world for script HexePodEntityDies!");
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");

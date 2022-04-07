@@ -17,12 +17,12 @@ import java.util.HashMap;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import com.vetpetmon.wyrmsofnyrus.procedure.ProcedureWyrmInvationCommandExecuted;
+import com.vetpetmon.wyrmsofnyrus.script.scriptWyrmInvasionCommandExecuted;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
-public class CommandWyrmInvationCommand extends ElementswyrmsofnyrusMod.ModElement {
-	public CommandWyrmInvationCommand(ElementswyrmsofnyrusMod instance) {
+public class CommandWyrmInvasionCommand extends ElementswyrmsofnyrusMod.ModElement {
+	public CommandWyrmInvasionCommand(ElementswyrmsofnyrusMod instance) {
 		super(instance, 14);
 	}
 
@@ -84,7 +84,7 @@ public class CommandWyrmInvationCommand extends ElementswyrmsofnyrusMod.ModEleme
 					Map<String, Object> $_dependencies = new HashMap<>();
 					$_dependencies.put("cmdparams", cmdparams);
 					$_dependencies.put("world", world);
-					ProcedureWyrmInvationCommandExecuted.executeProcedure($_dependencies);
+					scriptWyrmInvasionCommandExecuted.executescript($_dependencies);
 				}
 			}
 		}

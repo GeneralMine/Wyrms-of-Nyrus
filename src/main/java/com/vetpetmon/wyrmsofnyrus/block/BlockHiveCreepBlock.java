@@ -24,8 +24,8 @@ import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 
-import com.vetpetmon.wyrmsofnyrus.procedure.ProcedureInvasionBlockSpread;
-import com.vetpetmon.wyrmsofnyrus.procedure.ProcedureHiveCreepBlockUpdateTick;
+import com.vetpetmon.wyrmsofnyrus.script.scriptInvasionBlockSpread;
+import com.vetpetmon.wyrmsofnyrus.script.scriptHiveCreepBlockUpdateTick;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
@@ -70,7 +70,7 @@ public class BlockHiveCreepBlock extends ElementswyrmsofnyrusMod.ModElement {
 
 		@Override
 		public int tickRate(World world) {
-			return 500;
+			return 400;
 		}
 
 		@Override
@@ -83,7 +83,7 @@ public class BlockHiveCreepBlock extends ElementswyrmsofnyrusMod.ModElement {
 			{
 				Map<String, Object> $_dependencies = new HashMap<>();
 				$_dependencies.put("world", world);
-				ProcedureInvasionBlockSpread.executeProcedure($_dependencies);
+				scriptInvasionBlockSpread.executescript($_dependencies);
 			}
 		}
 
@@ -99,7 +99,7 @@ public class BlockHiveCreepBlock extends ElementswyrmsofnyrusMod.ModElement {
 				$_dependencies.put("y", y);
 				$_dependencies.put("z", z);
 				$_dependencies.put("world", world);
-				ProcedureHiveCreepBlockUpdateTick.executeProcedure($_dependencies);
+				scriptHiveCreepBlockUpdateTick.executescript($_dependencies);
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
 		}

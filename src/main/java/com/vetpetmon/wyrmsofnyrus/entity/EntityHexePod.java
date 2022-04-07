@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-import com.vetpetmon.wyrmsofnyrus.procedure.ProcedureHexePodEntityDies;
+import com.vetpetmon.wyrmsofnyrus.script.scriptHexePodEntityDies;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
@@ -147,7 +147,7 @@ public class EntityHexePod extends ElementswyrmsofnyrusMod.ModElement {
 				$_dependencies.put("y", y);
 				$_dependencies.put("z", z);
 				$_dependencies.put("world", world);
-				ProcedureHexePodEntityDies.executeProcedure($_dependencies);
+				scriptHexePodEntityDies.executescript($_dependencies);
 			}
 		}
 

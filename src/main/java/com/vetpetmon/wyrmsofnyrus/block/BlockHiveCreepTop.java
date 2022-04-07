@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 
-import com.vetpetmon.wyrmsofnyrus.procedure.ProcedureHiveCreepSpreadFurther;
+import com.vetpetmon.wyrmsofnyrus.script.scriptHiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
@@ -71,7 +71,7 @@ public class BlockHiveCreepTop extends ElementswyrmsofnyrusMod.ModElement {
 
 		@Override
 		public int tickRate(World world) {
-			return 500;
+			return 400;
 		}
 
 		@Override
@@ -100,7 +100,7 @@ public class BlockHiveCreepTop extends ElementswyrmsofnyrusMod.ModElement {
 				$_dependencies.put("y", y);
 				$_dependencies.put("z", z);
 				$_dependencies.put("world", world);
-				ProcedureHiveCreepSpreadFurther.executeProcedure($_dependencies);
+				scriptHiveCreepSpreadFurther.executescript($_dependencies);
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
 		}

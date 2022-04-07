@@ -1,4 +1,4 @@
-package com.vetpetmon.wyrmsofnyrus.procedure;
+package com.vetpetmon.wyrmsofnyrus.script;
 
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -14,22 +14,22 @@ import com.vetpetmon.wyrmsofnyrus.entity.EntityHexePod;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
-public class ProcedureInvasionEvent extends ElementswyrmsofnyrusMod.ModElement {
-	public ProcedureInvasionEvent(ElementswyrmsofnyrusMod instance) {
+public class scriptInvasionEvent extends ElementswyrmsofnyrusMod.ModElement {
+	public scriptInvasionEvent(ElementswyrmsofnyrusMod instance) {
 		super(instance, 25);
 	}
 
-	public static void executeProcedure(Map<String, Object> dependencies) {
+	public static void executescript(Map<String, Object> dependencies) {
 		if (dependencies.get("x") == null) {
-			System.err.println("Failed to load dependency x for procedure InvasionEvent!");
+			System.err.println("Failed to load dependency x for script InvasionEvent!");
 			return;
 		}
 		if (dependencies.get("z") == null) {
-			System.err.println("Failed to load dependency z for procedure InvasionEvent!");
+			System.err.println("Failed to load dependency z for script InvasionEvent!");
 			return;
 		}
 		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for procedure InvasionEvent!");
+			System.err.println("Failed to load dependency world for script InvasionEvent!");
 			return;
 		}
 		int x = (int) dependencies.get("x");
@@ -91,7 +91,7 @@ public class ProcedureInvasionEvent extends ElementswyrmsofnyrusMod.ModElement {
 			dependencies.put("world", world);
 			dependencies.put("entity", entity);
 			dependencies.put("event", event);
-			this.executeProcedure(dependencies);
+			this.executescript(dependencies);
 		}
 	}
 
