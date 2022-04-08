@@ -11,7 +11,9 @@ import net.minecraft.world.World;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.client.Minecraft;
 
+// All variables are global here.
 public class wyrmsofnyrusModVariables {
+
 	public static String wyrmInvasionStatus = "";
 	public static class MapVariables extends WorldSavedData {
 		public static final String DATA_NAME = "wyrmsofnyrus_mapvars";
@@ -54,6 +56,7 @@ public class wyrmsofnyrusModVariables {
 	public static class WorldVariables extends WorldSavedData {
 		public static final String DATA_NAME = "wyrmsofnyrus_worldvars";
 		public double wyrmInvasionPoints = 0;
+		public double wyrmInvasionDifficulty = 1;
 		public WorldVariables() {
 			super(DATA_NAME);
 		}
@@ -64,12 +67,14 @@ public class wyrmsofnyrusModVariables {
 
 		@Override
 		public void readFromNBT(NBTTagCompound nbt) {
-			wyrmInvasionPoints = nbt.getDouble("wyrmInvasionPoints");
+			wyrmInvasionPoints				= 	nbt.getDouble("wyrmInvasionPoints");
+			wyrmInvasionDifficulty		= 	nbt.getDouble("wyrmInvasionDifficulty");
 		}
 
 		@Override
 		public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 			nbt.setDouble("wyrmInvasionPoints", wyrmInvasionPoints);
+			nbt.setDouble("wyrmInvasionDifficulty", wyrmInvasionDifficulty);
 			return nbt;
 		}
 

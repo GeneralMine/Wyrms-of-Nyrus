@@ -20,18 +20,6 @@ public class scriptInvasionEvent extends ElementswyrmsofnyrusMod.ModElement {
 	}
 
 	public static void executescript(Map<String, Object> dependencies) {
-		if (dependencies.get("x") == null) {
-			System.err.println("Failed to load dependency x for script InvasionEvent!");
-			return;
-		}
-		if (dependencies.get("z") == null) {
-			System.err.println("Failed to load dependency z for script InvasionEvent!");
-			return;
-		}
-		if (dependencies.get("world") == null) {
-			System.err.println("Failed to load dependency world for script InvasionEvent!");
-			return;
-		}
 		int x = (int) dependencies.get("x");
 		int z = (int) dependencies.get("z");
 		World world = (World) dependencies.get("world");

@@ -7,6 +7,8 @@ import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
+import com.google.common.base.Predicate;
+
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.World;
 import net.minecraft.util.math.Vec3d;
@@ -20,6 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.monster.EntityHusk;
 import net.minecraft.entity.ai.EntityFlyHelper;
@@ -40,7 +43,11 @@ import java.util.Random;
 import java.util.Iterator;
 import java.util.ArrayList;
 
+import com.vetpetmon.wyrmsofnyrus.entity.EntityHexePod;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityRoyalGrub;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmling;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrusModVariables;
 import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
 
 @ElementswyrmsofnyrusMod.ModElement.Tag
@@ -86,6 +93,7 @@ public class EntityWyrmProber extends ElementswyrmsofnyrusMod.ModElement {
 			setNoAI(!true);
 			this.navigator = new PathNavigateFlying(this, this.world);
 			this.moveHelper = new EntityFlyHelper(this);
+			enablePersistence();
 		}
 
 		@Override
@@ -113,7 +121,7 @@ public class EntityWyrmProber extends ElementswyrmsofnyrusMod.ModElement {
 				public void startExecuting() {
 					EntityLivingBase livingentity = EntityCustom.this.getAttackTarget();
 					Vec3d vec3d = livingentity.getPositionEyes(1);
-					EntityCustom.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 4);
+					EntityCustom.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 5);
 				}
 
 				@Override
@@ -124,24 +132,30 @@ public class EntityWyrmProber extends ElementswyrmsofnyrusMod.ModElement {
 						EntityCustom.this.attackEntityAsMob(livingentity);
 					} else if (d0 < 32) {
 						Vec3d vec3d = livingentity.getPositionEyes(1);
-						EntityCustom.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 4);
+						EntityCustom.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 5);
 					}
 				}
 
 				protected double getAttackReachSq(EntityLivingBase attackTarget) {
-					return EntityCustom.this.width * 1.5 * EntityCustom.this.height * 1.5 + attackTarget.height;
+					return EntityCustom.this.width * 1.5 * EntityCustom.this.height * 1.5 + attackTarget.height * 1.2;
 				}
 			});
 
 
 			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayerMP.class, false, true));
 			this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityAnimal.class, false, true));
-			this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityMob.class, false, true));
+			this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<EntityMob>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
+				public boolean apply(EntityMob target) {
+					return !((target instanceof EntityCreeper) || (target instanceof EntityHexePod.EntityCustom) || (target instanceof EntityWyrmling.EntityCustom) || (target instanceof EntityRoyalGrub.EntityCustom) || (target instanceof EntityWyrmProber.EntityCustom));
+					//return !(target instanceof EntityCreeper);
+					//return !(target instanceof EntityHexePod.EntityCustom);
+					//return !(target instanceof EntityWyrmling.EntityCustom);
+					//return !(target instanceof EntityRoyalGrub.EntityCustom);
+					//return !(target instanceof EntityWyrmProber.EntityCustom);
+				}
+			}));
 
-			//this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityHusk.class, false, true));
-			//this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityZombie.class, false, true));
-
-			this.tasks.addTask(5, new EntityAIWander(this, 2, 20) {
+			this.tasks.addTask(5, new EntityAIWander(this, 0.6D) {
 				@Override
 				protected Vec3d getPosition() {
 					Random random = EntityCustom.this.getRNG();
@@ -202,13 +216,13 @@ public class EntityWyrmProber extends ElementswyrmsofnyrusMod.ModElement {
 			if (this.getEntityAttribute(SharedMonsterAttributes.ARMOR) != null)
 				this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.2D);
 			if (this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED) != null)
-				this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2D);
+				this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
 			if (this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH) != null)
-				this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D);
+				this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D * (wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
 			if (this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) != null)
-				this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3D);
+				this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3D * (wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
 			this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-			this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(2);
+			this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(5);
 		}
 
 		@Override

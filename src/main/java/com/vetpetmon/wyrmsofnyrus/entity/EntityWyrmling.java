@@ -24,7 +24,7 @@ import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.Entity;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.model.ModelRenderer;
@@ -69,7 +69,7 @@ public class EntityWyrmling extends ElementswyrmsofnyrusMod.ModElement {
 			};
 		});
 	}
-	public static class EntityCustom extends EntityCreature {
+	public static class EntityCustom extends EntityMob {
 		public EntityCustom(World world) {
 			super(world);
 			setSize(0.4f, 0.3f);
@@ -82,14 +82,14 @@ public class EntityWyrmling extends ElementswyrmsofnyrusMod.ModElement {
 		@Override
 		protected void initEntityAI() {
 			super.initEntityAI();
-			this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityWyrmling.EntityCustom.class, (float) 6, 1, 1.2));
+			//this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityWyrmling.EntityCustom.class, (float) 3, 1, 1.2));
+			this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayerMP.class, (float) 3, 1, 1.2));
 			this.tasks.addTask(2, new EntityAIFollow(this, (float) 1, 10, 5));
 			this.tasks.addTask(3, new EntityAIWander(this, 1));
 			this.tasks.addTask(4, new EntityAILookIdle(this));
 			this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayerMP.class, (float) 12));
 			this.tasks.addTask(6, new EntityAISwimming(this));
-			this.tasks.addTask(7, new EntityAILeapAtTarget(this, (float) 0.8));
-			this.tasks.addTask(8, new EntityAIPanic(this, 1.2));
+			this.tasks.addTask(7, new EntityAIPanic(this, 1.2));
 		}
 
 		@Override
@@ -142,7 +142,7 @@ public class EntityWyrmling extends ElementswyrmsofnyrusMod.ModElement {
 			if (this.getEntityAttribute(SharedMonsterAttributes.ARMOR) != null)
 				this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.3D);
 			if (this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED) != null)
-				this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
+				this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
 			if (this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH) != null)
 				this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6D);
 			if (this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) != null)

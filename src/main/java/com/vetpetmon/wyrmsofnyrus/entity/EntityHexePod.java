@@ -80,7 +80,6 @@ public class EntityHexePod extends ElementswyrmsofnyrusMod.ModElement {
 		protected void initEntityAI() {
 			super.initEntityAI();
 			// We don't need AI running for this thing. It isn't needed for droppods
-			//this.tasks.addTask(1, new EntityAILookIdle(this));
 		}
 
 		@Override

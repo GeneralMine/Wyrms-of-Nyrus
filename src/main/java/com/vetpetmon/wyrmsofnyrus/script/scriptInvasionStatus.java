@@ -22,18 +22,25 @@ public class scriptInvasionStatus extends ElementswyrmsofnyrusMod.ModElement {
 		World world = (World) dependencies.get("world");
 		if (((wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 100)) {
 			wyrmsofnyrusModVariables.wyrmInvasionStatus = (String) "Arriving";
+			wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionDifficulty = (double) 1.0;
 		} else if (((wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 500)) {
 			wyrmsofnyrusModVariables.wyrmInvasionStatus = (String) "Scouting";
+			wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 1.5;
 		} else if (((wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 1000)) {
 			wyrmsofnyrusModVariables.wyrmInvasionStatus = (String) "Establishing hive";
+			wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 2.0;
 		} else if (((wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 10000)) {
 			wyrmsofnyrusModVariables.wyrmInvasionStatus = (String) "Expanding";
+			wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 3.0;
 		} else if (((wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 100000)) {
 			wyrmsofnyrusModVariables.wyrmInvasionStatus = (String) "Invading";
+			wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 4.5;
 		} else if (((wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionPoints) > 100000)) {
 			wyrmsofnyrusModVariables.wyrmInvasionStatus = (String) "Dominant species";
+			wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 6.0;
 		} else {
 			wyrmsofnyrusModVariables.wyrmInvasionStatus = (String) "Unknown";
+			wyrmsofnyrusModVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 1.0;
 		}
 	}
 
