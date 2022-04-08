@@ -1,132 +1,32 @@
 package com.vetpetmon.wyrmsofnyrus;
 
-import java.io.File;
-import java.util.Map;
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-
-import org.apache.logging.log4j.LogManager;
+import net.minecraft.init.Blocks;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-import com.google.common.collect.ImmutableMap;
+@Mod(modid = ExampleMod.MODID, name = ExampleMod.NAME, version = ExampleMod.VERSION)
+public class ExampleMod
+{
+    public static final String MODID = "wyrmsofnyrus";
+    public static final String NAME = "Wyrms of Nyrus";
+    public static final String VERSION = "0.1.1";
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.RegistryEvent.MissingMappings;
-import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
+    private static Logger logger;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EnumCreatureType;
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event)
+    {
+        logger = event.getModLog();
+    }
 
-import net.minecraft.world.biome.Biome;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.item.Item;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-
-import java.util.function.Supplier;
-
-@Mod(modid = wyrmsofnyrusMod.MODID, version = wyrmsofnyrusMod.VERSION)
-public class wyrmsofnyrusMod {
-	public static final String MODID = "wyrmsofnyrus";
-	public static final String VERSION = "0.0.2";
-	public static final SimpleNetworkWrapper PACKET_HANDLER = NetworkRegistry.INSTANCE.newSimpleChannel("wyrmsofnyrus:a");
-	@SidedProxy(clientSide = "com.vetpetmon.wyrmsofnyrus.ClientProxywyrmsofnyrusMod", serverSide = "com.vetpetmon.wyrmsofnyrus.ServerProxywyrmsofnyrusMod")
-	public static IProxywyrmsofnyrusMod proxy;
-	@Mod.Instance(MODID)
-	public static wyrmsofnyrusMod instance;
-	public ElementswyrmsofnyrusMod elements = new ElementswyrmsofnyrusMod();
-	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(this);
-		GameRegistry.registerWorldGenerator(elements, 5);
-		GameRegistry.registerFuelHandler(elements);
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new ElementswyrmsofnyrusMod.GuiHandler());
-		elements.preInit(event);
-		MinecraftForge.EVENT_BUS.register(elements);
-		elements.getElements().forEach(element -> element.preInit(event));
-		proxy.preInit(event);
-	}
-
-	@Mod.EventHandler
-	public void init(FMLInitializationEvent event) {
-		elements.getElements().forEach(element -> element.init(event));
-		proxy.init(event);
-	}
-
-	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		proxy.postInit(event);
-	}
-
-	@Mod.EventHandler
-	public void serverLoad(FMLServerStartingEvent event) {
-		elements.getElements().forEach(element -> element.serverLoad(event));
-		proxy.serverLoad(event);
-	}
-
-	@SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
-		event.getRegistry().registerAll(elements.getBlocks().stream().map(Supplier::get).toArray(Block[]::new));
-	}
-
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event) {
-		event.getRegistry().registerAll(elements.getItems().stream().map(Supplier::get).toArray(Item[]::new));
-	}
-
-	@SubscribeEvent
-	public void registerBiomes(RegistryEvent.Register<Biome> event) {
-		event.getRegistry().registerAll(elements.getBiomes().stream().map(Supplier::get).toArray(Biome[]::new));
-	}
-
-	@SubscribeEvent
-	public void registerEntities(RegistryEvent.Register<EntityEntry> event) {
-		event.getRegistry().registerAll(elements.getEntities().stream().map(Supplier::get).toArray(EntityEntry[]::new));
-	}
-
-	@SubscribeEvent
-	public void registerPotions(RegistryEvent.Register<Potion> event) {
-		event.getRegistry().registerAll(elements.getPotions().stream().map(Supplier::get).toArray(Potion[]::new));
-	}
-
-	@SubscribeEvent
-	public void registerSounds(RegistryEvent.Register<net.minecraft.util.SoundEvent> event) {
-		elements.registerSounds(event);
-	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void registerModels(ModelRegistryEvent event) {
-		elements.getElements().forEach(element -> element.registerModels(event));
-	}
-	static {
-		FluidRegistry.enableUniversalBucket();
-	}
+    @EventHandler
+    public void init(FMLInitializationEvent event)
+    {
+        // some example code
+        logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+    }
 }
+
