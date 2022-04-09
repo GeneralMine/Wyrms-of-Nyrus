@@ -32,7 +32,7 @@ public class EntityWyrmling extends EntityMob implements IAnimatable{
         super.initEntityAI();
         this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayerMP.class, (float) 3, 1, 1.2));
         this.tasks.addTask(2, new EntityAIFollow(this, (float) 1, 10, 5));
-        this.tasks.addTask(3, new EntityAIWander(this, 1));
+        this.tasks.addTask(3, new EntityAIWander(this, 0.25));
         this.tasks.addTask(4, new EntityAILookIdle(this));
         this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayerMP.class, (float) 12));
         this.tasks.addTask(5, new EntityAISwimming(this));
@@ -43,7 +43,7 @@ public class EntityWyrmling extends EntityMob implements IAnimatable{
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.1D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(2D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
     }
