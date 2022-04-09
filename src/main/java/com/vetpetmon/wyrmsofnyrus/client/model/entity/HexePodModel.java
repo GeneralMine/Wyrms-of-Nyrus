@@ -16,7 +16,7 @@ public class HexePodModel extends AnimatedGeoModel<EntityHexePod>
     @Override
     public ResourceLocation getTextureLocation(EntityHexePod entityHexePod)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/item/hexepod.png");
+        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/entity/hexepod.png");
     }
 
     @Override
