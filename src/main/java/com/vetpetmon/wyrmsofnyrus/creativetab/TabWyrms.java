@@ -1,12 +1,9 @@
 
 package com.vetpetmon.wyrmsofnyrus.creativetab;
 
-import com.vetpetmon.wyrmsofnyrus.blocks.BlockHiveCreepBlockTop;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.creativetab.CreativeTabs;
 

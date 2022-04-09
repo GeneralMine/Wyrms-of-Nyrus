@@ -8,8 +8,6 @@ import net.minecraft.block.properties.IProperty;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.vetpetmon.wyrmsofnyrus.blocks.BlockHiveCreepBlockTop;
-
 public class HiveCreepBlockUpdateTick {
     public static void executescript(Map<String, Object> dependencies) {
         int x = (int) dependencies.get("x");
