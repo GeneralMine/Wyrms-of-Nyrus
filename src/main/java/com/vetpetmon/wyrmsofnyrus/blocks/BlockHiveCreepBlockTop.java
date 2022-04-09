@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.blocks;
 
+import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepBlockUpdateTick;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
 
@@ -41,7 +42,7 @@ public class BlockHiveCreepBlockTop extends Block{
         setResistance(10F);
         setLightLevel(0F);
         setLightOpacity(255);
-        //setCreativeTab(TabWyrms.tab);
+        setCreativeTab(TabWyrms.tab);
     }
     @Override
     public void addInformation(ItemStack itemstack, World world, List<String> list, ITooltipFlag flag) {
