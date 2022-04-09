@@ -21,9 +21,16 @@ import java.util.HashMap;
 
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockHiveCreepBlock extends Block{
     public static final Block block = null;
+    /*@SideOnly(Side.CLIENT)
+    public void registerModels(ModelRegistryEvent event) {
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0,
+                new ModelResourceLocation("wyrmsofnyrus:hivecreepblock", "inventory"));
+    }*/
     public BlockHiveCreepBlock(String s) {
         super(Material.CRAFTED_SNOW);
         setUnlocalizedName("hivecreepblock");

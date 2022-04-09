@@ -62,6 +62,8 @@ public class wyrmsofnyrus
     public void init(FMLInitializationEvent event)
     {
         SoundRegistry.RegisterSounds();
+        BlockRegistry.preInit();
+        ItemRegistry.preInit();
     }
 
     @SideOnly(Side.CLIENT)
