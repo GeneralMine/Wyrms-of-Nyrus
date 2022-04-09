@@ -3,7 +3,7 @@
     "modid": "wyrmsofnyrus",
     "name": "Wyrms of Nyrus",
     "description": "Adds the invasive Nyral Wyrms into Minecraft!",
-    "version": "0.0.2ALPHA",
+    "version": "0.1.0ALPHA",
     "mcversion": "1.12.2",
     "url": "",
     "updateUrl": "",
@@ -11,6 +11,6 @@
     "credits": "The Pissant community",
     "logoFile": "",
     "screenshots": [],
-    "dependencies": ["geckolib3@[3.0.19,)"]
+    "dependencies": ["geckolib3@[3.0.19,)","autoreglib@[1.3-32,)"]
   }
 ]
