@@ -5,23 +5,23 @@ import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class HexePodModel extends AnimatedGeoModel<EntityHexePod>
+public class WyrmlingModel extends AnimatedGeoModel<EntityHexePod>
 {
     @Override
     public ResourceLocation getModelLocation(EntityHexePod entityHexePod)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/hexepod.geo.json");
+        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/wyrmling.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityHexePod entityHexePod)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/hexepod.png");
+        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/wyrmling.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityHexePod entityHexePod)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/hexepod.animation.json");
+        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/wyrmlingmodel.animation.json");
     }
 }

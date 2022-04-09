@@ -25,7 +25,7 @@ public class EntityHexePod extends EntityMob implements IAnimatable{
         setSize(1f, 1f);
         experienceValue = 0;
         this.isImmuneToFire = true;
-        setNoAI(false);
+        setNoAI(true);
         enablePersistence();
     }
     //no AI
