@@ -30,7 +30,7 @@ public class EntityHexePod extends EntityMob implements IAnimatable{
         setSize(1f, 1f);
         experienceValue = 0;
         this.isImmuneToFire = true;
-        setNoAI(true);
+        setNoAI(false);
         enablePersistence();
     }
     //no AI
@@ -73,6 +73,7 @@ public class EntityHexePod extends EntityMob implements IAnimatable{
     public SoundEvent getDeathSound() {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
     }
+
     @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);

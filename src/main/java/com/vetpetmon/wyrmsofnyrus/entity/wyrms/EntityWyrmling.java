@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
+import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
@@ -55,16 +56,16 @@ public class EntityWyrmling extends EntityMob implements IAnimatable{
 
     @Override
     public SoundEvent getAmbientSound() {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.wyrmclicks3"));
+        return SoundRegistry.wyrmClicks;
     }
     @Override
     public SoundEvent getHurtSound(DamageSource ds) {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation("wyrmsofnyrus:hiss2"));
+        return SoundRegistry.wyrmHissTwo;
     }
-    @Override
+    /*@Override
     public SoundEvent getDeathSound() {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
-    }
+    }*/
 
     @Override
     public void registerControllers(AnimationData data) {
