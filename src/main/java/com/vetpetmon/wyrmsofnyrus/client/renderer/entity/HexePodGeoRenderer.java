@@ -1,4 +1,4 @@
-package com.vetpetmon.wyrmsofnyrus.client.renderer;
+package com.vetpetmon.wyrmsofnyrus.client.renderer.entity;
 
 import com.vetpetmon.wyrmsofnyrus.client.model.entity.HexePodModel;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;

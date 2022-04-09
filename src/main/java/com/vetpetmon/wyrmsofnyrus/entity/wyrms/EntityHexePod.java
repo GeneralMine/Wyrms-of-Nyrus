@@ -71,10 +71,10 @@ public class EntityHexePod extends EntityMob implements IAnimatable{
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController((IAnimatable) this, "controller", 20F, (AnimationController.IAnimationPredicate) this));
+        data.addAnimationController(new AnimationController(this, "controller", 20F, (AnimationController.IAnimationPredicate) this));
     }
 
-    private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event)
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hexepod.idle"));
         return PlayState.CONTINUE;
