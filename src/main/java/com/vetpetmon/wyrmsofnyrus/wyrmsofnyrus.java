@@ -1,8 +1,10 @@
 package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.HexePodGeoRenderer;
+import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.WyrmlingGeoRenderer;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.init.Blocks;
@@ -41,6 +43,7 @@ public class wyrmsofnyrus
     public void registerRenderers(FMLPreInitializationEvent event)
     {
         RenderingRegistry.registerEntityRenderingHandler(EntityHexePod.class, HexePodGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmling.class, WyrmlingGeoRenderer::new);
     }
 
     @EventHandler
