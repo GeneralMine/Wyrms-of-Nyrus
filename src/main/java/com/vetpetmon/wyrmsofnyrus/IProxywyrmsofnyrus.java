@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-public interface IProxywyrmsofnyrusMod {
+public interface IProxywyrmsofnyrus {
 	void preInit(FMLPreInitializationEvent event);
 
 	void init(FMLInitializationEvent event);

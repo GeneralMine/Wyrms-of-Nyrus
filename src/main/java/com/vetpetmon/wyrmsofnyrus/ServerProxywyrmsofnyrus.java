@@ -4,16 +4,14 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.client.model.obj.OBJLoader;
 
-public class ClientProxywyrmsofnyrusMod implements IProxywyrmsofnyrusMod {
+public class ServerProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 	@Override
-	public void init(FMLInitializationEvent event) {
+	public void preInit(FMLPreInitializationEvent event) {
 	}
 
 	@Override
-	public void preInit(FMLPreInitializationEvent event) {
-		OBJLoader.INSTANCE.addDomain("wyrmsofnyrus");
+	public void init(FMLInitializationEvent event) {
 	}
 
 	@Override

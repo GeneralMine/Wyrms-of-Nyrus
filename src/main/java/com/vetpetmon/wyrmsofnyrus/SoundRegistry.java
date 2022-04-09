@@ -4,12 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SoundRegistry {
-
-    //public static List<SoundEvent> ALL_SOUNDS = new ArrayList<SoundEvent>();
 
     public static SoundEvent wyrmClicks;
     public static SoundEvent wyrmHissTwo;

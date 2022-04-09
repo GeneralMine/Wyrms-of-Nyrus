@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
+import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepTop;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.block.state.IBlockState;
@@ -9,7 +10,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class HiveCreepBlockUpdateTick {
-    public static void executescript(Map<String, Object> dependencies) {
+    public static void doThis(Map<String, Object> dependencies) {
         int x = (int) dependencies.get("x");
         int y = (int) dependencies.get("y");
         int z = (int) dependencies.get("z");
@@ -18,7 +19,7 @@ public class HiveCreepBlockUpdateTick {
             if ((world.isAirBlock(new BlockPos((int) x, (int) (y + 1), (int) z)))) {
                 {
                     BlockPos _bp = new BlockPos((int) x, (int) y, (int) z);
-                    IBlockState _bs = BlockHiveCreepBlockTop.block.getDefaultState();
+                    IBlockState _bs = BlockHiveCreepTop.block.getDefaultState();
                     IBlockState _bso = world.getBlockState(_bp);
                     for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
                         IProperty _property = entry.getKey();

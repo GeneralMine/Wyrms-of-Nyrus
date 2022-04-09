@@ -2,8 +2,11 @@ package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.HexePodGeoRenderer;
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.WyrmlingGeoRenderer;
+import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
+
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -39,7 +42,7 @@ public class wyrmsofnyrus {
 
     public static final SimpleNetworkWrapper PACKET_HANDLER = NetworkRegistry.INSTANCE.newSimpleChannel("wyrmsofnyrus:a");
     @SidedProxy(clientSide = "com.vetpetmon.wyrmsofnyrus.ClientProxywyrmsofnyrus", serverSide = "com.vetpetmon.wyrmsofnyrus.ServerProxywyrmsofnyrus")
-    public static IProxywyrmsofnyrusMod proxy;
+    public static IProxywyrmsofnyrus proxy;
 
     @Mod.Instance(MODID)
     public static wyrmsofnyrus instance;
@@ -53,6 +56,8 @@ public class wyrmsofnyrus {
         MinecraftForge.EVENT_BUS.register(elements);
         elements.getElements().forEach(element -> element.preInit(event));
         proxy.preInit(event);
+
+        WyrmRegister.register();
     }
 
     @Mod.EventHandler
@@ -91,6 +96,12 @@ public class wyrmsofnyrus {
     @SubscribeEvent
     public void registerPotions(RegistryEvent.Register<Potion> event) {
         event.getRegistry().registerAll(elements.getPotions().stream().map(Supplier::get).toArray(Potion[]::new));
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public void registerModels(ModelRegistryEvent event) {
+        elements.getElements().forEach(element -> element.registerModels(event));
     }
 
     @SideOnly(Side.CLIENT)
