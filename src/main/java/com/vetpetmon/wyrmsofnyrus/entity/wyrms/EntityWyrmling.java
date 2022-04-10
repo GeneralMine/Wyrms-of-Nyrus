@@ -5,6 +5,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.*;
+import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -80,6 +81,13 @@ public class EntityWyrmling extends EntityMob implements IAnimatable{
         else {event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmlingmodel.idle"));}
 
         return PlayState.CONTINUE;
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source.getImmediateSource() instanceof EntityPotion)
+            return false;
+        return super.attackEntityFrom(source, amount);
     }
 
     @Override

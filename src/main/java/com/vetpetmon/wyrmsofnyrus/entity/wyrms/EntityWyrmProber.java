@@ -16,6 +16,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -47,49 +48,6 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
         this.setNoGravity(true);
     }
 
-
-    /*static class AIRandomFly extends EntityAIBase
-    {
-        private final EntityWyrmProber parentEntity;
-
-        public AIRandomFly(EntityWyrmProber WyrmProber)
-        {
-            this.parentEntity = WyrmProber;
-            this.setMutexBits(1);
-        }
-
-        public boolean shouldExecute()
-        {
-            EntityMoveHelper entitymovehelper = this.parentEntity.getMoveHelper();
-
-            if (!entitymovehelper.isUpdating())
-            {
-                return true;
-            }
-            else
-            {
-                double d0 = entitymovehelper.getX() - this.parentEntity.posX;
-                double d1 = entitymovehelper.getY() - this.parentEntity.posY;
-                double d2 = entitymovehelper.getZ() - this.parentEntity.posZ;
-                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                return d3 < 1.0D || d3 > 3600.0D;
-            }
-        }
-
-        public boolean shouldContinueExecuting()
-        {
-            return false;
-        }
-
-        public void startExecuting()
-        {
-            Random random = this.parentEntity.getRNG();
-            double d0 = this.parentEntity.posX + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            double d1 = this.parentEntity.posY + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            double d2 = this.parentEntity.posZ + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
-            this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
-        }
-    }*/
     static class WyrmProberMoveHelper extends EntityMoveHelper
     {
         private final EntityWyrmProber parentEntity;
@@ -215,6 +173,8 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
         if (source == DamageSource.FALL)
             return false;
         if (source == DamageSource.DROWN)
+            return false;
+        if (source.getImmediateSource() instanceof EntityPotion)    //Basically creates immunity from SRP's COTH effects and poison/wither, as wyrms are NOT organic beings
             return false;
         return super.attackEntityFrom(source, amount);
     }
