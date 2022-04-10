@@ -4,13 +4,18 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
 import com.google.common.base.Predicate;
 
+import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
+import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -26,8 +31,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.Random;
-
 public class EntityWyrmProber extends EntityMob implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmProber(World world) {
@@ -37,7 +40,7 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
         this.isImmuneToFire = false;
         setNoAI(false);
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new EntityFlyHelper(this);
+        this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
         enablePersistence();
     }
 
@@ -83,7 +86,7 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
             double d2 = this.parentEntity.posZ + (double)((random.nextFloat() * 2.0F - 1.0F) * 16.0F);
             this.parentEntity.getMoveHelper().setMoveTo(d0, d1, d2, 1.0D);
         }
-    }
+    }*/
     static class WyrmProberMoveHelper extends EntityMoveHelper
     {
         private final EntityWyrmProber parentEntity;
@@ -142,12 +145,12 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
 
             return true;
         }
-    }*/
+    }
     
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        //this.tasks.addTask(1, new AIRandomFly(this));
+        this.tasks.addTask(1, new FlyingMobAI(this, 5.0, 100));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, false, true));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, true));
         this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<EntityMob>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
@@ -185,6 +188,11 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
     }
 
     @Override
+    protected Item getDropItem() {
+        return new ItemStack(ItemCreepshard.block, (int) (1)).getItem();
+    }
+
+    @Override
     public SoundEvent getAmbientSound() {
         return SoundRegistry.wyrmClicks;
     }
@@ -196,6 +204,15 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
     public SoundEvent getDeathSound() {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
     }*/
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source == DamageSource.FALL)
+            return false;
+        if (source == DamageSource.DROWN)
+            return false;
+        return super.attackEntityFrom(source, amount);
+    }
 
     @Override
     public void registerControllers(AnimationData data) {
