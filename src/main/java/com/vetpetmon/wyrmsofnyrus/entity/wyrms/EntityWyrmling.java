@@ -73,7 +73,10 @@ public class EntityWyrmling extends EntityMob implements IAnimatable{
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        if (event.isMoving()) {event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmlingmodel.move"));}
+        if (event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmlingmodel.move"));
+            return PlayState.CONTINUE;
+        }
         else {event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmlingmodel.idle"));}
 
         return PlayState.CONTINUE;

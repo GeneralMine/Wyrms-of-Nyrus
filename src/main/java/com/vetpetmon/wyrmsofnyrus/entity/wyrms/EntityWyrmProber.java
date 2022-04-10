@@ -8,11 +8,13 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -90,7 +92,7 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
     static class WyrmProberMoveHelper extends EntityMoveHelper
     {
         private final EntityWyrmProber parentEntity;
-        private int courseChangeCooldown;
+        private int courseChangeCooldown = 40;
 
         public WyrmProberMoveHelper(EntityWyrmProber WyrmProber)
         {
@@ -150,14 +152,16 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(1, new FlyingMobAI(this, 5.0, 100));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, false, true));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, true));
+        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
+        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityLiving.class, (float) 64));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, false, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));
         this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<EntityMob>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
             public boolean apply(EntityMob target) {
                 return !((target instanceof EntityCreeper) || (target instanceof EntityHexePod) || (target instanceof EntityWyrmling) || (target instanceof EntityWyrmProber));
             }
         }));
+        this.tasks.addTask(5, new FlyingMobAI(this, 4.75, 100));
     }
 
     @Override
