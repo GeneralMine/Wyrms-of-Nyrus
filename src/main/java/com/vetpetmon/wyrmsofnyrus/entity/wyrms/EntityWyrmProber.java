@@ -44,6 +44,7 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
         enablePersistence();
+        this.setNoGravity(true);
     }
 
 
