@@ -21,13 +21,13 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.Block;
 
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
-import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@ElementswyrmsofnyrusMod.ModElement.Tag
-public class BlockWyrmLightsOrange extends ElementswyrmsofnyrusMod.ModElement {
+@AutoReg.ModElement.Tag
+public class BlockWyrmLightsOrange extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:wyrm_lights_orange")
 	public static final Block block = null;
-	public BlockWyrmLightsOrange(ElementswyrmsofnyrusMod instance) {
+	public BlockWyrmLightsOrange(AutoReg instance) {
 		super(instance, 23);
 	}
 

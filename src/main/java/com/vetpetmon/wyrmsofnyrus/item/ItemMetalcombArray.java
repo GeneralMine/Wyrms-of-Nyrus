@@ -17,13 +17,13 @@ import net.minecraft.block.state.IBlockState;
 import java.util.List;
 
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
-import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@ElementswyrmsofnyrusMod.ModElement.Tag
-public class ItemMetalcombArray extends ElementswyrmsofnyrusMod.ModElement {
+@AutoReg.ModElement.Tag
+public class ItemMetalcombArray extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:metalcomb_array")
 	public static final Item block = null;
-	public ItemMetalcombArray(ElementswyrmsofnyrusMod instance) {
+	public ItemMetalcombArray(AutoReg instance) {
 		super(instance, 21);
 	}
 

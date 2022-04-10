@@ -26,15 +26,15 @@ import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 
-import com.vetpetmon.wyrmsofnyrus.script.scriptHiveCreepSpreadFurther;
+import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
-import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@ElementswyrmsofnyrusMod.ModElement.Tag
-public class BlockHiveCreepTop extends ElementswyrmsofnyrusMod.ModElement {
+@AutoReg.ModElement.Tag
+public class BlockHiveCreepTop extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:hivecreeptop")
 	public static final Block block = null;
-	public BlockHiveCreepTop(ElementswyrmsofnyrusMod instance) {
+	public BlockHiveCreepTop(AutoReg instance) {
 		super(instance, 3);
 	}
 
@@ -100,7 +100,7 @@ public class BlockHiveCreepTop extends ElementswyrmsofnyrusMod.ModElement {
 				$_dependencies.put("y", y);
 				$_dependencies.put("z", z);
 				$_dependencies.put("world", world);
-				scriptHiveCreepSpreadFurther.executescript($_dependencies);
+				HiveCreepSpreadFurther.executescript($_dependencies);
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
 		}

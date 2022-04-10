@@ -3,7 +3,7 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:clicking1",
+        "name": "wyrmsofnyrus:entity/clicking1",
         "stream": false
       }
     ]
@@ -12,7 +12,7 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:clicking2",
+        "name": "wyrmsofnyrus:entity/clicking2",
         "stream": false
       }
     ]
@@ -21,7 +21,20 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:clicking3",
+        "name": "wyrmsofnyrus:entity/clicking3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.wyrmClicks": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/clicking3",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/clicking4",
         "stream": false
       }
     ]
@@ -35,11 +48,11 @@
       }
     ]
   },
-  "hiss2": {
+  "entity.hiss2": {
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:hiss2",
+        "name": "wyrmsofnyrus:entity/hiss2",
         "stream": false
       }
     ]
@@ -48,7 +61,7 @@
     "category": "hostile",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:gruburt",
+        "name": "wyrmsofnyrus:entity/gruburt",
         "stream": false
       }
     ]
@@ -57,7 +70,7 @@
     "category": "hostile",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:grubdle",
+        "name": "wyrmsofnyrus:entity/grubdle",
         "stream": false
       }
     ]

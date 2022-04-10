@@ -24,16 +24,16 @@ import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 
-import com.vetpetmon.wyrmsofnyrus.script.scriptInvasionBlockSpread;
-import com.vetpetmon.wyrmsofnyrus.script.scriptHiveCreepBlockUpdateTick;
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
+import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepBlockUpdateTick;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
-import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@ElementswyrmsofnyrusMod.ModElement.Tag
-public class BlockHiveCreepBlock extends ElementswyrmsofnyrusMod.ModElement {
+@AutoReg.ModElement.Tag
+public class BlockHiveCreepBlock extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:hivecreepblock")
 	public static final Block block = null;
-	public BlockHiveCreepBlock(ElementswyrmsofnyrusMod instance) {
+	public BlockHiveCreepBlock(AutoReg instance) {
 		super(instance, 4);
 	}
 
@@ -83,7 +83,7 @@ public class BlockHiveCreepBlock extends ElementswyrmsofnyrusMod.ModElement {
 			{
 				Map<String, Object> $_dependencies = new HashMap<>();
 				$_dependencies.put("world", world);
-				scriptInvasionBlockSpread.executescript($_dependencies);
+				InvasionBlockSpread.run($_dependencies);
 			}
 		}
 
@@ -99,7 +99,7 @@ public class BlockHiveCreepBlock extends ElementswyrmsofnyrusMod.ModElement {
 				$_dependencies.put("y", y);
 				$_dependencies.put("z", z);
 				$_dependencies.put("world", world);
-				scriptHiveCreepBlockUpdateTick.executescript($_dependencies);
+				HiveCreepBlockUpdateTick.doThis($_dependencies);
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
 		}

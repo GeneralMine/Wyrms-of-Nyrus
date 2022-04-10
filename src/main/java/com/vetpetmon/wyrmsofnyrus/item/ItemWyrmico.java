@@ -12,13 +12,13 @@ import net.minecraft.item.Item;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.block.state.IBlockState;
 
-import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@ElementswyrmsofnyrusMod.ModElement.Tag
-public class ItemWyrmico extends ElementswyrmsofnyrusMod.ModElement {
+@AutoReg.ModElement.Tag
+public class ItemWyrmico extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:wyrmico")
 	public static final Item block = null;
-	public ItemWyrmico(ElementswyrmsofnyrusMod instance) {
+	public ItemWyrmico(AutoReg instance) {
 		super(instance, 6);
 	}
 

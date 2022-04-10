@@ -8,11 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.creativetab.CreativeTabs;
 
 import com.vetpetmon.wyrmsofnyrus.item.ItemWyrmico;
-import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@ElementswyrmsofnyrusMod.ModElement.Tag
-public class TabWyrms extends ElementswyrmsofnyrusMod.ModElement {
-	public TabWyrms(ElementswyrmsofnyrusMod instance) {
+@AutoReg.ModElement.Tag
+public class TabWyrms extends AutoReg.ModElement {
+	public TabWyrms(AutoReg instance) {
 		super(instance, 5);
 	}
 

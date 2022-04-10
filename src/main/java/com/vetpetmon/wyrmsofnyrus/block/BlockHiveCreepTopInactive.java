@@ -24,13 +24,13 @@ import net.minecraft.block.Block;
 import java.util.List;
 
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
-import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@ElementswyrmsofnyrusMod.ModElement.Tag
-public class BlockHiveCreepTopInactive extends ElementswyrmsofnyrusMod.ModElement {
+@AutoReg.ModElement.Tag
+public class BlockHiveCreepTopInactive extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:hivecreeptopinactive")
 	public static final Block block = null;
-	public BlockHiveCreepTopInactive(ElementswyrmsofnyrusMod instance) {
+	public BlockHiveCreepTopInactive(AutoReg instance) {
 		super(instance, 16);
 	}
 

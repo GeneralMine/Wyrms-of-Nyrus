@@ -17,12 +17,12 @@ import java.util.HashMap;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import com.vetpetmon.wyrmsofnyrus.script.scriptWyrmsTestCommandExecuted;
-import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
+import com.vetpetmon.wyrmsofnyrus.invasion.WyrmsTestCommandExecuted;
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@ElementswyrmsofnyrusMod.ModElement.Tag
-public class CommandWyrmsTest extends ElementswyrmsofnyrusMod.ModElement {
-	public CommandWyrmsTest(ElementswyrmsofnyrusMod instance) {
+@AutoReg.ModElement.Tag
+public class CommandWyrmsTest extends AutoReg.ModElement {
+	public CommandWyrmsTest(AutoReg instance) {
 		super(instance, 8);
 	}
 
@@ -83,7 +83,7 @@ public class CommandWyrmsTest extends ElementswyrmsofnyrusMod.ModElement {
 				{
 					Map<String, Object> $_dependencies = new HashMap<>();
 					$_dependencies.put("world", world);
-					scriptWyrmsTestCommandExecuted.executescript($_dependencies);
+					WyrmsTestCommandExecuted.executescript($_dependencies);
 				}
 			}
 		}

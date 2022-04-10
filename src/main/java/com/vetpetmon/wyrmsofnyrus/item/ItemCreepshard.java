@@ -13,13 +13,13 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.block.state.IBlockState;
 
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
-import com.vetpetmon.wyrmsofnyrus.ElementswyrmsofnyrusMod;
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@ElementswyrmsofnyrusMod.ModElement.Tag
-public class ItemCreepshard extends ElementswyrmsofnyrusMod.ModElement {
+@AutoReg.ModElement.Tag
+public class ItemCreepshard extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:creepshard")
 	public static final Item block = null;
-	public ItemCreepshard(ElementswyrmsofnyrusMod instance) {
+	public ItemCreepshard(AutoReg instance) {
 		super(instance, 19);
 	}
 
