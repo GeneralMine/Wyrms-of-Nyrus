@@ -24,7 +24,7 @@ public class InvasionEvent extends AutoReg.ModElement {
 		int x = (int) dependencies.get("x");
 		int z = (int) dependencies.get("z");
 		World world = (World) dependencies.get("world");
-		if ((Math.random() > (0.99999 - ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty)/50)))) {
+		if ((Math.random() > (0.99999 - ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty)/5000)))) {
 			if ((Math.random() <= 0.75)) {
 				if (!world.isRemote) {
 					Entity entityToSpawn = new EntityHexePod(world);
