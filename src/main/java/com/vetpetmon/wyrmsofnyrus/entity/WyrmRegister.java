@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmProber;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
 
 import net.minecraft.util.ResourceLocation;
@@ -19,5 +20,6 @@ public final class WyrmRegister {
 
         EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "hexe_pod"),EntityHexePod.class,"hexe_pod",id++, wyrmsofnyrus.instance, 128, 1, true, -7981824, -154);
         EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "wyrmling"),EntityWyrmling.class,"wyrmling",id++, wyrmsofnyrus.instance, 32, 1, true, -26317, -52);
+        EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "wyrmprober"), EntityWyrmProber.class,"wyrmprober",id++, wyrmsofnyrus.instance, 64, 1, true, -26317, -52);
     }
 }

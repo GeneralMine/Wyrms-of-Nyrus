@@ -1,9 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.HexePodGeoRenderer;
+import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.WyrmProberGeoRenderer;
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.WyrmlingGeoRenderer;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmProber;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
 
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -110,6 +112,7 @@ public class wyrmsofnyrus {
     {
         RenderingRegistry.registerEntityRenderingHandler(EntityHexePod.class, HexePodGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmling.class, WyrmlingGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmProber.class, WyrmProberGeoRenderer::new);
     }
 
     @SideOnly(Side.CLIENT)

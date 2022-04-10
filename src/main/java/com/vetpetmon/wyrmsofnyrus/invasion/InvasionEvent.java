@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
+import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -23,7 +24,7 @@ public class InvasionEvent extends AutoReg.ModElement {
 		int x = (int) dependencies.get("x");
 		int z = (int) dependencies.get("z");
 		World world = (World) dependencies.get("world");
-		if ((Math.random() > 0.99999)) {
+		if ((Math.random() > (0.99999 - ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty)/50)))) {
 			if ((Math.random() <= 0.75)) {
 				if (!world.isRemote) {
 					Entity entityToSpawn = new EntityHexePod(world);

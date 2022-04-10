@@ -6,7 +6,6 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.*;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -23,7 +22,7 @@ public class EntityWyrmling extends EntityMob implements IAnimatable{
         super(world);
         setSize(0.5f, 0.5f);
         experienceValue = 1;
-        this.isImmuneToFire = true;
+        this.isImmuneToFire = false;
         setNoAI(false);
         enablePersistence();
     }

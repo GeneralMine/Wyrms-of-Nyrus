@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -40,6 +41,7 @@ public class AutoReg implements IWorldGenerator {
 	public final List<Supplier<Item>> items = new ArrayList<>();
 	public final List<Supplier<Biome>> biomes = new ArrayList<>();
 	public final List<Supplier<Potion>> potions = new ArrayList<>();
+	public final List<Supplier<EntityEntry>> entities = new ArrayList<>();
 	public AutoReg() {
 	}
 
@@ -119,6 +121,10 @@ public class AutoReg implements IWorldGenerator {
 
 	public List<Supplier<Biome>> getBiomes() {
 		return biomes;
+	}
+
+	public List<Supplier<EntityEntry>> getEntities() {
+		return entities;
 	}
 
 	public List<Supplier<Potion>> getPotions() {
