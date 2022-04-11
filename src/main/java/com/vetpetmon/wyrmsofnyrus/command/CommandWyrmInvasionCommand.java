@@ -83,6 +83,9 @@ public class CommandWyrmInvasionCommand extends AutoReg.ModElement {
 				{
 					Map<String, Object> $_dependencies = new HashMap<>();
 					$_dependencies.put("cmdparams", cmdparams);
+					$_dependencies.put("x", x);
+					$_dependencies.put("y", y);
+					$_dependencies.put("z", z);
 					$_dependencies.put("world", world);
 					WyrmInvasionCommandExecuted.executescript($_dependencies);
 				}

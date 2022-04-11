@@ -20,6 +20,9 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 
 	public static void executescript(Map<String, Object> dependencies) {
 		HashMap cmdparams = (HashMap) dependencies.get("cmdparams");
+		int x = (int) dependencies.get("x");
+		int y = (int) dependencies.get("y");
+		int z = (int) dependencies.get("z");
 		World world = (World) dependencies.get("world");
 		if ((((new Object() {
 			public String getText() {
@@ -30,7 +33,7 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 				return "";
 			}
 		}.getText())).equals("reset"))) {
-			wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints = (double) 0;
+			wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints = 0.0D;
 			wyrmVariables.WorldVariables.get(world).syncData(world);
 			System.out.println("Wyrm invasion points set to 0");
 		} else if ((((new Object() {
@@ -43,6 +46,25 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 			}
 		}.getText())).equals("print"))) {
 			System.out.println((("Points: ") + "" + ((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints))));
+		} else if ((((new Object() {
+			public String getText() {
+				String param = (String) cmdparams.get("0");
+				if (param != null) {
+					return param;
+				}
+				return "";
+			}
+		}.getText())).equals("forceVisit"))) {
+			wyrmVariables.MapVariables.get(world).invasionStarted = false;
+			wyrmVariables.MapVariables.get(world).syncData(world);
+			{
+				Map<String, Object> $_dependencies = new HashMap<>();
+				$_dependencies.put("x", x);
+				$_dependencies.put("y", y);
+				$_dependencies.put("z", z);
+				$_dependencies.put("world", world);
+				VisitorEvent.executeProcedure($_dependencies);
+			}
 		} else {
 			{
 				MinecraftServer mcserv = FMLCommonHandler.instance().getMinecraftServerInstance();

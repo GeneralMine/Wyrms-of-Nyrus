@@ -24,7 +24,7 @@ public class VisitorEvent {
 		int z = (int) dependencies.get("z");
 		World world = (World) dependencies.get("world");
 		if ((!(wyrmVariables.MapVariables.get(world).invasionStarted))) {
-			if ((Math.random() < 0.001)) {
+			if ((Math.random() > 0.95)) {
 				if (!world.isRemote) {
 					Entity entityToSpawn = new EntityTheVisitor(world);
 					entityToSpawn.setLocationAndAngles(x, (y + 50), z, world.rand.nextFloat() * 360F, 0.0F);

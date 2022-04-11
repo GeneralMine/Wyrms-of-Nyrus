@@ -1,4 +1,3 @@
-
 package com.vetpetmon.wyrmsofnyrus.block;
 
 import net.minecraftforge.fml.relauncher.SideOnly;
