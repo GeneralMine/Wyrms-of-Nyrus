@@ -43,7 +43,7 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:clicking4",
+        "name": "wyrmsofnyrus:entity/clicking4",
         "stream": false
       }
     ]
