@@ -8,10 +8,12 @@ public class SoundRegistry {
 
     public static SoundEvent wyrmClicks;
     public static SoundEvent wyrmHissTwo;
+    public static SoundEvent theVisitor;
 
     public static void RegisterSounds() {
         wyrmClicks = RegisterSound("entity.wyrmClicks");
         wyrmHissTwo = RegisterSound("entity.hiss2");
+        theVisitor = RegisterSound("theVisitor");
     }
 
     public static SoundEvent RegisterSound(String name) {

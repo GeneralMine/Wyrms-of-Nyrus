@@ -74,5 +74,15 @@
         "stream": false
       }
     ]
+  },
+  "visitormessage": {
+    "category": "master",
+    "subtitle": "subtitles.visitormessage",
+    "sounds": [
+      {
+        "name": "wyrmsofnyral:wyrmsvisitormessage",
+        "stream": false
+      }
+    ]
   }
 }

@@ -1,10 +1,12 @@
 package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.HexePodGeoRenderer;
+import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.TheVisitorGeoRenderer;
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.WyrmProberGeoRenderer;
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.WyrmlingGeoRenderer;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityTheVisitor;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmProber;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
 
@@ -113,6 +115,7 @@ public class wyrmsofnyrus {
         RenderingRegistry.registerEntityRenderingHandler(EntityHexePod.class, HexePodGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmling.class, WyrmlingGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmProber.class, WyrmProberGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTheVisitor.class, TheVisitorGeoRenderer::new);
     }
 
     @SideOnly(Side.CLIENT)

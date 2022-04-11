@@ -1,11 +1,15 @@
 itemGroup.tabwyrms=Wyrms
 item.wyrmico.name=Wyrmico
 tile.hivecreepblockinactive.name=Hive Creep Block
+subtitles.visitormessage=Starship humming
+entity.the_visitor.name=The Visitor
 tile.hivecreepblock.name=Hive Creep Block
 item.creepshard.name=Creepshard
 entity.hexe_pod.name=Hexe Pod
+tile.wyrm_lights_yellow.name=Wyrm Lights Orange
 tile.hivecreeptopinactive.name=Hive Creep Surface
 item.metalcomb_array.name=Metalcomb Array
+tile.metal_comb_panel_hive_creep.name=Metal Comb Panel Hive Creep
 tile.hivecreeptop.name=Hive Creep Surface
 entity.royalgrub.name=Royal Grub
 entity.wyrmprober.name=Wyrm Prober

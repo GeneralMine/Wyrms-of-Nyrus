@@ -15,6 +15,7 @@ public class wyrmVariables {
     public static String wyrmInvasionStatus = "";
     public static class MapVariables extends WorldSavedData {
         public static final String DATA_NAME = "wyrmsofnyrus_mapvars";
+        public boolean invasionStarted = false;
         public MapVariables() {
             super(DATA_NAME);
         }
@@ -29,6 +30,7 @@ public class wyrmVariables {
 
         @Override
         public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+            nbt.setBoolean("invasionStarted", invasionStarted);
             return nbt;
         }
 

@@ -21,26 +21,26 @@ public class InvasionStatus extends AutoReg.ModElement {
 	public static void executescript(Map<String, Object> dependencies) {
 		World world = (World) dependencies.get("world");
 		if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 100)) {
-			wyrmVariables.wyrmInvasionStatus = (String) "Arriving";
-			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = (double) 1.0;
+			wyrmVariables.wyrmInvasionStatus = "Arriving";
+			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty =  1.0;
 		} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 500)) {
-			wyrmVariables.wyrmInvasionStatus = (String) "Scouting";
-			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 1.5;
+			wyrmVariables.wyrmInvasionStatus = "Scouting";
+			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  =  1.5;
 		} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 1000)) {
-			wyrmVariables.wyrmInvasionStatus = (String) "Establishing hive";
-			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 2.0;
+			wyrmVariables.wyrmInvasionStatus =  "Establishing hive";
+			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  =  2.0;
 		} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 10000)) {
-			wyrmVariables.wyrmInvasionStatus = (String) "Expanding";
-			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 3.0;
+			wyrmVariables.wyrmInvasionStatus =  "Expanding";
+			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  =  3.0;
 		} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 100000)) {
-			wyrmVariables.wyrmInvasionStatus = (String) "Invading";
-			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 4.5;
+			wyrmVariables.wyrmInvasionStatus =  "Invading";
+			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  =  4.5;
 		} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) > 100000)) {
-			wyrmVariables.wyrmInvasionStatus = (String) "Dominant species";
-			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 6.0;
+			wyrmVariables.wyrmInvasionStatus =  "Dominant species";
+			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  =  6.0;
 		} else {
-			wyrmVariables.wyrmInvasionStatus = (String) "Unknown";
-			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  = (double) 1.0;
+			wyrmVariables.wyrmInvasionStatus =  "Unknown";
+			wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty  =  1.0;
 		}
 	}
 
