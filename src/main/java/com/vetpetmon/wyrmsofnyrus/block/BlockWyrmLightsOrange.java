@@ -57,7 +57,7 @@ public class BlockWyrmLightsOrange extends AutoReg.ModElement {
 
 		@Override
 		public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-			drops.add(new ItemStack(Items.GLOWSTONE_DUST, (int) (2)));
+			drops.add(new ItemStack(Items.GLOWSTONE_DUST, 2));
 		}
 	}
 }

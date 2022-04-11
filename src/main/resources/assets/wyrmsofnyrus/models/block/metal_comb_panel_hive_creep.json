@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "wyrmsofnyral:blocks/metalcomb_panel37",
+    "particle": "wyrmsofnyral:blocks/metalcomb_panel37"
+  }
+}
