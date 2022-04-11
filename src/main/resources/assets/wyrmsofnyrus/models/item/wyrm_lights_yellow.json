@@ -1,5 +1,5 @@
 {
-  "parent": "wyrmsofnyral:block/wyrm_lights_yellow",
+  "parent": "wyrmsofnyrus:block/wyrm_lights_yellow",
   "display": {
     "thirdperson": {
       "rotation": [

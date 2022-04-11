@@ -80,7 +80,7 @@
     "subtitle": "subtitles.visitormessage",
     "sounds": [
       {
-        "name": "wyrmsofnyral:wyrmsvisitormessage",
+        "name": "wyrmsofnyrus:wyrmsvisitormessage",
         "stream": false
       }
     ]

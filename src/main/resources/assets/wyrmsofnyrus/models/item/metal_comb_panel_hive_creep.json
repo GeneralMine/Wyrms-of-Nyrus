@@ -1,5 +1,5 @@
 {
-  "parent": "wyrmsofnyral:block/metal_comb_panel_hive_creep",
+  "parent": "wyrmsofnyrus:block/metal_comb_panel_hive_creep",
   "display": {
     "thirdperson": {
       "rotation": [
