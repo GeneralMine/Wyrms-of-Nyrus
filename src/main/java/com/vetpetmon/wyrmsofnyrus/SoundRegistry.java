@@ -13,7 +13,7 @@ public class SoundRegistry {
     public static void RegisterSounds() {
         wyrmClicks = RegisterSound("entity.wyrmClicks");
         wyrmHissTwo = RegisterSound("entity.hiss2");
-        theVisitor = RegisterSound("theVisitor");
+        theVisitor = RegisterSound("visitormessage");
     }
 
     public static SoundEvent RegisterSound(String name) {

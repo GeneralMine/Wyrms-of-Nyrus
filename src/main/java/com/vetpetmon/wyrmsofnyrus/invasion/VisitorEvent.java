@@ -18,29 +18,30 @@ import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 
 public class VisitorEvent {
 
-	public static void executeProcedure(Map<String, Object> dependencies) {
+	public static void executeProcedure(Map<String, Object> dependencies, Boolean forced) {
 		int x = (int) dependencies.get("x");
 		int y = (int) dependencies.get("y");
 		int z = (int) dependencies.get("z");
+		boolean isForced = forced;
 		World world = (World) dependencies.get("world");
 		if ((!(wyrmVariables.MapVariables.get(world).invasionStarted))) {
-			if ((Math.random() > 0.95)) {
+			if ((Math.random() > 0.95) || (isForced)) {
 				if (!world.isRemote) {
 					Entity entityToSpawn = new EntityTheVisitor(world);
-					entityToSpawn.setLocationAndAngles(x, (y + 50), z, world.rand.nextFloat() * 360F, 0.0F);
+					entityToSpawn.setLocationAndAngles(x, (y + 40), z, world.rand.nextFloat() * 360F, 0.0F);
 					world.spawnEntity(entityToSpawn);
 				}
 				if (!world.isRemote) {
 					Entity entityToSpawn = new EntityTheVisitor(world);
-					entityToSpawn.setLocationAndAngles((x + 50), (y + 50), (z + 50), world.rand.nextFloat() * 360F, 0.0F);
+					entityToSpawn.setLocationAndAngles((x + 50), (y + 40), (z + 50), world.rand.nextFloat() * 360F, 0.0F);
 					world.spawnEntity(entityToSpawn);
 				}
 				if (!world.isRemote) {
 					Entity entityToSpawn = new EntityTheVisitor(world);
-					entityToSpawn.setLocationAndAngles((x - 50), (y + 50), (z - 50), world.rand.nextFloat() * 360F, 0.0F);
+					entityToSpawn.setLocationAndAngles((x - 50), (y + 40), (z - 50), world.rand.nextFloat() * 360F, 0.0F);
 					world.spawnEntity(entityToSpawn);
 				}
-				world.playSound(null, x, y, z, SoundRegistry.theVisitor, SoundCategory.NEUTRAL, (float) 200, (float) 1);
+				world.playSound(null, x, y, z, SoundRegistry.theVisitor, SoundCategory.MASTER, (float) 200, (float) 1);
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
@@ -65,7 +66,7 @@ public class VisitorEvent {
 			dependencies.put("world", world);
 			dependencies.put("entity", entity);
 			dependencies.put("event", event);
-			this.executeProcedure(dependencies);
+			this.executeProcedure(dependencies, false);
 		}
 	}
 

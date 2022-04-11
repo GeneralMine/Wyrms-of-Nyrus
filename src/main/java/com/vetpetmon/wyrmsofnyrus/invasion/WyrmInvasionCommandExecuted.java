@@ -56,6 +56,7 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 			}
 		}.getText())).equals("forceVisit"))) {
 			wyrmVariables.MapVariables.get(world).invasionStarted = false;
+			System.out.println("Invasion forced");
 			wyrmVariables.MapVariables.get(world).syncData(world);
 			{
 				Map<String, Object> $_dependencies = new HashMap<>();
@@ -63,7 +64,7 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 				$_dependencies.put("y", y);
 				$_dependencies.put("z", z);
 				$_dependencies.put("world", world);
-				VisitorEvent.executeProcedure($_dependencies);
+				VisitorEvent.executeProcedure($_dependencies, true);
 			}
 		} else {
 			{

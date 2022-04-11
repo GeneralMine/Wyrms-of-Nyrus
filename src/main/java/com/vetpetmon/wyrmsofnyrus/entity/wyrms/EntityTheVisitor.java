@@ -58,7 +58,7 @@ public class EntityTheVisitor extends EntityMob implements IAnimatable {
         this.setNoGravity(true);
     }
 
-    @Override
+    /*@Override
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
         IEntityLivingData retval = super.onInitialSpawn(difficulty, livingdata);
         Entity entity = this;
@@ -68,7 +68,7 @@ public class EntityTheVisitor extends EntityMob implements IAnimatable {
             EntityDeathTimer.executeProcedure($_dependencies);
         }
         return retval;
-    }
+    }*/
 
     @Override
     public void setNoGravity(boolean ignored) {

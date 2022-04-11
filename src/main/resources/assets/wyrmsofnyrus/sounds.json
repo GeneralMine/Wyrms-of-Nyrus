@@ -30,6 +30,10 @@
     "category": "neutral",
     "sounds": [
       {
+        "name": "wyrmsofnyrus:entity/clicking2",
+        "stream": false
+      },
+      {
         "name": "wyrmsofnyrus:entity/clicking3",
         "stream": false
       },
