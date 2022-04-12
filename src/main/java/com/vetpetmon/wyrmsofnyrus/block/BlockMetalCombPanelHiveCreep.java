@@ -53,9 +53,9 @@ public class BlockMetalCombPanelHiveCreep extends AutoReg.ModElement {
 			setCreativeTab(TabWyrms.tab);
 		}
 
-		@Override
-		public MapColor getMapColor(IBlockState state, IBlockAccess blockAccess, BlockPos pos) {
+		//@Override
+		/*public MapColor getMapColor(IBlockState state, IBlockAccess blockAccess, BlockPos pos) {
 			return MapColor.IRON;
-		}
+		}*/
 	}
 }
