@@ -13,6 +13,8 @@ import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepTop;
 import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepBlockInactive;
 import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepBlock;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @AutoReg.ModElement.Tag
 public class HiveCreepSpreadFurther extends AutoReg.ModElement {

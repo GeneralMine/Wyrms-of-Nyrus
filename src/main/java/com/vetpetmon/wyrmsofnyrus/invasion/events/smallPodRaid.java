@@ -9,11 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.util.Map;
 
-@AutoReg.ModElement.Tag
-public class smallPodRaid extends AutoReg.ModElement{
-    public smallPodRaid(AutoReg elements, int sortid) {
-        super(elements, sortid);
-    }
+public class smallPodRaid {
     public static void Do(Map<String, Object> e){
         int x = (int) e.get("x");
         int z = (int) e.get("z");
@@ -49,8 +45,8 @@ public class smallPodRaid extends AutoReg.ModElement{
         }
     }
 
-    @Override
-    public void preInit(FMLPreInitializationEvent event) {
+    //@Override
+    /*public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
-    }
+    }*/
 }
