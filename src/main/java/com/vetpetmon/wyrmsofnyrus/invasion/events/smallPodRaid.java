@@ -4,6 +4,8 @@ import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.util.Map;
 
@@ -45,5 +47,10 @@ public class smallPodRaid extends AutoReg.ModElement{
                 world.spawnEntity(entityToSpawn);
             }
         }
+    }
+
+    @Override
+    public void preInit(FMLPreInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
     }
 }
