@@ -22,7 +22,7 @@ public class TabWyrms extends AutoReg.ModElement {
 			@SideOnly(Side.CLIENT)
 			@Override
 			public ItemStack getTabIconItem() {
-				return new ItemStack(ItemWyrmico.block, (int) (1));
+				return new ItemStack(ItemWyrmico.block, 1);
 			}
 
 			@SideOnly(Side.CLIENT)

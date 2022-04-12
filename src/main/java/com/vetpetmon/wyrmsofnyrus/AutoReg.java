@@ -71,12 +71,10 @@ public class AutoReg implements IWorldGenerator {
 		if (!event.player.world.isRemote) {
 			WorldSavedData mapdata = wyrmVariables.MapVariables.get(event.player.world);
 			WorldSavedData worlddata = wyrmVariables.WorldVariables.get(event.player.world);
-			if (mapdata != null)
-				wyrmsofnyrus.PACKET_HANDLER.sendTo(new wyrmVariables.WorldSavedDataSyncMessage(0, mapdata),
-						(EntityPlayerMP) event.player);
-			if (worlddata != null)
-				wyrmsofnyrus.PACKET_HANDLER.sendTo(new wyrmVariables.WorldSavedDataSyncMessage(1, worlddata),
-						(EntityPlayerMP) event.player);
+			wyrmsofnyrus.PACKET_HANDLER.sendTo(new wyrmVariables.WorldSavedDataSyncMessage(0, mapdata),
+					(EntityPlayerMP) event.player);
+			wyrmsofnyrus.PACKET_HANDLER.sendTo(new wyrmVariables.WorldSavedDataSyncMessage(1, worlddata),
+					(EntityPlayerMP) event.player);
 		}
 	}
 
@@ -84,9 +82,8 @@ public class AutoReg implements IWorldGenerator {
 	public void onPlayerChangedDimension(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event) {
 		if (!event.player.world.isRemote) {
 			WorldSavedData worlddata = wyrmVariables.WorldVariables.get(event.player.world);
-			if (worlddata != null)
-				wyrmsofnyrus.PACKET_HANDLER.sendTo(new wyrmVariables.WorldSavedDataSyncMessage(1, worlddata),
-						(EntityPlayerMP) event.player);
+			wyrmsofnyrus.PACKET_HANDLER.sendTo(new wyrmVariables.WorldSavedDataSyncMessage(1, worlddata),
+					(EntityPlayerMP) event.player);
 		}
 	}
 	private int messageID = 0;
