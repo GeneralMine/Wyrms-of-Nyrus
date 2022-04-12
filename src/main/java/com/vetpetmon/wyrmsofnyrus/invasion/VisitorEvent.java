@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -45,6 +46,13 @@ public class VisitorEvent {
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
+				for (int index0 = 0; index0 < (4+(int) (Math.ceil((Math.random() * 3)))); index0++) {
+					java.util.HashMap<String, Object> depens = new java.util.HashMap<>();
+					depens.put("x", x);
+					depens.put("z", z);
+					depens.put("world", world);
+					smallPodRaid.Do(dependencies);
+				}
 				wyrmVariables.MapVariables.get(world).invasionStarted = true;
 				wyrmVariables.MapVariables.get(world).syncData(world);
 			}
