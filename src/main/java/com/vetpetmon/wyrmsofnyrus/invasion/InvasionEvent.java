@@ -1,15 +1,15 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
+// pool of events to draw from:
+import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
+// end of event pool
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
-
 import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
-
 import java.util.Map;
 
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
@@ -28,37 +28,13 @@ public class InvasionEvent extends AutoReg.ModElement {
 				(Math.random() < 0.0001 + wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty / 6f * 0.00021f)
 				&& (wyrmVariables.MapVariables.get(world).invasionStarted)
 		)
-		{
-			if ((Math.random() <= 0.75)) {
-				if (!world.isRemote) {
-					Entity entityToSpawn = new EntityHexePod(world);
-					entityToSpawn.setLocationAndAngles((x - (Math.random() * 50)), 280, (z + (Math.random() * 50)), world.rand.nextFloat() * 360F,
-							0.0F);
-					world.spawnEntity(entityToSpawn);
-				}
-			} else if ((Math.random() <= 0.5)) {
-				if (!world.isRemote) {
-					Entity entityToSpawn = new EntityHexePod(world);
-					entityToSpawn.setLocationAndAngles((x + (Math.random() * 50)), 280, (z - (Math.random() * 50)), world.rand.nextFloat() * 360F,
-							0.0F);
-					world.spawnEntity(entityToSpawn);
-				}
-			} else if ((Math.random() <= 0.25)) {
-				if (!world.isRemote) {
-					Entity entityToSpawn = new EntityHexePod(world);
-					entityToSpawn.setLocationAndAngles((x + (Math.random() * 50)), 280, (z + (Math.random() * 50)), world.rand.nextFloat() * 360F,
-							0.0F);
-					world.spawnEntity(entityToSpawn);
-				}
-			} else {
-				if (!world.isRemote) {
-					Entity entityToSpawn = new EntityHexePod(world);
-					entityToSpawn.setLocationAndAngles((x - (Math.random() * 50)), 280, (z - (Math.random() * 50)), world.rand.nextFloat() * 360F,
-							0.0F);
-					world.spawnEntity(entityToSpawn);
-				}
+			{
+				java.util.HashMap<String, Object> depens = new java.util.HashMap<>();
+				depens.put("x", x);
+				depens.put("z", z);
+				depens.put("world", world);
+				smallPodRaid.Do(dependencies);
 			}
-		}
 	}
 
 	@SubscribeEvent
@@ -76,7 +52,7 @@ public class InvasionEvent extends AutoReg.ModElement {
 			dependencies.put("world", world);
 			dependencies.put("entity", entity);
 			dependencies.put("event", event);
-			this.executescript(dependencies);
+			executescript(dependencies);
 		}
 	}
 

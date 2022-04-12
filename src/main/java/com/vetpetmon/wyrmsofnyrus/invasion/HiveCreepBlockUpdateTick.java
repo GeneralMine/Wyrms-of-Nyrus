@@ -35,7 +35,7 @@ public class HiveCreepBlockUpdateTick {
                     $_dependencies.put("y", y);
                     $_dependencies.put("z", z);
                     $_dependencies.put("world", world);
-                    //HiveCreepSpreadFurther.executescript($_dependencies);
+                    HiveCreepSpreadFurther.executescript($_dependencies);
                 }
             }
         }

@@ -1,14 +1,10 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
-import com.vetpetmon.wyrmsofnyrus.invasion.EntityDeathTimer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -17,9 +13,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class EntityTheVisitor extends EntityMob implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);

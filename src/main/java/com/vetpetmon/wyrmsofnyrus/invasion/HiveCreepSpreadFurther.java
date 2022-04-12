@@ -26,10 +26,10 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		int z = (int) dependencies.get("z");
 		World world = (World) dependencies.get("world");
 		if (((Math.random() * 10) >= 9)) {
-			if ((((world.getBlockState(new BlockPos((int) x, (int) y, (int) (z - 1)))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos((int) x, (int) y, (int) (z - 1)))).getMaterial() == Material.GRASS))) {
+			if ((((world.getBlockState(new BlockPos(x, y, z - 1))).getMaterial() == Material.GROUND)
+					|| ((world.getBlockState(new BlockPos(x, y, z - 1))).getMaterial() == Material.GRASS))) {
 				{
-					BlockPos _bp = new BlockPos((int) x, (int) y, (int) (z - 1));
+					BlockPos _bp = new BlockPos(x, y, z - 1);
 					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
 					IBlockState _bso = world.getBlockState(_bp);
 					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
@@ -39,10 +39,10 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					}
 					world.setBlockState(_bp, _bs, 3);
 				}
-			} else if ((((world.getBlockState(new BlockPos((int) x, (int) y, (int) (z + 1)))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos((int) x, (int) y, (int) (z + 1)))).getMaterial() == Material.GRASS))) {
+			} else if ((((world.getBlockState(new BlockPos( x,  y,  (z + 1)))).getMaterial() == Material.GROUND)
+					|| ((world.getBlockState(new BlockPos( x,  y,  (z + 1)))).getMaterial() == Material.GRASS))) {
 				{
-					BlockPos _bp = new BlockPos((int) x, (int) y, (int) (z + 1));
+					BlockPos _bp = new BlockPos( x,  y,  (z + 1));
 					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
 					IBlockState _bso = world.getBlockState(_bp);
 					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
@@ -52,10 +52,10 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					}
 					world.setBlockState(_bp, _bs, 3);
 				}
-			} else if ((((world.getBlockState(new BlockPos((int) (x + 1), (int) y, (int) z))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos((int) (x + 1), (int) y, (int) z))).getMaterial() == Material.GRASS))) {
+			} else if ((((world.getBlockState(new BlockPos( (x + 1),  y,  z))).getMaterial() == Material.GROUND)
+					|| ((world.getBlockState(new BlockPos( (x + 1),  y,  z))).getMaterial() == Material.GRASS))) {
 				{
-					BlockPos _bp = new BlockPos((int) (x + 1), (int) y, (int) z);
+					BlockPos _bp = new BlockPos( (x + 1),  y,  z);
 					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
 					IBlockState _bso = world.getBlockState(_bp);
 					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
@@ -65,10 +65,10 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					}
 					world.setBlockState(_bp, _bs, 3);
 				}
-			} else if ((((world.getBlockState(new BlockPos((int) (x - 1), (int) y, (int) z))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos((int) (x - 1), (int) y, (int) z))).getMaterial() == Material.GRASS))) {
+			} else if ((((world.getBlockState(new BlockPos( (x - 1),  y,  z))).getMaterial() == Material.GROUND)
+					|| ((world.getBlockState(new BlockPos( (x - 1),  y,  z))).getMaterial() == Material.GRASS))) {
 				{
-					BlockPos _bp = new BlockPos((int) (x - 1), (int) y, (int) z);
+					BlockPos _bp = new BlockPos( (x - 1),  y,  z);
 					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
 					IBlockState _bso = world.getBlockState(_bp);
 					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
@@ -78,10 +78,10 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					}
 					world.setBlockState(_bp, _bs, 3);
 				}
-			} else if ((((world.getBlockState(new BlockPos((int) x, (int) (y - 1), (int) z))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos((int) x, (int) (y - 1), (int) z))).getMaterial() == Material.GRASS))) {
+			} else if ((((world.getBlockState(new BlockPos( x,  (y - 1),  z))).getMaterial() == Material.GROUND)
+					|| ((world.getBlockState(new BlockPos( x,  (y - 1),  z))).getMaterial() == Material.GRASS))) {
 				{
-					BlockPos _bp = new BlockPos((int) x, (int) (y - 1), (int) z);
+					BlockPos _bp = new BlockPos( x,  (y - 1),  z);
 					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
 					IBlockState _bso = world.getBlockState(_bp);
 					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
@@ -91,10 +91,10 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					}
 					world.setBlockState(_bp, _bs, 3);
 				}
-			} else if ((((world.getBlockState(new BlockPos((int) x, (int) (y + 1), (int) z))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos((int) x, (int) (y + 1), (int) z))).getMaterial() == Material.GRASS))) {
+			} else if ((((world.getBlockState(new BlockPos( x,  (y + 1),  z))).getMaterial() == Material.GROUND)
+					|| ((world.getBlockState(new BlockPos( x,  (y + 1),  z))).getMaterial() == Material.GRASS))) {
 				{
-					BlockPos _bp = new BlockPos((int) x, (int) (y + 1), (int) z);
+					BlockPos _bp = new BlockPos( x,  (y + 1),  z);
 					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
 					IBlockState _bso = world.getBlockState(_bp);
 					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
@@ -105,10 +105,10 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					world.setBlockState(_bp, _bs, 3);
 				}
 			} else {
-				if (((world.getBlockState(new BlockPos((int) x, (int) y, (int) z))).getBlock() == BlockHiveCreepTop.block.getDefaultState()
+				if (((world.getBlockState(new BlockPos( x,  y,  z))).getBlock() == BlockHiveCreepTop.block.getDefaultState()
 						.getBlock())) {
 					{
-						BlockPos _bp = new BlockPos((int) x, (int) y, (int) z);
+						BlockPos _bp = new BlockPos( x,  y,  z);
 						IBlockState _bs = BlockHiveCreepTopInactive.block.getDefaultState();
 						IBlockState _bso = world.getBlockState(_bp);
 						for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
@@ -120,7 +120,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					}
 				} else {
 					{
-						BlockPos _bp = new BlockPos((int) x, (int) y, (int) z);
+						BlockPos _bp = new BlockPos( x,  y,  z);
 						IBlockState _bs = BlockHiveCreepBlockInactive.block.getDefaultState();
 						IBlockState _bso = world.getBlockState(_bp);
 						for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
