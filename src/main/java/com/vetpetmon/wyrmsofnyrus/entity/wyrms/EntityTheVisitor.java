@@ -18,7 +18,7 @@ public class EntityTheVisitor extends EntityMob implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityTheVisitor(World world) {
         super(world);
-        setSize(0.5f, 0.5f);
+        setSize(5.5f, 5.5f);
         experienceValue = 0;
         this.isImmuneToFire = false;
         setNoAI(false);
