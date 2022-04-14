@@ -9,7 +9,7 @@
     "updateUrl": "",
     "authorList": ["Ik� (Ikae)"],
     "credits": "The Pissant community",
-    "logoFile": "",
+    "logoFile": "wyrmslogo.png",
     "screenshots": [],
     "dependencies": ["geckolib3"]
   }

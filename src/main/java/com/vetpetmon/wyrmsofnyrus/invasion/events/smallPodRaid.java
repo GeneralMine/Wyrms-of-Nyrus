@@ -41,9 +41,4 @@ public class smallPodRaid {
             }
         }
     }
-
-    //@Override
-    /*public void preInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(this);
-    }*/
 }
