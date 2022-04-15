@@ -5,12 +5,13 @@ entity.royalgrub.name=Royal Grub
 entity.wyrmprober.name=Wyrm Prober
 entity.wyrmling.name=Wyrmling
 entity.hexe_pod.name=Hexe Pod
+entity.wyrmworker.name=Wyrm Worker
 
 item.creepshard.name=Creepshard
 item.metalcomb_array.name=Metalcomb Array
 item.wyrmico.name=Wyrms Icon
 
-tile.metal_comb_panel_hive_creep.name=Metal Comb Panel Hive Creep
+tile.metal_comb_panel_hive_creep.name=Hive Creep Metal Combs
 tile.hivecreeptop.name=Hive Creep Surface
 tile.wyrm_lights_orange.name=Orange Wyrm Lights
 tile.wyrm_lights_yellow.name=Yellow Wyrm Lights

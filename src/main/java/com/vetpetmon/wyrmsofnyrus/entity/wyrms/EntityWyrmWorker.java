@@ -28,7 +28,7 @@ public class EntityWyrmWorker extends EntityMob implements IAnimatable{
 
     public EntityWyrmWorker(World world) {
         super(world);
-        setSize(1.5f, 1.5f);
+        setSize(1.0f, 1.5f);
         experienceValue = 1;
         this.isImmuneToFire = false;
         this.timeUntilNextProduct = this.rand.nextInt(6000) + 2000;
@@ -79,7 +79,7 @@ public class EntityWyrmWorker extends EntityMob implements IAnimatable{
         super.onLivingUpdate();
         if (!this.world.isRemote && --this.timeUntilNextProduct <= 0)
         {
-            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.dropItem(ItemMetalcombArray.block, 1);
             this.timeUntilNextProduct = this.rand.nextInt(6000) + 2000;
         }
