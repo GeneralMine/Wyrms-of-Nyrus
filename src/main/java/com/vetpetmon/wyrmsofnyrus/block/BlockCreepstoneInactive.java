@@ -1,6 +1,9 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -20,6 +23,8 @@ import net.minecraft.block.Block;
 
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
+
+import java.util.List;
 
 @AutoReg.ModElement.Tag
 public class BlockCreepstoneInactive extends AutoReg.ModElement {
@@ -54,8 +59,9 @@ public class BlockCreepstoneInactive extends AutoReg.ModElement {
 		}
 
 		@Override
-		public MapColor getMapColor(IBlockState state, IBlockAccess blockAccess, BlockPos pos) {
-			return MapColor.STONE;
+		public void addInformation(ItemStack itemstack, World world, List<String> list, ITooltipFlag flag) {
+			super.addInformation(itemstack, world, list, flag);
+			list.add("Stale - Does not spread or tick.");
 		}
 	}
 }

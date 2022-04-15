@@ -1,6 +1,11 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -20,6 +25,11 @@ import net.minecraft.block.Block;
 
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @AutoReg.ModElement.Tag
 public class BlockCreepstone extends AutoReg.ModElement {
@@ -52,10 +62,46 @@ public class BlockCreepstone extends AutoReg.ModElement {
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
 		}
+		@Override
+		public int tickRate(World world) {
+			return 400;
+		}
 
 		@Override
-		public MapColor getMapColor(IBlockState state, IBlockAccess blockAccess, BlockPos pos) {
-			return MapColor.STONE;
+		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+			super.onBlockAdded(world, pos, state);
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
+			{
+				Map<String, Object> $_dependencies = new HashMap<>();
+				$_dependencies.put("world", world);
+				InvasionBlockSpread.run($_dependencies);
+			}
+		}
+
+		@Override
+		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+			super.updateTick(world, pos, state, random);
+			int x = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
+			{
+				Map<String, Object> $_dependencies = new HashMap<>();
+				$_dependencies.put("x", x);
+				$_dependencies.put("y", y);
+				$_dependencies.put("z", z);
+				$_dependencies.put("world", world);
+				HiveCreepSpreadFurther.executescript($_dependencies);
+			}
+			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
+		}
+
+		@Override
+		public void addInformation(ItemStack itemstack, World world, List<String> list, ITooltipFlag flag) {
+			super.addInformation(itemstack, world, list, flag);
+			list.add("Spreads!");
 		}
 	}
 }
