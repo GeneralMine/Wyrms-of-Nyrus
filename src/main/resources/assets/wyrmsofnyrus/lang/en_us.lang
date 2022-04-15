@@ -1,7 +1,9 @@
+tile.creepstone_inactive.name=Creepstone
 itemGroup.tabwyrms=Wyrms
 item.wyrmico.name=Wyrmico
 tile.hivecreepblockinactive.name=Hive Creep Block
 subtitles.visitormessage=Starship humming
+tile.creepstone.name=Creepstone
 entity.thevisitor.name=The Visitor
 tile.hivecreepblock.name=Hive Creep Block
 item.creepshard.name=Creepshard
@@ -14,4 +16,4 @@ tile.hivecreeptop.name=Hive Creep Surface
 entity.royalgrub.name=Royal Grub
 entity.wyrmprober.name=Wyrm Prober
 entity.wyrmling.name=Wyrmling
-tile.wyrm_lights_orange.name=Wyrm Lights Orange
+tile.wyrm_lights_orange.name=Wyrm Lights Orangetile.creepstone.name=Creepstone
