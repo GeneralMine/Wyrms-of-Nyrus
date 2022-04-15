@@ -1,9 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityTheVisitor;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmProber;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -22,6 +19,7 @@ public final class WyrmRegister {
         EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "hexe_pod"),EntityHexePod.class,"hexe_pod",id++, wyrmsofnyrus.instance, 128, 1, true, -7981824, -154);
         EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "wyrmling"),EntityWyrmling.class,"wyrmling",id++, wyrmsofnyrus.instance, 32, 1, true, -26317, -52);
         EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "wyrmprober"), EntityWyrmProber.class,"wyrmprober",id++, wyrmsofnyrus.instance, 64, 1, true, -26317, -52);
-        EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "thevisitor"), EntityTheVisitor.class,"thevisitor",id++, wyrmsofnyrus.instance, 64, 1, true, -26317, -52);
+        EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "thevisitor"), EntityTheVisitor.class,"thevisitor",id++, wyrmsofnyrus.instance, 128, 1, true, -26317, -52);
+        EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "wyrmworker"), EntityWyrmWorker.class,"wyrmworker",id++, wyrmsofnyrus.instance, 64, 1, true, -26317, -52);
     }
 }
