@@ -14,7 +14,9 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
 
 public class EntityWyrmWorker extends EntityWyrm {
     public int timeUntilNextProduct;
@@ -90,7 +92,9 @@ public class EntityWyrmWorker extends EntityWyrm {
         super.writeEntityToNBT(compound);
         compound.setInteger("EggLayTime", this.timeUntilNextProduct);
     }
-
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
+    }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {

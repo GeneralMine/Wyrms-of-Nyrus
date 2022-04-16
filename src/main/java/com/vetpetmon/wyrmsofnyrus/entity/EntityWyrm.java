@@ -63,19 +63,10 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         return super.attackEntityFrom(source, amount);
     }
 
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
-    }
-
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
-    {
-        return PlayState.STOP;
-    }
 
     public AnimationFactory getFactory() {
         return this.factory;
     }
-
     public boolean isPreventingPlayerRest(EntityPlayer playerIn)
     {
         switch(casteType) {

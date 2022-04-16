@@ -13,7 +13,9 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
 
 public class EntityWyrmling extends EntityWyrm {
     private int timeUntilGrowth;
@@ -77,7 +79,9 @@ public class EntityWyrmling extends EntityWyrm {
         super.writeEntityToNBT(compound);
         compound.setInteger("GrowthTime", this.timeUntilGrowth);
     }
-
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
+    }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
