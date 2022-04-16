@@ -38,8 +38,23 @@ public class WyrmsTestCommandExecuted extends AutoReg.ModElement {
 			MinecraftServer mcserv = FMLCommonHandler.instance().getMinecraftServerInstance();
 			if (mcserv != null)
 				mcserv.getPlayerList().sendMessage(
-						new TextComponentString((("Current Wyrm invasion status: ") + "" + ((wyrmVariables.wyrmInvasionStatus)) + ""
-								+ (" || Points: ") + "" + ((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints)))));
+						new TextComponentString(
+								(
+									("Current Wyrm invasion status: ")
+									+ ""
+									+ ((wyrmVariables.wyrmInvasionStatus))
+									+ ""
+									+ (" || Points: ")
+									+ ""
+									+ ((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints))
+									+ (" || The ")
+									+ ""
+									+ ((wyrmVariables.WorldVariables.get(world).hiveName))
+									+ ""
+									+ (" Hive is currently invading the world!")
+								)
+						)
+				);
 		}
 	}
 }

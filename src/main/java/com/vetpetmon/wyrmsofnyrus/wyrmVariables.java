@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import com.vetpetmon.wyrmsofnyrus.invasion.HiveName;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -13,6 +14,7 @@ import net.minecraft.client.Minecraft;
 
 public class wyrmVariables {
     public static String wyrmInvasionStatus = "";
+    public static String hiveName = "";
     public static class MapVariables extends WorldSavedData {
         public static final String DATA_NAME = "wyrmsofnyrus_mapvars";
         public boolean invasionStarted = false;
@@ -57,6 +59,7 @@ public class wyrmVariables {
         public static final String DATA_NAME = "wyrmsofnyrus_worldvars";
         public double wyrmInvasionPoints = 0;
         public double wyrmInvasionDifficulty = 1;
+        public static String hiveName = "";
         public WorldVariables() {
             super(DATA_NAME);
         }
@@ -67,14 +70,19 @@ public class wyrmVariables {
 
         @Override
         public void readFromNBT(NBTTagCompound nbt) {
-            wyrmInvasionPoints				= 	nbt.getDouble("wyrmInvasionPoints");
+            wyrmInvasionPoints			= 	nbt.getDouble("wyrmInvasionPoints");
             wyrmInvasionDifficulty		= 	nbt.getDouble("wyrmInvasionDifficulty");
+            hiveName		            = 	nbt.getString("hiveName");
         }
 
         @Override
         public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
             nbt.setDouble("wyrmInvasionPoints", wyrmInvasionPoints);
             nbt.setDouble("wyrmInvasionDifficulty", wyrmInvasionDifficulty);
+            nbt.setString("hiveName", hiveName);
+            if (hiveName == ""){
+                hiveName = HiveName.HiveName();
+            }
             return nbt;
         }
 

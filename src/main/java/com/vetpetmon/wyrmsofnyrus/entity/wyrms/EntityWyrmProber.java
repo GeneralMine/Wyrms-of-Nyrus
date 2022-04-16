@@ -118,7 +118,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
                 return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
             }
         }));
-        this.tasks.addTask(5, new FlyingMobAI(this, 4.75, 100));
+        this.tasks.addTask(4, new FlyingMobAI(this, 4.75, 100));
     }
 
     @Override

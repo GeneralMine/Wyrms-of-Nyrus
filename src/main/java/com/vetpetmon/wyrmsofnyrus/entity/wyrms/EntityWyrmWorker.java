@@ -29,25 +29,33 @@ public class EntityWyrmWorker extends EntityWyrm {
         experienceValue = 1;
         enablePersistence();
         setNoAI(false);
-        this.timeUntilNextProduct = this.rand.nextInt(6000) + 2000;
+        this.timeUntilNextProduct = (int) (this.rand.nextInt(6000) + (2000 / (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty)));
     }
 
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(2, new EntityAIWander(this, 1.0));
-        this.tasks.addTask(3, new EntityAILookIdle(this));
-        this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 2.0));
+        if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0){
+            this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, true, true));
+            this.tasks.addTask(2, new EntityAIWander(this, 1.0));
+            this.tasks.addTask(3, new EntityAILookIdle(this));
+            this.tasks.addTask(1, new EntityAISwimming(this));
+        }
+        else {
+            this.tasks.addTask(2, new EntityAIWander(this, 1.0));
+            this.tasks.addTask(3, new EntityAILookIdle(this));
+            this.tasks.addTask(1, new EntityAISwimming(this));
+            this.tasks.addTask(1, new EntityAIPanic(this, 1.4));
+        }
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((2.0D) * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -78,7 +86,7 @@ public class EntityWyrmWorker extends EntityWyrm {
         {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.dropItem(ItemMetalcombArray.block, 1);
-            this.timeUntilNextProduct = this.rand.nextInt(6000) + 2000;
+            this.timeUntilNextProduct = (int) (this.rand.nextInt(6000) + (2000 / (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty)));
         }
     }
 
@@ -113,7 +121,12 @@ public class EntityWyrmWorker extends EntityWyrm {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.moving"));
             return PlayState.CONTINUE;
         }
-        else {event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idle"));}
+        else {
+            if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0){
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idleAwakened"));
+            }
+            else{event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idle"));}
+        }
 
         return PlayState.CONTINUE;
     }

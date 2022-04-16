@@ -2,12 +2,9 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.projectile.EntityPotion;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -23,15 +20,18 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.WyrmlingGrowUp.growUp;
 
 public class EntityWyrmling extends EntityWyrm {
     private int timeUntilGrowth;
+    private boolean hasGrown;
 
     public EntityWyrmling(World world) {
         super(world);
         this.casteType = 0;
+        this.hasGrown = false;
         setSize(0.5f, 0.5f);
         experienceValue = 1;
         this.isImmuneToFire = false;
         enablePersistence();
         setNoAI(false);
+        this.timeUntilGrowth = this.rand.nextInt(6000) + 2000;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class EntityWyrmling extends EntityWyrm {
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
-        if (!this.world.isRemote && --this.timeUntilGrowth <= 0)
+        if (!this.world.isRemote && --this.timeUntilGrowth <= 0 && !hasGrown)
         {
             World world = this.world;
             int i = (int) this.posX;
@@ -82,7 +82,8 @@ public class EntityWyrmling extends EntityWyrm {
             d.put("y", j);
             d.put("z", k);
             d.put("world", world);
-            growUp(d, this);
+            growUp(d, this, this.timeUntilGrowth);
+            this.hasGrown = true;
         }
     }
 
@@ -93,7 +94,7 @@ public class EntityWyrmling extends EntityWyrm {
 
         this.srpcothimmunity = true;
 
-        if (compound.hasKey("ProductionTime"))
+        if (compound.hasKey("GrowthTime"))
         {
             this.timeUntilGrowth = compound.getInteger("GrowthTime");
         }

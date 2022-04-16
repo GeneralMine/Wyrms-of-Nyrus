@@ -46,7 +46,7 @@ public class BlockMetalCombPanelHiveCreep extends AutoReg.ModElement {
 			setUnlocalizedName("metal_comb_panel_hive_creep");
 			setSoundType(SoundType.METAL);
 			setHarvestLevel("pickaxe", 3);
-			setHardness(2F);
+			setHardness(3F);
 			setResistance(9F);
 			setLightLevel(0F);
 			setLightOpacity(255);
