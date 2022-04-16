@@ -27,8 +27,6 @@ public class EntityWyrmWorker extends EntityWyrm {
         setSize(1.0f, 1.5f);
         experienceValue = 1;
         this.timeUntilNextProduct = this.rand.nextInt(6000) + 2000;
-        setNoAI(false);
-        enablePersistence();
     }
 
     @Override
@@ -45,8 +43,8 @@ public class EntityWyrmWorker extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.4D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
     }
@@ -92,9 +90,11 @@ public class EntityWyrmWorker extends EntityWyrm {
         super.writeEntityToNBT(compound);
         compound.setInteger("EggLayTime", this.timeUntilNextProduct);
     }
+
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
+        data.addAnimationController(new AnimationController(this, "controller", 1F, this::predicate));
     }
+
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
