@@ -158,6 +158,15 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     public SoundEvent getDeathSound() {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
     }*/
+
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source == DamageSource.FALL)
+            return false;
+        if (source == DamageSource.DROWN)
+            return false;
+        return super.attackEntityFrom(source, amount);
+    }
+
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
     }

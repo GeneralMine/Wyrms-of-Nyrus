@@ -45,24 +45,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         this.isImmuneToFire = false;
     }
 
-    protected boolean canDespawn() {
-        switch(casteType) {
-            case 8:
-            case 9:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return false;
-        if (source == DamageSource.DROWN)
-            return false;
-        return super.attackEntityFrom(source, amount);
-    }
-
+    protected boolean canDespawn() {return false;}
 
     public AnimationFactory getFactory() {
         return this.factory;

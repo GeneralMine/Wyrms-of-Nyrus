@@ -51,6 +51,9 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     @Override
     public SoundEvent getDeathSound() {return null;}
 
+    @Override
+    protected boolean canDespawn() {return true;}
+
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
     }

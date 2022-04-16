@@ -33,11 +33,11 @@ public class EntityWyrmling extends EntityWyrm {
         super.initEntityAI();
         this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayerMP.class, (float) 3, 1, 1.2));
         this.tasks.addTask(2, new EntityAIFollow(this, (float) 1, 10, 5));
-        this.tasks.addTask(3, new EntityAIWander(this, 0.25));
+        this.tasks.addTask(3, new EntityAIWander(this, 0.8));
         this.tasks.addTask(4, new EntityAILookIdle(this));
         this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayerMP.class, (float) 12));
         this.tasks.addTask(5, new EntityAISwimming(this));
-        this.tasks.addTask(6, new EntityAIPanic(this, 1.2));
+        this.tasks.addTask(6, new EntityAIPanic(this, 1.5));
     }
 
     @Override
@@ -93,9 +93,12 @@ public class EntityWyrmling extends EntityWyrm {
         return PlayState.CONTINUE;
     }
 
-    @Override
+
+
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source.getImmediateSource() instanceof EntityPotion)
+        if (source == DamageSource.FALL)
+            return false;
+        if (source == DamageSource.DROWN)
             return false;
         return super.attackEntityFrom(source, amount);
     }

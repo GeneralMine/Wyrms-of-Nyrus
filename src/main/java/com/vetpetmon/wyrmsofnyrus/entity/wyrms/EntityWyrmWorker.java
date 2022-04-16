@@ -33,11 +33,10 @@ public class EntityWyrmWorker extends EntityWyrm {
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(1, new EntityAIFollow(this, (float) 1, 10, 5));
-        this.tasks.addTask(2, new EntityAIWander(this, 0.25));
+        this.tasks.addTask(2, new EntityAIWander(this, 1.0));
         this.tasks.addTask(3, new EntityAILookIdle(this));
-        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayerMP.class, (float) 12));
-        this.tasks.addTask(5, new EntityAISwimming(this));
-        this.tasks.addTask(6, new EntityAIPanic(this, 1.2));
+        this.tasks.addTask(4, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIPanic(this, 2.0));
     }
 
     @Override
@@ -47,6 +46,14 @@ public class EntityWyrmWorker extends EntityWyrm {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
+    }
+
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source == DamageSource.FALL)
+            return false;
+        if (source == DamageSource.DROWN)
+            return false;
+        return super.attackEntityFrom(source, amount);
     }
 
     @Override

@@ -72,7 +72,7 @@ public class BlockHiveCreepTopInactive extends AutoReg.ModElement {
 
 		@Override
 		public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-			drops.add(new ItemStack(BlockHiveCreepBlock.block, (int) (1)));
+			drops.add(new ItemStack(BlockHiveCreepBlockInactive.block, (int) (1)));
 		}
 	}
 }
