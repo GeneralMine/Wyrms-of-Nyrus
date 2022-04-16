@@ -4,6 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
 import com.google.common.base.Predicate;
 
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -14,9 +15,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.entity.player.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -29,23 +28,18 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class EntityWyrmProber extends EntityMob implements IAnimatable {
+public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmProber(World world) {
         super(world);
+        this.casteType = 2;
         setSize(0.5f, 0.5f);
         experienceValue = 1;
-        this.isImmuneToFire = false;
-        setNoAI(false);
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
-        enablePersistence();
-        this.setNoGravity(true);
     }
 
     static class WyrmProberMoveHelper extends EntityMoveHelper
@@ -71,7 +65,7 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
                 if (this.courseChangeCooldown-- <= 0)
                 {
                     this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
-                    d3 = (double) MathHelper.sqrt(d3);
+                    d3 = MathHelper.sqrt(d3);
 
                     if (this.isNotColliding(this.posX, this.posY, this.posZ, d3))
                     {
@@ -115,9 +109,9 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityLiving.class, (float) 64));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, false, false));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<EntityMob>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
             public boolean apply(EntityMob target) {
-                return !((target instanceof EntityCreeper) || (target instanceof EntityHexePod) || (target instanceof EntityWyrmling) || (target instanceof EntityWyrmProber));
+                return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
             }
         }));
         this.tasks.addTask(5, new FlyingMobAI(this, 4.75, 100));
@@ -135,11 +129,6 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
     }
 
     @Override
-    protected boolean canDespawn() {
-        return false;
-    }
-
-    @Override
     public void onUpdate() {
         super.onUpdate();
         this.setNoGravity(true);
@@ -152,7 +141,7 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(ItemCreepshard.block, (int) (1)).getItem();
+        return new ItemStack(ItemCreepshard.block, 1).getItem();
     }
 
     @Override
@@ -168,32 +157,11 @@ public class EntityWyrmProber extends EntityMob implements IAnimatable {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
     }*/
 
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return false;
-        if (source == DamageSource.DROWN)
-            return false;
-        if (source.getImmediateSource() instanceof EntityPotion)    //Basically creates immunity from SRP's COTH effects and poison/wither, as wyrms are NOT organic beings
-            return false;
-        return super.attackEntityFrom(source, amount);
-    }
-
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 20F, (AnimationController.IAnimationPredicate) this::predicate));
-    }
-
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprober.flying"));
 
         return PlayState.CONTINUE;
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
     }
 
 }

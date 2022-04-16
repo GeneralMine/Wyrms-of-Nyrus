@@ -1,39 +1,33 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.hexepodContents;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityPotion;
-import net.minecraft.world.World;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
-
+import net.minecraft.util.SoundEvent;
+import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EntityHexePod extends EntityMob implements IAnimatable{
+public class EntityHexePod extends EntityWyrm implements IAnimatable{
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityHexePod(World world) {
         super(world);
+        this.casteType = 9;
         setSize(1f, 1f);
         experienceValue = 0;
-        this.isImmuneToFire = true;
-        setNoAI(false);
-        enablePersistence();
     }
-    //no AI
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -60,13 +54,8 @@ public class EntityHexePod extends EntityMob implements IAnimatable{
     }
 
     @Override
-    protected boolean canDespawn() {
-        return false;
-    }
-
-    @Override
     public SoundEvent getAmbientSound() {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation(""));
+        return null;
     }
 
     @Override
@@ -91,20 +80,10 @@ public class EntityHexePod extends EntityMob implements IAnimatable{
             hexepodContents.doThis($_dmap);
         }
     }
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 20F, (AnimationController.IAnimationPredicate) this::predicate));
-    }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.hexepod.idle"));
         return PlayState.CONTINUE;
     }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
-
 }

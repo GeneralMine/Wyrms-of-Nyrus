@@ -1,14 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.projectile.EntityPotion;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -17,20 +14,16 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class EntityWyrmWorker extends EntityMob implements IAnimatable{
-    private AnimationFactory factory = new AnimationFactory(this);
+public class EntityWyrmWorker extends EntityWyrm {
     public int timeUntilNextProduct;
 
     public EntityWyrmWorker(World world) {
         super(world);
+        this.casteType = 2;
         setSize(1.0f, 1.5f);
         experienceValue = 1;
-        this.isImmuneToFire = false;
         this.timeUntilNextProduct = this.rand.nextInt(6000) + 2000;
         setNoAI(false);
         enablePersistence();
@@ -54,11 +47,6 @@ public class EntityWyrmWorker extends EntityMob implements IAnimatable{
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
-    }
-
-    @Override
-    protected boolean canDespawn() {
-        return false;
     }
 
     @Override
@@ -103,11 +91,6 @@ public class EntityWyrmWorker extends EntityMob implements IAnimatable{
         compound.setInteger("EggLayTime", this.timeUntilNextProduct);
     }
 
-    @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 20F, (AnimationController.IAnimationPredicate) this::predicate));
-    }
-
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
@@ -117,18 +100,6 @@ public class EntityWyrmWorker extends EntityMob implements IAnimatable{
         else {event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idle"));}
 
         return PlayState.CONTINUE;
-    }
-
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source.getImmediateSource() instanceof EntityPotion)
-            return false;
-        return super.attackEntityFrom(source, amount);
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
     }
 
 }

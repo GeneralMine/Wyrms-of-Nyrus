@@ -1,31 +1,29 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.*;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class EntityWyrmling extends EntityMob implements IAnimatable{
-    private AnimationFactory factory = new AnimationFactory(this);
+public class EntityWyrmling extends EntityWyrm {
+    private int timeUntilGrowth;
+
     public EntityWyrmling(World world) {
         super(world);
+        this.casteType = 0;
         setSize(0.5f, 0.5f);
         experienceValue = 1;
         this.isImmuneToFire = false;
-        setNoAI(false);
-        enablePersistence();
     }
 
     @Override
@@ -50,11 +48,6 @@ public class EntityWyrmling extends EntityMob implements IAnimatable{
     }
 
     @Override
-    protected boolean canDespawn() {
-        return false;
-    }
-
-    @Override
     public SoundEvent getAmbientSound() {
         return SoundRegistry.wyrmClicks;
     }
@@ -68,8 +61,21 @@ public class EntityWyrmling extends EntityMob implements IAnimatable{
     }*/
 
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 20F, (AnimationController.IAnimationPredicate) this::predicate));
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        if (compound.hasKey("ProductionTime"))
+        {
+            this.timeUntilGrowth = compound.getInteger("GrowthTime");
+        }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("GrowthTime", this.timeUntilGrowth);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
@@ -88,11 +94,6 @@ public class EntityWyrmling extends EntityMob implements IAnimatable{
         if (source.getImmediateSource() instanceof EntityPotion)
             return false;
         return super.attackEntityFrom(source, amount);
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
     }
 
 }
