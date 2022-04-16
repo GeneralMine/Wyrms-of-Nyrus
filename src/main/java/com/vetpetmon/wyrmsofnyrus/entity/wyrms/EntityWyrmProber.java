@@ -42,6 +42,8 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         experienceValue = 1;
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
+        enablePersistence();
+        setNoAI(false);
     }
 
     static class WyrmProberMoveHelper extends EntityMoveHelper
@@ -122,7 +124,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.25D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));

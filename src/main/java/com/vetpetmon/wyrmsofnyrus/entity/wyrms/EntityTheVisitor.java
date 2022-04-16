@@ -20,6 +20,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         setSize(5.5f, 5.5f);
         experienceValue = 0;
         this.casteType = 8;
+        setNoAI(true);
     }
 
     @Override

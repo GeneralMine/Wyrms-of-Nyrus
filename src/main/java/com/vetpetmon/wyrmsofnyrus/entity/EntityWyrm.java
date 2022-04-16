@@ -30,18 +30,6 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
 
     public EntityWyrm(final World worldIn) {
         super(worldIn);
-        switch(casteType) {
-            case 7:
-                setNoAI(false);
-                break;
-            case 8:
-                setNoAI(true);
-                break;
-            default:
-                setNoAI(false);
-                enablePersistence();
-                break;
-        }
         this.isImmuneToFire = false;
     }
 

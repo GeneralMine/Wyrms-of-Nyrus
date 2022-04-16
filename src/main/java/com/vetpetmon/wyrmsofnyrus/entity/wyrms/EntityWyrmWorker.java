@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
+import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -26,6 +27,8 @@ public class EntityWyrmWorker extends EntityWyrm {
         this.casteType = 2;
         setSize(1.0f, 1.5f);
         experienceValue = 1;
+        enablePersistence();
+        setNoAI(false);
         this.timeUntilNextProduct = this.rand.nextInt(6000) + 2000;
     }
 
@@ -42,7 +45,7 @@ public class EntityWyrmWorker extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((2.0D) * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);

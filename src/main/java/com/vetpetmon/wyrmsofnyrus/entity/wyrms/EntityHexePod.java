@@ -29,6 +29,8 @@ public class EntityHexePod extends EntityWyrm implements IAnimatable{
         this.casteType = 9;
         setSize(1f, 1f);
         experienceValue = 0;
+        enablePersistence();
+        setNoAI(false);
     }
 
     @Override

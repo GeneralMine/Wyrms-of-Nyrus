@@ -26,6 +26,8 @@ public class EntityWyrmling extends EntityWyrm {
         setSize(0.5f, 0.5f);
         experienceValue = 1;
         this.isImmuneToFire = false;
+        enablePersistence();
+        setNoAI(false);
     }
 
     @Override
