@@ -19,12 +19,12 @@ import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 
 public class VisitorEvent {
 
-	public static void executeProcedure(Map<String, Object> dependencies, Boolean forced) {
-		int x = (int) dependencies.get("x");
-		int y = (int) dependencies.get("y");
-		int z = (int) dependencies.get("z");
+	public static void executeProcedure(Map<String, Object> e, Boolean forced) {
+		int x = (int) e.get("x");
+		int y = (int) e.get("y");
+		int z = (int) e.get("z");
 		boolean isForced = forced;
-		World world = (World) dependencies.get("world");
+		World world = (World) e.get("world");
 		if ((!(wyrmVariables.MapVariables.get(world).invasionStarted))) {
 			if ((Math.random() > 0.95) || (isForced)) {
 				if (!world.isRemote) {
@@ -51,7 +51,7 @@ public class VisitorEvent {
 					depens.put("x", x);
 					depens.put("z", z);
 					depens.put("world", world);
-					smallPodRaid.Do(dependencies);
+					smallPodRaid.Do(e);
 				}
 				wyrmVariables.MapVariables.get(world).invasionStarted = true;
 				wyrmVariables.MapVariables.get(world).syncData(world);

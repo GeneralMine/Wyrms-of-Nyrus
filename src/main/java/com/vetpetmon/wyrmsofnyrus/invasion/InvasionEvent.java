@@ -1,8 +1,8 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
-// pool of events to draw from:
-import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
-// end of event pool
+// imports ALL events automatically.
+import com.vetpetmon.wyrmsofnyrus.invasion.events.*;
+
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

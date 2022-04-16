@@ -19,6 +19,8 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.WyrmlingGrowUp.growUp;
+
 public class EntityWyrmling extends EntityWyrm {
     private int timeUntilGrowth;
 
@@ -71,8 +73,16 @@ public class EntityWyrmling extends EntityWyrm {
         super.onLivingUpdate();
         if (!this.world.isRemote && --this.timeUntilGrowth <= 0)
         {
-            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.timeUntilGrowth = this.rand.nextInt(6000) + 2000;
+            World world = this.world;
+            int i = (int) this.posX;
+            int j = (int) this.posY;
+            int k = (int) this.posZ;
+            java.util.HashMap<String, Object> d = new java.util.HashMap<>();
+            d.put("x", i);
+            d.put("y", j);
+            d.put("z", k);
+            d.put("world", world);
+            growUp(d, this);
         }
     }
 
