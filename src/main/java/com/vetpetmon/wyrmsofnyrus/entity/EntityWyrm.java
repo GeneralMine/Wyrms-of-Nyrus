@@ -27,6 +27,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
 
     public int casteType;
     private final AnimationFactory factory = new AnimationFactory(this);
+    protected boolean srpcothimmunity;
 
     public EntityWyrm(final World worldIn) {
         super(worldIn);

@@ -2,10 +2,12 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -64,10 +66,22 @@ public class EntityWyrmling extends EntityWyrm {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
     }*/
 
+    public void onLivingUpdate()
+    {
+        super.onLivingUpdate();
+        if (!this.world.isRemote && --this.timeUntilGrowth <= 0)
+        {
+            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+            this.timeUntilGrowth = this.rand.nextInt(6000) + 2000;
+        }
+    }
+
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
+
+        this.srpcothimmunity = true;
 
         if (compound.hasKey("ProductionTime"))
         {
@@ -79,6 +93,8 @@ public class EntityWyrmling extends EntityWyrm {
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
+
+        compound.setBoolean("srpcothimmunity", this.srpcothimmunity);
         compound.setInteger("GrowthTime", this.timeUntilGrowth);
     }
     public void registerControllers(AnimationData data) {

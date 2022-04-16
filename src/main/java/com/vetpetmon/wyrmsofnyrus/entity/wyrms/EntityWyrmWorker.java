@@ -88,6 +88,8 @@ public class EntityWyrmWorker extends EntityWyrm {
     {
         super.readEntityFromNBT(compound);
 
+        this.srpcothimmunity = true;
+
         if (compound.hasKey("ProductionTime"))
         {
             this.timeUntilNextProduct = compound.getInteger("ProductionTime");
@@ -98,7 +100,8 @@ public class EntityWyrmWorker extends EntityWyrm {
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setInteger("EggLayTime", this.timeUntilNextProduct);
+        compound.setBoolean("srpcothimmunity", this.srpcothimmunity);
+        compound.setInteger("ProductionTime", this.timeUntilNextProduct);
     }
 
     public void registerControllers(AnimationData data) {
