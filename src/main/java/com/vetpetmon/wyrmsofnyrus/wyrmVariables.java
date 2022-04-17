@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveName;
+import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -12,12 +13,16 @@ import net.minecraft.world.World;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.client.Minecraft;
 
+import java.util.ArrayList;
+
 public class wyrmVariables {
     public static String wyrmInvasionStatus = "";
     public static String hiveName = "";
+
     public static class MapVariables extends WorldSavedData {
         public static final String DATA_NAME = "wyrmsofnyrus_mapvars";
         public boolean invasionStarted = false;
+
         public MapVariables() {
             super(DATA_NAME);
         }

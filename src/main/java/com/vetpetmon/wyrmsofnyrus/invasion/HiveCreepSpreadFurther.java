@@ -26,7 +26,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		ArrayList<Block> invalidBlocks = new ArrayList<>();
 		invalidBlocks.add(Block.getBlockFromName("minecraft:furnace"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:brick_block"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:brick_stairs"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:bone_block"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:bedrock")); //I HAVEN'T TESTED TO SEE IF IT CONVERTS BEDROCK BEFORE BUT THAT'D BE HILARIOUS IF IT DID.
 		invalidBlocks.add(Block.getBlockFromName("minecraft:concrete"));
@@ -39,8 +38,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		invalidBlocks.add(Block.getBlockFromName("minecraft:jukebox"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:nether_brick"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:red_nether_brick"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:nether_brick_fence"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:nether_brick_stairs"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:noteblock"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:observer"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:obsidian"));
@@ -48,17 +45,9 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		invalidBlocks.add(Block.getBlockFromName("minecraft:prismarine"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:purpur_block"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:purpur_pillar"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:purpur_slab"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:purpur_stairs"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:quartz_block"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:quartz_stairs"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:quartz_slab"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:sponge"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:stained_glass"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:stone_brick_stairs"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:stone_stairs"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:stone_slabs"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:stone_pressure_plate"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:stone_button"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:wool"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:stonebrick"));
@@ -102,11 +91,10 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			}
 			for (BlockPos i: BlockPosList) {
 				couldSpread = true;
-				if ((!world.isAirBlock(i)) && (Math.random() >= 0.5)) {
+				if ((!world.isAirBlock(i)) && (Math.random() > 0.5) && (world.getBlockState(i).isFullCube())) {
 					if (
 						(((world.getBlockState(i)).getMaterial() == Material.ROCK))
 						&& !((invalidBlocks.contains((world.getBlockState(i)).getBlock())))
-						&& (world.getBlockState(i).isFullCube())
 					)
 					{
 						world.setBlockState((i), BlockCreepstone.block.getDefaultState(), 3);
@@ -115,7 +103,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					else if (
 						(((world.getBlockState(i)).getMaterial() == Material.GROUND) || ((world.getBlockState(i)).getMaterial() == Material.GRASS))
 						&& !((invalidBlocks.contains((world.getBlockState(i)).getBlock())))
-						&& (world.getBlockState(i).isFullCube())
 					)
 					{
 						world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
