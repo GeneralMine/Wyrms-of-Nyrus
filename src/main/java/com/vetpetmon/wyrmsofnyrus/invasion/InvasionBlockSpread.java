@@ -14,7 +14,7 @@ public class InvasionBlockSpread {
         }
         World world = (World) dependencies.get("world");
         wyrmVariables.WorldVariables
-                .get(world).wyrmInvasionPoints = (wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) + 0.05;
+                .get(world).wyrmInvasionPoints = (wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) + 0.015;
         wyrmVariables.WorldVariables.get(world).syncData(world);
     }
 }
