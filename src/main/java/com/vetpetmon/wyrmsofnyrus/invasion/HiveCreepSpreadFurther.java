@@ -97,6 +97,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					)
 					{
 						world.setBlockState((i), BlockCreepstone.block.getDefaultState(), 3);
+						break;
 					}
 
 					else if (
@@ -104,6 +105,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					)
 					{
 						world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
+						break;
 					}
 					else {
 						couldSpread = false;
