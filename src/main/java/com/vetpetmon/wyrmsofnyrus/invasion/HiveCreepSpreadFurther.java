@@ -91,10 +91,9 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			}
 			for (BlockPos i: BlockPosList) {
 				couldSpread = true;
-				if ((!world.isAirBlock(i)) && (Math.random() > 0.5) && (world.getBlockState(i).isFullCube())) {
+				if ((!world.isAirBlock(i)) && (Math.random() > 0.5) && (world.getBlockState(i).isFullCube()) && !((invalidBlocks.contains((world.getBlockState(i)).getBlock())))) {
 					if (
 						(((world.getBlockState(i)).getMaterial() == Material.ROCK))
-						&& !((invalidBlocks.contains((world.getBlockState(i)).getBlock())))
 					)
 					{
 						world.setBlockState((i), BlockCreepstone.block.getDefaultState(), 3);
@@ -102,7 +101,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 
 					else if (
 						(((world.getBlockState(i)).getMaterial() == Material.GROUND) || ((world.getBlockState(i)).getMaterial() == Material.GRASS))
-						&& !((invalidBlocks.contains((world.getBlockState(i)).getBlock())))
 					)
 					{
 						world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
