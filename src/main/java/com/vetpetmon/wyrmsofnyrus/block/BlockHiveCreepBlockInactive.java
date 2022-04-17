@@ -47,7 +47,7 @@ public class BlockHiveCreepBlockInactive extends AutoReg.ModElement {
 			super(Material.CRAFTED_SNOW);
 			setUnlocalizedName("hivecreepblockinactive");
 			setSoundType(SoundType.SLIME);
-			setHarvestLevel("shovel", 3);
+			setHarvestLevel("shovel", 1);
 			setHardness(1.05F);
 			setResistance(5F);
 			setLightLevel(0F);
