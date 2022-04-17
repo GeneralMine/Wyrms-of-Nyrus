@@ -64,7 +64,7 @@ public class BlockCreepstone extends AutoReg.ModElement {
 		}
 		@Override
 		public int tickRate(World world) {
-			return 400;
+			return 600;
 		}
 
 		@Override

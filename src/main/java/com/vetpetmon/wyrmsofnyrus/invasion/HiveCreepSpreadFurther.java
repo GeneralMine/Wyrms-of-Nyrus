@@ -21,211 +21,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		super(instance, 10);
 	}
 
-	public static void executescript(Map<String, Object> dependencies) {
-		int x = (int) dependencies.get("x");
-		int y = (int) dependencies.get("y");
-		int z = (int) dependencies.get("z");
-		World world = (World) dependencies.get("world");
-		if ((Math.random() >= 0.9)) {
-			if ((((world.getBlockState(new BlockPos(x, y, z - 1))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos(x, y, z - 1))).getMaterial() == Material.GRASS))) {
-				{
-					BlockPos _bp = new BlockPos(x, y, z - 1);
-					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
-					IBlockState _bso = world.getBlockState(_bp);
-					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-						IProperty _property = entry.getKey();
-						if (_bs.getPropertyKeys().contains(_property))
-							_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-					}
-					world.setBlockState(_bp, _bs, 3);
-				}
-			}
-			else if ((((world.getBlockState(new BlockPos( x,  y,  (z + 1)))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos( x,  y,  (z + 1)))).getMaterial() == Material.GRASS))) {
-				{
-					BlockPos _bp = new BlockPos( x,  y,  (z + 1));
-					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
-					IBlockState _bso = world.getBlockState(_bp);
-					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-						IProperty _property = entry.getKey();
-						if (_bs.getPropertyKeys().contains(_property))
-							_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-					}
-					world.setBlockState(_bp, _bs, 3);
-				}
-			}
-			else if ((((world.getBlockState(new BlockPos( (x + 1),  y,  z))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos( (x + 1),  y,  z))).getMaterial() == Material.GRASS))) {
-				{
-					BlockPos _bp = new BlockPos( (x + 1),  y,  z);
-					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
-					IBlockState _bso = world.getBlockState(_bp);
-					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-						IProperty _property = entry.getKey();
-						if (_bs.getPropertyKeys().contains(_property))
-							_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-					}
-					world.setBlockState(_bp, _bs, 3);
-				}
-			}
-			else if ((((world.getBlockState(new BlockPos( (x - 1),  y,  z))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos( (x - 1),  y,  z))).getMaterial() == Material.GRASS))) {
-				{
-					BlockPos _bp = new BlockPos( (x - 1),  y,  z);
-					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
-					IBlockState _bso = world.getBlockState(_bp);
-					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-						IProperty _property = entry.getKey();
-						if (_bs.getPropertyKeys().contains(_property))
-							_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-					}
-					world.setBlockState(_bp, _bs, 3);
-				}
-			}
-			else if ((((world.getBlockState(new BlockPos( x,  (y - 1),  z))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos( x,  (y - 1),  z))).getMaterial() == Material.GRASS))) {
-				{
-					BlockPos _bp = new BlockPos( x,  (y - 1),  z);
-					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
-					IBlockState _bso = world.getBlockState(_bp);
-					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-						IProperty _property = entry.getKey();
-						if (_bs.getPropertyKeys().contains(_property))
-							_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-					}
-					world.setBlockState(_bp, _bs, 3);
-				}
-			}
-			else if ((((world.getBlockState(new BlockPos( x,  (y + 1),  z))).getMaterial() == Material.GROUND)
-					|| ((world.getBlockState(new BlockPos( x,  (y + 1),  z))).getMaterial() == Material.GRASS))) {
-				{
-					BlockPos _bp = new BlockPos( x,  (y + 1),  z);
-					IBlockState _bs = BlockHiveCreepBlock.block.getDefaultState();
-					IBlockState _bso = world.getBlockState(_bp);
-					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-						IProperty _property = entry.getKey();
-						if (_bs.getPropertyKeys().contains(_property))
-							_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-					}
-					world.setBlockState(_bp, _bs, 3);
-				}
-			}
-
-			//Rocks
-			else if ((world.getBlockState(new BlockPos( x,  (y + 1),  z))).getMaterial() == Material.ROCK) {
-				BlockPos _bp = new BlockPos( x,  (y + 1),  z);
-				IBlockState _bs = BlockCreepstone.block.getDefaultState();
-				IBlockState _bso = world.getBlockState(_bp);
-				for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-					IProperty _property = entry.getKey();
-					if (_bs.getPropertyKeys().contains(_property))
-						_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-				}
-				world.setBlockState(_bp, _bs, 3);
-			}
-			else if ((world.getBlockState(new BlockPos( x,  (y - 1),  z))).getMaterial() == Material.ROCK) {
-				BlockPos _bp = new BlockPos( x,  (y - 1),  z);
-				IBlockState _bs = BlockCreepstone.block.getDefaultState();
-				IBlockState _bso = world.getBlockState(_bp);
-				for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-					IProperty _property = entry.getKey();
-					if (_bs.getPropertyKeys().contains(_property))
-						_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-				}
-				world.setBlockState(_bp, _bs, 3);
-			}
-			else if ((world.getBlockState(new BlockPos( (x-1),  y,  z))).getMaterial() == Material.ROCK) {
-				BlockPos _bp = new BlockPos( (x-1),  y,  z);
-				IBlockState _bs = BlockCreepstone.block.getDefaultState();
-				IBlockState _bso = world.getBlockState(_bp);
-				for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-					IProperty _property = entry.getKey();
-					if (_bs.getPropertyKeys().contains(_property))
-						_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-				}
-				world.setBlockState(_bp, _bs, 3);
-			}
-			else if ((world.getBlockState(new BlockPos( (x+1),  y,  z))).getMaterial() == Material.ROCK) {
-				BlockPos _bp = new BlockPos( (x+1),  y,  z);
-				IBlockState _bs = BlockCreepstone.block.getDefaultState();
-				IBlockState _bso = world.getBlockState(_bp);
-				for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-					IProperty _property = entry.getKey();
-					if (_bs.getPropertyKeys().contains(_property))
-						_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-				}
-				world.setBlockState(_bp, _bs, 3);
-			}
-			else if ((world.getBlockState(new BlockPos( x,  y,  (z+1)))).getMaterial() == Material.ROCK) {
-				BlockPos _bp = new BlockPos( x,  y,  (z+1));
-				IBlockState _bs = BlockCreepstone.block.getDefaultState();
-				IBlockState _bso = world.getBlockState(_bp);
-				for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-					IProperty _property = entry.getKey();
-					if (_bs.getPropertyKeys().contains(_property))
-						_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-				}
-				world.setBlockState(_bp, _bs, 3);
-			}
-			else if ((world.getBlockState(new BlockPos( x,  y,  (z-1)))).getMaterial() == Material.ROCK) {
-				BlockPos _bp = new BlockPos( x,  y,  (z-1));
-				IBlockState _bs = BlockCreepstone.block.getDefaultState();
-				IBlockState _bso = world.getBlockState(_bp);
-				for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-					IProperty _property = entry.getKey();
-					if (_bs.getPropertyKeys().contains(_property))
-						_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-				}
-				world.setBlockState(_bp, _bs, 3);
-			}
-
-			//De-activate
-			else {
-				if (((world.getBlockState(new BlockPos( x,  y,  z))).getBlock() == BlockHiveCreepTop.block.getDefaultState()
-						.getBlock())) {
-					{
-						BlockPos _bp = new BlockPos( x,  y,  z);
-						IBlockState _bs = BlockHiveCreepTopInactive.block.getDefaultState();
-						IBlockState _bso = world.getBlockState(_bp);
-						for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-							IProperty _property = entry.getKey();
-							if (_bs.getPropertyKeys().contains(_property))
-								_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-						}
-						world.setBlockState(_bp, _bs, 3);
-					}
-				}
-				else if (((world.getBlockState(new BlockPos( x,  y,  z))).getBlock() == BlockCreepstone.block.getDefaultState()
-						.getBlock())) {
-					BlockPos _bp = new BlockPos( x,  y,  z);
-					IBlockState _bs = BlockCreepstoneInactive.block.getDefaultState();
-					IBlockState _bso = world.getBlockState(_bp);
-					for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-						IProperty _property = entry.getKey();
-						if (_bs.getPropertyKeys().contains(_property))
-							_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-					}
-					world.setBlockState(_bp, _bs, 3);
-				}
-				else {
-					{
-						BlockPos _bp = new BlockPos( x,  y,  z);
-						IBlockState _bs = BlockHiveCreepBlockInactive.block.getDefaultState();
-						IBlockState _bso = world.getBlockState(_bp);
-						for (Map.Entry<IProperty<?>, Comparable<?>> entry : _bso.getProperties().entrySet()) {
-							IProperty _property = entry.getKey();
-							if (_bs.getPropertyKeys().contains(_property))
-								_bs = _bs.withProperty(_property, (Comparable) entry.getValue());
-						}
-						world.setBlockState(_bp, _bs, 3);
-					}
-				}
-			}
-		}
-	}
-
-	public static void optimumRVs(Map<String, Object> e) {
+	public static void executescript(Map<String, Object> e) {
 
 		ArrayList<Block> invalidBlocks = new ArrayList<>();
 		invalidBlocks.add(Block.getBlockFromName("minecraft:furnace"));
@@ -296,25 +92,51 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 
 		World world = (World) e.get("world");
 		boolean canSpreadThisTick = ((Math.random() >= 0.9));
+		boolean couldSpread = true;
 		if (canSpreadThisTick) {
 			if (world.isAirBlock(new BlockPos(x, y + 1, z)))
 			{
 				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
-					world.setBlockState((BlockPosList.get(0)), (IBlockState) Block.getBlockFromName("wyrmsofnyrus:hivecreeptop"), 3);
+					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTop.block.getDefaultState(), 3);
 				}
 			}
-			if (!world.isAirBlock(BlockPosList.get(1))) {
-				if (
-						(((world.getBlockState(BlockPosList.get(0))).getMaterial() == Material.ROCK))
-						&& !((invalidBlocks.contains((world.getBlockState(BlockPosList.get(0))).getBlock())))
-				)
-				{
+			for (BlockPos i: BlockPosList) {
+				couldSpread = true;
+				if ((!world.isAirBlock(i)) && (Math.random() >= 0.5)) {
+					if (
+						(((world.getBlockState(i)).getMaterial() == Material.ROCK))
+						&& !((invalidBlocks.contains((world.getBlockState(i)).getBlock())))
+						&& (world.getBlockState(i).isFullCube())
+					)
+					{
+						world.setBlockState((i), BlockCreepstone.block.getDefaultState(), 3);
+					}
 
+					else if (
+						(((world.getBlockState(i)).getMaterial() == Material.GROUND) || ((world.getBlockState(i)).getMaterial() == Material.GRASS))
+						&& !((invalidBlocks.contains((world.getBlockState(i)).getBlock())))
+						&& (world.getBlockState(i).isFullCube())
+					)
+					{
+						world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
+					}
+					else {
+						couldSpread = false;
+					}
+				}
+				if (!couldSpread){
+					if (((world.getBlockState(i)).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
+						world.setBlockState((i), BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
+					}
+					else if (((world.getBlockState(i)).getBlock() == Block.getBlockFromName("wyrmsofnyrus:creepstone"))) {
+						world.setBlockState((i), BlockCreepstoneInactive.block.getDefaultState(), 3);
+					}
+					else if (((world.getBlockState(i)).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreeptop"))) {
+						world.setBlockState((i), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
+					}
 				}
 			}
 		}
 
 	}
 }
-//why.
-// look ok we can do better than that, MCreator. Eat my shiny metal ArrayLists.

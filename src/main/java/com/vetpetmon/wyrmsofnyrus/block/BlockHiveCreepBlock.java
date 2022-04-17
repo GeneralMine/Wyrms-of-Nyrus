@@ -70,7 +70,7 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 
 		@Override
 		public int tickRate(World world) {
-			return 400;
+			return 500;
 		}
 
 		@Override
