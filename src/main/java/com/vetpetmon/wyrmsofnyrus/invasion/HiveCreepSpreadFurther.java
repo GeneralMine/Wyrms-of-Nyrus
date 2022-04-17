@@ -92,24 +92,17 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			for (BlockPos i: BlockPosList) {
 				couldSpread = true;
 				if ((!world.isAirBlock(i)) && (Math.random() > 0.5) && (world.getBlockState(i).isFullCube()) && !((invalidBlocks.contains((world.getBlockState(i)).getBlock())))) {
-					if (
-						(((world.getBlockState(i)).getMaterial() == Material.ROCK))
-					)
-					{
+					if ((((world.getBlockState(i)).getMaterial() == Material.ROCK))) {
 						world.setBlockState((i), BlockCreepstone.block.getDefaultState(), 3);
 						break;
 					}
-
-					else if (
-						(((world.getBlockState(i)).getMaterial() == Material.GROUND) || ((world.getBlockState(i)).getMaterial() == Material.GRASS))
-					)
-					{
+					else if ((((world.getBlockState(i)).getMaterial() == Material.GROUND) || ((world.getBlockState(i)).getMaterial() == Material.GRASS))) {
 						world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
 						break;
 					}
-					else {
-						couldSpread = false;
-					}
+				}
+				else if (i == BlockPosList.get(6)) {
+					couldSpread = false;
 				}
 				if (!couldSpread){
 					if (((world.getBlockState(i)).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
