@@ -92,11 +92,14 @@ public class EntityWyrmling extends EntityWyrm {
     {
         super.readEntityFromNBT(compound);
 
-        this.srpcothimmunity = true;
-
         if (compound.hasKey("GrowthTime"))
         {
             this.timeUntilGrowth = compound.getInteger("GrowthTime");
+        }
+
+        if (compound.hasKey("srpcothimmunity"))
+        {
+            this.srpcothimmunity = compound.getBoolean("srpcothimmunity");
         }
     }
 

@@ -32,6 +32,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     public EntityWyrm(final World worldIn) {
         super(worldIn);
         this.isImmuneToFire = false;
+        this.srpcothimmunity = true;
     }
 
     protected boolean canDespawn() {return false;}

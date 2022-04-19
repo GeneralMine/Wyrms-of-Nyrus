@@ -34,7 +34,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		invalidBlocks.add(Block.getBlockFromName("minecraft:end_bricks"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:end_stone"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:glass"));
-		invalidBlocks.add(Block.getBlockFromName("minecraft:glowstone"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:jukebox"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:nether_brick"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:red_nether_brick"));
@@ -53,7 +52,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		invalidBlocks.add(Block.getBlockFromName("minecraft:stonebrick"));
 
 		// Wyrm blocks
-		invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:creepstone"));
+		/*invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:creepstone"));
 		invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:creepstone_inactive"));
 		invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:hivecreepblockinactive"));
 		invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"));
@@ -61,7 +60,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:hivecreeptopinactive"));
 		invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:metal_comb_panel_hive_creep"));
 		invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:wyrm_lights_orange"));
-		invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:wyrm_lights_yellow"));
+		invalidBlocks.add(Block.getBlockFromName("wyrmsofnyrus:wyrm_lights_yellow"));*/
 
 
 		ArrayList<BlockPos> BlockPosList = new ArrayList<>();
@@ -80,8 +79,8 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 
 
 		World world = (World) e.get("world");
-		boolean canSpreadThisTick = ((Math.random() >= 0.9));
-		boolean couldSpread = true;
+		boolean canSpreadThisTick = ((Math.random() > 0.91));
+		boolean couldSpread;
 		if (canSpreadThisTick) {
 			if (world.isAirBlock(new BlockPos(x, y + 1, z)))
 			{
@@ -91,8 +90,12 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			}
 			for (BlockPos i: BlockPosList) {
 				couldSpread = true;
-				if ((!world.isAirBlock(i)) && (Math.random() > 0.5) && (world.getBlockState(i).isFullCube()) && !((invalidBlocks.contains((world.getBlockState(i)).getBlock())))) {
-					if ((((world.getBlockState(i)).getMaterial() == Material.ROCK))) {
+				if ((!world.isAirBlock(i)) && (world.getBlockState(i).getBlockHardness(world, i) < 2.25) && (world.getBlockState(i).isFullCube()) && !(invalidBlocks.contains((world.getBlockState(i)).getBlock()))) {
+					if (((world.getBlockState(i))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
+						world.setBlockState((i), BlockWyrmLightsYellow.block.getDefaultState(), 3);
+						break;
+					}
+					else if ((((world.getBlockState(i)).getMaterial() == Material.ROCK))) {
 						world.setBlockState((i), BlockCreepstone.block.getDefaultState(), 3);
 						break;
 					}
