@@ -16,6 +16,6 @@ public class HiveName {
         names.add("Aarak");
         names.add("Temuk");
         names.add("Irikek");
-        return names.get((int) ((Math.random()) * 10));
+        return names.get((int) ((Math.random()) * names.size()));
     }
 }
