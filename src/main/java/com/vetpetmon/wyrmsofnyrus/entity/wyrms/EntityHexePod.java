@@ -45,8 +45,6 @@ public class EntityHexePod extends EntityWyrm implements IAnimatable{
             return false;
         if (source == DamageSource.LIGHTNING_BOLT)
             return false;
-        if (source == DamageSource.FALL)
-            return true;
         return super.attackEntityFrom(source, amount);
     }
 
