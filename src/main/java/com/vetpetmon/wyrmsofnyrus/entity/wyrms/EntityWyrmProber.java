@@ -14,6 +14,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityVex;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.Item;
@@ -109,8 +110,9 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
+        this.tasks.addTask(5, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
-        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityLiving.class, (float) 64));
+        //this.tasks.addTask(4, new AIChargeAttack());
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, false, false));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));
         this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {

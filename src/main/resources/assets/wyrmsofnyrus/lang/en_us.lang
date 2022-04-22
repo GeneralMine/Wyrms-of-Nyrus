@@ -6,6 +6,8 @@ entity.wyrmprober.name=Wyrm Prober
 entity.wyrmling.name=Wyrmling
 entity.hexe_pod.name=Hexe Pod
 entity.wyrmworker.name=Wyrm Worker
+entity.wyrmrover.name=Wyrm Rover
+
 
 item.creepshard.name=Creepshard
 item.metalcomb_array.name=Metalcomb Array
@@ -19,7 +21,6 @@ tile.hivecreeptopinactive.name=Hive Creep Surface
 tile.hivecreepblock.name=Hive Creep Block
 tile.creepstone.name=Creepstone
 tile.hivecreepblockinactive.name=Hive Creep Block
-tile.creepstone.name=Creepstone
 tile.creepstone_inactive.name=Creepstone
 
 subtitles.visitormessage=Starship humming

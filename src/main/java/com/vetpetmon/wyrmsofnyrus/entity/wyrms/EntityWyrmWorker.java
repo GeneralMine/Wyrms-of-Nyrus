@@ -36,7 +36,7 @@ public class EntityWyrmWorker extends EntityWyrm {
     protected void initEntityAI() {
         super.initEntityAI();
         if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0){
-            this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, true, true));
+            this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, false, false));
             this.tasks.addTask(2, new EntityAIWander(this, 1.0));
             this.tasks.addTask(3, new EntityAILookIdle(this));
             this.tasks.addTask(1, new EntityAISwimming(this));
@@ -53,7 +53,7 @@ public class EntityWyrmWorker extends EntityWyrm {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((2.0D) * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
     }
