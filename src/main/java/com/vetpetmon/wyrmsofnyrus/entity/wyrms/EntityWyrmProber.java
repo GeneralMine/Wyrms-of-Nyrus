@@ -40,7 +40,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         super(world);
         this.casteType = 2;
         setSize(0.5f, 0.5f);
-        experienceValue = 1;
+        experienceValue = 3;
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
         enablePersistence();
@@ -111,16 +111,10 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(5, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         //this.tasks.addTask(4, new AIChargeAttack());
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, false, false));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
-            public boolean apply(EntityMob target) {
-                return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
-            }
-        }));
         this.tasks.addTask(4, new FlyingMobAI(this, 4.75, 100));
+        this.makeAllTargets();
     }
 
     @Override

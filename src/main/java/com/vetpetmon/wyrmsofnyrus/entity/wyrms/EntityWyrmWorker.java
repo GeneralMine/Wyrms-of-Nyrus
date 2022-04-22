@@ -6,6 +6,7 @@ import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,6 +19,8 @@ import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
+
+import java.lang.annotation.Inherited;
 
 public class EntityWyrmWorker extends EntityWyrm {
     public int timeUntilNextProduct;
@@ -36,7 +39,8 @@ public class EntityWyrmWorker extends EntityWyrm {
     protected void initEntityAI() {
         super.initEntityAI();
         if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0){
-            this.targetTasks.addTask(0, new EntityAINearestAttackableTarget<>(this, EntityPlayerMP.class, false, false));
+            afterPlayers();
+            this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             this.tasks.addTask(2, new EntityAIWander(this, 1.0));
             this.tasks.addTask(3, new EntityAILookIdle(this));
             this.tasks.addTask(1, new EntityAISwimming(this));
@@ -90,12 +94,9 @@ public class EntityWyrmWorker extends EntityWyrm {
         }
     }
 
-    @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
-
-        this.srpcothimmunity = true;
 
         if (compound.hasKey("ProductionTime"))
         {
@@ -103,11 +104,9 @@ public class EntityWyrmWorker extends EntityWyrm {
         }
     }
 
-    @Override
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setBoolean("srpcothimmunity", this.srpcothimmunity);
         compound.setInteger("ProductionTime", this.timeUntilNextProduct);
     }
 

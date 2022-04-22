@@ -99,7 +99,7 @@ public class EntityWyrmling extends EntityWyrm {
 
         if (compound.hasKey("srpcothimmunity"))
         {
-            this.srpcothimmunity = compound.getBoolean("srpcothimmunity");
+            this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
     }
 
@@ -108,7 +108,9 @@ public class EntityWyrmling extends EntityWyrm {
     {
         super.writeEntityToNBT(compound);
 
-        compound.setBoolean("srpcothimmunity", this.srpcothimmunity);
+        this.srpcothimmunity = 0;
+
+        compound.setInteger("srpcothimmunity", this.srpcothimmunity);
         compound.setInteger("GrowthTime", this.timeUntilGrowth);
     }
     public void registerControllers(AnimationData data) {

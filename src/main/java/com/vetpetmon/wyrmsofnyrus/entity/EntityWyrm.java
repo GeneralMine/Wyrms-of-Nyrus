@@ -1,7 +1,13 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
+import com.google.common.base.Predicate;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -10,6 +16,8 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.lang.annotation.Inherited;
 
 public abstract class EntityWyrm extends EntityMob implements IAnimatable {
 
@@ -27,15 +35,30 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
 
     public int casteType;
     private final AnimationFactory factory = new AnimationFactory(this);
-    protected boolean srpcothimmunity;
+    protected int srpcothimmunity;
 
     public EntityWyrm(final World worldIn) {
         super(worldIn);
         this.isImmuneToFire = false;
-        this.srpcothimmunity = true;
+        this.srpcothimmunity = 0;
     }
 
     protected boolean canDespawn() {return false;}
+
+    protected void makeAllTargets() {
+        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
+            public boolean apply(EntityMob target) {
+                return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
+            }
+        }));
+    }
+    protected void afterPlayers() {
+        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false, false));
+    }
 
     public AnimationFactory getFactory() {
         return this.factory;
@@ -50,5 +73,20 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
             default:
                 return true;
         }
+    }
+
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+
+        if (compound.hasKey("srpcothimmunity"))
+        {
+            this.srpcothimmunity = compound.getInteger("srpcothimmunity");
+        }
+    }
+
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("srpcothimmunity", this.srpcothimmunity);
     }
 }
