@@ -6,8 +6,6 @@ import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;

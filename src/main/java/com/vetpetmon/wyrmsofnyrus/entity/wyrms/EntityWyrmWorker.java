@@ -6,8 +6,6 @@ import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -19,8 +17,6 @@ import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
-
-import java.lang.annotation.Inherited;
 
 public class EntityWyrmWorker extends EntityWyrm {
     public int timeUntilNextProduct;

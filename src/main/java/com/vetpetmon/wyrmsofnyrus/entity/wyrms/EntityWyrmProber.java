@@ -9,14 +9,8 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntityVex;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
