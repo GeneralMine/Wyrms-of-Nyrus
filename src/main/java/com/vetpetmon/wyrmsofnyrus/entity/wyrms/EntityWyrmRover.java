@@ -71,7 +71,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        this.playSound(SoundRegistry.wyrmSteps, 0.15F, 1.0F);
+        this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
