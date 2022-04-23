@@ -16,8 +16,8 @@ public class SoundRegistry {
         wyrmClicks = RegisterSound("entity.wyrmClicks");
         wyrmHissTwo = RegisterSound("entity.hiss2");
         theVisitor = RegisterSound("visitormessage");
-        creepSpread = RegisterSound("hiveCreepSpread");
-        wyrmSteps = RegisterSound("wyrmSteps");
+        creepSpread = RegisterSound("entity.hiveCreepSpread");
+        wyrmSteps = RegisterSound("entity.wyrmSteps");
     }
 
     public static SoundEvent RegisterSound(String name) {

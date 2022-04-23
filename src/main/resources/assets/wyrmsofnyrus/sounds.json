@@ -8,7 +8,7 @@
       }
     ]
   },
-  "hiveCreepSpread": {
+  "entity.hiveCreepSpread": {
     "category": "neutral",
     "sounds": [
       {
@@ -21,20 +21,20 @@
       }
     ]
   },
-  "wyrmSteps": {
+  "entity.wyrmSteps": {
     "category": "neutral",
     "subtitle": "subtitles.wyrmSteps",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:entity/wyrmSteps1",
+        "name": "wyrmsofnyrus:entity/wyrmsteps1",
         "stream": false
       },
       {
-        "name": "wyrmsofnyrus:entity/wyrmSteps2",
+        "name": "wyrmsofnyrus:entity/wyrmsteps2",
         "stream": false
       },
       {
-        "name": "wyrmsofnyrus:entity/wyrmSteps3",
+        "name": "wyrmsofnyrus:entity/wyrmsteps3",
         "stream": false
       }
     ]
