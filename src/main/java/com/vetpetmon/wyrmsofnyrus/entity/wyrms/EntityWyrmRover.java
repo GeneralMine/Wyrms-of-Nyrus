@@ -4,12 +4,14 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -67,9 +69,9 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
     }*/
 
-    protected SoundEvent getStepSound()
+    protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        return SoundRegistry.wyrmSteps;
+        this.playSound(SoundRegistry.wyrmSteps, 0.15F, 1.0F);
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
