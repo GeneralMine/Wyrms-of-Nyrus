@@ -9,11 +9,15 @@ public class SoundRegistry {
     public static SoundEvent wyrmClicks;
     public static SoundEvent wyrmHissTwo;
     public static SoundEvent theVisitor;
+    public static SoundEvent creepSpread;
+    public static SoundEvent wyrmSteps;
 
     public static void RegisterSounds() {
         wyrmClicks = RegisterSound("entity.wyrmClicks");
         wyrmHissTwo = RegisterSound("entity.hiss2");
         theVisitor = RegisterSound("visitormessage");
+        creepSpread = RegisterSound("hiveCreepSpread");
+        wyrmSteps = RegisterSound("wyrmSteps");
     }
 
     public static SoundEvent RegisterSound(String name) {

@@ -79,6 +79,11 @@ public class EntityWyrmWorker extends EntityWyrm {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
     }*/
 
+    protected SoundEvent getStepSound()
+    {
+        return SoundRegistry.wyrmSteps;
+    }
+
     public void onLivingUpdate()
     {
         super.onLivingUpdate();

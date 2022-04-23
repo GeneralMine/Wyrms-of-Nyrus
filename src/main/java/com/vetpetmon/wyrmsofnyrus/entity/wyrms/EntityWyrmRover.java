@@ -67,6 +67,11 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
     }*/
 
+    protected SoundEvent getStepSound()
+    {
+        return SoundRegistry.wyrmSteps;
+    }
+
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source == DamageSource.FALL)
             return false;

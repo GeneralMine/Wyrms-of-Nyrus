@@ -8,20 +8,33 @@
       }
     ]
   },
-  "wyrmclicks2": {
+  "hiveCreepSpread": {
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:entity/clicking2",
+        "name": "wyrmsofnyrus:entity/creep",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/creep1",
         "stream": false
       }
     ]
   },
-  "wyrmclicks3": {
+  "wyrmSteps": {
     "category": "neutral",
+    "subtitle": "subtitles.wyrmSteps",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:entity/clicking3",
+        "name": "wyrmsofnyrus:entity/wyrmSteps1",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/wyrmSteps2",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/wyrmSteps3",
         "stream": false
       }
     ]
