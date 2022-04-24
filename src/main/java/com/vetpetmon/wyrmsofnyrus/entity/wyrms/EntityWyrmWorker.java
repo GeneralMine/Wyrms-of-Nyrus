@@ -26,7 +26,7 @@ public class EntityWyrmWorker extends EntityWyrm {
     public EntityWyrmWorker(World world) {
         super(world);
         this.casteType = 2;
-        setSize(1.0f, 1.5f);
+        setSize(0.85f, 1.5f);
         experienceValue = 1;
         enablePersistence();
         setNoAI(false);

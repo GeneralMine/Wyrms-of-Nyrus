@@ -117,7 +117,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.25D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
         //this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
         //this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(5 * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
     }
