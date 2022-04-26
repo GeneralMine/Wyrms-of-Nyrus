@@ -72,7 +72,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 				}
 			}
 			for (BlockPos i : BlockPosList) {
-				if ((!world.isAirBlock(i)) && (world.getBlockState(i).getBlockHardness(world, i) < 2.25) && (world.getBlockState(i).isFullCube()) && !(invalidBlocks.contains((world.getBlockState(i)).getBlock()))) {
+				if ((!world.isAirBlock(i)) && (world.getBlockState(i).getBlockHardness(world, i) < 2.45) && (world.getBlockState(i).isFullCube()) && !(invalidBlocks.contains((world.getBlockState(i)).getBlock()))) {
 					if (((world.getBlockState(i))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
 						world.setBlockState((i), BlockWyrmLightsYellow.block.getDefaultState(), 3);
 						break;

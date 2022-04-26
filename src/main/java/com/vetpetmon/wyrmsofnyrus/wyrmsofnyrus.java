@@ -1,12 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus;
 
-import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.*;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -29,6 +26,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.util.function.Supplier;
+
+import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 
 @Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION)
 public class wyrmsofnyrus {
@@ -106,12 +105,7 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void registerRenderers(FMLPreInitializationEvent event)
     {
-        RenderingRegistry.registerEntityRenderingHandler(EntityHexePod.class, HexePodGeoRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmling.class, WyrmlingGeoRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmProber.class, WyrmProberGeoRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTheVisitor.class, TheVisitorGeoRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWorker.class, WyrmWorkerGeoRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmRover.class, WyrmRoverGeoRenderer::new);
+        renderEngine();
     }
 
     @SideOnly(Side.CLIENT)
