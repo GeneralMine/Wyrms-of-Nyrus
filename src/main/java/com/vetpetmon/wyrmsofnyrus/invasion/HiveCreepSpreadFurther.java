@@ -86,6 +86,9 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 						++failedTries;
 					}
 				}
+				else {
+					++failedTries;
+				}
 			}
 			if (failedTries < 5) {
 					if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
