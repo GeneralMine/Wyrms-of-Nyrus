@@ -17,25 +17,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		super(instance, 10);
 	}
 
-	private static BlockPos[] blockPosList(Map<String, Object> e) {
-
-		int x = (int) e.get("x");
-		int y = (int) e.get("y");
-		int z = (int) e.get("z");
-
-		ArrayList<BlockPos> BlockPosList = new ArrayList<>();
-
-		BlockPosList.add(new BlockPos(x, y, z));	// 0
-		BlockPosList.add(new BlockPos(x, y-1, z));	// 1
-		BlockPosList.add(new BlockPos(x, y+1, z));	// 2
-		BlockPosList.add(new BlockPos(x-1, y, z));	// 3
-		BlockPosList.add(new BlockPos(x+1, y, z));	// 4
-		BlockPosList.add(new BlockPos(x, y, z-1));	// 5
-		BlockPosList.add(new BlockPos(x, y, z+1));	// 6
-
-		return new BlockPos[0];
-	}
-
 	public static void executescript(Map<String, Object> e) {
 
 		ArrayList<Block> invalidBlocks = new ArrayList<>();
@@ -66,19 +47,28 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		invalidBlocks.add(Block.getBlockFromName("minecraft:wool"));
 		invalidBlocks.add(Block.getBlockFromName("minecraft:stonebrick"));
 
+		ArrayList<BlockPos> BlockPosList = new ArrayList<>();
+
 		int x = (int) e.get("x");
 		int y = (int) e.get("y");
 		int z = (int) e.get("z");
 
-		BlockPos[] BlockPosList = blockPosList(e);
+		BlockPosList.add(new BlockPos(x, y, z));		// 0
+		BlockPosList.add(new BlockPos(x, y-1, z));	// 1
+		BlockPosList.add(new BlockPos(x, y+1, z));	// 2
+		BlockPosList.add(new BlockPos(x-1, y, z));	// 3
+		BlockPosList.add(new BlockPos(x+1, y, z));	// 4
+		BlockPosList.add(new BlockPos(x, y, z-1));	// 5
+		BlockPosList.add(new BlockPos(x, y, z+1));	// 6
+
 
 		World world = (World) e.get("world");
-		boolean canSpreadThisTick = ((Math.random() > 0.92));
+		boolean canSpreadThisTick = ((Math.random() > 0.91));
 		int failedTries = 0;
 		if (canSpreadThisTick) {
 			if (world.isAirBlock(new BlockPos(x, y + 1, z))) {
-				if (((world.getBlockState(BlockPosList[0])).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
-					world.setBlockState((BlockPosList[0]), BlockHiveCreepTop.block.getDefaultState(), 3);
+				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
+					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTop.block.getDefaultState(), 3);
 				}
 			}
 			for (BlockPos i : BlockPosList) {
@@ -101,12 +91,12 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 				}
 			}
 			if (failedTries < 5) {
-					if (((world.getBlockState(BlockPosList[0])).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
-						world.setBlockState((BlockPosList[0]), BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
-					} else if (((world.getBlockState(BlockPosList[0])).getBlock() == BlockCreepstone.block.getDefaultState())) {
-						world.setBlockState((BlockPosList[0]), BlockCreepstoneInactive.block.getDefaultState(), 3);
-					} else if (((world.getBlockState(BlockPosList[0])).getBlock() == BlockHiveCreepTop.block.getDefaultState())) {
-						world.setBlockState((BlockPosList[0]), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
+					if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
+						world.setBlockState((BlockPosList.get(0)), BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
+					} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockCreepstone.block.getDefaultState())) {
+						world.setBlockState((BlockPosList.get(0)), BlockCreepstoneInactive.block.getDefaultState(), 3);
+					} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepTop.block.getDefaultState())) {
+						world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
 				}
 			}
 		}
