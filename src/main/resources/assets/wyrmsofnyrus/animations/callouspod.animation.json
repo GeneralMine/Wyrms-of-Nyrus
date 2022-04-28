@@ -1,0 +1,38 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.callouspod.living": {
+			"loop": true,
+			"animation_length": 6,
+			"blend_weight": "30",
+			"bones": {
+				"Core": {
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.2917": {
+							"vector": [1.0002, 1, 1.0002]
+						},
+						"2.625": {
+							"vector": [1.0028, 1, 1.0028]
+						},
+						"3.0": {
+							"vector": [1.003, 1, 1.003]
+						},
+						"3.4167": {
+							"vector": [1.0028, 1, 1.0028]
+						},
+						"5.7917": {
+							"vector": [1.0002, 1, 1.0002]
+						},
+						"6.0": {
+							"vector": [1, 1, 1]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}
