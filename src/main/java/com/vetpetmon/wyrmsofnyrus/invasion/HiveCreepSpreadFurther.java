@@ -61,7 +61,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		BlockPosList.add(new BlockPos(x, y, z-1));	// 5
 		BlockPosList.add(new BlockPos(x, y, z+1));	// 6
 
-
 		World world = (World) e.get("world");
 		boolean canSpreadThisTick = ((Math.random() > 0.91));
 		int failedTries = 0;
@@ -100,5 +99,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 				}
 			}
 		}
+		invalidBlocks.clear();
+		BlockPosList.clear();
 	}
 }
