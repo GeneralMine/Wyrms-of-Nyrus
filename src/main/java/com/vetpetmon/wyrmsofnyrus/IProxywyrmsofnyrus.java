@@ -5,7 +5,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
+import java.io.File;
+
 public interface IProxywyrmsofnyrus {
+	File getDataDir();
+
 	void preInit(FMLPreInitializationEvent event);
 
 	void init(FMLInitializationEvent event);

@@ -4,6 +4,8 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
 import com.google.common.base.Predicate;
 
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
@@ -27,6 +29,7 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
 
 public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -100,26 +103,36 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
             return true;
         }
     }
-    
+
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        if (Invasion.probingEnabled) {
+            this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.72D);
+            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
+        }
+        else {
+            this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
+            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D + (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty / 2));
+        }
+
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
+        //this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
+        //this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(5 * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
+    }
+
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(5, new EntityAILookIdle(this));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         //this.tasks.addTask(4, new AIChargeAttack());
-        this.tasks.addTask(4, new FlyingMobAI(this, 4.75, 100));
+        this.tasks.addTask(4, new FlyingMobAI(this, 8.75, 100));
         this.makeAllTargets();
-    }
-
-    @Override
-    protected void applyEntityAttributes() {
-        super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
-        //this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        //this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(5 * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
     }
 
     @Override
@@ -155,6 +168,8 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         if (source == DamageSource.FALL)
             return false;
         if (source == DamageSource.DROWN)
+            return false;
+        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
         return super.attackEntityFrom(source, amount);
     }

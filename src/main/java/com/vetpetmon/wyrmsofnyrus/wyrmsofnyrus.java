@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -26,6 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.util.function.Supplier;
+import org.apache.logging.log4j.Logger;
 
 import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 
@@ -33,7 +35,7 @@ import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 public class wyrmsofnyrus {
     public static final String MODID = "wyrmsofnyrus";
     public static final String NAME = "Wyrms of Nyrus";
-    public static final String VERSION = "0.1.22";
+    public static final String VERSION = "0.1.224";
 
     public AutoReg elements = new AutoReg();
 
@@ -44,8 +46,13 @@ public class wyrmsofnyrus {
     @Mod.Instance(MODID)
     public static wyrmsofnyrus instance;
 
+    public static Logger logger;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        if(logger == null)
+            logger = event.getModLog();
+
         MinecraftForge.EVENT_BUS.register(this);
         GameRegistry.registerWorldGenerator(elements, 5);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new AutoReg.GuiHandler());
@@ -53,6 +60,8 @@ public class wyrmsofnyrus {
         MinecraftForge.EVENT_BUS.register(elements);
         elements.getElements().forEach(element -> element.preInit(event));
         proxy.preInit(event);
+
+        ConfigLib.reloadConfig();
 
         WyrmRegister.register();
     }

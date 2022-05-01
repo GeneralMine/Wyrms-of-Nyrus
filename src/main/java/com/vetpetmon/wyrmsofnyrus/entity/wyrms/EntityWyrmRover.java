@@ -1,6 +1,8 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.AI;
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -36,10 +38,12 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(2, new EntityAILookIdle(this));
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
-        afterPlayers();
+        if (AI.savageAIMode) {
+            this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
+            afterPlayers();
+        }
     }
 
     @Override
@@ -75,9 +79,11 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
+        if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
             return false;
         if (source == DamageSource.DROWN)
+            return false;
+        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
         return super.attackEntityFrom(source, amount);
     }

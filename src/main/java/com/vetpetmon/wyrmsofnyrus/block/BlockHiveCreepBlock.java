@@ -1,6 +1,7 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -25,7 +26,6 @@ import java.util.List;
 import java.util.HashMap;
 
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
-import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepBlockUpdateTick;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
@@ -99,7 +99,7 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 				$_dependencies.put("y", y);
 				$_dependencies.put("z", z);
 				$_dependencies.put("world", world);
-				HiveCreepBlockUpdateTick.doThis($_dependencies);
+				HiveCreepSpreadFurther.executescript($_dependencies);
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
 		}

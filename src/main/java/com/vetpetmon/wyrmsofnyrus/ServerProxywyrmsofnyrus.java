@@ -5,7 +5,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
+import java.io.File;
+
 public class ServerProxywyrmsofnyrus implements IProxywyrmsofnyrus {
+	@Override
+	public File getDataDir() {
+		return null;
+	}
+
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 	}
