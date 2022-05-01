@@ -21,7 +21,11 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 	public static int failedTries = 0;
 
 	public static void executescript(Map<String, Object> e) {
-		if (Invasion.creepEnabled) {
+
+
+		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/Invasion.creepSpreadRate))));
+		
+		if (Invasion.creepEnabled && canSpreadThisTick) {
 
 			ArrayList<Block> invalidBlocks = new ArrayList<>();
 			invalidBlocks.add(Block.getBlockFromName("minecraft:furnace"));
@@ -66,41 +70,37 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			BlockPosList.add(new BlockPos(x, y, z + 1));    // 6
 
 			World world = (World) e.get("world");
-			boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/Invasion.creepSpreadRate))));
-
-
-			if (canSpreadThisTick) {
-				if (world.isAirBlock(new BlockPos(x, y + 1, z))) {
-					if (((world.getBlockState(BlockPosList.get(0))).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
-						world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTop.block.getDefaultState(), 3);
-					}
+			failedTries = 0;
+			if (world.isAirBlock(new BlockPos(x, y + 1, z))) {
+				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
+					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTop.block.getDefaultState(), 3);
 				}
-				for (BlockPos i : BlockPosList) {
-					if ((!world.isAirBlock(i)) && (world.getBlockState(i).getBlockHardness(world, i) < 2.45) && (world.getBlockState(i).isFullCube()) && !(invalidBlocks.contains((world.getBlockState(i)).getBlock()))) {
-						if (((world.getBlockState(i))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
-							world.setBlockState((i), BlockWyrmLightsYellow.block.getDefaultState(), 3);
-							break;
-						} else if ((((world.getBlockState(i)).getMaterial() == Material.ROCK))) {
-							world.setBlockState((i), BlockCreepstone.block.getDefaultState(), 3);
-							break;
-						} else if ((((world.getBlockState(i)).getMaterial() == Material.GROUND) || ((world.getBlockState(i)).getMaterial() == Material.GRASS))) {
-							world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
-							break;
-						} else {
-							++failedTries;
-						}
+			}
+			for (BlockPos i : BlockPosList) {
+				if ((!world.isAirBlock(i)) && (world.getBlockState(i).getBlockHardness(world, i) < 2.45) && (world.getBlockState(i).isFullCube()) && !(invalidBlocks.contains((world.getBlockState(i)).getBlock()))) {
+					if (((world.getBlockState(i))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
+						world.setBlockState((i), BlockWyrmLightsYellow.block.getDefaultState(), 3);
+						break;
+					} else if ((((world.getBlockState(i)).getMaterial() == Material.ROCK))) {
+						world.setBlockState((i), BlockCreepstone.block.getDefaultState(), 3);
+						break;
+					} else if ((((world.getBlockState(i)).getMaterial() == Material.GROUND) || ((world.getBlockState(i)).getMaterial() == Material.GRASS))) {
+						world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
+						break;
 					} else {
 						++failedTries;
 					}
+				} else {
+					++failedTries;
 				}
-				if (failedTries >= 5) {
-					if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
-						world.setBlockState((BlockPosList.get(0)), BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
-					} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockCreepstone.block.getDefaultState())) {
-						world.setBlockState((BlockPosList.get(0)), BlockCreepstoneInactive.block.getDefaultState(), 3);
-					} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepTop.block.getDefaultState())) {
-						world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
-					}
+			}
+			if (failedTries >= 5) {
+				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
+					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
+				} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockCreepstone.block.getDefaultState())) {
+					world.setBlockState((BlockPosList.get(0)), BlockCreepstoneInactive.block.getDefaultState(), 3);
+				} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepTop.block.getDefaultState())) {
+					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
 				}
 			}
 			invalidBlocks.clear();
