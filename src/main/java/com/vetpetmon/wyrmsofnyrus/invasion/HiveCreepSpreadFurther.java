@@ -18,6 +18,8 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		super(instance, 10);
 	}
 
+	public static int failedTries = 0;
+
 	public static void executescript(Map<String, Object> e) {
 		if (Invasion.creepEnabled) {
 
@@ -64,8 +66,9 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			BlockPosList.add(new BlockPos(x, y, z + 1));    // 6
 
 			World world = (World) e.get("world");
-			boolean canSpreadThisTick = ((Math.random() > ((float)(1.0/Invasion.creepSpreadRate))));
-			int failedTries = 0;
+			boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/Invasion.creepSpreadRate))));
+
+
 			if (canSpreadThisTick) {
 				if (world.isAirBlock(new BlockPos(x, y + 1, z))) {
 					if (((world.getBlockState(BlockPosList.get(0))).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
