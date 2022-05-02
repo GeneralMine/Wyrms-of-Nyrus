@@ -4,10 +4,10 @@ import net.minecraftforge.common.config.Configuration;
 
 // The overall properties of wyrms.
 public class Radiogenetics {
-    public static boolean immuneToFalling;
-    public static boolean immuneToCacti;
+    public static boolean immuneToFalling = true;
+    public static boolean immuneToCacti = false;
 
-    public static int workerProductivity;
+    public static int workerProductivity = 2500;
 
     public static void loadFromConfig(Configuration config) {
 

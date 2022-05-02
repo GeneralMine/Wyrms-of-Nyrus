@@ -3,11 +3,11 @@ package com.vetpetmon.wyrmsofnyrus.config;
 import net.minecraftforge.common.config.Configuration;
 
 public class AI {
-    public static boolean suicidalWyrms;
-    public static boolean attackMobs;
-    public static boolean attackAnimals;
+    public static boolean suicidalWyrms = false;
+    public static boolean attackMobs = true;
+    public static boolean attackAnimals = true;
 
-    public static boolean savageAIMode;
+    public static boolean savageAIMode = true;
 
     public static void loadFromConfig(Configuration config) {
 

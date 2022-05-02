@@ -5,6 +5,9 @@ import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -61,9 +64,17 @@ public class wyrmsofnyrus {
         elements.getElements().forEach(element -> element.preInit(event));
         proxy.preInit(event);
 
-        ConfigLib.reloadConfig();
+        //ConfigLib.reloadConfig();
 
         WyrmRegister.register();
+    }
+
+
+    @SubscribeEvent
+    public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equals(wyrmsofnyrus.MODID)) {
+            ConfigManager.sync(wyrmsofnyrus.MODID, Config.Type.INSTANCE);
+        }
     }
 
     @Mod.EventHandler

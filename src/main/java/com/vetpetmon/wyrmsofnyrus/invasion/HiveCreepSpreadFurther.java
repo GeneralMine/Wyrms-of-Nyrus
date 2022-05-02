@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.block.*;
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -24,7 +25,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 	public static int executescript(Map<String, Object> e, int ts) {
 
 		timesspread = ts;
-		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/Invasion.creepSpreadRate))));
+		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
 
 		if (Invasion.creepEnabled && canSpreadThisTick) {
 			hasTicked = false;
@@ -91,15 +92,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					}
 				}
 			}
-			/*if (timesFailed > 5) {
-				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
-					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
-				} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockCreepstone.block.getDefaultState())) {
-					world.setBlockState((BlockPosList.get(0)), BlockCreepstoneInactive.block.getDefaultState(), 3);
-				} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepTop.block.getDefaultState())) {
-					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
-				}
-			}*/
 			invalidBlocks.clear();
 			BlockPosList.clear();
 			if (!hasTicked){
@@ -108,7 +100,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			}
 
 		}
-		System.out.println("Debugging: timespread for block at: " + (timesspread));
+		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 5) System.out.println("Debugging: timespread for block at: " + (timesspread));
 		return timesspread;
 	}
 }

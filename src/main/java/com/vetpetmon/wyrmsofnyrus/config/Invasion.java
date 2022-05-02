@@ -1,15 +1,19 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
+import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
 
 public class Invasion {
-    public static boolean invasionEnabled;
+    @Config.Comment("Enable or disable the wyrm invasion")
+    @Config.Name("Enable invasion")
+    public static boolean invasionEnabled = true;
+    @Config.Comment("Makes probers mean and scary.")
+    @Config.Name("Enable probing")
+    public static boolean probingEnabled = true;
 
-    public static boolean probingEnabled;
-
-    public static boolean creepEnabled;
-    public static int creepSpreadRate;
-    public static float creepSpreadPoints;
+    public static boolean creepEnabled = true;
+    public static int creepSpreadRate = 50;
+    public static float creepSpreadPoints = 0.015f;
 
     public static void loadFromConfig(Configuration config) {
 

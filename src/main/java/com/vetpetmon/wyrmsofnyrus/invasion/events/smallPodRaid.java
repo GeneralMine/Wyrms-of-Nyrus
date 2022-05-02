@@ -1,6 +1,8 @@
 package com.vetpetmon.wyrmsofnyrus.invasion.events;
 
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
@@ -40,5 +42,6 @@ public class smallPodRaid {
                 world.spawnEntity(entityToSpawn);
             }
         }
+        if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 2) wyrmsofnyrus.logger.info("A small hexepod was spawned.");
     }
 }

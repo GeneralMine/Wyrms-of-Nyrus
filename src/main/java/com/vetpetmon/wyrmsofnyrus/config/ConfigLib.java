@@ -7,17 +7,38 @@ package com.vetpetmon.wyrmsofnyrus.config;
 */
 
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.io.File;
 
 import static com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus.proxy;
 
+@Config(modid = wyrmsofnyrus.MODID)
 public class ConfigLib {
 
-    public static boolean createConfigBool(Configuration config, String category, String name, String comment, boolean def) {
+    // All config fields are made accessible here.
+    @Config.Comment("Wyrm Invasion configuration.")
+    @Config.Name("Invasion")
+    public static final Invasion invasion = new Invasion();
 
+    @Config.Comment("Debugging for developers and testers.")
+    @Config.Name("Debug")
+    public static final Debug debug = new Debug();
+
+    @Config.Comment("AI configuration.")
+    @Config.Name("AI")
+    public static final AI ai = new AI();
+
+    @Config.Comment("Mob property configuration.")
+    @Config.Name("Radiogenetics")
+    public static final Radiogenetics radiogenetics = new Radiogenetics();
+
+    public static boolean createConfigBool(Configuration config, String category, String name, String comment, boolean def) {
         Property prop = config.get(category, name, def);
         prop.setComment(comment);
         return prop.getBoolean();
@@ -53,12 +74,27 @@ public class ConfigLib {
 
         return value;
     }
+
     public static void reloadConfig() {
-        Configuration config = new Configuration(new File(proxy.getDataDir().getPath() + "/config/wyrms.cfg"));
-        config.load();
-        Invasion.loadFromConfig(config);
-        AI.loadFromConfig(config);
-        Radiogenetics.loadFromConfig(config);
-        config.save();
+        Configuration cfg = new Configuration(new File(proxy.getDataDir().getPath() + "/config/wyrms.cfg"));
+        cfg.load();
+        Debug.loadFromConfig(cfg);
+        Invasion.loadFromConfig(cfg);
+        AI.loadFromConfig(cfg);
+        Radiogenetics.loadFromConfig(cfg);
+        cfg.save();
     }
+
+    @Mod.EventBusSubscriber(modid = wyrmsofnyrus.MODID)
+    private static class EventHandler
+    {
+        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+        {
+            if (event.getModID().equals(wyrmsofnyrus.MODID))
+            {
+                ConfigManager.sync(wyrmsofnyrus.MODID, Config.Type.INSTANCE);
+            }
+        }
+    }
+
 }

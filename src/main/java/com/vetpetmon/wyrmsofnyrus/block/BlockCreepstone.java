@@ -1,6 +1,7 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
@@ -13,14 +14,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.Item;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.Block;
 
@@ -99,7 +98,7 @@ public class BlockCreepstone extends AutoReg.ModElement {
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
 			if (timesSpread > (Invasion.creepSpreadRate*20)) {
-				System.out.println("Debugging: Creepstone block at " + (new BlockPos(x, y, z)) + " was turned inactive after " + (timesSpread) + " operations.");
+				if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 4) System.out.println("Debugging: Creepstone block at " + (new BlockPos(x, y, z)) + " was turned inactive after " + (timesSpread) + " operations.");
 				world.setBlockState((new BlockPos(x, y, z)), BlockCreepstoneInactive.block.getDefaultState(), 3);
 			}
 		}
