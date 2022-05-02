@@ -97,7 +97,8 @@ public class BlockCreepstone extends AutoReg.ModElement {
 				timesSpread = HiveCreepSpreadFurther.executescript($_dependencies, timesSpread);
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
-			if (timesSpread > 5) {
+			if (timesSpread > 50) {
+				System.out.println("Debugging: Creepstone block at " + (new BlockPos(x, y, z)) + " was turned inactive after " + (timesSpread) + " operations.");
 				world.setBlockState((new BlockPos(x, y, z)), BlockCreepstoneInactive.block.getDefaultState(), 3);
 			}
 		}

@@ -18,14 +18,16 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		super(instance, 10);
 	}
 
-	//public static int timesFailed = 0;
+	public static boolean hasTicked;
+	public static int timesspread;
 
-	public static int executescript(Map<String, Object> e, int timesSpread) {
+	public static int executescript(Map<String, Object> e, int ts) {
 
-
+		timesspread = ts;
 		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/Invasion.creepSpreadRate))));
 
 		if (Invasion.creepEnabled && canSpreadThisTick) {
+			hasTicked = false;
 
 			ArrayList<Block> invalidBlocks = new ArrayList<>();
 			invalidBlocks.add(Block.getBlockFromName("minecraft:furnace"));
@@ -87,9 +89,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 						world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
 						break;
 					}
-					//else {timesFailed = timesFailed + 1;}
 				}
-				//else {timesFailed = timesFailed + 1;}
 			}
 			/*if (timesFailed > 5) {
 				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
@@ -102,10 +102,13 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			}*/
 			invalidBlocks.clear();
 			BlockPosList.clear();
+			if (!hasTicked){
+				timesspread = ts + 1;
+				hasTicked = true;
+			}
 
-			return timesSpread = timesSpread + 1;
 		}
-
-		return timesSpread = timesSpread;
+		System.out.println("Debugging: timespread for block at: " + (timesspread));
+		return timesspread;
 	}
 }
