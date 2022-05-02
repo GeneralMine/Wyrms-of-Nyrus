@@ -1,6 +1,7 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
@@ -103,7 +104,7 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 				timesSpread = HiveCreepSpreadFurther.executescript($_dependencies, timesSpread);
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
-			if (timesSpread > 50) {
+			if (timesSpread > (Invasion.creepSpreadRate*20)) {
 				System.out.println("Debugging: Hive Creep block at " + (new BlockPos(x, y, z)) + " was turned inactive after " + (timesSpread) + " operations.");
 				world.setBlockState((new BlockPos(x, y, z)), BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
 			}
