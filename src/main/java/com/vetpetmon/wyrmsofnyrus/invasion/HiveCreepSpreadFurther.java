@@ -23,7 +23,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 	public static int executescript(Map<String, Object> e, int timesSpread) {
 
 
-		boolean canSpreadThisTick = ((Math.random() > ((float)(1.0/Invasion.creepSpreadRate))));
+		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/Invasion.creepSpreadRate))));
 
 		if (Invasion.creepEnabled && canSpreadThisTick) {
 
