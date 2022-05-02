@@ -51,6 +51,7 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 				new ModelResourceLocation("wyrmsofnyrus:hivecreeptop", "inventory"));
 	}
 	public static class BlockCustom extends Block {
+		int timesSpread = 0;
 		public BlockCustom() {
 			super(Material.CRAFTED_SNOW);
 			setUnlocalizedName("hivecreeptop");
@@ -100,9 +101,12 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 				$_dependencies.put("y", y);
 				$_dependencies.put("z", z);
 				$_dependencies.put("world", world);
-				HiveCreepSpreadFurther.executescript($_dependencies);
+				timesSpread = HiveCreepSpreadFurther.executescript($_dependencies, timesSpread);
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
+			if (timesSpread > 5) {
+				world.setBlockState((new BlockPos(x, y, z)), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
+			}
 		}
 	}
 }

@@ -18,13 +18,13 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		super(instance, 10);
 	}
 
-	public static int failedTries = 0;
+	//public static int timesFailed = 0;
 
-	public static void executescript(Map<String, Object> e) {
+	public static int executescript(Map<String, Object> e, int timesSpread) {
 
 
-		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/Invasion.creepSpreadRate))));
-		
+		boolean canSpreadThisTick = ((Math.random() > ((float)(1.0/Invasion.creepSpreadRate))));
+
 		if (Invasion.creepEnabled && canSpreadThisTick) {
 
 			ArrayList<Block> invalidBlocks = new ArrayList<>();
@@ -70,7 +70,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			BlockPosList.add(new BlockPos(x, y, z + 1));    // 6
 
 			World world = (World) e.get("world");
-			failedTries = 0;
 			if (world.isAirBlock(new BlockPos(x, y + 1, z))) {
 				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
 					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTop.block.getDefaultState(), 3);
@@ -87,14 +86,12 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					} else if ((((world.getBlockState(i)).getMaterial() == Material.GROUND) || ((world.getBlockState(i)).getMaterial() == Material.GRASS))) {
 						world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
 						break;
-					} else {
-						++failedTries;
 					}
-				} else {
-					++failedTries;
+					//else {timesFailed = timesFailed + 1;}
 				}
+				//else {timesFailed = timesFailed + 1;}
 			}
-			if (failedTries >= 5) {
+			/*if (timesFailed > 5) {
 				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
 					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
 				} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockCreepstone.block.getDefaultState())) {
@@ -102,9 +99,13 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 				} else if (((world.getBlockState(BlockPosList.get(0))).getBlock() == BlockHiveCreepTop.block.getDefaultState())) {
 					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
 				}
-			}
+			}*/
 			invalidBlocks.clear();
 			BlockPosList.clear();
+
+			return timesSpread = timesSpread + 1;
 		}
+
+		return timesSpread = timesSpread;
 	}
 }
