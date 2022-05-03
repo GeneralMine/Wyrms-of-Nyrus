@@ -1,7 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
@@ -9,9 +8,9 @@ import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -30,29 +29,29 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 
-public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
+public class EntityDobber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    public EntityWyrmProber(World world) {
+    public EntityDobber(World world) {
         super(world);
         this.casteType = 2;
         setSize(0.5f, 0.5f);
         experienceValue = 3;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
+        this.moveHelper = new EntityDobber.DobberMoveHelper(this);
         enablePersistence();
         setNoAI(false);
     }
 
-    static class WyrmProberMoveHelper extends EntityMoveHelper
+    static class DobberMoveHelper extends EntityMoveHelper
     {
-        private final EntityWyrmProber parentEntity;
+        private final EntityDobber parentEntity;
         private int courseChangeCooldown;
 
-        public WyrmProberMoveHelper(EntityWyrmProber WyrmProber)
+        public DobberMoveHelper(EntityDobber WyrmProber)
         {
             super(WyrmProber);
             this.parentEntity = WyrmProber;
-            if (getSimpleAI()) {
+            if (AI.performanceAIMode) {
                 courseChangeCooldown = 160;
             }
             else {
@@ -62,7 +61,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
 
         public void onUpdateMoveHelper()
         {
-            if (this.action == EntityMoveHelper.Action.MOVE_TO)
+            if (this.action == Action.MOVE_TO)
             {
                 double d0 = this.posX - this.parentEntity.posX;
                 double d1 = this.posY - this.parentEntity.posY;
@@ -82,7 +81,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
                     }
                     else
                     {
-                        this.action = EntityMoveHelper.Action.WAIT;
+                        this.action = Action.WAIT;
                     }
                 }
             }
@@ -113,30 +112,20 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Invasion.probingEnabled) {
-            this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
-            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.72D);
-            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.5D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
-        }
-        else {
-            this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
-            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
-            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D + (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty / 2));
-        }
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.9D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.5D + (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty / 2));
 
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
-        //this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        //this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(5 * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
     }
 
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
         simpleAI();
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
-        //this.tasks.addTask(4, new AIChargeAttack());
-        this.tasks.addTask(4, new FlyingMobAI(this, 8.75, 100));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.5D, false));
+        this.tasks.addTask(4, new FlyingMobAI(this, 18.75, 100));
         this.makeAllTargets();
     }
 
@@ -180,11 +169,11 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     }
 
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
+        data.addAnimationController(new AnimationController(this, "controller", 10F, this::predicate));
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprober.flying"));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.swarmwyrm.flying"));
 
         return PlayState.CONTINUE;
     }

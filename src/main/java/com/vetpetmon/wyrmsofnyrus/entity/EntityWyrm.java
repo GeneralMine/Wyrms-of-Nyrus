@@ -40,19 +40,23 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
 
     protected boolean canDespawn() {return false;}
 
+    protected static boolean getSimpleAI() {return AI.performanceAIMode;}
+    protected static boolean getAttackMobs() {return AI.attackMobs;}
+    protected static boolean getAttackAnimals() {return AI.attackAnimals;}
+    protected static boolean getWillAttackCrepers() {return AI.suicidalWyrms;}
 
     protected void simpleAI() {
-        if (!AI.performanceAIMode) this.tasks.addTask(2, new EntityAILookIdle(this));
+        if (!getSimpleAI()) this.tasks.addTask(2, new EntityAILookIdle(this));
     }
 
     protected void makeAllTargets() {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false, false));
-        if(AI.attackAnimals){this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));}
-        if(AI.attackMobs) {
+        if(getAttackAnimals()){this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));}
+        if(getAttackMobs()) {
             this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
                 public boolean apply(EntityMob target) {
-                    if (AI.suicidalWyrms) return !(target instanceof EntityWyrm);
+                    if (getWillAttackCrepers()) return !(target instanceof EntityWyrm);
                     else return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
                 }
             }));
@@ -66,6 +70,8 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     public AnimationFactory getFactory() {
         return this.factory;
     }
+
+    @Override
     public boolean isPreventingPlayerRest(EntityPlayer playerIn)
     {
         switch(casteType) {

@@ -32,6 +32,7 @@ public class EntityWyrmWorker extends EntityWyrm {
         experienceValue = 1;
         enablePersistence();
         setNoAI(false);
+        this.setCanPickUpLoot(true);
         this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
     }
 

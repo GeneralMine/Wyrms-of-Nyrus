@@ -23,7 +23,7 @@ public class WyrmlingGrowUp {
             world.spawnEntity(entityToSpawn);
             hasSpawned = true;
         }
-        if (hasSpawned) {wyrmIn.attackEntityFrom(DamageSource.MAGIC, (float) 100000);}
+        if (hasSpawned) {wyrmIn.setDead();}
     }
 
 }
