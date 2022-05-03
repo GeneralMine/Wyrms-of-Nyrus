@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -42,6 +43,8 @@ public class AutoReg implements IWorldGenerator {
 	public final List<Supplier<Biome>> biomes = new ArrayList<>();
 	public final List<Supplier<Potion>> potions = new ArrayList<>();
 	public final List<Supplier<EntityEntry>> entities = new ArrayList<>();
+	public static ConfigLib.Invasion invasion = ConfigLib.invasion;
+	public static ConfigLib.Debug debug = ConfigLib.debug;
 	public AutoReg() {
 	}
 

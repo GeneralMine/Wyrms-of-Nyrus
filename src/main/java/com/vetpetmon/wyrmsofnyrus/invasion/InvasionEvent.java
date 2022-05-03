@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 // imports ALL events automatically.
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.*;
 
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -21,6 +21,7 @@ public class InvasionEvent extends AutoReg.ModElement {
 	public InvasionEvent(AutoReg instance) {
 		super(instance, 25);
 	}
+	static ConfigLib.Invasion invasion = ConfigLib.invasion;
 
 	public static void executescript(Map<String, Object> dependencies) {
 		int x = (int) dependencies.get("x");
@@ -41,7 +42,7 @@ public class InvasionEvent extends AutoReg.ModElement {
 
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-		if (event.phase == TickEvent.Phase.END && Invasion.invasionEnabled) {
+		if (event.phase == TickEvent.Phase.END && invasion.invasionEnabled) {
 			Entity entity = event.player;
 			World world = entity.world;
 			int i = (int) entity.posX;

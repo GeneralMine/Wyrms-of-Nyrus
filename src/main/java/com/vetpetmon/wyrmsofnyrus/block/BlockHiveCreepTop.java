@@ -2,8 +2,7 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
-import com.vetpetmon.wyrmsofnyrus.config.Debug;
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import net.minecraft.block.Block;
@@ -24,6 +23,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import static com.vetpetmon.wyrmsofnyrus.AutoReg.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -104,8 +105,8 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 				timesSpread = HiveCreepSpreadFurther.executescript($_dependencies, timesSpread);
 			}
 			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
-			if (timesSpread > (Invasion.creepSpreadRate*20)) {
-				if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 4) System.out.println("Debugging: Hive Creep Surface block at " + (new BlockPos(x, y, z)) + " was turned inactive after " + (timesSpread) + " operations.");
+			if (timesSpread > (invasion.creepSpreadRate*20)) {
+				if (debug.LOGGINGENABLED && debug.DEBUGLEVEL >= 4) System.out.println("Debugging: Hive Creep Surface block at " + (new BlockPos(x, y, z)) + " was turned inactive after " + (timesSpread) + " operations.");
 				world.setBlockState((new BlockPos(x, y, z)), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
 			}
 		}

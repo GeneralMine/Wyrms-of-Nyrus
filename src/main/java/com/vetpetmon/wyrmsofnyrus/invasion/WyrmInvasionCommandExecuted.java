@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import net.minecraft.world.World;
@@ -19,8 +19,9 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 		super(instance, 15);
 	}
 
+	static ConfigLib.Invasion invasion = ConfigLib.invasion;
 	public static void executescript(Map<String, Object> dependencies) {
-		if (Invasion.invasionEnabled) {
+		if (invasion.invasionEnabled) {
 			HashMap cmdparams = (HashMap) dependencies.get("cmdparams");
 			int x = (int) dependencies.get("x");
 			int y = (int) dependencies.get("y");

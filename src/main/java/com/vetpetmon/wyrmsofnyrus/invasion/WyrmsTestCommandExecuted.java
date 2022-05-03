@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import net.minecraft.world.World;
@@ -19,6 +19,8 @@ public class WyrmsTestCommandExecuted extends AutoReg.ModElement {
 		super(instance, 7);
 	}
 
+	static ConfigLib.Invasion invasion = ConfigLib.invasion;
+
 	public static void executescript(Map<String, Object> dependencies) {
 		World world = (World) dependencies.get("world");
 		MinecraftServer mcserv = FMLCommonHandler.instance().getMinecraftServerInstance();
@@ -29,7 +31,7 @@ public class WyrmsTestCommandExecuted extends AutoReg.ModElement {
 							"The world is in peaceful mode! It is recommended you at least lock the difficulty to Easy for the wyrms to work properly."));
 			}
 		}
-		else if (!Invasion.invasionEnabled){
+		else if (!invasion.invasionEnabled){
 			mcserv.getPlayerList().sendMessage(new TextComponentString(
 					"Invasions are not enabled, many features are missing."));
 		}
@@ -40,7 +42,7 @@ public class WyrmsTestCommandExecuted extends AutoReg.ModElement {
 			}
 		}
 		{
-			if (mcserv != null && Invasion.invasionEnabled)
+			if (mcserv != null && invasion.invasionEnabled)
 				mcserv.getPlayerList().sendMessage(
 						new TextComponentString(
 								(

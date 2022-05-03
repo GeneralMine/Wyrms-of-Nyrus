@@ -1,8 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.AI;
-import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -32,13 +31,13 @@ public class EntityWyrmWorker extends EntityWyrm {
         experienceValue = 1;
         enablePersistence();
         setNoAI(false);
-        this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
+        this.timeUntilNextProduct = (this.rand.nextInt(6000) + (radiogenetics.workerProductivity));
     }
 
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0 && AI.savageAIMode){
+        if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0 && ai.savageAIMode){
             afterPlayers();
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             this.tasks.addTask(2, new EntityAIWander(this, 1.0));
@@ -63,11 +62,11 @@ public class EntityWyrmWorker extends EntityWyrm {
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
+        if (source == DamageSource.FALL && radiogenetics.immuneToFalling)
             return false;
         if (source == DamageSource.DROWN)
             return false;
-        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
+        if (source == DamageSource.CACTUS && radiogenetics.immuneToCacti)
             return false;
         return super.attackEntityFrom(source, amount);
     }
@@ -97,7 +96,7 @@ public class EntityWyrmWorker extends EntityWyrm {
         {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.dropItem(ItemMetalcombArray.block, 1);
-            this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
+            this.timeUntilNextProduct = (this.rand.nextInt(6000) + (radiogenetics.workerProductivity));
         }
     }
 
@@ -128,7 +127,7 @@ public class EntityWyrmWorker extends EntityWyrm {
             return PlayState.CONTINUE;
         }
         else {
-            if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0 && AI.savageAIMode){
+            if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0 && ai.savageAIMode){
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idleAwakened"));
             }
             else{event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idle"));}
