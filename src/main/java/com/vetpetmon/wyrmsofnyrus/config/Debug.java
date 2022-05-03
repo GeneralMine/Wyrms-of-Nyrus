@@ -1,10 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
 
-public final class Debug {
+public class Debug {
     @Config.Comment("Enable or disable console logging")
     @Config.Name("Enable Debugging")
     public static boolean LOGGINGENABLED = false;
