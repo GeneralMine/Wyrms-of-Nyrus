@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -131,11 +131,11 @@ public class EntityWyrmling extends EntityWyrm {
 
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL && radiogenetics.immuneToFalling)
+        if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
             return false;
         if (source == DamageSource.DROWN)
             return false;
-        if (source == DamageSource.CACTUS && radiogenetics.immuneToCacti)
+        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
         return super.attackEntityFrom(source, amount);
     }

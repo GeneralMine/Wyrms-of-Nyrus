@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
-import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
+import com.vetpetmon.wyrmsofnyrus.config.AI;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -26,9 +26,6 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     // 7 - Hexe pods (no AI but gravity)
     // 8 - Visitor (No AI + vanishes)
     // 9 - Event (vanishes)
-    public static ConfigLib.Invasion invasion = ConfigLib.invasion;
-    public static ConfigLib.AI ai = ConfigLib.ai;
-    public static ConfigLib.Radiogenetics radiogenetics = ConfigLib.radiogenetics;
 
     public int casteType;
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -45,11 +42,11 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     protected void makeAllTargets() {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false, false));
-        if(ai.attackAnimals){this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));}
-        if(ai.attackMobs) {
+        if(AI.attackAnimals){this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));}
+        if(AI.attackMobs) {
             this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
                 public boolean apply(EntityMob target) {
-                    if (ai.suicidalWyrms) return !(target instanceof EntityWyrm);
+                    if (AI.suicidalWyrms) return !(target instanceof EntityWyrm);
                     else return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
                 }
             }));

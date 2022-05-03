@@ -1,7 +1,8 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.block.*;
-import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
@@ -21,15 +22,12 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 	public static boolean hasTicked;
 	public static int timesspread;
 
-	static ConfigLib.Invasion invasion = ConfigLib.invasion;
-	static ConfigLib.Debug debug = ConfigLib.debug;
-
 	public static int executescript(Map<String, Object> e, int ts) {
 
 		timesspread = ts;
-		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ invasion.creepSpreadRate))));
+		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
 
-		if (invasion.creepEnabled && canSpreadThisTick) {
+		if (Invasion.creepEnabled && canSpreadThisTick) {
 			hasTicked = false;
 
 			ArrayList<Block> invalidBlocks = new ArrayList<>();
@@ -102,7 +100,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 			}
 
 		}
-		if (debug.LOGGINGENABLED && debug.DEBUGLEVEL >= 5) System.out.println("Debugging: timespread for block at: " + (timesspread));
+		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 5) System.out.println("Debugging: timespread for block at: " + (timesspread));
 		return timesspread;
 	}
 }

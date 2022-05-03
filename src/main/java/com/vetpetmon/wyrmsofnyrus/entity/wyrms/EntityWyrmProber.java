@@ -2,7 +2,8 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
-import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
@@ -105,7 +106,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (invasion.probingEnabled) {
+        if (Invasion.probingEnabled) {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.72D);
             this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
@@ -166,7 +167,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
             return false;
         if (source == DamageSource.DROWN)
             return false;
-        if (source == DamageSource.CACTUS && radiogenetics.immuneToCacti)
+        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
         return super.attackEntityFrom(source, amount);
     }

@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
-import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -19,10 +19,8 @@ public class InvasionStatus extends AutoReg.ModElement {
 		super(instance, 12);
 	}
 
-	static ConfigLib.Invasion invasion = ConfigLib.invasion;
-
 	public static void executescript(Map<String, Object> dependencies) {
-		if (invasion.invasionEnabled) {
+		if (Invasion.invasionEnabled) {
 			World world = (World) dependencies.get("world");
 			if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 500)) {
 				wyrmVariables.wyrmInvasionStatus = "Arriving";
@@ -54,7 +52,7 @@ public class InvasionStatus extends AutoReg.ModElement {
 
 	@SubscribeEvent
 	public void onWorldTick(TickEvent.WorldTickEvent event) {
-		if (event.phase == TickEvent.Phase.END && invasion.invasionEnabled) {
+		if (event.phase == TickEvent.Phase.END && Invasion.invasionEnabled) {
 			World world = event.world;
 			java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
 			dependencies.put("world", world);

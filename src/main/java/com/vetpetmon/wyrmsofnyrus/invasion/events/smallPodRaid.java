@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.invasion.events;
 
-import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.Entity;
@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 import java.util.Map;
 
 public class smallPodRaid {
-    static ConfigLib.Debug debug = ConfigLib.debug;
     public static void Do(Map<String, Object> e){
         int x = (int) e.get("x");
         int z = (int) e.get("z");
@@ -43,6 +42,6 @@ public class smallPodRaid {
                 world.spawnEntity(entityToSpawn);
             }
         }
-        if (debug.LOGGINGENABLED && debug.DEBUGLEVEL >= 2) wyrmsofnyrus.logger.info("A small hexepod was spawned.");
+        if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 2) wyrmsofnyrus.logger.info("A small hexepod was spawned.");
     }
 }
