@@ -3,21 +3,25 @@ package com.vetpetmon.wyrmsofnyrus.config;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
 
+import static com.vetpetmon.wyrmsofnyrus.config.ConfigLib.CFG_DIV;
+
 public class Invasion {
     @Config.Comment("Enable or disable the wyrm invasion")
     @Config.Name("Enable invasion")
-    public static boolean invasionEnabled = true;
+    public static boolean invasionEnabled;
     @Config.Comment("Makes probers mean and scary.")
     @Config.Name("Enable probing")
-    public static boolean probingEnabled = true;
+    public static boolean probingEnabled;
 
-    public static boolean creepEnabled = true;
-    public static int creepSpreadRate = 50;
-    public static float creepSpreadPoints = 0.015f;
+    public static boolean creepEnabled;
+    public static int creepSpreadRate;
+    public static float creepSpreadPoints;
 
     public static void loadFromConfig(Configuration config) {
 
         final String CATEGORY = "Invasion";
+        config.addCustomCategoryComment(CATEGORY,CFG_DIV + "\nThe Wyrm Invasion is the main mechanic of this mod, with a fully-fledged event system with threats that keep players on edge.\n" + CFG_DIV);
+        config.setCategoryRequiresWorldRestart(CATEGORY,true);
 
         invasionEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Invasion enabled", "Enables the invasion system. Many functions of the mod will not work if this is off, including other sub-systems.", true);
 

@@ -64,7 +64,7 @@ public class wyrmsofnyrus {
         elements.getElements().forEach(element -> element.preInit(event));
         proxy.preInit(event);
 
-        //ConfigLib.reloadConfig();
+        ConfigLib.reloadConfig();
 
         WyrmRegister.register();
     }

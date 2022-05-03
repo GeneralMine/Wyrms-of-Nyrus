@@ -126,7 +126,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(5, new EntityAILookIdle(this));
+        simpleAI();
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         //this.tasks.addTask(4, new AIChargeAttack());
         this.tasks.addTask(4, new FlyingMobAI(this, 8.75, 100));

@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -38,6 +39,11 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     }
 
     protected boolean canDespawn() {return false;}
+
+
+    protected void simpleAI() {
+        if (!AI.performanceAIMode) this.tasks.addTask(2, new EntityAILookIdle(this));
+    }
 
     protected void makeAllTargets() {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));

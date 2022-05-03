@@ -42,12 +42,12 @@ public class EntityWyrmWorker extends EntityWyrm {
             afterPlayers();
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             this.tasks.addTask(2, new EntityAIWander(this, 1.0));
-            this.tasks.addTask(3, new EntityAILookIdle(this));
+            simpleAI();
             this.tasks.addTask(1, new EntityAISwimming(this));
         }
         else {
             this.tasks.addTask(2, new EntityAIWander(this, 1.0));
-            this.tasks.addTask(3, new EntityAILookIdle(this));
+            simpleAI();
             this.tasks.addTask(1, new EntityAISwimming(this));
             this.tasks.addTask(1, new EntityAIPanic(this, 1.4));
         }

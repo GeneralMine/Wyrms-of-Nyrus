@@ -39,7 +39,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
         super.initEntityAI();
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(2, new EntityAILookIdle(this));
+        simpleAI();
         if (AI.savageAIMode) {
             this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
             afterPlayers();

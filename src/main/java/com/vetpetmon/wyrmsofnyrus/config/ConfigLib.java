@@ -18,25 +18,9 @@ import java.io.File;
 
 import static com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus.proxy;
 
-@Config(modid = wyrmsofnyrus.MODID)
 public class ConfigLib {
 
-    // All config fields are made accessible here.
-    @Config.Comment("Wyrm Invasion configuration.")
-    @Config.Name("Invasion")
-    public static final Invasion invasion = new Invasion();
-
-    @Config.Comment("Debugging for developers and testers.")
-    @Config.Name("Debug")
-    public static final Debug debug = new Debug();
-
-    @Config.Comment("AI configuration.")
-    @Config.Name("AI")
-    public static final AI ai = new AI();
-
-    @Config.Comment("Mob property configuration.")
-    @Config.Name("Radiogenetics")
-    public static final Radiogenetics radiogenetics = new Radiogenetics();
+    public static String CFG_DIV = "================================================";
 
     public static boolean createConfigBool(Configuration config, String category, String name, String comment, boolean def) {
         Property prop = config.get(category, name, def);
