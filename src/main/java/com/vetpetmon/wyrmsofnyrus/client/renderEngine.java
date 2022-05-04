@@ -12,6 +12,7 @@ public class renderEngine {
         RenderingRegistry.registerEntityRenderingHandler(EntityTheVisitor.class, TheVisitorGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWorker.class, WyrmWorkerGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmRover.class, WyrmRoverGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityDobber.class, DobberGeoRenderer::new);
     }
 
 }
