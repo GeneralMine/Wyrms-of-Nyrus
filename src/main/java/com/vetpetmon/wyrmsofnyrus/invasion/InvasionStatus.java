@@ -19,33 +19,46 @@ public class InvasionStatus extends AutoReg.ModElement {
 		super(instance, 12);
 	}
 
+	public static double getDifficulty(float baseDiff) {
+		// First factor: What's the basic invasion stage difficulty here?
+		float dFactorOne = baseDiff;
+		// Second factor: Is this EXtended Canon and what is that difficulty option set too?
+		float dFactorTwo;
+		if(Invasion.isEXCANON()) {dFactorTwo = Invasion.getEXCANONDIFFICULTY();}
+		else {dFactorTwo = 1;}
+
+		float finalDifficulty = (dFactorOne * dFactorTwo);
+
+		return finalDifficulty;
+	}
+
 	public static void executescript(Map<String, Object> dependencies) {
 		if (Invasion.invasionEnabled) {
 			World world = (World) dependencies.get("world");
 			if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 500)) {
 				wyrmVariables.wyrmInvasionStatus = "Arriving";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = 1.0;
+				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(1.0F);
 			} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 1500)) {
 				wyrmVariables.wyrmInvasionStatus = "Scouting";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = 1.5;
+				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(1.5F);
 			} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 5000)) {
 				wyrmVariables.wyrmInvasionStatus = "Establishing hive";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = 2.0;
+				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(2.0F);
 			} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 25000)) {
 				wyrmVariables.wyrmInvasionStatus = "Expanding";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = 3.0;
+				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(3.0F);
 			} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 100000)) {
 				wyrmVariables.wyrmInvasionStatus = "Invading";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = 4.5;
+				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(4.5F);
 			} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) <= 100000)) {
 				wyrmVariables.wyrmInvasionStatus = "Dominant species";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = 5.5;
+				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(5.5F);
 			} else if (((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints) > 250000)) {
 				wyrmVariables.wyrmInvasionStatus = "Terraforming";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = 6.0;
+				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(6.0F);
 			} else {
 				wyrmVariables.wyrmInvasionStatus = "Unknown";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = 1.0;
+				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(1.0F);
 			}
 		}
 	}

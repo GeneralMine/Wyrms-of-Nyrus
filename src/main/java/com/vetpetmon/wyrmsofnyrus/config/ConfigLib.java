@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.io.File;
 
+import static com.vetpetmon.wyrmsofnyrus.config.Invasion.isEXCANON;
 import static com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus.proxy;
 
 public class ConfigLib {
@@ -66,7 +67,24 @@ public class ConfigLib {
         Invasion.loadFromConfig(cfg);
         AI.loadFromConfig(cfg);
         Radiogenetics.loadFromConfig(cfg);
+        setCanon();
         cfg.save();
+    }
+
+    public static void setCanon() {
+        if (isEXCANON()) {
+            Invasion.invasionEnabled = true;
+            Invasion.probingEnabled = true;
+            Invasion.creepEnabled = true;
+            Invasion.creepSpreadRate = 5;
+            Invasion.creepSpreadPoints = 0.05F;
+            AI.attackMobs = true;
+            AI.attackAnimals = true;
+            AI.savageAIMode = true;
+            AI.performanceAIMode = false;
+            Radiogenetics.immuneToCacti = true;
+            Radiogenetics.immuneToFalling = true;
+        }
     }
 
     @Mod.EventBusSubscriber(modid = wyrmsofnyrus.MODID)
