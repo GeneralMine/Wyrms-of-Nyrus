@@ -43,4 +43,8 @@ public class Invasion {
     public static float getEXCANONDIFFICULTY() {
         return EXCANONDIFFICULTY;
     }
+    public static boolean isCreepEnabled() {
+        return creepEnabled;
+    }
+
 }

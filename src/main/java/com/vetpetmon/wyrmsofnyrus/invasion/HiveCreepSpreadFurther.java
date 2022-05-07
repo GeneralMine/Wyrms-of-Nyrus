@@ -27,7 +27,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		timesspread = ts;
 		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
 
-		if (Invasion.creepEnabled && canSpreadThisTick) {
+		if (Invasion.isCreepEnabled() && canSpreadThisTick) {
 			hasTicked = false;
 
 			ArrayList<Block> invalidBlocks = new ArrayList<>();

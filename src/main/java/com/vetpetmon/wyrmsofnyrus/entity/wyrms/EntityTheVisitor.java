@@ -1,7 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -15,12 +19,15 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private int timeUntilDespawn;
+
     public EntityTheVisitor(World world) {
         super(world);
         setSize(5.5f, 5.5f);
         experienceValue = 0;
         this.casteType = 8;
         setNoAI(true);
+        this.timeUntilDespawn = this.rand.nextInt(6000) + 2000;
     }
 
     @Override
@@ -54,6 +61,42 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
 
     @Override
     protected boolean canDespawn() {return true;}
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        if (compound.hasKey("GrowthTime"))
+        {
+            this.timeUntilDespawn = compound.getInteger("DespawnTime");
+        }
+
+        if (compound.hasKey("srpcothimmunity"))
+        {
+            this.srpcothimmunity = compound.getInteger("srpcothimmunity");
+        }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+
+        this.srpcothimmunity = 0;
+
+        compound.setInteger("srpcothimmunity", this.srpcothimmunity);
+        compound.setInteger("DespawnTime", this.timeUntilDespawn);
+    }
+
+    public void onLivingUpdate()
+    {
+        super.onLivingUpdate();
+        if (!this.world.isRemote && --this.timeUntilDespawn <= 0)
+        {
+            this.setDead();
+        }
+    }
 
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
