@@ -1,4 +1,13 @@
 {
+  "creepwyrmscream": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/creepwyrmscream",
+        "stream": false
+      }
+    ]
+  },
   "wyrmclicks": {
     "category": "neutral",
     "sounds": [
