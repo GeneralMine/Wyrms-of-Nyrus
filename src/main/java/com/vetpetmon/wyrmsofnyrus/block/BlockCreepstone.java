@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Random;
 
 @AutoReg.ModElement.Tag
-public class BlockCreepstone extends ActiveCreepBlock {
+public class BlockCreepstone extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:creepstone")
 	public static final Block block = null;
 	public BlockCreepstone(AutoReg instance) {
@@ -71,7 +71,7 @@ public class BlockCreepstone extends ActiveCreepBlock {
 			boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
 			super.updateTick(world, pos, state, random);
 			if (canSpreadThisTick) {
-				CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:creepstone_inactive");
+				ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:creepstone_inactive");
 				world.scheduleUpdate(pos, this, this.tickRate(world));
 			}
 		}

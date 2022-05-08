@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Random;
 
 @AutoReg.ModElement.Tag
-public class BlockHiveCreepTop extends ActiveCreepBlock {
+public class BlockHiveCreepTop extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:hivecreeptop")
 	public static final Block block = null;
 	public BlockHiveCreepTop(AutoReg instance) {
@@ -90,7 +90,7 @@ public class BlockHiveCreepTop extends ActiveCreepBlock {
 			boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
 			super.updateTick(world, pos, state, random);
 			if (canSpreadThisTick) {
-				CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreeptopinactive");
+				ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreeptopinactive");
 				world.scheduleUpdate(pos, this, this.tickRate(world));
 			}
 		}

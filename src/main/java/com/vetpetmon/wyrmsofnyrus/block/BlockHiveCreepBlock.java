@@ -30,7 +30,7 @@ import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
 @AutoReg.ModElement.Tag
-public class BlockHiveCreepBlock extends ActiveCreepBlock {
+public class BlockHiveCreepBlock extends AutoReg.ModElement {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:hivecreepblock")
 	public static final Block block = null;
 	public BlockHiveCreepBlock(AutoReg instance) {
@@ -89,7 +89,7 @@ public class BlockHiveCreepBlock extends ActiveCreepBlock {
 			boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
 			super.updateTick(world, pos, state, random);
 			if (canSpreadThisTick) {
-				CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreepblockinactive");
+				ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreepblockinactive");
 				world.scheduleUpdate(pos, this, this.tickRate(world));
 			}
 		}

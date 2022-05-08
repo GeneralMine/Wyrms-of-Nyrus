@@ -7,6 +7,7 @@ package com.vetpetmon.wyrmsofnyrus.config;
 */
 
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Configuration;
@@ -15,13 +16,18 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import static com.vetpetmon.wyrmsofnyrus.config.Invasion.iBdef;
 import static com.vetpetmon.wyrmsofnyrus.config.Invasion.isEXCANON;
 import static com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus.proxy;
 
 public class ConfigLib {
 
     public static String CFG_DIV = "================================================";
+    public static ArrayList<Block> iBdefFinal;
 
     public static boolean createConfigBool(Configuration config, String category, String name, String comment, boolean def) {
         Property prop = config.get(category, name, def);
@@ -77,6 +83,9 @@ public class ConfigLib {
         setCanon();
         wyrmsofnyrus.logger.info("Configuration loaded or changed.");
         cfg.save();
+    }
+    public static void FinalizeiBdef() {
+            List iBdefFinal = Arrays.asList(iBdef);
     }
 
     public static void setCanon() {

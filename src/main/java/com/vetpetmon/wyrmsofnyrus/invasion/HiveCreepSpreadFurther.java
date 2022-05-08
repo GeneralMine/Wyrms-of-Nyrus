@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.block.*;
+import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import net.minecraft.block.Block;
@@ -42,6 +43,14 @@ public class HiveCreepSpreadFurther{
 		return BlockPosList;
 	}
 
+	private static boolean creepspreadRules(BlockPos i, World world) {
+		boolean isAir = (world.isAirBlock(i));
+		boolean isSoft = (world.getBlockState(i).getBlockHardness(world, i) < Invasion.creepSpreadMaxHardness);
+		boolean isFullCube = (world.getBlockState(i).isFullCube());
+		boolean isUnAllowedBlock = (ConfigLib.iBdefFinal.contains((world.getBlockState(i)).getBlock()));
+		return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);
+	}
+
 	public static int executescript(BlockPos pos, World world, int ts) {
 
 		int timesspread = ts;
@@ -77,11 +86,6 @@ public class HiveCreepSpreadFurther{
 		}
 		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 5) System.out.println("Debugging: timespread for block at: " + (timesspread));
 		return timesspread;
-	}
-
-	private static boolean creepspreadRules(BlockPos i, World world) {
-		boolean isSoft = (world.getBlockState(i).getBlockHardness(world, i) < Invasion.creepSpreadMaxHardness);
-		return (!world.isAirBlock(i)) && (isSoft) && (world.getBlockState(i).isFullCube()) && !(Invasion.iBdefFinal.contains((world.getBlockState(i)).getBlock()));
 	}
 
 }

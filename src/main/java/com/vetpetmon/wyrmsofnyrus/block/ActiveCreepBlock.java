@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
+
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
@@ -9,10 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class ActiveCreepBlock extends AutoReg.ModElement{
-    public ActiveCreepBlock(AutoReg elements, int sortid) {
-        super(elements, sortid);
-    }
+public class ActiveCreepBlock{
 
     public static void CreepSpread(BlockPos pos, World world, int ts, String inactiveBlockName) {
         HiveCreepSpreadFurther.executescript(pos, world, ts);

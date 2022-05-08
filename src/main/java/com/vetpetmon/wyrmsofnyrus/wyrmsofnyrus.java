@@ -53,8 +53,10 @@ public class wyrmsofnyrus {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        if(logger == null)
-            logger = event.getModLog();
+        if(logger == null) logger = event.getModLog();
+
+        ConfigLib.reloadConfig();
+        ConfigLib.FinalizeiBdef();
 
         MinecraftForge.EVENT_BUS.register(this);
         GameRegistry.registerWorldGenerator(elements, 5);
@@ -63,8 +65,6 @@ public class wyrmsofnyrus {
         MinecraftForge.EVENT_BUS.register(elements);
         elements.getElements().forEach(element -> element.preInit(event));
         proxy.preInit(event);
-
-        ConfigLib.reloadConfig();
 
         WyrmRegister.register();
     }
