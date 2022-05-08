@@ -1,9 +1,7 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
-import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -32,7 +30,7 @@ import java.util.Map;
 import java.util.Random;
 
 @AutoReg.ModElement.Tag
-public class BlockCreepstone extends AutoReg.ModElement {
+public class BlockCreepstone extends ActiveCreepBlock {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:creepstone")
 	public static final Block block = null;
 	public BlockCreepstone(AutoReg instance) {
@@ -63,43 +61,29 @@ public class BlockCreepstone extends AutoReg.ModElement {
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
 		}
-		@Override
+
+
 		public int tickRate(World world) {
 			return 600;
+		}
+
+		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+			boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
+			super.updateTick(world, pos, state, random);
+			if (canSpreadThisTick) {
+				CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:creepstone_inactive");
+				world.scheduleUpdate(pos, this, this.tickRate(world));
+			}
 		}
 
 		@Override
 		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 			super.onBlockAdded(world, pos, state);
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
+			world.scheduleUpdate(pos, this, this.tickRate(world));
 			{
 				Map<String, Object> $_dependencies = new HashMap<>();
 				$_dependencies.put("world", world);
 				InvasionBlockSpread.run($_dependencies);
-			}
-		}
-
-		@Override
-		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-			super.updateTick(world, pos, state, random);
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-			{
-				Map<String, Object> $_dependencies = new HashMap<>();
-				$_dependencies.put("x", x);
-				$_dependencies.put("y", y);
-				$_dependencies.put("z", z);
-				$_dependencies.put("world", world);
-				timesSpread = HiveCreepSpreadFurther.executescript($_dependencies, timesSpread);
-			}
-			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
-			if (timesSpread > (Invasion.creepSpreadRate*20)) {
-				if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 4) System.out.println("Debugging: Creepstone block at " + (new BlockPos(x, y, z)) + " was turned inactive after " + (timesSpread) + " operations.");
-				world.setBlockState((new BlockPos(x, y, z)), BlockCreepstoneInactive.block.getDefaultState(), 3);
 			}
 		}
 

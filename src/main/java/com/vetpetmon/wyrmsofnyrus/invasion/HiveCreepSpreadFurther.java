@@ -4,12 +4,12 @@ import com.vetpetmon.wyrmsofnyrus.block.*;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.block.material.Material;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class HiveCreepSpreadFurther{
 
@@ -42,17 +42,16 @@ public class HiveCreepSpreadFurther{
 		return BlockPosList;
 	}
 
-	public static int executescript(Map<String, Object> e, int ts) {
+	public static int executescript(BlockPos pos, World world, int ts) {
 
 		int timesspread = ts;
 		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
 
 		if (Invasion.isCreepEnabled() && canSpreadThisTick) {
-			int x = (int) e.get("x");
-			int y = (int) e.get("y");
-			int z = (int) e.get("z");
+			int x = (int) pos.getX();
+			int y = (int) pos.getX();
+			int z = (int) pos.getX();
 			BlockPosList = getCSPos(x,y,z);
-			World world = (World) e.get("world");
 			assert false;
 			if (world.isAirBlock(BlockPosList.get(2))) {
 				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
@@ -62,13 +61,13 @@ public class HiveCreepSpreadFurther{
 			for (BlockPos i : BlockPosList) {
 				if (creepspreadRules(i, world)) {
 					if (((world.getBlockState(i))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
-						world.setBlockState((i), BlockWyrmLightsYellow.block.getDefaultState(), 3);
+						world.setBlockState((i), (IBlockState) Block.getBlockFromName("wyrmsofnyrus:wyrm_lights_yellow"), 3);
 						break;
 					} else if ((((world.getBlockState(i)).getMaterial() == Material.ROCK))) {
-						world.setBlockState((i), BlockCreepstone.block.getDefaultState(), 3);
+						world.setBlockState((i), (IBlockState) Block.getBlockFromName("wyrmsofnyrus:creepstone"), 3);
 						break;
 					} else if ((((world.getBlockState(i)).getMaterial() == Material.GROUND) || ((world.getBlockState(i)).getMaterial() == Material.GRASS))) {
-						world.setBlockState((i), BlockHiveCreepBlock.block.getDefaultState(), 3);
+						world.setBlockState((i), (IBlockState) Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"), 3);
 						break;
 					}
 				}

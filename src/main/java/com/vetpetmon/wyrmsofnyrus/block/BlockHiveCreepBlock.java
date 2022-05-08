@@ -1,9 +1,7 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
-import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -32,7 +30,7 @@ import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
 @AutoReg.ModElement.Tag
-public class BlockHiveCreepBlock extends AutoReg.ModElement {
+public class BlockHiveCreepBlock extends ActiveCreepBlock {
 	@GameRegistry.ObjectHolder("wyrmsofnyrus:hivecreepblock")
 	public static final Block block = null;
 	public BlockHiveCreepBlock(AutoReg instance) {
@@ -79,10 +77,7 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 		@Override
 		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 			super.onBlockAdded(world, pos, state);
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
+			world.scheduleUpdate(pos, this, this.tickRate(world));
 			{
 				Map<String, Object> $_dependencies = new HashMap<>();
 				$_dependencies.put("world", world);
@@ -90,24 +85,12 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 			}
 		}
 
-		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+			boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
 			super.updateTick(world, pos, state, random);
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-			{
-				Map<String, Object> $_dependencies = new HashMap<>();
-				$_dependencies.put("x", x);
-				$_dependencies.put("y", y);
-				$_dependencies.put("z", z);
-				$_dependencies.put("world", world);
-				timesSpread = HiveCreepSpreadFurther.executescript($_dependencies, timesSpread);
-			}
-			world.scheduleUpdate(new BlockPos(x, y, z), this, this.tickRate(world));
-			if (timesSpread > (Invasion.creepSpreadRate*20)) {
-				if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 4) System.out.println("Debugging: Hive Creep block at " + (new BlockPos(x, y, z)) + " was turned inactive after " + (timesSpread) + " operations.");
-				world.setBlockState((new BlockPos(x, y, z)), BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
+			if (canSpreadThisTick) {
+				CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreepblockinactive");
+				world.scheduleUpdate(pos, this, this.tickRate(world));
 			}
 		}
 	}

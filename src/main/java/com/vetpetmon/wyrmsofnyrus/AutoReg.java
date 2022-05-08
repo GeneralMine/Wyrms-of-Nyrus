@@ -1,5 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -128,7 +130,10 @@ public class AutoReg implements IWorldGenerator {
 		return potions;
 	}
 	public static class ModElement implements Comparable<ModElement> {
-		@Retention(RetentionPolicy.RUNTIME)
+        protected void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+        }
+
+        @Retention(RetentionPolicy.RUNTIME)
 		public @interface Tag {
 		}
 		protected final AutoReg elements;
