@@ -36,6 +36,13 @@ public class ConfigLib {
         return prop.getString();
     }
 
+    public static String[] createConfigStringList(Configuration config, String category, String name, String comment, String[] def) {
+
+        Property prop = config.get(category, name, def);
+        prop.setComment(comment);
+        return prop.getStringList();
+    }
+
     public static int createConfigInt(Configuration config, String category, String name, String comment, int def) {
 
         Property prop = config.get(category, name, def);

@@ -30,34 +30,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		if (Invasion.isCreepEnabled() && canSpreadThisTick) {
 			hasTicked = false;
 
-			ArrayList<Block> invalidBlocks = new ArrayList<>();
-			invalidBlocks.add(Block.getBlockFromName("minecraft:furnace"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:brick_block"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:bone_block"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:bedrock")); //I HAVEN'T TESTED TO SEE IF IT CONVERTS BEDROCK BEFORE BUT THAT'D BE HILARIOUS IF IT DID.
-			invalidBlocks.add(Block.getBlockFromName("minecraft:concrete"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:concrete_powder"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:dropper"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:end_bricks"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:end_stone"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:glass"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:jukebox"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:nether_brick"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:red_nether_brick"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:noteblock"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:observer"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:obsidian"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:packed_ice"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:prismarine"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:purpur_block"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:purpur_pillar"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:quartz_block"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:sponge"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:stained_glass"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:stone_button"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:wool"));
-			invalidBlocks.add(Block.getBlockFromName("minecraft:stonebrick"));
-
 			ArrayList<BlockPos> BlockPosList = new ArrayList<>();
 
 			int x = (int) e.get("x");
@@ -79,7 +51,7 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 				}
 			}
 			for (BlockPos i : BlockPosList) {
-				if ((!world.isAirBlock(i)) && (world.getBlockState(i).getBlockHardness(world, i) < 2.45) && (world.getBlockState(i).isFullCube()) && !(invalidBlocks.contains((world.getBlockState(i)).getBlock()))) {
+				if (creepspreadRules(i, world)) {
 					if (((world.getBlockState(i))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
 						world.setBlockState((i), BlockWyrmLightsYellow.block.getDefaultState(), 3);
 						break;
@@ -92,7 +64,6 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 					}
 				}
 			}
-			invalidBlocks.clear();
 			BlockPosList.clear();
 			if (!hasTicked){
 				timesspread = ts + 1;
@@ -103,4 +74,10 @@ public class HiveCreepSpreadFurther extends AutoReg.ModElement {
 		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 5) System.out.println("Debugging: timespread for block at: " + (timesspread));
 		return timesspread;
 	}
+
+	private static boolean creepspreadRules(BlockPos i, World world) {
+		boolean isSoft = (world.getBlockState(i).getBlockHardness(world, i) < Invasion.creepSpreadMaxHardness);
+		return (!world.isAirBlock(i)) && (isSoft) && (world.getBlockState(i).isFullCube()) && !(Invasion.iBdefFinal.contains((world.getBlockState(i)).getBlock()));
+	}
+
 }
