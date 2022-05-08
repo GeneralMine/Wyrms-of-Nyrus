@@ -68,11 +68,13 @@ public class ConfigLib {
         AI.loadFromConfig(cfg);
         Radiogenetics.loadFromConfig(cfg);
         setCanon();
+        wyrmsofnyrus.logger.info("Configuration loaded or changed.");
         cfg.save();
     }
 
     public static void setCanon() {
         if (isEXCANON()) {
+            wyrmsofnyrus.logger.info("We are in EX-tended canon mode!");
             Invasion.invasionEnabled = true;
             Invasion.probingEnabled = true;
             Invasion.creepEnabled = true;
@@ -95,6 +97,7 @@ public class ConfigLib {
             if (event.getModID().equals(wyrmsofnyrus.MODID))
             {
                 ConfigManager.sync(wyrmsofnyrus.MODID, Config.Type.INSTANCE);
+                wyrmsofnyrus.logger.info("Configuration loaded or changed.");
             }
         }
     }
