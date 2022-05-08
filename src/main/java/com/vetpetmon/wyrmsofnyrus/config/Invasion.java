@@ -5,8 +5,6 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.vetpetmon.wyrmsofnyrus.config.ConfigLib.CFG_DIV;
 
