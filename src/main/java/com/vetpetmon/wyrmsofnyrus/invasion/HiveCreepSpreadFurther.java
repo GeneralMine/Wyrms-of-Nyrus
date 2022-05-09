@@ -47,21 +47,24 @@ public class HiveCreepSpreadFurther{
 		boolean isAir = (world.isAirBlock(i));
 		boolean isSoft = (world.getBlockState(i).getBlockHardness(world, i) < Invasion.creepSpreadMaxHardness);
 		boolean isFullCube = (world.getBlockState(i).isFullCube());
-		boolean isUnAllowedBlock = (ConfigLib.iBdefFinal.contains((world.getBlockState(i)).getBlock()));
-		return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);
+		if (Invasion.CSBlockBLEnabled) {
+			boolean isUnAllowedBlock = ((ConfigLib.iBdefFinal.contains((world.getBlockState(i)).getBlock())));
+			return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);
+		}
+		else {
+			return (!isAir) && (isSoft) && (isFullCube);
+		}
 	}
 
 	public static int executescript(BlockPos pos, World world, int ts) {
 
 		int timesspread = ts;
-		boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
 
-		if (Invasion.isCreepEnabled() && canSpreadThisTick) {
-			int x = (int) pos.getX();
-			int y = (int) pos.getX();
-			int z = (int) pos.getX();
+		if (Invasion.isCreepEnabled()) {
+			int x = pos.getX();
+			int y = pos.getX();
+			int z = pos.getX();
 			BlockPosList = getCSPos(x,y,z);
-			assert false;
 			if (world.isAirBlock(BlockPosList.get(2))) {
 				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
 					world.setBlockState((BlockPosList.get(0)), BlockHiveCreepTop.block.getDefaultState(), 3);

@@ -87,7 +87,7 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 
 		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-			boolean canSpreadThisTick = ((Math.random() < ((float)(1.0/ Invasion.creepSpreadRate))));
+			boolean canSpreadThisTick = ((Math.random() <= ((float)(1.0/ Invasion.creepSpreadRate))));
 			super.updateTick(world, pos, state, random);
 			if (canSpreadThisTick) {
 				ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreeptopinactive");
