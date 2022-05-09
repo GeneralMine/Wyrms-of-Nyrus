@@ -27,7 +27,6 @@ import static com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus.proxy;
 public class ConfigLib {
 
     public static String CFG_DIV = "================================================";
-    public static ArrayList<Block> iBdefFinal;
 
     public static boolean createConfigBool(Configuration config, String category, String name, String comment, boolean def) {
         Property prop = config.get(category, name, def);
@@ -81,14 +80,8 @@ public class ConfigLib {
         AI.loadFromConfig(cfg);
         Radiogenetics.loadFromConfig(cfg);
         setCanon();
-        FinalizeiBdef();
         wyrmsofnyrus.logger.info("Configuration loaded or changed.");
         cfg.save();
-    }
-
-    public static void FinalizeiBdef() {
-            List iBdefF = Arrays.asList(iBdef);
-            iBdefFinal = new ArrayList<Block>(iBdefF);
     }
 
     public static void setCanon() {

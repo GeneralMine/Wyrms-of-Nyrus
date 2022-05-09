@@ -43,12 +43,12 @@ public class HiveCreepSpreadFurther{
 		return BlockPosList;
 	}
 
-	private static boolean creepspreadRules(BlockPos i, World world) {
+	private static boolean creepspreadRules(BlockPos i, World world, int x, int y, int z) {
 		boolean isAir = (world.isAirBlock(i));
 		boolean isSoft = (world.getBlockState(i).getBlockHardness(world, i) < Invasion.creepSpreadMaxHardness);
 		boolean isFullCube = (world.getBlockState(i).isFullCube());
-		if (Invasion.CSBlockBLEnabled) {
-			boolean isUnAllowedBlock = ((ConfigLib.iBdefFinal.contains((world.getBlockState(i)).getBlock())));
+		if ((Invasion.CSBlockBLEnabled) && !(i.equals(new BlockPos(x, y, z)))) {
+			boolean isUnAllowedBlock = ((Invasion.iBdefFinal.contains( (Block) ((world.getBlockState(i))))));
 			return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);
 		}
 		else {
@@ -62,8 +62,8 @@ public class HiveCreepSpreadFurther{
 
 		if (Invasion.isCreepEnabled()) {
 			int x = pos.getX();
-			int y = pos.getX();
-			int z = pos.getX();
+			int y = pos.getY();
+			int z = pos.getZ();
 			BlockPosList = getCSPos(x,y,z);
 			if (world.isAirBlock(BlockPosList.get(2))) {
 				if (((world.getBlockState(BlockPosList.get(0))).getBlock() == Block.getBlockFromName("wyrmsofnyrus:hivecreepblock"))) {
@@ -71,7 +71,7 @@ public class HiveCreepSpreadFurther{
 				}
 			}
 			for (BlockPos i : BlockPosList) {
-				if (creepspreadRules(i, world)) {
+				if (creepspreadRules(i, world, x,y,z)) {
 					if (((world.getBlockState(i))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
 						world.setBlockState((i), (IBlockState) Block.getBlockFromName("wyrmsofnyrus:wyrm_lights_yellow"), 3);
 						break;
