@@ -1,8 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.config.Config;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ public class Invasion {
     public static float creepSpreadMaxHardness;
     public static String[] invalidBlocksForCreepspread;
     public static boolean CSBlockBLEnabled;
-    public static ArrayList<Block> iBdefFinal;
+    public static ArrayList<ResourceLocation> iBdefFinal;
     public static boolean creepSpreadsDiagonally;
 
     public static String[] iBdef = {"minecraft:furnace", "minecraft:brick_block", "minecraft:bone_block", "minecraft:bedrock", "minecraft:concrete", "minecraft:concrete_powder", "minecraft:end_bricks", "minecraft:end_stone", "minecraft:glass", "minecraft:jukebox", "minecraft:nether_brick", "minecraft:red_nether_brick", "minecraft:noteblock", "minecraft:observer", "minecraft:obsidian", "minecraft:packed_ice", "minecraft:prismarine", "minecraft:purpur_block", "minecraft:purpur_pillar", "minecraft:quartz_block", "minecraft:sponge", "minecraft:stained_glass", "minecraft:wool", "minecraft:stonebrick"};
@@ -46,7 +44,7 @@ public class Invasion {
         creepSpreadPoints = ConfigLib.createConfigDouble(config, CATEGORY, "Creep spread points", "Every time a creep block is created, the invasion points increase. If Invasion is not enabled, this won't work at all. It is recommended you should keep this number as a decimal unless if you want pain...", 0.015);
         creepSpreadMaxHardness = ConfigLib.createConfigDouble(config, CATEGORY, "Creep spread max hardness", "Maximum hardness of a block that can be infested. Can automatically generate a blacklist this way for other mods if you're too lazy to add to the blacklist below.", 2.45);
         invalidBlocksForCreepspread = ConfigLib.createConfigStringList(config, CATEGORY, "Creepable block blacklist", ("Blacklist of blocks hive creep can not spread to. Blocks that are not consider a full block by the MC engine do not need to be included here.\nWARNING: EXPERIMENTAL FEATURE. Disabled/enable in the 2nd config option. Is automatically set to true in development builds."), iBdef);
-        CSBlockBLEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Creepable block blacklist", null, true);
+        CSBlockBLEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Creepable block blacklist enabled", "Enables the creepable block blacklist.", true);
         FinalizeiBdef();
         creepSpreadsDiagonally = ConfigLib.createConfigBool(config, CATEGORY, "Creep spreads on diagonals", "Hive creep spreads to the 4 blocks directly touching it by default. This option, if set to true, will make it cover all blocks around it in a one-block radius. Disabled by default to minimize TPS impact.", false);
     }
@@ -64,9 +62,7 @@ public class Invasion {
     }
 
     public static void FinalizeiBdef() {
-        List iBdefF = Arrays.asList(iBdef);
-        iBdefFinal = new ArrayList<Block>(iBdefF);
-
-
+        List iBdefF = Arrays.asList(invalidBlocksForCreepspread);
+        iBdefFinal = new ArrayList<ResourceLocation>(iBdefF);
     }
 }
