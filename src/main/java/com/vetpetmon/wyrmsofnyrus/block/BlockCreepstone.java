@@ -64,7 +64,7 @@ public class BlockCreepstone extends AutoReg.ModElement {
 
 
 		public int tickRate(World world) {
-			return 600;
+			return Invasion.creepTickRate;
 		}
 
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {

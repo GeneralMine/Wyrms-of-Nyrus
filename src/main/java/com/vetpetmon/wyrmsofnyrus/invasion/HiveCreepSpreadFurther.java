@@ -66,6 +66,7 @@ public class HiveCreepSpreadFurther{
 			int z = pos.getZ();
 			BlockPosList = getCSPos(x,y,z);
 			BlockPos thisPos = BlockPosList.get(0);
+			assert false;
 
 			if (world.isAirBlock(BlockPosList.get(2))) {
 				if (((world.getBlockState(thisPos)).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {

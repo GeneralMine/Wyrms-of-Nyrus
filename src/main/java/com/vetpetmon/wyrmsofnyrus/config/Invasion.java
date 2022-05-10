@@ -18,6 +18,7 @@ public class Invasion {
 
     public static boolean creepEnabled;
     public static int creepSpreadRate;
+    public static int creepTickRate;
     public static float creepSpreadPoints;
     public static float creepSpreadMaxHardness;
     public static String[] invalidBlocksForCreepspread;
@@ -41,6 +42,7 @@ public class Invasion {
 
         probingEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Probing enabled", "Probers deal heavy damage and every kill advances the invasion by 2 points, compared to only one. They also have longer aggro range and fly faster. Set to false to disable this feature and make probers less dangerous.", true);
 
+        creepTickRate = ConfigLib.createConfigInt(config, CATEGORY, "Creep tickrate", "Every n world ticks, hive creep blocks will tick and roll to see if they spread or not. 20 ticks = 1 second. Default: 400", 400);
         creepEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Creep enabled", "If hive creep is enabled or not. This stops spread, and also renders Creepwyrms useless (as they will not naturally spawn.)", true);
         creepSpreadRate = ConfigLib.createConfigInt(config, CATEGORY, "Creep spread speed", "1 to n chance every tick that a hive creep blocks actually does something. Some blocks will tick much slower, like creepstone. Increase this number if you're seeing TPS drops", 10);
         creepSpreadPoints = ConfigLib.createConfigDouble(config, CATEGORY, "Creep spread points", "Every time a creep block is created, the invasion points increase. If Invasion is not enabled, this won't work at all. It is recommended you should keep this number as a decimal unless if you want pain...", 0.015);
