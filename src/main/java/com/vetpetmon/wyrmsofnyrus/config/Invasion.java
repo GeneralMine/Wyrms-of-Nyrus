@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
+import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
@@ -21,7 +22,8 @@ public class Invasion {
     public static float creepSpreadMaxHardness;
     public static String[] invalidBlocksForCreepspread;
     public static boolean CSBlockBLEnabled;
-    public static ArrayList<ResourceLocation> iBdefFinal;
+    public static ArrayList<String> iBdefFinal;
+    public static ArrayList<Block> invalidBlocks;
     public static boolean creepSpreadsDiagonally;
 
     public static String[] iBdef = {"minecraft:furnace", "minecraft:brick_block", "minecraft:bone_block", "minecraft:bedrock", "minecraft:concrete", "minecraft:concrete_powder", "minecraft:end_bricks", "minecraft:end_stone", "minecraft:glass", "minecraft:jukebox", "minecraft:nether_brick", "minecraft:red_nether_brick", "minecraft:noteblock", "minecraft:observer", "minecraft:obsidian", "minecraft:packed_ice", "minecraft:prismarine", "minecraft:purpur_block", "minecraft:purpur_pillar", "minecraft:quartz_block", "minecraft:sponge", "minecraft:stained_glass", "minecraft:wool", "minecraft:stonebrick"};
@@ -63,6 +65,10 @@ public class Invasion {
 
     public static void FinalizeiBdef() {
         List iBdefF = Arrays.asList(invalidBlocksForCreepspread);
-        iBdefFinal = new ArrayList<ResourceLocation>(iBdefF);
+        iBdefFinal = new ArrayList<String>(iBdefF);
+        invalidBlocks = new ArrayList<>();
+        for (String i:iBdefFinal) {
+            invalidBlocks.add(Block.getBlockFromName(i));
+        }
     }
 }

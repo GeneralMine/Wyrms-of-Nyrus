@@ -11,7 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.block.material.Material;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class HiveCreepSpreadFurther{
 
@@ -49,7 +48,7 @@ public class HiveCreepSpreadFurther{
 		boolean isSoft = (world.getBlockState(i).getBlockHardness(world, i) < Invasion.creepSpreadMaxHardness);
 		boolean isFullCube = (world.getBlockState(i).isFullCube());
 		if ((Invasion.CSBlockBLEnabled) && !(i.equals(new BlockPos(x, y, z)))) {
-			boolean isUnAllowedBlock = ((Invasion.iBdefFinal.contains((world.getBlockState(i).getBlock().getRegistryName()))));
+			boolean isUnAllowedBlock = ((Invasion.invalidBlocks.contains((world.getBlockState(i).getBlock()))));
 			return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);
 		}
 		else {
@@ -69,20 +68,20 @@ public class HiveCreepSpreadFurther{
 			BlockPos thisPos = BlockPosList.get(0);
 
 			if (world.isAirBlock(BlockPosList.get(2))) {
-				if (((world.getBlockState(thisPos)).getBlock() == getCreepBlock("hivecreeptop"))) {
+				if (((world.getBlockState(thisPos)).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
 					world.setBlockState((thisPos), BlockHiveCreepTop.block.getDefaultState(), 3);
 				}
 			}
 			for (BlockPos i : BlockPosList) {
 				if (creepspreadRules(i, world, x,y,z)) {
 					if (((world.getBlockState(i))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
-						world.setBlockState(i, getCreepBlock("wyrm_lights_orange"), 3);
+						world.setBlockState(i, BlockWyrmLightsYellow.block.getDefaultState(), 3);
 						break;
 					} else if (matLookingBlock(i, Material.ROCK, world)) {
-						world.setBlockState(i, getCreepBlock("creepstone"), 3);
+						world.setBlockState(i, BlockCreepstone.block.getDefaultState(), 3);
 						break;
 					} else if ((matLookingBlock(i, Material.GROUND, world) || (matLookingBlock(i, Material.GRASS, world)))) {
-						world.setBlockState(i, getCreepBlock("hivecreepblock"), 3);
+						world.setBlockState(i, BlockHiveCreepBlock.block.getDefaultState(), 3);
 						break;
 					}
 				}
