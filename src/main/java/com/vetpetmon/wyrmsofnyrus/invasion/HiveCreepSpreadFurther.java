@@ -3,9 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 import com.vetpetmon.wyrmsofnyrus.block.*;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.block.material.Material;
@@ -94,7 +92,6 @@ public class HiveCreepSpreadFurther{
 		return timesspread;
 	}
 
-	public static IBlockState getCreepBlock(String block) {return (IBlockState) Block.getBlockFromName((wyrmsofnyrus.MODID + ":" + block));}
 	public static boolean matLookingBlock(BlockPos pos, Material mat, World world) {return (((world.getBlockState(pos)).getMaterial() == mat));}
 
 }

@@ -1,7 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
 import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
@@ -65,9 +64,12 @@ public class Invasion {
         return creepEnabled;
     }
 
+    /**
+     * Casts the invalid block blacklist for creep spread. First casts to List, then ArrayList<String>, and finally ArrayList<Block>.
+     */
     public static void FinalizeiBdef() {
-        List iBdefF = Arrays.asList(invalidBlocksForCreepspread);
-        iBdefFinal = new ArrayList<String>(iBdefF);
+        List<String> iBdefF = Arrays.asList(invalidBlocksForCreepspread);
+        iBdefFinal = new ArrayList<>(iBdefF);
         invalidBlocks = new ArrayList<>();
         for (String i:iBdefFinal) {
             invalidBlocks.add(Block.getBlockFromName(i));

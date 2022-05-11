@@ -56,6 +56,7 @@ public class wyrmsofnyrus {
         if(logger == null) logger = event.getModLog();
 
         ConfigLib.reloadConfig();
+        ConfigLib.setCanon();
 
         MinecraftForge.EVENT_BUS.register(this);
         GameRegistry.registerWorldGenerator(elements, 5);
