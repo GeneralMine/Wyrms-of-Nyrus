@@ -1,11 +1,10 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
+import com.vetpetmon.wyrmsofnyrus.synapselib.blacklistUtil;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.vetpetmon.wyrmsofnyrus.config.ConfigLib.CFG_DIV;
 
@@ -22,7 +21,6 @@ public class Invasion {
     public static float creepSpreadMaxHardness;
     public static String[] invalidBlocksForCreepspread;
     public static boolean CSBlockBLEnabled;
-    public static ArrayList<String> iBdefFinal;
     public static ArrayList<Block> invalidBlocks;
     public static boolean creepSpreadsDiagonally;
 
@@ -68,11 +66,6 @@ public class Invasion {
      * Casts the invalid block blacklist for creep spread. First casts to List, then ArrayList<String>, and finally ArrayList<Block>.
      */
     public static void FinalizeiBdef() {
-        List<String> iBdefF = Arrays.asList(invalidBlocksForCreepspread);
-        iBdefFinal = new ArrayList<>(iBdefF);
-        invalidBlocks = new ArrayList<>();
-        for (String i:iBdefFinal) {
-            invalidBlocks.add(Block.getBlockFromName(i));
-        }
+        invalidBlocks = blacklistUtil.castToBlockBL(invalidBlocksForCreepspread);
     }
 }
