@@ -16,7 +16,7 @@ public class hexepodContents {
         int y = (int) dpnds.get("y");
         int z = (int) dpnds.get("z");
         World world = (World) dpnds.get("world");
-        for (int index0 = 0; index0 < (RNG.getIntRange(1,3)); index0++) {
+        for (int index0 = 0; index0 < (RNG.getIntRangeInclu(1,3)); index0++) {
             if ((entity instanceof EntityHexePod)) {
                 if (!world.isRemote) {
                     Entity entityToSpawn = new EntityWyrmling(world);
