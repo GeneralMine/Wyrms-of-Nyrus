@@ -1,5 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+
 import java.util.ArrayList;
 
 public class HiveName {
@@ -19,7 +21,7 @@ public class HiveName {
         names.add("Ikik");
         names.add("Zir");
         names.add("Vim");
-        return names.get((int) ((Math.random()) * 12));
+        return names.get( (RNG.getIntRange(0, names.size())) );
         //return names.get((int) ((Math.random()) * names.size()));
     }
 }
