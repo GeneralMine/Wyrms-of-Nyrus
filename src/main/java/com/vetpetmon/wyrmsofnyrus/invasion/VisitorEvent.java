@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -32,21 +33,11 @@ public class VisitorEvent {
 					entityToSpawn.setLocationAndAngles(x, (y + 40), z, world.rand.nextFloat() * 360F, 0.0F);
 					world.spawnEntity(entityToSpawn);
 				}
-				if (!world.isRemote) {
-					Entity entityToSpawn = new EntityTheVisitor(world);
-					entityToSpawn.setLocationAndAngles((x + 50), (y + 40), (z + 50), world.rand.nextFloat() * 360F, 0.0F);
-					world.spawnEntity(entityToSpawn);
-				}
-				if (!world.isRemote) {
-					Entity entityToSpawn = new EntityTheVisitor(world);
-					entityToSpawn.setLocationAndAngles((x - 50), (y + 40), (z - 50), world.rand.nextFloat() * 360F, 0.0F);
-					world.spawnEntity(entityToSpawn);
-				}
 				world.playSound(null, x, y, z, SoundRegistry.theVisitor, SoundCategory.MASTER, (float) 200, (float) 1);
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
-				for (int index0 = 0; index0 < (4+(int) (Math.ceil((Math.random() * 3)))); index0++) {
+				for (int index0 = 0; index0 < (2+(RNG.getIntRangeInclu(1,3))); index0++) {
 					java.util.HashMap<String, Object> depens = new java.util.HashMap<>();
 					depens.put("x", x);
 					depens.put("z", z);
@@ -76,9 +67,5 @@ public class VisitorEvent {
 			dependencies.put("event", event);
 			this.executeProcedure(dependencies, false);
 		}
-	}
-
-	public void preInit(FMLPreInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 }
