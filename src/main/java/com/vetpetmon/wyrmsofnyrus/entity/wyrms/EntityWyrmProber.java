@@ -184,7 +184,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprober.flying"));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.flying"));
 
         return PlayState.CONTINUE;
     }

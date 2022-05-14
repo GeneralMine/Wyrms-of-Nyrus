@@ -1,6 +1,7 @@
 {
   "creepwyrmscream": {
     "category": "hostile",
+    "subtitle": "subtitles.creepwyrmscream",
     "sounds": [
       {
         "name": "wyrmsofnyrus:entity/creepwyrmscream",
@@ -19,6 +20,7 @@
   },
   "entity.hiveCreepSpread": {
     "category": "neutral",
+    "subtitle": "subtitles.hiveCreepSpread",
     "sounds": [
       {
         "name": "wyrmsofnyrus:entity/creep",

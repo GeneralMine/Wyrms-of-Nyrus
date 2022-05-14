@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 
+import com.vetpetmon.wyrmsofnyrus.synapselib.threading;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
@@ -54,6 +55,8 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
+
+        threading.checkThreads();
 
         ConfigLib.reloadConfig();
         ConfigLib.setCanon();

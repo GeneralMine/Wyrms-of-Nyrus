@@ -8,6 +8,7 @@ entity.hexe_pod.name=Hexe Pod
 entity.wyrmworker.name=Wyrm Worker
 entity.wyrmrover.name=Wyrm Rover
 entity.wyrmdobber.name=Dobber
+entity.callouspod.name=Callous Landing Pod
 
 
 item.creepshard.name=Creepshard
@@ -27,3 +28,5 @@ tile.creepstone_inactive.name=Creepstone
 subtitles.visitormessage=Starship humming
 subtitles.wyrmClicks=Wyrm clicks
 subtitles.wyrmSteps=Wyrm skittering
+subtitles.creepwyrmscream=Creepwyrm screeching
+subtitles.hiveCreepSpread=Creeping
