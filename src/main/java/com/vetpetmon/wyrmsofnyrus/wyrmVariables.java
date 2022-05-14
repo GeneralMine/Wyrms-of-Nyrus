@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveName;
+import com.vetpetmon.wyrmsofnyrus.synapselib.optiMath;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -83,7 +84,7 @@ public class wyrmVariables {
         @Override
         public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
             nbt.setDouble("wyrmInvasionPoints", wyrmInvasionPoints);
-            nbt.setDouble("wyrmInvasionDifficulty", wyrmInvasionDifficulty);
+            nbt.setDouble("wyrmInvasionDifficulty", optiMath.arcForm(wyrmInvasionDifficulty));
             nbt.setString("hiveName", hiveName);
             if (hiveName == ""){
                 hiveName = HiveName.HiveName();
