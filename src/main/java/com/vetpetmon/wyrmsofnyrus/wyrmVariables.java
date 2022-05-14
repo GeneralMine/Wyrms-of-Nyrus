@@ -76,7 +76,7 @@ public class wyrmVariables {
 
         @Override
         public void readFromNBT(NBTTagCompound nbt) {
-            wyrmInvasionPoints			= 	nbt.getDouble("wyrmInvasionPoints");
+            wyrmInvasionPoints			= 	optiMath.arcForm(nbt.getDouble("wyrmInvasionPoints"));
             wyrmInvasionDifficulty		= 	nbt.getDouble("wyrmInvasionDifficulty");
             hiveName		            = 	nbt.getString("hiveName");
         }
