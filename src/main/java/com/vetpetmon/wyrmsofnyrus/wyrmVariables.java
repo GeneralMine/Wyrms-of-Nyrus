@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class wyrmVariables {
     public static String wyrmInvasionStatus = "";
     public static String hiveName = "";
+    public static int wyrmEvo;
 
     public static class MapVariables extends WorldSavedData {
         public static final String DATA_NAME = "wyrmsofnyrus_mapvars";
@@ -65,6 +66,7 @@ public class wyrmVariables {
         public static final String DATA_NAME = "wyrmsofnyrus_worldvars";
         public double wyrmInvasionPoints = 0;
         public double wyrmInvasionDifficulty = 1;
+        public int wyrmEvo = 0;
         public static String hiveName = "";
         public WorldVariables() {
             super(DATA_NAME);
@@ -77,12 +79,14 @@ public class wyrmVariables {
         @Override
         public void readFromNBT(NBTTagCompound nbt) {
             wyrmInvasionPoints			= 	optiMath.arcForm(nbt.getDouble("wyrmInvasionPoints"));
+            wyrmEvo                     =   nbt.getInteger("wyrmEvo");
             wyrmInvasionDifficulty		= 	nbt.getDouble("wyrmInvasionDifficulty");
             hiveName		            = 	nbt.getString("hiveName");
         }
 
         @Override
         public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+            nbt.setInteger("wyrmEvo", wyrmEvo);
             nbt.setDouble("wyrmInvasionPoints", wyrmInvasionPoints);
             nbt.setDouble("wyrmInvasionDifficulty", optiMath.arcForm(wyrmInvasionDifficulty));
             nbt.setString("hiveName", hiveName);

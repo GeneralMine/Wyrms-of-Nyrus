@@ -67,10 +67,8 @@ public class HiveCreepSpreadFurther{
 			assert false;
 
 			for (BlockPos i : BlockPosList) {
-				if (world.isAirBlock(BlockPosList.get(2))) {
-					if (((world.getBlockState(thisPos)).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
-						world.setBlockState((thisPos), BlockHiveCreepTop.block.getDefaultState(), 3);
-					}
+				if ((world.isAirBlock(BlockPosList.get(2))) && ((world.getBlockState(thisPos)).getBlock() == BlockHiveCreepBlock.block.getDefaultState())) {
+					world.setBlockState((thisPos), BlockHiveCreepTop.block.getDefaultState(), 3);
 				}
 				if (creepspreadRules(i, world, x,y,z)) {
 					if (((world.getBlockState(i))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
