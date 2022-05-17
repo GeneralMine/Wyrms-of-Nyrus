@@ -2,12 +2,12 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
-import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
+import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -125,7 +125,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         }
 
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(5,difficulty));
         //this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
         //this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(5 * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
     }
@@ -180,7 +180,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     }
 
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
+        data.addAnimationController(new AnimationController(this, "controller", 10F, this::predicate));
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {

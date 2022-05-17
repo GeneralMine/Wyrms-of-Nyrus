@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
+import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -31,6 +32,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     public int casteType;
     private final AnimationFactory factory = new AnimationFactory(this);
     protected int srpcothimmunity;
+    public double difficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
 
     public EntityWyrm(final World worldIn) {
         super(worldIn);
