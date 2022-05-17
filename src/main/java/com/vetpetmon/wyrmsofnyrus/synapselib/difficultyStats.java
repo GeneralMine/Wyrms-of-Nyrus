@@ -22,4 +22,20 @@ public class difficultyStats {
         return ((baseHP * 2) + ((difficulty * exdif)/2));
     }
 
+    /**
+     * Calculates the DMG of the entity in the fastest way possible.
+     * @param baseDMG the amount of damage a mob does in FULL hearts.
+     * @param difficulty The current difficulty of the wyrm invasion.
+     * @return a double value of the entity's damage capabilities.
+     */
+    public static double damage(double baseDMG, double difficulty)
+    {
+        if (Invasion.isEXCANON()) exdif = Invasion.getEXCANONDIFFICULTY();
+        else exdif = 1;
+
+        return ((baseDMG) + ((difficulty * exdif)/3));
+    }
+
+
+
 }

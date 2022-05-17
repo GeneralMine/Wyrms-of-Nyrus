@@ -116,12 +116,12 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         if (Invasion.probingEnabled) {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.72D);
-            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.5D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(3.5,difficulty));
         }
         else {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
-            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D + (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty / 2));
+            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(1,difficulty));
         }
 
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.25D);
