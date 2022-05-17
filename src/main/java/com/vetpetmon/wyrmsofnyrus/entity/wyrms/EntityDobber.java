@@ -7,6 +7,7 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
+import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -114,10 +115,10 @@ public class EntityDobber extends EntityWyrm implements IAnimatable {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.9D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.5D + (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty / 2));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(0.5,difficulty));
 
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2D * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(1,difficulty));
     }
 
     @Override
