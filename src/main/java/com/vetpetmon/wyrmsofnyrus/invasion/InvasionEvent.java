@@ -27,10 +27,15 @@ public class InvasionEvent extends AutoReg.ModElement {
 		World world = (World) dependencies.get("world");
 		int eventRolled = 0;
 		double wyrmInvasionDifficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
-		if (wyrmVariables.MapVariables.get(world).invasionStarted && (Math.random() < 0.0001 + wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty / 6f * 0.00021f)) {
+		if (wyrmVariables.MapVariables.get(world).invasionStarted && (Math.random() < 0.00001 + (wyrmInvasionDifficulty / 6f * 0.00021f))) {
 			if(wyrmInvasionDifficulty > 1.5) {
-				eventRolled = (RNG.getIntRangeInclu(1,2));
+				eventRolled = (RNG.getIntRangeInclu(1,3));
 			}
+			else if(wyrmInvasionDifficulty > 2.0) {
+				eventRolled = (RNG.getIntRangeInclu(1,5));
+			}
+
+
 			if ( eventRolled == 1)
 			{
 				smallPodRaid.Do(dependencies);
@@ -38,6 +43,10 @@ public class InvasionEvent extends AutoReg.ModElement {
 			else if ( eventRolled == 2)
 			{
 				scoutingPodRaid.call(dependencies);
+			}
+			else if ( eventRolled == 5)
+			{
+				massIncursion.call(dependencies, 1);
 			}
 		}
 	}
