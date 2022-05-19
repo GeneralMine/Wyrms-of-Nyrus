@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 import com.vetpetmon.wyrmsofnyrus.block.*;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
@@ -57,6 +58,7 @@ public class HiveCreepSpreadFurther{
 	public static int executescript(BlockPos pos, World world, int ts) {
 
 		int timesspread = ts;
+		boolean canSpreadThisTick = ((RNG.getIntRangeInclu(0,Invasion.creepSpreadRate)) == Invasion.creepSpreadRate);
 
 		if (Invasion.isCreepEnabled()) {
 			int x = pos.getX();
@@ -64,16 +66,18 @@ public class HiveCreepSpreadFurther{
 			int z = pos.getZ();
 			BlockPosList = getCSPos(x,y,z);
 			assert false;
-			for (int i = 0; i < BlockPosList.size(); i++) {
-				BlockPos posi = BlockPosList.get(i);
+			if (canSpreadThisTick){
+				for (int i = 0; i < BlockPosList.size(); i++) {
+					BlockPos posi = BlockPosList.get(i);
 
-				if (creepspreadRules(posi, world, x,y,z)) {
-					if (((world.getBlockState(posi))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
-						world.setBlockState(posi, BlockWyrmLightsYellow.block.getDefaultState(), 3);
-					} else if (matLookingBlock(posi, Material.ROCK, world)) {
-						world.setBlockState(posi, BlockCreepstone.block.getDefaultState(), 3);
-					} else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {
-						world.setBlockState(posi, BlockHiveCreepBlock.block.getDefaultState(), 3);
+					if (creepspreadRules(posi, world, x, y, z)) {
+						if (((world.getBlockState(posi))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
+							world.setBlockState(posi, BlockWyrmLightsYellow.block.getDefaultState(), 3);
+						} else if (matLookingBlock(posi, Material.ROCK, world)) {
+							world.setBlockState(posi, BlockCreepstone.block.getDefaultState(), 3);
+						} else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {
+							world.setBlockState(posi, BlockHiveCreepBlock.block.getDefaultState(), 3);
+						}
 					}
 				}
 			}

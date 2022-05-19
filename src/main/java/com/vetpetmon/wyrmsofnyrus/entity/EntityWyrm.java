@@ -32,12 +32,13 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     public int casteType;
     private final AnimationFactory factory = new AnimationFactory(this);
     protected int srpcothimmunity;
-    public double difficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
+    public double difficulty;
 
     public EntityWyrm(final World worldIn) {
         super(worldIn);
         this.isImmuneToFire = false;
         this.srpcothimmunity = 0;
+        difficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
     }
 
     protected boolean canDespawn() {return false;}

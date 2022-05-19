@@ -87,15 +87,12 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 		}
 
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-			boolean canSpreadThisTick = ((RNG.getIntRangeInclu(0,Invasion.creepSpreadRate)) == Invasion.creepSpreadRate);
 			super.updateTick(world, pos, state, random);
 			if (world.isAirBlock(new BlockPos(pos.getX(), pos.getY()+1,pos.getZ()))){
 				world.setBlockState((pos), BlockHiveCreepTop.block.getDefaultState(), 3);
 			}
-			if (canSpreadThisTick) {
-				ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreepblockinactive");
-				world.scheduleUpdate(pos, this, this.tickRate(world));
-			}
+			ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreepblockinactive");
+			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 	}
 }
