@@ -4,6 +4,7 @@ package com.vetpetmon.wyrmsofnyrus.block;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -87,7 +88,7 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 
 		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-			boolean canSpreadThisTick = ((Math.random() <= ((float)(1.0/ Invasion.creepSpreadRate))));
+			boolean canSpreadThisTick = ((RNG.getIntRangeInclu(0,Invasion.creepSpreadRate)) == Invasion.creepSpreadRate);
 			super.updateTick(world, pos, state, random);
 			if (canSpreadThisTick) {
 				ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreeptopinactive");
