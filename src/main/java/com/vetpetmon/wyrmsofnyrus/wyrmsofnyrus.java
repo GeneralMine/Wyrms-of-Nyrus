@@ -59,7 +59,8 @@ public class wyrmsofnyrus {
                 "If you experience a glitch anywhere, please ping any Vetpetmon Labs member in the community discord with the log and description, along if instructions on how to replicate the issue, if needed.\n\n" +
                 "Do beware that there may be balancing issues in any development build.");
         wyrmsofnyrus.logger.warn("We hope you are aware that the Wyrms are EXTREMELY destructive to your worlds.\n\n" +
-                "By downloading and installing this mod into your instance of Minecraft, you agree that you and your world gets invaded, overran by alien flora, eaten by aliens, probed when you least expect it, blah blah blah...");
+                "By downloading and installing this mod into your instance of Minecraft, you agree that you and your world gets invaded, overran by alien flora, eaten by aliens, probed when you least expect it, blah blah blah...\n" +
+                "You can make this mod less destructive by checking the config file after the game loads. You WILL need to restart MC for changes to be applied.");
 
         threading.checkThreads();
 
