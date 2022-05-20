@@ -4,6 +4,7 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.*;
 
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -23,20 +24,31 @@ public class InvasionEvent extends AutoReg.ModElement {
 	}
 
 	public static void executescript(Map<String, Object> dependencies) {
-		int x = (int) dependencies.get("x");
-		int z = (int) dependencies.get("z");
 		World world = (World) dependencies.get("world");
-		if (
-				(Math.random() < 0.0001 + wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty / 6f * 0.00021f)
-				&& (wyrmVariables.MapVariables.get(world).invasionStarted)
-		)
+		int eventRolled = 0;
+		double wyrmInvasionDifficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
+		if (wyrmVariables.MapVariables.get(world).invasionStarted && (Math.random() < 0.00001 + (wyrmInvasionDifficulty / 6f * 0.00021f))) {
+			if(wyrmInvasionDifficulty > 1.5) {
+				eventRolled = (RNG.getIntRangeInclu(1,3));
+			}
+			else if(wyrmInvasionDifficulty > 2.0) {
+				eventRolled = (RNG.getIntRangeInclu(1,5));
+			}
+
+
+			if ( eventRolled == 1)
 			{
-				java.util.HashMap<String, Object> depens = new java.util.HashMap<>();
-				depens.put("x", x);
-				depens.put("z", z);
-				depens.put("world", world);
 				smallPodRaid.Do(dependencies);
 			}
+			else if ( eventRolled == 2)
+			{
+				scoutingPodRaid.call(dependencies);
+			}
+			else if ( eventRolled == 5)
+			{
+				massIncursion.call(dependencies, 1);
+			}
+		}
 	}
 
 	@SubscribeEvent

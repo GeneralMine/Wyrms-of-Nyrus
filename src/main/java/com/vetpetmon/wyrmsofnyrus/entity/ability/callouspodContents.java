@@ -21,11 +21,12 @@ public class callouspodContents {
                 if (!world.isRemote) {
                     Entity entityToSpawn = new EntityWyrmProber(world);
                     entityToSpawn.setLocationAndAngles(x, y, z, world.rand.nextFloat() * 360F, 0.0F);
-                    entityToSpawn = new EntityDobber(world);
-                    for (int i = 0; i < (2+(RNG.getIntRangeInclu(1,3))); i++) {
-                        entityToSpawn.setLocationAndAngles(x, y, z, world.rand.nextFloat() * 360F, 0.0F);
-                    }
                     world.spawnEntity(entityToSpawn);
+                    for (int i = 0; i < (2+(RNG.getIntRangeInclu(1,3))); i++) {
+                        entityToSpawn = new EntityDobber(world);
+                        entityToSpawn.setLocationAndAngles(x, y+1, z, world.rand.nextFloat() * 360F, 0.0F);
+                        world.spawnEntity(entityToSpawn);
+                    }
                 }
             }
         }

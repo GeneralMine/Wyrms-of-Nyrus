@@ -2,6 +2,7 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -86,12 +87,12 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 		}
 
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
-			boolean canSpreadThisTick = ((Math.random() <= ((float)(1.0/ Invasion.creepSpreadRate))));
 			super.updateTick(world, pos, state, random);
-			if (canSpreadThisTick) {
-				ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreepblockinactive");
-				world.scheduleUpdate(pos, this, this.tickRate(world));
+			if (world.isAirBlock(new BlockPos(pos.getX(), pos.getY()+1,pos.getZ()))){
+				world.setBlockState((pos), BlockHiveCreepTop.block.getDefaultState(), 3);
 			}
+			ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:hivecreepblockinactive");
+			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 	}
 }

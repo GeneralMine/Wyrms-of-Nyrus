@@ -39,7 +39,7 @@ public class EntityWyrmWorker extends EntityWyrm {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0 && AI.savageAIMode){
+        if (difficulty >= 3.0 && AI.savageAIMode){
             afterPlayers();
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             this.tasks.addTask(2, new EntityAIWander(this, 1.0));
@@ -56,8 +56,9 @@ public class EntityWyrmWorker extends EntityWyrm {
 
     @Override
     protected void applyEntityAttributes() {
+        difficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((2.0D) * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((2.0D) * (difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
@@ -129,7 +130,7 @@ public class EntityWyrmWorker extends EntityWyrm {
             return PlayState.CONTINUE;
         }
         else {
-            if ((wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty) >= 3.0 && AI.savageAIMode){
+            if (difficulty >= 3.0 && AI.savageAIMode){
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idleAwakened"));
             }
             else{event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idle"));}
