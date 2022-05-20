@@ -56,6 +56,7 @@ public class EntityWyrmWorker extends EntityWyrm {
 
     @Override
     protected void applyEntityAttributes() {
+        difficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((2.0D) * (difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
