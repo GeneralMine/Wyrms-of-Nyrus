@@ -39,7 +39,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         setSize(0.5f, 0.5f);
         experienceValue = 3;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
+        moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
         enablePersistence();
         setNoAI(false);
     }
