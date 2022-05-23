@@ -38,7 +38,7 @@ public class EntityDobber extends EntityWyrm implements IAnimatable {
         setSize(0.5f, 0.5f);
         experienceValue = 3;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new EntityDobber.DobberMoveHelper(this);
+        moveHelper = new EntityDobber.DobberMoveHelper(this);
         enablePersistence();
         setNoAI(false);
     }
@@ -128,7 +128,7 @@ public class EntityDobber extends EntityWyrm implements IAnimatable {
         simpleAI();
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.5D, false));
         this.tasks.addTask(4, new FlyingMobAI(this, 18.75, 100));
-        this.makeAllTargets();
+        this.makeAllTargets(true);
     }
 
     @Override
