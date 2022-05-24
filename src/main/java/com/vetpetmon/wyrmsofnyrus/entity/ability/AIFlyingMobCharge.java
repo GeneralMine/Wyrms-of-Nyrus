@@ -4,7 +4,6 @@ package com.vetpetmon.wyrmsofnyrus.entity.ability;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 
@@ -84,7 +83,6 @@ import net.minecraft.util.math.Vec3d;
 
 public class AIFlyingMobCharge extends EntityAIBase
 {
-    public EntityMoveHelper moveHelper;
     private final EntityWyrm wyrm;
     public AIFlyingMobCharge(EntityWyrm wyrm)
     {
@@ -113,7 +111,7 @@ public class AIFlyingMobCharge extends EntityAIBase
     {
         EntityLivingBase entitylivingbase = wyrm.getAttackTarget();
         Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
-        moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
+        wyrm.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
         wyrm.setCharging(true);
         wyrm.playSound(SoundEvents.ENTITY_VEX_CHARGE, 1.0F, 1.0F);
     }
@@ -139,7 +137,7 @@ public class AIFlyingMobCharge extends EntityAIBase
             if (d0 < 9.0D)
             {
                 Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
-                moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
+                EntityWyrm.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
             }
         }
     }

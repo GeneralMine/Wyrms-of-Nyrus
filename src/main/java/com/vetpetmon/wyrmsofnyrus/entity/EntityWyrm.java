@@ -23,6 +23,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class EntityWyrm extends EntityMob implements IAnimatable {
+    public static EntityMoveHelper moveHelper;
+
     //  LIST OF CASTE TYPES:
     // 0 - Other
     // 1 - Ignoble (workers)
@@ -56,6 +58,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     protected void entityInit()
     {
         super.entityInit();
+        this.dataManager.register(WYRM_FLAGS, (byte) 0);
     }
 
     /**
