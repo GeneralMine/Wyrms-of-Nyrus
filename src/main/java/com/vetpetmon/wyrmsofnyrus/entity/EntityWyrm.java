@@ -3,7 +3,6 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -59,20 +58,14 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         this.dataManager.register(WYRM_FLAGS, (byte) 0);
     }
 
-    /**
-     * These are all Getter methods to be used within the actual wyrm entity classes.
-     */
-
     protected static boolean getSimpleAI() {return AI.performanceAIMode;}
     protected static boolean getAttackMobs() {return AI.attackMobs;}
     protected static boolean getAttackAnimals() {return AI.attackAnimals;}
-    protected static boolean getWillAttackCreepers() {return AI.suicidalWyrms;}
-    public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
+    protected static boolean getWillAttackCrepers() {return AI.suicidalWyrms;}
 
-    /**
-     * If SimpleAI is not enabled in the configs, then more resource-intensive tasks are added to AI tasklists.
-     */
-    protected void simpleAI() {if (!getSimpleAI()) this.tasks.addTask(2, new EntityAILookIdle(this));}
+    protected void simpleAI() {
+        if (!getSimpleAI()) this.tasks.addTask(2, new EntityAILookIdle(this));
+    }
 
     protected void makeAllTargets(boolean notSeeThru) {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
@@ -81,7 +74,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         if(getAttackMobs()) {
             this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, true, false, new Predicate<EntityMob>() {
                 public boolean apply(EntityMob target) {
-                    if (getWillAttackCreepers()) return !(target instanceof EntityWyrm);
+                    if (getWillAttackCrepers()) return !(target instanceof EntityWyrm);
                     else return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
                 }
             }));
@@ -152,9 +145,18 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     {
         return this.getWyrmFlag(1);
     }
+
     public void setCharging(boolean charging)
     {
         this.setWyrmFlag(1, charging);
     }
 
+    /*public void setCharging(boolean b) {
+        this.dataManager.register(WYRM_FLAGS, Byte.valueOf((byte)0));
+    }
+
+    public boolean isCharging() {
+        int i = this.dataManager.get(WYRM_FLAGS).byteValue();
+        return (i) != 0;
+    }*/
 }
