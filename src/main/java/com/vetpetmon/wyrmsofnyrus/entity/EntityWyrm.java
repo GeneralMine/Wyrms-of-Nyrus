@@ -36,12 +36,13 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     // 7 - Hexe pods (no AI but gravity)
     // 8 - Visitor (No AI + vanishes)
     // 9 - Event (vanishes)
+    // 10 - Megawyrms
+    // 11 - Aquatics
 
-    public int casteType;
+    public static int casteType;
     private final AnimationFactory factory = new AnimationFactory(this);
     public ThreadLocalRandom rand;
     protected int srpcothimmunity;
-    public double difficulty;
     protected static final DataParameter<Byte> WYRM_FLAGS = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BYTE);
 
     public EntityWyrm(final World worldIn) {
@@ -51,6 +52,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         this.dataManager.register(WYRM_FLAGS, (byte) 0);
     }
 
+    // Certain wyrms despawn after a set amount of time.
     protected boolean canDespawn() {return false;}
 
     protected void entityInit()
@@ -63,12 +65,12 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
      * These are all Getter methods to be used within the actual wyrm entity classes.
      */
 
+    protected static int getCaste() {return casteType;}
     protected static boolean getSimpleAI() {return AI.performanceAIMode;}
     protected static boolean getAttackMobs() {return AI.attackMobs;}
     protected static boolean getAttackAnimals() {return AI.attackAnimals;}
     protected static boolean getWillAttackCreepers() {return AI.suicidalWyrms;}
     public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
-
     /**
      * If SimpleAI is not enabled in the configs, then more resource-intensive tasks are added to AI tasklists.
      */
@@ -101,7 +103,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     @Override
     public boolean isPreventingPlayerRest(EntityPlayer playerIn)
     {
-        switch(casteType) {
+        switch(getCaste()) {
             case 1:
             case 7:
             case 8:
@@ -110,6 +112,9 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
                 return true;
         }
     }
+
+
+    protected void setCaste(int caste) {casteType = caste;}
 
     public void readEntityFromNBT(NBTTagCompound compound)
     {

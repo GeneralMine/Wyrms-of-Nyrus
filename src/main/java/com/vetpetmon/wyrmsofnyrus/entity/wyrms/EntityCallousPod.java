@@ -26,7 +26,7 @@ public class EntityCallousPod extends EntityWyrm implements IAnimatable{
     private AnimationFactory factory = new AnimationFactory(this);
     public EntityCallousPod(World world) {
         super(world);
-        this.casteType = 9;
+        setCaste(7);
         setSize(1f, 1f);
         experienceValue = 0;
         enablePersistence();

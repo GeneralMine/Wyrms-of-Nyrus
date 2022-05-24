@@ -35,7 +35,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmProber(World world) {
         super(world);
-        this.casteType = 2;
+        setCaste(2);
         setSize(0.5f, 0.5f);
         experienceValue = 3;
         this.navigator = new PathNavigateFlying(this, this.world);

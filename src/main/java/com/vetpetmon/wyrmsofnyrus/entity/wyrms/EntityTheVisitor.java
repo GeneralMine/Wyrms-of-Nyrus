@@ -25,7 +25,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         super(world);
         setSize(5.5f, 5.5f);
         experienceValue = 0;
-        this.casteType = 8;
+        setCaste(8);
         setNoAI(true);
         this.timeUntilDespawn = this.rand.nextInt(6000) + 2000;
     }
