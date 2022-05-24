@@ -112,7 +112,7 @@ public class EntityDobber extends EntityWyrm implements IAnimatable {
 
     @Override
     protected void applyEntityAttributes() {
-        difficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
+        float difficulty = (float) getInvasionDifficulty();
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.9D);

@@ -49,7 +49,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
 
     @Override
     protected void applyEntityAttributes() {
-        difficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
+        float difficulty = (float) getInvasionDifficulty();
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.75D);

@@ -20,7 +20,7 @@ public class difficultyStats {
         if (Invasion.isEXCANON()) exdif = Invasion.getEXCANONDIFFICULTY();
         else exdif = 1;
 
-        return ( ((baseHP * 2) + ((difficulty * exdif)/2)) * Radiogenetics.wyrmVitality);
+        return ( ((baseHP * 2) + (difficulty * exdif)) * Radiogenetics.wyrmVitality);
     }
 
     /**
@@ -34,7 +34,7 @@ public class difficultyStats {
         if (Invasion.isEXCANON()) exdif = Invasion.getEXCANONDIFFICULTY();
         else exdif = 1;
 
-        return ( ((baseDMG) + ((difficulty * exdif)/3)) * Radiogenetics.wyrmStrength);
+        return ( ((baseDMG) + (difficulty * exdif)) * Radiogenetics.wyrmStrength);
     }
 
     /**
@@ -48,7 +48,7 @@ public class difficultyStats {
         if (Invasion.isEXCANON()) exdif = Invasion.getEXCANONDIFFICULTY();
         else exdif = 1;
 
-        return ( ((baseAMR) + ((difficulty * exdif)/4)) * Radiogenetics.wyrmStrength);
+        return ( ((baseAMR) + (difficulty * exdif)) * Radiogenetics.wyrmStrength);
     }
 
 

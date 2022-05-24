@@ -8,10 +8,11 @@ import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -20,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -32,6 +34,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    //private boolean isCharging;
     public EntityWyrmProber(World world) {
         super(world);
         this.casteType = 2;
@@ -112,8 +115,8 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
 
     @Override
     protected void applyEntityAttributes() {
-        difficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
         super.applyEntityAttributes();
+        float difficulty = (float) getInvasionDifficulty();
         if (Invasion.probingEnabled) {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.72D);
@@ -131,12 +134,83 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         //this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(5 * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
     }
 
+    //TODO: make this not lag so freaking heavily.
+    /*public class AIFlyingMobCharge extends EntityAIBase {
+        double chargespeed;
+        public AIFlyingMobCharge(double speed)
+        {
+            chargespeed = speed;
+            this.setMutexBits(1);
+        }
+
+        public boolean shouldExecute()
+        {
+            if (EntityWyrmProber.this.getAttackTarget() != null && !EntityWyrmProber.this.getMoveHelper().isUpdating() && EntityWyrmProber.this.rand.nextInt(7) == 0)
+            {
+                return EntityWyrmProber.this.getDistanceSq(EntityWyrmProber.this.getAttackTarget()) > 4.0D;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public boolean shouldContinueExecuting()
+        {
+            return EntityWyrmProber.this.getMoveHelper().isUpdating() && EntityWyrmProber.this.isCharging() && EntityWyrmProber.this.getAttackTarget() != null && EntityWyrmProber.this.getAttackTarget().isEntityAlive();
+        }
+
+        public void startExecuting()
+        {
+            EntityLivingBase entitylivingbase = EntityWyrmProber.this.getAttackTarget();
+            assert entitylivingbase != null;
+            Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
+            EntityWyrmProber.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
+            EntityWyrmProber.this.setCharging(true);
+            EntityWyrmProber.this.playSound(SoundEvents.ENTITY_VEX_CHARGE, 1.0F, 1.0F);
+        }
+
+        public void resetTask()
+        {
+            EntityWyrmProber.this.setCharging(false);
+        }
+
+        public void updateTask()
+        {
+            EntityLivingBase entitylivingbase = EntityWyrmProber.this.getAttackTarget();
+
+            if (EntityWyrmProber.this.getEntityBoundingBox().intersects(entitylivingbase.getEntityBoundingBox()))
+            {
+                EntityWyrmProber.this.attackEntityAsMob(entitylivingbase);
+                EntityWyrmProber.this.setCharging(false);
+            }
+            else
+            {
+                double d0 = EntityWyrmProber.this.getDistanceSq(entitylivingbase);
+
+                if (d0 < 9.0D)
+                {
+                    Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
+                    EntityWyrmProber.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, chargespeed);
+                }
+            }
+        }
+    }
+
+    private void setCharging(boolean b) {
+        isCharging = b;
+    }
+
+    private boolean isCharging() {
+        return isCharging;
+    }*/
+
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
         simpleAI();
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
-        //this.tasks.addTask(4, new AIChargeAttack());
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 2.0D, false));
+        //this.tasks.addTask(4, new AIFlyingMobCharge(2.0));
         this.tasks.addTask(4, new FlyingMobAI(this, 8.75, 100));
         this.makeAllTargets();
     }

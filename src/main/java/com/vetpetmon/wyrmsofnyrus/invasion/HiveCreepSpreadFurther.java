@@ -73,17 +73,20 @@ public class HiveCreepSpreadFurther{
 					if (creepspreadRules(posi, world, x, y, z)) {
 						if (((world.getBlockState(posi))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
 							world.setBlockState(posi, BlockWyrmLightsYellow.block.getDefaultState(), 3);
+							break;
 						} else if (matLookingBlock(posi, Material.ROCK, world)) {
 							world.setBlockState(posi, BlockCreepstone.block.getDefaultState(), 3);
+							break;
 						} else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {
 							world.setBlockState(posi, BlockHiveCreepBlock.block.getDefaultState(), 3);
+							break;
 						}
 					}
 				}
+				timesspread = ts + 1;
 			}
 			//failsafe(world, x, y, z); //Old code left for reference
 			BlockPosList.clear();
-			timesspread = ts + 1;
 		}
 		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 5) System.out.println("Debugging: timespread for block at: " + (timesspread));
 		return timesspread;
