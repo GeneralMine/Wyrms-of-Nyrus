@@ -19,7 +19,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private int timeUntilDespawn;
+    protected int timeUntilDespawn = this.rand.nextInt(6000) + 2000;
 
     public EntityTheVisitor(World world) {
         super(world);
@@ -27,7 +27,6 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         experienceValue = 0;
         setCaste(8);
         setNoAI(true);
-        this.timeUntilDespawn = this.rand.nextInt(6000) + 2000;
     }
 
     @Override

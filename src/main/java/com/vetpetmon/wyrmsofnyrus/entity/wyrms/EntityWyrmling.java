@@ -21,7 +21,7 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.WyrmlingGrowUp.growUp;
 
 public class EntityWyrmling extends EntityWyrm {
     private int timeUntilGrowth;
-    private boolean hasGrown;
+    protected boolean hasGrown;
 
     public EntityWyrmling(World world) {
         super(world);

@@ -32,13 +32,14 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntityDobber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    public EntityMoveHelper moveHelper;
     public EntityDobber(World world) {
         super(world);
         setCaste(2);
         setSize(0.5f, 0.5f);
         experienceValue = 3;
         this.navigator = new PathNavigateFlying(this, this.world);
-        moveHelper = new EntityDobber.DobberMoveHelper(this);
+        this.moveHelper = new EntityDobber.DobberMoveHelper(this);
         enablePersistence();
         setNoAI(false);
     }

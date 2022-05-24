@@ -33,13 +33,14 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    public EntityMoveHelper moveHelper;
     public EntityWyrmProber(World world) {
         super(world);
         setCaste(2);
         setSize(0.5f, 0.5f);
         experienceValue = 3;
         this.navigator = new PathNavigateFlying(this, this.world);
-        moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
+        this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
         enablePersistence();
         setNoAI(false);
     }

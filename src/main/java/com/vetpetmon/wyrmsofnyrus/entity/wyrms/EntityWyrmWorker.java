@@ -23,7 +23,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
 public class EntityWyrmWorker extends EntityWyrm {
-    public int timeUntilNextProduct;
+    protected int timeUntilNextProduct;
 
     public EntityWyrmWorker(World world) {
         super(world);
