@@ -3,7 +3,9 @@ package com.vetpetmon.wyrmsofnyrus;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 
+import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import com.vetpetmon.wyrmsofnyrus.synapselib.threading;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
@@ -67,6 +69,8 @@ public class wyrmsofnyrus {
         ConfigLib.reloadConfig();
         ConfigLib.setCanon();
 
+        messageReg.init();
+
         MinecraftForge.EVENT_BUS.register(this);
         GameRegistry.registerWorldGenerator(elements, 5);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new AutoReg.GuiHandler());
@@ -102,6 +106,11 @@ public class wyrmsofnyrus {
     public void serverLoad(FMLServerStartingEvent event) {
         elements.getElements().forEach(element -> element.serverLoad(event));
         proxy.serverLoad(event);
+    }
+
+    public static ResourceLocation getResource(final String name)
+    {
+        return new ResourceLocation(wyrmsofnyrus.MODID, name);
     }
 
     @SubscribeEvent
