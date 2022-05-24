@@ -14,8 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WoNCreepedLands extends WoNBiome {
     public WoNCreepedLands(final BiomeProperties properties, final ResourceLocation registryName) {
-        super(new Biome.BiomeProperties("Creeped Lands").setRainfall(0.5F).setBaseHeight(0.1F).setWaterColor(-6193834).setHeightVariation(0.2F)
-                .setTemperature(0.5F), wyrmsofnyrus.getResource("creeped_lands"));
+        super(properties, registryName);
         topBlock = BlockHiveCreepBlock.block.getDefaultState();
         fillerBlock = BlockCreepstoneInactive.block.getDefaultState();
         decorator.treesPerChunk = 0;
