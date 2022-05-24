@@ -27,7 +27,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmRover(World world) {
         super(world);
-        setCaste(2);
+        this.casteType = 2;
         setSize(1.5f, 1f);
         experienceValue = 4;
         enablePersistence();

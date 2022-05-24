@@ -27,7 +27,7 @@ public class EntityWyrmWorker extends EntityWyrm {
 
     public EntityWyrmWorker(World world) {
         super(world);
-        setCaste(1);
+        this.casteType = 2;
         setSize(0.85f, 1.5f);
         experienceValue = 1;
         enablePersistence();
@@ -39,7 +39,7 @@ public class EntityWyrmWorker extends EntityWyrm {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        if (getInvasionDifficulty() >= 3.0 && AI.savageAIMode){
+        if (difficulty >= 3.0 && AI.savageAIMode){
             afterPlayers();
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             this.tasks.addTask(2, new EntityAIWander(this, 1.0));
@@ -130,7 +130,7 @@ public class EntityWyrmWorker extends EntityWyrm {
             return PlayState.CONTINUE;
         }
         else {
-            if (getInvasionDifficulty() >= 3.0 && AI.savageAIMode){
+            if (difficulty >= 3.0 && AI.savageAIMode){
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idleAwakened"));
             }
             else{event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idle"));}

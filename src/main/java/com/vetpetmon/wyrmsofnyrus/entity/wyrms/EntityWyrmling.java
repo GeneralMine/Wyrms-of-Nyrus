@@ -25,7 +25,7 @@ public class EntityWyrmling extends EntityWyrm {
 
     public EntityWyrmling(World world) {
         super(world);
-        setCaste(0);
+        this.casteType = 0;
         this.hasGrown = false;
         setSize(0.5f, 0.5f);
         experienceValue = 1;
