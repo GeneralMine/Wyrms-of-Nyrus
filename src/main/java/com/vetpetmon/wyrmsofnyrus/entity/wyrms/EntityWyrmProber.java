@@ -5,7 +5,6 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.AIFlyingMobCharge;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
@@ -137,9 +136,9 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         super.initEntityAI();
         simpleAI();
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
-        this.tasks.addTask(4, new AIFlyingMobCharge(this));
+        //this.tasks.addTask(4, new AIChargeAttack());
         this.tasks.addTask(4, new FlyingMobAI(this, 8.75, 100));
-        this.makeAllTargets(false);
+        this.makeAllTargets();
     }
 
     @Override
