@@ -58,6 +58,7 @@ public class HiveCreepSpreadFurther{
 	public static int executescript(BlockPos pos, World world, int ts) {
 
 		int timesspread = ts;
+		boolean hasSpread = false;
 		boolean canSpreadThisTick = ((RNG.getIntRangeInclu(0,Invasion.creepSpreadRate)) == Invasion.creepSpreadRate);
 
 		if (Invasion.isCreepEnabled()) {
@@ -67,26 +68,27 @@ public class HiveCreepSpreadFurther{
 			BlockPosList = getCSPos(x,y,z);
 			assert false;
 			if (canSpreadThisTick){
+				hasSpread = true;
 				for (int i = 0; i < BlockPosList.size(); i++) {
 					BlockPos posi = BlockPosList.get(i);
 
 					if (creepspreadRules(posi, world, x, y, z)) {
 						if (((world.getBlockState(posi))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
 							world.setBlockState(posi, BlockWyrmLightsYellow.block.getDefaultState(), 3);
-							break;
 						} else if (matLookingBlock(posi, Material.ROCK, world)) {
 							world.setBlockState(posi, BlockCreepstone.block.getDefaultState(), 3);
-							break;
 						} else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {
 							world.setBlockState(posi, BlockHiveCreepBlock.block.getDefaultState(), 3);
-							break;
 						}
 					}
 				}
-				timesspread = ts + 1;
 			}
 			//failsafe(world, x, y, z); //Old code left for reference
 			BlockPosList.clear();
+			if (hasSpread){
+				timesspread = ts + 1;
+				hasSpread = true;
+			}
 		}
 		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 5) System.out.println("Debugging: timespread for block at: " + (timesspread));
 		return timesspread;
