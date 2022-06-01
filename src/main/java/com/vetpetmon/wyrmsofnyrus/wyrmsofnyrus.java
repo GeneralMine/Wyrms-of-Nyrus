@@ -57,8 +57,8 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
-        wyrmsofnyrus.logger.info("You are on the Early Testing Build! \n\n" +
-                "If you experience a glitch anywhere, please ping any Vetpetmon Labs member in the community discord with the log and description, along if instructions on how to replicate the issue, if needed.\n\n" +
+        wyrmsofnyrus.logger.info(
+                "If you experience a glitch anywhere, please ping any Vetpetmon Labs team member in the community discord with the log and description, along if instructions on how to replicate the issue, if needed.\n\n" +
                 "Do beware that there may be balancing issues in any development build.");
         wyrmsofnyrus.logger.warn("We hope you are aware that the Wyrms are EXTREMELY destructive to your worlds.\n\n" +
                 "By downloading and installing this mod into your instance of Minecraft, you agree that you and your world gets invaded, overran by alien flora, eaten by aliens, probed when you least expect it, blah blah blah...\n" +
