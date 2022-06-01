@@ -1,7 +1,12 @@
 {
   "variants": {
-    "normal": {
-      "model": "wyrmsofnyrus:hivecreeptopinactive"
-    }
+    "normal": [
+      {
+        "model": "wyrmsofnyrus:hivecreeptop"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreeptop2"
+      }
+    ]
   }
 }

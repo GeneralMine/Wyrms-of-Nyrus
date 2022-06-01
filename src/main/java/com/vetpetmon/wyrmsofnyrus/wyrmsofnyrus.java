@@ -3,7 +3,9 @@ package com.vetpetmon.wyrmsofnyrus;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 
+import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import com.vetpetmon.wyrmsofnyrus.synapselib.threading;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
@@ -39,7 +41,7 @@ import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 public class wyrmsofnyrus {
     public static final String MODID = "wyrmsofnyrus";
     public static final String NAME = "Wyrms of Nyrus";
-    public static final String VERSION = "0.1.232";
+    public static final String VERSION = "0.1.233";
 
     public AutoReg elements = new AutoReg();
 
@@ -55,8 +57,8 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
-        wyrmsofnyrus.logger.info("You are on the Early Testing Build! \n\n" +
-                "If you experience a glitch anywhere, please ping any Vetpetmon Labs member in the community discord with the log and description, along if instructions on how to replicate the issue, if needed.\n\n" +
+        wyrmsofnyrus.logger.info(
+                "If you experience a glitch anywhere, please ping any Vetpetmon Labs team member in the community discord with the log and description, along if instructions on how to replicate the issue, if needed.\n\n" +
                 "Do beware that there may be balancing issues in any development build.");
         wyrmsofnyrus.logger.warn("We hope you are aware that the Wyrms are EXTREMELY destructive to your worlds.\n\n" +
                 "By downloading and installing this mod into your instance of Minecraft, you agree that you and your world gets invaded, overran by alien flora, eaten by aliens, probed when you least expect it, blah blah blah...\n" +
@@ -66,6 +68,8 @@ public class wyrmsofnyrus {
 
         ConfigLib.reloadConfig();
         ConfigLib.setCanon();
+
+        messageReg.init();
 
         MinecraftForge.EVENT_BUS.register(this);
         GameRegistry.registerWorldGenerator(elements, 5);
@@ -102,6 +106,11 @@ public class wyrmsofnyrus {
     public void serverLoad(FMLServerStartingEvent event) {
         elements.getElements().forEach(element -> element.serverLoad(event));
         proxy.serverLoad(event);
+    }
+
+    public static ResourceLocation getResource(final String name)
+    {
+        return new ResourceLocation(wyrmsofnyrus.MODID, name);
     }
 
     @SubscribeEvent

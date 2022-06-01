@@ -58,6 +58,7 @@ public class HiveCreepSpreadFurther{
 	public static int executescript(BlockPos pos, World world, int ts) {
 
 		int timesspread = ts;
+		boolean hasSpread = false;
 		boolean canSpreadThisTick = ((RNG.getIntRangeInclu(0,Invasion.creepSpreadRate)) == Invasion.creepSpreadRate);
 
 		if (Invasion.isCreepEnabled()) {
@@ -67,6 +68,7 @@ public class HiveCreepSpreadFurther{
 			BlockPosList = getCSPos(x,y,z);
 			assert false;
 			if (canSpreadThisTick){
+				hasSpread = true;
 				for (int i = 0; i < BlockPosList.size(); i++) {
 					BlockPos posi = BlockPosList.get(i);
 
@@ -83,7 +85,10 @@ public class HiveCreepSpreadFurther{
 			}
 			//failsafe(world, x, y, z); //Old code left for reference
 			BlockPosList.clear();
-			timesspread = ts + 1;
+			if (hasSpread){
+				timesspread = ts + 1;
+				hasSpread = true;
+			}
 		}
 		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 5) System.out.println("Debugging: timespread for block at: " + (timesspread));
 		return timesspread;

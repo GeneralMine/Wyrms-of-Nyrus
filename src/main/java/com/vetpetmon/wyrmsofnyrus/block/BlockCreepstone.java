@@ -2,8 +2,8 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -51,7 +51,7 @@ public class BlockCreepstone extends AutoReg.ModElement {
 				new ModelResourceLocation("wyrmsofnyrus:creepstone", "inventory"));
 	}
 	public static class BlockCustom extends Block {
-		int timesSpread = 0;
+		int timesSpread;
 		public BlockCustom() {
 			super(Material.CRAFTED_SNOW);
 			setUnlocalizedName("creepstone");
@@ -61,6 +61,7 @@ public class BlockCreepstone extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
+			this.timesSpread = 0;
 		}
 
 
@@ -70,7 +71,8 @@ public class BlockCreepstone extends AutoReg.ModElement {
 
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
-			ActiveCreepBlock.CreepSpread(pos, world, timesSpread, "wyrmsofnyrus:creepstone_inactive");
+			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, timesSpread);
+			ActiveCreepBlock.CreepSpread(pos, world, timesSpread, BlockCreepstoneInactive.block.getDefaultState());
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 

@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "wyrmsofnyrus:blocks/hivereepotton",
+    "up": "wyrmsofnyrus:blocks/hivecreeptop2",
+    "north": "wyrmsofnyrus:blocks/hivereepide",
+    "east": "wyrmsofnyrus:blocks/hivereepide",
+    "south": "wyrmsofnyrus:blocks/hivereepide",
+    "west": "wyrmsofnyrus:blocks/hivereepide",
+    "particle": "wyrmsofnyrus:blocks/hivereepotton"
+  }
+}

@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.synapselib;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 
 /**
  * This component was specifically designed for Wyrms of Nyrus's mobs and creatures.
@@ -19,7 +20,7 @@ public class difficultyStats {
         if (Invasion.isEXCANON()) exdif = Invasion.getEXCANONDIFFICULTY();
         else exdif = 1;
 
-        return ((baseHP * 2) + ((difficulty * exdif)/2));
+        return ( ((baseHP * 2) + (difficulty * exdif)) * Radiogenetics.wyrmVitality);
     }
 
     /**
@@ -33,7 +34,21 @@ public class difficultyStats {
         if (Invasion.isEXCANON()) exdif = Invasion.getEXCANONDIFFICULTY();
         else exdif = 1;
 
-        return ((baseDMG) + ((difficulty * exdif)/3));
+        return ( ((baseDMG) + (difficulty * exdif)) * Radiogenetics.wyrmStrength);
+    }
+
+    /**
+     * Calculates the AMR of the entity in the fastest way possible.
+     * @param baseAMR the amount of armor the mob has.
+     * @param difficulty The current difficulty of the wyrm invasion.
+     * @return a double value of the entity's total armor.
+     */
+    public static double armor(double baseAMR, double difficulty)
+    {
+        if (Invasion.isEXCANON()) exdif = Invasion.getEXCANONDIFFICULTY();
+        else exdif = 1;
+
+        return ( ((baseAMR) + (difficulty * exdif)) * Radiogenetics.wyrmStrength);
     }
 
 

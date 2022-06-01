@@ -32,7 +32,6 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     public int casteType;
     private final AnimationFactory factory = new AnimationFactory(this);
     protected int srpcothimmunity;
-    public double difficulty;
 
     public EntityWyrm(final World worldIn) {
         super(worldIn);
@@ -45,7 +44,8 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     protected static boolean getSimpleAI() {return AI.performanceAIMode;}
     protected static boolean getAttackMobs() {return AI.attackMobs;}
     protected static boolean getAttackAnimals() {return AI.attackAnimals;}
-    protected static boolean getWillAttackCrepers() {return AI.suicidalWyrms;}
+    protected static boolean getWillAttackCreepers() {return AI.suicidalWyrms;}
+    public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
 
     protected void simpleAI() {
         if (!getSimpleAI()) this.tasks.addTask(2, new EntityAILookIdle(this));
@@ -58,7 +58,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         if(getAttackMobs()) {
             this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
                 public boolean apply(EntityMob target) {
-                    if (getWillAttackCrepers()) return !(target instanceof EntityWyrm);
+                    if (getWillAttackCreepers()) return !(target instanceof EntityWyrm);
                     else return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
                 }
             }));

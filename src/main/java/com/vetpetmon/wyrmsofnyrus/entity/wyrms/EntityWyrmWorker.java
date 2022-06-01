@@ -5,6 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
+import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -39,26 +40,24 @@ public class EntityWyrmWorker extends EntityWyrm {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        if (difficulty >= 3.0 && AI.savageAIMode){
+        if (getInvasionDifficulty() >= 3.0 && AI.savageAIMode){
             afterPlayers();
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
-            this.tasks.addTask(2, new EntityAIWander(this, 1.0));
             simpleAI();
-            this.tasks.addTask(1, new EntityAISwimming(this));
         }
         else {
-            this.tasks.addTask(2, new EntityAIWander(this, 1.0));
             simpleAI();
-            this.tasks.addTask(1, new EntityAISwimming(this));
             this.tasks.addTask(1, new EntityAIPanic(this, 1.4));
         }
+        this.tasks.addTask(2, new EntityAIWander(this, 1.0));
+        this.tasks.addTask(1, new EntityAISwimming(this));
     }
 
     @Override
     protected void applyEntityAttributes() {
-        difficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
+        float difficulty = (float) getInvasionDifficulty();
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue((2.0D) * (difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
@@ -130,7 +129,7 @@ public class EntityWyrmWorker extends EntityWyrm {
             return PlayState.CONTINUE;
         }
         else {
-            if (difficulty >= 3.0 && AI.savageAIMode){
+            if (getInvasionDifficulty() >= 3.0 && AI.savageAIMode){
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idleAwakened"));
             }
             else{event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idle"));}

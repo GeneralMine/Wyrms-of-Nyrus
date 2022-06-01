@@ -120,10 +120,10 @@ public class EntityWyrmling extends EntityWyrm {
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmlingmodel.move"));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmling.moving"));
             return PlayState.CONTINUE;
         }
-        else {event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmlingmodel.idle"));}
+        else {event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmling.idle"));}
 
         return PlayState.CONTINUE;
     }
