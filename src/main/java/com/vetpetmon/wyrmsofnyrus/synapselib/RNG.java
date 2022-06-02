@@ -40,6 +40,15 @@ public class RNG {
     }
 
     /**
+     * A set of digital dice to INSTANTLY generate a random number without needing to use two manual inputs.
+     * This shortens it to one input.
+     */
+    public static int dBase(int Sides)
+    {
+        return ThreadLocalRandom.current().nextInt(0, Sides + 1);
+    }
+
+    /**
      * Tests an RNG component function n amount of times with a given min-max value.
      * Intended for demonstration or debugging purposes only, doesn't return any
      * value at all, prints outputs into the log. Can be ran outside of Minecraft.
