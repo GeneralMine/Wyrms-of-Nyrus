@@ -30,7 +30,7 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable {
     public EntityWyrmSoldier(World world) {
         super(world);
         this.casteType = 3;
-        setSize(1.25f, 1f);
+        setSize(2.5f, 1.5f);
         experienceValue = 8;
         enablePersistence();
         setNoAI(false);
