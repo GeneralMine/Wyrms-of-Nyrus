@@ -12,6 +12,8 @@ public class SoundRegistry {
     public static SoundEvent creepSpread;
     public static SoundEvent wyrmSteps;
     public static SoundEvent creepwyrmscream;
+    public static SoundEvent deepwyrmclicks;
+    public static SoundEvent slowwyrmsteps;
 
     public static void RegisterSounds() {
         wyrmClicks = RegisterSound("entity.wyrmClicks");
@@ -20,6 +22,8 @@ public class SoundRegistry {
         creepSpread = RegisterSound("entity.hiveCreepSpread");
         wyrmSteps = RegisterSound("entity.wyrmSteps");
         creepwyrmscream = RegisterSound("entity.creepwyrmscream");
+        deepwyrmclicks = RegisterSound("entity.deepwyrmclicks");
+        slowwyrmsteps = RegisterSound("entity.slowwyrmsteps");
     }
 
     public static SoundEvent RegisterSound(String name) {

@@ -9,11 +9,11 @@
       }
     ]
   },
-  "wyrmclicks": {
+  "entity.deepwyrmclicks": {
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:entity/clicking1",
+        "name": "wyrmsofnyrus:entity/deepclicking1",
         "stream": false
       }
     ]
@@ -68,11 +68,11 @@
       }
     ]
   },
-  "wyrmclicks4": {
+  "entity.slowwyrmsteps": {
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:entity/clicking4",
+        "name": "wyrmsofnyrus:entity/slowwyrmsteps",
         "stream": false
       }
     ]
