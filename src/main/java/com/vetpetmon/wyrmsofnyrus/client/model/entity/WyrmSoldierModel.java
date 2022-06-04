@@ -10,18 +10,18 @@ public class WyrmSoldierModel extends AnimatedGeoModel<EntityWyrmSoldier>
     @Override
     public ResourceLocation getModelLocation(EntityWyrmSoldier EntityWyrmSoldier)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/wyrmprober.geo.json");
+        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/soldierwyrm.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityWyrmSoldier EntityWyrmSoldier)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/wyrmprobermodel.png");
+        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/soldierwyrm.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityWyrmSoldier EntityWyrmSoldier)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/wyrmprober.animation.json");
+        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/soldierwyrm.animation.json");
     }
 }
