@@ -11,6 +11,7 @@
   },
   "entity.deepwyrmclicks": {
     "category": "neutral",
+    "subtitle": "subtitles.deepwyrmclicks",
     "sounds": [
       {
         "name": "wyrmsofnyrus:entity/deepclicking1",
@@ -70,6 +71,7 @@
   },
   "entity.slowwyrmsteps": {
     "category": "neutral",
+    "subtitle": "subtitles.slowWyrmSteps",
     "sounds": [
       {
         "name": "wyrmsofnyrus:entity/slowwyrmsteps",
