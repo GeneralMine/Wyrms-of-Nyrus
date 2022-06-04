@@ -89,7 +89,7 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable {
     }
 
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 1F, this::predicate));
+        data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {

@@ -1,7 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmSoldier;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmWorker;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -15,10 +17,19 @@ public class WyrmlingGrowUp {
         boolean hasSpawned = false;
         int y = (int) e.get("y");
         int z = (int) e.get("z");
+        Entity entityToSpawn;
         int GrowthTime = timeUntilGrowth;
+        int entityToGrowTo = RNG.dBase(1);
         World world = (World) e.get("world");
+        switch(entityToGrowTo) {
+            case(0):
+                entityToSpawn = new EntityWyrmSoldier(world);
+                break;
+            default:
+                entityToSpawn = new EntityWyrmWorker(world);
+                break;
+        }
         if (!world.isRemote && GrowthTime <= 0 && !hasSpawned) {
-            Entity entityToSpawn = new EntityWyrmWorker(world);
             entityToSpawn.setLocationAndAngles((x), (y), (z), world.rand.nextFloat() * 360F, 0.0F);
             world.spawnEntity(entityToSpawn);
             hasSpawned = true;
