@@ -4,12 +4,18 @@ entity.thevisitor.name=The Visitor
 entity.royalgrub.name=Royal Grub
 entity.wyrmprober.name=Prober
 entity.wyrmling.name=Wyrmling
+entity.creepwyrm.name=Creepwyrm
+entity.wyrmlandfester.name=Landfester
 entity.hexe_pod.name=Hexe Pod
 entity.wyrmworker.name=Worker
+entity.wyrmmetalworker.name=Metalworker
 entity.wyrmrover.name=Rover
 entity.wyrmdobber.name=Dobber
 entity.callouspod.name=Callous Landing Pod
 entity.wyrmsoldier.name=Soldier
+entity.wyrmintruder.name=Intruder
+entity.wyrmsapqueen.name=Sapient Queen
+entity.wyrmqueenling.name=Queenling
 
 
 item.creepshard.name=Creepshard
