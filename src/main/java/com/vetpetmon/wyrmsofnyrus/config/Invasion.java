@@ -21,7 +21,8 @@ public class Invasion {
     public static String[] invalidBlocksForCreepspread;
     public static boolean CSBlockBLEnabled;
     public static ArrayList<Block> invalidBlocks;
-    public static boolean creepSpreadsDiagonally;
+
+    public static float invasionProgressionRate;
 
     public static String[] iBdef = {"minecraft:furnace", "minecraft:brick_block", "minecraft:bone_block", "minecraft:bedrock", "minecraft:concrete", "minecraft:concrete_powder", "minecraft:end_bricks", "minecraft:end_stone", "minecraft:glass", "minecraft:jukebox", "minecraft:nether_brick", "minecraft:red_nether_brick", "minecraft:noteblock", "minecraft:observer", "minecraft:obsidian", "minecraft:packed_ice", "minecraft:prismarine", "minecraft:purpur_block", "minecraft:purpur_pillar", "minecraft:quartz_block", "minecraft:sponge", "minecraft:stained_glass", "minecraft:wool", "minecraft:stonebrick"};
 
@@ -48,6 +49,9 @@ public class Invasion {
         invalidBlocksForCreepspread = ConfigLib.createConfigStringList(config, CATEGORY, "Creepable block blacklist", ("Blacklist of blocks hive creep can not spread to. Blocks that are not consider a full block by the MC engine do not need to be included here.\nWARNING: EXPERIMENTAL FEATURE. Disabled/enable in the 2nd config option. Is automatically set to true in development builds."), iBdef);
         CSBlockBLEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Creepable block blacklist enabled", "Enables the creepable block blacklist.", true);
         FinalizeiBdef();
+
+        invasionProgressionRate = ConfigLib.createConfigDouble(config, CATEGORY, "Invasion Progression Rate", "Speed up or slow down invasion stage progression by multiplying the point requirements. Default: 1.0", 1.0);
+
     }
 
     public static boolean isEXCANON() {
