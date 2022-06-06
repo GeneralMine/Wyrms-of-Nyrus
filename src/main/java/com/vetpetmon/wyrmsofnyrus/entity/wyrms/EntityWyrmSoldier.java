@@ -5,6 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
+import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -57,7 +58,7 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable {
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(ItemCreepshard.block, 3).getItem();
+        return new ItemStack(wyrmArmorFragment.block, 3).getItem();
     }
 
     @Override

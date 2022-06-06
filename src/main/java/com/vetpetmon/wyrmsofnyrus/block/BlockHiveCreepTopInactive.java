@@ -75,6 +75,17 @@ public class BlockHiveCreepTopInactive extends AutoReg.ModElement {
 		}*/
 
 		@Override
+		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+			super.onBlockAdded(world, pos, state);
+			world.scheduleUpdate(pos, this, this.tickRate(world));
+			{
+				Map<String, Object> $_dependencies = new HashMap<>();
+				$_dependencies.put("world", world);
+				InvasionBlockSpread.run($_dependencies);
+			}
+		}
+
+		@Override
 		public void addInformation(ItemStack itemstack, World world, List<String> list, ITooltipFlag flag) {
 			super.addInformation(itemstack, world, list, flag);
 			list.add("Stale - Will not spread or lag");

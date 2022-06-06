@@ -17,10 +17,10 @@ entity.wyrmintruder.name=Intruder
 entity.wyrmsapqueen.name=Sapient Queen
 entity.wyrmqueenling.name=Queenling
 
-
 item.creepshard.name=Creepshard
 item.metalcomb_array.name=Metalcomb Array
 item.wyrmico.name=Wyrms Icon
+item.wyrmarmorfrag.name=Armor Fragment
 
 tile.metal_comb_panel_hive_creep.name=Hive Creep Metal Combs
 tile.hivecreeptop.name=Hive Creep Surface

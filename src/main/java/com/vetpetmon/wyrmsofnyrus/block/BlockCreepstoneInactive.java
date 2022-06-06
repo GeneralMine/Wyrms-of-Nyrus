@@ -1,6 +1,8 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -22,7 +24,9 @@ import net.minecraft.block.Block;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @AutoReg.ModElement.Tag
 public class BlockCreepstoneInactive extends AutoReg.ModElement {
@@ -54,6 +58,16 @@ public class BlockCreepstoneInactive extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
+		}
+		@Override
+		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+			super.onBlockAdded(world, pos, state);
+			world.scheduleUpdate(pos, this, this.tickRate(world));
+			{
+				Map<String, Object> $_dependencies = new HashMap<>();
+				$_dependencies.put("world", world);
+				InvasionBlockSpread.run($_dependencies);
+			}
 		}
 
 		@Override
