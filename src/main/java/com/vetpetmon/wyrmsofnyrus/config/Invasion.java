@@ -42,13 +42,12 @@ public class Invasion {
         creepTickRate = ConfigLib.createConfigInt(config, CATEGORY, "Creep tickrate", "Every n world ticks, hive creep blocks will tick and roll to see if they spread or not. 20 ticks = 1 second. Default: 400", 400);
         creepEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Creep enabled", "If The Creep is enabled or not. This stops spread, and also renders Creepwyrms useless (Also disabling their spawning.) Default: true", true);
         if (!creepEnabled) wyrmsofnyrus.logger.info("Creep module has been disabled");
-        creepSpreadRate = ConfigLib.createConfigInt(config, CATEGORY, "Creep spread speed", "1 to n chance every tick that a hive creep blocks actually does something. Some blocks will tick much slower, like creepstone. Increase this number if you're seeing TPS drops. Default: 10", 10);
+        creepSpreadRate = ConfigLib.createConfigInt(config, CATEGORY, "Creep spread speed", "1 to n chance every tick that a hive creep blocks actually does something. Some blocks will tick much slower, like creepstone. Increase this number if you're seeing TPS drops. Default: 5", 5);
         creepSpreadPoints = ConfigLib.createConfigDouble(config, CATEGORY, "Creep spread points", "Every time a creep block is created, the invasion points increase. If Invasion is not enabled, this won't work at all. It is recommended you should keep this number as a decimal unless if you want pain... Default: 0.015", 0.015);
         creepSpreadMaxHardness = ConfigLib.createConfigDouble(config, CATEGORY, "Creep spread max hardness", "Maximum hardness of a block that can be infested. Can automatically generate a blacklist this way for other mods if you're too lazy to add to the blacklist below. Default: 2.45", 2.45);
         invalidBlocksForCreepspread = ConfigLib.createConfigStringList(config, CATEGORY, "Creepable block blacklist", ("Blacklist of blocks hive creep can not spread to. Blocks that are not consider a full block by the MC engine do not need to be included here.\nWARNING: EXPERIMENTAL FEATURE. Disabled/enable in the 2nd config option. Is automatically set to true in development builds."), iBdef);
         CSBlockBLEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Creepable block blacklist enabled", "Enables the creepable block blacklist.", true);
         FinalizeiBdef();
-        creepSpreadsDiagonally = ConfigLib.createConfigBool(config, CATEGORY, "Creep spreads on diagonals", "Hive creep spreads to the 4 blocks directly touching it by default. This option, if set to true, will make it cover all blocks around it in a one-block radius. Disabled by default to minimize TPS impact. Default: false", false);
     }
 
     public static boolean isEXCANON() {
