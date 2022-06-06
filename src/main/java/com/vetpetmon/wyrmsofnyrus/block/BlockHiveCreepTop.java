@@ -7,7 +7,6 @@ import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -50,7 +49,7 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 	public static class BlockCustom extends Block {
 		int timesSpread;
 		public BlockCustom() {
-			super(Material.CRAFTED_SNOW);
+			super(BlockMaterials.CREEP);
 			setUnlocalizedName("hivecreeptop");
 			setSoundType(SoundType.SLIME);
 			setHarvestLevel("shovel", 1);

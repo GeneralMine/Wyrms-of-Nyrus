@@ -8,6 +8,7 @@ public class Radiogenetics {
     public static boolean immuneToCacti;
 
     public static int workerProductivity;
+    public static int creepwyrmInfestRange;
 
     public static double wyrmStrength;
     public static double wyrmResistance;
@@ -22,6 +23,7 @@ public class Radiogenetics {
         immuneToCacti = ConfigLib.createConfigBool(config, CATEGORY, "Immune to cacti", "Makes certain wyrms immune to cactus damage. Set this to true if you want a closer to canon defense strategy. Default: false", false);
 
         workerProductivity = ConfigLib.createConfigInt(config, CATEGORY, "Worker productivity", "As a baseline, workers make a product every x ticks. This value is the base time it will take, total time will vary based on RNG still. Default: 2500", 2500);
+        creepwyrmInfestRange= ConfigLib.createConfigInt(config, CATEGORY, "Creepwyrm Infestation Range", "Creepwyrms can check a block within a x by x by x range and infest it. For example, a range of 8 makes creepwyrms add blocks in a 8x8x8 range. Default: 16", 16);
 
         wyrmStrength = ConfigLib.createConfigDouble(config, CATEGORY, "Wyrm Strength", "The attack strength of wyrms. 1.0 = 100% Default: 1.0", 1.0);
         wyrmResistance = ConfigLib.createConfigDouble(config, CATEGORY, "Wyrm Resistance", "The armor of wyrms. 1.0 = 100% Default: 1.0", 1.0);

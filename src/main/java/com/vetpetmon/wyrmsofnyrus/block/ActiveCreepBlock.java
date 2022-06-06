@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 public class ActiveCreepBlock{
 
     public static void CreepSpread(BlockPos pos, World world, int ts, IBlockState inactiveBlockName) {
-        if (ts > ((Invasion.creepSpreadRate + 1) * 10)) {
+        if (ts > ((Invasion.creepSpreadRate + 5) * 10)) {
             if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 4)
                 System.out.println("Debugging: creep block at " + (pos + " was turned inactive after " + (ts) + " operations."));
             world.setBlockState(pos, inactiveBlockName, 3);

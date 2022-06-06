@@ -42,7 +42,7 @@ public class HiveCreepSpreadFurther{
 		return BlockPosList;
 	}
 
-	private static boolean creepspreadRules(BlockPos i, World world, int x, int y, int z) {
+	public static boolean creepspreadRules(BlockPos i, World world, int x, int y, int z) {
 		boolean isAir = (world.isAirBlock(i));
 		boolean isSoft = (world.getBlockState(i).getBlockHardness(world, i) < Invasion.creepSpreadMaxHardness);
 		boolean isFullCube = (world.getBlockState(i).isFullCube());

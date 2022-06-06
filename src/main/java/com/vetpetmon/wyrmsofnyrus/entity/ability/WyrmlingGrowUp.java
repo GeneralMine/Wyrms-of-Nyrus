@@ -5,7 +5,6 @@ import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmSoldier;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmWorker;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import java.util.Map;

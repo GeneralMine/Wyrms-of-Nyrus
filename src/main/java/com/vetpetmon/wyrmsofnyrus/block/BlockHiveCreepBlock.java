@@ -53,7 +53,7 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 	public static class BlockCustom extends Block {
 		int timesSpread;
 		public BlockCustom() {
-			super(Material.CRAFTED_SNOW);
+			super(BlockMaterials.CREEP);
 			setUnlocalizedName("hivecreepblock");
 			setSoundType(SoundType.SLIME);
 			setHarvestLevel("shovel", 1);

@@ -53,7 +53,7 @@ public class BlockCreepstone extends AutoReg.ModElement {
 	public static class BlockCustom extends Block {
 		int timesSpread;
 		public BlockCustom() {
-			super(Material.CRAFTED_SNOW);
+			super(BlockMaterials.CREEP);
 			setUnlocalizedName("creepstone");
 			setSoundType(SoundType.SLIME);
 			setHardness(2F);
