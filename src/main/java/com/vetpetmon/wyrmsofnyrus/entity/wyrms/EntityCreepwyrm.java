@@ -29,7 +29,7 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
         experienceValue = 30;
         enablePersistence();
         setNoAI(false);
-        this.timeUntilNextCreep = 600;
+        this.timeUntilNextCreep = 100;
     }
 
     @Override
@@ -52,19 +52,18 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         float difficulty = (float) getInvasionDifficulty();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(4,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(35,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2D);
     }
 
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (!this.world.isRemote && --this.timeUntilNextCreep <= 0)
         {
-            // TODO: Put CreepSpread Method here.
             creepTheLands(getPosition(),this.world);
-            this.timeUntilNextCreep = 600;
+            this.timeUntilNextCreep = 100;
         }
     }
 
