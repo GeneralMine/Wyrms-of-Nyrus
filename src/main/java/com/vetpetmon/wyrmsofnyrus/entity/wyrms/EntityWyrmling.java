@@ -5,7 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -38,10 +38,10 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayerMP.class, (float) 3, 1, 1.2));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, (float) 3, 1, 1.2));
         this.tasks.addTask(2, new EntityAIFollow(this, (float) 1, 10, 5));
         this.tasks.addTask(3, new EntityAIWander(this, 0.8));
-        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayerMP.class, (float) 12));
+        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 12));
         this.tasks.addTask(5, new EntityAISwimming(this));
         this.tasks.addTask(6, new EntityAIPanic(this, 1.5));
         simpleAI();
@@ -64,10 +64,6 @@ public class EntityWyrmling extends EntityWyrm {
     public SoundEvent getHurtSound(DamageSource ds) {
         return SoundRegistry.wyrmHissTwo;
     }
-    /*@Override
-    public SoundEvent getDeathSound() {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
-    }*/
 
     public void onLivingUpdate()
     {

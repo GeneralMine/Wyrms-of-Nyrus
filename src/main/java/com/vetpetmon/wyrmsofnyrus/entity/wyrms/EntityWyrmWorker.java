@@ -6,7 +6,6 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -81,10 +80,6 @@ public class EntityWyrmWorker extends EntityWyrm {
     public SoundEvent getHurtSound(DamageSource ds) {
         return SoundRegistry.wyrmHissTwo;
     }
-    /*@Override
-    public SoundEvent getDeathSound() {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
-    }*/
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {

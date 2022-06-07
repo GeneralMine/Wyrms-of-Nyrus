@@ -18,7 +18,7 @@ public class creepTheLands {
         int y = ((pos.getY()) + RNG.getIntRangeInclu(-Range,Range));
         int z = ((pos.getZ()) + RNG.getIntRangeInclu(-Range,Range));
         BlockPos lookingBlock = new BlockPos(x,y,z);
-        if (creepspreadRules(lookingBlock, world, x, y, z)) {
+        if (creepspreadRules(lookingBlock, world, pos)) {
             assert false;
             if (((world.getBlockState(lookingBlock))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
                 world.setBlockState(lookingBlock, BlockWyrmLightsYellow.block.getDefaultState(), 3);

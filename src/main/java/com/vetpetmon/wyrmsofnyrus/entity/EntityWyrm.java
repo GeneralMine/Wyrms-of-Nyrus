@@ -9,28 +9,36 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+/**
+ * Abstract class that all Wyrms of Nyrus entities are built from.
+ * Handles a lot of the hot nonsense of class inheritance for you.
+ * You're welcome. <3
+ */
 public abstract class EntityWyrm extends EntityMob implements IAnimatable {
 
+    // TODO: FIX THIS.
     //  LIST OF CASTE TYPES:
-    // 0 - Other
-    // 1 - Ignoble (workers)
-    // 2 - Scouters
-    // 3 - Warriors
-    // 4 - Archives
-    // 5 - Royal
-    // 6 - Imperial
-    // 7 - Hexe pods (no AI but gravity)
-    // 8 - Visitor (No AI + vanishes)
-    // 9 - Event (vanishes)
-
+    //  0 - Other
+    //  1 - Ignoble (workers)
+    //  2 - Scouters
+    //  3 - Warriors
+    //  4 - Archives
+    //  5 - Royal
+    //  6 - Imperial
+    //  7 - Hexe pods (no AI but gravity)
+    //  8 - Visitor (No AI + vanishes)
+    //  9 - Event (vanishes)
     public int casteType;
+    // Shared GeckoLib method for all wyrms. Saves some spaghetti in the non-abstract wyrm classes.
     private final AnimationFactory factory = new AnimationFactory(this);
+    // SRP compatibility <3
     protected int srpcothimmunity;
 
     public EntityWyrm(final World worldIn) {
@@ -39,40 +47,64 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         this.srpcothimmunity = 0;
     }
 
+    // Most wyrms don't need to despawn. Despawning breaks a lot of things, like Creepwyrms, for a prime example.
     protected boolean canDespawn() {return false;}
 
+    // Getters for Wyrms.
     protected static boolean getSimpleAI() {return AI.performanceAIMode;}
     protected static boolean getAttackMobs() {return AI.attackMobs;}
     protected static boolean getAttackAnimals() {return AI.attackAnimals;}
+    protected static boolean getAttackVillagers() {return AI.attackVillagers;}
     protected static boolean getWillAttackCreepers() {return AI.suicidalWyrms;}
+
+    /**
+     * Getter for invasion difficulty. Makes things look a million times neater, and can be called outside EntityWyrm.
+     * Handles the world dependency for you. I love it.
+     * @return The invasion difficulty of the world.
+     */
     public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
 
+    /**
+     * If we are not running with Simple AI (config option), then add Entity AI Idle Looking.
+     * If it is running with Simple AI, don't add it to the AI task pool, lowering entity update counts.
+     * PLEASE use this instead of using addTask. I will not accept unoptimized code.
+     */
     protected void simpleAI() {
         if (!getSimpleAI()) this.tasks.addTask(2, new EntityAILookIdle(this));
     }
 
+    /**
+     * Makes wyrms attack ALL possible targets. Some targets may be disabled by configs.
+     * Use the direct methods like after______(); to bypass config settings for specific entities, just don't use this general method!
+     * It'll add more tasks on top of tasks, causing funky behaviours... Or nothing goes wrong at all, but I'd prefer you didn't make us find out.
+     * If all config options disable attacking other mobs, only player targeting will remain.
+     */
     protected void makeAllTargets() {
-        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false, false));
-        if(getAttackAnimals()){this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));}
-        if(getAttackMobs()) {
-            this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
-                public boolean apply(EntityMob target) {
-                    if (getWillAttackCreepers()) return !(target instanceof EntityWyrm);
-                    else return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
-                }
-            }));
-        }
+        afterPlayers();
+        if(getAttackAnimals()) afterAnimals();
+        if(getAttackVillagers()) afterVillagers();
+        if(getAttackMobs()) afterMobs();
     }
+    // Everything here bypasses config options. Use sparingly with good reason.
+    protected void afterMobs() {
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
+            public boolean apply(EntityMob target) {
+                if (getWillAttackCreepers()) return !(target instanceof EntityWyrm);
+                else return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
+            }
+        }));
+    }
+    protected void afterAnimals() {this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));}
+    protected void afterVillagers() { this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, false, false));}
     protected void afterPlayers() {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false, false));
     }
 
-    public AnimationFactory getFactory() {
-        return this.factory;
-    }
+    // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.
+    public AnimationFactory getFactory() {return this.factory;}
 
+    //TODO: Fix this.
     @Override
     public boolean isPreventingPlayerRest(EntityPlayer playerIn)
     {
@@ -86,6 +118,9 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         }
     }
 
+    // Gives all wyrms COTH (from Scape & Run: Parasites) immunity so that way pack makers and unknowing players DON'T have to add it themselves.
+    // Credit to Dhantry for helping me figure this out <3 turns out it's not a boolean, it's an integer. I feel stupid but then again SRP is closed-source, so I can't blame myself for being clueless.
+    // Other modders are 100% free to use this knowledge to make their entities SRP-compatible too, such as a few mobs in Mowzie's Mobs that are also inorganic. You don't need to credit me, just Dhan for SRP.
     public void readEntityFromNBT(NBTTagCompound compound)
     {
 

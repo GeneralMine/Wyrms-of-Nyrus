@@ -9,10 +9,8 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -127,11 +125,8 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
             this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(1,difficulty));
         }
-
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.25D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(5,difficulty));
-        //this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        //this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(5 * (wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty));
     }
 
     //TODO: make this not lag so freaking heavily.
@@ -212,7 +207,14 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 2.0D, false));
         //this.tasks.addTask(4, new AIFlyingMobCharge(2.0));
         this.tasks.addTask(4, new FlyingMobAI(this, 8.75, 100));
-        this.makeAllTargets();
+        // Bypass configs entirely if probing is enabled, else make probers respect the optimizations players want.
+        if (Invasion.probingEnabled) {
+            this.afterPlayers();
+            this.afterVillagers();
+            this.afterAnimals();
+            this.afterMobs();
+        }
+        else this.makeAllTargets();
     }
 
     @Override
@@ -239,10 +241,6 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     public SoundEvent getHurtSound(DamageSource ds) {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.bat.takeoff"));
     }
-    /*@Override
-    public SoundEvent getDeathSound() {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
-    }*/
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source == DamageSource.FALL)
