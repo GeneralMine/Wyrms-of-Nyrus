@@ -92,8 +92,8 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 			if (world.isAirBlock(new BlockPos(pos.getX(), pos.getY()+1,pos.getZ()))){
 				world.setBlockState((pos), BlockHiveCreepTop.block.getDefaultState(), 3);
 			}
-			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, timesSpread);
-			ActiveCreepBlock.CreepSpread(pos, world, timesSpread, BlockHiveCreepBlockInactive.block.getDefaultState());
+			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, this.timesSpread);
+			ActiveCreepBlock.CreepSpread(pos, world, this.timesSpread, BlockHiveCreepBlockInactive.block.getDefaultState());
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 	}

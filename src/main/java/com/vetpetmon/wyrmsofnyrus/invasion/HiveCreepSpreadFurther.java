@@ -48,7 +48,7 @@ public class HiveCreepSpreadFurther{
 				}
 			}
 			if (hasSpread) {
-				timesspread = ts + 1;
+				timesspread = ++ts;
 			}
 		}
 		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 5)

@@ -70,8 +70,8 @@ public class BlockCreepstone extends AutoReg.ModElement {
 
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
-			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, timesSpread);
-			ActiveCreepBlock.CreepSpread(pos, world, timesSpread, BlockCreepstoneInactive.block.getDefaultState());
+			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, this.timesSpread);
+			ActiveCreepBlock.CreepSpread(pos, world, this.timesSpread, BlockCreepstoneInactive.block.getDefaultState());
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 
