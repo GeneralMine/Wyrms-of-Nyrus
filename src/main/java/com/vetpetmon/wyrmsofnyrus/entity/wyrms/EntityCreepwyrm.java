@@ -69,6 +69,9 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
         }
     }
 
+    // TODO
+    //public boolean isPushable() {return false;}
+
     @Override
     public SoundEvent getAmbientSound() {return SoundRegistry.creepSpread;}
 

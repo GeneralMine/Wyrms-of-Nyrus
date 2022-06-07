@@ -25,6 +25,7 @@ public final class WyrmRegister {
         EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "wyrmdobber"), EntityDobber.class,"wyrmdobber",id++, wyrmsofnyrus.instance, 32, 1, true, -26317, -52);
         EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "callouspod"), EntityCallousPod.class,"callouspod",id++, wyrmsofnyrus.instance, 128, 1, true, -7981824, -154);
         EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "wyrmsoldier"), EntityWyrmSoldier.class,"wyrmsoldier",id++, wyrmsofnyrus.instance, 64, 1, true, -26317, -52);
-        EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "creepwyrm"), EntityCreepwyrm.class,"creepwyrm",id++, wyrmsofnyrus.instance, 64, 1, true, -7981824, -154);
+        EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "creepwyrm"), EntityCreepwyrm.class,"creepwyrm",id++, wyrmsofnyrus.instance, 128, 1, true, -7981824, -154);
+        EntityRegistry.registerModEntity(new ResourceLocation("wyrmsofnyrus", "wyrmmyrmur"), EntityMyrmur.class,"wyrmmyrmur",id++, wyrmsofnyrus.instance, 64, 1, true, -26317, -52);
     }
 }

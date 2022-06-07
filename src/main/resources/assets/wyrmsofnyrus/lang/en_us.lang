@@ -16,6 +16,7 @@ entity.wyrmsoldier.name=Soldier
 entity.wyrmintruder.name=Intruder
 entity.wyrmsapqueen.name=Sapient Queen
 entity.wyrmqueenling.name=Queenling
+entity.wyrmmyrmur.name=Myrmur
 
 item.creepshard.name=Creepshard
 item.metalcomb_array.name=Metalcomb Array
