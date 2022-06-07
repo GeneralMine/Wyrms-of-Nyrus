@@ -22,7 +22,8 @@ public class HiveCreepSpreadFurther{
 		boolean isAir = (world.isAirBlock(i));
 		boolean isSoft = (world.getBlockState(i).getBlockHardness(world, i) < Invasion.creepSpreadMaxHardness);
 		boolean isFullCube = (world.getBlockState(i).isFullCube());
-		boolean isUnAllowedBlock = ((Invasion.invalidBlocks.contains((world.getBlockState(i).getBlock()))));
+		boolean isUnAllowedBlock = ((Invasion.invalidBlocks.contains((world.getBlockState(i).getBlock())))
+				|| matLookingBlock(i,BlockMaterials.CREEP,world));
 		if ((Invasion.CSBlockBLEnabled) && !(i.equals(OG))) {return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);}
 		else {return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);}
 	}
