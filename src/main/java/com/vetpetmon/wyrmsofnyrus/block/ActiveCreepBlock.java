@@ -16,7 +16,7 @@ public class ActiveCreepBlock {
 
     private static BlockPos posLooking;
 
-    public static void CreepSpread(BlockPos pos, World world, int ts, IBlockState inactiveBlockName) {
+    public static void CreepSpread(BlockPos pos, World world, IBlockState inactiveBlockName) {
         boolean doCheck = ((RNG.getIntRangeInclu(0,5)) < 3);
         if (doCheck) {
             if (checkValidRange(pos, world)) {

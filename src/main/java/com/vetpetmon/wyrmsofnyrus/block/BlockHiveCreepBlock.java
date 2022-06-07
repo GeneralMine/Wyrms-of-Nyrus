@@ -51,7 +51,6 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 				new ModelResourceLocation("wyrmsofnyrus:hivecreepblock", "inventory"));
 	}
 	public static class BlockCustom extends Block {
-		int timesSpread;
 		public BlockCustom() {
 			super(BlockMaterials.CREEP);
 			setUnlocalizedName("hivecreepblock");
@@ -62,7 +61,6 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
-			this.timesSpread = 0;
 		}
 
 		@Override
@@ -92,8 +90,8 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 			if (world.isAirBlock(new BlockPos(pos.getX(), pos.getY()+1,pos.getZ()))){
 				world.setBlockState((pos), BlockHiveCreepTop.block.getDefaultState(), 3);
 			}
-			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, this.timesSpread);
-			ActiveCreepBlock.CreepSpread(pos, world, this.timesSpread, BlockHiveCreepBlockInactive.block.getDefaultState());
+			HiveCreepSpreadFurther.executescript(pos, world);
+			ActiveCreepBlock.CreepSpread(pos, world, BlockHiveCreepBlockInactive.block.getDefaultState());
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 	}

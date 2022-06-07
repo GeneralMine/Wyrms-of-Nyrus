@@ -50,7 +50,6 @@ public class BlockCreepstone extends AutoReg.ModElement {
 				new ModelResourceLocation("wyrmsofnyrus:creepstone", "inventory"));
 	}
 	public static class BlockCustom extends Block {
-		int timesSpread;
 		public BlockCustom() {
 			super(BlockMaterials.CREEP);
 			setUnlocalizedName("creepstone");
@@ -60,7 +59,6 @@ public class BlockCreepstone extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
-			this.timesSpread = 0;
 		}
 
 		public int tickRate(World world) {
@@ -69,8 +67,8 @@ public class BlockCreepstone extends AutoReg.ModElement {
 
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
-			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, this.timesSpread);
-			ActiveCreepBlock.CreepSpread(pos, world, this.timesSpread, BlockCreepstoneInactive.block.getDefaultState());
+			HiveCreepSpreadFurther.executescript(pos, world);
+			ActiveCreepBlock.CreepSpread(pos, world, BlockCreepstoneInactive.block.getDefaultState());
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 

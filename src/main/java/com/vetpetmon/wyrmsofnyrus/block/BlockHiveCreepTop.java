@@ -47,7 +47,6 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 				new ModelResourceLocation("wyrmsofnyrus:hivecreeptop", "inventory"));
 	}
 	public static class BlockCustom extends Block {
-		int timesSpread;
 		public BlockCustom() {
 			super(BlockMaterials.CREEP);
 			setUnlocalizedName("hivecreeptop");
@@ -58,7 +57,6 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
-			this.timesSpread = 0;
 		}
 
 		@Override
@@ -89,8 +87,8 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
-			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, this.timesSpread);
-			ActiveCreepBlock.CreepSpread(pos, world, this.timesSpread, BlockHiveCreepTopInactive.block.getDefaultState());
+			HiveCreepSpreadFurther.executescript(pos, world);
+			ActiveCreepBlock.CreepSpread(pos, world, BlockHiveCreepTopInactive.block.getDefaultState());
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 	}
