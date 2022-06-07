@@ -29,7 +29,7 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable {
     public EntityMyrmur(World world) {
         super(world);
         this.casteType = 3;
-        setSize(0.65f, 1.0f);
+        setSize(0.65f, 1.35f);
         experienceValue = 12;
         enablePersistence();
         setNoAI(false);

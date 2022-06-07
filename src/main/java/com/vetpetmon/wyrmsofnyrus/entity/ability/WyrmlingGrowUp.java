@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityMyrmur;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmSoldier;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmWorker;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
@@ -18,10 +19,16 @@ public class WyrmlingGrowUp {
         int z = (int) e.get("z");
         Entity entityToSpawn;
         int GrowthTime = timeUntilGrowth;
-        int entityToGrowTo = RNG.dBase(1);
+        int entityToGrowTo = RNG.dBase(12);
         World world = (World) e.get("world");
         switch(entityToGrowTo) {
+            case(11):
+                entityToSpawn = new EntityMyrmur(world);
+                break;
             case(0):
+            case(1):
+            case(2):
+            case(3):
                 entityToSpawn = new EntityWyrmSoldier(world);
                 break;
             default:
