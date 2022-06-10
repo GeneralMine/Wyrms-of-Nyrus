@@ -6,6 +6,7 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.synapselib.rangeCheck;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -101,8 +102,12 @@ public class EntityWyrmWorker extends EntityWyrm {
         super.onLivingUpdate();
         if (!this.world.isRemote && --this.timeUntilNextProduct <= 0)
         {
-            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(ItemMetalcombArray.block, 1);
+            // Check if there's a hopper in range. If there is at least one in range, go to the "else" condition and just make funny noise instead.
+            if (!rangeCheck.blocks(world,getPosition(),4,"minecraft:hopper")) {
+                this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+                this.dropItem(ItemMetalcombArray.block, 1);
+            }
+            else this.playSound(SoundRegistry.wyrmHissTwo, 1.0F, 0.25F); // They're unionizing.
             this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
         }
     }
