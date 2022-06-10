@@ -37,7 +37,7 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable {
     protected void initEntityAI() {
         super.initEntityAI();
         isSapient();
-        this.tasks.addTask(1, new EntityAILeapAtTarget(this, (float) 1.55));
+        this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.55F));
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.45D, true));
