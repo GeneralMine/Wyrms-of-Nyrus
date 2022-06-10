@@ -137,6 +137,8 @@ public class EntityWyrmling extends EntityWyrm {
             return false;
         if (source == DamageSource.DROWN)
             return false;
+        if (source == DamageSource.ON_FIRE)
+            return super.attackEntityFrom(source, amount*3);
         if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
         return super.attackEntityFrom(source, amount);

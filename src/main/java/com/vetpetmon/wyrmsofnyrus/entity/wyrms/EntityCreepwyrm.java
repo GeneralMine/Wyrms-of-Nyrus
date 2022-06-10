@@ -49,6 +49,8 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
             return false;
         if (source == DamageSource.LIGHTNING_BOLT)
             return false;
+        if (source == DamageSource.ON_FIRE)
+            return super.attackEntityFrom(source, amount*3);
         return super.attackEntityFrom(source, amount);
     }
 

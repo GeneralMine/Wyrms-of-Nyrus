@@ -92,6 +92,8 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable {
             return false;
         if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
+        if (source == DamageSource.ON_FIRE)
+            return super.attackEntityFrom(source, amount*3);
         return super.attackEntityFrom(source, amount);
     }
 
