@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.projectile.EntityPotion;
@@ -17,7 +18,11 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.creepTheLands.creepTheLands;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.creepTheLands.*;
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.staysStill.*;
 
 public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
     private AnimationFactory factory = new AnimationFactory(this);
@@ -62,6 +67,20 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
 
     public void onLivingUpdate() {
         super.onLivingUpdate();
+        /*int x = (int) this.posX;
+        int y = (int) this.posY;
+        int z = (int) this.posZ;
+        Entity entity = this;
+        {
+            Map<String, Object> $_d = new HashMap<>();
+            $_d.put("entity", entity);
+            $_d.put("x", x);
+            $_d.put("y", y);
+            $_d.put("z", z);
+            $_d.put("world", world);
+            staysStill($_d);
+        }*/
+
         if (!this.world.isRemote && --this.timeUntilNextCreep <= 0)
         {
             creepTheLands(getPosition(),this.world);
