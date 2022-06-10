@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 
 public class probingPoints {
     public static void probingPoints(World world) {
-        wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints += 10;
+        wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints += 5;
         wyrmVariables.WorldVariables.get(world).syncData(world);
     }
 }

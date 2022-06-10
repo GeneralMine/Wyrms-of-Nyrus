@@ -11,7 +11,9 @@ public class Invasion {
     public static boolean invasionEnabled;
     public static boolean EXCANON;
     public static float EXCANONDIFFICULTY;
+
     public static boolean probingEnabled;
+    public static int invasionPointsPerKill;
 
     public static boolean creepEnabled;
     public static int creepSpreadRate;
@@ -38,7 +40,9 @@ public class Invasion {
         EXCANON = ConfigLib.createConfigBool(config, CATEGORY, "SNAZ OS EX-tended canon", "Are we playing with the Bloodmind Nyral Wyrms, which bend their backs to take over ALL the worlds? (activates Nether and End invasions, makes wyrms immune to a LOT of damagetypes, and worsens invasion difficulty + hive creep.)\nThe EX-tended canon basically follows the Hostile Universe principle, where most, if not, all the aliens of the Stellar Networked Actuality Zone act as Great Filters to primitive or early space-age civilizations and worlds.\nEnabling this forces ALL features of this mod's invasion system with enhanced difficulty to exist.\nIf you are playing without other mods, you might want to be smart and keep this at false.\nIf you are playing with mods like SRP, HBM, TechGuns, Matter Overdrive, and/or Draconic evolution, you may want to set this to true.\nConfiguration options like EXCANON DIFFICULY will now apply. Default: false", false);
         EXCANONDIFFICULTY = ConfigLib.createConfigDouble(config, CATEGORY, "EXCANON DIFFICULTY", "The factor of difficulty you wish to put yourself here. If for some reason that the doubled stats is not enough, you can increase this from the default 2.0x difficulty. Default: 2.0", 2.0);
 
-        probingEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Probing enabled", "Probers deal heavy damage and every kill advances the invasion by 2 points, compared to only one. They also have longer aggro range and fly faster. Set to false to disable this feature and make probers less dangerous. Default: true", true);
+        invasionPointsPerKill = ConfigLib.createConfigInt(config, CATEGORY, "Invasion Points Per Kill", "Wyrms gain invasion points for every kill. Set this to 0 to disable this feature entirely. Default: 1", 1);
+
+        probingEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Probing enabled", "Probers deal heavy damage and every kill advances the invasion by 5 points, compared to only one. They also have longer aggro range and fly faster. Set to false to disable this feature and make probers less dangerous. Default: true", true);
 
         creepTickRate = ConfigLib.createConfigInt(config, CATEGORY, "Creep tickrate", "Every n world ticks, hive creep blocks will tick and roll to see if they spread or not. 20 ticks = 1 second. Default: 400", 400);
         creepEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Creep enabled", "If The Creep is enabled or not. This stops spread, and also renders Creepwyrms useless (Also disabling their spawning.) Default: true", true);

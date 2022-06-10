@@ -2,8 +2,10 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
@@ -14,6 +16,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.probingPoints.probingPoints;
 
 /**
  * Abstract class that all Wyrms of Nyrus entities are built from.
@@ -124,6 +128,13 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
             default:
                 return true;
         }
+    }
+
+    // Wyrms now earn points when they kill something.
+    @Override
+    public void onKillEntity(EntityLivingBase entity) {
+        super.onKillEntity(entity);
+        wyrmKillBonuses.pointIncrease(world);
     }
 
     // Gives all wyrms COTH (from Scape & Run: Parasites) immunity so that way pack makers and unknowing players DON'T have to add it themselves.
