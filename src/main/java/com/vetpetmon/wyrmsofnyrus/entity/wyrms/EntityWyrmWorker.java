@@ -22,6 +22,8 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
+
 public class EntityWyrmWorker extends EntityWyrm {
     public int timeUntilNextProduct;
 
@@ -84,6 +86,12 @@ public class EntityWyrmWorker extends EntityWyrm {
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
         this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,2);
     }
 
     public void onLivingUpdate()

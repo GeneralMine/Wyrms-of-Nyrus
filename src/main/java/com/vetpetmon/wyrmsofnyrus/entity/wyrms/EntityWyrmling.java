@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -18,6 +19,7 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.WyrmlingGrowUp.growUp;
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmling extends EntityWyrm {
     private int timeUntilGrowth;
@@ -124,7 +126,11 @@ public class EntityWyrmling extends EntityWyrm {
         return PlayState.CONTINUE;
     }
 
-
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,1);
+    }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)

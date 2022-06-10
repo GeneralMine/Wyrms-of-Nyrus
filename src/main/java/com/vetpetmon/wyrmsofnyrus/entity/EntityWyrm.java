@@ -99,18 +99,22 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     }
     // Everything here bypasses config options. Use sparingly with good reason.
     protected void afterMobs() {
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, false, false, new Predicate<EntityMob>() {
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, true, false, new Predicate<EntityMob>() {
             public boolean apply(EntityMob target) {
                 if (getWillAttackCreepers()) return !(target instanceof EntityWyrm);
                 else return !((target instanceof EntityCreeper) || (target instanceof EntityWyrm));
             }
         }));
     }
-    protected void afterAnimals() {this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, false, false));}
-    protected void afterVillagers() { this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, false, false));}
+    protected void afterAnimals() {this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, true, false));}
+    protected void afterVillagers() { this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, true, false));}
+    protected void afterPlayers(boolean checkSight) {
+        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, checkSight, false));
+    }
     protected void afterPlayers() {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, false));
     }
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.

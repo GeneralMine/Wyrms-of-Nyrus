@@ -23,6 +23,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
+
 public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmRover(World world) {
@@ -77,6 +79,12 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
         this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,6);
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {

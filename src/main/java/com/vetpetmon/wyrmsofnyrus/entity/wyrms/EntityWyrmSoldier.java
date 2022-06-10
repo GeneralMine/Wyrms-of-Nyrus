@@ -3,9 +3,11 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.callouspodContents;
 import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -23,6 +25,11 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -86,6 +93,12 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable {
         if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
         return super.attackEntityFrom(source, amount);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,4);
     }
 
     public void registerControllers(AnimationData data) {

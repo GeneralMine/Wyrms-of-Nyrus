@@ -79,7 +79,7 @@ public class wyrmBreakDoors extends EntityAIDoorInteract {
     {
         super.updateTask();
 
-        if (this.entity.getRNG().nextInt(20) == 0)
+        if (this.entity.getRNG().nextInt(10) == 0)
         {
             this.entity.world.playEvent(1019, this.doorPosition, 0);
         }

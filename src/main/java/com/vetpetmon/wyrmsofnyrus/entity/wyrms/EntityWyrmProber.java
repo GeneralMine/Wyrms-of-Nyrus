@@ -19,6 +19,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -31,6 +32,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.probingPoints.probingPoints;
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
 public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
@@ -47,46 +49,51 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         setNoAI(false);
     }
 
-    static class WyrmProberMoveHelper extends EntityMoveHelper
+    class WyrmProberMoveHelper extends EntityMoveHelper
     {
         private final EntityWyrmProber parentEntity;
-        private int courseChangeCooldown;
+        private double speedW;
 
         public WyrmProberMoveHelper(EntityWyrmProber WyrmProber)
         {
             super(WyrmProber);
             this.parentEntity = WyrmProber;
-            if (getSimpleAI()) {
-                courseChangeCooldown = 160;
-            }
-            else {
-                courseChangeCooldown = 80;
-            }
         }
 
         public void onUpdateMoveHelper()
         {
             if (this.action == EntityMoveHelper.Action.MOVE_TO)
             {
-                double d0 = this.posX - this.parentEntity.posX;
-                double d1 = this.posY - this.parentEntity.posY;
-                double d2 = this.posZ - this.parentEntity.posZ;
+                double d0 = this.posX - EntityWyrmProber.this.posX;
+                double d1 = this.posY - EntityWyrmProber.this.posY;
+                double d2 = this.posZ - EntityWyrmProber.this.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+                d3 = (double)MathHelper.sqrt(d3);
 
-                if (this.courseChangeCooldown-- <= 0)
+                if (d3 < EntityWyrmProber.this.getEntityBoundingBox().getAverageEdgeLength())
                 {
-                    this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(5) + 2;
-                    d3 = MathHelper.sqrt(d3);
+                    this.action = EntityMoveHelper.Action.WAIT;
+                    EntityWyrmProber.this.motionX *= 0.5D;
+                    EntityWyrmProber.this.motionY *= 0.5D;
+                    EntityWyrmProber.this.motionZ *= 0.5D;
+                }
+                else
+                {
+                    EntityWyrmProber.this.motionX += d0 / d3 * 0.05D * this.speed;
+                    EntityWyrmProber.this.motionY += d1 / d3 * 0.05D * this.speed;
+                    EntityWyrmProber.this.motionZ += d2 / d3 * 0.05D * this.speed;
 
-                    if (this.isNotColliding(this.posX, this.posY, this.posZ, d3))
+                    if (EntityWyrmProber.this.getAttackTarget() == null)
                     {
-                        this.parentEntity.motionX += d0 / d3 * 0.1D;
-                        this.parentEntity.motionY += d1 / d3 * 0.1D;
-                        this.parentEntity.motionZ += d2 / d3 * 0.1D;
+                        EntityWyrmProber.this.rotationYaw = -((float)MathHelper.atan2(EntityWyrmProber.this.motionX, EntityWyrmProber.this.motionZ)) * (180F / (float)Math.PI);
+                        EntityWyrmProber.this.renderYawOffset = EntityWyrmProber.this.rotationYaw;
                     }
                     else
                     {
-                        this.action = EntityMoveHelper.Action.WAIT;
+                        double d4 = EntityWyrmProber.this.getAttackTarget().posX - EntityWyrmProber.this.posX;
+                        double d5 = EntityWyrmProber.this.getAttackTarget().posZ - EntityWyrmProber.this.posZ;
+                        EntityWyrmProber.this.rotationYaw = -((float)MathHelper.atan2(d4, d5)) * (180F / (float)Math.PI);
+                        EntityWyrmProber.this.renderYawOffset = EntityWyrmProber.this.rotationYaw;
                     }
                 }
             }
@@ -207,23 +214,33 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     protected void initEntityAI() {
         super.initEntityAI();
         simpleAI();
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 2.0D, false));
         //this.tasks.addTask(4, new AIFlyingMobCharge(2.0));
-        this.tasks.addTask(4, new FlyingMobAI(this, 8.75, 100));
         // Bypass configs entirely if probing is enabled, else make probers respect the optimizations players want.
         if (Invasion.probingEnabled) {
-            this.afterPlayers();
+            this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.5D, false));
+            this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 100));
+            this.afterPlayers(false);
             this.afterVillagers();
             this.afterAnimals();
             this.afterMobs();
         }
-        else this.makeAllTargets();
+        else {
+            this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
+            this.tasks.addTask(4, new FlyingMobAI(this, 6.05, 100));
+            this.makeAllTargets();
+        }
     }
 
     @Override
     public void onKillEntity(EntityLivingBase entity) {
         super.onKillEntity(entity);
         if (Invasion.probingEnabled) {probingPoints(world);}
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,1);
     }
 
     @Override

@@ -22,6 +22,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
+
 public class EntityMyrmur extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityMyrmur(World world) {
@@ -85,6 +87,12 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable {
         if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
         return super.attackEntityFrom(source, amount);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,3);
     }
 
     public void registerControllers(AnimationData data) {

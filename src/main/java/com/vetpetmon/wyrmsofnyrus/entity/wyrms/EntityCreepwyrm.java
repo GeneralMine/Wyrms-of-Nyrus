@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.creepTheLands.*;
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.staysStill.*;
 
 public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
@@ -95,6 +97,12 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
 
     @Override
     public SoundEvent getAmbientSound() {return SoundRegistry.creepSpread;}
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,23);
+    }
 
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
