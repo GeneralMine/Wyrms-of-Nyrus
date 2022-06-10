@@ -7,9 +7,7 @@ import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.entity.ai.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -38,6 +36,8 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
+        isSapient();
+        this.tasks.addTask(1, new EntityAILeapAtTarget(this, (float) 1.55));
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.45D, true));

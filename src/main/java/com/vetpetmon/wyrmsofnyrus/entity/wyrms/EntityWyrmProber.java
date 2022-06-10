@@ -9,6 +9,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.item.Item;
@@ -28,6 +29,8 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.probingPoints.probingPoints;
 
 
 public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
@@ -215,6 +218,12 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
             this.afterMobs();
         }
         else this.makeAllTargets();
+    }
+
+    @Override
+    public void onKillEntity(EntityLivingBase entity) {
+        super.onKillEntity(entity);
+        if (Invasion.probingEnabled) {probingPoints(world);}
     }
 
     @Override

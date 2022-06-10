@@ -2,10 +2,9 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -71,6 +70,15 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
      */
     protected void simpleAI() {
         if (!getSimpleAI()) this.tasks.addTask(2, new EntityAILookIdle(this));
+    }
+
+    /**
+     * Wyrms with Sapient AI can futz with doors and break stuff and just harass players in general.
+     * They're given better AI and can ruin the player's day. 'Nuff said.
+     */
+    protected void isSapient() {
+        this.tasks.addTask(2, new wyrmBreakDoors(this, 200));
+        this.tasks.addTask(1, new EntityAIWander(this, 0.8));
     }
 
     /**
