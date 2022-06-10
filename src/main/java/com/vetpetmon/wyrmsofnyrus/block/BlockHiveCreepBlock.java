@@ -1,8 +1,11 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
+import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -17,16 +20,12 @@ import net.minecraft.item.Item;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.Block;
 
 import java.util.Random;
-import java.util.Map;
 import java.util.List;
-import java.util.HashMap;
 
-import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
@@ -78,11 +77,6 @@ public class BlockHiveCreepBlock extends AutoReg.ModElement {
 		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 			super.onBlockAdded(world, pos, state);
 			world.scheduleUpdate(pos, this, this.tickRate(world));
-			{
-				Map<String, Object> $_dependencies = new HashMap<>();
-				$_dependencies.put("world", world);
-				InvasionBlockSpread.run($_dependencies);
-			}
 		}
 
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {

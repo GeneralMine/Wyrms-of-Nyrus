@@ -1,9 +1,11 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
-import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
+import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -24,9 +26,7 @@ import net.minecraft.block.Block;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 @AutoReg.ModElement.Tag
@@ -76,11 +76,6 @@ public class BlockCreepstone extends AutoReg.ModElement {
 		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 			super.onBlockAdded(world, pos, state);
 			world.scheduleUpdate(pos, this, this.tickRate(world));
-			{
-				Map<String, Object> $_dependencies = new HashMap<>();
-				$_dependencies.put("world", world);
-				InvasionBlockSpread.run($_dependencies);
-			}
 		}
 
 		@Override

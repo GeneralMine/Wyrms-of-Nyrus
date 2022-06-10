@@ -4,6 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.block.*;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
@@ -39,13 +40,19 @@ public class HiveCreepSpreadFurther{
 				int z = ((pos.getZ()) + RNG.getIntRangeInclu(-Range, Range));
 				BlockPos posi = new BlockPos(x, y, z);
 				if ((creepspreadRules(posi, world, pos)) && canSpreadThisTick) {
-					if (((world.getBlockState(posi))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) world.setBlockState(posi, BlockWyrmLightsYellow.block.getDefaultState(), 3);
-					else if (matLookingBlock(posi, Material.ROCK, world)) world.setBlockState(posi, BlockCreepstone.block.getDefaultState(), 3);
-					else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) world.setBlockState(posi, BlockHiveCreepBlock.block.getDefaultState(), 3);
+					if (((world.getBlockState(posi))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {world.setBlockState(posi, BlockWyrmLightsYellow.block.getDefaultState(), 3);addPoints(world);}
+					else if (matLookingBlock(posi, Material.ROCK, world)) {world.setBlockState(posi, BlockCreepstone.block.getDefaultState(), 3);addPoints(world);}
+					else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {world.setBlockState(posi, BlockHiveCreepBlock.block.getDefaultState(), 3);addPoints(world);}
 				}
 			}
 		}
 	}
+
+	public static void addPoints(World world){
+		invasionPoints.add(world, Invasion.creepSpreadPoints);
+		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 8) wyrmsofnyrus.logger.info("Invasion points increased by " + Invasion.creepSpreadPoints + " from creep spread");
+	}
+
 	public static boolean matLookingBlock(BlockPos pos, Material mat, World world) {return (((world.getBlockState(pos)).getMaterial() == mat));}
 
 }

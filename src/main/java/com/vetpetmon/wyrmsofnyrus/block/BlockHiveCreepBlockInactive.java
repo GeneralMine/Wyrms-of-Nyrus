@@ -1,7 +1,6 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
-import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -16,13 +15,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.Item;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.Block;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Random;
 
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
@@ -70,10 +67,12 @@ public class BlockHiveCreepBlockInactive extends AutoReg.ModElement {
 		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 			super.onBlockAdded(world, pos, state);
 			world.scheduleUpdate(pos, this, this.tickRate(world));
-			{
-				Map<String, Object> $_dependencies = new HashMap<>();
-				$_dependencies.put("world", world);
-				InvasionBlockSpread.run($_dependencies);
+		}
+		@Override
+		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+			super.updateTick(world, pos, state, random);
+			if (world.isAirBlock(new BlockPos(pos.getX(), pos.getY()+1,pos.getZ()))){
+				world.setBlockState((pos), BlockHiveCreepTop.block.getDefaultState(), 3);
 			}
 		}
 

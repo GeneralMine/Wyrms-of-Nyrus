@@ -51,11 +51,6 @@ public class WyrmsTestCommandExecuted extends AutoReg.ModElement {
 									+ (" || Points: ")
 									+ ""
 									+ ((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints))
-									+ (" || The ")
-									+ ""
-									+ ((wyrmVariables.WorldVariables.get(world).hiveName))
-									+ ""
-									+ (" Hive is currently invading the world!")
 								)
 						)
 				);
