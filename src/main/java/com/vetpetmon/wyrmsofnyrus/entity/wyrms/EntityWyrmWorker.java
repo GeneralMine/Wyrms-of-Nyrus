@@ -112,7 +112,7 @@ public class EntityWyrmWorker extends EntityWyrm {
             else {
                 this.playSound(SoundRegistry.wyrmHissTwo, 1.0F, 0.25F);
                 this.unionizing = true;
-            } // They're unionizing.
+            } // They're unionizing. (just means they turn hostile, regardless of Savage AI settings)
             this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
         }
     }

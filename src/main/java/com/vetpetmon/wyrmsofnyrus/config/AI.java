@@ -9,7 +9,7 @@ public class AI {
     public static boolean attackVillagers;
 
     public static boolean savageAIMode;
-
+    public static boolean destroyBlocks;
 
     public static boolean performanceAIMode;
 
@@ -20,6 +20,7 @@ public class AI {
         config.addCustomCategoryComment(CATEGORY,"\nAI configuration\n");
         config.setCategoryRequiresMcRestart(CATEGORY,true);
 
+        destroyBlocks= ConfigLib.createConfigBool(config, CATEGORY, "Block destruction", "Some wyrms (Those marked as diggers or sapients) will try to break blocks. If this is disabled, they won't do that. Default: true", true);
         suicidalWyrms = ConfigLib.createConfigBool(config, CATEGORY, "Suidical wyrms", "Makes wyrms also attack creepers like idiots, if they use hostile AI targetting more than just players. Leave this as false if you want wyrms to have more braincells than you. Default: false", false);
         attackMobs = ConfigLib.createConfigBool(config, CATEGORY, "Attack mobs", "Wyrms that can target mobs (zombies, SRP parasites, etc) will target and attack mobs. Default: true", true);
         attackAnimals = ConfigLib.createConfigBool(config, CATEGORY, "Attack animals", "Wyrms that can target animals (Sheep, animania cows, etc) will target and attack animals. Default: true", true);
