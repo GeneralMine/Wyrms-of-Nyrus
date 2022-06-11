@@ -27,6 +27,7 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 
 public class EntityWyrmWorker extends EntityWyrm {
     public int timeUntilNextProduct;
+    public boolean unionizing;
 
     public EntityWyrmWorker(World world) {
         super(world);
@@ -37,12 +38,13 @@ public class EntityWyrmWorker extends EntityWyrm {
         setNoAI(false);
         this.setCanPickUpLoot(true);
         this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
+        this.unionizing = false;
     }
 
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        if (getInvasionDifficulty() >= 3.0 && AI.savageAIMode){
+        if ((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing)){
             afterPlayers();
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             simpleAI();
@@ -107,7 +109,10 @@ public class EntityWyrmWorker extends EntityWyrm {
                 this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
                 this.dropItem(ItemMetalcombArray.block, 1);
             }
-            else this.playSound(SoundRegistry.wyrmHissTwo, 1.0F, 0.25F); // They're unionizing.
+            else {
+                this.playSound(SoundRegistry.wyrmHissTwo, 1.0F, 0.25F);
+                this.unionizing = true;
+            } // They're unionizing.
             this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
         }
     }
