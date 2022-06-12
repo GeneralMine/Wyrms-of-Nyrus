@@ -13,7 +13,7 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:entity/supercriticality",
+        "name": "wyrmsofnyrus:supercriticality",
         "stream": false
       }
     ]
@@ -22,7 +22,7 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:entity/supercriticalitydistant",
+        "name": "wyrmsofnyrus:supercriticalitydistant",
         "stream": false
       }
     ]
