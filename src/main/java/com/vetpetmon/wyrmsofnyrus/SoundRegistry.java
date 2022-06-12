@@ -26,8 +26,8 @@ public class SoundRegistry {
         creepwyrmscream = RegisterSound("entity.creepwyrmscream");
         deepwyrmclicks = RegisterSound("entity.deepwyrmclicks");
         slowwyrmsteps = RegisterSound("entity.slowwyrmsteps");
-        nukeClose = RegisterSound("entity.supercriticality");
-        nukeFar = RegisterSound("entity.supercriticalitydistant");
+        nukeClose = RegisterSound("supercriticality");
+        nukeFar = RegisterSound("supercriticalitydistant");
     }
 
     public static SoundEvent RegisterSound(String name) {
