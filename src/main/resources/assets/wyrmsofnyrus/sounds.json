@@ -9,6 +9,24 @@
       }
     ]
   },
+  "supercriticality": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/supercriticality",
+        "stream": false
+      }
+    ]
+  },
+  "supercriticalitydistant": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/supercriticalitydistant",
+        "stream": false
+      }
+    ]
+  },
   "entity.deepwyrmclicks": {
     "category": "neutral",
     "subtitle": "subtitles.deepwyrmclicks",
