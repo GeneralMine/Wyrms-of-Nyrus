@@ -15,7 +15,7 @@ public class wyrmDeathSpecial {
         int z = pos.getZ();
         if ((entityIn.isBurning()) && Radiogenetics.explodingWyrms) {
             if (!world.isRemote) {
-                world.createExplosion(null, x, y, z, (float) (power*2), true);
+                world.createExplosion(null, x, y, z, (float) (power), true);
             }
             if (((power) >= 20)) {
                 world.addWeatherEffect(new EntityLightningBolt(world, x, y, z, true));
