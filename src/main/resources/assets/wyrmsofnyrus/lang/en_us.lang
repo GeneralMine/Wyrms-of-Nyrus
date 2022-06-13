@@ -2,23 +2,31 @@ itemGroup.tabwyrms=Wyrms
 
 entity.thevisitor.name=The Visitor
 entity.royalgrub.name=Royal Grub
-entity.wyrmprober.name=Wyrm Prober
+entity.wyrmprober.name=Prober
 entity.wyrmling.name=Wyrmling
+entity.creepwyrm.name=Creepwyrm
+entity.wyrmlandfester.name=Landfester
 entity.hexe_pod.name=Hexe Pod
-entity.wyrmworker.name=Wyrm Worker
-entity.wyrmrover.name=Wyrm Rover
+entity.wyrmworker.name=Worker
+entity.wyrmmetalworker.name=Metalworker
+entity.wyrmrover.name=Rover
 entity.wyrmdobber.name=Dobber
 entity.callouspod.name=Callous Landing Pod
-
+entity.wyrmsoldier.name=Soldier
+entity.wyrmintruder.name=Intruder
+entity.wyrmsapqueen.name=Sapient Queen
+entity.wyrmqueenling.name=Queenling
+entity.wyrmmyrmur.name=Myrmur
 
 item.creepshard.name=Creepshard
 item.metalcomb_array.name=Metalcomb Array
 item.wyrmico.name=Wyrms Icon
+item.wyrmarmorfrag.name=Armor Fragment
 
 tile.metal_comb_panel_hive_creep.name=Hive Creep Metal Combs
 tile.hivecreeptop.name=Hive Creep Surface
-tile.wyrm_lights_orange.name=Orange Wyrm Lights
-tile.wyrm_lights_yellow.name=Yellow Wyrm Lights
+tile.wyrm_lights_orange.name=Orange Hive Lights
+tile.wyrm_lights_yellow.name=Yellow Hive Lights
 tile.hivecreeptopinactive.name=Hive Creep Surface
 tile.hivecreepblock.name=Hive Creep Block
 tile.creepstone.name=Creepstone
@@ -26,7 +34,9 @@ tile.hivecreepblockinactive.name=Hive Creep Block
 tile.creepstone_inactive.name=Creepstone
 
 subtitles.visitormessage=Starship humming
-subtitles.wyrmClicks=Wyrm clicks
-subtitles.wyrmSteps=Wyrm skittering
+subtitles.wyrmClicks=Clicking
+subtitles.wyrmSteps=Skittering
 subtitles.creepwyrmscream=Creepwyrm screeching
-subtitles.hiveCreepSpread=Creeping
+subtitles.hiveCreepSpread=Creeping block
+subtitles.deepwyrmclicks=Deep clicking
+subtitles.slowWyrmSteps=Wyrm steps

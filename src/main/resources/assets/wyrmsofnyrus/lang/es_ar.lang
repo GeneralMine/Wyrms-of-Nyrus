@@ -1,0 +1,44 @@
+itemGroup.tabwyrms=Wyrms
+
+entity.thevisitor.name=El Visitante
+entity.royalgrub.name=Larva Real
+entity.wyrmprober.name=Sondeador
+entity.wyrmling.name=Wyrm Joven
+entity.creepwyrm.name=Wyrm de Creep
+entity.wyrmlandfester.name=Landfester
+entity.hexe_pod.name=Hexe Cápsula
+entity.wyrmworker.name=Trabajador
+entity.wyrmmetalworker.name=Obrero Metalúrgico
+entity.wyrmrover.name=Vagabundo
+entity.wyrmdobber.name=Dobber
+entity.callouspod.name=Cápsula de Aterrizaje Desalmado
+entity.wyrmsoldier.name=Soldado
+entity.wyrmintruder.name=Intruso
+entity.wyrmsapqueen.name=Reina Sapiente
+entity.wyrmqueenling.name=Reina Joven
+
+
+item.creepshard.name=Casco de Creep
+item.metalcomb_array.name=Matriz de Peine Metalico
+item.wyrmico.name=Wyrms Icon
+
+tile.metal_comb_panel_hive_creep.name=Peine de Metal Colmena (Creep)
+tile.hivecreeptop.name=Colmena Creep Superficie
+tile.wyrm_lights_orange.name=Luces de Colmena Naranja
+tile.wyrm_lights_yellow.name=Luces de Colmena Amarillas
+tile.hivecreeptopinactive.name=Colmena Creep Superficie
+tile.hivecreepblock.name=Colmena Creep
+tile.creepstone.name=Piedra de Creep
+tile.hivecreepblockinactive.name=Colmena Creep
+tile.creepstone_inactive.name=Piedra de Creep
+
+subtitles.visitormessage=Zumbido de Nave Estelar
+subtitles.wyrmClicks=Haciendo Clic
+subtitles.wyrmSteps=Saltador de Wyrm
+subtitles.creepwyrmscream=Wyrm de Creep Gritando
+subtitles.hiveCreepSpread=Bloque Progresivo
+subtitles.deepwyrmclicks=Clic profundo
+subtitles.slowWyrmSteps=Pasos de Wyrm
+
+entity.wyrmmyrmur.name=Myrmur
+item.wyrmarmorfrag.name=Fragmento de Armadura

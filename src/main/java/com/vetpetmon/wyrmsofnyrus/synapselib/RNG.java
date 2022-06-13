@@ -6,8 +6,8 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Random Number Generation component
  *
- * Includes various methods for getting numbers generated on the fly, instead of constantly
- * the same functions over and over again at the most raw format. This RNG simplifier is a
+ * Includes various methods for getting numbers generated on the fly, instead of constantly running
+ * the same functions over and over again at the most raw format. This RNG simplifier is an
  * RNG coder's best friend by being far easier to understand and faster to type out.
  * Most code that is included is intended for use in Minecraft mods, but can work without.
  */
@@ -37,6 +37,15 @@ public class RNG {
      */
     public static double getDoubleRange(double Min, double Max) {
         return (ThreadLocalRandom.current().nextDouble() * (Max - Min)) + Min;
+    }
+
+    /**
+     * A set of digital dice to INSTANTLY generate a random number without needing to use two manual inputs.
+     * This shortens it to one input.
+     */
+    public static int dBase(int Sides)
+    {
+        return ThreadLocalRandom.current().nextInt(0, Sides + 1);
     }
 
     /**

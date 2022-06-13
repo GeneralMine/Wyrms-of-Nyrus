@@ -1,11 +1,6 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
-import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
-import com.vetpetmon.wyrmsofnyrus.world.biome.CreepedLands.WoNCreepedLands;
-import com.vetpetmon.wyrmsofnyrus.world.biome.SpreadingBiome;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -22,18 +17,13 @@ import net.minecraft.item.Item;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.Block;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
-
-import static com.vetpetmon.wyrmsofnyrus.world.biome.SpreadingBiome.biomeCreeped;
 
 @AutoReg.ModElement.Tag
 public class BlockHiveCreepTopInactive extends AutoReg.ModElement {
@@ -57,7 +47,7 @@ public class BlockHiveCreepTopInactive extends AutoReg.ModElement {
 	}
 	public static class BlockCustom extends Block {
 		public BlockCustom() {
-			super(Material.CRAFTED_SNOW);
+			super(BlockMaterials.CREEP);
 			setUnlocalizedName("hivecreeptopinactive");
 			setSoundType(SoundType.SLIME);
 			setHarvestLevel("shovel", 1);
@@ -73,6 +63,12 @@ public class BlockHiveCreepTopInactive extends AutoReg.ModElement {
 		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 			new SpreadingBiome(world, pos, biomeCreeped);
 		}*/
+
+		@Override
+		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+			super.onBlockAdded(world, pos, state);
+			world.scheduleUpdate(pos, this, this.tickRate(world));
+		}
 
 		@Override
 		public void addInformation(ItemStack itemstack, World world, List<String> list, ITooltipFlag flag) {

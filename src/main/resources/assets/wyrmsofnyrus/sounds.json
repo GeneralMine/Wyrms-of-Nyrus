@@ -9,11 +9,30 @@
       }
     ]
   },
-  "wyrmclicks": {
+  "supercriticality": {
     "category": "neutral",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:entity/clicking1",
+        "name": "wyrmsofnyrus:supercriticality",
+        "stream": false
+      }
+    ]
+  },
+  "supercriticalitydistant": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:supercriticalitydistant",
+        "stream": false
+      }
+    ]
+  },
+  "entity.deepwyrmclicks": {
+    "category": "neutral",
+    "subtitle": "subtitles.deepwyrmclicks",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/deepclicking1",
         "stream": false
       }
     ]
@@ -68,11 +87,12 @@
       }
     ]
   },
-  "wyrmclicks4": {
+  "entity.slowwyrmsteps": {
     "category": "neutral",
+    "subtitle": "subtitles.slowWyrmSteps",
     "sounds": [
       {
-        "name": "wyrmsofnyrus:entity/clicking4",
+        "name": "wyrmsofnyrus:entity/slowwyrmsteps",
         "stream": false
       }
     ]

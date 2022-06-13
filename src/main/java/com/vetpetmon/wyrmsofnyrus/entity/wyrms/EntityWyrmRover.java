@@ -6,7 +6,6 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -23,6 +22,8 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -80,6 +81,12 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
         this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
     }
 
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,6);
+    }
+
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
             return false;
@@ -87,6 +94,8 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
             return false;
         if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
+        if (source == DamageSource.ON_FIRE)
+            return super.attackEntityFrom(source, amount*3);
         return super.attackEntityFrom(source, amount);
     }
 

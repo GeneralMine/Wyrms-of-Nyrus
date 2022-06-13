@@ -1,6 +1,7 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -10,12 +11,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.Item;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.Block;
 
@@ -46,7 +45,7 @@ public class BlockCreepstoneInactive extends AutoReg.ModElement {
 	}
 	public static class BlockCustom extends Block {
 		public BlockCustom() {
-			super(Material.CRAFTED_SNOW);
+			super(BlockMaterials.CREEP);
 			setUnlocalizedName("creepstone_inactive");
 			setSoundType(SoundType.SLIME);
 			setHardness(2F);
@@ -54,6 +53,12 @@ public class BlockCreepstoneInactive extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
+		}
+
+		@Override
+		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+			super.onBlockAdded(world, pos, state);
+			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 
 		@Override

@@ -1,9 +1,11 @@
 
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
-import com.vetpetmon.wyrmsofnyrus.invasion.InvasionBlockSpread;
+import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -18,16 +20,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.Item;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.Block;
 
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 @AutoReg.ModElement.Tag
@@ -51,9 +50,8 @@ public class BlockCreepstone extends AutoReg.ModElement {
 				new ModelResourceLocation("wyrmsofnyrus:creepstone", "inventory"));
 	}
 	public static class BlockCustom extends Block {
-		int timesSpread;
 		public BlockCustom() {
-			super(Material.CRAFTED_SNOW);
+			super(BlockMaterials.CREEP);
 			setUnlocalizedName("creepstone");
 			setSoundType(SoundType.SLIME);
 			setHardness(2F);
@@ -61,9 +59,7 @@ public class BlockCreepstone extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
-			this.timesSpread = 0;
 		}
-
 
 		public int tickRate(World world) {
 			return Invasion.creepTickRate;
@@ -71,8 +67,8 @@ public class BlockCreepstone extends AutoReg.ModElement {
 
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
-			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, timesSpread);
-			ActiveCreepBlock.CreepSpread(pos, world, timesSpread, BlockCreepstoneInactive.block.getDefaultState());
+			HiveCreepSpreadFurther.executescript(pos, world);
+			ActiveCreepBlock.CreepSpread(pos, world, BlockCreepstoneInactive.block.getDefaultState());
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 
@@ -80,11 +76,6 @@ public class BlockCreepstone extends AutoReg.ModElement {
 		public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 			super.onBlockAdded(world, pos, state);
 			world.scheduleUpdate(pos, this, this.tickRate(world));
-			{
-				Map<String, Object> $_dependencies = new HashMap<>();
-				$_dependencies.put("world", world);
-				InvasionBlockSpread.run($_dependencies);
-			}
 		}
 
 		@Override

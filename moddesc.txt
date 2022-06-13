@@ -1,0 +1,25 @@
+*From the Axil Galaxy, an invasive alien species eyes upon planets which show great opportunity for expanding their hive's reach across the universe. Unfortunately for you, they just so happen to be looking at the Overworld.
+
+They don't come in peace.*
+
+###### NOTICE: Wyrms of Nyrus is in alpha. Please read update notes carefully, you may need to update configuration files, make new worlds, etc.
+###### REQUIRES GECKOLIB. It is currently not on Modrinth, you can grab it from GitHub or Curseforge.
+
+**Wyrms of Nyrus** follows the canonical lore of Iké's Nyral Wyrms (from the SNAZ OS Extended Canon) and provides an immersive view into the ever-so-hostile universe. *It is a very destructive mod, but the destruction can be opted out of via user configuration.*
+
+# INVASION
+
+The Nyral Wyrms show up in worlds after some time, announcing their arrival and dropping the first wave of drones! Despite their cute looks, they grow up into various hostile units! No alien here is truly safe to keep...
+
+# MECHANICS
+
+There's a new invasion mechanic that acts as the scoreboard for wyrms; they earn points by kills, assimilating blocks into The Creep, and through forceful examinations and studies on the Overworld's inhabitants.
+
+No wyrm of any caste or type ends up staying friendly. Workers will turn against you, wyrmlings grow up into formidable foes, and much, much more. The Wyrms themselves have special properties that stand out from any vanilla or modded mob, and as such, you should consider your arsenal very carefully...
+
+# PLAY YOUR WAY
+
+Wyrms of Nyrus comes packaged with a configuration file fine-tuned for a lightly modded experience by default. However, many parts of the mod are customizable, especially the more destructive features. This mod is perfectly compatible with heavily modded settings, and works well in modpacks, as it does when standing alone.
+
+
+You are free to use Wyrms of Nyrus in a modpack.

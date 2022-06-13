@@ -6,7 +6,7 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.synapselib.rangeCheck;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -23,8 +23,11 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
+
 public class EntityWyrmWorker extends EntityWyrm {
     public int timeUntilNextProduct;
+    public boolean unionizing;
 
     public EntityWyrmWorker(World world) {
         super(world);
@@ -35,12 +38,13 @@ public class EntityWyrmWorker extends EntityWyrm {
         setNoAI(false);
         this.setCanPickUpLoot(true);
         this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
+        this.unionizing = false;
     }
 
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        if (getInvasionDifficulty() >= 3.0 && AI.savageAIMode){
+        if ((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing)){
             afterPlayers();
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             simpleAI();
@@ -70,6 +74,8 @@ public class EntityWyrmWorker extends EntityWyrm {
             return false;
         if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
+        if (source == DamageSource.ON_FIRE)
+            return super.attackEntityFrom(source, amount*3);
         return super.attackEntityFrom(source, amount);
     }
 
@@ -81,14 +87,16 @@ public class EntityWyrmWorker extends EntityWyrm {
     public SoundEvent getHurtSound(DamageSource ds) {
         return SoundRegistry.wyrmHissTwo;
     }
-    /*@Override
-    public SoundEvent getDeathSound() {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
-    }*/
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
         this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,2);
     }
 
     public void onLivingUpdate()
@@ -96,8 +104,15 @@ public class EntityWyrmWorker extends EntityWyrm {
         super.onLivingUpdate();
         if (!this.world.isRemote && --this.timeUntilNextProduct <= 0)
         {
-            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(ItemMetalcombArray.block, 1);
+            // Check if there's a hopper in range. If there is at least one in range, go to the "else" condition and just make funny noise instead.
+            if (!rangeCheck.blocks(world,getPosition(),4,"minecraft:hopper")) {
+                this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+                this.dropItem(ItemMetalcombArray.block, 1);
+            }
+            else {
+                this.playSound(SoundRegistry.wyrmHissTwo, 1.0F, 0.25F);
+                this.unionizing = true;
+            } // They're unionizing. (just means they turn hostile, regardless of Savage AI settings)
             this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
         }
     }

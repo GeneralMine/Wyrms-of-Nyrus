@@ -7,7 +7,6 @@ import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -48,9 +47,8 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 				new ModelResourceLocation("wyrmsofnyrus:hivecreeptop", "inventory"));
 	}
 	public static class BlockCustom extends Block {
-		int timesSpread;
 		public BlockCustom() {
-			super(Material.CRAFTED_SNOW);
+			super(BlockMaterials.CREEP);
 			setUnlocalizedName("hivecreeptop");
 			setSoundType(SoundType.SLIME);
 			setHarvestLevel("shovel", 1);
@@ -59,7 +57,6 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
-			this.timesSpread = 0;
 		}
 
 		@Override
@@ -90,8 +87,8 @@ public class BlockHiveCreepTop extends AutoReg.ModElement {
 		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
-			this.timesSpread = HiveCreepSpreadFurther.executescript(pos, world, timesSpread);
-			ActiveCreepBlock.CreepSpread(pos, world, timesSpread, BlockHiveCreepTopInactive.block.getDefaultState());
+			HiveCreepSpreadFurther.executescript(pos, world);
+			ActiveCreepBlock.CreepSpread(pos, world, BlockHiveCreepTopInactive.block.getDefaultState());
 			world.scheduleUpdate(pos, this, this.tickRate(world));
 		}
 	}
