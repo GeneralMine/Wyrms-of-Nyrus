@@ -6,8 +6,8 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Random Number Generation component
  *
- * Includes various methods for getting numbers generated on the fly, instead of constantly
- * the same functions over and over again at the most raw format. This RNG simplifier is a
+ * Includes various methods for getting numbers generated on the fly, instead of constantly running
+ * the same functions over and over again at the most raw format. This RNG simplifier is an
  * RNG coder's best friend by being far easier to understand and faster to type out.
  * Most code that is included is intended for use in Minecraft mods, but can work without.
  */
