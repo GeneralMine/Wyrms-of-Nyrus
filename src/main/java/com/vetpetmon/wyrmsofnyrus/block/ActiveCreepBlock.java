@@ -3,7 +3,9 @@ package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.rangeCheck;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -14,31 +16,19 @@ import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.creepsp
 
 public class ActiveCreepBlock {
 
-    private static BlockPos posLooking;
-
     public static void CreepSpread(BlockPos pos, World world, IBlockState inactiveBlockName) {
         boolean doCheck = ((RNG.getIntRangeInclu(0,50)) >= 43);
         if (doCheck) {
-            if (checkValidRange(pos, world)) {
-                if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 4)
+            if (!rangeCheck.material(world,pos,3,BlockMaterials.CREEP)) {
+                if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 8)
+                    System.out.println("Debugging: creep block at " + pos + " saw a non-creep block, so it can spread somewhere, thus, it was not turned inactive.");
+            }
+            else {
+                if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 7)
                     System.out.println("Debugging: creep block at " + pos + " was turned inactive");
                 world.setBlockState(pos, inactiveBlockName, 3);
             }
         }
-    }
-
-    private static boolean checkValidRange(BlockPos pos, World world) {
-        int Range = 1;
-        int fails = 0;
-        for (int i = 0; i < (20); i++) {
-            int x = ((pos.getX()) + RNG.getIntRangeInclu(-Range, Range));
-            int y = ((pos.getY()) + RNG.getIntRangeInclu(-Range, Range));
-            int z = ((pos.getZ()) + RNG.getIntRangeInclu(-Range, Range));
-            posLooking = new BlockPos(x,y,z);
-            if (!creepspreadRules(posLooking,world,pos))++fails;
-        }
-        if (fails>=20) return true;
-        return false;
     }
 
 

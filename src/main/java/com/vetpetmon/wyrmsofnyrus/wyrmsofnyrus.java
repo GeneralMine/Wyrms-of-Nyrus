@@ -41,7 +41,7 @@ import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 public class wyrmsofnyrus {
     public static final String MODID = "wyrmsofnyrus";
     public static final String NAME = "Wyrms of Nyrus";
-    public static final String VERSION = "0.1.3";
+    public static final String VERSION = "0.1.31";
 
     public AutoReg elements = new AutoReg();
 
