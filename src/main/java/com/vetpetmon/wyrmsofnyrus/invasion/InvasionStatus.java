@@ -19,7 +19,7 @@ public class InvasionStatus extends AutoReg.ModElement {
 		super(instance, 12);
 	}
 
-	public static double getDifficulty(float baseDiff) {
+	public static float getDifficulty(float baseDiff) {
 		// First factor: What's the basic invasion stage difficulty here?
 		float dFactorOne = baseDiff;
 		// Second factor: Is this EXtended Canon and what is that difficulty option set too?
@@ -35,31 +35,31 @@ public class InvasionStatus extends AutoReg.ModElement {
 	public static void executescript(Map<String, Object> dependencies) {
 		if (Invasion.invasionEnabled) {
 			World world = (World) dependencies.get("world");
-			double invasionPoints = wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints;
-			if (invasionPoints <= (500 * Invasion.invasionProgressionRate)) {
+			double invasionP = invasionPoints.get(world);
+			if (invasionP <= (1000 * Invasion.invasionProgressionRate)) {
 				wyrmVariables.wyrmInvasionStatus = "Arriving";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(1.0F);
-			} else if (invasionPoints <= (1500 * Invasion.invasionProgressionRate)) {
+				invasionPoints.setDifficulty(world,getDifficulty(1.0F));
+			} else if (invasionP <= (5000 * Invasion.invasionProgressionRate)) {
 				wyrmVariables.wyrmInvasionStatus = "Scouting";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(1.5F);
-			} else if (invasionPoints <= (5000 * Invasion.invasionProgressionRate)) {
+				invasionPoints.setDifficulty(world,getDifficulty(1.5F));
+			} else if (invasionP <= (10000 * Invasion.invasionProgressionRate)) {
 				wyrmVariables.wyrmInvasionStatus = "Establishing hive";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(2.0F);
-			} else if (invasionPoints <= (25000 * Invasion.invasionProgressionRate)) {
+				invasionPoints.setDifficulty(world,getDifficulty(2.0F));
+			} else if (invasionP <= (25000 * Invasion.invasionProgressionRate)) {
 				wyrmVariables.wyrmInvasionStatus = "Expanding";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(3.0F);
-			} else if (invasionPoints <= (100000 * Invasion.invasionProgressionRate)) {
+				invasionPoints.setDifficulty(world,getDifficulty(3.0F));
+			} else if (invasionP <= (100000 * Invasion.invasionProgressionRate)) {
 				wyrmVariables.wyrmInvasionStatus = "Invading";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(4.5F);
-			} else if (invasionPoints <= (1000000 * Invasion.invasionProgressionRate)) {
+				invasionPoints.setDifficulty(world,getDifficulty(4.5F));
+			} else if (invasionP <= (1000000 * Invasion.invasionProgressionRate)) {
 				wyrmVariables.wyrmInvasionStatus = "Dominant species";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(5.5F);
-			} else if (invasionPoints > (2500000 * Invasion.invasionProgressionRate)) {
+				invasionPoints.setDifficulty(world,getDifficulty(5.5F));
+			} else if (invasionP > (2500000 * Invasion.invasionProgressionRate)) {
 				wyrmVariables.wyrmInvasionStatus = "Terraforming";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(6.0F);
+				invasionPoints.setDifficulty(world,getDifficulty(6.0F));
 			} else {
 				wyrmVariables.wyrmInvasionStatus = "Unknown";
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty = getDifficulty(1.0F);
+				invasionPoints.setDifficulty(world,getDifficulty(1.0F));
 			}
 		}
 	}

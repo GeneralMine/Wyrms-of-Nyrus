@@ -12,6 +12,11 @@ import net.minecraft.world.World;
  */
 public class invasionPoints {
     public static double get(World w) {return wyrmVariables.WorldVariables.get(w).wyrmInvasionPoints;}
+    public static double getDifficulty(World w) {return wyrmVariables.WorldVariables.get(w).wyrmInvasionDifficulty;}
+    public static void setDifficulty(World w, float input) {
+        wyrmVariables.WorldVariables.get(w).wyrmInvasionDifficulty = input;
+        sync(w);
+    }
 
     /**
      * Adds invasion points to the world.

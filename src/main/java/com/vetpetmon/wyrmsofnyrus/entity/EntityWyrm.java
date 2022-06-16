@@ -68,12 +68,16 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
 
     /**
-     * If we are not running with Simple AI (config option), then add Entity AI Idle Looking.
+     * If we are not running with Simple AI (config option), then add Entity AI LookIdle & WanderAvoidWater.
+     * The reason being is these add random entity updates 24/7, and with 400 wyrms in loaded chunks, this makes a difference of ~300 ms processing time. AKA: With hundreds of wyrms, this saves TPS.
      * If it is running with Simple AI, don't add it to the AI task pool, lowering entity update counts.
-     * PLEASE use this instead of using addTask. I will not accept unoptimized code.
+     * PLEASE use this instead of using addTask. I will not accept unoptimized code for optimization functions.
      */
     protected void simpleAI() {
-        if (!getSimpleAI()) this.tasks.addTask(2, new EntityAILookIdle(this));
+        if (!getSimpleAI()) {
+            this.tasks.addTask(2, new EntityAILookIdle(this));
+            this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
+        }
     }
 
     /**
