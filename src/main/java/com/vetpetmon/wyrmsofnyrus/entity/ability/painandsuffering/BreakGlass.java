@@ -15,12 +15,10 @@ public class BreakGlass {
         int y = pos.getY();
         int z = pos.getZ();
         BlockPos breakPos = new BlockPos(x,y,z);
-        boolean found;
         double sx;
         double sy;
         double sz;
         sx = ((range) / (-2));
-        found = false;
         for (int index0 = 0; index0 < (int) ((range)); index0++) {
             sy = ((range) / (-2));
             for (int index1 = 0; index1 < (int) ((range)); index1++) {
@@ -33,7 +31,8 @@ public class BreakGlass {
                             break;
                         }
                         else {
-                            found = (true);
+                            world.setBlockToAir(breakPos);
+                            world.playSound(null, x, y, z, SoundEvent.REGISTRY.getObject(new ResourceLocation("block.glass.break")), SoundCategory.MASTER, (float) 2, (float) 1.05);
                             break;
                         }
                     }
@@ -42,10 +41,6 @@ public class BreakGlass {
                 sy = (sy) + 1;
             }
             sx = (sx) + 1;
-        }
-        if (((found))) {
-            world.setBlockToAir(breakPos);
-            world.playSound(null, x, y, z, SoundEvent.REGISTRY.getObject(new ResourceLocation("block.glass.break")), SoundCategory.MASTER, (float) 2, (float) 1.05);
         }
     }
 }

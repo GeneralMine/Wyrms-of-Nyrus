@@ -248,7 +248,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     public void onLivingUpdate(){
         super.onLivingUpdate();
-        chanceToBreak = RNG.dBase(5);
+        chanceToBreak = RNG.dBase(20);
         if (AI.destroyBlocks && Invasion.probingEnabled && (chanceToBreak == 2)) BreakGlass.CheckAndBreak(world,getPosition(),3);
     }
     @Override
