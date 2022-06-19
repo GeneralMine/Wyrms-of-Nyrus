@@ -10,6 +10,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.AIProberAttack;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -38,6 +39,7 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 
 public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private int chanceToBreak;
     //private boolean isCharging;
     public EntityWyrmProber(World world) {
         super(world);
@@ -246,7 +248,8 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     public void onLivingUpdate(){
         super.onLivingUpdate();
-        if (AI.destroyBlocks && Invasion.probingEnabled) BreakGlass.CheckAndBreak(world,getPosition(),3);
+        chanceToBreak = RNG.dBase(5);
+        if (AI.destroyBlocks && Invasion.probingEnabled && (chanceToBreak == 2)) BreakGlass.CheckAndBreak(world,getPosition(),3);
     }
     @Override
     public void onUpdate() {

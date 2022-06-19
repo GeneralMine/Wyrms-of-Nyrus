@@ -20,16 +20,22 @@ public class BreakGlass {
         double sy;
         double sz;
         sx = ((range) / (-2));
-        found = (false);
+        found = false;
         for (int index0 = 0; index0 < (int) ((range)); index0++) {
             sy = ((range) / (-2));
             for (int index1 = 0; index1 < (int) ((range)); index1++) {
                 sz = ((range) / (-2));
                 for (int index2 = 0; index2 < (int) ((range)); index2++) {
-                    if (((world.getBlockState(new BlockPos((int) (x + (sx)), (int) (y + (sy)), (int) (z + (sz))))).getMaterial() == Material.GLASS)) {
-                        found = (true);
-                        breakPos = (new BlockPos((int) (x + (sx)), (int) (y + (sy)), (int) (z + (sz))));
-                        break;
+                    breakPos = (new BlockPos((int) (x + (sx)), (int) (y + (sy)), (int) (z + (sz))));
+                    if (((world.getBlockState(breakPos)).getMaterial() == Material.GLASS)) {
+                        if ((world.getBlockState(breakPos)).getBlockHardness(world,breakPos) > 2.5) {
+                            world.playSound(null, x, y, z, SoundEvent.REGISTRY.getObject(new ResourceLocation("block.glass.fall")), SoundCategory.MASTER, (float) 2, (float) 1.5);
+                            break;
+                        }
+                        else {
+                            found = (true);
+                            break;
+                        }
                     }
                     sz = ((sz) + 1);
                 }
@@ -39,7 +45,7 @@ public class BreakGlass {
         }
         if (((found))) {
             world.setBlockToAir(breakPos);
-            world.playSound(null, x, y, z, SoundEvent.REGISTRY.getObject(new ResourceLocation("block.glass.break")), SoundCategory.MASTER, (float) 2, (float) 1.5);
+            world.playSound(null, x, y, z, SoundEvent.REGISTRY.getObject(new ResourceLocation("block.glass.break")), SoundCategory.MASTER, (float) 2, (float) 1.05);
         }
     }
 }
