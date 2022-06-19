@@ -31,7 +31,7 @@ public class BreakGlass {
             sx = (sx) + 1;
         }
         if (((found) == (true))) {
-            world.setBlockToAir(new BlockPos((int) x, (int) y, (int) z));
+            world.setBlockToAir(new BlockPos(x, y, z));
         }
     }
 }
