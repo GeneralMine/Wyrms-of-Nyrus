@@ -5,6 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.AIProberAttack;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
@@ -217,7 +218,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         //this.tasks.addTask(4, new AIFlyingMobCharge(2.0));
         // Bypass configs entirely if probing is enabled, else make probers respect the optimizations players want.
         if (Invasion.probingEnabled) {
-            this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.5D, false));
+            this.tasks.addTask(2, new AIProberAttack(this, 1.5D, true));
             this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 100));
             this.afterPlayers(false);
             this.afterVillagers();
