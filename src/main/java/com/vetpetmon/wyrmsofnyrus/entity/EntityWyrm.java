@@ -2,13 +2,11 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +14,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.probingPoints.probingPoints;
 
 /**
  * Abstract class that all Wyrms of Nyrus entities are built from.
@@ -119,6 +115,11 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     protected void afterPlayers() {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, false));
+    }
+    protected void afterInsectoids() {
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityCaveSpider.class, true, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntitySpider.class, true, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntitySilverfish.class, true, false));
     }
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.

@@ -8,6 +8,7 @@ import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -40,10 +41,12 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable {
         super.initEntityAI();
         isSapient();
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.55F));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityMyrmur.class, 30, 1, 1.2));
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.45D, true));
         afterPlayers();
+        afterInsectoids();
     }
 
     @Override
@@ -53,7 +56,8 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable {
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(6,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(1,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(3,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.1D);
     }
 
     @Override
@@ -88,6 +92,8 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable {
             return false;
         if (source == DamageSource.ON_FIRE)
             return super.attackEntityFrom(source, amount*3);
+        if (source == DamageSource.GENERIC)
+            return super.attackEntityFrom(source, (float) (amount*0.75));
         return super.attackEntityFrom(source, amount);
     }
 

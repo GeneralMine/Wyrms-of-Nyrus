@@ -40,7 +40,7 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, (float) 3, 1, 1.2));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, 3, 1, 1.2));
         this.tasks.addTask(2, new EntityAIFollow(this, (float) 1, 10, 5));
         this.tasks.addTask(3, new EntityAIWander(this, 0.8));
         this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 12));
