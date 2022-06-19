@@ -2,11 +2,13 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
+import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.AIProberAttack;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 
@@ -20,9 +22,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -243,7 +243,11 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         super.onDeath(source);
         wyrmDeathSpecial(this,getPosition(),world,1);
     }
-
+    @Override
+    public void onLivingUpdate(){
+        super.onLivingUpdate();
+        if (!AI.destroyBlocks && Invasion.probingEnabled) BreakGlass.CheckAndBreak(world,getPosition(),3);
+    }
     @Override
     public void onUpdate() {
         super.onUpdate();

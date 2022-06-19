@@ -54,6 +54,6 @@ public class HiveCreepSpreadFurther{
 		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 8) wyrmsofnyrus.logger.info("Invasion points increased by " + Invasion.creepSpreadPoints + " from creep spread");
 	}
 
-	public static boolean matLookingBlock(BlockPos pos, Material mat, World world) {return ((blockUtils.getLookingBlockMat(pos,world) == mat));}
+	public static boolean matLookingBlock(BlockPos pos, Material mat, World world) {return (blockUtils.getLookingBlockMat(pos,world) == mat);}
 
 }
