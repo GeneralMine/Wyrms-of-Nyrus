@@ -246,7 +246,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     public void onLivingUpdate(){
         super.onLivingUpdate();
-        if (!AI.destroyBlocks && Invasion.probingEnabled) BreakGlass.CheckAndBreak(world,getPosition(),3);
+        if (AI.destroyBlocks && Invasion.probingEnabled) BreakGlass.CheckAndBreak(world,getPosition(),3);
     }
     @Override
     public void onUpdate() {
