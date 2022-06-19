@@ -1,6 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering;
 
+import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -9,6 +14,7 @@ public class BreakGlass {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
+        BlockPos breakPos = new BlockPos(x,y,z);
         boolean found;
         double sx;
         double sy;
@@ -22,6 +28,7 @@ public class BreakGlass {
                 for (int index2 = 0; index2 < (int) ((range)); index2++) {
                     if (((world.getBlockState(new BlockPos((int) (x + (sx)), (int) (y + (sy)), (int) (z + (sz))))).getMaterial() == Material.GLASS)) {
                         found = (true);
+                        breakPos = (new BlockPos((int) (x + (sx)), (int) (y + (sy)), (int) (z + (sz))));
                         break;
                     }
                     sz = ((sz) + 1);
@@ -30,8 +37,9 @@ public class BreakGlass {
             }
             sx = (sx) + 1;
         }
-        if (((found) == (true))) {
-            world.setBlockToAir(new BlockPos(x, y, z));
+        if (((found))) {
+            world.setBlockToAir(breakPos);
+            world.playSound(null, x, y, z, SoundEvent.REGISTRY.getObject(new ResourceLocation("block.glass.break")), SoundCategory.MASTER, (float) 2, (float) 1.5);
         }
     }
 }
