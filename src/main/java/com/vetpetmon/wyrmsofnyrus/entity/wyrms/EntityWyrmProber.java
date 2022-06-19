@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
+import com.vetpetmon.wyrmsofnyrus.compat.IRadiationImmune;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
@@ -251,6 +252,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         chanceToBreak = RNG.dBase(20);
         if (AI.destroyBlocks && Invasion.probingEnabled && (chanceToBreak == 2)) BreakGlass.CheckAndBreak(world,getPosition(),3);
     }
+
     @Override
     public void onUpdate() {
         super.onUpdate();

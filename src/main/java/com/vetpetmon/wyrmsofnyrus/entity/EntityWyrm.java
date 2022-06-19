@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
+import com.vetpetmon.wyrmsofnyrus.compat.IRadiationImmune;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -11,16 +12,21 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.Objects;
 
 /**
  * Abstract class that all Wyrms of Nyrus entities are built from.
  * Handles a lot of the hot nonsense of class inheritance for you.
  * You're welcome. <3
  */
-public abstract class EntityWyrm extends EntityMob implements IAnimatable {
+public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadiationImmune {
 
     // TODO: FIX THIS.
     //  LIST OF CASTE TYPES:
@@ -48,6 +54,12 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
 
     // Most wyrms don't need to despawn. Despawning breaks a lot of things, like Creepwyrms, for a prime example.
     protected boolean canDespawn() {return false;}
+
+    /*public void onLivingUpdate() {
+        if (Loader.isModLoaded("hbm") && !isPotionActive(Objects.requireNonNull(Potion.getPotionFromResourceLocation("potion.hbm_mutation")))) {
+            this.addPotionEffect(new PotionEffect(Objects.requireNonNull(Potion.getPotionFromResourceLocation("potion.hbm_mutation"))));
+        }
+    }*/ //I tried. Put HBM on the incompatibility list until HBM gives us a real way to do this as seen by what SRP does.
 
     // Getters for Wyrms.
     protected static boolean getSimpleAI() {return AI.performanceAIMode;}
@@ -138,6 +150,12 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
                 return true;
         }
     }
+    //@Override
+    //public void onUpdate() {
+        // Silly NTM wants to kill wyrms using radiation. This fixes that by setting the value to 0 every update. Might be laggy but that's the only fix that HBM provides. Don't look at me, look at the source code. https://github.com/Drillgon200/Hbm-s-Nuclear-Tech-GIT/blob/1.12.2_test/src/main/java/com/hbm/entity/mob/EntityMaskMan.java#L88
+        // I would use IRadiationImmune, but I'm not too sure if making a duplicate interface is safe.
+        //if (Loader.isModLoaded("hbm")) getEntityData().setFloat("hfr_radiation", 0);
+    //}
 
     // Wyrms now earn points when they kill something.
     @Override
