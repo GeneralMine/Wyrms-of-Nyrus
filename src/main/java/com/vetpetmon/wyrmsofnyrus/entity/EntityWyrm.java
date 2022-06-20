@@ -174,11 +174,18 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadi
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
+        // Attempt to fix #6. Did not work.
+        //compound.getFloat("rads");
+        //compound.getFloat("envRads");
+        //compound.getFloat("radBuf");
     }
 
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
+        //compound.setFloat("rads", 0);
+        //compound.setFloat("envRads", 0);
+        //compound.setFloat("radBuf", 0);
     }
 }
