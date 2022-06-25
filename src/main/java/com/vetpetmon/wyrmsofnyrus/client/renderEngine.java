@@ -15,6 +15,7 @@ public class renderEngine {
         RenderingRegistry.registerEntityRenderingHandler(EntityDobber.class, DobberGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCallousPod.class, CallousPodGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmSoldier.class, WyrmSoldierGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmSoldierInfectoid.class, WyrmSoldierInfectoidGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepwyrm.class, CreepwyrmGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMyrmur.class, MyrmurGeoRenderer::new);
     }

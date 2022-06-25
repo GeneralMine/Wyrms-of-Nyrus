@@ -61,7 +61,7 @@ public class Invasion {
         CSBlockBLEnabled = ConfigLib.createConfigBool(config, CATEGORYTWO, "Creepable block blacklist enabled", "Enables the creepable block blacklist.", true);
         FinalizeiBdef();
 
-        invasionProgressionRate = ConfigLib.createConfigDouble(config, CATEGORY, "Invasion Progression Rate", "Speed up or slow down invasion stage progression by multiplying the point requirements. Default: 1.0", 1.0);
+        invasionProgressionRate = ConfigLib.createConfigDouble(config, CATEGORY, "Invasion Progression Rate", "Speed up or slow down invasion stage progression by multiplying the point requirements. Higher numbers slow things down. Make sure to not set this too higher, else there may be overflow errors trying to reach higher stages. Default: 1.0", 1.0);
 
     }
 

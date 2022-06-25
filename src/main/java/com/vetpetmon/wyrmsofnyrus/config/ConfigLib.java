@@ -71,6 +71,7 @@ public class ConfigLib {
         Invasion.loadFromConfig(cfg);
         AI.loadFromConfig(cfg);
         Radiogenetics.loadFromConfig(cfg);
+        Evo.loadFromConfig(cfg);
         wyrmsofnyrus.logger.info("Configuration loaded or changed.");
         cfg.save();
     }

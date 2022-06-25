@@ -26,7 +26,7 @@ public class VisitorEvent {
 		int y = (int) e.get("y");
 		int z = (int) e.get("z");
 		boolean isForced = forced;
-		if ((!(wyrmVariables.MapVariables.get(world).invasionStarted)) || (isForced)) {
+		if ((!(wyrmVariables.MapVariables.get(world).invasionStarted) && ((RNG.getIntRangeInclu(0, 2000)) == 1)) || (isForced)) {
 				if (!world.isRemote) {
 					Entity entityToSpawn = new EntityTheVisitor(world);
 					entityToSpawn.setLocationAndAngles(x, (y + 40), z, world.rand.nextFloat() * 360F, 0.0F);
@@ -46,7 +46,7 @@ public class VisitorEvent {
 
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-		if (event.phase == TickEvent.Phase.END && ((RNG.getIntRangeInclu(0, 2000)) == 1)) {
+		if (event.phase == TickEvent.Phase.END ) {
 			Entity entity = event.player;
 			World world = entity.world;
 			java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();

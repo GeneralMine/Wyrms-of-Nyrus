@@ -1,9 +1,8 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityMyrmur;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmSoldier;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmWorker;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
@@ -29,7 +28,12 @@ public class WyrmlingGrowUp {
             case(1):
             case(2):
             case(3):
-                entityToSpawn = new EntityWyrmSoldier(world);
+                if (evoPoints.get(world) >= 50 && RNG.dBase(3) == 2) {
+                    entityToSpawn = new EntityWyrmSoldierInfectoid(world);
+                }
+                else {
+                    entityToSpawn = new EntityWyrmSoldier(world);
+                }
                 break;
             default:
                 entityToSpawn = new EntityWyrmWorker(world);
