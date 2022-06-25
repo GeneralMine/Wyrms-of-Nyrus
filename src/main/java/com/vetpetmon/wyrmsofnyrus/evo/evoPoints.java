@@ -39,6 +39,12 @@ public class evoPoints {
         sync(w);
     }
 
+    public static void decay(World w) {
+        if (RNG.dBase(300) == 1) {
+            subtract(w,1);
+        }
+    }
+
     /**
      * Syncs the variable change to the world.
      */
@@ -50,9 +56,7 @@ public class evoPoints {
     public void onWorldTick(TickEvent.WorldTickEvent event) {
         if (event.phase == TickEvent.Phase.END ) {
             World world = event.world;
-            if (RNG.dBase(300) == 1) {
-                subtract(world,1);
-            }
+            decay(world);
         }
     }
 }
