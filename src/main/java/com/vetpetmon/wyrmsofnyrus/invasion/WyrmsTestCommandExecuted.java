@@ -51,6 +51,8 @@ public class WyrmsTestCommandExecuted extends AutoReg.ModElement {
 									+ (invasionPoints.get(world))
 									+ (" || Evolution: ")
 									+ (evoPoints.get(world))
+									+ (" || Min Evolution: ")
+									+ (evoPoints.minEvoCap)
 								)
 						)
 				);
