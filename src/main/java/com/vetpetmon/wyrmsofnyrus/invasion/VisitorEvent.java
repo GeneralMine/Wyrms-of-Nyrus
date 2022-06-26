@@ -40,8 +40,10 @@ public class VisitorEvent extends AutoReg.ModElement {
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
 				world.addWeatherEffect(new EntityLightningBolt(world, x, 170, z, false));
-				for (int index0 = 0; index0 < (2+(RNG.getIntRangeInclu(1,3))); index0++) {
-					smallPodRaid.Do(e);
+				if (!isForced) {
+					for (int index0 = 0; index0 < (2 + (RNG.getIntRangeInclu(1, 3))); index0++) {
+						smallPodRaid.Do(e);
+					}
 				}
 				wyrmVariables.WorldVariables.get(world).invasionStarted = true;
 				wyrmVariables.WorldVariables.get(world).syncData(world);
