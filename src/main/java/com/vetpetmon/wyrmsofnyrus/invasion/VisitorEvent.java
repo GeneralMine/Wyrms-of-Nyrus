@@ -30,7 +30,7 @@ public class VisitorEvent extends AutoReg.ModElement {
 		int y = (int) e.get("y");
 		int z = (int) e.get("z");
 		boolean isForced = forced;
-		if (((!wyrmVariables.WorldVariables.get(world).invasionStarted) && ((RNG.getIntRangeInclu(0, 200)) == 1)) || (isForced)) {
+		if (((!wyrmVariables.WorldVariables.get(world).invasionStarted) && ((RNG.getIntRangeInclu(0, 20000000)) == 1)) || (isForced)) {
 				if (!world.isRemote) {
 					Entity entityToSpawn = new EntityTheVisitor(world);
 					entityToSpawn.setLocationAndAngles(x, (y + 40), z, world.rand.nextFloat() * 360F, 0.0F);
