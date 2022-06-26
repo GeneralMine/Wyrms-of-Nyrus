@@ -9,7 +9,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -81,7 +80,7 @@ public class EntityWyrmling extends EntityWyrm {
             d.put("y", j);
             d.put("z", k);
             d.put("world", world);
-            growUp(d, this, this.timeUntilGrowth);
+            growUp(d, this);
             this.hasGrown = true;
         }
     }

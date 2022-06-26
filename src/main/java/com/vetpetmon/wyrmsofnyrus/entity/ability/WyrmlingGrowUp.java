@@ -12,13 +12,12 @@ import java.util.Map;
 
 public class WyrmlingGrowUp {
 
-    public static void growUp(Map<String, Object> e, final EntityWyrm wyrmIn, int timeUntilGrowth) {
+    public static void growUp(Map<String, Object> e, final EntityWyrm wyrmIn) {
         int x = (int) e.get("x");
         boolean hasSpawned = false;
         int y = (int) e.get("y");
         int z = (int) e.get("z");
         Entity entityToSpawn;
-        int GrowthTime = timeUntilGrowth;
         int entityToGrowTo = RNG.dBase(12);
         World world = (World) e.get("world");
         switch(entityToGrowTo) {
@@ -40,7 +39,7 @@ public class WyrmlingGrowUp {
                 entityToSpawn = new EntityWyrmWorker(world);
                 break;
         }
-        if (!world.isRemote && GrowthTime <= 0 && !hasSpawned) {
+        if (!world.isRemote && !hasSpawned) {
             entityToSpawn.setLocationAndAngles((x), (y), (z), world.rand.nextFloat() * 360F, 0.0F);
             world.spawnEntity(entityToSpawn);
             hasSpawned = true;
