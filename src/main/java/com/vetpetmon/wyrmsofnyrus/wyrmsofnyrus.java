@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import com.vetpetmon.wyrmsofnyrus.synapselib.threading;
 import net.minecraft.util.ResourceLocation;
@@ -100,6 +101,7 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+        evoPoints.minimum();
     }
 
     @Mod.EventHandler

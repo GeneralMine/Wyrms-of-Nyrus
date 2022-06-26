@@ -57,7 +57,7 @@ public class ConfigLib {
 
         if(value < 0) {
             wyrmsofnyrus.logger.error("User error in config: You set a configurable value to 0 or below.");
-            wyrmsofnyrus.logger.error(String.format("Error will be catched and set back to %d, but please, read configuration instructions more closely.", def));
+            wyrmsofnyrus.logger.error(String.format("Error will be caught and set back to %d, but please, read configuration instructions more closely.", def));
             return def;
         }
 

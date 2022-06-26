@@ -1,9 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.evo;
 
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -15,7 +17,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
  * Even worse, there's no dedicated getter. I'm fixing that as we speak.
  */
 public class evoPoints {
-    public static double get(World w) {return wyrmVariables.WorldVariables.get(w).wyrmEvo;}
+    public static int minEvoCap = 0;
+    public static int get(World w) {return wyrmVariables.WorldVariables.get(w).wyrmEvo;}
+    public static void set(World w, int i) {wyrmVariables.WorldVariables.get(w).wyrmEvo = i;}
 
     /**
      * Adds invasion points to the world.
@@ -26,6 +30,14 @@ public class evoPoints {
     public static void add(World w, int i){
         wyrmVariables.WorldVariables.get(w).wyrmEvo += i;
         sync(w);
+    }
+
+    public static void minimum(){
+        if (Loader.isModLoaded("draconicevolution")) {minEvoCap += 100;}
+        if (Loader.isModLoaded("hbm")) {minEvoCap += 80;}
+        if (Loader.isModLoaded("techguns")) {minEvoCap += 50;}
+        if (Loader.isModLoaded("immersiveintelligence")) {minEvoCap += 50;}
+        if (Loader.isModLoaded("srparasites")) {minEvoCap += 20;}
     }
 
     /**
@@ -40,8 +52,11 @@ public class evoPoints {
     }
 
     public static void decay(World w) {
-        if (RNG.dBase(300) == 1) {
-            subtract(w,1);
+        if (RNG.dBase(300) == 1 && ((get(w) - ((int) (1 * Evo.evoFactor))) >= minEvoCap)) {
+            subtract(w, (int) (1 * Evo.evoFactor));
+        }
+        else if (get(w) <= minEvoCap) {
+            set(w,minEvoCap);
         }
     }
 

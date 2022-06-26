@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
@@ -28,7 +29,7 @@ public class WyrmlingGrowUp {
             case(1):
             case(2):
             case(3):
-                if (evoPoints.get(world) >= 50 && RNG.dBase(3) == 2) {
+                if (Evo.evoVariantsEnabled && (evoPoints.get(world) >= 50 && RNG.dBase(3) == 2)) {
                     entityToSpawn = new EntityWyrmSoldierInfectoid(world);
                 }
                 else {
