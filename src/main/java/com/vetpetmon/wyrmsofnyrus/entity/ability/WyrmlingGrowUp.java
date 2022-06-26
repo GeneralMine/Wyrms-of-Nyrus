@@ -18,11 +18,18 @@ public class WyrmlingGrowUp {
         int y = (int) e.get("y");
         int z = (int) e.get("z");
         Entity entityToSpawn;
-        int entityToGrowTo = RNG.dBase(12);
+        int entityToGrowTo = RNG.dBase(13);
         World world = (World) e.get("world");
         switch(entityToGrowTo) {
             case(11):
-                entityToSpawn = new EntityMyrmur(world);
+                if (Evo.evoEnabled && evoPoints.get(world) >= 100) {
+                    entityToSpawn = new EntityMyrmur(world);
+                }
+                else {
+                    entityToSpawn = new EntityWyrmWorker(world);
+                }
+                if(!Evo.evoEnabled) entityToSpawn = new EntityMyrmur(world);
+
                 break;
             case(0):
             case(1):
