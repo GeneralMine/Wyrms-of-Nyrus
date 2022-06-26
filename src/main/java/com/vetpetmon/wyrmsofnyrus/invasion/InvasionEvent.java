@@ -27,7 +27,7 @@ public class InvasionEvent extends AutoReg.ModElement {
 		World world = (World) dependencies.get("world");
 		int eventRolled = 0;
 		double wyrmInvasionDifficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
-		if (wyrmVariables.MapVariables.get(world).invasionStarted && (Math.random() < 0.00001 + (wyrmInvasionDifficulty / 6f * 0.00021f))) {
+		if (wyrmVariables.WorldVariables.get(world).invasionStarted && (Math.random() < 0.00001 + (wyrmInvasionDifficulty / 6f * 0.00021f))) {
 			if(wyrmInvasionDifficulty > 1.5) {eventRolled = (RNG.getIntRangeInclu(1,4));}
 			else if(wyrmInvasionDifficulty >= 2.0) {eventRolled = (RNG.getIntRangeInclu(1,5));}
 			else if(wyrmInvasionDifficulty >= 2.5) {eventRolled = (RNG.getIntRangeInclu(1,7));}

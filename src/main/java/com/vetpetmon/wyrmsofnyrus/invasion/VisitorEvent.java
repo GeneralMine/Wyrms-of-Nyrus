@@ -2,7 +2,6 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -31,7 +30,7 @@ public class VisitorEvent extends AutoReg.ModElement {
 		int y = (int) e.get("y");
 		int z = (int) e.get("z");
 		boolean isForced = forced;
-		if ((!(wyrmVariables.MapVariables.get(world).invasionStarted) && ((RNG.getIntRangeInclu(0, 200000)) == 1)) || (isForced)) {
+		if (((!wyrmVariables.WorldVariables.get(world).invasionStarted) && ((RNG.getIntRangeInclu(0, 200)) == 1)) || (isForced)) {
 				if (!world.isRemote) {
 					Entity entityToSpawn = new EntityTheVisitor(world);
 					entityToSpawn.setLocationAndAngles(x, (y + 40), z, world.rand.nextFloat() * 360F, 0.0F);
@@ -44,19 +43,26 @@ public class VisitorEvent extends AutoReg.ModElement {
 				for (int index0 = 0; index0 < (2+(RNG.getIntRangeInclu(1,3))); index0++) {
 					smallPodRaid.Do(e);
 				}
-				wyrmVariables.MapVariables.get(world).invasionStarted = true;
-				wyrmVariables.MapVariables.get(world).syncData(world);
+				wyrmVariables.WorldVariables.get(world).invasionStarted = true;
+				wyrmVariables.WorldVariables.get(world).syncData(world);
 		}
 	}
 
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		Entity entity = event.player;
-		java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
-		dependencies.put("x", (int) entity.posX);
-		dependencies.put("y", (int) entity.posY);
-		dependencies.put("z", (int) entity.posZ);
-		this.executeProcedure(dependencies, false, entity.world);
+		World world = entity.world;
+		if (!wyrmVariables.WorldVariables.get(world).invasionStarted) {
+			java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
+			dependencies.put("x", (int) entity.posX);
+			dependencies.put("y", (int) entity.posY);
+			dependencies.put("z", (int) entity.posZ);
+			dependencies.put("world", world);
+			dependencies.put("entity", entity);
+			executeProcedure(dependencies, false, world);
+			wyrmVariables.WorldVariables.get(world).invasionStarted = true;
+			wyrmVariables.WorldVariables.get(world).syncData(world);
+		}
 	}
 
 	@Override
