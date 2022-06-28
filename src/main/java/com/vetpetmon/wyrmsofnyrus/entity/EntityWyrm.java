@@ -5,6 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.compat.IRadiationImmune;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.*;
@@ -13,6 +14,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
@@ -103,6 +105,12 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadi
         if(getAttackAnimals()) afterAnimals();
         if(getAttackVillagers()) afterVillagers();
         if(getAttackMobs()) afterMobs();
+
+        //Lycanites Mobs just copies the raw EntityLiving class and builds their entities using that base class. Why.
+        if (Loader.isModLoaded("lycanitesmobs") && getAttackMobs()) {
+            this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, true, false, new Predicate<EntityMob>() {
+            public boolean apply(EntityMob target) {return(target instanceof EntityLiving && !((target instanceof EntityCreeper) || (target instanceof EntityWyrm)));}
+        }));}
     }
     // Everything here bypasses config options. Use sparingly with good reason.
     protected void afterMobs() {
