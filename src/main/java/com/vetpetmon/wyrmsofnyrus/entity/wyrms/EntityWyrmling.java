@@ -53,13 +53,13 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && evoPoints.get(world) >= 150){
-            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2D);
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
-        }
-        else if (Evo.evoEnabled && evoPoints.get(world) >= 300){
+        if (Evo.evoEnabled && evoPoints.get(world) >= 300){
             this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4D);
             this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24D);
+        }
+        else if (Evo.evoEnabled && evoPoints.get(world) >= 150){
+            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2D);
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
         }
         else {
             this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.1D);
