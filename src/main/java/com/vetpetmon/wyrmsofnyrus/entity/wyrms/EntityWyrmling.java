@@ -5,6 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,17 +54,18 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
+        float difficulty = (float) getInvasionDifficulty();
         if (Evo.evoEnabled && evoPoints.get(world) >= 300){
-            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4D);
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24D);
+            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(8,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(24,difficulty));
         }
         else if (Evo.evoEnabled && evoPoints.get(world) >= 150){
-            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2D);
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
+            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(4,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(12,difficulty));
         }
         else {
-            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.1D);
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4D);
+            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(3,difficulty));
         }
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
