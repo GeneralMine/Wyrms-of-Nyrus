@@ -43,11 +43,23 @@ public class evoPoints extends AutoReg.ModElement {
         sync(w);
     }
 
+    /**
+     * Looks at your modpack and sees what mods are currently loaded. Does not throw
+     * an error if a mod isn't detected, and instead just doesn't add to the minimum.
+     *
+     * MUST BE RUN AT PRE-INT. Minimum evo points cap is remembered until the game
+     * is unloaded from RAM. minEvoCap is always reset to 0 when first loaded, so
+     * no need to make another setter for that.
+     */
     public static void minimum(){
         if (Loader.isModLoaded("draconicevolution")) {minEvoCap += 100;}
         if (Loader.isModLoaded("hbm")) {minEvoCap += 80;}
         if (Loader.isModLoaded("techguns")) {minEvoCap += 50;}
         if (Loader.isModLoaded("immersiveintelligence")) {minEvoCap += 50;}
+        if (Loader.isModLoaded("securitycraft")) {minEvoCap += 45;}
+        if (Loader.isModLoaded("roughmobs")) {minEvoCap += 30;}
+        if (Loader.isModLoaded("roughmobsrevamped")) {minEvoCap += 30;}
+        if (Loader.isModLoaded("ic2")) {minEvoCap += 30;}
         if (Loader.isModLoaded("srparasites")) {minEvoCap += 20;}
     }
 
