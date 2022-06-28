@@ -57,11 +57,11 @@ public class EntityWyrmling extends EntityWyrm {
         float difficulty = (float) getInvasionDifficulty();
         if (Evo.evoEnabled && evoPoints.get(world) >= 300){
             this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(8,difficulty));
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(24,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(12,difficulty));
         }
         else if (Evo.evoEnabled && evoPoints.get(world) >= 150){
             this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(4,difficulty));
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(12,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(6,difficulty));
         }
         else {
             this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2,difficulty));
