@@ -12,6 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -22,7 +23,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.creepTheLands.*;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
-public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
+public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     private int timeUntilNextCreep;
     public EntityCreepwyrm(World world) {
@@ -119,4 +120,12 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepwyrm.idle"));
         return PlayState.CONTINUE;
     }
+
+    @Override
+    public int tickTimer() {
+        return ticksExisted;
+    }
+
+    @Override
+    public void tick() {super.onUpdate();}
 }

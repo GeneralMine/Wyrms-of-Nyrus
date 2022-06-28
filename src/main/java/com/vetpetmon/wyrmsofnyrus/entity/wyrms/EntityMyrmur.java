@@ -8,7 +8,6 @@ import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -16,6 +15,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -25,7 +25,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
-public class EntityMyrmur extends EntityWyrm implements IAnimatable {
+public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityMyrmur(World world) {
         super(world);
@@ -119,4 +119,11 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable {
         return PlayState.CONTINUE;
     }
 
+    @Override
+    public int tickTimer() {
+        return ticksExisted;
+    }
+
+    @Override
+    public void tick() {super.onUpdate();}
 }
