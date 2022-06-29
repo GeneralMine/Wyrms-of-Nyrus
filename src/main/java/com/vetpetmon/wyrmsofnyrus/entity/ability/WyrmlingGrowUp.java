@@ -31,6 +31,13 @@ public class WyrmlingGrowUp {
                 if(!Evo.evoEnabled) entityToSpawn = new EntityMyrmur(world);
 
                 break;
+            case(8):
+                if (Evo.evoEnabled && evoPoints.get(world) >= 400) {
+                    entityToSpawn = new EntityWyrmRoverUranium(world);
+                }
+                else {
+                    entityToSpawn = new EntityWyrmRover(world);
+                }
             case(0):
             case(1):
             case(2):
