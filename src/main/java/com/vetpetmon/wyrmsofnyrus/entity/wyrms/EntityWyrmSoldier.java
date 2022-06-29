@@ -19,6 +19,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -31,7 +32,7 @@ import java.util.Map;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
-public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable {
+public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmSoldier(World world) {
         super(world);
@@ -117,4 +118,11 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable {
         return PlayState.CONTINUE;
     }
 
+    @Override
+    public int tickTimer() {
+        return ticksExisted;
+    }
+
+    @Override
+    public void tick() {super.onUpdate();}
 }

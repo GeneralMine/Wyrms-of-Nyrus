@@ -17,6 +17,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -26,7 +27,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
-public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatable {
+public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmSoldierInfectoid(World world) {
         super(world);
@@ -51,9 +52,9 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
     protected void applyEntityAttributes() {
         float difficulty = (float) getInvasionDifficulty();
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(4.5d,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(5.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.52D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(8,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(10,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(5,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
     }
@@ -112,5 +113,11 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
         }
         return PlayState.CONTINUE;
     }
+    @Override
+    public int tickTimer() {
+        return ticksExisted;
+    }
 
+    @Override
+    public void tick() {super.onUpdate();}
 }
