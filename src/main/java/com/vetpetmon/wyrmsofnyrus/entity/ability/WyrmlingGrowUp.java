@@ -32,7 +32,8 @@ public class WyrmlingGrowUp {
 
                 break;
             case(8):
-                if (Evo.evoEnabled && evoPoints.get(world) >= 400) {
+            case(9):
+                if (Evo.evoVariantsEnabled && (evoPoints.get(world) >= 400 && RNG.dBase(3) == 2)) {
                     entityToSpawn = new EntityWyrmRoverUranium(world);
                 }
                 else {

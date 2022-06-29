@@ -85,7 +85,7 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
     @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,6);
+        wyrmDeathSpecial(this,getPosition(),world,10);
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
