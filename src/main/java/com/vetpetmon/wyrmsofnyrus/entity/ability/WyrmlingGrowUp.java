@@ -18,7 +18,7 @@ public class WyrmlingGrowUp {
         int y = (int) e.get("y");
         int z = (int) e.get("z");
         Entity entityToSpawn;
-        int entityToGrowTo = RNG.dBase(13);
+        int entityToGrowTo = RNG.dBase(16);
         World world = (World) e.get("world");
         switch(entityToGrowTo) {
             case(11):
