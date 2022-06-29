@@ -45,20 +45,18 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         simpleAI();
-        if (AI.savageAIMode) {
-            this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
-            afterPlayers();
-        }
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
+        afterPlayers();
     }
 
     @Override
     protected void applyEntityAttributes() {
         float difficulty = (float) getInvasionDifficulty();
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(5.0d,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(6.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.75D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(8,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(2,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(6,difficulty));
     }
 
     @Override

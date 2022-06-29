@@ -43,10 +43,8 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         simpleAI();
-        if (AI.savageAIMode) {
-            this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
-            afterPlayers();
-        }
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
+        afterPlayers();
     }
 
     @Override
@@ -55,8 +53,8 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.75D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(3,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(1,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(4,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(4,difficulty));
     }
 
     @Override
