@@ -28,6 +28,19 @@ public class evoPoints extends AutoReg.ModElement {
     public static int minEvoCap = 0;
     public static int get(World w) {return wyrmVariables.WorldVariables.get(w).wyrmEvo;}
     public static void set(World w, int i) {wyrmVariables.WorldVariables.get(w).wyrmEvo = i;}
+    public static double evoMilestone(World w){
+        double evoBoost = 1.0;
+        if (get(w) >= 150) {
+            evoBoost = 1.25;
+        }
+        if (get(w) >= 250) {
+            evoBoost = 1.5;
+        }
+        if (get(w) >= 400) {
+            evoBoost = 1.75;
+        }
+        return evoBoost;
+    }
 
     /**
      * Adds invasion points to the world.
@@ -54,13 +67,13 @@ public class evoPoints extends AutoReg.ModElement {
     public static void minimum(){
         if (Loader.isModLoaded("draconicevolution")) {minEvoCap += 100;}
         if (Loader.isModLoaded("hbm")) {minEvoCap += 80;}
+        if (Loader.isModLoaded("srparasites")) {minEvoCap += 60;}
         if (Loader.isModLoaded("techguns")) {minEvoCap += 50;}
         if (Loader.isModLoaded("immersiveintelligence")) {minEvoCap += 50;}
         if (Loader.isModLoaded("securitycraft")) {minEvoCap += 45;}
         if (Loader.isModLoaded("roughmobs")) {minEvoCap += 30;}
         if (Loader.isModLoaded("roughmobsrevamped")) {minEvoCap += 30;}
         if (Loader.isModLoaded("ic2")) {minEvoCap += 30;}
-        if (Loader.isModLoaded("srparasites")) {minEvoCap += 20;}
     }
 
     /**
