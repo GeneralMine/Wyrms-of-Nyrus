@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
+import javax.annotation.Nullable;
 import com.vetpetmon.wyrmsofnyrus.compat.IRadiationImmune;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
@@ -13,6 +14,9 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -23,7 +27,10 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  * Handles a lot of the hot nonsense of class inheritance for you.
  * You're welcome. <3
  */
-public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadiationImmune {
+public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadiationImmune, IMob {
+
+    protected static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
+
 
     // TODO: FIX THIS.
     //  LIST OF CASTE TYPES:
@@ -153,6 +160,36 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadi
                 return true;
         }
     }
+
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataManager.register(HAS_TARGET, false);
+    }
+
+    /**
+     * Detects if the Wyrm entity has found a target. Useful for animation.
+     *
+     * @return boolean
+     */
+    public boolean hasAttackTarget() {
+        if (this.world.isRemote) {
+            return this.dataManager.get(HAS_TARGET);
+        } else {
+            return this.getAttackTarget() != null && !this.getAttackTarget().isDead;
+        }
+    }
+
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (getAttackTarget() == null) {
+            this.dataManager.set(HAS_TARGET, false);
+        }
+        else {
+            this.dataManager.set(HAS_TARGET, true);
+        }
+    }
+
     //@Override
     //public void onUpdate() {
         // Silly NTM wants to kill wyrms using radiation. This fixes that by setting the value to 0 every update. Might be laggy but that's the only fix that HBM provides. Don't look at me, look at the source code. https://github.com/Drillgon200/Hbm-s-Nuclear-Tech-GIT/blob/1.12.2_test/src/main/java/com/hbm/entity/mob/EntityMaskMan.java#L88

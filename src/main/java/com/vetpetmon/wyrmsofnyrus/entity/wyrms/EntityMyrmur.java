@@ -111,11 +111,11 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
         if (event.isMoving()) {
             // TODO: If it's got a target, display special animation instead of the normal moving animation.
             //if (EntityAIAttackMelee.shouldContinueExecuting()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.attacking"));
-            /*else */event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.moving"));
+            /*else */
+            if (hasAttackTarget()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.attacking"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.moving"));
         }
-        else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.idle"));
-        }
+        else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.idle"));
         return PlayState.CONTINUE;
     }
 
