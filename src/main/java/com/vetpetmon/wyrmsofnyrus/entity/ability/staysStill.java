@@ -13,7 +13,7 @@ public class staysStill {
         int y = (int) dependencies.get("y");
         int z = (int) dependencies.get("z");
         World world = (World) dependencies.get("world");
-        if ((world.isAirBlock(new BlockPos(x, (y - 1), z)))) {
+        if (!(world.isAirBlock(new BlockPos(x, (y - 1), z)))) {
             entity.setPositionAndUpdate(x, y, z);
         }
     }
