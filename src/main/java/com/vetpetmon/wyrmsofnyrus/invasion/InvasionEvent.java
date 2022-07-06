@@ -31,13 +31,18 @@ public class InvasionEvent extends AutoReg.ModElement {
 			if(wyrmInvasionDifficulty > 1.5) {eventRolled = (RNG.getIntRangeInclu(1,4));}
 			else if(wyrmInvasionDifficulty >= 2.0) {eventRolled = (RNG.getIntRangeInclu(1,5));}
 			else if(wyrmInvasionDifficulty >= 2.5) {eventRolled = (RNG.getIntRangeInclu(1,7));}
+			else if(wyrmInvasionDifficulty >= 3.25) {eventRolled = (RNG.getIntRangeInclu(1,10));}
+			else if(wyrmInvasionDifficulty >= 3.75) {eventRolled = (RNG.getIntRangeInclu(1,11));}
 
 
-			if ( eventRolled == 1) {smallPodRaid.Do(dependencies);}
-			else if ( eventRolled == 2) {scoutingPodRaid.call(dependencies);}
+			if ( eventRolled == 2) {scoutingPodRaid.call(dependencies);}
 			else if ( eventRolled == 4) {creepwyrmDrop.call(dependencies);}
 			else if ( eventRolled == 5) {massIncursion.call(dependencies, 1);}
 			else if ( eventRolled == 7) {scoutingPodRaid.call(dependencies);creepwyrmDrop.call(dependencies);}
+			else if ( eventRolled == 8) {massIncursion.call(dependencies, 1);}
+			else if ( eventRolled == 9) {massIncursion.call(dependencies, 2);}
+			else if ( eventRolled == 10) {scoutingPodRaid.call(dependencies);creepwyrmDrop.call(dependencies);smallPodRaid.Do(dependencies);}
+			else {smallPodRaid.Do(dependencies);}
 		}
 	}
 
