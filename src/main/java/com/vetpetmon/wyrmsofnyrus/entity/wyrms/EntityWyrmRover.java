@@ -4,6 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.Block;
@@ -16,6 +17,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -25,7 +27,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
-public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
+public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmRover(World world) {
         super(world);
@@ -42,20 +44,18 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         simpleAI();
-        if (AI.savageAIMode) {
-            this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
-            afterPlayers();
-        }
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
+        afterPlayers();
     }
 
     @Override
     protected void applyEntityAttributes() {
-        float difficulty = (float) getInvasionDifficulty();
+        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.75D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(3,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(1,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(4,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(4,difficulty));
     }
 
     @Override
@@ -112,5 +112,11 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable {
         }
         return PlayState.CONTINUE;
     }
+    @Override
+    public int tickTimer() {
+        return ticksExisted;
+    }
 
+    @Override
+    public void tick() {super.onUpdate();}
 }

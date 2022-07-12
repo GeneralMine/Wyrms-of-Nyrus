@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import net.minecraft.world.World;
@@ -45,12 +46,13 @@ public class WyrmsTestCommandExecuted extends AutoReg.ModElement {
 						new TextComponentString(
 								(
 									("Current Wyrm invasion status: ")
-									+ ""
 									+ ((wyrmVariables.wyrmInvasionStatus))
-									+ ""
 									+ (" || Points: ")
-									+ ""
-									+ ((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints))
+									+ (invasionPoints.get(world))
+									+ (" || Evolution: ")
+									+ (evoPoints.get(world))
+									+ (" || Min Evolution: ")
+									+ (evoPoints.minEvoCap)
 								)
 						)
 				);

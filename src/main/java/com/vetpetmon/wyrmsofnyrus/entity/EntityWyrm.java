@@ -1,30 +1,36 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
+import javax.annotation.Nullable;
+import com.vetpetmon.wyrmsofnyrus.compat.IRadiationImmune;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.probingPoints.probingPoints;
 
 /**
  * Abstract class that all Wyrms of Nyrus entities are built from.
  * Handles a lot of the hot nonsense of class inheritance for you.
  * You're welcome. <3
  */
-public abstract class EntityWyrm extends EntityMob implements IAnimatable {
+public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadiationImmune, IMob {
+
+    protected static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
+
 
     // TODO: FIX THIS.
     //  LIST OF CASTE TYPES:
@@ -53,6 +59,12 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     // Most wyrms don't need to despawn. Despawning breaks a lot of things, like Creepwyrms, for a prime example.
     protected boolean canDespawn() {return false;}
 
+    /*public void onLivingUpdate() {
+        if (Loader.isModLoaded("hbm") && !isPotionActive(Objects.requireNonNull(Potion.getPotionFromResourceLocation("potion.hbm_mutation")))) {
+            this.addPotionEffect(new PotionEffect(Objects.requireNonNull(Potion.getPotionFromResourceLocation("potion.hbm_mutation"))));
+        }
+    }*/ //I tried. Put HBM on the incompatibility list until HBM gives us a real way to do this as seen by what SRP does.
+
     // Getters for Wyrms.
     protected static boolean getSimpleAI() {return AI.performanceAIMode;}
     protected static boolean getAttackMobs() {return AI.attackMobs;}
@@ -68,12 +80,16 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
     public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
 
     /**
-     * If we are not running with Simple AI (config option), then add Entity AI Idle Looking.
+     * If we are not running with Simple AI (config option), then add Entity AI LookIdle & WanderAvoidWater.
+     * The reason being is these add random entity updates 24/7, and with 400 wyrms in loaded chunks, this makes a difference of ~300 ms processing time. AKA: With hundreds of wyrms, this saves TPS.
      * If it is running with Simple AI, don't add it to the AI task pool, lowering entity update counts.
-     * PLEASE use this instead of using addTask. I will not accept unoptimized code.
+     * PLEASE use this instead of using addTask. I will not accept unoptimized code for optimization functions.
      */
     protected void simpleAI() {
-        if (!getSimpleAI()) this.tasks.addTask(2, new EntityAILookIdle(this));
+        if (!getSimpleAI()) {
+            this.tasks.addTask(2, new EntityAILookIdle(this));
+            this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
+        }
     }
 
     /**
@@ -96,6 +112,12 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         if(getAttackAnimals()) afterAnimals();
         if(getAttackVillagers()) afterVillagers();
         if(getAttackMobs()) afterMobs();
+
+        //Lycanites Mobs just copies the raw EntityLiving class and builds their entities using that base class. Why.
+        if (Loader.isModLoaded("lycanitesmobs") && getAttackMobs()) {
+            this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, true, false, new Predicate<EntityMob>() {
+            public boolean apply(EntityMob target) {return(target instanceof EntityLiving && !((target instanceof EntityCreeper) || (target instanceof EntityWyrm)));}
+        }));}
     }
     // Everything here bypasses config options. Use sparingly with good reason.
     protected void afterMobs() {
@@ -116,6 +138,11 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, false));
     }
+    protected void afterInsectoids() {
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityCaveSpider.class, true, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntitySpider.class, true, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntitySilverfish.class, true, false));
+    }
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.
     public AnimationFactory getFactory() {return this.factory;}
@@ -134,6 +161,42 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         }
     }
 
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataManager.register(HAS_TARGET, false);
+    }
+
+    /**
+     * Detects if the Wyrm entity has found a target. Useful for animation.
+     *
+     * @return boolean
+     */
+    public boolean hasAttackTarget() {
+        if (this.world.isRemote) {
+            return this.dataManager.get(HAS_TARGET);
+        } else {
+            return this.getAttackTarget() != null && !this.getAttackTarget().isDead;
+        }
+    }
+
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (getAttackTarget() == null) {
+            this.dataManager.set(HAS_TARGET, false);
+        }
+        else {
+            this.dataManager.set(HAS_TARGET, true);
+        }
+    }
+
+    //@Override
+    //public void onUpdate() {
+        // Silly NTM wants to kill wyrms using radiation. This fixes that by setting the value to 0 every update. Might be laggy but that's the only fix that HBM provides. Don't look at me, look at the source code. https://github.com/Drillgon200/Hbm-s-Nuclear-Tech-GIT/blob/1.12.2_test/src/main/java/com/hbm/entity/mob/EntityMaskMan.java#L88
+        // I would use IRadiationImmune, but I'm not too sure if making a duplicate interface is safe.
+        //if (Loader.isModLoaded("hbm")) getEntityData().setFloat("hfr_radiation", 0);
+    //}
+
     // Wyrms now earn points when they kill something.
     @Override
     public void onKillEntity(EntityLivingBase entity) {
@@ -151,11 +214,18 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable {
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
+        // Attempt to fix #6. Did not work.
+        //compound.getFloat("rads");
+        //compound.getFloat("envRads");
+        //compound.getFloat("radBuf");
     }
 
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
+        //compound.setFloat("rads", 0);
+        //compound.setFloat("envRads", 0);
+        //compound.setFloat("radBuf", 0);
     }
 }

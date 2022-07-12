@@ -1,7 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.util.SoundCategory;
@@ -13,6 +15,7 @@ public class wyrmDeathSpecial {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
+        evoPoints.add(world,(int) (1 * Evo.evoFactor));
         if ((entityIn.isBurning()) && Radiogenetics.explodingWyrms) {
             if (!world.isRemote) {
                 world.createExplosion(null, x, y, z, (float) (power), true);

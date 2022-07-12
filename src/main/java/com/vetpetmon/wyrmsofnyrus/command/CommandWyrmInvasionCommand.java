@@ -87,6 +87,7 @@ public class CommandWyrmInvasionCommand extends AutoReg.ModElement {
 					$_dependencies.put("y", y);
 					$_dependencies.put("z", z);
 					$_dependencies.put("world", world);
+					$_dependencies.put("entity", entity);
 					WyrmInvasionCommandExecuted.executescript($_dependencies);
 				}
 			}

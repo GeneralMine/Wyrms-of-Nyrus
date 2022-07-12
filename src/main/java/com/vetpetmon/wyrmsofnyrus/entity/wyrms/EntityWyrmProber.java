@@ -2,11 +2,17 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
+import com.vetpetmon.wyrmsofnyrus.compat.IRadiationImmune;
+import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.AIProberAttack;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -19,9 +25,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -37,6 +41,7 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 
 public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private int chanceToBreak;
     //private boolean isCharging;
     public EntityWyrmProber(World world) {
         super(world);
@@ -124,7 +129,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) getInvasionDifficulty();
+        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
         if (Invasion.probingEnabled) {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.72D);
@@ -217,7 +222,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         //this.tasks.addTask(4, new AIFlyingMobCharge(2.0));
         // Bypass configs entirely if probing is enabled, else make probers respect the optimizations players want.
         if (Invasion.probingEnabled) {
-            this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.5D, false));
+            this.tasks.addTask(2, new AIProberAttack(this, 1.5D, true));
             this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 100));
             this.afterPlayers(false);
             this.afterVillagers();
@@ -241,6 +246,12 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     public void onDeath(DamageSource source) {
         super.onDeath(source);
         wyrmDeathSpecial(this,getPosition(),world,1);
+    }
+    @Override
+    public void onLivingUpdate(){
+        super.onLivingUpdate();
+        chanceToBreak = RNG.dBase(20);
+        if (AI.destroyBlocks && Invasion.probingEnabled && (chanceToBreak == 2)) BreakGlass.CheckAndBreak(world,getPosition(),3);
     }
 
     @Override

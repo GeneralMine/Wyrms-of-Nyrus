@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import com.vetpetmon.wyrmsofnyrus.synapselib.threading;
 import net.minecraft.util.ResourceLocation;
@@ -41,7 +42,7 @@ import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 public class wyrmsofnyrus {
     public static final String MODID = "wyrmsofnyrus";
     public static final String NAME = "Wyrms of Nyrus";
-    public static final String VERSION = "0.1.3";
+    public static final String VERSION = "0.1.35";
 
     public AutoReg elements = new AutoReg();
 
@@ -100,6 +101,7 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+        evoPoints.minimum();
     }
 
     @Mod.EventHandler

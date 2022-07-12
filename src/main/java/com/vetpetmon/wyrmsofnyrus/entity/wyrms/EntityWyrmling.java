@@ -1,15 +1,17 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -40,7 +42,7 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, (float) 3, 1, 1.2));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, 3, 1, 1.2));
         this.tasks.addTask(2, new EntityAIFollow(this, (float) 1, 10, 5));
         this.tasks.addTask(3, new EntityAIWander(this, 0.8));
         this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 12));
@@ -52,9 +54,20 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.1D);
+        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
+        if (Evo.evoEnabled && evoPoints.get(world) >= 300){
+            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(8,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(12,difficulty));
+        }
+        else if (Evo.evoEnabled && evoPoints.get(world) >= 150){
+            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(4,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(6,difficulty));
+        }
+        else {
+            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(3,difficulty));
+        }
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
     }
 
@@ -81,7 +94,7 @@ public class EntityWyrmling extends EntityWyrm {
             d.put("y", j);
             d.put("z", k);
             d.put("world", world);
-            growUp(d, this, this.timeUntilGrowth);
+            growUp(d, this);
             this.hasGrown = true;
         }
     }

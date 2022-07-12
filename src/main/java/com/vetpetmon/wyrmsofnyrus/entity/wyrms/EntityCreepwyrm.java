@@ -1,17 +1,18 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -19,14 +20,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.creepTheLands.*;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.staysStill.*;
 
-public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
+public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     private int timeUntilNextCreep;
     public EntityCreepwyrm(World world) {
@@ -63,10 +60,17 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         float difficulty = (float) getInvasionDifficulty();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(4,difficulty));
+        if (Evo.evoEnabled && evoPoints.get(world) >= 500){
+            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(6,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(55,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4D);
+        }
+        else {
+            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(4,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(35,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2D);
+        }
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(35,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 
@@ -116,4 +120,12 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable{
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepwyrm.idle"));
         return PlayState.CONTINUE;
     }
+
+    @Override
+    public int tickTimer() {
+        return ticksExisted;
+    }
+
+    @Override
+    public void tick() {super.onUpdate();}
 }

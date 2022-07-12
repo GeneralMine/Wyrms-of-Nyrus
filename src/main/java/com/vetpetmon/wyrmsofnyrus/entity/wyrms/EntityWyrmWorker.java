@@ -2,8 +2,10 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import com.vetpetmon.wyrmsofnyrus.synapselib.rangeCheck;
@@ -44,7 +46,8 @@ public class EntityWyrmWorker extends EntityWyrm {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        if ((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing)){
+        if (((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing))
+                || (Evo.evoEnabled && evoPoints.get(world) >= 150)) {
             afterPlayers();
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             simpleAI();
@@ -59,7 +62,7 @@ public class EntityWyrmWorker extends EntityWyrm {
 
     @Override
     protected void applyEntityAttributes() {
-        float difficulty = (float) getInvasionDifficulty();
+        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);

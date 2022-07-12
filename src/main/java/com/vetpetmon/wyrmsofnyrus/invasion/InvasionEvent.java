@@ -27,17 +27,22 @@ public class InvasionEvent extends AutoReg.ModElement {
 		World world = (World) dependencies.get("world");
 		int eventRolled = 0;
 		double wyrmInvasionDifficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
-		if (wyrmVariables.MapVariables.get(world).invasionStarted && (Math.random() < 0.00001 + (wyrmInvasionDifficulty / 6f * 0.00021f))) {
+		if (wyrmVariables.WorldVariables.get(world).invasionStarted && (Math.random() < 0.00001 + (wyrmInvasionDifficulty / 6f * 0.00021f))) {
 			if(wyrmInvasionDifficulty > 1.5) {eventRolled = (RNG.getIntRangeInclu(1,4));}
 			else if(wyrmInvasionDifficulty >= 2.0) {eventRolled = (RNG.getIntRangeInclu(1,5));}
 			else if(wyrmInvasionDifficulty >= 2.5) {eventRolled = (RNG.getIntRangeInclu(1,7));}
+			else if(wyrmInvasionDifficulty >= 3.25) {eventRolled = (RNG.getIntRangeInclu(1,10));}
+			else if(wyrmInvasionDifficulty >= 3.75) {eventRolled = (RNG.getIntRangeInclu(1,11));}
 
 
-			if ( eventRolled == 1) {smallPodRaid.Do(dependencies);}
-			else if ( eventRolled == 2) {scoutingPodRaid.call(dependencies);}
+			if ( eventRolled == 2) {scoutingPodRaid.call(dependencies);}
 			else if ( eventRolled == 4) {creepwyrmDrop.call(dependencies);}
 			else if ( eventRolled == 5) {massIncursion.call(dependencies, 1);}
 			else if ( eventRolled == 7) {scoutingPodRaid.call(dependencies);creepwyrmDrop.call(dependencies);}
+			else if ( eventRolled == 8) {massIncursion.call(dependencies, 1);}
+			else if ( eventRolled == 9) {massIncursion.call(dependencies, 2);}
+			else if ( eventRolled == 10) {scoutingPodRaid.call(dependencies);creepwyrmDrop.call(dependencies);smallPodRaid.Do(dependencies);}
+			else {smallPodRaid.Do(dependencies);}
 		}
 	}
 
