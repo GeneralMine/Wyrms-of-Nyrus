@@ -4,11 +4,6 @@ import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 
 import com.vetpetmon.wyrmsofnyrus.synapselib.RegHelper;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
-
-import static com.vetpetmon.wyrmsofnyrus.synapselib.RegHelper.resName;
 
 // This is the loader for all wyrm entities
 
