@@ -7,7 +7,7 @@ public class synapseLib {
 
     public static String initializeMSG() {
         if (!(Objects.equals(libVars.ExpectLibVersion, LibVersion)))
-            return ("SynapseLib is on version " + LibVersion + ", but expected version " + libVars.ExpectLibVersion + ". Any reported errors you experience will be invalidated.");
+            return ("SynapseLib is on version " + LibVersion + ", but a mod expected version " + libVars.ExpectLibVersion + ". Any reported errors you experience will be invalidated.");
         else
             return ("SynapseLib is on version " + LibVersion) ;
     }
