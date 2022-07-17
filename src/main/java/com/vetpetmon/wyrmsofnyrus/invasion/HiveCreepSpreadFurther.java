@@ -29,6 +29,7 @@ public class HiveCreepSpreadFurther{
 		if ((Invasion.CSBlockBLEnabled) && !(i.equals(OG))) {return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);}
 		else {return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);}
 	}
+
 	public static void executescript(BlockPos pos, World world) {
 		boolean canSpreadThisTick = ((RNG.getIntRangeInclu(0, Invasion.creepSpreadRate)) == Invasion.creepSpreadRate);
 

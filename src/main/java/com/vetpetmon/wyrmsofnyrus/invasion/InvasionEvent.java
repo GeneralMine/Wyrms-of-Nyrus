@@ -36,12 +36,13 @@ public class InvasionEvent extends AutoReg.ModElement {
 
 
 			if ( eventRolled == 2) {scoutingPodRaid.call(dependencies);}
-			else if ( eventRolled == 4) {creepwyrmDrop.call(dependencies);}
+			else if ( eventRolled == 4 && Invasion.isCreepEnabled()) {creepwyrmDrop.call(dependencies);}
 			else if ( eventRolled == 5) {massIncursion.call(dependencies, 1);}
-			else if ( eventRolled == 7) {scoutingPodRaid.call(dependencies);creepwyrmDrop.call(dependencies);}
+			else if ( eventRolled == 7) {scoutingPodRaid.call(dependencies);
+				if (Invasion.isCreepEnabled())creepwyrmDrop.call(dependencies);}
 			else if ( eventRolled == 8) {massIncursion.call(dependencies, 1);}
 			else if ( eventRolled == 9) {massIncursion.call(dependencies, 2);}
-			else if ( eventRolled == 10) {scoutingPodRaid.call(dependencies);creepwyrmDrop.call(dependencies);smallPodRaid.Do(dependencies);}
+			else if ( eventRolled == 10) {scoutingPodRaid.call(dependencies);if (Invasion.isCreepEnabled())creepwyrmDrop.call(dependencies);smallPodRaid.Do(dependencies);}
 			else {smallPodRaid.Do(dependencies);}
 		}
 	}

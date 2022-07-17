@@ -5,6 +5,8 @@ import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
+import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
+import com.vetpetmon.wyrmsofnyrus.synapselib.synapseLib;
 import com.vetpetmon.wyrmsofnyrus.synapselib.threading;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -40,9 +42,9 @@ import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 
 @Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION)
 public class wyrmsofnyrus {
-    public static final String MODID = "wyrmsofnyrus";
-    public static final String NAME = "Wyrms of Nyrus";
-    public static final String VERSION = "0.1.35";
+    public static final String MODID = libVars.ModID;
+    public static final String NAME = libVars.ModName;
+    public static final String VERSION = libVars.ModVersion;
 
     public AutoReg elements = new AutoReg();
 
@@ -58,14 +60,9 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
-        wyrmsofnyrus.logger.info(
-                "If you experience a glitch anywhere, please ping any Vetpetmon Labs team member in the community discord with the log and description, along if instructions on how to replicate the issue, if needed.\n\n" +
-                "Do beware that there may be balancing issues in any development build.");
-        wyrmsofnyrus.logger.warn("We hope you are aware that the Wyrms are EXTREMELY destructive to your worlds.\n\n" +
-                "By downloading and installing this mod into your instance of Minecraft, you agree that you and your world gets invaded, overran by alien flora, eaten by aliens, probed when you least expect it, blah blah blah...\n" +
-                "You can make this mod less destructive by checking the config file after the game loads. You WILL need to restart MC for changes to be applied.");
+        wyrmsofnyrus.logger.info(synapseLib.initializeMSG());
 
-        threading.checkThreads();
+        //threading.checkThreads(); //We know this works
 
         ConfigLib.reloadConfig();
         ConfigLib.setCanon();
