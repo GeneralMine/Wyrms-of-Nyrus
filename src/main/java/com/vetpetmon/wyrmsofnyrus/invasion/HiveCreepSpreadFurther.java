@@ -36,9 +36,9 @@ public class HiveCreepSpreadFurther{
 			int Range = 1;
 			assert false;
 			for (int i = 0; i < 5; i++) {
-				int x = ((pos.getX()) + RNG.getIntRangeInclu(-Range, Range));
-				int y = ((pos.getY()) + RNG.getIntRangeInclu(-Range, Range));
-				int z = ((pos.getZ()) + RNG.getIntRangeInclu(-Range, Range));
+				int x = (int) ((pos.getX()) + RNG.PMRange(Range));
+				int y = (int) ((pos.getY()) + RNG.PMRange(Range));
+				int z = (int) ((pos.getZ()) + RNG.PMRange(Range));
 				BlockPos posi = new BlockPos(x, y, z);
 				if ((creepspreadRules(posi, world, pos)) && canSpreadThisTick) {
 					if (((world.getBlockState(posi))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {world.setBlockState(posi, BlockWyrmLightsYellow.block.getDefaultState(), 3);addPoints(world);}
