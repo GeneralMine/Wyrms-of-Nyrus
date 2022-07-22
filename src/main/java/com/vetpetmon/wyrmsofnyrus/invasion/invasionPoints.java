@@ -11,6 +11,7 @@ import net.minecraft.world.World;
  * Even worse, there's no dedicated getter. I'm fixing that as we speak.
  */
 public class invasionPoints {
+    private static double pointBuffer;
     public static double get(World w) {return wyrmVariables.WorldVariables.get(w).wyrmInvasionPoints;}
     public static double getDifficulty(World w) {return wyrmVariables.WorldVariables.get(w).wyrmInvasionDifficulty;}
     public static void setDifficulty(World w, float input) {
@@ -25,11 +26,17 @@ public class invasionPoints {
      * @param i Value to add
      */
     public static void add(World w, int i){
-        wyrmVariables.WorldVariables.get(w).wyrmInvasionPoints += i;
-        sync(w);
+        pointBuffer += i;
+        if (pointBuffer >= 1) updatePoints(w,pointBuffer);
     }
     public static void add(World w, double i){
-        wyrmVariables.WorldVariables.get(w).wyrmInvasionPoints += i;
+        pointBuffer += i;
+        if (pointBuffer >= 1) updatePoints(w,pointBuffer);
+    }
+
+    public static void updatePoints(World w, double buffer){
+        wyrmVariables.WorldVariables.get(w).wyrmInvasionPoints += (int) buffer;
+        pointBuffer = 0;
         sync(w);
     }
 
