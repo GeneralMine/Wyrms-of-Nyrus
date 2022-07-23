@@ -31,6 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.vetpetmon.wyrmsofnyrus.config.Invasion.isEXCANON;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnimationTickable {
@@ -52,6 +53,7 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
         afterPlayers();
         if (getAttackVillagers()) afterVillagers();
+        if (isEXCANON()) {afterMobs();}
     }
 
     @Override
