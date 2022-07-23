@@ -2,7 +2,6 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
-import com.vetpetmon.wyrmsofnyrus.compat.hbmComp;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -215,7 +214,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
-        if (hbm.isEnabled()) hbmComp.makeRadImmune(compound);
+        //if (hbm.isEnabled()) hbmComp.makeRadImmune(compound);
     }
     
     @Override
