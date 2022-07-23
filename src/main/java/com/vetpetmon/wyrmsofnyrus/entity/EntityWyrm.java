@@ -1,8 +1,8 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
-import javax.annotation.Nullable;
-import com.vetpetmon.wyrmsofnyrus.compat.IRadiationImmune;
+import com.vetpetmon.wyrmsofnyrus.compat.hbm;
+import com.vetpetmon.wyrmsofnyrus.compat.hbmComp;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -27,7 +27,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  * Handles a lot of the hot nonsense of class inheritance for you.
  * You're welcome. <3
  */
-public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadiationImmune, IMob {
+public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob {
 
     protected static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
 
@@ -215,6 +215,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadi
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
+        if (hbm.isEnabled()) hbmComp.makeRadImmune(compound);
     }
     
     @Override

@@ -1,0 +1,35 @@
+package com.vetpetmon.wyrmsofnyrus.compat;
+
+import com.hbm.entity.mob.EntityNuclearCreeper;
+import com.hbm.entity.mob.EntityQuackos;
+import com.hbm.interfaces.IRadiationImmune;
+import com.hbm.potion.HbmPotion;
+import com.hbm.util.ContaminationUtil;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityMooshroom;
+import net.minecraft.entity.passive.EntityOcelot;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Pseudo;
+
+@Pseudo
+@Mixin(ContaminationUtil.class)
+public class mixinHBMRad {
+    /**
+     * @author HBM
+     * @reason Make HBM's RAD system not kill wyrms because there's no other option to add immunity.
+     */
+    @Overwrite(remap = false)
+    public static boolean isRadImmune(Entity e) {
+        if (e instanceof EntityLivingBase && ((EntityLivingBase)e).isPotionActive(HbmPotion.mutation)) {
+            return true;
+        } else {
+            return e instanceof EntityNuclearCreeper || e instanceof EntityMooshroom || e instanceof EntityZombie || e instanceof EntitySkeleton || e instanceof EntityQuackos || e instanceof EntityOcelot || e instanceof IRadiationImmune|| e instanceof EntityWyrm;
+        }
+    }
+
+}
