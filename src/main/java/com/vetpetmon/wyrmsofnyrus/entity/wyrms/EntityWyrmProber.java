@@ -204,6 +204,8 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         return SoundRegistry.wyrmClicks;
     }
     @Override
+    protected SoundEvent getFallSound(int heightIn) {return null;}
+    @Override
     public SoundEvent getHurtSound(DamageSource ds) {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.bat.takeoff"));
     }
