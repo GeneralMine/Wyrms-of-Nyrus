@@ -168,6 +168,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
 
     /**
      * Detects if the Wyrm entity has found a target. Useful for animation.
+     * dOESN'T ACTUALLY WORK YET THO.
      *
      * @return boolean
      */

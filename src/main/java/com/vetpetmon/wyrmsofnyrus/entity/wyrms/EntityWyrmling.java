@@ -73,7 +73,7 @@ public class EntityWyrmling extends EntityWyrm {
 
     @Override
     public SoundEvent getAmbientSound() {
-        return SoundRegistry.wyrmClicks;
+        return SoundRegistry.wyrmlingclicks;
     }
     @Override
     public SoundEvent getHurtSound(DamageSource ds) {

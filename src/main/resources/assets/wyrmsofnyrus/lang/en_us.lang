@@ -41,6 +41,9 @@ subtitles.wyrmSteps=Skittering
 subtitles.creepwyrmscream=Creepwyrm screeching
 subtitles.hiveCreepSpread=Creeping block
 subtitles.deepwyrmclicks=Deep clicking
-subtitles.slowWyrmSteps=Wyrm steps
+subtitles.slowWyrmSteps=Heavy steps
+subtitles.wyrmHiss=Hissing
+subtitles.wyrmRoar=Deep roar
+subtitles.wyrmlingClicks=High-pitched hisses
 
 death.attack.prober=%s got probed
