@@ -8,6 +8,6 @@ package com.vetpetmon.wyrmsofnyrus.synapselib;
 public class libVars {
     public static final String ModID = "wyrmsofnyrus"; //System name (ID) for the mod.
     public static final String ModName = "Wyrms of Nyrus"; //User-friendly name for the mod.
-    public static final String ModVersion = "0.1.355"; //Version of the mod.
+    public static final String ModVersion = "0.1.36"; //Version of the mod.
     public static final String ExpectLibVersion = "0.25"; //Version of the library the mod needs/works best with.
 }
