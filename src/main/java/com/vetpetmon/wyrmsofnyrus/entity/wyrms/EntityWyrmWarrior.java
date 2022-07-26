@@ -50,10 +50,10 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
         private final EntityWyrmWarrior parentEntity;
         private double speedW;
 
-        public WyrmWarriorMoveHelper(EntityWyrmWarrior EntityWyrmWarrior)
+        public WyrmWarriorMoveHelper(EntityWyrmWarrior WyrmWarrior)
         {
-            super(EntityWyrmWarrior);
-            this.parentEntity = EntityWyrmWarrior;
+            super(WyrmWarrior);
+            this.parentEntity = WyrmWarrior;
         }
 
         public void onUpdateMoveHelper()
@@ -70,13 +70,13 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
                 {
                     this.action = Action.WAIT;
                     EntityWyrmWarrior.this.motionX *= 0.5D;
-                    EntityWyrmWarrior.this.motionY *= 0.5D;
+                    EntityWyrmWarrior.this.motionY *= 1.5D;
                     EntityWyrmWarrior.this.motionZ *= 0.5D;
                 }
                 else
                 {
                     EntityWyrmWarrior.this.motionX += d0 / d3 * 0.05D * this.speed;
-                    EntityWyrmWarrior.this.motionY += d1 / d3 * 0.05D * this.speed;
+                    EntityWyrmWarrior.this.motionY += d1 / d3 * 0.1D * this.speed;
                     EntityWyrmWarrior.this.motionZ += d2 / d3 * 0.05D * this.speed;
 
                     if (EntityWyrmWarrior.this.getAttackTarget() == null)
@@ -195,10 +195,10 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprobermodel.Moving"));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.moving"));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.flying"));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.idle"));
         }
 
         return PlayState.CONTINUE;
