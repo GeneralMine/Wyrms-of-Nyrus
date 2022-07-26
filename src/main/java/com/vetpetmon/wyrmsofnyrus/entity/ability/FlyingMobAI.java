@@ -54,6 +54,6 @@ public class FlyingMobAI extends EntityAIBase
     }
 
     protected double getAttackReachSq(EntityLivingBase attackTarget) {
-        return this.parentEntity.width * 1.5 * this.parentEntity.height * 1.5 + attackTarget.height * 1.2;
+        return this.parentEntity.width * 1.25 * this.parentEntity.height * 1.5 + attackTarget.height * 1.2;
     }
 }

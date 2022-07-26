@@ -70,13 +70,13 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
                 {
                     this.action = Action.WAIT;
                     EntityWyrmWarrior.this.motionX *= 0.5D;
-                    EntityWyrmWarrior.this.motionY *= 1.5D;
+                    EntityWyrmWarrior.this.motionY *= 0.5D;
                     EntityWyrmWarrior.this.motionZ *= 0.5D;
                 }
                 else
                 {
                     EntityWyrmWarrior.this.motionX += d0 / d3 * 0.05D * this.speed;
-                    EntityWyrmWarrior.this.motionY += d1 / d3 * 0.1D * this.speed;
+                    EntityWyrmWarrior.this.motionY += d1 / d3 * 0.05D * this.speed;
                     EntityWyrmWarrior.this.motionZ += d2 / d3 * 0.05D * this.speed;
 
                     if (EntityWyrmWarrior.this.getAttackTarget() == null)
@@ -133,7 +133,7 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
         super.initEntityAI();
         simpleAI();
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
-        this.tasks.addTask(4, new FlyingMobAI(this, 6.05, 100));
+        this.tasks.addTask(4, new FlyingMobAI(this, 3.05, 10));
         this.afterPlayers(true);
         this.afterVillagers();
         this.afterAnimals();
