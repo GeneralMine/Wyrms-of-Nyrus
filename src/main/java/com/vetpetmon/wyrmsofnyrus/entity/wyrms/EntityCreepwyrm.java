@@ -29,7 +29,7 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
     public EntityCreepwyrm(World world) {
         super(world);
         this.casteType = 0;
-        setSize(3f, 5f);
+        setSize(1f, 5f);
         experienceValue = 30;
         enablePersistence();
         setNoAI(false);
@@ -108,7 +108,7 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
     @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,23);
+        wyrmDeathSpecial(this,getPosition(),world,21);
     }
 
     public void registerControllers(AnimationData data) {

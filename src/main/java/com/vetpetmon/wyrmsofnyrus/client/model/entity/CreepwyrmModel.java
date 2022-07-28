@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityCreepwyrm;
+import com.vetpetmon.wyrmsofnyrus.synapselib.synMath;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
@@ -34,10 +35,24 @@ public class CreepwyrmModel extends AnimatedTickingGeoModel<EntityCreepwyrm>
     {
         super.setLivingAnimations(entity, uniqueID, customPredicate);
         IBone head = this.getAnimationProcessor().getBone("Head");
+        IBone neck5 = this.getAnimationProcessor().getBone("Neck5");
+        IBone neck4 = this.getAnimationProcessor().getBone("Neck4");
+        IBone neck3 = this.getAnimationProcessor().getBone("Neck3");
+        IBone neck2 = this.getAnimationProcessor().getBone("Neck2");
 
         EntityLivingBase entityIn = entity;
         EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
-        head.setRotationX(extraData.headPitch * ((float)Math.PI / 180F));
-        head.setRotationY(extraData.netHeadYaw * ((float)Math.PI / 180F));
+        float neckYaw = synMath.clamp((extraData.netHeadYaw * ((float)Math.PI / 460F)), -1, 0);
+        float neckPitch = synMath.clamp((extraData.headPitch * ((float)Math.PI / 260F)), -1, 0);
+        head.setRotationX(neckPitch);
+        head.setRotationY(extraData.netHeadYaw * ((float)Math.PI / 260F));
+        neck5.setRotationX(neckPitch);
+        neck5.setRotationY(neckYaw);
+        neck4.setRotationX(neckPitch);
+        neck4.setRotationY(neckYaw);
+        neck3.setRotationX(neckPitch);
+        neck3.setRotationY(neckYaw);
+        neck2.setRotationX(neckPitch);
+        neck2.setRotationY(neckYaw);
     }
 }
