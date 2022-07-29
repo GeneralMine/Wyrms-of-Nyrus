@@ -37,7 +37,7 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
     public EntityWyrmWarrior(World world) {
         super(world);
         this.casteType = 2;
-        setSize(1.0f, 2.25f);
+        setSize(0.9f, 2.0f);
         experienceValue = 3;
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new EntityWyrmWarrior.WyrmWarriorMoveHelper(this);
