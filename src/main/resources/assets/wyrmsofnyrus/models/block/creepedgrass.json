@@ -1,10 +1,11 @@
 {
+  "parent": "block/grass",
   "textures": {
-    "overlay": "wyrmsofnyrus:blocks/creepstage0",
+    "overlay": "blocks/grass_side_overlay",
     "bottom": "blocks/dirt",
     "top": "blocks/grass_top",
     "side": "blocks/grass_side",
-    "mipoverlay": "blocks/grass_side_overlay",
+    "mipoverlay": "wyrmsofnyrus:blocks/creepstage0",
     "particle": "minecraft:blocks/dirt"
   },
   "elements": [
@@ -22,21 +23,21 @@
   {   "from": [ 0, 0, 0 ],
     "to": [ 16, 16, 16 ],
     "faces": {
-      "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "tintindex": 0, "cullface": "north" },
-      "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "tintindex": 0, "cullface": "south" },
-      "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "tintindex": 0, "cullface": "west" },
-      "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "tintindex": 0, "cullface": "east" }
+      "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "overlay": 0, "cullface": "north" },
+      "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "overlay": 0, "cullface": "south" },
+      "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "overlay": 0, "cullface": "west" },
+      "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "overlay": 0, "cullface": "east" }
     }
   },
   {   "from": [ 0, 0, 0 ],
     "to": [ 16, 16, 16 ],
     "faces": {
-      "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "down" },
-      "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "up" },
-      "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "north" },
-      "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "south" },
-      "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "west" },
-      "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "east" }
+      "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "cullface": "down" },
+      "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "cullface": "up" },
+      "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "cullface": "north" },
+      "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "cullface": "south" },
+      "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "cullface": "west" },
+      "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "cullface": "east" }
     }
   }
   ],

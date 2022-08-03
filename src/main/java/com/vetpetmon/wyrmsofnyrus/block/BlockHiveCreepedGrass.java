@@ -2,12 +2,16 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
+import com.vetpetmon.wyrmsofnyrus.client.blocks.biomeColor;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RegHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
@@ -41,7 +45,7 @@ public class BlockHiveCreepedGrass extends AutoReg.ModElement {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0,
 				new ModelResourceLocation(RegHelper.resName("creepedgrass"), "inventory"));
 	}
-	public static class creepedGrass extends creepStagedGrass {
+	public static class creepedGrass extends creepStagedGrass implements IWyrmBlocks {
 
 		public creepedGrass() {
 			setUnlocalizedName("creepedgrass");
@@ -59,6 +63,37 @@ public class BlockHiveCreepedGrass extends AutoReg.ModElement {
 		{
 			return BlockRenderLayer.CUTOUT_MIPPED;
 		}
+
+		@Override
+		public Class<? extends ItemBlock> getItemClass() {
+			return null;
+		}
+
+		@Override
+		public IProperty[] getPresetProperties() {
+			return new IProperty[0];
+		}
+
+		@Override
+		public IProperty[] getNonRenderingProperties() {
+			return new IProperty[0];
+		}
+
+		@Override
+		public String getStateName(IBlockState p0) {
+			return null;
+		}
+
+		@SideOnly(Side.CLIENT)
+		public IBlockColor getBlockColor() {
+			return biomeColor.CREEPGRASSCOLORING;
+		}
+
+		@SideOnly(Side.CLIENT)
+		public IItemColor getItemColor() {
+			return biomeColor.BLOCKITEMCOLOR;
+		}
+
 
 		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {

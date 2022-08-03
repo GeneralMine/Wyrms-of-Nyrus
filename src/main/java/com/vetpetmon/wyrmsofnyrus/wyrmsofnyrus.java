@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import com.vetpetmon.wyrmsofnyrus.client.blocks.biomeColor;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
@@ -94,6 +95,7 @@ public class wyrmsofnyrus {
         proxy.init(event);
         SoundRegistry.RegisterSounds();
         hbm.compatInit();
+        wyrmsofnyrus.proxy.registerColors();
         //MixinBootstrap.init();
         //Mixins.addConfiguration("mixins.wyrmsofnyrus.compat.json");
     }

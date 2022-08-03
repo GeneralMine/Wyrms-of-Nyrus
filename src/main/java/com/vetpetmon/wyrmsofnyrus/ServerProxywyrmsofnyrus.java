@@ -28,4 +28,9 @@ public class ServerProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 	@Override
 	public void serverLoad(FMLServerStartingEvent event) {
 	}
+
+	@Override
+	public void registerColors() {
+
+	}
 }
