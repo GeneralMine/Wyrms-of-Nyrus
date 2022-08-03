@@ -1,5 +1,5 @@
 {
-  "parent": "block/cube_all",
+  "parent": "wyrmsofnyrus:block/creeped",
   "textures": {
     "overlay": "wyrmsofnyrus:blocks/creepstage1",
     "all": "minecraft:blocks/dirt",

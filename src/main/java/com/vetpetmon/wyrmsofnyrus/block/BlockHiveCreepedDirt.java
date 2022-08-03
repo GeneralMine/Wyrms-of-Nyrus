@@ -5,7 +5,6 @@ import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -56,10 +55,18 @@ public class BlockHiveCreepedDirt extends AutoReg.ModElement {
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
 			int stage = state.getValue(STAGE) + 1;
-			if (stage < 3) world.setBlockState(pos, state.withProperty(STAGE, stage), 2);
-			else if (stage >= 3) {
-				assert false;
-				convert(world, pos, BlockHiveCreepBlockInactive.block.getDefaultState());
+			switch (stage) {
+				case(4):
+				case(5):
+					assert false;
+					convert(world, pos, BlockHiveCreepBlock.block.getDefaultState());
+					break;
+				case(10):
+					assert false;
+					convert(world, pos, BlockHiveCreepBlockInactive.block.getDefaultState());
+					break;
+				default:
+					world.setBlockState(pos, state.withProperty(STAGE, stage), 2);
 			}
 		}
 	}

@@ -26,8 +26,8 @@ public class HiveCreepSpreadFurther{
 		boolean isFullCube = (world.getBlockState(i).isFullCube());
 		boolean isUnAllowedBlock = ((Invasion.invalidBlocks.contains((world.getBlockState(i).getBlock())))
 				|| matLookingBlock(i,BlockMaterials.CREEP,world));
-		if ((Invasion.CSBlockBLEnabled) && !(i.equals(OG))) {return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);}
-		else {return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);}
+		if ((Invasion.CSBlockBLEnabled) && !(i.equals(OG))) return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);
+		else return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);
 	}
 
 	public static void executescript(BlockPos pos, World world) {
@@ -44,7 +44,7 @@ public class HiveCreepSpreadFurther{
 				if ((creepspreadRules(posi, world, pos)) && canSpreadThisTick) {
 					if (((world.getBlockState(posi))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {world.setBlockState(posi, BlockWyrmLightsYellow.block.getDefaultState(), 3);addPoints(world);}
 					else if (matLookingBlock(posi, Material.ROCK, world)) {world.setBlockState(posi, BlockCreepstone.block.getDefaultState(), 3);addPoints(world);}
-					else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {world.setBlockState(posi, BlockHiveCreepBlock.block.getDefaultState(), 3);addPoints(world);}
+					else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {world.setBlockState(posi, BlockHiveCreepedDirt.block.getDefaultState(), 3);addPoints(world);}
 				}
 			}
 		}

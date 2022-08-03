@@ -3,23 +3,29 @@ package com.vetpetmon.wyrmsofnyrus.block;
 import net.minecraft.block.Block;
 
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public abstract class creepStaged extends Block {
 
-    public static PropertyInteger STAGE = PropertyInteger.create("stage", 1, 3);
+    public static PropertyInteger STAGE = PropertyInteger.create("stage", 0, 9);
 
     public creepStaged() {
         super(BlockMaterials.CREEP);
         this.setTickRandomly(true);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, 0));
     }
 
     @Override
@@ -40,8 +46,14 @@ public abstract class creepStaged extends Block {
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
         super.onBlockAdded(world, pos, state);
-        world.setBlockState(pos, state.withProperty(STAGE, 1), 2);
         world.scheduleUpdate(pos, this, this.tickRate(world));
+    }
+
+    @Nonnull
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT;
     }
 
     /**

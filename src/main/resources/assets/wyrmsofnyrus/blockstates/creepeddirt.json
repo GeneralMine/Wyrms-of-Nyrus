@@ -3,6 +3,9 @@
     "normal": {
       "model": "wyrmsofnyrus:creepeddirts0"
     },
+    "stage=0": {
+      "model": "wyrmsofnyrus:creepeddirts0"
+    },
     "stage=1": {
       "model": "wyrmsofnyrus:creepeddirts0"
     },
@@ -10,6 +13,26 @@
       "model": "wyrmsofnyrus:creepeddirts1"
     },
     "stage=3": {
+      "model": "wyrmsofnyrus:creepeddirts2"
+    },
+
+    "stage=4": {
+      "model": "wyrmsofnyrus:creepeddirts0"
+    },
+    "stage=5": {
+      "model": "wyrmsofnyrus:creepeddirts0"
+    },
+    "stage=6": {
+      "model": "wyrmsofnyrus:creepeddirts0"
+    },
+
+    "stage=7": {
+      "model": "wyrmsofnyrus:creepeddirts0"
+    },
+    "stage=8": {
+      "model": "wyrmsofnyrus:creepeddirts1"
+    },
+    "stage=9": {
       "model": "wyrmsofnyrus:creepeddirts2"
     }
   }

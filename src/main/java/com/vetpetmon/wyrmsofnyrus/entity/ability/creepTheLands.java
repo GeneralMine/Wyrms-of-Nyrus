@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import static com.vetpetmon.wyrmsofnyrus.block.creepStaged.STAGE;
 import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.*;
 
 public class creepTheLands {
@@ -26,7 +27,7 @@ public class creepTheLands {
                 world.setBlockState(lookingBlock, BlockCreepstoneInactive.block.getDefaultState(), 3);
                 addPoints(world);
             } else if ((matLookingBlock(lookingBlock, Material.GROUND, world))) {
-                world.setBlockState(lookingBlock, BlockHiveCreepBlockInactive.block.getDefaultState(), 3);
+                world.setBlockState(lookingBlock, BlockHiveCreepedDirt.block.getDefaultState().withProperty(STAGE,6), 3);
                 addPoints(world);
             } else if ((matLookingBlock(lookingBlock, Material.GRASS, world))) {
                 world.setBlockState(lookingBlock, BlockHiveCreepTopInactive.block.getDefaultState(), 3);
