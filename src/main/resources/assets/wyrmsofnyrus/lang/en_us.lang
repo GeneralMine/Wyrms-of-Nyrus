@@ -35,6 +35,11 @@ tile.hivecreepblock.name=Hive Creep Block
 tile.creepstone.name=Creepstone
 tile.hivecreepblockinactive.name=Hive Creep Block
 tile.creepstone_inactive.name=Creepstone
+tile.creepeddirt.name=Creeped Dirt
+tile.creepedsand.name=Creeped Sand
+tile.creepedgravel.name=Creeped Gravel
+tile.creepedstone.name=Creeped Stone
+tile.creepedgrass.name=Creeped Grass
 
 subtitles.visitormessage=Starship humming
 subtitles.wyrmClicks=Clicking

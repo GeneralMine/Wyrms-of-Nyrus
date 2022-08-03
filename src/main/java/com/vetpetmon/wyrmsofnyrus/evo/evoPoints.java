@@ -65,15 +65,18 @@ public class evoPoints extends AutoReg.ModElement {
      * no need to make another setter for that.
      */
     public static void minimum(){
-        if (Loader.isModLoaded("draconicevolution")) {minEvoCap += 100;}
-        if (hbm.isEnabled()) {minEvoCap += 80;}
-        if (Loader.isModLoaded("srparasites")) {minEvoCap += 60;}
-        if (Loader.isModLoaded("techguns")) {minEvoCap += 50;}
-        if (Loader.isModLoaded("immersiveintelligence")) {minEvoCap += 50;}
-        if (Loader.isModLoaded("securitycraft")) {minEvoCap += 45;}
-        if (Loader.isModLoaded("roughmobs")) {minEvoCap += 30;}
-        if (Loader.isModLoaded("roughmobsrevamped")) {minEvoCap += 30;}
-        if (Loader.isModLoaded("ic2")) {minEvoCap += 30;}
+        if (Evo.customEvoMinCap > 0) minEvoCap += Evo.customEvoMinCap;
+        if (Evo.evoReadsModpack) {
+            if (Loader.isModLoaded("draconicevolution")) minEvoCap += 100;
+            if (hbm.isEnabled()) minEvoCap += 80;
+            if (Loader.isModLoaded("srparasites")) minEvoCap += 60;
+            if (Loader.isModLoaded("techguns")) minEvoCap += 50;
+            if (Loader.isModLoaded("immersiveintelligence")) minEvoCap += 50;
+            if (Loader.isModLoaded("securitycraft")) minEvoCap += 45;
+            if (Loader.isModLoaded("roughmobs")) minEvoCap += 30;
+            if (Loader.isModLoaded("roughmobsrevamped")) minEvoCap += 30;
+            if (Loader.isModLoaded("ic2")) minEvoCap += 30;
+        }
     }
 
     /**

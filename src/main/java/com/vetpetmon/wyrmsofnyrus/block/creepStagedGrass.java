@@ -1,9 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
-import net.minecraft.block.Block;
-
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -18,12 +16,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class creepStaged extends Block {
-
+public abstract class creepStagedGrass extends BlockGrass {
     public static PropertyInteger STAGE = PropertyInteger.create("stage", 0, 9);
 
-    public creepStaged() {
-        super(BlockMaterials.CREEP);
+    public creepStagedGrass() {
         this.setTickRandomly(true);
         this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, 0));
     }
@@ -40,7 +36,7 @@ public abstract class creepStaged extends Block {
     }
     public BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {STAGE});
+        return new BlockStateContainer(this, new IProperty[] {STAGE,SNOWY});
     }
 
     @Override

@@ -30,7 +30,7 @@ public class creepTheLands {
                 world.setBlockState(lookingBlock, BlockHiveCreepedDirt.block.getDefaultState().withProperty(STAGE,6), 3);
                 addPoints(world);
             } else if ((matLookingBlock(lookingBlock, Material.GRASS, world))) {
-                world.setBlockState(lookingBlock, BlockHiveCreepTopInactive.block.getDefaultState(), 3);
+                world.setBlockState(lookingBlock, BlockHiveCreepedGrass.block.getDefaultState().withProperty(STAGE,6), 3);
                 addPoints(world);
             }
         }
