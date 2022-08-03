@@ -3,7 +3,6 @@ package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
-import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
@@ -31,7 +30,7 @@ public class BlockHiveCreepedDirt extends AutoReg.ModElement {
 
 	@Override
 	public void initElements() {
-		elements.blocks.add(() -> new BlockCustom().setRegistryName("creepeddirt"));
+		elements.blocks.add(() -> new creepedDirt().setRegistryName("creepeddirt"));
 		elements.items.add(() -> new ItemBlock(block).setRegistryName(block.getRegistryName()));
 	}
 
@@ -41,9 +40,9 @@ public class BlockHiveCreepedDirt extends AutoReg.ModElement {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0,
 				new ModelResourceLocation("wyrmsofnyrus:creepeddirt", "inventory"));
 	}
-	public static class BlockCustom extends creepStaged {
-		public static PropertyInteger STAGE = PropertyInteger.create("stage", 1, 3);
-		public BlockCustom() {
+	public static class creepedDirt extends creepStaged {
+
+		public creepedDirt() {
 			setUnlocalizedName("creepeddirt");
 			setSoundType(SoundType.GROUND);
 			setHarvestLevel("shovel", 1);
@@ -52,6 +51,16 @@ public class BlockHiveCreepedDirt extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
+		}
+		@Override
+		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+			super.updateTick(world, pos, state, random);
+			int stage = state.getValue(STAGE) + 1;
+			if (stage < 3) world.setBlockState(pos, state.withProperty(STAGE, stage), 2);
+			else if (stage >= 3) {
+				assert false;
+				convert(world, pos, BlockHiveCreepBlockInactive.block.getDefaultState());
+			}
 		}
 	}
 }
