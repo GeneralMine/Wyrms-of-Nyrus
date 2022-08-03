@@ -1,0 +1,57 @@
+
+package com.vetpetmon.wyrmsofnyrus.block;
+
+import com.vetpetmon.wyrmsofnyrus.AutoReg;
+import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
+import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
+
+@AutoReg.ModElement.Tag
+public class BlockHiveCreepedDirt extends AutoReg.ModElement {
+	@GameRegistry.ObjectHolder("wyrmsofnyrus:creepeddirt")
+	public static final Block block = null;
+	public BlockHiveCreepedDirt(AutoReg instance) {
+		super(instance, 204);
+	}
+
+	@Override
+	public void initElements() {
+		elements.blocks.add(() -> new BlockCustom().setRegistryName("creepeddirt"));
+		elements.items.add(() -> new ItemBlock(block).setRegistryName(block.getRegistryName()));
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerModels(ModelRegistryEvent event) {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0,
+				new ModelResourceLocation("wyrmsofnyrus:creepeddirt", "inventory"));
+	}
+	public static class BlockCustom extends creepStaged {
+		public static PropertyInteger STAGE = PropertyInteger.create("stage", 1, 3);
+		public BlockCustom() {
+			setUnlocalizedName("creepeddirt");
+			setSoundType(SoundType.GROUND);
+			setHarvestLevel("shovel", 1);
+			setHardness(0.5F);
+			setResistance(0.5F);
+			setLightLevel(0F);
+			setLightOpacity(255);
+			setCreativeTab(TabWyrms.tab);
+		}
+	}
+}
