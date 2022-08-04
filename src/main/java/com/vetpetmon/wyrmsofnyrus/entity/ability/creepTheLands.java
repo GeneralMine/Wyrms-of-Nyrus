@@ -24,7 +24,7 @@ public class creepTheLands {
                 world.setBlockState(lookingBlock, BlockWyrmLightsYellow.block.getDefaultState(), 3);
                 addPoints(world);
             } else if (matLookingBlock(lookingBlock, Material.ROCK, world)) {
-                world.setBlockState(lookingBlock, BlockCreepstoneInactive.block.getDefaultState(), 3);
+                world.setBlockState(lookingBlock, BlockHiveCreepedStone.block.getDefaultState().withProperty(STAGE,6), 3);
                 addPoints(world);
             } else if ((matLookingBlock(lookingBlock, Material.GROUND, world))) {
                 world.setBlockState(lookingBlock, BlockHiveCreepedDirt.block.getDefaultState().withProperty(STAGE,6), 3);

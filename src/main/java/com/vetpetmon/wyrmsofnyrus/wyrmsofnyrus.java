@@ -105,6 +105,7 @@ public class wyrmsofnyrus {
     }
 
     @SubscribeEvent
+    @SideOnly(Side.CLIENT)
     public void BlockColorHandlerInit(ColorHandlerEvent.Block event){
         BlockColors blockColors = event.getBlockColors();
         blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
@@ -113,6 +114,7 @@ public class wyrmsofnyrus {
     }
     @SubscribeEvent
     @SuppressWarnings("deprecation")
+    @SideOnly(Side.CLIENT)
     public void ItemColorHandlerInit(ColorHandlerEvent.Item event){
         ItemColors itemColors = event.getItemColors();
         itemColors.registerItemColorHandler((stack, tintIndex) ->

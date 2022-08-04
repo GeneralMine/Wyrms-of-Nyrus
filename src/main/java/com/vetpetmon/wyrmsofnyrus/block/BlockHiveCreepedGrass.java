@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 @AutoReg.ModElement.Tag
@@ -44,7 +45,7 @@ public class BlockHiveCreepedGrass extends AutoReg.ModElement {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0,
 				new ModelResourceLocation(RegHelper.resName("creepedgrass"), "inventory"));
 	}
-	public static class creepedGrass extends creepStagedGrass implements IWyrmBlocks {
+	public static class creepedGrass extends creepStagedGrass {
 
 		public creepedGrass() {
 			setUnlocalizedName("creepedgrass");
@@ -57,42 +58,12 @@ public class BlockHiveCreepedGrass extends AutoReg.ModElement {
 			setCreativeTab(TabWyrms.tab);
 		}
 
+		@Nonnull
 		@SideOnly(Side.CLIENT)
 		public BlockRenderLayer getBlockLayer()
 		{
 			return BlockRenderLayer.CUTOUT_MIPPED;
 		}
-
-		@Override
-		public Class<? extends ItemBlock> getItemClass() {
-			return null;
-		}
-
-		@Override
-		public IProperty[] getPresetProperties() {
-			return new IProperty[0];
-		}
-
-		@Override
-		public IProperty[] getNonRenderingProperties() {
-			return new IProperty[0];
-		}
-
-		@Override
-		public String getStateName(IBlockState p0) {
-			return null;
-		}
-
-		@SideOnly(Side.CLIENT)
-		public IBlockColor getBlockColor() {
-			return null;
-		}
-
-		@SideOnly(Side.CLIENT)
-		public IItemColor getItemColor() {
-			return null;
-		}
-
 
 		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
