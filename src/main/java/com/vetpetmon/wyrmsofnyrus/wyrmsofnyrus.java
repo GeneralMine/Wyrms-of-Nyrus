@@ -99,7 +99,6 @@ public class wyrmsofnyrus {
         proxy.init(event);
         SoundRegistry.RegisterSounds();
         hbm.compatInit();
-        wyrmsofnyrus.proxy.registerColors();
         //MixinBootstrap.init();
         //Mixins.addConfiguration("mixins.wyrmsofnyrus.compat.json");
     }
