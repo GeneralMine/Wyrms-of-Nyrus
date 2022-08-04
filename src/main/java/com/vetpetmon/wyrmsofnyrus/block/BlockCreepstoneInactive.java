@@ -48,8 +48,9 @@ public class BlockCreepstoneInactive extends AutoReg.ModElement {
 			super(BlockMaterials.CREEP);
 			setUnlocalizedName("creepstone_inactive");
 			setSoundType(SoundType.SLIME);
+			setHarvestLevel("pickaxe", 2);
 			setHardness(2F);
-			setResistance(7F);
+			setResistance(10F);
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);

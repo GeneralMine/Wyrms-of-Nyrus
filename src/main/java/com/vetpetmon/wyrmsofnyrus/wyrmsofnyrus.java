@@ -1,19 +1,30 @@
 package com.vetpetmon.wyrmsofnyrus;
 
-import com.vetpetmon.wyrmsofnyrus.client.blocks.biomeColor;
+import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepedGrass;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
-
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
 import com.vetpetmon.wyrmsofnyrus.synapselib.synapseLib;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.ColorizerGrass;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -25,19 +36,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.event.RegistryEvent;
-
-import net.minecraft.world.biome.Biome;
-import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
-import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.util.function.Supplier;
-import org.apache.logging.log4j.Logger;
 
 import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 
@@ -99,6 +103,23 @@ public class wyrmsofnyrus {
         //MixinBootstrap.init();
         //Mixins.addConfiguration("mixins.wyrmsofnyrus.compat.json");
     }
+
+    @SubscribeEvent
+    public void BlockColorHandlerInit(ColorHandlerEvent.Block event){
+        BlockColors blockColors = event.getBlockColors();
+        blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
+                        worldIn != null && pos != null ? BiomeColorHelper.getGrassColorAtPos(worldIn, pos) : ColorizerGrass.getGrassColor(0.5D, 1.0D),
+                BlockHiveCreepedGrass.block);
+    }
+    @SubscribeEvent
+    @SuppressWarnings("deprecation")
+    public void ItemColorHandlerInit(ColorHandlerEvent.Item event){
+        ItemColors itemColors = event.getItemColors();
+        itemColors.registerItemColorHandler((stack, tintIndex) ->
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                BlockHiveCreepedGrass.block);
+    }
+
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {

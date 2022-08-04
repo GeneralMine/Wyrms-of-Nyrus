@@ -6,14 +6,10 @@ import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RegHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -25,16 +21,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 @AutoReg.ModElement.Tag
-public class BlockHiveCreepedGrass extends AutoReg.ModElement {
-	@GameRegistry.ObjectHolder("wyrmsofnyrus:creepedgrass")
+public class BlockHiveCreepedStone extends AutoReg.ModElement {
+
+	private static final String name = "creepedstone";
+
+	@GameRegistry.ObjectHolder("wyrmsofnyrus:creepedstone")
 	public static final Block block = null;
-	public BlockHiveCreepedGrass(AutoReg instance) {
-		super(instance, 205);
+	public BlockHiveCreepedStone(AutoReg instance) {
+		super(instance, 206);
 	}
 
 	@Override
 	public void initElements() {
-		elements.blocks.add(() -> new creepedGrass().setRegistryName("creepedgrass"));
+		elements.blocks.add(() -> new creepedDirt().setRegistryName(name));
 		elements.items.add(() -> new ItemBlock(block).setRegistryName(block.getRegistryName()));
 	}
 
@@ -42,58 +41,20 @@ public class BlockHiveCreepedGrass extends AutoReg.ModElement {
 	@Override
 	public void registerModels(ModelRegistryEvent event) {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0,
-				new ModelResourceLocation(RegHelper.resName("creepedgrass"), "inventory"));
+				new ModelResourceLocation(RegHelper.resName(name), "inventory"));
 	}
-	public static class creepedGrass extends creepStagedGrass implements IWyrmBlocks {
+	public static class creepedDirt extends creepStaged {
 
-		public creepedGrass() {
-			setUnlocalizedName("creepedgrass");
-			setSoundType(SoundType.GROUND);
-			setHarvestLevel("shovel", 1);
-			setHardness(0.75F);
-			setResistance(0.75F);
+		public creepedDirt() {
+			setUnlocalizedName(name);
+			setSoundType(SoundType.STONE);
+			setHarvestLevel("pickaxe", 1);
+			setHardness(1.5F);
+			setResistance(10.0F);
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
 		}
-
-		@SideOnly(Side.CLIENT)
-		public BlockRenderLayer getBlockLayer()
-		{
-			return BlockRenderLayer.CUTOUT_MIPPED;
-		}
-
-		@Override
-		public Class<? extends ItemBlock> getItemClass() {
-			return null;
-		}
-
-		@Override
-		public IProperty[] getPresetProperties() {
-			return new IProperty[0];
-		}
-
-		@Override
-		public IProperty[] getNonRenderingProperties() {
-			return new IProperty[0];
-		}
-
-		@Override
-		public String getStateName(IBlockState p0) {
-			return null;
-		}
-
-		@SideOnly(Side.CLIENT)
-		public IBlockColor getBlockColor() {
-			return null;
-		}
-
-		@SideOnly(Side.CLIENT)
-		public IItemColor getItemColor() {
-			return null;
-		}
-
-
 		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
@@ -102,11 +63,11 @@ public class BlockHiveCreepedGrass extends AutoReg.ModElement {
 				case(4):
 				case(5):
 					assert false;
-					convert(world, pos, BlockHiveCreepTop.block.getDefaultState());
+					convert(world, pos, BlockCreepstone.block.getDefaultState());
 					break;
 				case(10):
 					assert false;
-					convert(world, pos, BlockHiveCreepTopInactive.block.getDefaultState());
+					convert(world, pos, BlockCreepstoneInactive.block.getDefaultState());
 					break;
 				default:
 					world.setBlockState(pos, state.withProperty(STAGE, stage), 2);

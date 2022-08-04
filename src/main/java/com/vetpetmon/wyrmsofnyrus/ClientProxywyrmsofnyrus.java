@@ -1,20 +1,16 @@
 package com.vetpetmon.wyrmsofnyrus;
 
 import com.google.common.collect.Lists;
-import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepedGrass;
-import com.vetpetmon.wyrmsofnyrus.block.IWyrmBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 import java.io.File;
 import java.util.List;
-
-import static com.vetpetmon.wyrmsofnyrus.client.blocks.biomeColor.*;
 
 public class ClientProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 
@@ -25,18 +21,8 @@ public class ClientProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 		registerColors();
 	}
 
-	@Override //Did i really forget to override registerColors() which caused this whole mess to begin with?
+	@Override
 	public void registerColors() {
-		for (final Block block : coloredBlocks) {
-			final IWyrmBlocks blocks = (IWyrmBlocks) block;
-			if (blocks.getBlockColor() != null) {
-				Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(blocks.getBlockColor(), new Block[]{block});
-			}
-			if (blocks.getItemColor() != null) {
-				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(blocks.getItemColor(), new Block[]{block});
-			}
-		}
-		blockColorInt();
 	}
 
 	@Override
