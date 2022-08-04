@@ -1,7 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.client.blocks;
 
+import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepedGrass;
 import com.vetpetmon.wyrmsofnyrus.block.IWyrmBlocks;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemBlock;
@@ -13,6 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+
+import static com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepedGrass.block;
 
 @SideOnly(Side.CLIENT)
 public class biomeColor {
@@ -34,7 +38,7 @@ public class biomeColor {
         return blockColor == null ? 0xFFFFFF : blockColor.colorMultiplier(state, null, null, tintIndex);
     };
 
-    /*public static BlockColors blockColorInt() {
+    public static BlockColors blockColorInt() {
         final BlockColors blockColor = new BlockColors();
         blockColor.registerBlockColorHandler(new IBlockColor()
         {
@@ -42,8 +46,8 @@ public class biomeColor {
             {
                 return worldIn != null && pos != null ? BiomeColorHelper.getGrassColorAtPos(worldIn, pos) : ColorizerGrass.getGrassColor(0.5D, 1.0D);
             }
-        },BlockHiveCreepedGrass.block);
+        }, BlockHiveCreepedGrass.block);
 
         return blockColor;
-    }*/
+    }
 }

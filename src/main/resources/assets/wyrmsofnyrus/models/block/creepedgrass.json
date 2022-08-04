@@ -23,10 +23,10 @@
   {   "from": [ 0, 0, 0 ],
     "to": [ 16, 16, 16 ],
     "faces": {
-      "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "overlay": 0, "cullface": "north" },
-      "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "overlay": 0, "cullface": "south" },
-      "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "overlay": 0, "cullface": "west" },
-      "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#mipoverlay", "overlay": 0, "cullface": "east" }
+      "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "overlay": 0, "cullface": "north", "tintindex": 0 },
+      "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "overlay": 0, "cullface": "south", "tintindex": 0  },
+      "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "overlay": 0, "cullface": "west", "tintindex": 0  },
+      "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "overlay": 0, "cullface": "east", "tintindex": 0  }
     }
   },
   {   "from": [ 0, 0, 0 ],

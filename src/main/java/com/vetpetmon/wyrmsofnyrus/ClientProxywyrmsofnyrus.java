@@ -14,6 +14,8 @@ import net.minecraftforge.client.model.obj.OBJLoader;
 import java.io.File;
 import java.util.List;
 
+import static com.vetpetmon.wyrmsofnyrus.client.blocks.biomeColor.*;
+
 public class ClientProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 
 	private static List<Block> coloredBlocks = Lists.newArrayList();;
@@ -34,6 +36,7 @@ public class ClientProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(blocks.getItemColor(), new Block[]{block});
 			}
 		}
+		blockColorInt();
 	}
 
 	@Override
