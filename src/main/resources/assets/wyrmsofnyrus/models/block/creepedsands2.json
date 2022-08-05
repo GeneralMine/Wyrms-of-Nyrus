@@ -1,0 +1,6 @@
+{
+  "parent": "wyrmsofnyrus:block/creepedsand",
+  "textures": {
+    "overlay": "wyrmsofnyrus:blocks/creepstage2"
+  }
+}

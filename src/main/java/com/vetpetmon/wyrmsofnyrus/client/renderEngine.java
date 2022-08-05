@@ -19,6 +19,7 @@ public class renderEngine {
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmSoldierInfectoid.class, WyrmSoldierInfectoidGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepwyrm.class, CreepwyrmGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMyrmur.class, MyrmurGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWarrior.class, WyrmWarriorGeoRenderer::new);
     }
 
 }

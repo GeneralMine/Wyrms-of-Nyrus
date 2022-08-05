@@ -1,8 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
-import javax.annotation.Nullable;
-import com.vetpetmon.wyrmsofnyrus.compat.IRadiationImmune;
+import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -27,7 +26,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  * Handles a lot of the hot nonsense of class inheritance for you.
  * You're welcome. <3
  */
-public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadiationImmune, IMob {
+public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob {
 
     protected static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
 
@@ -169,6 +168,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadi
 
     /**
      * Detects if the Wyrm entity has found a target. Useful for animation.
+     * dOESN'T ACTUALLY WORK YET THO.
      *
      * @return boolean
      */
@@ -207,6 +207,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadi
     // Gives all wyrms COTH (from Scape & Run: Parasites) immunity so that way pack makers and unknowing players DON'T have to add it themselves.
     // Credit to Dhantry for helping me figure this out <3 turns out it's not a boolean, it's an integer. I feel stupid but then again SRP is closed-source, so I can't blame myself for being clueless.
     // Other modders are 100% free to use this knowledge to make their entities SRP-compatible too, such as a few mobs in Mowzie's Mobs that are also inorganic. You don't need to credit me, just Dhan for SRP.
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
 
@@ -214,18 +215,13 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IRadi
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
-        // Attempt to fix #6. Did not work.
-        //compound.getFloat("rads");
-        //compound.getFloat("envRads");
-        //compound.getFloat("radBuf");
+        //if (hbm.isEnabled()) hbmComp.makeRadImmune(compound);
     }
-
+    
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
-        //compound.setFloat("rads", 0);
-        //compound.setFloat("envRads", 0);
-        //compound.setFloat("radBuf", 0);
     }
 }

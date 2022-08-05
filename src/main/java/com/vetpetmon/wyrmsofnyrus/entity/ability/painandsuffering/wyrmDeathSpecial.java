@@ -21,7 +21,7 @@ public class wyrmDeathSpecial {
                 world.createExplosion(null, x, y, z, (float) (power), true);
             }
             if (((power) >= 20)) {
-                world.addWeatherEffect(new EntityLightningBolt(world, x, y, z, true));
+                world.addWeatherEffect(new EntityLightningBolt(world, x, y, z, false));
                 world.playSound(null, x, y, z, SoundRegistry.nukeClose, SoundCategory.AMBIENT, (float) (100.0 * power), 1.00F);
                 world.playSound(null, x, y, z, SoundRegistry.nukeFar, SoundCategory.AMBIENT, (float) (1000.0 * power), 1.00F);
             }

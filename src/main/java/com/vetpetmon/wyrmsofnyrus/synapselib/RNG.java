@@ -66,6 +66,16 @@ public class RNG {
     }
 
     /**
+     * More shorthands. This one selects a random value between two directions, both directions (positive and negative)
+     * have the same length.
+     * @param range double
+     * @return negative or positive position value
+     */
+    public static double PMRange(double range) {
+        return getDoubleRange(-range,range);
+    }
+
+    /**
      * Tests an RNG component function n amount of times with a given min-max value.
      * Intended for demonstration or debugging purposes only, doesn't return any
      * value at all, prints outputs into the log. Can be ran outside of Minecraft.

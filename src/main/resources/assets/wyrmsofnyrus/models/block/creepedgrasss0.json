@@ -1,0 +1,6 @@
+{
+  "parent": "wyrmsofnyrus:block/creepedgrass",
+  "textures": {
+    "mipoverlay": "wyrmsofnyrus:blocks/creepstage0"
+  }
+}

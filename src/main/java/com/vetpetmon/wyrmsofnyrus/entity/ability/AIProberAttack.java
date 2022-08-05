@@ -1,6 +1,8 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
 import com.vetpetmon.wyrmsofnyrus.DamageSources.DamageSourceProbed;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -9,6 +11,8 @@ import net.minecraft.pathfinding.Path;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.probingPoints.probingPoints;
 
 
 public class AIProberAttack extends EntityAIBase
@@ -153,6 +157,7 @@ public class AIProberAttack extends EntityAIBase
             this.attacker.swingArm(EnumHand.MAIN_HAND);
             this.attacker.attackEntityAsMob(target);
             target.attackEntityFrom(DamageSourceProbed.PROBER, 50);
+            invasionPoints.add(world, 2);
         }
     }
 

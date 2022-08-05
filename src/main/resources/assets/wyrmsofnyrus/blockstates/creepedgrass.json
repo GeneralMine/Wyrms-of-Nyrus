@@ -1,0 +1,73 @@
+{
+  "variants": {
+    "normal": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=false,stage=0": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=false,stage=1": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=false,stage=2": {
+      "model": "wyrmsofnyrus:creepedgrasss1"
+    },
+    "snowy=false,stage=3": {
+      "model": "wyrmsofnyrus:creepedgrasss2"
+    },
+
+    "snowy=false,stage=4": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=false,stage=5": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=false,stage=6": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+
+    "snowy=false,stage=7": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=false,stage=8": {
+      "model": "wyrmsofnyrus:creepedgrasss1"
+    },
+    "snowy=false,stage=9": {
+      "model": "wyrmsofnyrus:creepedgrasss2"
+    },
+
+
+    "snowy=true,stage=0": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=true,stage=1": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=true,stage=2": {
+      "model": "wyrmsofnyrus:creepedgrasss1"
+    },
+    "snowy=true,stage=3": {
+      "model": "wyrmsofnyrus:creepedgrasss2"
+    },
+
+    "snowy=true,stage=4": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=true,stage=5": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=true,stage=6": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+
+    "snowy=true,stage=7": {
+      "model": "wyrmsofnyrus:creepedgrasss0"
+    },
+    "snowy=true,stage=8": {
+      "model": "wyrmsofnyrus:creepedgrasss1"
+    },
+    "snowy=true,stage=9": {
+      "model": "wyrmsofnyrus:creepedgrasss2"
+    }
+  }
+}

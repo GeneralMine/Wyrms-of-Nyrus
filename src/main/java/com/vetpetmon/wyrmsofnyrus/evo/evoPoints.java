@@ -1,10 +1,10 @@
 package com.vetpetmon.wyrmsofnyrus.evo;
 
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
+import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
@@ -65,15 +65,18 @@ public class evoPoints extends AutoReg.ModElement {
      * no need to make another setter for that.
      */
     public static void minimum(){
-        if (Loader.isModLoaded("draconicevolution")) {minEvoCap += 100;}
-        if (Loader.isModLoaded("hbm")) {minEvoCap += 80;}
-        if (Loader.isModLoaded("srparasites")) {minEvoCap += 60;}
-        if (Loader.isModLoaded("techguns")) {minEvoCap += 50;}
-        if (Loader.isModLoaded("immersiveintelligence")) {minEvoCap += 50;}
-        if (Loader.isModLoaded("securitycraft")) {minEvoCap += 45;}
-        if (Loader.isModLoaded("roughmobs")) {minEvoCap += 30;}
-        if (Loader.isModLoaded("roughmobsrevamped")) {minEvoCap += 30;}
-        if (Loader.isModLoaded("ic2")) {minEvoCap += 30;}
+        if (Evo.customEvoMinCap > 0) minEvoCap += Evo.customEvoMinCap;
+        if (Evo.evoReadsModpack) {
+            if (Loader.isModLoaded("draconicevolution")) minEvoCap += 100;
+            if (hbm.isEnabled()) minEvoCap += 80;
+            if (Loader.isModLoaded("srparasites")) minEvoCap += 60;
+            if (Loader.isModLoaded("techguns")) minEvoCap += 50;
+            if (Loader.isModLoaded("immersiveintelligence")) minEvoCap += 50;
+            if (Loader.isModLoaded("securitycraft")) minEvoCap += 45;
+            if (Loader.isModLoaded("roughmobs")) minEvoCap += 30;
+            if (Loader.isModLoaded("roughmobsrevamped")) minEvoCap += 30;
+            if (Loader.isModLoaded("ic2")) minEvoCap += 30;
+        }
     }
 
     /**

@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
@@ -29,11 +30,11 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
     public EntityCreepwyrm(World world) {
         super(world);
         this.casteType = 0;
-        setSize(3f, 5f);
+        setSize(1f, 5f);
         experienceValue = 30;
         enablePersistence();
         setNoAI(false);
-        this.timeUntilNextCreep = 100;
+        this.timeUntilNextCreep = Invasion.normCreepwyrmCreepSpeed;
     }
 
     @Override
@@ -108,7 +109,7 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
     @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,23);
+        wyrmDeathSpecial(this,getPosition(),world,21);
     }
 
     public void registerControllers(AnimationData data) {

@@ -1,48 +1,50 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepedGrass;
+import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
-
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.synapselib.*;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
-import com.vetpetmon.wyrmsofnyrus.synapselib.threading;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.color.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.ColorizerGrass;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.event.RegistryEvent;
-
-import net.minecraft.world.biome.Biome;
-import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
-import net.minecraft.block.Block;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
 import java.util.function.Supplier;
-import org.apache.logging.log4j.Logger;
 
 import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 
 @Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION)
 public class wyrmsofnyrus {
-    public static final String MODID = "wyrmsofnyrus";
-    public static final String NAME = "Wyrms of Nyrus";
-    public static final String VERSION = "0.1.35";
+    public static final String MODID = libVars.ModID;
+    public static final String NAME = libVars.ModName;
+    public static final String VERSION = libVars.ModVersion;
 
     public AutoReg elements = new AutoReg();
 
@@ -58,14 +60,9 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
-        wyrmsofnyrus.logger.info(
-                "If you experience a glitch anywhere, please ping any Vetpetmon Labs team member in the community discord with the log and description, along if instructions on how to replicate the issue, if needed.\n\n" +
-                "Do beware that there may be balancing issues in any development build.");
-        wyrmsofnyrus.logger.warn("We hope you are aware that the Wyrms are EXTREMELY destructive to your worlds.\n\n" +
-                "By downloading and installing this mod into your instance of Minecraft, you agree that you and your world gets invaded, overran by alien flora, eaten by aliens, probed when you least expect it, blah blah blah...\n" +
-                "You can make this mod less destructive by checking the config file after the game loads. You WILL need to restart MC for changes to be applied.");
+        wyrmsofnyrus.logger.info(synapseLib.initializeMSG());
 
-        threading.checkThreads();
+        //threading.checkThreads(); //We know this works
 
         ConfigLib.reloadConfig();
         ConfigLib.setCanon();
@@ -96,7 +93,29 @@ public class wyrmsofnyrus {
         elements.getElements().forEach(element -> element.init(event));
         proxy.init(event);
         SoundRegistry.RegisterSounds();
+        hbm.compatInit();
+        //MixinBootstrap.init();
+        //Mixins.addConfiguration("mixins.wyrmsofnyrus.compat.json");
     }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public void BlockColorHandlerInit(ColorHandlerEvent.Block event){
+        BlockColors blockColors = event.getBlockColors();
+        blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) ->
+                        worldIn != null && pos != null ? BiomeColorHelper.getGrassColorAtPos(worldIn, pos) : ColorizerGrass.getGrassColor(0.5D, 1.0D),
+                BlockHiveCreepedGrass.block);
+    }
+    @SubscribeEvent
+    @SuppressWarnings("deprecation")
+    @SideOnly(Side.CLIENT)
+    public void ItemColorHandlerInit(ColorHandlerEvent.Item event){
+        ItemColors itemColors = event.getItemColors();
+        itemColors.registerItemColorHandler((stack, tintIndex) ->
+                event.getBlockColors().colorMultiplier(((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata()), null, null, tintIndex),
+                BlockHiveCreepedGrass.block);
+    }
+
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {

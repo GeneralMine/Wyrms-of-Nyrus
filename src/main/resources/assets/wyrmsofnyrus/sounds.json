@@ -97,11 +97,40 @@
       }
     ]
   },
+  "entity.wyrmroars": {
+    "category": "hostile",
+    "subtitle": "subtitles.wyrmRoar",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/roar1",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/roar2",
+        "stream": false
+      }
+    ]
+  },
   "entity.hiss2": {
     "category": "neutral",
+    "subtitle": "subtitles.wyrmHiss",
     "sounds": [
       {
         "name": "wyrmsofnyrus:entity/hiss2",
+        "stream": false
+      }
+    ]
+  },
+  "entity.wyrmlingclicks": {
+    "category": "neutral",
+    "subtitle": "subtitles.wyrmlingClicks",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/wyrmlingclicking1",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/wyrmlingclicking2",
         "stream": false
       }
     ]
@@ -134,4 +163,4 @@
       }
     ]
   }
-}
+},

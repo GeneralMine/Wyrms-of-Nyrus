@@ -17,4 +17,6 @@ public interface IProxywyrmsofnyrus {
 	void postInit(FMLPostInitializationEvent event);
 
 	void serverLoad(FMLServerStartingEvent event);
+
+	void registerColors();
 }

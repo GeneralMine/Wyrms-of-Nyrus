@@ -1,0 +1,39 @@
+{
+  "variants": {
+    "normal": {
+      "model": "wyrmsofnyrus:creepedstone"
+    },
+    "stage=0": {
+      "model": "wyrmsofnyrus:creepedstone"
+    },
+    "stage=1": {
+      "model": "wyrmsofnyrus:creepedstone"
+    },
+    "stage=2": {
+      "model": "wyrmsofnyrus:creepedstones1"
+    },
+    "stage=3": {
+      "model": "wyrmsofnyrus:creepedstones2"
+    },
+
+    "stage=4": {
+      "model": "wyrmsofnyrus:creepedstones2"
+    },
+    "stage=5": {
+      "model": "wyrmsofnyrus:creepedstone"
+    },
+    "stage=6": {
+      "model": "wyrmsofnyrus:creepedstone"
+    },
+
+    "stage=7": {
+      "model": "wyrmsofnyrus:creepedstone"
+    },
+    "stage=8": {
+      "model": "wyrmsofnyrus:creepedstones1"
+    },
+    "stage=9": {
+      "model": "wyrmsofnyrus:creepedstones2"
+    }
+  }
+}

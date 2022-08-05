@@ -72,7 +72,7 @@ public class BlockHiveCreepBlockInactive extends AutoReg.ModElement {
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
 			if (world.isAirBlock(new BlockPos(pos.getX(), pos.getY()+1,pos.getZ()))){
-				world.setBlockState((pos), BlockHiveCreepTop.block.getDefaultState(), 3);
+				world.setBlockState((pos), BlockHiveCreepTopInactive.block.getDefaultState(), 3);
 			}
 		}
 
