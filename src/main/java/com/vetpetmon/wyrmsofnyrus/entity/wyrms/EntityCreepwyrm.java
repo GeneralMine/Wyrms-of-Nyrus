@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
@@ -33,7 +34,7 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
         experienceValue = 30;
         enablePersistence();
         setNoAI(false);
-        this.timeUntilNextCreep = 100;
+        this.timeUntilNextCreep = Invasion.normCreepwyrmCreepSpeed;
     }
 
     @Override

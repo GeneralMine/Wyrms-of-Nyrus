@@ -21,6 +21,9 @@ public class Invasion {
     public static boolean creepNewInactivity;
     public static int creepSpreadRate;
     public static int creepTickRate;
+    public static int normCreepwyrmCreepSpeed;
+    public static int direCreepwyrmCreepSpeed;
+    public static int creephiveCreepSpeed;
     public static float creepSpreadPoints;
     public static float creepSpreadMaxHardness;
     public static String[] invalidBlocksForCreepspread;
@@ -61,9 +64,14 @@ public class Invasion {
         creepSpreadRate = ConfigLib.createConfigInt(config, CATEGORYTWO, "Creep spread speed", "1 to n chance every tick that a hive creep blocks actually does something. Some blocks will tick much slower, like creepstone. Increase this number if you're seeing TPS drops. Default: 5", 5);
         creepSpreadPoints = ConfigLib.createConfigDouble(config, CATEGORYTWO, "Creep spread points", "Every time a creep block is created, the invasion points increase. If Invasion is not enabled, this won't work at all. It is recommended you should keep this number as a decimal unless if you want pain... Default: 0.015", 0.015);
         creepSpreadMaxHardness = ConfigLib.createConfigDouble(config, CATEGORYTWO, "Creep spread max hardness", "Maximum hardness of a block that can be infested. Can automatically generate a blacklist this way for other mods if you're too lazy to add to the blacklist below. Default: 2.45", 2.45);
-        invalidBlocksForCreepspread = ConfigLib.createConfigStringList(config, CATEGORYTWO, "Creepable block blacklist", ("Blacklist of blocks hive creep can not spread to. Blocks that are not consider a full block by the MC engine do not need to be included here.\nWARNING: EXPERIMENTAL FEATURE. Disabled/enable in the 2nd config option. Is automatically set to true in development builds."), iBdef);
+        invalidBlocksForCreepspread = ConfigLib.createConfigStringList(config, CATEGORYTWO, "Creepable block blacklist", ("Blacklist of blocks hive creep can not spread to. Blocks that are not considered a full block by the MC engine do not need to be included here.\nWARNING: EXPERIMENTAL FEATURE. Disabled/enable in the 2nd config option. Is automatically set to true in development builds."), iBdef);
         CSBlockBLEnabled = ConfigLib.createConfigBool(config, CATEGORYTWO, "Creepable block blacklist enabled", "Enables the creepable block blacklist.", true);
         FinalizeiBdef();
+
+        // Creepwyrm creeping speeds
+        normCreepwyrmCreepSpeed = ConfigLib.createConfigInt(config, CATEGORYTWO, "Creepwyrm creep speed", "The speed at which normal Creepwyrms spread The Creep. Every x entity updates, the creepwyrm runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creepwyrms do their thing a lot slower. Default: 200", 200);
+        direCreepwyrmCreepSpeed = ConfigLib.createConfigInt(config, CATEGORYTWO, "Dire Creepwyrm creep speed", "The speed at which Dire Creepwyrms spread The Creep. Every x entity updates, the creepwyrm runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creepwyrms do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
+        creephiveCreepSpeed = ConfigLib.createConfigInt(config, CATEGORYTWO, "Creep Hive creep speed", "The speed at which Creep Hives spread The Creep. Every x entity updates, the creep hive runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creep hives do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
 
         invasionProgressionRate = ConfigLib.createConfigDouble(config, CATEGORY, "Invasion Progression Rate", "Speed up or slow down invasion stage progression by multiplying the point requirements. Higher numbers slow things down. Make sure to not set this too higher, else there may be overflow errors trying to reach higher stages. Default: 1.0", 1.0);
 
