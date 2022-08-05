@@ -15,6 +15,13 @@ public class Invasion {
     public static boolean probingEnabled;
     public static int invasionPointsPerKill;
 
+    public static int iPointsIStage1Threshold;
+    public static int iPointsIStage2Threshold;
+    public static int iPointsIStage3Threshold;
+    public static int iPointsIStage4Threshold;
+    public static int iPointsIStage5Threshold;
+    public static int iPointsIStage6Threshold;
+
     public static int maxEventDistance;
 
     public static boolean creepEnabled;
@@ -30,8 +37,6 @@ public class Invasion {
     public static boolean CSBlockBLEnabled;
     public static ArrayList<Block> invalidBlocks;
 
-    public static float invasionProgressionRate;
-
     public static String[] iBdef = {"minecraft:furnace", "minecraft:brick_block", "minecraft:bone_block", "minecraft:bedrock", "minecraft:concrete", "minecraft:concrete_powder", "minecraft:end_bricks", "minecraft:end_stone", "minecraft:glass", "minecraft:jukebox", "minecraft:nether_brick", "minecraft:red_nether_brick", "minecraft:noteblock", "minecraft:observer", "minecraft:obsidian", "minecraft:packed_ice", "minecraft:prismarine", "minecraft:purpur_block", "minecraft:purpur_pillar", "minecraft:quartz_block", "minecraft:sponge", "minecraft:stained_glass", "minecraft:wool", "minecraft:stonebrick"};
 
     public static void loadFromConfig(Configuration config) {
@@ -46,6 +51,15 @@ public class Invasion {
 
         invasionEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Invasion enabled", "Enables the invasion system. Many functions of the mod will not work if this is off, including other sub-systems. Default: true", true);
         if (!invasionEnabled) wyrmsofnyrus.logger.info("Invasion module has been disabled");
+
+        //invasion stage point thresholds
+        iPointsIStage1Threshold = ConfigLib.createConfigInt(config, CATEGORY,"Stage 1 Invasion Point threshold" ,"How many points are required to reach this phase of the alien invasion. Phase 0 (arriving) takes place UNDER this value. Default: 1000", 1000);
+        iPointsIStage2Threshold = ConfigLib.createConfigInt(config, CATEGORY,"Stage 2 Invasion Point threshold" ,"How many points are required to reach this phase of the alien invasion. Default: 5000", 5000);
+        iPointsIStage3Threshold = ConfigLib.createConfigInt(config, CATEGORY,"Stage 3 Invasion Point threshold" ,"How many points are required to reach this phase of the alien invasion. Default: 10000", 10000);
+        iPointsIStage4Threshold = ConfigLib.createConfigInt(config, CATEGORY,"Stage 4 Invasion Point threshold" ,"How many points are required to reach this phase of the alien invasion. Default: 50000", 50000);
+        iPointsIStage5Threshold = ConfigLib.createConfigInt(config, CATEGORY,"Stage 5 Invasion Point threshold" ,"How many points are required to reach this phase of the alien invasion. Default: 100000", 100000);
+        iPointsIStage6Threshold = ConfigLib.createConfigInt(config, CATEGORY,"Stage 6 Invasion Point threshold" ,"How many points are required to reach this phase of the alien invasion. Default: 2500000", 2500000);
+        validatePhaseThresholds(); // Validate everything
 
         maxEventDistance= ConfigLib.createConfigInt(config, CATEGORY, "Max event distance", "All invasion events take place a certain distance away from the player. Increasing this range makes it less likely that events happen near the player, but may cause performance hitches due to potential chunkloading. Usually keep this number in increments of 16 (Chunk x/z size). Default is calculated for Minecraft's usual 12 chunk render radius. Default: 192", 192);
 
@@ -73,8 +87,6 @@ public class Invasion {
         direCreepwyrmCreepSpeed = ConfigLib.createConfigInt(config, CATEGORYTWO, "Dire Creepwyrm creep speed", "The speed at which Dire Creepwyrms spread The Creep. Every x entity updates, the creepwyrm runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creepwyrms do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
         creephiveCreepSpeed = ConfigLib.createConfigInt(config, CATEGORYTWO, "Creep Hive creep speed", "The speed at which Creep Hives spread The Creep. Every x entity updates, the creep hive runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creep hives do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
 
-        invasionProgressionRate = ConfigLib.createConfigDouble(config, CATEGORY, "Invasion Progression Rate", "Speed up or slow down invasion stage progression by multiplying the point requirements. Higher numbers slow things down. Make sure to not set this too high, else there may be overflow errors trying to reach higher stages. Default: 1.0", 1.0);
-
     }
 
     public static boolean isEXCANON() {
@@ -94,5 +106,38 @@ public class Invasion {
      */
     public static void FinalizeiBdef() {
         invalidBlocks = blacklistUtil.castToBlockBL(invalidBlocksForCreepspread);
+    }
+
+    /**
+     * Validates user input concerning phase thresholds.
+     */
+    public static void validatePhaseThresholds(){
+        wyrmsofnyrus.logger.info("Validating invasion stage point thresholds...");
+        for (int i = 0; i < 10; i++) //run this at least 7 times to fully make sure stuff validates correctly. Extra iterations won't hurt load times AND ensures good error tolerance. I'm assuming users may do stupid things in their config files.
+        {
+            wyrmsofnyrus.logger.info("Stage " + i + " of validation.");
+            if (iPointsIStage1Threshold > iPointsIStage2Threshold) {
+                iPointsIStage1Threshold = 1000;
+                wyrmsofnyrus.logger.warn("Stage 1 Invasion Point threshold was more than Stage 2 Invasion Point threshold, resetting to default...");
+            }
+            else if (iPointsIStage2Threshold > iPointsIStage3Threshold) {
+                iPointsIStage2Threshold = 5000;
+                wyrmsofnyrus.logger.warn("Stage 2 Invasion Point threshold was more than Stage 3 Invasion Point threshold, resetting to default...");
+            }
+            else if (iPointsIStage3Threshold > iPointsIStage4Threshold) {
+                iPointsIStage3Threshold = 10000;
+                wyrmsofnyrus.logger.warn("Stage 3 Invasion Point threshold was more than Stage 4 Invasion Point threshold, resetting to default...");
+            }
+            else if (iPointsIStage4Threshold > iPointsIStage5Threshold) {
+                iPointsIStage4Threshold = 50000;
+                wyrmsofnyrus.logger.warn("Stage 4 Invasion Point threshold was more than Stage 5 Invasion Point threshold, resetting to default...");
+            }
+            else if (iPointsIStage5Threshold > iPointsIStage6Threshold) {
+                iPointsIStage5Threshold = 100000;
+                wyrmsofnyrus.logger.warn("Stage 5 Invasion Point threshold was more than Stage 6 Invasion Point threshold, resetting to default...");
+            }
+            else break; //break out of loop as no more iterations are needed, all statements return false and therefor are valid.
+        }
+        wyrmsofnyrus.logger.info("All invasion stage point thresholds are validated.");
     }
 }

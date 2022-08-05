@@ -36,25 +36,25 @@ public class InvasionStatus extends AutoReg.ModElement {
 		if (Invasion.invasionEnabled) {
 			World world = (World) dependencies.get("world");
 			double invasionP = invasionPoints.get(world);
-			if (invasionP <= (1000 * Invasion.invasionProgressionRate)) {
+			if (invasionP <= (Invasion.iPointsIStage1Threshold)) {
 				wyrmVariables.wyrmInvasionStatus = "Arriving";
 				invasionPoints.setDifficulty(world,getDifficulty(1.0F));
-			} else if (invasionP <= (5000 * Invasion.invasionProgressionRate)) {
+			} else if (invasionP <= (Invasion.iPointsIStage2Threshold)) {
 				wyrmVariables.wyrmInvasionStatus = "Scouting";
 				invasionPoints.setDifficulty(world,getDifficulty(1.5F));
-			} else if (invasionP <= (10000 * Invasion.invasionProgressionRate)) {
+			} else if (invasionP <= (Invasion.iPointsIStage3Threshold)) {
 				wyrmVariables.wyrmInvasionStatus = "Establishing hive";
 				invasionPoints.setDifficulty(world,getDifficulty(2.0F));
-			} else if (invasionP <= (25000 * Invasion.invasionProgressionRate)) {
+			} else if (invasionP <= (Invasion.iPointsIStage4Threshold)) {
 				wyrmVariables.wyrmInvasionStatus = "Expanding";
 				invasionPoints.setDifficulty(world,getDifficulty(3.0F));
-			} else if (invasionP <= (100000 * Invasion.invasionProgressionRate)) {
+			} else if (invasionP <= (Invasion.iPointsIStage5Threshold)) {
 				wyrmVariables.wyrmInvasionStatus = "Invading";
 				invasionPoints.setDifficulty(world,getDifficulty(4.5F));
-			} else if (invasionP <= (1000000 * Invasion.invasionProgressionRate)) {
+			} else if (invasionP <= (Invasion.iPointsIStage6Threshold)) {
 				wyrmVariables.wyrmInvasionStatus = "Dominant species";
 				invasionPoints.setDifficulty(world,getDifficulty(5.5F));
-			} else if (invasionP > (2500000 * Invasion.invasionProgressionRate)) {
+			} else if (invasionP > (Invasion.iPointsIStage6Threshold)) {
 				wyrmVariables.wyrmInvasionStatus = "Terraforming";
 				invasionPoints.setDifficulty(world,getDifficulty(6.0F));
 			} else {
