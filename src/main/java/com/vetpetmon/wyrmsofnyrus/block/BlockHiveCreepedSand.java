@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RegHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -20,16 +21,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 @AutoReg.ModElement.Tag
-public class BlockHiveCreepedDirt extends AutoReg.ModElement {
-	@GameRegistry.ObjectHolder("wyrmsofnyrus:creepeddirt")
+public class BlockHiveCreepedSand extends AutoReg.ModElement {
+
+	private static final String name = "creepedsand";
+
+	@GameRegistry.ObjectHolder("wyrmsofnyrus:creepedsand")
 	public static final Block block = null;
-	public BlockHiveCreepedDirt(AutoReg instance) {
-		super(instance, 204);
+	public BlockHiveCreepedSand(AutoReg instance) {
+		super(instance, 207);
 	}
 
 	@Override
 	public void initElements() {
-		elements.blocks.add(() -> new creepedDirt().setRegistryName("creepeddirt"));
+		elements.blocks.add(() -> new creepedSand().setRegistryName(name));
 		elements.items.add(() -> new ItemBlock(block).setRegistryName(block.getRegistryName()));
 	}
 
@@ -37,16 +41,16 @@ public class BlockHiveCreepedDirt extends AutoReg.ModElement {
 	@Override
 	public void registerModels(ModelRegistryEvent event) {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0,
-				new ModelResourceLocation("wyrmsofnyrus:creepeddirt", "inventory"));
+				new ModelResourceLocation(RegHelper.resName(name), "inventory"));
 	}
-	public static class creepedDirt extends creepStaged {
+	public static class creepedSand extends creepStaged {
 
-		public creepedDirt() {
-			setUnlocalizedName("creepeddirt");
-			setSoundType(SoundType.GROUND);
+		public creepedSand() {
+			setUnlocalizedName(name);
+			setSoundType(SoundType.SAND);
 			setHarvestLevel("shovel", 0);
-			setHardness(0.5F);
-			setResistance(0.5F);
+			setHardness(0.15F);
+			setResistance(0.15F);
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
