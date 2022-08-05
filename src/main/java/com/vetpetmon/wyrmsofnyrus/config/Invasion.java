@@ -113,31 +113,36 @@ public class Invasion {
      */
     public static void validatePhaseThresholds(){
         wyrmsofnyrus.logger.info("Validating invasion stage point thresholds...");
-        for (int i = 0; i < 10; i++) //run this at least 7 times to fully make sure stuff validates correctly. Extra iterations won't hurt load times AND ensures good error tolerance. I'm assuming users may do stupid things in their config files.
-        {
-            wyrmsofnyrus.logger.info("Stage " + i + " of validation.");
+        boolean validationFailed = false;
             if (iPointsIStage1Threshold > iPointsIStage2Threshold) {
-                iPointsIStage1Threshold = 1000;
+                validationFailed = true;
                 wyrmsofnyrus.logger.warn("Stage 1 Invasion Point threshold was more than Stage 2 Invasion Point threshold, resetting to default...");
             }
             else if (iPointsIStage2Threshold > iPointsIStage3Threshold) {
-                iPointsIStage2Threshold = 5000;
+                validationFailed = true;
                 wyrmsofnyrus.logger.warn("Stage 2 Invasion Point threshold was more than Stage 3 Invasion Point threshold, resetting to default...");
             }
             else if (iPointsIStage3Threshold > iPointsIStage4Threshold) {
-                iPointsIStage3Threshold = 10000;
+                validationFailed = true;
                 wyrmsofnyrus.logger.warn("Stage 3 Invasion Point threshold was more than Stage 4 Invasion Point threshold, resetting to default...");
             }
             else if (iPointsIStage4Threshold > iPointsIStage5Threshold) {
-                iPointsIStage4Threshold = 50000;
+                validationFailed = true;
                 wyrmsofnyrus.logger.warn("Stage 4 Invasion Point threshold was more than Stage 5 Invasion Point threshold, resetting to default...");
             }
             else if (iPointsIStage5Threshold > iPointsIStage6Threshold) {
-                iPointsIStage5Threshold = 100000;
-                wyrmsofnyrus.logger.warn("Stage 5 Invasion Point threshold was more than Stage 6 Invasion Point threshold, resetting to default...");
+                validationFailed = true;
+                wyrmsofnyrus.logger.warn("Stage 5 Invasion Point threshold was more than Stage 6 Invasion Point threshold, resetting both to default...");
             }
-            else break; //break out of loop as no more iterations are needed, all statements return false and therefor are valid.
-        }
+            if (validationFailed) {
+                wyrmsofnyrus.logger.warn("Had to fall back to default point thresholds to avoid logic errors. Please fix your configuration file to use custom thresholds again.");
+                iPointsIStage1Threshold = 1000;
+                iPointsIStage2Threshold = 5000;
+                iPointsIStage3Threshold = 10000;
+                iPointsIStage4Threshold = 50000;
+                iPointsIStage5Threshold = 100000;
+                iPointsIStage6Threshold = 2500000;
+            }
         wyrmsofnyrus.logger.info("All invasion stage point thresholds are validated.");
     }
 }
