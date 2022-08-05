@@ -73,7 +73,7 @@ public class Invasion {
         direCreepwyrmCreepSpeed = ConfigLib.createConfigInt(config, CATEGORYTWO, "Dire Creepwyrm creep speed", "The speed at which Dire Creepwyrms spread The Creep. Every x entity updates, the creepwyrm runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creepwyrms do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
         creephiveCreepSpeed = ConfigLib.createConfigInt(config, CATEGORYTWO, "Creep Hive creep speed", "The speed at which Creep Hives spread The Creep. Every x entity updates, the creep hive runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creep hives do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
 
-        invasionProgressionRate = ConfigLib.createConfigDouble(config, CATEGORY, "Invasion Progression Rate", "Speed up or slow down invasion stage progression by multiplying the point requirements. Higher numbers slow things down. Make sure to not set this too higher, else there may be overflow errors trying to reach higher stages. Default: 1.0", 1.0);
+        invasionProgressionRate = ConfigLib.createConfigDouble(config, CATEGORY, "Invasion Progression Rate", "Speed up or slow down invasion stage progression by multiplying the point requirements. Higher numbers slow things down. Make sure to not set this too high, else there may be overflow errors trying to reach higher stages. Default: 1.0", 1.0);
 
     }
 
