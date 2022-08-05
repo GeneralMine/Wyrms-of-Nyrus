@@ -30,10 +30,12 @@ public abstract class creepStagedGrass extends BlockGrass {
         list.add("Gradually takes over blocks before converting them. Can not spread until the block is fully converted.");
     }
 
-    public int getMetaFromState(IBlockState state)
+    @Nonnull
+    public IBlockState getStateFromMeta(int meta)
     {
-        return state.getValue(STAGE);
+        return this.getDefaultState().withProperty(STAGE, meta);
     }
+    public int getMetaFromState(IBlockState state){return state.getValue(STAGE);}
     public BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] {STAGE,SNOWY});
