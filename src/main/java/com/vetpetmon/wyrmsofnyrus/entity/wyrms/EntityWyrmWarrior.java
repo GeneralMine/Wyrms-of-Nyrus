@@ -69,9 +69,9 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
                 if (d3 < EntityWyrmWarrior.this.getEntityBoundingBox().getAverageEdgeLength())
                 {
                     this.action = Action.WAIT;
-                    EntityWyrmWarrior.this.motionX *= 0.5D;
-                    EntityWyrmWarrior.this.motionY *= 0.5D;
-                    EntityWyrmWarrior.this.motionZ *= 0.5D;
+                    EntityWyrmWarrior.this.motionX *= 0.95D;
+                    EntityWyrmWarrior.this.motionY *= 2.05D;
+                    EntityWyrmWarrior.this.motionZ *= 0.95D;
                 }
                 else
                 {
