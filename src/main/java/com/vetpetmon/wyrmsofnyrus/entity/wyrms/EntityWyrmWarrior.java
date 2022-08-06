@@ -75,9 +75,9 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
                 }
                 else
                 {
-                    EntityWyrmWarrior.this.motionX += d0 / d3 * 0.09D * this.speed;
-                    EntityWyrmWarrior.this.motionY += d1 / d3 * 0.2D * this.speed;
-                    EntityWyrmWarrior.this.motionZ += d2 / d3 * 0.09D * this.speed;
+                    EntityWyrmWarrior.this.motionX += d0 / d3 * 0.009D * this.speed;
+                    EntityWyrmWarrior.this.motionY += d1 / d3 * 0.002D * this.speed;
+                    EntityWyrmWarrior.this.motionZ += d2 / d3 * 0.009D * this.speed;
 
                     if (EntityWyrmWarrior.this.getAttackTarget() == null)
                     {
