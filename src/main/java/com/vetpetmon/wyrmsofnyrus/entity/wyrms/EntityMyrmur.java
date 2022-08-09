@@ -85,6 +85,7 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source.isProjectile()) amount *= 0.75F;
         if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
             return false;
         if (source == DamageSource.DROWN)

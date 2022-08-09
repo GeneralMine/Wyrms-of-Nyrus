@@ -9,6 +9,8 @@ public class Evo {
     public static boolean evoVariantsEnabled;
     public static boolean evoFromKilled;
 
+    public static boolean evoHBMVariantsEnabled;
+
     public static float evoFactor;
     public static int customEvoMinCap;
 
@@ -26,6 +28,8 @@ public class Evo {
         evoFactor = ConfigLib.createConfigDouble(config,CATEGORY,"Evolution factor"," Determines how powerful evolution gets. Do not touch this if you intend on keeping closer to what would be expected in vanilla Mineccraft. Higher values speeds up the evolution system growth faster, lower values slow it down. Default: 1.0",1.0);
         evoFromKilled = ConfigLib.createConfigBool(config, CATEGORY, "Evolution from wyrm deaths", "When wyrms die, they gain more evolutionary pressure to evolve and adapt against dying. Improvise. Overcome. Adapt. Default: true", true);
         evoVariantsEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Evolution variants", "As evolution increases, so does the chance of meeting an evolved variant of wyrm. Default: true", true);
+
+        evoHBMVariantsEnabled = ConfigLib.createConfigBool(config, CATEGORY, "HBM evolution variants", "Enable/disable the HBM Taint evo variations. Requires variants to be enabled, does nothing if HBM is not installed. Default: true", true);
 
     }
 }

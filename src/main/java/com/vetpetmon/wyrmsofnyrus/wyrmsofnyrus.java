@@ -61,6 +61,7 @@ public class wyrmsofnyrus {
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
         wyrmsofnyrus.logger.info(synapseLib.initializeMSG());
+        hbm.compatInit();
 
         //threading.checkThreads(); //We know this works
 
@@ -93,7 +94,6 @@ public class wyrmsofnyrus {
         elements.getElements().forEach(element -> element.init(event));
         proxy.init(event);
         SoundRegistry.RegisterSounds();
-        hbm.compatInit();
         //MixinBootstrap.init();
         //Mixins.addConfiguration("mixins.wyrmsofnyrus.compat.json");
     }

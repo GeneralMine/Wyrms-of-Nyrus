@@ -86,6 +86,7 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source.isMagicDamage()) amount *= 0.5F;
         if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
             return false;
         if (source == DamageSource.DROWN)

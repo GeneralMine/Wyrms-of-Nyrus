@@ -1,5 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
+import com.hbm.interfaces.IRadiationImmune;
+import com.hbm.lib.ModDamageSource;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
@@ -31,26 +33,26 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
-public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityWyrmWarriorTainted extends EntityWyrm implements IAnimatable, IAnimationTickable, IRadiationImmune {
     private final AnimationFactory factory = new AnimationFactory(this);
     //private boolean isCharging;
-    public EntityWyrmWarrior(World world) {
+    public EntityWyrmWarriorTainted(World world) {
         super(world);
         this.casteType = 2;
         setSize(0.9f, 2.0f);
-        experienceValue = 5;
+        experienceValue = 30;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new EntityWyrmWarrior.WyrmWarriorMoveHelper(this);
+        this.moveHelper = new EntityWyrmWarriorTainted.WyrmWarriorMoveHelper(this);
         enablePersistence();
         setNoAI(false);
     }
 
     class WyrmWarriorMoveHelper extends EntityMoveHelper
     {
-        private final EntityWyrmWarrior parentEntity;
+        private final EntityWyrmWarriorTainted parentEntity;
         private double speedW;
 
-        public WyrmWarriorMoveHelper(EntityWyrmWarrior WyrmWarrior)
+        public WyrmWarriorMoveHelper(EntityWyrmWarriorTainted WyrmWarrior)
         {
             super(WyrmWarrior);
             this.parentEntity = WyrmWarrior;
@@ -60,36 +62,36 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
         {
             if (this.action == Action.MOVE_TO)
             {
-                double d0 = this.posX - EntityWyrmWarrior.this.posX;
-                double d1 = this.posY - EntityWyrmWarrior.this.posY;
-                double d2 = this.posZ - EntityWyrmWarrior.this.posZ;
+                double d0 = this.posX - EntityWyrmWarriorTainted.this.posX;
+                double d1 = this.posY - EntityWyrmWarriorTainted.this.posY;
+                double d2 = this.posZ - EntityWyrmWarriorTainted.this.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                d3 = (double)MathHelper.sqrt(d3);
+                d3 = (double) MathHelper.sqrt(d3);
 
-                if (d3 < EntityWyrmWarrior.this.getEntityBoundingBox().getAverageEdgeLength())
+                if (d3 < EntityWyrmWarriorTainted.this.getEntityBoundingBox().getAverageEdgeLength())
                 {
                     this.action = Action.WAIT;
-                    EntityWyrmWarrior.this.motionX *= 0.9D;
-                    EntityWyrmWarrior.this.motionY *= 2.0D;
-                    EntityWyrmWarrior.this.motionZ *= 0.9D;
+                    EntityWyrmWarriorTainted.this.motionX *= 0.9D;
+                    EntityWyrmWarriorTainted.this.motionY *= 2.0D;
+                    EntityWyrmWarriorTainted.this.motionZ *= 0.9D;
                 }
                 else
                 {
-                    EntityWyrmWarrior.this.motionX += d0 / d3 * 0.02D * this.speed;
-                    EntityWyrmWarrior.this.motionY += d1 / d3 * 0.02D * this.speed;
-                    EntityWyrmWarrior.this.motionZ += d2 / d3 * 0.02D * this.speed;
+                    EntityWyrmWarriorTainted.this.motionX += d0 / d3 * 0.02D * this.speed;
+                    EntityWyrmWarriorTainted.this.motionY += d1 / d3 * 0.02D * this.speed;
+                    EntityWyrmWarriorTainted.this.motionZ += d2 / d3 * 0.02D * this.speed;
 
-                    if (EntityWyrmWarrior.this.getAttackTarget() == null)
+                    if (EntityWyrmWarriorTainted.this.getAttackTarget() == null)
                     {
-                        EntityWyrmWarrior.this.rotationYaw = -((float)MathHelper.atan2(EntityWyrmWarrior.this.motionX, EntityWyrmWarrior.this.motionZ)) * (180F / (float)Math.PI);
-                        EntityWyrmWarrior.this.renderYawOffset = EntityWyrmWarrior.this.rotationYaw;
+                        EntityWyrmWarriorTainted.this.rotationYaw = -((float)MathHelper.atan2(EntityWyrmWarriorTainted.this.motionX, EntityWyrmWarriorTainted.this.motionZ)) * (180F / (float)Math.PI);
+                        EntityWyrmWarriorTainted.this.renderYawOffset = EntityWyrmWarriorTainted.this.rotationYaw;
                     }
                     else
                     {
-                        double d4 = EntityWyrmWarrior.this.getAttackTarget().posX - EntityWyrmWarrior.this.posX;
-                        double d5 = EntityWyrmWarrior.this.getAttackTarget().posZ - EntityWyrmWarrior.this.posZ;
-                        EntityWyrmWarrior.this.rotationYaw = -((float)MathHelper.atan2(d4, d5)) * (180F / (float)Math.PI);
-                        EntityWyrmWarrior.this.renderYawOffset = EntityWyrmWarrior.this.rotationYaw;
+                        double d4 = EntityWyrmWarriorTainted.this.getAttackTarget().posX - EntityWyrmWarriorTainted.this.posX;
+                        double d5 = EntityWyrmWarriorTainted.this.getAttackTarget().posZ - EntityWyrmWarriorTainted.this.posZ;
+                        EntityWyrmWarriorTainted.this.rotationYaw = -((float)MathHelper.atan2(d4, d5)) * (180F / (float)Math.PI);
+                        EntityWyrmWarriorTainted.this.renderYawOffset = EntityWyrmWarriorTainted.this.rotationYaw;
                     }
                 }
             }
@@ -123,9 +125,10 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
         float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(4,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(6,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(22,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(12,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(16,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(66,difficulty));
     }
 
     @Override
@@ -178,6 +181,13 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source.isMagicDamage()) amount = 0.0F;
+        if (source.isProjectile()) amount *= 0.5F;
+        if (source.isExplosion()) amount *= 0.5F;
+        if (source == ModDamageSource.radiation || source == ModDamageSource.mudPoisoning) {
+            this.heal(amount * 1.25F);
+            return false;
+        }
         if (source == DamageSource.FALL)
             return false;
         if (source == DamageSource.DROWN)
