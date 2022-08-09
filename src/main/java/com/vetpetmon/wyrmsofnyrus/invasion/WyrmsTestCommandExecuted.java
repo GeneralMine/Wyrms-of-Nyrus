@@ -37,7 +37,7 @@ public class WyrmsTestCommandExecuted extends AutoReg.ModElement {
 		else {
 			{
 				if (mcserv != null)
-					mcserv.getPlayerList().sendMessage(new TextComponentString("Wyrms of Nyral is working properly."));
+					mcserv.getPlayerList().sendMessage(new TextComponentString("Wyrms of Nyrus is working properly."));
 			}
 		}
 		{
