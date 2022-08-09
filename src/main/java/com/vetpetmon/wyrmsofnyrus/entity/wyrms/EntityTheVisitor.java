@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
@@ -104,5 +105,10 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.NyrusVisitor.idle"));
 
         return PlayState.CONTINUE;
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        return false;
     }
 }
