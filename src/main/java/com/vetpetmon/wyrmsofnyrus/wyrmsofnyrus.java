@@ -77,8 +77,6 @@ public class wyrmsofnyrus {
         MinecraftForge.EVENT_BUS.register(elements);
         elements.getElements().forEach(element -> element.preInit(event));
         proxy.preInit(event);
-
-        WyrmRegister.register();
     }
 
 
@@ -94,6 +92,8 @@ public class wyrmsofnyrus {
         elements.getElements().forEach(element -> element.init(event));
         proxy.init(event);
         SoundRegistry.RegisterSounds();
+
+        WyrmRegister.register();
         //MixinBootstrap.init();
         //Mixins.addConfiguration("mixins.wyrmsofnyrus.compat.json");
     }

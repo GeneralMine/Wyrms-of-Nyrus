@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.hbm.interfaces.IRadiationImmune;
 import com.hbm.lib.ModDamageSource;
+import com.hbm.potion.HbmPotion;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
@@ -9,9 +10,11 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -84,15 +87,14 @@ public class EntityWyrmWarriorTainted extends EntityWyrm implements IAnimatable,
                     if (EntityWyrmWarriorTainted.this.getAttackTarget() == null)
                     {
                         EntityWyrmWarriorTainted.this.rotationYaw = -((float)MathHelper.atan2(EntityWyrmWarriorTainted.this.motionX, EntityWyrmWarriorTainted.this.motionZ)) * (180F / (float)Math.PI);
-                        EntityWyrmWarriorTainted.this.renderYawOffset = EntityWyrmWarriorTainted.this.rotationYaw;
                     }
                     else
                     {
                         double d4 = EntityWyrmWarriorTainted.this.getAttackTarget().posX - EntityWyrmWarriorTainted.this.posX;
                         double d5 = EntityWyrmWarriorTainted.this.getAttackTarget().posZ - EntityWyrmWarriorTainted.this.posZ;
                         EntityWyrmWarriorTainted.this.rotationYaw = -((float)MathHelper.atan2(d4, d5)) * (180F / (float)Math.PI);
-                        EntityWyrmWarriorTainted.this.renderYawOffset = EntityWyrmWarriorTainted.this.rotationYaw;
                     }
+                    EntityWyrmWarriorTainted.this.renderYawOffset = EntityWyrmWarriorTainted.this.rotationYaw;
                 }
             }
         }
@@ -141,6 +143,15 @@ public class EntityWyrmWarriorTainted extends EntityWyrm implements IAnimatable,
         this.afterVillagers();
         this.afterAnimals();
         this.afterMobs();
+    }
+
+    @Override
+    public boolean attackEntityAsMob(Entity entityIn) {
+        boolean result = super.attackEntityAsMob(entityIn);
+        if (result) {
+            difficultyStats.applyPotionEffect(entityIn, HbmPotion.taint, 60, 1);
+        }
+        return result;
     }
 
     @Override

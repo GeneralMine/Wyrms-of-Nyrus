@@ -11,6 +11,6 @@ public class libVars {
     public static final String ModID = "wyrmsofnyrus"; //System name (ID) for the mod.
     public static final String ModName = "Wyrms of Nyrus"; //User-friendly name for the mod.
     public static final String ModVersion = "0.1.361"; //Version of the mod.
-    public static final String ExpectLibVersion = "0.27"; //Version of the library the mod needs/works best with.
+    public static final String ExpectLibVersion = "0.28"; //Version of the library the mod needs/works best with.
     public static final Object modInstance = wyrmsofnyrus.instance; //Mod object (instance)
 }
