@@ -40,7 +40,7 @@ import java.util.function.Supplier;
 
 import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 
-@Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION)
+@Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION, dependencies = "required-after:geckolib3")
 public class wyrmsofnyrus {
     public static final String MODID = libVars.ModID;
     public static final String NAME = libVars.ModName;
