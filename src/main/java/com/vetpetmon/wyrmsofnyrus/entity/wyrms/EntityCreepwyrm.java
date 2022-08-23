@@ -8,6 +8,7 @@ import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -56,6 +57,7 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
     protected void initEntityAI() {
         afterPlayers();
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.5D, false));
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     }
     @Override
     protected void applyEntityAttributes() {

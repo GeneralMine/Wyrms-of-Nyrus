@@ -10,6 +10,7 @@ import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -128,6 +129,7 @@ public class EntityDobber extends EntityWyrm implements IAnimatable {
     protected void initEntityAI() {
         super.initEntityAI();
         simpleAI();
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.5D, false));
         this.tasks.addTask(4, new FlyingMobAI(this, 18.75, 100));
         this.makeAllTargets();

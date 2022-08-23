@@ -13,6 +13,7 @@ import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
@@ -139,6 +140,7 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
         simpleAI();
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
         this.tasks.addTask(4, new FlyingMobAI(this, 3.05, 10));
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.afterPlayers(true);
         this.afterVillagers();
         this.afterAnimals();

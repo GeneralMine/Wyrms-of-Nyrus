@@ -152,6 +152,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         if (Invasion.probingEnabled) {
             this.tasks.addTask(2, new AIProberAttack(this, 1.5D, true));
             this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 100));
+            this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
             this.afterPlayers(false);
             this.afterVillagers();
             this.afterAnimals();
@@ -160,6 +161,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         else {
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
             this.tasks.addTask(4, new FlyingMobAI(this, 6.05, 100));
+            this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
             this.makeAllTargets();
         }
     }

@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.item.Item;
@@ -51,6 +52,7 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
+        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
         afterPlayers();
         if (getAttackVillagers()) afterVillagers();
         if (isEXCANON()) {afterMobs();}
