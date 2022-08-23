@@ -2,7 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
@@ -31,7 +31,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
-public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     //private boolean isCharging;
     public EntityWyrmWarrior(World world) {
@@ -190,7 +190,7 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
     }
 
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
+        data.addAnimationController(new AnimationController(this, "controller", 3F, this::predicate));
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
@@ -198,7 +198,8 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.moving"));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.idle"));
+            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.groundedIdle"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.idle"));
         }
 
         return PlayState.CONTINUE;

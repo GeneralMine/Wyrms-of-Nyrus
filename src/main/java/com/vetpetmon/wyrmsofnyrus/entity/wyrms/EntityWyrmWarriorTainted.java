@@ -5,7 +5,7 @@ import com.hbm.lib.ModDamageSource;
 import com.hbm.potion.HbmPotion;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
@@ -36,7 +36,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
-public class EntityWyrmWarriorTainted extends EntityWyrm implements IAnimatable, IAnimationTickable, IRadiationImmune {
+public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnimatable, IAnimationTickable, IRadiationImmune {
     private final AnimationFactory factory = new AnimationFactory(this);
     //private boolean isCharging;
     public EntityWyrmWarriorTainted(World world) {
@@ -219,7 +219,8 @@ public class EntityWyrmWarriorTainted extends EntityWyrm implements IAnimatable,
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.moving"));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.idle"));
+            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.groundedIdle"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.idle"));
         }
 
         return PlayState.CONTINUE;
