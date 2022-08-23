@@ -218,7 +218,8 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.moving"));
+            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.groundedRun"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.moving"));
         }
         else {
             if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.groundedIdle"));

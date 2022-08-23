@@ -23,9 +23,7 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 /**
- * Abstract class that all Wyrms of Nyrus entities are built from.
- * Handles a lot of the hot nonsense of class inheritance for you.
- * You're welcome. <3
+ * Abstract class for flying wyrms, adds a lot of code and methods for fliers.
  */
 public abstract class EntityWyrmFlying extends EntityWyrm implements IAnimatable, IMob {
 
@@ -44,6 +42,6 @@ public abstract class EntityWyrmFlying extends EntityWyrm implements IAnimatable
     public AnimationFactory getFactory() {return this.factory;}
 
     public boolean isGrounded(){
-        return !(world.isAirBlock(new BlockPos(getPosition().getX(), getPosition().getY()-1,getPosition().getZ())));
+        return !(world.isBlockFullCube(new BlockPos(getPosition().getX(), getPosition().getY()-1,getPosition().getZ())));
     }
 }
