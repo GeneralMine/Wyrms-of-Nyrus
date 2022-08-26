@@ -19,6 +19,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -41,6 +42,7 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     private int chanceToBreak;
+    private int proberTimer;
     //private boolean isCharging;
     public EntityWyrmProber(World world) {
         super(world);
@@ -51,6 +53,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
         enablePersistence();
         setNoAI(false);
+        this.proberTimer = 2400; // Lives for ~2 two minutes
     }
 
     class WyrmProberMoveHelper extends EntityMoveHelper
@@ -180,6 +183,9 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     public void onLivingUpdate(){
         super.onLivingUpdate();
+        if (!this.world.isRemote && --this.proberTimer <= 0){
+            this.setDead();
+        }
         chanceToBreak = RNG.dBase(20);
         if (AI.destroyBlocks && Invasion.probingEnabled && (chanceToBreak == 2)) BreakGlass.CheckAndBreak(world,getPosition(),3);
     }
@@ -221,6 +227,33 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         if (source == DamageSource.ON_FIRE)
             return super.attackEntityFrom(source, amount*3);
         return super.attackEntityFrom(source, amount);
+    }
+
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        if (compound.hasKey("GrowthTime"))
+        {
+            this.proberTimer = compound.getInteger("proberTimer");
+        }
+
+        if (compound.hasKey("srpcothimmunity"))
+        {
+            this.srpcothimmunity = compound.getInteger("srpcothimmunity");
+        }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+
+        this.srpcothimmunity = 0;
+
+        compound.setInteger("srpcothimmunity", this.srpcothimmunity);
+        compound.setInteger("proberTimer", this.proberTimer);
     }
 
     public void registerControllers(AnimationData data) {
