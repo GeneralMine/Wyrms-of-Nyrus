@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Invasion {
     public static boolean invasionEnabled;
+    public static boolean invasionStartsNaturally;
     public static boolean EXCANON;
     public static float EXCANONDIFFICULTY;
 
@@ -51,6 +52,7 @@ public class Invasion {
 
         invasionEnabled = ConfigLib.createConfigBool(config, CATEGORY, "Invasion enabled", "Enables the invasion system. Many functions of the mod will not work if this is off, including other sub-systems. Default: true", true);
         if (!invasionEnabled) wyrmsofnyrus.logger.info("Invasion module has been disabled");
+        invasionStartsNaturally = ConfigLib.createConfigBool(config, CATEGORY, "Invasion starts naturally", "Allows the invasion to start naturally without needing admin commands. Default: true", true);
 
         //invasion stage point thresholds
         iPointsIStage1Threshold = ConfigLib.createConfigInt(config, CATEGORY,"Stage 1 Invasion Point threshold" ,"How many points are required to reach this phase of the alien invasion. Phase 0 (arriving) takes place UNDER this value. Default: 1000", 1000);
