@@ -56,7 +56,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
         enablePersistence();
         setNoAI(false);
-        this.proberTimer = 2400; // Lives for ~2 two minutes
+        this.proberTimer = 2500; // Lives for ~2 two minutes
         this.probingpoints = 0;
     }
 
@@ -253,7 +253,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
 
         if (compound.hasKey("probingpoints"))
         {
-            this.proberTimer = compound.getInteger("probingpoints");
+            this.probingpoints = compound.getInteger("probingpoints");
         }
 
         if (compound.hasKey("srpcothimmunity"))

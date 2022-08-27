@@ -29,6 +29,6 @@ public abstract class EntityWyrmFlying extends EntityWyrm implements IAnimatable
     public AnimationFactory getFactory() {return this.factory;}
 
     public boolean isGrounded(){
-        return !(world.isBlockFullCube(new BlockPos(getPosition().getX(), getPosition().getY()-1,getPosition().getZ())));
+        return (world.isBlockFullCube(new BlockPos(getPosition().getX(), getPosition().getY()-1,getPosition().getZ())));
     }
 }
