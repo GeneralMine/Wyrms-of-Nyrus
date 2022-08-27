@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
+import com.hbm.potion.HbmPotion;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
 import com.vetpetmon.wyrmsofnyrus.config.AI;
@@ -10,10 +11,12 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.AIProberAttack;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -35,7 +38,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.probingPoints.probingPoints;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
@@ -43,6 +45,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     private int chanceToBreak;
     private int proberTimer;
+    private int probingpoints;
     //private boolean isCharging;
     public EntityWyrmProber(World world) {
         super(world);
@@ -54,6 +57,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         enablePersistence();
         setNoAI(false);
         this.proberTimer = 2400; // Lives for ~2 two minutes
+        this.probingpoints = 0;
     }
 
     class WyrmProberMoveHelper extends EntityMoveHelper
@@ -172,7 +176,14 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     public void onKillEntity(EntityLivingBase entity) {
         super.onKillEntity(entity);
-        if (Invasion.probingEnabled) {probingPoints(world);}
+        if (Invasion.probingEnabled) {this.probingpoints += 5;}
+    }
+
+    @Override
+    public boolean attackEntityAsMob(Entity entityIn) {
+        boolean result = super.attackEntityAsMob(entityIn);
+        if (result) this.probingpoints += 2;
+        return result;
     }
 
     @Override
@@ -184,6 +195,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     public void onLivingUpdate(){
         super.onLivingUpdate();
         if (!this.world.isRemote && --this.proberTimer <= 0){
+            invasionPoints.add(world, this.probingpoints);
             this.setDead();
         }
         chanceToBreak = RNG.dBase(20);
@@ -234,9 +246,14 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     {
         super.readEntityFromNBT(compound);
 
-        if (compound.hasKey("GrowthTime"))
+        if (compound.hasKey("proberTimer"))
         {
             this.proberTimer = compound.getInteger("proberTimer");
+        }
+
+        if (compound.hasKey("probingpoints"))
+        {
+            this.proberTimer = compound.getInteger("probingpoints");
         }
 
         if (compound.hasKey("srpcothimmunity"))
@@ -254,6 +271,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
 
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
         compound.setInteger("proberTimer", this.proberTimer);
+        compound.setInteger("probingpoints", this.probingpoints);
     }
 
     public void registerControllers(AnimationData data) {
