@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
+import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
@@ -18,11 +19,12 @@ public class WyrmlingGrowUp {
         int y = (int) e.get("y");
         int z = (int) e.get("z");
         Entity entityToSpawn;
-        int entityToGrowTo = RNG.dBase(16);
+        int entityToGrowTo = RNG.dBase(18);
         World world = (World) e.get("world");
+        int evoPointsInWorld = evoPoints.get(world);
         switch(entityToGrowTo) {
             case(11):
-                if (Evo.evoEnabled && evoPoints.get(world) >= 100) {
+                if (Evo.evoEnabled && evoPointsInWorld >= 100) {
                     entityToSpawn = new EntityMyrmur(world);
                 }
                 else {
@@ -33,17 +35,34 @@ public class WyrmlingGrowUp {
                 break;
             case(8):
             case(9):
-                if (Evo.evoVariantsEnabled && (evoPoints.get(world) >= 400 && RNG.dBase(3) == 2)) {
+                if (Evo.evoVariantsEnabled && (evoPointsInWorld >= 400 && RNG.dBase(3) == 2)) {
                     entityToSpawn = new EntityWyrmRoverUranium(world);
                 }
                 else {
                     entityToSpawn = new EntityWyrmRover(world);
                 }
+                break;
+            case(15):
+            case(16):
+                if (hbm.isEnabled() && Evo.evoVariantsEnabled)
+                {
+                    if (evoPointsInWorld >= 1800){
+                        entityToSpawn = new EntityWyrmWarriorTainted(world);
+                    }
+                    else if (evoPointsInWorld >= 800 && RNG.dBase(3) == 2) {
+                        entityToSpawn = new EntityWyrmWarriorTainted(world);
+                    }
+                    else entityToSpawn = new EntityWyrmWarrior(world);
+                }
+                else {
+                    entityToSpawn = new EntityWyrmWarrior(world);
+                }
+                break;
             case(0):
             case(1):
             case(2):
             case(3):
-                if (Evo.evoVariantsEnabled && (evoPoints.get(world) >= 50 && RNG.dBase(3) == 2)) {
+                if (Evo.evoVariantsEnabled && (evoPointsInWorld >= 50 && RNG.dBase(3) == 2)) {
                     entityToSpawn = new EntityWyrmSoldierInfectoid(world);
                 }
                 else {

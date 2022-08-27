@@ -15,7 +15,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityMoveHelper;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -179,7 +178,7 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(wyrmArmorFragment.block, 2).getItem();
+        return new ItemStack(wyrmArmorFragment.block, 4).getItem();
     }
 
     @Override
