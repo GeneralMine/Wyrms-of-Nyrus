@@ -47,10 +47,10 @@ public class WyrmlingGrowUp {
                 if (hbm.isEnabled() && Evo.evoVariantsEnabled)
                 {
                     if (evoPointsInWorld >= 1800){
-                        entityToSpawn = new EntityWyrmWarriorTainted(world);
+                        entityToSpawn = HBMwyrms.getWyrm("Warrior",world);
                     }
                     else if (evoPointsInWorld >= 800 && RNG.dBase(3) == 2) {
-                        entityToSpawn = new EntityWyrmWarriorTainted(world);
+                        entityToSpawn = HBMwyrms.getWyrm("Warrior",world);
                     }
                     else entityToSpawn = new EntityWyrmWarrior(world);
                 }
