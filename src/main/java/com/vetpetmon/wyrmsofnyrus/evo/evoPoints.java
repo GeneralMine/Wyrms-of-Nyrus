@@ -69,7 +69,7 @@ public class evoPoints extends AutoReg.ModElement {
         if (Evo.evoReadsModpack) {
             if (Loader.isModLoaded("draconicevolution")) minEvoCap += 100;
             if (hbm.isEnabled()) minEvoCap += 80;
-            if (Loader.isModLoaded("srparasites")) minEvoCap += 60;
+            if (Loader.isModLoaded("srparasites")) minEvoCap += 80;
             if (Loader.isModLoaded("techguns")) minEvoCap += 50;
             if (Loader.isModLoaded("immersiveintelligence")) minEvoCap += 50;
             if (Loader.isModLoaded("securitycraft")) minEvoCap += 45;
