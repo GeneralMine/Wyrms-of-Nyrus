@@ -66,14 +66,18 @@ public class ConfigLib {
 
     public static void reloadConfig() {
         Configuration cfg = new Configuration(new File(proxy.getDataDir().getPath() + "/config/wyrms.cfg"));
+        Configuration wcfg = new Configuration(new File(proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/wyrmstats.cfg"));
         cfg.load();
+        wcfg.load();
         Debug.loadFromConfig(cfg);
         Invasion.loadFromConfig(cfg);
         AI.loadFromConfig(cfg);
         Radiogenetics.loadFromConfig(cfg);
         Evo.loadFromConfig(cfg);
+        wyrmStats.loadFromConfig(wcfg);
         wyrmsofnyrus.logger.info("Configuration loaded or changed.");
         cfg.save();
+        wcfg.save();
     }
 
     public static void setCanon() {
