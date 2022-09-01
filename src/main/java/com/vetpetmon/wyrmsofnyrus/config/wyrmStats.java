@@ -32,12 +32,17 @@ public class wyrmStats {
     public static float dobberATK;
     public static float dobberSPD;
 
+    public static float wyrmlingHP;
+    public static float wyrmlingDEF;
+    public static float wyrmlingSPD;
+
     public static void loadFromConfig(Configuration c) {
         startFile(c);
         warriorStats(c);
         soldierStats(c);
         proberStats(c);
         dobberStats(c);
+        wyrmlingStats(c);
 
     }
 
@@ -94,5 +99,15 @@ public class wyrmStats {
         dobberSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.9", 0.9);
 
         dobberATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 0.5", 0.5);
+    }
+
+    public static void wyrmlingStats(Configuration c) {
+        final String CAT = "Wyrmling Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the wyrmlings.\n");
+        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 3", 3);
+
+        wyrmlingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 2", 2);
+
+        wyrmlingSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.55", 0.55);
     }
 }

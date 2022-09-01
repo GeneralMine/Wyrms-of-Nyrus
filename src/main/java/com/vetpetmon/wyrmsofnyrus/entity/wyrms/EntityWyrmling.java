@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
@@ -26,6 +27,8 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 public class EntityWyrmling extends EntityWyrm {
     private int timeUntilGrowth;
     private boolean hasGrown;
+    private float HP;
+    private float DEF;
 
     public EntityWyrmling(World world) {
         super(world);
@@ -37,6 +40,8 @@ public class EntityWyrmling extends EntityWyrm {
         enablePersistence();
         setNoAI(false);
         this.timeUntilGrowth = this.rand.nextInt(6000) + 2000;
+        this.HP = wyrmStats.wyrmlingHP;
+        this.DEF = wyrmStats.wyrmlingDEF;
     }
 
     @Override
@@ -56,18 +61,21 @@ public class EntityWyrmling extends EntityWyrm {
         super.applyEntityAttributes();
         float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
         if (Evo.evoEnabled && evoPoints.get(world) >= 300){
-            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(8,difficulty));
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(12,difficulty));
+            this.DEF = wyrmStats.wyrmlingDEF * 4;
+            this.HP = wyrmStats.wyrmlingHP * 4;
         }
         else if (Evo.evoEnabled && evoPoints.get(world) >= 150){
-            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(4,difficulty));
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(6,difficulty));
+            this.DEF = wyrmStats.wyrmlingDEF * 2;
+            this.HP = wyrmStats.wyrmlingHP * 2;
         }
         else {
-            this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2,difficulty));
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(3,difficulty));
+            this.DEF = wyrmStats.wyrmlingDEF;
+            this.HP = wyrmStats.wyrmlingHP;
         }
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
+
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(this.HP,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(this.DEF,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(wyrmStats.wyrmlingSPD);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
     }
 
