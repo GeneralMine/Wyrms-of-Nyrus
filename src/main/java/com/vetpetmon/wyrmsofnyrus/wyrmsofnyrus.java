@@ -2,7 +2,6 @@ package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepedGrass;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
-import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.*;
@@ -39,6 +38,7 @@ import software.bernie.geckolib3.GeckoLib;
 import java.util.function.Supplier;
 
 import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
+import static com.vetpetmon.wyrmsofnyrus.config.ConfigBase.*;
 
 @Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION, dependencies = "required-after:geckolib3")
 public class wyrmsofnyrus {
@@ -65,8 +65,8 @@ public class wyrmsofnyrus {
 
         //threading.checkThreads(); //We know this works
 
-        ConfigLib.reloadConfig();
-        ConfigLib.setCanon();
+        reloadConfig();
+        setCanon();
 
         messageReg.init();
 

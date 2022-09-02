@@ -1,12 +1,13 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
 import net.minecraftforge.common.config.Configuration;
-import static com.vetpetmon.wyrmsofnyrus.config.ConfigLib.*;
 
-//Giant list of wyrm stats for fine tuning
+import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
+
+//Giant list of wyrm stats for fine-tuning
 public class wyrmStats {
 
-    private static String advNotice = "\n\n WIP section! This configuration file isn't fully fleshed out and is subject to change in future versions. \n\n These values are part of advanced configuration for more precise user tuning. Good for modpack developers.";
+    private static final String advNotice = "\n\n WIP section! This configuration file isn't fully fleshed out and is subject to change in future versions. \n\n These values are part of advanced configuration for more precise user tuning. Good for modpack developers.";
 
     public static float warriorHP;
     public static float taintedWarriorHP;
