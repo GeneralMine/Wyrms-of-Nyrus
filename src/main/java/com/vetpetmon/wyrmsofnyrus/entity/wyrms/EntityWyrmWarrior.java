@@ -2,22 +2,22 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
+import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.*;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -31,101 +31,30 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
-public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     //private boolean isCharging;
     public EntityWyrmWarrior(World world) {
         super(world);
         this.casteType = 2;
         setSize(0.9f, 2.0f);
-        experienceValue = 3;
+        experienceValue = 5;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new EntityWyrmWarrior.WyrmWarriorMoveHelper(this);
+        this.moveHelper = new flierMoveHelperGhastlike(this, 30, 1.0, 0.8);
+        //this.moveHelper = new EntityWyrmWarrior.WyrmWarriorMoveHelper(this);
         enablePersistence();
         setNoAI(false);
     }
 
-    class WyrmWarriorMoveHelper extends EntityMoveHelper
-    {
-        private final EntityWyrmWarrior parentEntity;
-        private double speedW;
-
-        public WyrmWarriorMoveHelper(EntityWyrmWarrior WyrmWarrior)
-        {
-            super(WyrmWarrior);
-            this.parentEntity = WyrmWarrior;
-        }
-
-        public void onUpdateMoveHelper()
-        {
-            if (this.action == Action.MOVE_TO)
-            {
-                double d0 = this.posX - EntityWyrmWarrior.this.posX;
-                double d1 = this.posY - EntityWyrmWarrior.this.posY;
-                double d2 = this.posZ - EntityWyrmWarrior.this.posZ;
-                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                d3 = (double)MathHelper.sqrt(d3);
-
-                if (d3 < EntityWyrmWarrior.this.getEntityBoundingBox().getAverageEdgeLength())
-                {
-                    this.action = Action.WAIT;
-                    EntityWyrmWarrior.this.motionX *= 0.5D;
-                    EntityWyrmWarrior.this.motionY *= 0.5D;
-                    EntityWyrmWarrior.this.motionZ *= 0.5D;
-                }
-                else
-                {
-                    EntityWyrmWarrior.this.motionX += d0 / d3 * 0.05D * this.speed;
-                    EntityWyrmWarrior.this.motionY += d1 / d3 * 0.05D * this.speed;
-                    EntityWyrmWarrior.this.motionZ += d2 / d3 * 0.05D * this.speed;
-
-                    if (EntityWyrmWarrior.this.getAttackTarget() == null)
-                    {
-                        EntityWyrmWarrior.this.rotationYaw = -((float)MathHelper.atan2(EntityWyrmWarrior.this.motionX, EntityWyrmWarrior.this.motionZ)) * (180F / (float)Math.PI);
-                        EntityWyrmWarrior.this.renderYawOffset = EntityWyrmWarrior.this.rotationYaw;
-                    }
-                    else
-                    {
-                        double d4 = EntityWyrmWarrior.this.getAttackTarget().posX - EntityWyrmWarrior.this.posX;
-                        double d5 = EntityWyrmWarrior.this.getAttackTarget().posZ - EntityWyrmWarrior.this.posZ;
-                        EntityWyrmWarrior.this.rotationYaw = -((float)MathHelper.atan2(d4, d5)) * (180F / (float)Math.PI);
-                        EntityWyrmWarrior.this.renderYawOffset = EntityWyrmWarrior.this.rotationYaw;
-                    }
-                }
-            }
-        }
-
-        private boolean isNotColliding(double x, double y, double z, double p_179926_7_)
-        {
-            double d0 = (x - this.parentEntity.posX) / p_179926_7_;
-            double d1 = (y - this.parentEntity.posY) / p_179926_7_;
-            double d2 = (z - this.parentEntity.posZ) / p_179926_7_;
-            AxisAlignedBB axisalignedbb = this.parentEntity.getEntityBoundingBox();
-
-            for (int i = 1; (double)i < p_179926_7_; ++i)
-            {
-                axisalignedbb = axisalignedbb.offset(d0, d1, d2);
-
-                if (!this.parentEntity.world.getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty())
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
-
-
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
+        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(4,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(6,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(12,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(wyrmStats.warriorATK,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(wyrmStats.warriorDEF,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(wyrmStats.warriorHP,difficulty));
     }
 
     @Override
@@ -133,7 +62,9 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
         super.initEntityAI();
         simpleAI();
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
-        this.tasks.addTask(4, new FlyingMobAI(this, 3.05, 10));
+        this.tasks.addTask(4, new EntityAIFlierMob(this, 3.05, 200));
+        this.tasks.addTask(8, new EntityAIFlierMoveRandom(this));
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.afterPlayers(true);
         this.afterVillagers();
         this.afterAnimals();
@@ -190,15 +121,17 @@ public class EntityWyrmWarrior extends EntityWyrm implements IAnimatable, IAnima
     }
 
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
+        data.addAnimationController(new AnimationController(this, "controller", 3F, this::predicate));
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.moving"));
+            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.groundedRun"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.moving"));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.idle"));
+            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.groundedIdle"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.idle"));
         }
 
         return PlayState.CONTINUE;

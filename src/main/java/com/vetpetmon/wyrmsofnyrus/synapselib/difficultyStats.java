@@ -2,6 +2,11 @@ package com.vetpetmon.wyrmsofnyrus.synapselib;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 
 /**
  * This component was specifically designed for Wyrms of Nyrus's mobs and creatures.
@@ -35,6 +40,20 @@ public class difficultyStats {
         else exdif = 1;
 
         return ( ((baseDMG) + (difficulty * exdif)) * Radiogenetics.wyrmStrength);
+    }
+
+    /**
+     * Applies a potion effect to an attacked entity.
+     * Duration is scaled/increased by difficulty.
+     * Supports modded & vanilla potions.
+     * @param inputE Entity input, the entity that gets attacked
+     * @param effect Class of the effect, like HbmPotion.radiation
+     * @param duration Base duration of effect in ticks
+     * @param lvl Effect level
+     */
+    public static void applyPotionEffect(Entity inputE, Potion effect, int duration, int lvl) {
+
+        ((EntityLivingBase) inputE).addPotionEffect(new PotionEffect(effect, duration + inputE.world.getDifficulty().ordinal() * 40, lvl));
     }
 
     /**

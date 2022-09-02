@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import net.minecraft.world.World;
@@ -26,6 +27,7 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 			int y = (int) dependencies.get("y");
 			int z = (int) dependencies.get("z");
 			World world = (World) dependencies.get("world");
+
 			if ((((new Object() {
 				public String getText() {
 					String param = (String) cmdparams.get("0");
@@ -67,7 +69,18 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 					$_dependencies.put("z", z);
 					VisitorEvent.executeProcedure($_dependencies, true, world);
 				}
-			} else {
+			} else if ((((new Object() {
+				public String getText() {
+					String param = (String) cmdparams.get("0");
+					if (param != null) {
+						return param;
+					}
+					return "";
+				}
+			}.getText())).equals("startInvasion"))) {
+				wyrmVariables.WorldVariables.get(world).invasionStarted = true;
+				wyrmsofnyrus.logger.info("Wyrm invasion started by command usage.");
+			}else {
 				{
 					MinecraftServer mcserv = FMLCommonHandler.instance().getMinecraftServerInstance();
 					if (mcserv != null)

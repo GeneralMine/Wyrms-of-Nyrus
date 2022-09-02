@@ -3,7 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.synapselib;
 import java.util.Objects;
 
 public class synapseLib {
-    public static final String LibVersion = "0.26"; //Version of the library.
+    public static final String LibVersion = "0.3"; //Version of the library.
 
     public static String initializeMSG() {
         if (!(Objects.equals(libVars.ExpectLibVersion, LibVersion)))

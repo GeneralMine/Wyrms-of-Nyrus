@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
+import com.vetpetmon.wyrmsofnyrus.synapselib.synMath;
 import net.minecraft.util.math.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.*;
@@ -7,21 +8,31 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.pathfinding.PathNavigateFlying;
 
 //  This is a custom AI for flight-capable mobs.
-//  They will try to avoid dropping onto the ground, and try to move in the air towards targets
-//  Use this AI with caution. It could be laggy, for all I know. You think I know Jabba?
+//  They will try to avoid flying too high, and try to move in the air towards targets
 
 public class FlyingMobAI extends EntityAIBase
 {
     private final EntityMob parentEntity;
     private final double FlySpeed;
-    private final int FlightLimit;
+    private final int FlightLimitMax;
+    private final int FlightLimitMin;
 
-    public FlyingMobAI(EntityMob entity, Double FlySpeed, Integer FlightLimit)
+    public FlyingMobAI(EntityMob entity, double FlySpeed, int FlightMax, int FlightMin)
     {
         this.parentEntity = entity;
         this.setMutexBits(1);
         this.FlySpeed = FlySpeed;
-        this.FlightLimit = FlightLimit;
+        this.FlightLimitMax = FlightMax;
+        this.FlightLimitMin = FlightMin;
+    }
+
+    public FlyingMobAI(EntityMob entity, double FlySpeed, int FlightMax)
+    {
+        this.parentEntity = entity;
+        this.setMutexBits(1);
+        this.FlySpeed = FlySpeed;
+        this.FlightLimitMax = FlightMax;
+        this.FlightLimitMin = 1;
     }
 
     public boolean shouldExecute() {
@@ -38,7 +49,7 @@ public class FlyingMobAI extends EntityAIBase
     public void startExecuting() {
         EntityLivingBase livingentity = this.parentEntity.getAttackTarget();
         Vec3d vec3d = livingentity.getPositionEyes(1);
-        this.parentEntity.getMoveHelper().setMoveTo(vec3d.x, vec3d.y, vec3d.z, FlySpeed);
+        this.parentEntity.getMoveHelper().setMoveTo(vec3d.x, synMath.clamp((float) vec3d.y, this.FlightLimitMin, this.FlightLimitMax), vec3d.z, FlySpeed);
     }
 
     @Override
@@ -54,6 +65,6 @@ public class FlyingMobAI extends EntityAIBase
     }
 
     protected double getAttackReachSq(EntityLivingBase attackTarget) {
-        return this.parentEntity.width * 1.25 * this.parentEntity.height * 1.5 + attackTarget.height * 1.2;
+        return this.parentEntity.width * 0.85 * this.parentEntity.height * 0.85 + attackTarget.height * 1.1;
     }
 }

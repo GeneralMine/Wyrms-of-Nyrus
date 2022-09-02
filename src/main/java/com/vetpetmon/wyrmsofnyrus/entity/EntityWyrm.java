@@ -70,6 +70,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     protected static boolean getAttackAnimals() {return AI.attackAnimals;}
     protected static boolean getAttackVillagers() {return AI.attackVillagers;}
     protected static boolean getWillAttackCreepers() {return AI.suicidalWyrms;}
+    protected static boolean getWillAttackPlayers() {return AI.niceToPlayers;}
 
     /**
      * Getter for invasion difficulty. Makes things look a million times neater, and can be called outside EntityWyrm.
@@ -130,8 +131,10 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     protected void afterAnimals() {this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, true, false));}
     protected void afterVillagers() { this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, true, false));}
     protected void afterPlayers(boolean checkSight) {
-        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, checkSight, false));
+        if (getWillAttackPlayers()){
+            this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
+            this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, checkSight, false));
+        }
     }
     protected void afterPlayers() {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));

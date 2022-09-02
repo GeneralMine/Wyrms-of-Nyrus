@@ -44,6 +44,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
         super.initEntityAI();
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         simpleAI();
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
         afterPlayers();
@@ -52,7 +53,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
 
     @Override
     protected void applyEntityAttributes() {
-        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
+        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.75D);

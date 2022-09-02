@@ -2,7 +2,6 @@ package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepedGrass;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
-import com.vetpetmon.wyrmsofnyrus.config.ConfigLib;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.*;
@@ -39,8 +38,9 @@ import software.bernie.geckolib3.GeckoLib;
 import java.util.function.Supplier;
 
 import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
+import static com.vetpetmon.wyrmsofnyrus.config.ConfigBase.*;
 
-@Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION)
+@Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION, dependencies = "required-after:geckolib3")
 public class wyrmsofnyrus {
     public static final String MODID = libVars.ModID;
     public static final String NAME = libVars.ModName;
@@ -61,11 +61,12 @@ public class wyrmsofnyrus {
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
         wyrmsofnyrus.logger.info(synapseLib.initializeMSG());
+        hbm.compatInit();
 
         //threading.checkThreads(); //We know this works
 
-        ConfigLib.reloadConfig();
-        ConfigLib.setCanon();
+        reloadConfig();
+        setCanon();
 
         messageReg.init();
 
@@ -76,8 +77,6 @@ public class wyrmsofnyrus {
         MinecraftForge.EVENT_BUS.register(elements);
         elements.getElements().forEach(element -> element.preInit(event));
         proxy.preInit(event);
-
-        WyrmRegister.register();
     }
 
 
@@ -93,7 +92,8 @@ public class wyrmsofnyrus {
         elements.getElements().forEach(element -> element.init(event));
         proxy.init(event);
         SoundRegistry.RegisterSounds();
-        hbm.compatInit();
+
+        WyrmRegister.register();
         //MixinBootstrap.init();
         //Mixins.addConfiguration("mixins.wyrmsofnyrus.compat.json");
     }

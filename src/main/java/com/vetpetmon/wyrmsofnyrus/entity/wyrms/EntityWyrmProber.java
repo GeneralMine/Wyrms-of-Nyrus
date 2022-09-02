@@ -2,24 +2,27 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
-import com.vetpetmon.wyrmsofnyrus.compat.IRadiationImmune;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.AIProberAttack;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -28,6 +31,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -35,13 +39,14 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.probingPoints.probingPoints;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
-public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
+public class EntityWyrmProber extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     private int chanceToBreak;
+    private int proberTimer;
+    private int probingpoints;
     //private boolean isCharging;
     public EntityWyrmProber(World world) {
         super(world);
@@ -52,7 +57,17 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         this.moveHelper = new EntityWyrmProber.WyrmProberMoveHelper(this);
         enablePersistence();
         setNoAI(false);
+        this.proberTimer = 2500; // Lives for ~2 two minutes
+        this.probingpoints = 0;
     }
+
+    @Override
+    public int tickTimer() {
+        return ticksExisted;
+    }
+
+    @Override
+    public void tick() {super.onUpdate();}
 
     class WyrmProberMoveHelper extends EntityMoveHelper
     {
@@ -129,19 +144,18 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
+        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         if (Invasion.probingEnabled) {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
-            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.72D);
-            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(7,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(wyrmStats.proberSPD+0.25D);
         }
         else {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
-            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
-            this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(1,difficulty));
+            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(wyrmStats.proberSPD);
         }
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(5,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(wyrmStats.proberDEF,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(wyrmStats.proberATK,difficulty));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(wyrmStats.proberHP,difficulty));
     }
 
     @Override
@@ -152,7 +166,8 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         // Bypass configs entirely if probing is enabled, else make probers respect the optimizations players want.
         if (Invasion.probingEnabled) {
             this.tasks.addTask(2, new AIProberAttack(this, 1.5D, true));
-            this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 100));
+            this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 256, 10));
+            this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
             this.afterPlayers(false);
             this.afterVillagers();
             this.afterAnimals();
@@ -161,6 +176,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         else {
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
             this.tasks.addTask(4, new FlyingMobAI(this, 6.05, 100));
+            this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
             this.makeAllTargets();
         }
     }
@@ -168,7 +184,14 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     public void onKillEntity(EntityLivingBase entity) {
         super.onKillEntity(entity);
-        if (Invasion.probingEnabled) {probingPoints(world);}
+        if (Invasion.probingEnabled) {this.probingpoints += 5;}
+    }
+
+    @Override
+    public boolean attackEntityAsMob(Entity entityIn) {
+        boolean result = super.attackEntityAsMob(entityIn);
+        if (result) this.probingpoints += 2;
+        return result;
     }
 
     @Override
@@ -179,6 +202,10 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
     @Override
     public void onLivingUpdate(){
         super.onLivingUpdate();
+        if (!this.world.isRemote && --this.proberTimer <= 0){
+            invasionPoints.add(world, this.probingpoints);
+            this.setDead();
+        }
         chanceToBreak = RNG.dBase(20);
         if (AI.destroyBlocks && Invasion.probingEnabled && (chanceToBreak == 2)) BreakGlass.CheckAndBreak(world,getPosition(),3);
     }
@@ -201,7 +228,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
 
     @Override
     public SoundEvent getAmbientSound() {
-        return SoundRegistry.wyrmClicks;
+        return SoundRegistry.proberidle;
     }
     @Override
     protected SoundEvent getFallSound(int heightIn) {return null;}
@@ -222,16 +249,49 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         return super.attackEntityFrom(source, amount);
     }
 
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+
+        if (compound.hasKey("proberTimer"))
+        {
+            this.proberTimer = compound.getInteger("proberTimer");
+        }
+
+        if (compound.hasKey("probingpoints"))
+        {
+            this.probingpoints = compound.getInteger("probingpoints");
+        }
+
+        if (compound.hasKey("srpcothimmunity"))
+        {
+            this.srpcothimmunity = compound.getInteger("srpcothimmunity");
+        }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+
+        this.srpcothimmunity = 0;
+
+        compound.setInteger("srpcothimmunity", this.srpcothimmunity);
+        compound.setInteger("proberTimer", this.proberTimer);
+        compound.setInteger("probingpoints", this.probingpoints);
+    }
+
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprobermodel.Moving"));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprober.Moving"));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.flying"));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprober.flying"));
         }
 
         return PlayState.CONTINUE;

@@ -49,6 +49,7 @@ public class EntityWyrmWorker extends EntityWyrm {
         if (((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing))
                 || (Evo.evoEnabled && evoPoints.get(world) >= 150)) {
             afterPlayers();
+            this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             simpleAI();
         }
@@ -62,7 +63,7 @@ public class EntityWyrmWorker extends EntityWyrm {
 
     @Override
     protected void applyEntityAttributes() {
-        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
+        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);

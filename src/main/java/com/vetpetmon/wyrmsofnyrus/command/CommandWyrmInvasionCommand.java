@@ -9,7 +9,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.entity.Entity;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.ICommand;
-import net.minecraft.command.CommandHandler;
 
 import java.util.Map;
 import java.util.List;

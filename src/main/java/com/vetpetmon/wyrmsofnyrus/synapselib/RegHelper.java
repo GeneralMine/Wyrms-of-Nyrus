@@ -10,13 +10,21 @@ public class RegHelper extends libVars {
         return new ResourceLocation(ModID, NAME);
     }
 
+    /**
+     * Shorthand to ragister an entity into the game. Handles resource location and various repeated parameters.
+     * Often reduces character count by 40% compared to directly using EntityRegistry.registerModEntity().
+     * @param entityName
+     * @param entityClass
+     * @param id
+     * @param trackRange
+     */
     public static void RegEntity(String entityName, java.lang.Class<? extends Entity> entityClass, int id, int trackRange){
         EntityRegistry.registerModEntity(
                 resName(entityName),
                 entityClass,
                 entityName,
                 id,
-                wyrmsofnyrus.instance,
+                libVars.modInstance,
                 trackRange,
                 1,
                 true
@@ -41,7 +49,7 @@ public class RegHelper extends libVars {
                 entityClass,
                 entityName,
                 id,
-                wyrmsofnyrus.instance,
+                libVars.modInstance,
                 trackRange,
                 1,
                 true,

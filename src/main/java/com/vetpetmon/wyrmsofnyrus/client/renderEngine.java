@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client;
 
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.*;
+import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
@@ -20,6 +21,9 @@ public class renderEngine {
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepwyrm.class, CreepwyrmGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMyrmur.class, MyrmurGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWarrior.class, WyrmWarriorGeoRenderer::new);
+        if (hbm.isEnabled()) {
+            RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWarriorTainted.class, WyrmWarriorTaintedGeoRenderer::new);
+        }
     }
 
 }

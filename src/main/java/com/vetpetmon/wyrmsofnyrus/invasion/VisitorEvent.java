@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -54,7 +55,7 @@ public class VisitorEvent extends AutoReg.ModElement {
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		Entity entity = event.player;
 		World world = entity.world;
-		if (!wyrmVariables.WorldVariables.get(world).invasionStarted) {
+		if (!wyrmVariables.WorldVariables.get(world).invasionStarted && Invasion.invasionStartsNaturally) {
 			java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
 			dependencies.put("x", (int) entity.posX);
 			dependencies.put("y", (int) entity.posY);
