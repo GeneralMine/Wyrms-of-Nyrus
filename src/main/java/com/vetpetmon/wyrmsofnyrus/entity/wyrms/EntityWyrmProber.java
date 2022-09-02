@@ -1,6 +1,5 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
-import com.hbm.potion.HbmPotion;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 
 import com.vetpetmon.wyrmsofnyrus.config.AI;
@@ -32,6 +31,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
@@ -42,7 +42,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
-public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
+public class EntityWyrmProber extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     private int chanceToBreak;
     private int proberTimer;
@@ -60,6 +60,14 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         this.proberTimer = 2500; // Lives for ~2 two minutes
         this.probingpoints = 0;
     }
+
+    @Override
+    public int tickTimer() {
+        return ticksExisted;
+    }
+
+    @Override
+    public void tick() {super.onUpdate();}
 
     class WyrmProberMoveHelper extends EntityMoveHelper
     {
@@ -158,7 +166,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable {
         // Bypass configs entirely if probing is enabled, else make probers respect the optimizations players want.
         if (Invasion.probingEnabled) {
             this.tasks.addTask(2, new AIProberAttack(this, 1.5D, true));
-            this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 100));
+            this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 256, 10));
             this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
             this.afterPlayers(false);
             this.afterVillagers();

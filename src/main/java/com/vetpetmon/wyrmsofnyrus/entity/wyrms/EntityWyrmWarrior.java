@@ -4,10 +4,12 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.synapselib.synMath;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -42,7 +44,8 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
         setSize(0.9f, 2.0f);
         experienceValue = 5;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new EntityWyrmWarrior.WyrmWarriorMoveHelper(this);
+        this.moveHelper = new flierMoveHelperGhastlike(this, 10, 1.1, 0.8);
+        //this.moveHelper = new EntityWyrmWarrior.WyrmWarriorMoveHelper(this);
         enablePersistence();
         setNoAI(false);
     }
@@ -51,6 +54,7 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
     {
         private final EntityWyrmWarrior parentEntity;
         private double speedW;
+        private int yMax = 200;
 
         public WyrmWarriorMoveHelper(EntityWyrmWarrior WyrmWarrior)
         {
@@ -63,7 +67,7 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
             if (this.action == Action.MOVE_TO)
             {
                 double d0 = this.posX - EntityWyrmWarrior.this.posX;
-                double d1 = this.posY - EntityWyrmWarrior.this.posY;
+                double d1 = this.posX - EntityWyrmWarrior.this.posY;//synMath.clamp((float) (this.posY - EntityWyrmWarrior.this.posY), yMax, 0);
                 double d2 = this.posZ - EntityWyrmWarrior.this.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
                 d3 = (double)MathHelper.sqrt(d3);
@@ -80,6 +84,8 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
                     EntityWyrmWarrior.this.motionX += d0 / d3 * 0.02D * this.speed;
                     EntityWyrmWarrior.this.motionY += d1 / d3 * 0.02D * this.speed;
                     EntityWyrmWarrior.this.motionZ += d2 / d3 * 0.02D * this.speed;
+
+                    //if (EntityWyrmWarrior.this.posY > yMax && EntityWyrmWarrior.this.getAttackTarget() == null) this.posY = yMax;
 
                     if (EntityWyrmWarrior.this.getAttackTarget() == null)
                     {
@@ -135,7 +141,7 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
         super.initEntityAI();
         simpleAI();
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
-        this.tasks.addTask(4, new FlyingMobAI(this, 3.05, 10));
+        this.tasks.addTask(4, new EntityAIFlierMob(this, 3.05, 200));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.afterPlayers(true);
         this.afterVillagers();
