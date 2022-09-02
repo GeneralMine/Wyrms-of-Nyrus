@@ -62,7 +62,7 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) getInvasionDifficulty();
+        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         if (Evo.evoEnabled && evoPoints.get(world) >= 500){
             this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(6,difficulty));
             this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(55,difficulty));

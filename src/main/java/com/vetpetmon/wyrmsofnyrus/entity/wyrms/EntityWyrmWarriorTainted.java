@@ -53,7 +53,7 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
+        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);

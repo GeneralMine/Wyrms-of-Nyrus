@@ -59,7 +59,7 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) (getInvasionDifficulty() * evoPoints.evoMilestone(world));
+        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         if (Evo.evoEnabled && evoPoints.get(world) >= 300){
             this.DEF = wyrmStats.wyrmlingDEF * 4;
             this.HP = wyrmStats.wyrmlingHP * 4;

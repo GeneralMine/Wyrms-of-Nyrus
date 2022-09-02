@@ -30,14 +30,20 @@ public class evoPoints extends AutoReg.ModElement {
     public static void set(World w, int i) {wyrmVariables.WorldVariables.get(w).wyrmEvo = i;}
     public static double evoMilestone(World w){
         double evoBoost = 1.0;
-        if (get(w) >= 150) {
-            evoBoost = 1.25;
+        if (get(w) >= 2000) {
+            evoBoost = 4.0;
         }
-        if (get(w) >= 250) {
+        else if (get(w) >= 800) {
+            evoBoost = 2.0;
+        }
+        else if (get(w) >= 400) {
+            evoBoost = 1.75;
+        }
+        else if (get(w) >= 250) {
             evoBoost = 1.5;
         }
-        if (get(w) >= 400) {
-            evoBoost = 1.75;
+        else if (get(w) >= 150) {
+            evoBoost = 1.25;
         }
         return evoBoost;
     }
