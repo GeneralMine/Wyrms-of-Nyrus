@@ -39,8 +39,7 @@ public class WyrmProberModel extends AnimatedTickingGeoModel<EntityWyrmProber>
 
         EntityLivingBase entityIn = entity;
         EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
-        body.setRotationX(extraData.netHeadYaw * ((float)Math.PI / 180F));
+        body.setRotationX(extraData.headPitch * ((float)Math.PI / 180F));
         body.setRotationY(extraData.netHeadYaw * ((float)Math.PI / 180F));
-        body.setRotationZ(extraData.netHeadYaw * ((float)Math.PI / 180F));
     }
 }

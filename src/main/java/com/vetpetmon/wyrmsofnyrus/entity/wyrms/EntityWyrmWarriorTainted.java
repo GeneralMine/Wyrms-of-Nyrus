@@ -10,6 +10,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -46,79 +47,9 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
         setSize(0.9f, 2.0f);
         experienceValue = 30;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new EntityWyrmWarriorTainted.WyrmWarriorMoveHelper(this);
+        this.moveHelper = new flierMoveHelperGhastlike(this, 10, 1.0, 0.8);
         enablePersistence();
         setNoAI(false);
-    }
-
-    class WyrmWarriorMoveHelper extends EntityMoveHelper
-    {
-        private final EntityWyrmWarriorTainted parentEntity;
-        private double speedW;
-
-        public WyrmWarriorMoveHelper(EntityWyrmWarriorTainted WyrmWarrior)
-        {
-            super(WyrmWarrior);
-            this.parentEntity = WyrmWarrior;
-        }
-
-        public void onUpdateMoveHelper()
-        {
-            if (this.action == Action.MOVE_TO)
-            {
-                double d0 = this.posX - EntityWyrmWarriorTainted.this.posX;
-                double d1 = this.posY - EntityWyrmWarriorTainted.this.posY;
-                double d2 = this.posZ - EntityWyrmWarriorTainted.this.posZ;
-                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                d3 = (double) MathHelper.sqrt(d3);
-
-                if (d3 < EntityWyrmWarriorTainted.this.getEntityBoundingBox().getAverageEdgeLength())
-                {
-                    this.action = Action.WAIT;
-                    EntityWyrmWarriorTainted.this.motionX *= 0.9D;
-                    EntityWyrmWarriorTainted.this.motionY *= 2.0D;
-                    EntityWyrmWarriorTainted.this.motionZ *= 0.9D;
-                }
-                else
-                {
-                    EntityWyrmWarriorTainted.this.motionX += d0 / d3 * 0.02D * this.speed;
-                    EntityWyrmWarriorTainted.this.motionY += d1 / d3 * 0.02D * this.speed;
-                    EntityWyrmWarriorTainted.this.motionZ += d2 / d3 * 0.02D * this.speed;
-
-                    if (EntityWyrmWarriorTainted.this.getAttackTarget() == null)
-                    {
-                        EntityWyrmWarriorTainted.this.rotationYaw = -((float)MathHelper.atan2(EntityWyrmWarriorTainted.this.motionX, EntityWyrmWarriorTainted.this.motionZ)) * (180F / (float)Math.PI);
-                    }
-                    else
-                    {
-                        double d4 = EntityWyrmWarriorTainted.this.getAttackTarget().posX - EntityWyrmWarriorTainted.this.posX;
-                        double d5 = EntityWyrmWarriorTainted.this.getAttackTarget().posZ - EntityWyrmWarriorTainted.this.posZ;
-                        EntityWyrmWarriorTainted.this.rotationYaw = -((float)MathHelper.atan2(d4, d5)) * (180F / (float)Math.PI);
-                    }
-                    EntityWyrmWarriorTainted.this.renderYawOffset = EntityWyrmWarriorTainted.this.rotationYaw;
-                }
-            }
-        }
-
-        private boolean isNotColliding(double x, double y, double z, double p_179926_7_)
-        {
-            double d0 = (x - this.parentEntity.posX) / p_179926_7_;
-            double d1 = (y - this.parentEntity.posY) / p_179926_7_;
-            double d2 = (z - this.parentEntity.posZ) / p_179926_7_;
-            AxisAlignedBB axisalignedbb = this.parentEntity.getEntityBoundingBox();
-
-            for (int i = 1; (double)i < p_179926_7_; ++i)
-            {
-                axisalignedbb = axisalignedbb.offset(d0, d1, d2);
-
-                if (!this.parentEntity.world.getCollisionBoxes(this.parentEntity, axisalignedbb).isEmpty())
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
     }
 
 

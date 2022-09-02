@@ -44,7 +44,7 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
         setSize(0.9f, 2.0f);
         experienceValue = 5;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new flierMoveHelperGhastlike(this, 10, 1.1, 0.8);
+        this.moveHelper = new flierMoveHelperGhastlike(this, 10, 1.0, 0.8);
         //this.moveHelper = new EntityWyrmWarrior.WyrmWarriorMoveHelper(this);
         enablePersistence();
         setNoAI(false);
