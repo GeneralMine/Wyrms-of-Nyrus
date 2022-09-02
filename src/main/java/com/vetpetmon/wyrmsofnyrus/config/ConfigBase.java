@@ -26,20 +26,21 @@ public class ConfigBase {
             general = createDirectory("general", ConfigDirectory),
             wyrms = createDirectory("wyrms", ConfigDirectory),
             debug = createDirectory("debug", ConfigDirectory),
-            evo = createDirectory("evolution", ConfigDirectory);
-    private static final Configuration[] configs = {general, wyrms, debug, evo};
+            evo = createDirectory("evolution", ConfigDirectory),
+            invasion = createDirectory("invasion", ConfigDirectory);
+    private static final Configuration[] configs = {general, wyrms, debug, evo, invasion};
 
     // Specific for WoN.
     public static void reloadConfig() {
 
         for (Configuration i:configs) i.load();
 
-        Invasion.loadFromConfig(general);
         AI.loadFromConfig(general);
         Radiogenetics.loadFromConfig(general);
         wyrmStats.loadFromConfig(wyrms);
         Debug.loadFromConfig(debug);
         Evo.loadFromConfig(evo);
+        Invasion.loadFromConfig(invasion);
 
         for (Configuration i:configs) i.save();
         wyrmsofnyrus.logger.info("Configuration loaded or changed.");
