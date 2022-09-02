@@ -9,6 +9,20 @@
       }
     ]
   },
+  "entity.prober": {
+    "category": "hostile",
+    "subtitle": "subtitles.prober",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/prober1",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/prober2",
+        "stream": false
+      }
+    ]
+  },
   "supercriticality": {
     "category": "neutral",
     "sounds": [
@@ -163,4 +177,4 @@
       }
     ]
   }
-},
+}

@@ -228,7 +228,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable, IAnimat
 
     @Override
     public SoundEvent getAmbientSound() {
-        return SoundRegistry.wyrmClicks;
+        return SoundRegistry.proberidle;
     }
     @Override
     protected SoundEvent getFallSound(int heightIn) {return null;}

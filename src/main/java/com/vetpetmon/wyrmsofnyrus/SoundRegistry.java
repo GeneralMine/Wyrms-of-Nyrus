@@ -18,6 +18,7 @@ public class SoundRegistry {
     public static SoundEvent nukeFar;
     public static SoundEvent wyrmroars;
     public static SoundEvent wyrmlingclicks;
+    public static SoundEvent proberidle;
 
     public static void RegisterSounds() {
         wyrmClicks = RegisterSound("entity.wyrmClicks");
@@ -32,6 +33,7 @@ public class SoundRegistry {
         nukeFar = RegisterSound("supercriticalitydistant");
         wyrmlingclicks = RegisterSound("entity.wyrmlingclicks");
         wyrmroars = RegisterSound("entity.wyrmroars");
+        proberidle = RegisterSound("entity.prober");
     }
 
     public static SoundEvent RegisterSound(String name) {

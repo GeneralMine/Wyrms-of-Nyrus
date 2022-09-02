@@ -52,5 +52,6 @@ subtitles.slowWyrmSteps=Heavy steps
 subtitles.wyrmHiss=Hissing
 subtitles.wyrmRoar=Deep roar
 subtitles.wyrmlingClicks=High-pitched hisses
+subtitles.prober=Buzzing
 
 death.attack.prober=%s got probed
