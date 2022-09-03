@@ -65,7 +65,7 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
         this.tasks.addTask(4, new EntityAIFlierMob(this, 3.05, 200));
         this.tasks.addTask(8, new EntityAIFlierMoveRandom(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.afterPlayers(true);
+        this.afterPlayers();
         this.afterVillagers();
         this.afterAnimals();
         this.afterMobs();
