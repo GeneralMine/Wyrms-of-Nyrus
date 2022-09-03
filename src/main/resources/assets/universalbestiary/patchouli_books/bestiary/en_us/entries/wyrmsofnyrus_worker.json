@@ -1,0 +1,18 @@
+{
+  "name": "Worker",
+  "icon": "minecraft:spawn_egg{EntityTag:{id:'wyrmsofnyrus:wyrmworker'}}",
+  "category": "monsters",
+  "flag": "universalbestiary:entity:wyrmsofnyrus:wyrmworker",
+  "advancement": "universalbestiary:wyrmsofnyrus_worker",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(mob)Worker$() can grow up from $(mob)Wyrmlings$(). They produce metalcombs, which are used by the alien invaders to build their hives."
+    },
+    {
+      "type": "entity",
+      "entity": "wyrmsofnyrus:wyrmworker",
+      "text": "Will unionize on you if you're not careful"
+    }
+  ]
+}

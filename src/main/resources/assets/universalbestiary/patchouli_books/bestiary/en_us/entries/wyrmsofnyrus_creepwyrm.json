@@ -1,0 +1,18 @@
+{
+  "name": "Creepwyrm",
+  "icon": "minecraft:spawn_egg{EntityTag:{id:'wyrmsofnyrus:creepwyrm'}}",
+  "category": "monsters",
+  "flag": "universalbestiary:entity:wyrmsofnyrus:creepwyrm",
+  "advancement": "universalbestiary:wyrmsofnyrus_creepwyrm",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(mob)Creepwyrm$() appear from the ground-up, infesting the lands with some weird plant-like substance called The Creep. It's almost like a sub-hive of its own. Definitely don't let this grow any bigger."
+    },
+    {
+      "type": "entity",
+      "entity": "wyrmsofnyrus:creepwyrm",
+      "text": "All will be infested in due time..."
+    }
+  ]
+}

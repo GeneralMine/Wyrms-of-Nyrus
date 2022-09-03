@@ -1,0 +1,18 @@
+{
+  "name": "Prober",
+  "icon": "minecraft:spawn_egg{EntityTag:{id:'wyrmsofnyrus:wyrmprober'}}",
+  "category": "monsters",
+  "flag": "universalbestiary:entity:wyrmsofnyrus:wyrmprober",
+  "advancement": "universalbestiary:wyrmsofnyrus_prober",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The $(mob)Prober$() is found within the Callous Lander pods with their Dobber minions. They are the most vile of all invasion forces; designed to penetrate skulls at 150 MPH bursts, drain brains in under 20 seconds, and move on like nothing ever happened."
+    },
+    {
+      "type": "entity",
+      "entity": "wyrmsofnyrus:wyrmprober",
+      "text": "Avoid at all costs"
+    }
+  ]
+}
