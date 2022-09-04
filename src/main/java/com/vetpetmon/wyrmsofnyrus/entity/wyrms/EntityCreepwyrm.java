@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
@@ -95,7 +96,7 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
 
         if (!this.world.isRemote && --this.timeUntilNextCreep <= 0)
         {
-            creepTheLands(getPosition(),this.world);
+            creepTheLands(getPosition(),this.world, Radiogenetics.creepwyrmInfestRange);
             this.timeUntilNextCreep = 100;
         }
     }
