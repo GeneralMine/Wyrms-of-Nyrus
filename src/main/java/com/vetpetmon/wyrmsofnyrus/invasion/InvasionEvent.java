@@ -1,11 +1,13 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 // imports ALL events automatically.
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.*;
 
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -27,12 +29,14 @@ public class InvasionEvent extends AutoReg.ModElement {
 		World world = (World) dependencies.get("world");
 		int eventRolled = 0;
 		double wyrmInvasionDifficulty = wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;
-		if (wyrmVariables.WorldVariables.get(world).invasionStarted && (RNG.getIntRangeInclu(1,4000) < (wyrmInvasionDifficulty * Invasion.eventFrequency))/*(Math.random() < 0.00001 + (wyrmInvasionDifficulty / 6f * 0.00021f))*/) {
+		if (wyrmVariables.WorldVariables.get(world).invasionStarted && (RNG.getIntRangeInclu(1,6000) < (wyrmInvasionDifficulty * Invasion.eventFrequency))/*(Math.random() < 0.00001 + (wyrmInvasionDifficulty / 6f * 0.00021f))*/) {
 			if(wyrmInvasionDifficulty > 1.5) {eventRolled = (RNG.getIntRangeInclu(1,4));}
 			else if(wyrmInvasionDifficulty >= 2.0) {eventRolled = (RNG.getIntRangeInclu(1,5));}
 			else if(wyrmInvasionDifficulty >= 2.5) {eventRolled = (RNG.getIntRangeInclu(1,7));}
 			else if(wyrmInvasionDifficulty >= 3.25) {eventRolled = (RNG.getIntRangeInclu(1,10));}
 			else if(wyrmInvasionDifficulty >= 3.75) {eventRolled = (RNG.getIntRangeInclu(1,11));}
+			else {eventRolled = (RNG.getIntRangeInclu(1,3));}
+			if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 2) wyrmsofnyrus.logger.info("[INVASION] Rolled event: " + eventRolled);
 
 
 			if ( eventRolled <= 2) {scoutingPodRaid.call(dependencies);}
@@ -55,14 +59,16 @@ public class InvasionEvent extends AutoReg.ModElement {
 			int i = (int) entity.posX;
 			int j = (int) entity.posY;
 			int k = (int) entity.posZ;
-			java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
-			dependencies.put("x", i);
-			dependencies.put("y", j);
-			dependencies.put("z", k);
-			dependencies.put("world", world);
-			dependencies.put("entity", entity);
-			dependencies.put("event", event);
-			executescript(dependencies);
+			if (wyrmVariables.WorldVariables.get(world).invasionStarted) {
+				java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
+				dependencies.put("x", i);
+				dependencies.put("y", j);
+				dependencies.put("z", k);
+				dependencies.put("world", world);
+				dependencies.put("entity", entity);
+				dependencies.put("event", event);
+				executescript(dependencies);
+			}
 		}
 	}
 
