@@ -9,19 +9,13 @@ public class wyrmStats {
 
     private static final String advNotice = "\n\n WIP section! This configuration file isn't fully fleshed out and is subject to change in future versions. \n\n These values are part of advanced configuration for more precise user tuning. Good for modpack developers.";
 
-    public static float warriorHP;
-    public static float taintedWarriorHP;
-    public static float warriorDEF;
-    public static float taintedWarriorDEF;
-    public static float warriorATK;
-    public static float taintedWarriorATK;
+    public static float warriorHP, taintedWarriorHP;
+    public static float warriorDEF, taintedWarriorDEF;
+    public static float warriorATK, taintedWarriorATK;
 
-    public static float soldierHP;
-    public static float infectoidSoldierHP;
-    public static float soldierDEF;
-    public static float infectoidSoldierDEF;
-    public static float soldierATK;
-    public static float infectoidSoldierATK;
+    public static float soldierHP, infectoidSoldierHP;
+    public static float soldierDEF, infectoidSoldierDEF;
+    public static float soldierATK, infectoidSoldierATK;
 
     public static float proberHP;
     public static float proberDEF;
