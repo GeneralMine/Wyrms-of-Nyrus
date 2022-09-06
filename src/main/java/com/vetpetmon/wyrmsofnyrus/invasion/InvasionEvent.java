@@ -39,7 +39,7 @@ public class InvasionEvent extends AutoReg.ModElement {
 			if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 2) wyrmsofnyrus.logger.info("[INVASION] Rolled event: " + eventRolled);
 
 
-			if ( eventRolled <= 2) {scoutingPodRaid.call(dependencies);}
+			if ( eventRolled <= 1) {scoutingPodRaid.call(dependencies);}
 			else if ( eventRolled == 4 && Invasion.isCreepEnabled()) {creepwyrmDrop.call(dependencies);}
 			else if ( eventRolled == 5) {massIncursion.call(dependencies, 1);}
 			else if ( eventRolled == 7) {scoutingPodRaid.call(dependencies);
