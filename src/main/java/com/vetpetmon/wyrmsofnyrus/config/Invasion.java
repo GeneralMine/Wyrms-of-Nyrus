@@ -10,32 +10,21 @@ import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
 import java.util.ArrayList;
 
 public class Invasion {
-    public static boolean invasionEnabled;
-    public static boolean invasionStartsNaturally;
+    public static boolean invasionEnabled, invasionStartsNaturally;
     public static boolean EXCANON;
     public static float EXCANONDIFFICULTY;
 
     public static boolean probingEnabled;
     public static int invasionPointsPerKill;
 
-    public static int iPointsIStage1Threshold;
-    public static int iPointsIStage2Threshold;
-    public static int iPointsIStage3Threshold;
-    public static int iPointsIStage4Threshold;
-    public static int iPointsIStage5Threshold;
-    public static int iPointsIStage6Threshold;
+    public static int iPointsIStage1Threshold, iPointsIStage2Threshold, iPointsIStage3Threshold, iPointsIStage4Threshold, iPointsIStage5Threshold, iPointsIStage6Threshold;
 
-    public static int maxEventDistance;
+    public static int maxEventDistance, eventFrequency;
 
-    public static boolean creepEnabled;
-    public static boolean creepNewInactivity;
-    public static int creepSpreadRate;
-    public static int creepTickRate;
-    public static int normCreepwyrmCreepSpeed;
-    public static int direCreepwyrmCreepSpeed;
-    public static int creephiveCreepSpeed;
-    public static float creepSpreadPoints;
-    public static float creepSpreadMaxHardness;
+    public static boolean creepEnabled, creepNewInactivity;
+    public static int creepSpreadRate, creepTickRate;
+    public static int normCreepwyrmCreepSpeed, direCreepwyrmCreepSpeed, creephiveCreepSpeed;
+    public static float creepSpreadPoints, creepSpreadMaxHardness;
     public static String[] invalidBlocksForCreepspread;
     public static boolean CSBlockBLEnabled;
     public static ArrayList<Block> invalidBlocks;
@@ -65,7 +54,8 @@ public class Invasion {
         iPointsIStage6Threshold = createConfigInt(config, CATEGORY,"Stage 6 Invasion Point threshold" ,"How many points are required to reach this phase of the alien invasion. Default: 2500000", 2500000);
         validatePhaseThresholds(); // Validate everything
 
-        maxEventDistance= createConfigInt(config, CATEGORY, "Max event distance", "All invasion events take place a certain distance away from the player. Increasing this range makes it less likely that events happen near the player, but may cause performance hitches due to potential chunkloading. Usually keep this number in increments of 16 (Chunk x/z size). Default is calculated for Minecraft's usual 12 chunk render radius. Default: 192", 192);
+        maxEventDistance = createConfigInt(config, CATEGORY, "Max event distance", "All invasion events take place a certain distance away from the player. Increasing this range makes it less likely that events happen near the player, but may cause performance hitches due to potential chunkloading. Usually keep this number in increments of 16 (Chunk x/z size). Default is calculated for Minecraft's usual 12 chunk render radius. Default: 192", 192);
+        eventFrequency = createConfigInt(config, CATEGORY, "Event frequency", "Multiplier for invasion event rolls. Keep this number between 2 and 5 to avoid event spam. Default: 2", 2);
 
         EXCANON = createConfigBool(config, CATEGORY, "SNAZ OS EX-tended canon", "Are we playing with the Bloodmind-origins Nyral Wyrms, which bend their backs to take over ALL the worlds? (activates Nether and End invasions, makes wyrms immune to a LOT of damagetypes, and worsens invasion difficulty + hive creep.)\nThe EX-tended canon basically follows the Hostile Universe principle, where most, if not, all the aliens of the Stellar Networked Actuality Zone act as Great Filters to primitive or early space-age civilizations and worlds.\nEnabling this forces ALL features of this mod's invasion system with enhanced difficulty to exist.\nIf you are playing without other mods, you might want to be smart and keep this at false.\nIf you are playing with mods like SRP, HBM, TechGuns, Matter Overdrive, and/or Draconic evolution, you may want to set this to true.\nConfiguration options like EXCANON DIFFICULY will now apply. Default: false", false);
         EXCANONDIFFICULTY = createConfigDouble(config, CATEGORY, "EXCANON DIFFICULTY", "The factor of difficulty you wish to put yourself here. If for some reason that the doubled stats is not enough, you can increase this from the default 2.0x difficulty. Default: 2.0", 2.0);

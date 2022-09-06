@@ -47,7 +47,15 @@ public class CommandWyrmInvasionCommand extends AutoReg.ModElement {
 
 		@Override
 		public List getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos) {
-			return new ArrayList();
+			List<String> list = new ArrayList<>();
+			if (args.length == 1) {
+				list.add("reset");
+				list.add("print");
+				list.add("forceVisit");
+				list.add("startInvasion");
+				list.add("stopInvasion");
+			}
+			return list;
 		}
 
 		@Override
