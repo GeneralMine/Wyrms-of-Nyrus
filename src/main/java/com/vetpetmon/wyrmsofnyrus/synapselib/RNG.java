@@ -12,6 +12,10 @@ import java.util.concurrent.ThreadLocalRandom;
  * Most code that is included is intended for use in Minecraft mods, but can work without.
  */
 public class RNG {
+
+    public static Thread synLibRNG; //Multithreading!
+    public static int intOutput;
+
     /**
      * Gets a randomly generated whole number (integer) within a specified range.
      * This returns a number in that range, inclusive of Min, but exclusive of Max.
@@ -27,6 +31,36 @@ public class RNG {
     public static int getIntRangeInclu(int Min, int Max)
     {
         return ThreadLocalRandom.current().nextInt(Min, Max + 1);
+    }
+
+    /**
+     * [EXPERIMENTAL] Multithreaded RNG, may be unstable, but can reduce
+     * overhead caused by multiple RNG calls by putting that all in a different
+     * thread.
+     * @param min min
+     * @param max max
+     * @return integer value
+     */
+     public static int threadedInt(int min, int max) {
+
+        synLibRNG = new Thread() {
+            public void run() {
+                try {
+                    synLibRNG.join();
+                    RNG.intOutput = ThreadLocalRandom.current().nextInt(min, max);
+                }
+                catch (InterruptedException e) {
+                    System.out.printf("Thread %s was interrupted or threw an exception.",
+                            Thread.currentThread().getName());
+                    RNG.intOutput = 0;
+                }
+            }
+        };
+        return intOutput;
+     }
+
+    public static int threadedIntInclu(int min, int max) {
+        return threadedInt(min,max+1);
     }
 
     /**

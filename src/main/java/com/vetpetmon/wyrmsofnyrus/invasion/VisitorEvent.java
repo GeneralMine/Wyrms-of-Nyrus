@@ -63,8 +63,6 @@ public class VisitorEvent extends AutoReg.ModElement {
 			dependencies.put("world", world);
 			dependencies.put("entity", entity);
 			executeProcedure(dependencies, false, world);
-			wyrmVariables.WorldVariables.get(world).invasionStarted = true;
-			wyrmVariables.WorldVariables.get(world).syncData(world);
 		}
 	}
 

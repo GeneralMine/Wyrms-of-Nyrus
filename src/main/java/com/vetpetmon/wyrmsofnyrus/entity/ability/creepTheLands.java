@@ -12,8 +12,7 @@ import static com.vetpetmon.wyrmsofnyrus.block.creepStaged.STAGE;
 import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.*;
 
 public class creepTheLands {
-    public static void creepTheLands(BlockPos pos, World world){
-        int Range = Radiogenetics.creepwyrmInfestRange;
+    public static void creepTheLands(BlockPos pos, World world, int Range){
         int x = (int) ((pos.getX()) + RNG.PMRange(Range));
         int y = (int) ((pos.getY()) + RNG.PMRange(Range));
         int z = (int) ((pos.getZ()) + RNG.PMRange(Range));

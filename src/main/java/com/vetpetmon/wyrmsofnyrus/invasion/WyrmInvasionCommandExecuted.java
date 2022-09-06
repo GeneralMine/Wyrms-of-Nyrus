@@ -79,7 +79,20 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 				}
 			}.getText())).equals("startInvasion"))) {
 				wyrmVariables.WorldVariables.get(world).invasionStarted = true;
+				wyrmVariables.WorldVariables.get(world).syncData(world);
 				wyrmsofnyrus.logger.info("Wyrm invasion started by command usage.");
+			}else if ((((new Object() {
+				public String getText() {
+					String param = (String) cmdparams.get("0");
+					if (param != null) {
+						return param;
+					}
+					return "";
+				}
+			}.getText())).equals("stopInvasion"))) {
+				wyrmVariables.WorldVariables.get(world).invasionStarted = false;
+				wyrmVariables.WorldVariables.get(world).syncData(world);
+				wyrmsofnyrus.logger.info("Wyrm invasion ended by command usage.");
 			}else {
 				{
 					MinecraftServer mcserv = FMLCommonHandler.instance().getMinecraftServerInstance();
