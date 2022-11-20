@@ -5,7 +5,9 @@ import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -41,6 +43,12 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
+        // Broken at the moment, will fix soon. See #22
+        /*createWaypoint((new EntityCreepwyrmWaypoint(this.world)),
+                (int) ((getPosition().getX()) + RNG.PMRange(10)),
+                (int) ((getPosition().getY()) + RNG.PMRange(10)),
+                (int) ((getPosition().getZ()) + RNG.PMRange(10)) );
+        */
         if (source == DamageSource.FALL)
             return false;
         if (source.getImmediateSource() instanceof EntityPotion)

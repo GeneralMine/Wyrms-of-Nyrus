@@ -2,20 +2,11 @@
   "group": "wyrmsofnyrus",
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "01",
-    "23"
+    "##",
+    "##"
   ],
   "key": {
-    "0": {
-      "item": "wyrmsofnyrus:metalcomb_array"
-    },
-    "1": {
-      "item": "wyrmsofnyrus:metalcomb_array"
-    },
-    "2": {
-      "item": "wyrmsofnyrus:metalcomb_array"
-    },
-    "3": {
+    "#": {
       "item": "wyrmsofnyrus:metalcomb_array"
     }
   },

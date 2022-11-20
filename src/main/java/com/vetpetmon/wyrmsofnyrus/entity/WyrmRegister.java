@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.entity.hivemind.*;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 
 import com.vetpetmon.wyrmsofnyrus.synapselib.RegHelper;
@@ -29,5 +30,12 @@ public final class WyrmRegister {
         RegHelper.RegEntity("wyrmsoldierevo", EntityWyrmSoldierInfectoid.class, id++, 46, 2);
         RegHelper.RegEntity("wyrmwarrior", EntityWyrmWarrior.class, id++, 64, 2);
         if (Evo.evoHBMVariantsEnabled && hbm.isEnabled()) {RegHelper.RegEntity("wyrmwarriortainted", EntityWyrmWarriorTainted.class, id++, 64, 2);}
+
+        id += 100;
+
+        // Register Waypoints
+        RegHelper.RegEntity("creepwyrmwaypoint", EntityCreepwyrmWaypoint.class, id++, 64);
+        RegHelper.RegEntity("overseerwaypoint", EntityOverseerWaypoint.class, id++, 64);
+
     }
 }

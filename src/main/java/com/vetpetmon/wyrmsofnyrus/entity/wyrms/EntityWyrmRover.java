@@ -44,8 +44,8 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
         super.initEntityAI();
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         simpleAI();
+        hivemindFollow();
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
         afterPlayers();
         if (isEXCANON()) {afterVillagers();}

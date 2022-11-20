@@ -6,7 +6,7 @@ import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.AIProberAttack;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
@@ -42,7 +42,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
-public class EntityWyrmProber extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     private int chanceToBreak;
     private int proberTimer;
@@ -167,8 +167,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable, IAnimat
         if (Invasion.probingEnabled) {
             this.tasks.addTask(2, new AIProberAttack(this, 1.5D, true));
             this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 256, 10));
-            this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-            this.afterPlayers(false);
+            this.afterPlayers(true, true);
             this.afterVillagers();
             this.afterAnimals();
             this.afterMobs();
@@ -176,7 +175,6 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable, IAnimat
         else {
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
             this.tasks.addTask(4, new FlyingMobAI(this, 6.05, 100));
-            this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
             this.makeAllTargets();
         }
     }
@@ -217,11 +215,6 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable, IAnimat
     }
 
     @Override
-    public void setNoGravity(boolean ignored) {
-        super.setNoGravity(true);
-    }
-
-    @Override
     protected Item getDropItem() {
         return new ItemStack(ItemCreepshard.block, 1).getItem();
     }
@@ -230,8 +223,7 @@ public class EntityWyrmProber extends EntityWyrm implements IAnimatable, IAnimat
     public SoundEvent getAmbientSound() {
         return SoundRegistry.proberidle;
     }
-    @Override
-    protected SoundEvent getFallSound(int heightIn) {return null;}
+
     @Override
     public SoundEvent getHurtSound(DamageSource ds) {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.bat.takeoff"));

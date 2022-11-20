@@ -1,10 +1,14 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
-import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
+import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
+import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityHivemind;
+import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityOverseerWaypoint;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
@@ -16,6 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -28,8 +33,9 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  */
 public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob {
 
-    protected static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
+    private static DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
 
+    private String animationName;
 
     // TODO: FIX THIS.
     //  LIST OF CASTE TYPES:
@@ -52,17 +58,11 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     public EntityWyrm(final World worldIn) {
         super(worldIn);
         this.isImmuneToFire = false;
-        this.srpcothimmunity = 0;
+        this.srpcothimmunity = 1;
     }
 
     // Most wyrms don't need to despawn. Despawning breaks a lot of things, like Creepwyrms, for a prime example.
     protected boolean canDespawn() {return false;}
-
-    /*public void onLivingUpdate() {
-        if (Loader.isModLoaded("hbm") && !isPotionActive(Objects.requireNonNull(Potion.getPotionFromResourceLocation("potion.hbm_mutation")))) {
-            this.addPotionEffect(new PotionEffect(Objects.requireNonNull(Potion.getPotionFromResourceLocation("potion.hbm_mutation"))));
-        }
-    }*/ //I tried. Put HBM on the incompatibility list until HBM gives us a real way to do this as seen by what SRP does.
 
     // Getters for Wyrms.
     protected static boolean getSimpleAI() {return AI.performanceAIMode;}
@@ -70,7 +70,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     protected static boolean getAttackAnimals() {return AI.attackAnimals;}
     protected static boolean getAttackVillagers() {return AI.attackVillagers;}
     protected static boolean getWillAttackCreepers() {return AI.suicidalWyrms;}
-    protected static boolean getWillAttackPlayers() {return AI.niceToPlayers;}
+    protected static boolean getWillNotAttackPlayers() {return AI.niceToPlayers;}
 
     /**
      * Getter for invasion difficulty. Makes things look a million times neater, and can be called outside EntityWyrm.
@@ -94,7 +94,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
 
     /**
      * Wyrms with Sapient AI can futz with doors and break stuff and just harass players in general.
-     * They're given better AI and can ruin the player's day. 'Nuff said.
+     * They're given better AI and can ruin the player's day. Nuff said.
      */
     protected void isSapient() {
         this.tasks.addTask(2, new wyrmBreakDoors(this, 200));
@@ -130,21 +130,46 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     }
     protected void afterAnimals() {this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, true, false));}
     protected void afterVillagers() { this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, true, false));}
+
+    protected void afterPlayers(boolean checkSight, boolean ignoreConfig) { if (ignoreConfig) afterPlayers(checkSight); }
     protected void afterPlayers(boolean checkSight) {
-        if (getWillAttackPlayers()){
+        if (!getWillNotAttackPlayers()){
             this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
             this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, checkSight, false));
         }
     }
     protected void afterPlayers() {
-        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, false));
+        if (!getWillNotAttackPlayers()){
+            this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
+            this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, false));
+        }
     }
     protected void afterInsectoids() {
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityCaveSpider.class, true, false));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntitySpider.class, true, false));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntitySilverfish.class, true, false));
     }
+
+    // HIVEMIND
+    protected void hivemindFollow() {
+        this.targetTasks.addTask(5, new EntityAINearestAttackableTarget<>(this, EntityHivemind.class, 2, false, false, new Predicate<EntityHivemind>() {
+            public boolean apply(EntityHivemind target) {
+                return (target != null);
+            }
+        }));
+    }
+    protected void hivemindAvoid() {
+        this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, (EntityCreepwyrmWaypoint.class), 30, 1, 2.2));
+        this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, (EntityOverseerWaypoint.class), 30, 1, 2.2));
+    }
+
+    protected void createWaypoint(Entity waypoint, int x, int y, int z) {
+        waypoint.setLocationAndAngles((x), (y+3), (z), world.rand.nextFloat() * 360F, 0.0F);
+        world.spawnEntity(waypoint);
+    }
+
+
+
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.
     public AnimationFactory getFactory() {return this.factory;}
@@ -226,5 +251,19 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
+    }
+
+    // Checkers for animations or abilities.
+    private boolean blockIsWater(BlockPos pos)
+    {
+        return world.getBlockState(pos).getMaterial() == Material.WATER;
+    }
+
+    public boolean isInWater(){
+        return (blockIsWater(new BlockPos(getPosition().getX(), getPosition().getY(),getPosition().getZ())));
+    }
+
+    public boolean isGrounded(){
+        return (world.isBlockFullCube(new BlockPos(getPosition().getX(), getPosition().getY()-1,getPosition().getZ())));
     }
 }

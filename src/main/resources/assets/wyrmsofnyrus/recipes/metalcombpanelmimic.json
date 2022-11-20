@@ -1,0 +1,18 @@
+{
+  "group": "wyrmsofnyrus",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    " # ",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "wyrmsofnyrus:metalcomb_array"
+    }
+  },
+  "result": {
+    "item": "wyrmsofnyrus:metalcombpanelmimic",
+    "count": 4
+  }
+}

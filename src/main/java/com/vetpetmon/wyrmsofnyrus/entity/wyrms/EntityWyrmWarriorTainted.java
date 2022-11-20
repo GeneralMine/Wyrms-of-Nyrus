@@ -4,6 +4,7 @@ import com.hbm.interfaces.IRadiationImmune;
 import com.hbm.lib.ModDamageSource;
 import com.hbm.potion.HbmPotion;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.Client;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
@@ -37,6 +38,8 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 
 public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnimatable, IAnimationTickable, IRadiationImmune {
     private final AnimationFactory factory = new AnimationFactory(this);
+
+    private String animationName = "animation.warriorwyrm";
     //private boolean isCharging;
     public EntityWyrmWarriorTainted(World world) {
         super(world);
@@ -69,11 +72,12 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
         this.tasks.addTask(4, new EntityAIFlierMob(this, 3.05, 200));
         this.tasks.addTask(8, new EntityAIFlierMoveRandom(this));
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        //this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.afterPlayers();
         this.afterVillagers();
         this.afterAnimals();
         this.afterMobs();
+        hivemindFollow();
     }
 
     @Override
@@ -102,11 +106,6 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     }
 
     @Override
-    public void setNoGravity(boolean ignored) {
-        super.setNoGravity(true);
-    }
-
-    @Override
     protected Item getDropItem() {
         return new ItemStack(wyrmArmorFragment.block, 4).getItem();
     }
@@ -115,8 +114,6 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     public SoundEvent getAmbientSound() {
         return SoundRegistry.wyrmroars;
     }
-    @Override
-    protected SoundEvent getFallSound(int heightIn) {return null;}
     @Override
     public SoundEvent getHurtSound(DamageSource ds) {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.bat.takeoff"));
@@ -146,15 +143,20 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
+        if (Client.fancyAnimations) {
+            if (isInWater()) {
+                if (event.isMoving()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".swim"));
+                else event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".inWater"));
+            }
+        }
         if (event.isMoving()) {
-            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.groundedRun"));
-            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.moving"));
+            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedRun"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation((animationName + ".moving")));
         }
         else {
-            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.groundedIdle"));
-            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.warriorwyrm.idle"));
+            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedIdle"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".idle"));
         }
-
         return PlayState.CONTINUE;
     }
 

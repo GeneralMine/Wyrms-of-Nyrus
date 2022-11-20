@@ -48,7 +48,11 @@ public class CommandWyrmsTest extends AutoReg.ModElement {
 
 		@Override
 		public List getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos) {
-			return new ArrayList();
+			List<String> list = new ArrayList<>();
+			if (args.length == 1) {
+				list.add("reloadClient");
+			}
+			return list;
 		}
 
 		@Override
@@ -82,6 +86,7 @@ public class CommandWyrmsTest extends AutoReg.ModElement {
 				});
 				{
 					Map<String, Object> $_dependencies = new HashMap<>();
+					$_dependencies.put("cmdparams", cmdparams);
 					$_dependencies.put("world", world);
 					WyrmsTestCommandExecuted.executescript($_dependencies);
 				}

@@ -4,6 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.*;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Loader;
 
 public class renderEngine {
     public static void renderEngine() {
@@ -21,7 +22,7 @@ public class renderEngine {
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepwyrm.class, CreepwyrmGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMyrmur.class, MyrmurGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWarrior.class, WyrmWarriorGeoRenderer::new);
-        if (hbm.isEnabled()) {
+        if (Loader.isModLoaded("hbm")) {
             RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWarriorTainted.class, WyrmWarriorTaintedGeoRenderer::new);
         }
     }

@@ -4,7 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
@@ -34,7 +34,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
-public class EntityDobber extends EntityWyrm implements IAnimatable {
+public class EntityDobber extends EntityWyrmFlying implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityDobber(World world) {
         super(world);
@@ -130,7 +130,7 @@ public class EntityDobber extends EntityWyrm implements IAnimatable {
     protected void initEntityAI() {
         super.initEntityAI();
         simpleAI();
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
+        hivemindFollow();
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.5D, false));
         this.tasks.addTask(4, new FlyingMobAI(this, 18.75, 100));
         this.makeAllTargets();
@@ -140,11 +140,6 @@ public class EntityDobber extends EntityWyrm implements IAnimatable {
     public void onUpdate() {
         super.onUpdate();
         this.setNoGravity(true);
-    }
-
-    @Override
-    public void setNoGravity(boolean ignored) {
-        super.setNoGravity(true);
     }
 
     @Override

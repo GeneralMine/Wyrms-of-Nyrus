@@ -53,8 +53,8 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
-        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
         afterPlayers();
+        hivemindFollow();
         if (getAttackVillagers()) afterVillagers();
         if (isEXCANON()) {afterMobs();}
     }

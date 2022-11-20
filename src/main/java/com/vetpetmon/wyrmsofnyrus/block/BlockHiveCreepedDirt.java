@@ -4,9 +4,11 @@ package com.vetpetmon.wyrmsofnyrus.block;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.BlockPos;
@@ -50,6 +52,10 @@ public class BlockHiveCreepedDirt extends AutoReg.ModElement {
 			setLightLevel(0F);
 			setLightOpacity(255);
 			setCreativeTab(TabWyrms.tab);
+		}
+		public Item getItemDropped(IBlockState state, Random rand, int fortune)
+		{
+			return Blocks.DIRT.getItemDropped(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), rand, fortune);
 		}
 		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {

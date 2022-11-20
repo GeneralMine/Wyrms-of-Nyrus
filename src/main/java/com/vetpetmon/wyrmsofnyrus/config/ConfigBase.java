@@ -27,8 +27,9 @@ public class ConfigBase {
             wyrms = createDirectory("wyrms", ConfigDirectory),
             debug = createDirectory("debug", ConfigDirectory),
             evo = createDirectory("evolution", ConfigDirectory),
-            invasion = createDirectory("invasion", ConfigDirectory);
-    private static final Configuration[] configs = {general, wyrms, debug, evo, invasion};
+            invasion = createDirectory("invasion", ConfigDirectory),
+            clientside = createDirectory("client", ConfigDirectory);
+    private static final Configuration[] configs = {general, wyrms, debug, evo, invasion, clientside};
 
     // Specific for WoN.
     public static void reloadConfig() {
@@ -41,9 +42,17 @@ public class ConfigBase {
         Debug.loadFromConfig(debug);
         Evo.loadFromConfig(evo);
         Invasion.loadFromConfig(invasion);
+        Client.loadFromConfig(clientside);
 
         for (Configuration i:configs) i.save();
         wyrmsofnyrus.logger.info("Configuration loaded or changed.");
+    }
+
+    public static void reloadClient() {
+        clientside.load();
+        Client.loadFromConfig(clientside);
+        clientside.save();
+        wyrmsofnyrus.logger.info("Client's configuration reloaded.");
     }
 
     public static void setCanon() {

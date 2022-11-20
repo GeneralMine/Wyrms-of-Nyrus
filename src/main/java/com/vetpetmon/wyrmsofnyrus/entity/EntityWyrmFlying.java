@@ -4,6 +4,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -14,7 +15,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  */
 public abstract class EntityWyrmFlying extends EntityWyrm implements IAnimatable, IMob {
 
-    protected static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrmFlying.class, DataSerializers.BOOLEAN);
+    protected static DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrmFlying.class, DataSerializers.BOOLEAN);
 
     // Shared GeckoLib method for all wyrms. Saves some spaghetti in the non-abstract wyrm classes.
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -22,13 +23,19 @@ public abstract class EntityWyrmFlying extends EntityWyrm implements IAnimatable
     public EntityWyrmFlying(final World worldIn) {
         super(worldIn);
         this.isImmuneToFire = false;
-        this.srpcothimmunity = 0;
+        this.srpcothimmunity = 1;
     }
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.
     public AnimationFactory getFactory() {return this.factory;}
 
-    public boolean isGrounded(){
-        return (world.isBlockFullCube(new BlockPos(getPosition().getX(), getPosition().getY()-1,getPosition().getZ())));
+    // Shared by all flying entities.
+    @Override
+    protected SoundEvent getFallSound(int heightIn) {return null;}
+
+    @Override
+    public void setNoGravity(boolean ignored) {
+        super.setNoGravity(true);
     }
+
 }

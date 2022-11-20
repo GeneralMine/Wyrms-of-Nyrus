@@ -8,6 +8,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -33,6 +35,9 @@ public abstract class EntityHivemind extends EntityLiving {
     public EntityHivemind(World worldIn) {
         super(worldIn);
         this.tickTimer = 200;
+        experienceValue = 0;
+        setSize(0.05f, 0.05f);
+        setNoAI(true);
     }
 
     public waypointGoal getSetGoal() {
@@ -98,16 +103,16 @@ public abstract class EntityHivemind extends EntityLiving {
     private Entity entitySpawnPicker() {
         Entity entityPicked;
         switch(getAlertStrength()) {
-            case (1):
+            case (2):
                 entityPicked = new EntityWyrmRover(this.world);
                 break;
-            case (2):
+            case (3):
                 entityPicked = new EntityWyrmSoldier(this.world);
                 break;
-            case (3):
+            case (4):
                 entityPicked = new EntityMyrmur(this.world);
                 break;
-            case (4):
+            case (5):
                 entityPicked = new EntityWyrmWarrior(this.world);
                 break;
             default:
@@ -116,4 +121,7 @@ public abstract class EntityHivemind extends EntityLiving {
         }
         return entityPicked;
     }
+
+    // Takes no damage. Despawns naturally.
+    public boolean attackEntityFrom(DamageSource source, float amount) {return false;}
 }

@@ -1,0 +1,22 @@
+package com.vetpetmon.wyrmsofnyrus.config;
+
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.Configuration;
+
+import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.createConfigBool;
+import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.createConfigInt;
+
+public class Client {
+    public static boolean fancyAnimations;
+
+
+    public static void loadFromConfig(Configuration config) {
+
+        final String CATEGORY = "Clientside";
+
+        config.addCustomCategoryComment(CATEGORY, "\nUser-end settings. Can be reloaded at any point in time.\n");
+
+        fancyAnimations = createConfigBool(config, CATEGORY, "Enable fancy animations", "Allows for extra animations to be played for certain wyrms that have more than 2-3 animations, reduces the amount of conditionals being checked and might help with FPS on lower end PCs. Default: true", true);
+    }
+}
