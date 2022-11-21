@@ -21,7 +21,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
 
     public EntityTheVisitor(World world) {
         super(world);
-        setSize(5.5f, 5.5f);
+        setSize(5.5f, 3.5f);
         experienceValue = 0;
         this.casteType = 8;
         setNoAI(true);
@@ -102,7 +102,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.NyrusVisitor.idle"));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.visitor.Idle"));
 
         return PlayState.CONTINUE;
     }

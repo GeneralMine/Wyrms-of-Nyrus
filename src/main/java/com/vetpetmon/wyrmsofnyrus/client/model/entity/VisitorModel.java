@@ -22,6 +22,6 @@ public class VisitorModel extends AnimatedGeoModel<EntityTheVisitor>
     @Override
     public ResourceLocation getAnimationFileLocation(EntityTheVisitor EntityTheVisitor)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/nyrusvisitor.animation.json");
+        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/visitor.animation.json");
     }
 }

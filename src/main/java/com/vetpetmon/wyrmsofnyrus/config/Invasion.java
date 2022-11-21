@@ -14,6 +14,8 @@ public class Invasion {
     public static boolean EXCANON;
     public static float EXCANONDIFFICULTY;
 
+    public static int invasionStartMode, invasionStartTime, invasionStartChance;
+
     public static boolean probingEnabled;
     public static int invasionPointsPerKill;
 
@@ -40,6 +42,11 @@ public class Invasion {
         final String CATEGORYTWO = "Hive Creep";
         config.addCustomCategoryComment(CATEGORYTWO,  "\nEverything involving Hive Creep\n");
         config.setCategoryRequiresWorldRestart(CATEGORYTWO, true);
+
+        invasionStartMode = createConfigInt(config, CATEGORY,"Invasion Start Mode" ,"0 = Random chance, 1 = after x days, 2 = hybrid (time & chance). Default: 2", 2);
+        invasionStartTime = createConfigInt(config, CATEGORY,"Invasion Start Time" ,"Number of days until wyrms can start to invade. Default: 30", 30);
+        invasionStartChance = createConfigInt(config, CATEGORY,"Invasion Start Chance" ,"1 in x chance to occur each day before wyrms start invading. Default: 50", 50);
+
 
         invasionEnabled = createConfigBool(config, CATEGORY, "Invasion enabled", "Enables the invasion system. Many functions of the mod will not work if this is off, including other sub-systems. Default: true", true);
         if (!invasionEnabled) wyrmsofnyrus.logger.info("Invasion module has been disabled");
