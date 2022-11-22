@@ -30,7 +30,7 @@ public class BlockMimiHive extends AutoReg.ModElement {
 
     @Override
     public void initElements() {
-        elements.blocks.add(() -> new BlockMimiHive.BlockCustom().setRegistryName("metalcombpanelmimic"));
+        elements.blocks.add(() -> new BlockCustom().setRegistryName("metalcombpanelmimic"));
         elements.items.add(() -> new ItemBlock(block).setRegistryName(block.getRegistryName()));
     }
 

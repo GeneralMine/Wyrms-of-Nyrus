@@ -67,7 +67,7 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 					$_dependencies.put("x", x);
 					$_dependencies.put("y", y);
 					$_dependencies.put("z", z);
-					VisitorEvent.executeProcedure($_dependencies, true, world);
+					VisitorEvent.visitorEvent($_dependencies, true, world);
 				}
 			} else if ((((new Object() {
 				public String getText() {

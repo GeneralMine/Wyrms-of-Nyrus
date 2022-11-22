@@ -122,18 +122,14 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        if (Client.fancyAnimations) {
-            if (isInWater()) {
-                if (event.isMoving()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".swim"));
-                else event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".inWater"));
-            }
-        }
         if (event.isMoving()) {
-            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedRun"));
+            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".swim"));
+            else if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedRun"));
             else event.getController().setAnimation(new AnimationBuilder().addAnimation((animationName + ".moving")));
         }
         else {
-            if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedIdle"));
+            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".inWater"));
+            else if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedIdle"));
             else event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".idle"));
         }
 
