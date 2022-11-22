@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
+import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
@@ -7,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -105,6 +107,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         {
             summonPods((int) this.posX, (int) this.posY, (int) this.posZ);
             this.dropTimer = (this.rand.nextInt( Invasion.visitorDropPodFrequencyVariation) + Invasion.visitorDropPodFrequency);
+            world.playSound(null, (int) this.posX, (int) this.posY, (int) this.posZ, SoundRegistry.wyrmroars, SoundCategory.MASTER, (float) 100, (float) 0.5);
         }
         if (!this.world.isRemote && --this.timeUntilDespawn <= 0)
         {
