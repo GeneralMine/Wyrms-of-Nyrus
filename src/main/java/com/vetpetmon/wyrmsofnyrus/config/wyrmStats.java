@@ -31,6 +31,10 @@ public class wyrmStats {
     public static float wyrmlingDEF;
     public static float wyrmlingSPD;
 
+    public static float visitorHP;
+    public static float visitorDEF;
+    public static float visitorSPD;
+
     public static void loadFromConfig(Configuration c) {
         startFile(c);
         warriorStats(c);
@@ -104,5 +108,14 @@ public class wyrmStats {
         wyrmlingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 2", 2);
 
         wyrmlingSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.55", 0.55);
+    }
+    public static void visitorStats(Configuration c) {
+        final String CAT = "Visitor Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the wyrmlings.\n");
+        visitorHP = createConfigDouble(c, CAT, "Normal HP", "Default: 60", 60);
+
+        visitorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 8", 8);
+
+        visitorSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.05", 0.05);
     }
 }

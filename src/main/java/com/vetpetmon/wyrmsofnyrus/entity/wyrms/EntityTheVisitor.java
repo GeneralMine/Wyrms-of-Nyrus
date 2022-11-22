@@ -2,11 +2,14 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -19,6 +22,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import com.vetpetmon.wyrmsofnyrus.entity.ai.voidwyrm;
+
 
 public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -30,18 +35,25 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         setSize(10.0f, 3.5f);
         experienceValue = 0;
         this.casteType = 8;
+        this.navigator = new PathNavigateFlying(this, this.world);
+        this.moveHelper = new flierMoveHelperGhastlike(this, 200, wyrmStats.visitorSPD, 0.0D);
         this.dropTimer = (this.rand.nextInt( Invasion.visitorDropPodFrequencyVariation) + Invasion.visitorDropPodFrequency);
         setNoAI(false);
-        this.timeUntilDespawn = this.rand.nextInt(6000) + 12000000;
+        enablePersistence();
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.05D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(wyrmStats.visitorDEF);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(wyrmStats.visitorSPD);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(wyrmStats.visitorHP);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
+    }
+    @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.addTask(4, new voidwyrm(this, wyrmStats.visitorSPD, 200));
     }
 
     @Override
@@ -108,10 +120,6 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
             summonPods((int) this.posX, (int) this.posY, (int) this.posZ);
             this.dropTimer = (this.rand.nextInt( Invasion.visitorDropPodFrequencyVariation) + Invasion.visitorDropPodFrequency);
             world.playSound(null, (int) this.posX, (int) this.posY, (int) this.posZ, SoundRegistry.wyrmroars, SoundCategory.MASTER, (float) 100, (float) 0.5);
-        }
-        if (!this.world.isRemote && --this.timeUntilDespawn <= 0)
-        {
-            this.setDead();
         }
     }
 
