@@ -25,7 +25,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
 
     public EntityTheVisitor(World world) {
         super(world);
-        setSize(5.5f, 3.5f);
+        setSize(10.0f, 3.5f);
         experienceValue = 0;
         this.casteType = 8;
         this.dropTimer = (this.rand.nextInt( Invasion.visitorDropPodFrequencyVariation) + Invasion.visitorDropPodFrequency);
@@ -116,7 +116,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         int spawnX;
         int spawnZ;
         Entity entityToSpawn;
-        for (int index0 = 0; index0 < (RNG.getIntRangeInclu(2,3)); index0++) {
+        for (int index0 = 0; index0 < (RNG.getIntRangeInclu(2,5)); index0++) {
             spawnX = x + RNG.getIntRangeInclu(-3,3);
             spawnZ = z + RNG.getIntRangeInclu(-3,3);
             if (!world.isRemote) {
