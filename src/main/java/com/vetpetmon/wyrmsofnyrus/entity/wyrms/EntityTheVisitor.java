@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
@@ -23,6 +24,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import com.vetpetmon.wyrmsofnyrus.entity.ai.voidwyrm;
+
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
 public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
@@ -145,6 +148,24 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
 
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 20F, this::predicate));
+    }
+
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source == DamageSource.FALL)
+            return false;
+        if (source == DamageSource.DROWN)
+            return false;
+        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
+            return false;
+        if (source == DamageSource.ON_FIRE)
+            return super.attackEntityFrom(source, amount*3);
+        return super.attackEntityFrom(source, amount);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,100);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
