@@ -22,6 +22,9 @@
 							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						}
+					},
+					"scale": {
+						"vector": [5, 5, 5]
 					}
 				},
 				"Tail": {

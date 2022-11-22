@@ -1,7 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
-import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -15,17 +17,20 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+
 public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
     private int timeUntilDespawn;
+    private int dropTimer;
 
     public EntityTheVisitor(World world) {
         super(world);
         setSize(5.5f, 3.5f);
         experienceValue = 0;
         this.casteType = 8;
-        setNoAI(true);
-        this.timeUntilDespawn = this.rand.nextInt(6000) + 12000;
+        this.dropTimer = (this.rand.nextInt( Invasion.visitorDropPodFrequencyVariation) + Invasion.visitorDropPodFrequency);
+        setNoAI(false);
+        this.timeUntilDespawn = this.rand.nextInt(6000) + 12000000;
     }
 
     @Override
@@ -70,6 +75,11 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
             this.timeUntilDespawn = compound.getInteger("DespawnTime");
         }
 
+        if (compound.hasKey("dropTimer"))
+        {
+            this.timeUntilDespawn = compound.getInteger("dropTimer");
+        }
+
         if (compound.hasKey("srpcothimmunity"))
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
@@ -83,6 +93,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
 
         this.srpcothimmunity = 0;
 
+        compound.setInteger("dropTimer", this.dropTimer);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
         compound.setInteger("DespawnTime", this.timeUntilDespawn);
     }
@@ -90,9 +101,34 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
+        if (!this.world.isRemote && --this.dropTimer <= 0)
+        {
+            summonPods((int) this.posX, (int) this.posY, (int) this.posZ);
+            this.dropTimer = (this.rand.nextInt( Invasion.visitorDropPodFrequencyVariation) + Invasion.visitorDropPodFrequency);
+        }
         if (!this.world.isRemote && --this.timeUntilDespawn <= 0)
         {
             this.setDead();
+        }
+    }
+
+    public void summonPods(int x, int y, int z) {
+        int spawnX;
+        int spawnZ;
+        Entity entityToSpawn;
+        for (int index0 = 0; index0 < (RNG.getIntRangeInclu(2,3)); index0++) {
+            spawnX = x + RNG.getIntRangeInclu(-3,3);
+            spawnZ = z + RNG.getIntRangeInclu(-3,3);
+            if (!world.isRemote) {
+                if (RNG.getIntRangeInclu(1,2) == 1){
+                    entityToSpawn = new EntityHexePod(world);
+                }
+                else {
+                    entityToSpawn = new EntityCallousPod(world);
+                }
+                entityToSpawn.setLocationAndAngles(spawnX, y, spawnZ, world.rand.nextFloat() * 360F, 0.0F);
+                world.spawnEntity(entityToSpawn);
+            }
         }
     }
 
