@@ -32,7 +32,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
 
     public EntityTheVisitor(World world) {
         super(world);
-        setSize(10.0f, 3.5f);
+        setSize(20.0f, 3.5f);
         experienceValue = 0;
         this.casteType = 8;
         this.navigator = new PathNavigateFlying(this, this.world);
