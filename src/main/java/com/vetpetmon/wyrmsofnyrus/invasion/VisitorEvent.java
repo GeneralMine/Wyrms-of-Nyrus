@@ -20,8 +20,6 @@ import java.util.Map;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityTheVisitor;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 @AutoReg.ModElement.Tag
 public class VisitorEvent extends AutoReg.ModElement {

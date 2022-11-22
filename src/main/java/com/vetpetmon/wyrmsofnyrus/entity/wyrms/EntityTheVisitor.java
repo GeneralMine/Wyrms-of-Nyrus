@@ -25,15 +25,15 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         experienceValue = 0;
         this.casteType = 8;
         setNoAI(true);
-        this.timeUntilDespawn = this.rand.nextInt(6000) + 2000;
+        this.timeUntilDespawn = this.rand.nextInt(6000) + 12000;
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.25D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.05D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
     }
 
@@ -107,8 +107,4 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         return PlayState.CONTINUE;
     }
 
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        return false;
-    }
 }

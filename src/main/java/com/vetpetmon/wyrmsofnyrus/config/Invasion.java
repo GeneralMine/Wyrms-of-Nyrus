@@ -10,8 +10,7 @@ import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
 import java.util.ArrayList;
 
 public class Invasion {
-    public static boolean invasionEnabled, invasionStartsNaturally;
-    public static boolean EXCANON;
+    public static boolean invasionEnabled, invasionStartsNaturally, EXCANON;
     public static float EXCANONDIFFICULTY;
 
     public static int invasionStartMode, invasionStartTime, invasionStartChance;
@@ -19,13 +18,16 @@ public class Invasion {
     public static boolean probingEnabled;
     public static int invasionPointsPerKill;
 
+    public static int minWyrmsHexepod, maxWyrmsHexepod, minWyrmsCallouspod, maxWyrmsCallouspod;
+    public static boolean callousPodIncludesDobbers;
+    public static float visitorDropPodFrequency, visitorDropPodFrequencyVariation;
+
     public static int iPointsIStage1Threshold, iPointsIStage2Threshold, iPointsIStage3Threshold, iPointsIStage4Threshold, iPointsIStage5Threshold, iPointsIStage6Threshold;
 
     public static int maxEventDistance, eventFrequency;
 
     public static boolean creepEnabled, creepNewInactivity;
-    public static int creepSpreadRate, creepTickRate;
-    public static int normCreepwyrmCreepSpeed, direCreepwyrmCreepSpeed, creephiveCreepSpeed;
+    public static int creepSpreadRate, creepTickRate, normCreepwyrmCreepSpeed, direCreepwyrmCreepSpeed, creephiveCreepSpeed;
     public static float creepSpreadPoints, creepSpreadMaxHardness;
     public static String[] invalidBlocksForCreepspread;
     public static boolean CSBlockBLEnabled;
@@ -43,10 +45,25 @@ public class Invasion {
         config.addCustomCategoryComment(CATEGORYTWO,  "\nEverything involving Hive Creep\n");
         config.setCategoryRequiresWorldRestart(CATEGORYTWO, true);
 
+        final String CATEGORYTHREE = "Drop Pods";
+        config.addCustomCategoryComment(CATEGORYTHREE,  "\nEverything involving wyrm spawns from the Invasion system.\n");
+        config.setCategoryRequiresWorldRestart(CATEGORYTHREE, false);
+
+        callousPodIncludesDobbers = createConfigBool(config, CATEGORYTHREE,"Callous pod spawn dobbers" ,"Will dobber swarms spawn from callous pods? This option is here in case if the entity spam from swarms tanks performance. Default: true", true);
+        minWyrmsHexepod = createConfigInt(config, CATEGORYTHREE,"Hexe min spawns" ,"Minimum wyrms to spawn from Hexe pods. Will still always spawn at least 1 wyrm. Hexe pods always spawn wyrmlings that grow into various castes of wyrms except royals. Default: 1", 1);
+        maxWyrmsHexepod = createConfigInt(config, CATEGORYTHREE,"Hexe max spawns" ,"Maximum wyrms to spawn from Hexe pods. Default: 3", 3);
+        if (minWyrmsHexepod < 1) minWyrmsHexepod = 1;
+
+        minWyrmsCallouspod = createConfigInt(config, CATEGORYTHREE,"Callous min spawns" ,"Minimum wyrms to spawn from Callous pods. Will still always spawn at least 1 wyrm. Callous pods spawn this number of probers, and double this number for dobbers, if they are enabled. Dobber swarms spawn alongside probers every roll, so if two probers spawn, dobber swarms are generated twice. Default: 1", 1);
+        maxWyrmsCallouspod = createConfigInt(config, CATEGORYTHREE,"Callous max spawns" ,"Maximum wyrms to spawn from Callous pods. Default: 2", 2);
+        if (minWyrmsCallouspod < 1) minWyrmsCallouspod = 1;
+
         invasionStartMode = createConfigInt(config, CATEGORY,"Invasion Start Mode" ,"0 = Random chance, 1 = after x days, 2 = hybrid (time & chance). Default: 2", 2);
         invasionStartTime = createConfigInt(config, CATEGORY,"Invasion Start Time" ,"Number of days until wyrms can start to invade. Default: 30", 30);
         invasionStartChance = createConfigInt(config, CATEGORY,"Invasion Start Chance" ,"1 in x chance to occur each day before wyrms start invading. Default: 50", 50);
 
+        visitorDropPodFrequency = createConfigDouble(config, CATEGORYTHREE,"Visitor drop pod frequency" ,"Delay for each drop pod spawn from The Visitor. Default: 5000", 5000F);
+        visitorDropPodFrequencyVariation = createConfigDouble(config, CATEGORYTHREE,"Visitor drop pod frequency variation" ,"Random variation added to the drop delays, adds 0 to x ticks to delay. Default: 2000", 2000F);
 
         invasionEnabled = createConfigBool(config, CATEGORY, "Invasion enabled", "Enables the invasion system. Many functions of the mod will not work if this is off, including other sub-systems. Default: true", true);
         if (!invasionEnabled) wyrmsofnyrus.logger.info("Invasion module has been disabled");
