@@ -130,12 +130,17 @@ public class EntityWyrmWorker extends EntityWyrm {
         {
             this.timeUntilNextProduct = compound.getInteger("ProductionTime");
         }
+        if (compound.hasKey("unionizing"))
+        {
+            this.unionizing = compound.getBoolean("unionizing");
+        }
     }
 
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("ProductionTime", this.timeUntilNextProduct);
+        compound.setBoolean("unionizing", this.unionizing);
     }
 
     public void registerControllers(AnimationData data) {
