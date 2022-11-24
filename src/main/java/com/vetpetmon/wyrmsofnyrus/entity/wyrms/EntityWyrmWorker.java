@@ -144,15 +144,14 @@ public class EntityWyrmWorker extends EntityWyrm {
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.moving"));
+        if ((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || this.unionizing) {
+            if (event.isMoving()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.moveHostile"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.IdleHostile"));
             return PlayState.CONTINUE;
         }
         else {
-            if (getInvasionDifficulty() >= 3.0 && AI.savageAIMode){
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idleAwakened"));
-            }
-            else{event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.idle"));}
+            if (event.isMoving()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.move"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmworker.Idle"));
         }
 
         return PlayState.CONTINUE;
