@@ -17,23 +17,13 @@ public class wyrmStats {
     public static float soldierDEF, infectoidSoldierDEF;
     public static float soldierATK, infectoidSoldierATK;
 
-    public static float proberHP;
-    public static float proberDEF;
-    public static float proberATK;
-    public static float proberSPD;
+    public static float proberHP, proberDEF, proberATK, proberSPD;
 
-    public static float dobberHP;
-    public static float dobberDEF;
-    public static float dobberATK;
-    public static float dobberSPD;
+    public static float dobberHP, dobberDEF, dobberATK, dobberSPD;
 
-    public static float wyrmlingHP;
-    public static float wyrmlingDEF;
-    public static float wyrmlingSPD;
+    public static float wyrmlingHP, wyrmlingDEF, wyrmlingSPD;
 
-    public static float visitorHP;
-    public static float visitorDEF;
-    public static float visitorSPD;
+    public static float visitorHP, visitorDEF, visitorSPD;
 
     public static void loadFromConfig(Configuration c) {
         startFile(c);
@@ -42,6 +32,7 @@ public class wyrmStats {
         proberStats(c);
         dobberStats(c);
         wyrmlingStats(c);
+        visitorStats(c);
 
     }
 
@@ -66,7 +57,7 @@ public class wyrmStats {
     public static void soldierStats(Configuration c) {
         final String CAT = "Soldier Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Soldiers, including variants.\n");
-        soldierHP = createConfigDouble(c, CAT, "Normal HP", "Default: 6", 6);
+        soldierHP = createConfigDouble(c, CAT, "Normal HP", "Default: 12", 12);
         infectoidSoldierHP = createConfigDouble(c, CAT, "Infectoid Variant HP", "Default: 10", 10);
 
         soldierDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4", 4);
@@ -103,7 +94,7 @@ public class wyrmStats {
     public static void wyrmlingStats(Configuration c) {
         final String CAT = "Wyrmling Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the wyrmlings.\n");
-        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 3", 3);
+        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 4", 4);
 
         wyrmlingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 2", 2);
 
@@ -116,6 +107,6 @@ public class wyrmStats {
 
         visitorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 8", 8);
 
-        visitorSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.05", 0.05);
+        visitorSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.15", 0.15);
     }
 }
