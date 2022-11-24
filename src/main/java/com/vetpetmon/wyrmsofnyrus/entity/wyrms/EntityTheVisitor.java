@@ -14,6 +14,8 @@ import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -33,10 +35,12 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     private int timeUntilDespawn;
     private int dropTimer;
 
+    private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+
     public EntityTheVisitor(World world) {
         super(world);
         setSize(20.0f, 3.5f);
-        experienceValue = 0;
+        experienceValue = 100;
         this.casteType = 8;
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new flierMoveHelperGhastlike(this, 200, wyrmStats.visitorSPD, 0.0D);
@@ -63,6 +67,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     public void onUpdate() {
         super.onUpdate();
         this.setNoGravity(true);
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
     @Override
@@ -101,6 +106,13 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
+        if (this.hasCustomName()) this.bossInfo.setName(this.getDisplayName());
+    }
+
+    public void setCustomNameTag(String name)
+    {
+        super.setCustomNameTag(name);
+        this.bossInfo.setName(this.getDisplayName());
     }
 
     @Override
@@ -173,6 +185,11 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.visitor.Idle"));
 
         return PlayState.CONTINUE;
+    }
+
+    public boolean isNonBoss()
+    {
+        return false;
     }
 
 }
