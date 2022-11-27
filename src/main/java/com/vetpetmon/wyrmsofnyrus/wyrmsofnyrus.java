@@ -73,10 +73,6 @@ public class wyrmsofnyrus {
 
         messageReg.init();
 
-        // Start registering blocks & items.
-        //AllBlocks.preInit();
-        //AllItems.preInit();
-
         MinecraftForge.EVENT_BUS.register(this);
         GameRegistry.registerWorldGenerator(elements, 5);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new AutoReg.GuiHandler());
@@ -99,9 +95,6 @@ public class wyrmsofnyrus {
         elements.getElements().forEach(element -> element.init(event));
         proxy.init(event);
         SoundRegistry.RegisterSounds();
-
-        //AllBlocks.init();
-        //AllItems.init();
 
         WyrmRegister.register();
         //MixinBootstrap.init();
@@ -131,9 +124,6 @@ public class wyrmsofnyrus {
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
         evoPoints.minimum();
-
-        //AllBlocks.postInit();
-        //AllItems.postInit();
     }
 
     @Mod.EventHandler
