@@ -62,8 +62,8 @@ public class Invasion {
         invasionStartTime = createConfigInt(config, CATEGORY,"Invasion Start Time" ,"Number of days until wyrms can start to invade. Default: 30", 30);
         invasionStartChance = createConfigInt(config, CATEGORY,"Invasion Start Chance" ,"1 in x chance to occur each day before wyrms start invading. Default: 50", 50);
 
-        visitorDropPodFrequency = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency" ,"Delay for each drop pod spawn from The Visitor. Default: 500", 500);
-        visitorDropPodFrequencyVariation = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency variation" ,"Random variation added to the drop delays, adds -x to x ticks to delay. Default: 100", 100);
+        visitorDropPodFrequency = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency" ,"Delay for each drop pod spawn from The Visitor. Default: 3500", 3500);
+        visitorDropPodFrequencyVariation = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency variation" ,"Random variation added to the drop delays, adds -x to x ticks to delay. Default: 500", 500);
 
         invasionEnabled = createConfigBool(config, CATEGORY, "Invasion enabled", "Enables the invasion system. Many functions of the mod will not work if this is off, including other sub-systems. Default: true", true);
         if (!invasionEnabled) wyrmsofnyrus.logger.info("Invasion module has been disabled");

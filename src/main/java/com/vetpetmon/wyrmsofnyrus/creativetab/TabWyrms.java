@@ -1,13 +1,13 @@
 
 package com.vetpetmon.wyrmsofnyrus.creativetab;
 
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.creativetab.CreativeTabs;
 
-import com.vetpetmon.wyrmsofnyrus.item.ItemWyrmico;
 import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
 @AutoReg.ModElement.Tag
@@ -18,11 +18,11 @@ public class TabWyrms extends AutoReg.ModElement {
 
 	@Override
 	public void initElements() {
-		tab = new CreativeTabs("tabwyrms") {
+		tab = new CreativeTabs("wyrms") {
 			@SideOnly(Side.CLIENT)
 			@Override
 			public ItemStack getTabIconItem() {
-				return new ItemStack(ItemWyrmico.block, 1);
+				return new ItemStack(AllItems.wyrmico, 1);
 			}
 
 			@SideOnly(Side.CLIENT)

@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -31,6 +32,11 @@ public class ServerProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 
 	@Override
 	public void registerColors() {
+
+	}
+
+	@Override
+	public void registerItemRenderer(Item item, int meta, String id) {
 
 	}
 }

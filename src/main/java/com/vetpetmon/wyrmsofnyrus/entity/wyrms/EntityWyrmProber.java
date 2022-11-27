@@ -12,7 +12,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
-import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 
@@ -216,7 +216,7 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(ItemCreepshard.block, 1).getItem();
+        return new ItemStack(AllItems.creepshard, 1).getItem();
     }
 
     @Override

@@ -1,9 +1,12 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepedGrass;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
+import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.synapselib.*;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import net.minecraft.block.Block;
@@ -70,6 +73,10 @@ public class wyrmsofnyrus {
 
         messageReg.init();
 
+        // Start registering blocks & items.
+        //AllBlocks.preInit();
+        //AllItems.preInit();
+
         MinecraftForge.EVENT_BUS.register(this);
         GameRegistry.registerWorldGenerator(elements, 5);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new AutoReg.GuiHandler());
@@ -92,6 +99,9 @@ public class wyrmsofnyrus {
         elements.getElements().forEach(element -> element.init(event));
         proxy.init(event);
         SoundRegistry.RegisterSounds();
+
+        //AllBlocks.init();
+        //AllItems.init();
 
         WyrmRegister.register();
         //MixinBootstrap.init();
@@ -121,6 +131,9 @@ public class wyrmsofnyrus {
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
         evoPoints.minimum();
+
+        //AllBlocks.postInit();
+        //AllItems.postInit();
     }
 
     @Mod.EventHandler
@@ -135,13 +148,30 @@ public class wyrmsofnyrus {
     }
 
     @SubscribeEvent
+    public static void onModelRegister(ModelRegistryEvent event) {
+        for (Item item : AllItems.ALL_ITEMS) {
+            if (item instanceof IHasModel) {
+                ((IHasModel) item).registerModels();
+            }
+        }
+
+        for (Block block : AllBlocks.ALL_BLOCKS) {
+            if (block instanceof IHasModel) {
+                ((IHasModel) block).registerModels();
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(elements.getBlocks().stream().map(Supplier::get).toArray(Block[]::new));
+        event.getRegistry().registerAll(AllBlocks.ALL_BLOCKS.toArray(new Block[0]));
     }
 
     @SubscribeEvent
     public void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(elements.getItems().stream().map(Supplier::get).toArray(Item[]::new));
+        event.getRegistry().registerAll(AllItems.ALL_ITEMS.toArray(new Item[0]));
     }
 
     @SubscribeEvent
@@ -158,6 +188,17 @@ public class wyrmsofnyrus {
     @SideOnly(Side.CLIENT)
     public void registerModels(ModelRegistryEvent event) {
         elements.getElements().forEach(element -> element.registerModels(event));
+        for (Item item : AllItems.ALL_ITEMS) {
+            if (item instanceof IHasModel) {
+                ((IHasModel) item).registerModels();
+            }
+        }
+
+        for (Block block : AllBlocks.ALL_BLOCKS) {
+            if (block instanceof IHasModel) {
+                ((IHasModel) block).registerModels();
+            }
+        }
     }
 
     @SideOnly(Side.CLIENT)

@@ -1,4 +1,5 @@
-itemGroup.tabwyrms=Wyrms
+itemGroup.wyrms=Wyrms
+itemGroup.z=Wyrms
 
 entity.thevisitor.name=The Visitor
 entity.royalgrub.name=Royal Grub
@@ -55,4 +56,18 @@ subtitles.wyrmRoar=Deep roar
 subtitles.wyrmlingClicks=High-pitched hisses
 subtitles.prober=Buzzing
 
+tooltip.won.item.creepshard=A piece of inorganic Hive Creep off of one of the Creeped. Despite being chipped off of its host, it is still alive.
+tooltip.won.item.creepedflesh=The still-moving flesh of one of The Creeped. The main ingredient to a solution to this invasion...
+tooltip.won.item.creepedbulb=A gross cyst of melting flesh caused by radiation poisoning. The Creeped seem to eat off of the energies produced by this external organ.
+tooltip.won.item.creepedbrainmatter=Chunks of brain matter from The Creeped. The ultimate control center of the Creeped... It could be rewired to suit a different purpose.
+
+tooltip.won.item.follyflesh=Flesh from the wyrmfolly, mixed with alien and terrestrial DNA samples. Perfectly safe to eat!
+
+tooltip.won.item.metalcomb_array=An array of metalcombs packed closely together. Place multiple of these arrays together in specific patterns to create hivetech. Can only be made by Workers.
+tooltip.won.item.wyrmarmorfrag=The shell of a heavily-armored wyrm, still radioactive and potent.
+
 death.attack.prober=%s got probed
+death.attack.strykerslash=%s was turned into chopped player
+death.attack.strykerbite=%s died to a fatal bite
+death.attack.strykerstab=%s took one too many stab wounds
+death.attack.strykernormal=%s messed around and found out
