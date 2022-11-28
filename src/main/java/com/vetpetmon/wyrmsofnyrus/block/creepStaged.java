@@ -1,11 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
-import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -40,7 +38,7 @@ public class creepStaged extends Block implements IHasModel {
         this.setSoundType(SoundType.SLIME);
         this.setConvert(convertBlockTo);
         this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, 0));
-        setCreativeTab(TabWyrms.tab);
+        setCreativeTab(wyrmsofnyrus.wyrmTabs);
         AllBlocks.ALL_BLOCKS.add(this);
         AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }

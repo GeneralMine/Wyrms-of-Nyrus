@@ -1,35 +1,23 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.common.MinecraftForge;
-
+import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Map;
 
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
 
-@AutoReg.ModElement.Tag
-public class InvasionStatus extends AutoReg.ModElement {
-	public InvasionStatus(AutoReg instance) {
-		super(instance, 12);
-	}
+public class InvasionStatus {
 
 	public static float getDifficulty(float baseDiff) {
 		// First factor: What's the basic invasion stage difficulty here?
-		float dFactorOne = baseDiff;
 		// Second factor: Is this EXtended Canon and what is that difficulty option set too?
-		float dFactorTwo;
-		if(Invasion.isEXCANON()) {dFactorTwo = Invasion.getEXCANONDIFFICULTY();}
-		else {dFactorTwo = 1;}
+		float dFactorTwo = 1;
+		if(Invasion.isEXCANON()) dFactorTwo = Invasion.getEXCANONDIFFICULTY();
 
-		float finalDifficulty = (dFactorOne * dFactorTwo);
-
-		return finalDifficulty;
+		return (baseDiff * dFactorTwo);
 	}
 
 	public static void executescript(Map<String, Object> dependencies) {
@@ -71,12 +59,7 @@ public class InvasionStatus extends AutoReg.ModElement {
 			java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
 			dependencies.put("world", world);
 			dependencies.put("event", event);
-			this.executescript(dependencies);
+			executescript(dependencies);
 		}
-	}
-
-	@Override
-	public void preInit(FMLPreInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 }

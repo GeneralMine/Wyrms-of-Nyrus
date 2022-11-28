@@ -1,31 +1,22 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityTheVisitor;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.common.MinecraftForge;
-
-import net.minecraft.world.World;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Map;
 
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityTheVisitor;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-
-@AutoReg.ModElement.Tag
-public class VisitorEvent extends AutoReg.ModElement {
-	public VisitorEvent(AutoReg instance) {
-		super(instance, 205);
-	}
+public class VisitorEvent {
 	private static int nextDay = 0;
 
 	public static void visitorEvent(Map<String, Object> e, Boolean forced, World world) {
@@ -108,10 +99,5 @@ public class VisitorEvent extends AutoReg.ModElement {
 			dependencies.put("entity", entity);
 			visitorEvent(dependencies, false, world);
 		}
-	}
-
-	@Override
-	public void preInit(FMLPreInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 }

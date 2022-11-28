@@ -1,7 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
@@ -31,7 +30,7 @@ public class BlockHivecreepBase extends Block implements IHasModel {
         this.setHardness(hardness);
         this.setResistance(blastresist);
         this.setSoundType(SoundType.SLIME);
-        setCreativeTab(TabWyrms.tab);
+        setCreativeTab(wyrmsofnyrus.wyrmTabs);
         AllBlocks.ALL_BLOCKS.add(this);
         AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }

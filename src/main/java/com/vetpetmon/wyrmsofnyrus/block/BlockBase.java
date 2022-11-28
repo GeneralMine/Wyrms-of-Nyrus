@@ -1,6 +1,5 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
-import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
@@ -18,7 +17,7 @@ public class BlockBase extends Block implements IHasModel {
         this.setSoundType(st);
         this.setHardness(hardness);
         this.setResistance(blastresist);
-        setCreativeTab(TabWyrms.tab);
+        setCreativeTab(wyrmsofnyrus.wyrmTabs);
         AllBlocks.ALL_BLOCKS.add(this);
         AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
@@ -32,7 +31,7 @@ public class BlockBase extends Block implements IHasModel {
         this.setResistance(blastresist);
         this.setLightLevel(lightLevel);
         this.setLightOpacity(lightOpacity);
-        setCreativeTab(TabWyrms.tab);
+        setCreativeTab(wyrmsofnyrus.wyrmTabs);
         AllBlocks.ALL_BLOCKS.add(this);
         AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }

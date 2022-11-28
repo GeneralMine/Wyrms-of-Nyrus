@@ -20,6 +20,8 @@ public class AllBlocks {
     public static final Block hivecreeptop = new BlockHivecreepBase("hivecreeptop",1,2.25F);
     public static final Block creepstone = new BlockHivecreepBase("creepstone",3,4);
 
+
+    public static final Block creepedgrass = new creepStagedGrass();
     public static final Block creepeddirt = new creepStaged("creepeddirt",0.7F,0.9F, hivecreepblock);
     public static final Block creepedsand = new creepStaged("creepedsand",0.5F,0.5F, hivecreepblock);
     public static final Block creepedstone = new creepStaged("creepedstone",1.5F,7.5F, hivecreepblock);

@@ -1,30 +1,25 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 // imports ALL events automatically.
+
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.invasion.events.*;
-
+import com.vetpetmon.wyrmsofnyrus.invasion.events.creepwyrmDrop;
+import com.vetpetmon.wyrmsofnyrus.invasion.events.massIncursion;
+import com.vetpetmon.wyrmsofnyrus.invasion.events.scoutingPodRaid;
+import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+
 import java.util.Map;
 
 
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
-
-@AutoReg.ModElement.Tag
-public class InvasionEvent extends AutoReg.ModElement {
-	public InvasionEvent(AutoReg instance) {
-		super(instance, 25);
-	}
-
+public class InvasionEvent {
 	public static void executescript(Map<String, Object> dependencies) {
 		World world = (World) dependencies.get("world");
 		int eventRolled = 0;
@@ -70,10 +65,5 @@ public class InvasionEvent extends AutoReg.ModElement {
 				executescript(dependencies);
 			}
 		}
-	}
-
-	@Override
-	public void preInit(FMLPreInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 }

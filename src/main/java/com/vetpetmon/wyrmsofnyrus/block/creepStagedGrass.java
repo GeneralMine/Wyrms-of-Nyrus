@@ -1,6 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -15,15 +18,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Random;
 
-public abstract class creepStagedGrass extends BlockGrass {
+public class creepStagedGrass extends BlockGrass {
     public static PropertyInteger STAGE = PropertyInteger.create("stage", 0, 9);
 
     public creepStagedGrass() {
-        this.setTickRandomly(true);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, 0));
+        setUnlocalizedName("creepedgrass");
+        setSoundType(SoundType.GROUND);
+        setHarvestLevel("shovel", 1);
+        setHardness(0.75F);
+        setResistance(0.75F);
+        setLightLevel(0F);
+        setLightOpacity(255);
+        setCreativeTab(wyrmsofnyrus.wyrmTabs);
     }
-
     @Override
     public void addInformation(ItemStack itemstack, World world, List<String> list, ITooltipFlag flag) {
         super.addInformation(itemstack, world, list, flag);
@@ -54,13 +63,26 @@ public abstract class creepStagedGrass extends BlockGrass {
         return BlockRenderLayer.CUTOUT;
     }
 
-    /**
-     * Converts a block into another block. OVERRIDE THIS IN EXTENDED CLASSES!
-     * @param world World
-     * @param pos BlockPos
-     * @param convertTo BlockState
-     */
-    public void convert(World world, BlockPos pos, IBlockState convertTo) {
-        world.setBlockState(pos, convertTo, 3);
+    public void convert(World world, BlockPos pos, Block convertTo, int activeFlag) {
+        world.setBlockState(pos, convertTo.getDefaultState().withProperty(BlockHivecreepBase.ACTIVE, activeFlag), 3);
+    }
+
+    @Override
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+        super.updateTick(world, pos, state, random);
+        int stage = state.getValue(STAGE) + 1;
+        switch (stage) {
+            case(4):
+            case(5):
+                assert false;
+                convert(world, pos, AllBlocks.hivecreeptop, 1);
+                break;
+            case(10):
+                assert false;
+                convert(world, pos, AllBlocks.hivecreeptop, 0);
+                break;
+            default:
+                world.setBlockState(pos, state.withProperty(STAGE, stage), 2);
+        }
     }
 }

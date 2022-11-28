@@ -1,14 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.evo;
 
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -19,11 +16,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
  *
  * Even worse, there's no dedicated getter. I'm fixing that as we speak.
  */
-@AutoReg.ModElement.Tag
-public class evoPoints extends AutoReg.ModElement {
-    public evoPoints(AutoReg instance) {
-        super(instance, 206);
-    }
+public class evoPoints{
 
     public static int minEvoCap = 0;
     public static int get(World w) {return wyrmVariables.WorldVariables.get(w).wyrmEvo;}
@@ -116,10 +109,5 @@ public class evoPoints extends AutoReg.ModElement {
     public void onWorldTick(TickEvent.WorldTickEvent event) {
         World world = event.world;
         decay(world);
-    }
-
-    @Override
-    public void preInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(this);
     }
 }

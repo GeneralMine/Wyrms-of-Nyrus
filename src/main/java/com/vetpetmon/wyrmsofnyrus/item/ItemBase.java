@@ -1,12 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.item;
 
-import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.client.resources.I18n;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class ItemBase extends Item implements IHasModel {
     public ItemBase(String name, boolean hastooltip) {
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(TabWyrms.tab);
+        setCreativeTab(wyrmsofnyrus.wyrmTabs);
         AllItems.ALL_ITEMS.add(this);
         this.hastooltip = hastooltip;
     }

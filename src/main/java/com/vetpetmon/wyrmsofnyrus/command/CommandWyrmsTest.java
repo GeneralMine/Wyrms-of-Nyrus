@@ -1,34 +1,19 @@
 
 package com.vetpetmon.wyrmsofnyrus.command;
 
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-
-import net.minecraft.world.World;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.entity.Entity;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.command.ICommand;
-import net.minecraft.command.CommandHandler;
-
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Arrays;
-import java.util.ArrayList;
-
 import com.vetpetmon.wyrmsofnyrus.invasion.WyrmsTestCommandExecuted;
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
+import net.minecraft.command.ICommand;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.Entity;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-@AutoReg.ModElement.Tag
-public class CommandWyrmsTest extends AutoReg.ModElement {
-	public CommandWyrmsTest(AutoReg instance) {
-		super(instance, 8);
-	}
+import java.util.*;
 
-	@Override
-	public void serverLoad(FMLServerStartingEvent event) {
-		event.registerServerCommand(new CommandHandler());
+public class CommandWyrmsTest{
+	public CommandWyrmsTest() {
+		super();
 	}
 	public static class CommandHandler implements ICommand {
 		@Override
@@ -72,9 +57,6 @@ public class CommandWyrmsTest extends AutoReg.ModElement {
 
 		@Override
 		public void execute(MinecraftServer server, ICommandSender sender, String[] cmd) {
-			int x = sender.getPosition().getX();
-			int y = sender.getPosition().getY();
-			int z = sender.getPosition().getZ();
 			Entity entity = sender.getCommandSenderEntity();
 			if (entity != null) {
 				World world = entity.world;

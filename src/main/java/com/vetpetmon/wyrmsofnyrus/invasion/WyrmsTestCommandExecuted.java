@@ -3,24 +3,17 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigBase;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-
-import net.minecraft.world.World;
-import net.minecraft.world.EnumDifficulty;
-import net.minecraft.util.text.TextComponentString;
+import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
-
-@AutoReg.ModElement.Tag
-public class WyrmsTestCommandExecuted extends AutoReg.ModElement {
-	public WyrmsTestCommandExecuted(AutoReg instance) {
-		super(instance, 7);
-	}
+public class WyrmsTestCommandExecuted {
 
 	public static void executescript(Map<String, Object> dependencies) {
 		World world = (World) dependencies.get("world");
