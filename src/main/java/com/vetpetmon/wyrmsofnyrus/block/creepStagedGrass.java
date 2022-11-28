@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
@@ -11,6 +12,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
@@ -22,11 +24,12 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
-public class creepStagedGrass extends BlockGrass implements IHasModel {
+public class creepStagedGrass extends BlockGrass implements IHasModel{
     public static PropertyInteger STAGE = PropertyInteger.create("stage", 0, 9);
 
     public creepStagedGrass() {
-        setUnlocalizedName("creepedgrass");
+        this.setUnlocalizedName("creepedgrass");
+        this.setRegistryName("creepedgrass");
         setSoundType(SoundType.GROUND);
         setHarvestLevel("shovel", 1);
         setHardness(0.75F);
@@ -34,6 +37,8 @@ public class creepStagedGrass extends BlockGrass implements IHasModel {
         setLightLevel(0F);
         setLightOpacity(255);
         setCreativeTab(wyrmsofnyrus.wyrmTabs);
+        AllBlocks.ALL_BLOCKS.add(this);
+        AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
     @Override
     public void registerModels() {
