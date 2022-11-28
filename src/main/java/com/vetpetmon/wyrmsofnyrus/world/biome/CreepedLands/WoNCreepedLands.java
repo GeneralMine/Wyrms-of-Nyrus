@@ -1,22 +1,20 @@
 package com.vetpetmon.wyrmsofnyrus.world.biome.CreepedLands;
 
-import com.vetpetmon.wyrmsofnyrus.block.BlockCreepstoneInactive;
-import com.vetpetmon.wyrmsofnyrus.block.BlockHiveCreepBlock;
+
+import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityDobber;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
 import com.vetpetmon.wyrmsofnyrus.world.biome.WoNBiome;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WoNCreepedLands extends WoNBiome {
     public WoNCreepedLands(final BiomeProperties properties, final ResourceLocation registryName) {
         super(properties, registryName);
-        topBlock = BlockHiveCreepBlock.block.getDefaultState();
-        fillerBlock = BlockCreepstoneInactive.block.getDefaultState();
+        topBlock = AllBlocks.hivecreeptop.getDefaultState();
+        fillerBlock = AllBlocks.hivecreepblock.getDefaultState();
         decorator.treesPerChunk = 0;
         decorator.flowersPerChunk = 0;
         decorator.grassPerChunk = 0;

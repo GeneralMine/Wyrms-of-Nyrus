@@ -23,6 +23,20 @@ public class BlockBase extends Block implements IHasModel {
         AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
+    public BlockBase(Material m, String s, SoundType st, float hardness, float blastresist, int lightOpacity, float lightLevel){
+        super(m);
+        this.setUnlocalizedName(s);
+        this.setRegistryName(s);
+        this.setSoundType(st);
+        this.setHardness(hardness);
+        this.setResistance(blastresist);
+        this.setLightLevel(lightLevel);
+        this.setLightOpacity(lightOpacity);
+        setCreativeTab(TabWyrms.tab);
+        AllBlocks.ALL_BLOCKS.add(this);
+        AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+    }
+
     @Override
     public void registerModels() {
         wyrmsofnyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");

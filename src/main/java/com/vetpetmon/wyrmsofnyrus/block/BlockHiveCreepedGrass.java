@@ -65,6 +65,10 @@ public class BlockHiveCreepedGrass extends AutoReg.ModElement {
 			return BlockRenderLayer.CUTOUT_MIPPED;
 		}
 
+		public void convert(World world, BlockPos pos, Block convertTo, int activeFlag) {
+			world.setBlockState(pos, convertTo.getDefaultState().withProperty(BlockHivecreepBase.ACTIVE, activeFlag), 3);
+		}
+
 		@Override
 		public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
 			super.updateTick(world, pos, state, random);
@@ -73,11 +77,11 @@ public class BlockHiveCreepedGrass extends AutoReg.ModElement {
 				case(4):
 				case(5):
 					assert false;
-					convert(world, pos, BlockHiveCreepTop.block.getDefaultState());
+					convert(world, pos, AllBlocks.hivecreeptop, 1);
 					break;
 				case(10):
 					assert false;
-					convert(world, pos, BlockHiveCreepTopInactive.block.getDefaultState());
+					convert(world, pos, AllBlocks.hivecreeptop, 0);
 					break;
 				default:
 					world.setBlockState(pos, state.withProperty(STAGE, stage), 2);

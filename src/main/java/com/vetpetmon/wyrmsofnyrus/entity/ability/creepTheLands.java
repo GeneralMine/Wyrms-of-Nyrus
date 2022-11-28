@@ -20,16 +20,16 @@ public class creepTheLands {
         if (creepspreadRules(lookingBlock, world, pos)) {
             assert false;
             if (((world.getBlockState(lookingBlock))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
-                world.setBlockState(lookingBlock, BlockWyrmLightsYellow.block.getDefaultState(), 3);
+                world.setBlockState(lookingBlock, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);
                 addPoints(world);
             } else if (matLookingBlock(lookingBlock, Material.ROCK, world)) {
-                world.setBlockState(lookingBlock, BlockHiveCreepedStone.block.getDefaultState().withProperty(STAGE,6), 3);
+                world.setBlockState(lookingBlock, AllBlocks.creepedstone.getDefaultState().withProperty(STAGE,6), 3);
                 addPoints(world);
             } else if ((matLookingBlock(lookingBlock, Material.GROUND, world))) {
-                world.setBlockState(lookingBlock, BlockHiveCreepedDirt.block.getDefaultState().withProperty(STAGE,6), 3);
+                world.setBlockState(lookingBlock, AllBlocks.creepeddirt.getDefaultState().withProperty(STAGE,6), 3);
                 addPoints(world);
             } else if ((matLookingBlock(lookingBlock, Material.SAND, world))) {
-                world.setBlockState(lookingBlock, BlockHiveCreepedSand.block.getDefaultState().withProperty(STAGE, 6), 3);
+                world.setBlockState(lookingBlock, AllBlocks.creepedsand.getDefaultState().withProperty(STAGE, 6), 3);
                 addPoints(world);
             } else if ((matLookingBlock(lookingBlock, Material.GRASS, world))) {
                 world.setBlockState(lookingBlock, BlockHiveCreepedGrass.block.getDefaultState().withProperty(STAGE,6), 3);
