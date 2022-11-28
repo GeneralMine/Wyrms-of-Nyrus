@@ -46,7 +46,7 @@ public class HiveCreepSpreadFurther{
 				BlockPos posi = new BlockPos(x, y, z);
 				if ((creepspreadRules(posi, world, pos)) && canSpreadThisTick) {
 					if (((world.getBlockState(posi))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {world.setBlockState(posi, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);addPoints(world);}
-					else if ((matLookingBlock(posi, Material.SAND, world))) world.setBlockState(posi, AllBlocks.creepedsand.getDefaultState().withProperty(BlockHivecreepBase.ACTIVE, 1), 3);
+					else if ((matLookingBlock(posi, Material.SAND, world))) {world.setBlockState(posi, AllBlocks.creepedsand.getDefaultState().withProperty(BlockHivecreepBase.ACTIVE, 1), 3);addPoints(world);}
 					else if (matLookingBlock(posi, Material.ROCK, world)) {world.setBlockState(posi, AllBlocks.creepedstone.getDefaultState().withProperty(BlockHivecreepBase.ACTIVE, 1), 3);addPoints(world);}
 					else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {world.setBlockState(posi, AllBlocks.creepeddirt.getDefaultState().withProperty(BlockHivecreepBase.ACTIVE, 1), 3);addPoints(world);}
 				}
