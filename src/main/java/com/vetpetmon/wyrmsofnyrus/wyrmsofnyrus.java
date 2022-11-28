@@ -16,6 +16,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.potion.Potion;
@@ -23,6 +24,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,6 +41,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -54,9 +58,8 @@ public class wyrmsofnyrus {
     public static final String MODID = libVars.ModID;
     public static final String NAME = libVars.ModName;
     public static final String VERSION = libVars.ModVersion;
-
     public static CreativeTabs wyrmTabs = new TabWyrms(CreativeTabs.getNextID(), "wyrms");
-    public static final SimpleNetworkWrapper PACKET_HANDLER = NetworkRegistry.INSTANCE.newSimpleChannel("wyrmsofnyrus:a");
+    public static SimpleNetworkWrapper PACKET_HANDLER = NetworkRegistry.INSTANCE.newSimpleChannel("wyrmsofnyrus:a");
     @SidedProxy(clientSide = "com.vetpetmon.wyrmsofnyrus.ClientProxywyrmsofnyrus", serverSide = "com.vetpetmon.wyrmsofnyrus.ServerProxywyrmsofnyrus")
     public static IProxywyrmsofnyrus proxy;
 
@@ -80,6 +83,37 @@ public class wyrmsofnyrus {
 
         MinecraftForge.EVENT_BUS.register(this);
         proxy.preInit(event);
+        this.addNetworkMessage(wyrmVariables.WorldSavedDataSyncMessageHandler.class,
+                wyrmVariables.WorldSavedDataSyncMessage.class, Side.SERVER, Side.CLIENT);
+    }
+
+    @SubscribeEvent
+    public void onPlayerLoggedIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
+        if (!event.player.world.isRemote) {
+            WorldSavedData mapdata = wyrmVariables.MapVariables.get(event.player.world);
+            WorldSavedData worlddata = wyrmVariables.WorldVariables.get(event.player.world);
+            wyrmsofnyrus.PACKET_HANDLER.sendTo(new wyrmVariables.WorldSavedDataSyncMessage(0, mapdata),
+                    (EntityPlayerMP) event.player);
+            wyrmsofnyrus.PACKET_HANDLER.sendTo(new wyrmVariables.WorldSavedDataSyncMessage(1, worlddata),
+                    (EntityPlayerMP) event.player);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerChangedDimension(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (!event.player.world.isRemote) {
+            WorldSavedData worlddata = wyrmVariables.WorldVariables.get(event.player.world);
+            wyrmsofnyrus.PACKET_HANDLER.sendTo(new wyrmVariables.WorldSavedDataSyncMessage(1, worlddata),
+                    (EntityPlayerMP) event.player);
+        }
+    }
+
+    private int messageID = 0;
+    public <T extends IMessage, V extends IMessage> void addNetworkMessage(Class<? extends IMessageHandler<T, V>> handler, Class<T> messageClass,
+                                                                           Side... sides) {
+        for (Side side : sides)
+            wyrmsofnyrus.PACKET_HANDLER.registerMessage(handler, messageClass, messageID, side);
+        messageID++;
     }
 
 
