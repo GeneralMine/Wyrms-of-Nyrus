@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
+import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
@@ -9,6 +10,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +22,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
-public class creepStagedGrass extends BlockGrass {
+public class creepStagedGrass extends BlockGrass implements IHasModel {
     public static PropertyInteger STAGE = PropertyInteger.create("stage", 0, 9);
 
     public creepStagedGrass() {
@@ -32,6 +34,10 @@ public class creepStagedGrass extends BlockGrass {
         setLightLevel(0F);
         setLightOpacity(255);
         setCreativeTab(wyrmsofnyrus.wyrmTabs);
+    }
+    @Override
+    public void registerModels() {
+        wyrmsofnyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
     @Override
     public void addInformation(ItemStack itemstack, World world, List<String> list, ITooltipFlag flag) {
