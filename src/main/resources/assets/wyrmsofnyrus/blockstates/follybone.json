@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":  { "model": "wyrmsofnyrus:follybone" },
+    "axis=z":   { "model": "wyrmsofnyrus:follybone", "x": 90 },
+    "axis=x":   { "model": "wyrmsofnyrus:follybone", "x": 90, "y": 90 },
+    "axis=none": { "model": "wyrmsofnyrus:follybone" }
+  }
+}

@@ -32,11 +32,8 @@ tile.metal_comb_panel_hive_creep.name=Hive Creep Metal Combs
 tile.hivecreeptop.name=Hive Creep Surface
 tile.wyrm_lights_orange.name=Orange Hive Lights
 tile.wyrm_lights_yellow.name=Yellow Hive Lights
-tile.hivecreeptopinactive.name=Hive Creep Surface
 tile.hivecreepblock.name=Hive Creep Block
 tile.creepstone.name=Creepstone
-tile.hivecreepblockinactive.name=Hive Creep Block
-tile.creepstone_inactive.name=Creepstone
 tile.creepeddirt.name=Creeped Dirt
 tile.creepedsand.name=Creeped Sand
 tile.creepedgravel.name=Creeped Gravel
@@ -56,12 +53,19 @@ subtitles.wyrmRoar=Deep roar
 subtitles.wyrmlingClicks=High-pitched hisses
 subtitles.prober=Buzzing
 
+tooltip.won.tile.metalcombpanelmimic=Fake metalcomb panels that mimic the properties of real metalcomb panels. Wyrms shouldn't be able to tell the difference... Right?
+tooltip.won.tile.wyrm_lights_orange=Not to be mistaken with the eggs, glowbulbs are hot to the touch. Handle with care.
+tooltip.won.tile.wyrm_lights_yellow=Not to be mistaken with the eggs, glowbulbs are hot to the touch. Handle with care.
+
 tooltip.won.item.creepshard=A piece of inorganic Hive Creep off of one of the Creeped. Despite being chipped off of its host, it is still alive.
 tooltip.won.item.creepedflesh=The still-moving flesh of one of The Creeped. The main ingredient to a solution to this invasion...
 tooltip.won.item.creepedbulb=A gross cyst of melting flesh caused by radiation poisoning. The Creeped seem to eat off of the energies produced by this external organ.
 tooltip.won.item.creepedbrainmatter=Chunks of brain matter from The Creeped. The ultimate control center of the Creeped... It could be rewired to suit a different purpose.
 
 tooltip.won.item.follyflesh=Flesh from the wyrmfolly, mixed with alien and terrestrial DNA samples. Perfectly safe to eat!
+tooltip.won.item.follybone=Tough bones with indeterminate origins. Can be used in place of sticks for making tools.
+tooltip.won.item.follyskin=Strong, yet bumpy skin from a wyrmfolly. Acts almost like leather!
+tooltip.won.item.follybulb=A large, solidified cyst from a felled wyrmfolly. Just about as strong as diamonds.
 
 tooltip.won.item.metalcomb_array=An array of metalcombs packed closely together. Place multiple of these arrays together in specific patterns to create hivetech. Can only be made by Workers.
 tooltip.won.item.wyrmarmorfrag=The shell of a heavily-armored wyrm, still radioactive and potent.

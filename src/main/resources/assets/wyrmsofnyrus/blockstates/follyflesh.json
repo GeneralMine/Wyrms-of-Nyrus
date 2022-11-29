@@ -1,0 +1,39 @@
+{
+  "variants": {
+    "normal": [
+      {
+        "model": "wyrmsofnyrus:follyflesh"
+      },
+      {
+        "model": "wyrmsofnyrus:follyflesh",
+        "x": 180
+      },
+      {
+        "model": "wyrmsofnyrus:follyflesh",
+        "x": 90
+      },
+      {
+        "model": "wyrmsofnyrus:follyflesh",
+        "x": 270
+      },
+      {
+        "model": "wyrmsofnyrus:follyflesh1"
+      },
+      {
+        "model": "wyrmsofnyrus:follyflesh1",
+        "x": 90
+      },
+      {
+        "model": "wyrmsofnyrus:follyflesh2"
+      },
+      {
+        "model": "wyrmsofnyrus:follyflesh2",
+        "x": 180
+      },
+      {
+        "model": "wyrmsofnyrus:follyflesh2",
+        "x": 90
+      }
+    ]
+  }
+}

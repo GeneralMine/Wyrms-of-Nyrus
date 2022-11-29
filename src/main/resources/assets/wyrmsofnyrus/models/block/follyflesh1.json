@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "wyrmsofnyrus:blocks/follyflesh",
+        "particle": "wyrmsofnyrus:blocks/follyflesh1"
+    }
+}
