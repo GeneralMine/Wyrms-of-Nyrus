@@ -31,7 +31,7 @@ public class difficultyStats {
     public static double damage(double baseDMG, double difficulty)
     {
 
-        return (baseDMG + difficulty);
+        return (baseDMG + (difficulty*1.2));
     }
 
     /**
@@ -56,7 +56,7 @@ public class difficultyStats {
      */
     public static double armor(double baseAMR, double difficulty)
     {
-        return (baseAMR + difficulty);
+        return (baseAMR + (difficulty*1.5));
     }
 
 
