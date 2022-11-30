@@ -19,7 +19,7 @@ public class difficultyStats {
      */
     public static double health(double baseHP, double difficulty)
     {
-        return (baseHP * 2 + difficulty) ;
+        return ((baseHP * 2) + difficulty) ;
     }
 
     /**
