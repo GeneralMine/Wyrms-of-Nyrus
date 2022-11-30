@@ -27,6 +27,7 @@ item.creepshard.name=Creepshard
 item.metalcomb_array.name=Metalcomb Array
 item.wyrmico.name=Wyrms Icon
 item.wyrmarmorfrag.name=Armor Fragment
+item.creepedflesh.name=Creeped Flesh
 
 tile.metal_comb_panel_hive_creep.name=Hive Creep Metal Combs
 tile.hivecreeptop.name=Hive Creep Surface
@@ -40,6 +41,8 @@ tile.creepedgravel.name=Creeped Gravel
 tile.creepedstone.name=Creeped Stone
 tile.creepedgrass.name=Creeped Grass
 tile.metalcombpanelmimic.name=Mimicked Metalcomb Panels
+tile.follybone.name=Wyrmfolly Bone
+tile.follyflesh.name=Wyrmfolly Flesh
 
 subtitles.visitormessage=Starship humming
 subtitles.wyrmClicks=Clicking
@@ -62,10 +65,10 @@ tooltip.won.item.creepedflesh=The still-moving flesh of one of The Creeped. The 
 tooltip.won.item.creepedbulb=A gross cyst of melting flesh caused by radiation poisoning. The Creeped seem to eat off of the energies produced by this external organ.
 tooltip.won.item.creepedbrainmatter=Chunks of brain matter from The Creeped. The ultimate control center of the Creeped... It could be rewired to suit a different purpose.
 
-tooltip.won.item.follyflesh=Flesh from the wyrmfolly, mixed with alien and terrestrial DNA samples. Perfectly safe to eat!
-tooltip.won.item.follybone=Tough bones with indeterminate origins. Can be used in place of sticks for making tools.
-tooltip.won.item.follyskin=Strong, yet bumpy skin from a wyrmfolly. Acts almost like leather!
-tooltip.won.item.follybulb=A large, solidified cyst from a felled wyrmfolly. Just about as strong as diamonds.
+tooltip.won.item.follyfleshpiece=Flesh from the wyrmfolly, mixed with alien and terrestrial DNA samples. Perfectly safe to eat!
+tooltip.won.item.follybones=Tough bones with indeterminate origins. Can be used in place of sticks for making tools.
+tooltip.won.item.follyskinpiece=Strong, yet bumpy skin from a wyrmfolly. Acts almost like leather!
+tooltip.won.item.follybulbpiece=A large, solidified cyst from a felled wyrmfolly. Just about as strong as diamonds.
 
 tooltip.won.item.metalcomb_array=An array of metalcombs packed closely together. Place multiple of these arrays together in specific patterns to create hivetech. Can only be made by Workers.
 tooltip.won.item.wyrmarmorfrag=The shell of a heavily-armored wyrm, still radioactive and potent.

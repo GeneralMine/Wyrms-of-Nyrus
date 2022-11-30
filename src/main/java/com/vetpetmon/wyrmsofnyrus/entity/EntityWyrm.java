@@ -2,15 +2,21 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.*;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityHivemind;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityOverseerWaypoint;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -34,6 +40,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob {
 
     private static DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
+    protected static float exdif = setExdif();
+
+    public static float setExdif() {
+        if (Invasion.isEXCANON()) return exdif = Invasion.getEXCANONDIFFICULTY();
+        else return exdif = 1;
+    }
 
     private String animationName;
 
@@ -78,6 +90,20 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
      * @return The invasion difficulty of the world.
      */
     public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
+
+    public float genDifficulty(World world) {
+        exdif = setExdif();
+        return (float) ((getInvasionDifficulty() + evoPoints.evoMilestone(world)) * exdif);
+    }
+
+    public void setStats(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR) {
+        float diff = genDifficulty(world);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
+    }
 
     /**
      * If we are not running with Simple AI (config option), then add Entity AI LookIdle & WanderAvoidWater.

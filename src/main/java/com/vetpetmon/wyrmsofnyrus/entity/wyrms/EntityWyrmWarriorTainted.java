@@ -8,9 +8,9 @@ import com.vetpetmon.wyrmsofnyrus.config.Client;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.*;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMoveRandom;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.Entity;
@@ -55,13 +55,8 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
+        this.setStats(wyrmStats.taintedWarriorHP,wyrmStats.taintedWarriorDEF,wyrmStats.taintedWarriorATK,0.45F,wyrmStats.taintedWarriorKBR);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(wyrmStats.taintedWarriorATK,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(wyrmStats.taintedWarriorDEF,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(wyrmStats.taintedWarriorHP,difficulty));
     }
 
     @Override

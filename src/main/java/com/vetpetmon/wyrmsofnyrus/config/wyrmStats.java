@@ -12,23 +12,30 @@ public class wyrmStats {
     public static float warriorHP, taintedWarriorHP;
     public static float warriorDEF, taintedWarriorDEF;
     public static float warriorATK, taintedWarriorATK;
+    public static float warriorKBR, taintedWarriorKBR;
 
     public static float soldierHP, infectoidSoldierHP;
     public static float soldierDEF, infectoidSoldierDEF;
     public static float soldierATK, infectoidSoldierATK;
-
+    public static float roverHP, roverDEF, roverATK, roverSPD, roverKBR;
+    public static float roverUraniumHP, roverUraniumDEF, roverUraniumATK, roverUraniumSPD, roverUraniumKBR;
+    public static float myrmurHP, myrmurDEF, myrmurATK, myrmurSPD, myrmurKBR;
     public static float proberHP, proberDEF, proberATK, proberSPD;
     public static float dobberHP, dobberDEF, dobberATK, dobberSPD;
+    public static float workerHP, workerDEF, workerATK, workerSPD, workerKBR;
     public static float wyrmlingHP, wyrmlingDEF, wyrmlingSPD;
-    public static float visitorHP, visitorDEF, visitorSPD;
+    public static float visitorHP, visitorDEF, visitorSPD, visitorKBR;
     public static float strykerfollyHP, strykerfollyATK, strykerfollyDEF, strykerfollySPD, strykerfollyKBR, strykerfollyPointsTillAscension;
     public static float strykerfollyAscendedHP, strykerfollyAscendedATK, strykerfollyAscendedDEF, strykerfollyAscendedSPD, strykerfollyAscendedKBR;
 
     public static void loadFromConfig(Configuration c) {
         startFile(c);
+        roverStats(c);
+        myrmurStats(c);
         warriorStats(c);
         soldierStats(c);
         proberStats(c);
+        workerStats(c);
         dobberStats(c);
         wyrmlingStats(c);
         visitorStats(c);
@@ -39,6 +46,35 @@ public class wyrmStats {
     public static void startFile(Configuration c) {
         final String CAT = "!Wyrm stats";
         c.addCustomCategoryComment(CAT,"\nThis file contains mostly every adjustable base stat value present on the wyrms. Keep in mind that in-game, these values may CHANGE due to the Invasion and/or Evolution system.\n\n STAT KEYS:\n\nSPD: Speed\nATK: Damage\nHP: Health\nDEF: Armor\nKBR: Knockback Reduction\n" + advNotice);
+    }
+
+    public static void roverStats(Configuration c) {
+        final String CAT = "Rover Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Rovers, including variants.\n");
+        roverHP = createConfigDouble(c, CAT, "Normal HP", "Default: 5", 5);
+        roverUraniumHP = createConfigDouble(c, CAT, "Uranium Variant HP", "Default: 8", 8);
+
+        roverDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3.5", 3.5);
+        roverUraniumDEF = createConfigDouble(c, CAT, "Uranium Variant DEF", "Default: 6", 6);
+
+        roverATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
+        roverUraniumATK = createConfigDouble(c, CAT, "Uranium Variant ATK", "Default: 6", 6);
+
+        roverSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.75", 0.75);
+        roverUraniumSPD = createConfigDouble(c, CAT, "Uranium Variant SPD", "Default: 0.75", 0.75);
+
+        roverKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
+        roverUraniumKBR = createConfigDouble(c, CAT, "Uranium Variant KBR", "Default: 0.5", 0.75);
+    }
+
+    public static void myrmurStats(Configuration c) {
+        final String CAT = "Myrmur Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Myrmurs.\n");
+        myrmurHP = createConfigDouble(c, CAT, "Normal HP", "Default: 6", 6);
+        myrmurDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3.5", 3.5);
+        myrmurATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
+        myrmurSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.45", 0.45);
+        myrmurKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.1", 0.1);
     }
 
     public static void warriorStats(Configuration c) {
@@ -52,6 +88,9 @@ public class wyrmStats {
 
         warriorATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
         taintedWarriorATK = createConfigDouble(c, CAT, "Tainted Variant ATK", "Default: 12", 12);
+
+        warriorKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
+        taintedWarriorKBR = createConfigDouble(c, CAT, "Tainted Variant KBR", "Default: 0.5", 0.5);
     }
 
     public static void soldierStats(Configuration c) {
@@ -79,6 +118,20 @@ public class wyrmStats {
         proberATK = createConfigDouble(c, CAT, "Normal ATK", "Only used if probing is disabled. Default: 4", 4);
     }
 
+    public static void workerStats(Configuration c) {
+        final String CAT = "Worker Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Workers.\n");
+        workerHP = createConfigDouble(c, CAT, "Normal HP", "Default: 14", 14);
+
+        workerDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4.5", 4.5);
+
+        workerSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.35", 0.35);
+
+        workerATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2", 2);
+
+        workerKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
+    }
+
     public static void dobberStats(Configuration c) {
         final String CAT = "Dobber Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the dobbers.\n");
@@ -94,7 +147,7 @@ public class wyrmStats {
     public static void wyrmlingStats(Configuration c) {
         final String CAT = "Wyrmling Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the wyrmlings.\n");
-        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 12", 12);
+        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 8", 8);
 
         wyrmlingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 8", 8);
 
@@ -108,6 +161,8 @@ public class wyrmStats {
         visitorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 20", 20);
 
         visitorSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.15", 0.15);
+
+        visitorKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 1.0", 1.0);
     }
 
     public static void strykerfollyStats(Configuration c) {

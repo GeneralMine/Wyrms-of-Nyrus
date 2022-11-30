@@ -6,8 +6,6 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -60,7 +58,6 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         if (Evo.evoEnabled && evoPoints.get(world) >= 300){
             this.DEF = wyrmStats.wyrmlingDEF * 4;
             this.HP = wyrmStats.wyrmlingHP * 4;
@@ -73,11 +70,7 @@ public class EntityWyrmling extends EntityWyrm {
             this.DEF = wyrmStats.wyrmlingDEF;
             this.HP = wyrmStats.wyrmlingHP;
         }
-
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(this.HP,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(this.DEF,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(wyrmStats.wyrmlingSPD);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
+        this.setStats(this.HP,this.DEF,0F,wyrmStats.wyrmlingSPD,0F);
     }
 
     @Override
