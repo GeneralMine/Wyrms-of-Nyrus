@@ -55,8 +55,8 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoSoldier)) this.setStatsEvo(wyrmStats.soldierHP,wyrmStats.soldierDEF,wyrmStats.soldierATK,0.5F,0.7F,Evo.minEvoSoldier);
-        else this.setStats(wyrmStats.soldierHP,wyrmStats.soldierDEF,wyrmStats.soldierATK,0.5F,0.7F);
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoSoldier)) this.setStatsEvo(wyrmStats.soldierHP,wyrmStats.soldierDEF,wyrmStats.soldierATK,wyrmStats.soldierSPD,wyrmStats.soldierKBR,Evo.minEvoSoldier);
+        else this.setStats(wyrmStats.soldierHP,wyrmStats.soldierDEF,wyrmStats.soldierATK,wyrmStats.soldierSPD,wyrmStats.soldierKBR);
     }
 
     @Override

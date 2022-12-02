@@ -1,9 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -54,7 +56,8 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.infectoidSoldierHP,wyrmStats.infectoidSoldierDEF,wyrmStats.infectoidSoldierATK,0.52F,0.8F);
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoSoldierInf)) this.setStatsEvo(wyrmStats.infectoidSoldierHP,wyrmStats.infectoidSoldierDEF,wyrmStats.infectoidSoldierATK,wyrmStats.infectoidSoldierSPD,wyrmStats.infectoidSoldierKBR,Evo.minEvoSoldierInf);
+        else this.setStats(wyrmStats.infectoidSoldierHP,wyrmStats.infectoidSoldierDEF,wyrmStats.infectoidSoldierATK,wyrmStats.infectoidSoldierSPD,wyrmStats.infectoidSoldierKBR);
     }
 
     @Override

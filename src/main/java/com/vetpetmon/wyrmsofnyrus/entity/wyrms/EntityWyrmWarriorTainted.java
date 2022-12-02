@@ -5,9 +5,11 @@ import com.hbm.lib.ModDamageSource;
 import com.hbm.potion.HbmPotion;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMoveRandom;
@@ -55,7 +57,8 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.taintedWarriorHP,wyrmStats.taintedWarriorDEF,wyrmStats.taintedWarriorATK,0.45F,wyrmStats.taintedWarriorKBR);
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWarriorTainted)) this.setStatsEvo(wyrmStats.taintedWarriorHP,wyrmStats.taintedWarriorDEF,wyrmStats.taintedWarriorATK,wyrmStats.taintedWarriorSPD,wyrmStats.taintedWarriorKBR, Evo.minEvoWarriorTainted);
+        else this.setStats(wyrmStats.taintedWarriorHP,wyrmStats.taintedWarriorDEF,wyrmStats.taintedWarriorATK,wyrmStats.taintedWarriorSPD,wyrmStats.taintedWarriorKBR);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
     }
 

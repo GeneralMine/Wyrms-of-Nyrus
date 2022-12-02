@@ -13,10 +13,13 @@ public class wyrmStats {
     public static float warriorDEF, taintedWarriorDEF;
     public static float warriorATK, taintedWarriorATK;
     public static float warriorKBR, taintedWarriorKBR;
+    public static float warriorSPD, taintedWarriorSPD;
 
     public static float soldierHP, infectoidSoldierHP;
     public static float soldierDEF, infectoidSoldierDEF;
     public static float soldierATK, infectoidSoldierATK;
+    public static float soldierSPD, infectoidSoldierSPD;
+    public static float soldierKBR, infectoidSoldierKBR;
     public static float roverHP, roverDEF, roverATK, roverSPD, roverKBR;
     public static float roverUraniumHP, roverUraniumDEF, roverUraniumATK, roverUraniumSPD, roverUraniumKBR;
     public static float myrmurHP, myrmurDEF, myrmurATK, myrmurSPD, myrmurKBR;
@@ -99,6 +102,9 @@ public class wyrmStats {
         warriorATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
         taintedWarriorATK = createConfigDouble(c, CAT, "Tainted Variant ATK", "Default: 12", 12);
 
+        warriorSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.45", 0.45);
+        taintedWarriorSPD = createConfigDouble(c, CAT, "Tainted Variant SPD", "Default: 0.45", 0.45);
+
         warriorKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
         taintedWarriorKBR = createConfigDouble(c, CAT, "Tainted Variant KBR", "Default: 0.5", 0.5);
     }
@@ -114,6 +120,12 @@ public class wyrmStats {
 
         soldierATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
         infectoidSoldierATK = createConfigDouble(c, CAT, "Infectoid Variant ATK", "Default: 9", 9);
+
+        soldierSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.5", 0.5);
+        infectoidSoldierSPD = createConfigDouble(c, CAT, "Infectoid Variant SPD", "Default: 0.52", 0.52);
+
+        soldierKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.7", 0.7);
+        infectoidSoldierKBR = createConfigDouble(c, CAT, "Infectoid Variant KBR", "Default: 0.52", 0.8);
     }
 
     public static void proberStats(Configuration c) {

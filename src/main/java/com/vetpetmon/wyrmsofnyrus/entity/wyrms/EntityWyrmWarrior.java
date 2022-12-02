@@ -2,9 +2,11 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMoveRandom;
@@ -49,7 +51,8 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.warriorHP,wyrmStats.warriorDEF,wyrmStats.warriorATK,0.45F,wyrmStats.warriorKBR);
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWarrior)) this.setStatsEvo(wyrmStats.warriorHP,wyrmStats.warriorDEF,wyrmStats.warriorATK,wyrmStats.warriorSPD,wyrmStats.warriorKBR, Evo.minEvoWarrior);
+        else this.setStats(wyrmStats.warriorHP,wyrmStats.warriorDEF,wyrmStats.warriorATK,wyrmStats.warriorSPD,wyrmStats.warriorKBR);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
     }
 

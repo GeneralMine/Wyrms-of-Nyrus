@@ -14,7 +14,7 @@ public class Evo {
     public static float evoFactor, evoPowerHP, evoPowerDEF, evoPowerATK;
     public static int customEvoMinCap, evoPointsPerLevel;
 
-    public static int minEvoCreepwyrm, minEvoWyrmling, minEvoWorker, minEvoSoldier;
+    public static int minEvoCreepwyrm, minEvoWyrmling, minEvoWorker, minEvoSoldier, minEvoSoldierInf, minEvoWarrior, minEvoWarriorTainted;
 
 
     public static void loadFromConfig(Configuration config) {
@@ -51,5 +51,8 @@ public class Evo {
         minEvoWyrmling = createConfigInt(config, CATEGORYTWO, "Wyrmling", "Default: 2", 2);
         minEvoWorker = createConfigInt(config, CATEGORYTWO, "Worker", "Default: 3", 3);
         minEvoSoldier = createConfigInt(config, CATEGORYTWO, "Soldier", "Default: 4", 4);
+        minEvoSoldierInf = createConfigInt(config, CATEGORYTWO, "Soldier (Infectoid)", "Default: 10", 10);
+        minEvoWarrior = createConfigInt(config, CATEGORYTWO, "Warrior", "Default: 5", 5);
+        minEvoWarriorTainted = createConfigInt(config, CATEGORYTWO, "Warrior (Tainted)", "Default: 12", 12);
     }
 }
