@@ -66,7 +66,7 @@ public class wyrmStats {
         roverUraniumSPD = createConfigDouble(c, CAT, "Uranium Variant SPD", "Default: 0.75", 0.75);
 
         roverKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
-        roverUraniumKBR = createConfigDouble(c, CAT, "Uranium Variant KBR", "Default: 0.5", 0.75);
+        roverUraniumKBR = createConfigDouble(c, CAT, "Uranium Variant KBR", "Default: 0.5", 0.5);
     }
 
     public static void CreepwyrmStats(Configuration c) {
