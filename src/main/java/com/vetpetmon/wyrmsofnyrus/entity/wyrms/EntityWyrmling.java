@@ -25,8 +25,6 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 public class EntityWyrmling extends EntityWyrm {
     private int timeUntilGrowth;
     private boolean hasGrown;
-    private float HP;
-    private float DEF;
 
     public EntityWyrmling(World world) {
         super(world);
@@ -38,8 +36,6 @@ public class EntityWyrmling extends EntityWyrm {
         enablePersistence();
         setNoAI(false);
         this.timeUntilGrowth = this.rand.nextInt(6000) + 2000;
-        this.HP = wyrmStats.wyrmlingHP;
-        this.DEF = wyrmStats.wyrmlingDEF;
     }
 
     @Override
@@ -58,19 +54,8 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && evoPoints.get(world) >= 300){
-            this.DEF = wyrmStats.wyrmlingDEF * 4;
-            this.HP = wyrmStats.wyrmlingHP * 4;
-        }
-        else if (Evo.evoEnabled && evoPoints.get(world) >= 150){
-            this.DEF = wyrmStats.wyrmlingDEF * 2;
-            this.HP = wyrmStats.wyrmlingHP * 2;
-        }
-        else {
-            this.DEF = wyrmStats.wyrmlingDEF;
-            this.HP = wyrmStats.wyrmlingHP;
-        }
-        this.setStats(this.HP,this.DEF,0F,wyrmStats.wyrmlingSPD,0F);
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWyrmling)) this.setStatsEvo(wyrmStats.wyrmlingHP,wyrmStats.wyrmlingDEF,0F,wyrmStats.wyrmlingSPD,0F, Evo.minEvoWyrmling);
+        else this.setStats(wyrmStats.wyrmlingHP,wyrmStats.wyrmlingDEF,0F,wyrmStats.wyrmlingSPD,0F);
     }
 
     @Override

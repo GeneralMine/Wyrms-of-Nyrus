@@ -24,6 +24,7 @@ public class wyrmStats {
     public static float dobberHP, dobberDEF, dobberATK, dobberSPD;
     public static float workerHP, workerDEF, workerATK, workerSPD, workerKBR;
     public static float wyrmlingHP, wyrmlingDEF, wyrmlingSPD;
+    public static float creepwyrmHP, creepwyrmDEF, creepwyrmATK;
     public static float visitorHP, visitorDEF, visitorSPD, visitorKBR;
     public static float strykerfollyHP, strykerfollyATK, strykerfollyDEF, strykerfollySPD, strykerfollyKBR, strykerfollyPointsTillAscension;
     public static float strykerfollyAscendedHP, strykerfollyAscendedATK, strykerfollyAscendedDEF, strykerfollyAscendedSPD, strykerfollyAscendedKBR;
@@ -31,6 +32,7 @@ public class wyrmStats {
     public static void loadFromConfig(Configuration c) {
         startFile(c);
         roverStats(c);
+        CreepwyrmStats(c);
         myrmurStats(c);
         warriorStats(c);
         soldierStats(c);
@@ -65,6 +67,14 @@ public class wyrmStats {
 
         roverKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
         roverUraniumKBR = createConfigDouble(c, CAT, "Uranium Variant KBR", "Default: 0.5", 0.75);
+    }
+
+    public static void CreepwyrmStats(Configuration c) {
+        final String CAT = "Creepwyrm Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Creepwyrms.\n");
+        creepwyrmHP = createConfigDouble(c, CAT, "Normal HP", "Default: 55", 55);
+        creepwyrmDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 10", 10);
+        creepwyrmATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2.5", 2.5);
     }
 
     public static void myrmurStats(Configuration c) {
@@ -147,7 +157,7 @@ public class wyrmStats {
     public static void wyrmlingStats(Configuration c) {
         final String CAT = "Wyrmling Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the wyrmlings.\n");
-        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 8", 8);
+        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 4", 4);
 
         wyrmlingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 8", 8);
 

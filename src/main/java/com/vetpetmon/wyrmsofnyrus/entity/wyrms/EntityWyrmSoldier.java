@@ -1,9 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -53,7 +55,8 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.soldierHP,wyrmStats.soldierDEF,wyrmStats.soldierATK,0.5F,0.7F);
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoSoldier)) this.setStatsEvo(wyrmStats.soldierHP,wyrmStats.soldierDEF,wyrmStats.soldierATK,0.5F,0.7F,Evo.minEvoSoldier);
+        else this.setStats(wyrmStats.soldierHP,wyrmStats.soldierDEF,wyrmStats.soldierATK,0.5F,0.7F);
     }
 
     @Override

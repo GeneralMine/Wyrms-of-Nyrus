@@ -45,8 +45,7 @@ public class EntityWyrmWorker extends EntityWyrm {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        if (((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing))
-                || (Evo.evoEnabled && evoPoints.get(world) >= 150)) {
+        if (((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing))) {
             afterPlayers();
             this.targetTasks.addTask(4, new EntityAIHurtByTarget(this, true));
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
@@ -64,7 +63,8 @@ public class EntityWyrmWorker extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.workerHP,wyrmStats.workerDEF,wyrmStats.workerATK, wyrmStats.workerSPD,wyrmStats.workerKBR);
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWorker)) this.setStatsEvo(wyrmStats.workerHP,wyrmStats.workerDEF,wyrmStats.workerATK, wyrmStats.workerSPD,wyrmStats.workerKBR,Evo.minEvoWorker);
+        else this.setStats(wyrmStats.workerHP,wyrmStats.workerDEF,wyrmStats.workerATK, wyrmStats.workerSPD,wyrmStats.workerKBR);
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {

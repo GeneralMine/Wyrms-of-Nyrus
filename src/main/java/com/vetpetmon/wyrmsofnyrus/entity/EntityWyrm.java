@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
@@ -91,16 +92,26 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
      */
     public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
 
-    public float genDifficulty(World world) {
+    public float genDifficulty() {
         exdif = setExdif();
-        return (float) ((getInvasionDifficulty() + evoPoints.evoMilestone(world)) * exdif);
+        return (float) ((getInvasionDifficulty()) * exdif);
     }
 
     public void setStats(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR) {
-        float diff = genDifficulty(world);
+        float diff = genDifficulty();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff*1.5));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff*1.2));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
+    }
+    public void setStatsEvo(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR, int minLevel) {
+        float diff = genDifficulty();
+        int level = ((evoPoints.getLevel() - minLevel)+1);
+        double HP = (entityHealth * Radiogenetics.wyrmVitality), DEF = (entityArmor * Radiogenetics.wyrmResistance), ATK = (entityDamage * Radiogenetics.wyrmStrength);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health((HP+(HP*(Evo.evoPowerHP*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor((DEF+ (DEF*(Evo.evoPowerDEF*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage((ATK+(ATK*(Evo.evoPowerATK*level))), diff));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
     }
