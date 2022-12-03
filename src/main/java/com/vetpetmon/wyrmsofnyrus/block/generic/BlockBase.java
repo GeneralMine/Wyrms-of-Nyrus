@@ -1,5 +1,6 @@
-package com.vetpetmon.wyrmsofnyrus.block;
+package com.vetpetmon.wyrmsofnyrus.block.generic;
 
+import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;

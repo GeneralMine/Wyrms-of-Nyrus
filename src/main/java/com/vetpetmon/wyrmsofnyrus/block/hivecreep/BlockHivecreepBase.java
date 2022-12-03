@@ -1,5 +1,7 @@
-package com.vetpetmon.wyrmsofnyrus.block;
+package com.vetpetmon.wyrmsofnyrus.block.hivecreep;
 
+import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
+import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;

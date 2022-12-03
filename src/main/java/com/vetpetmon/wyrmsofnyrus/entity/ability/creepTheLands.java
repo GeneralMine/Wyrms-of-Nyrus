@@ -1,14 +1,13 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
 import com.vetpetmon.wyrmsofnyrus.block.*;
-import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static com.vetpetmon.wyrmsofnyrus.block.creepStaged.STAGE;
+import static com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged.STAGE;
 import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.*;
 
 public class creepTheLands {

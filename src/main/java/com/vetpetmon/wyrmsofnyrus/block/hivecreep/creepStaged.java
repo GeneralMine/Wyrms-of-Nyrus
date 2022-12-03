@@ -1,5 +1,8 @@
-package com.vetpetmon.wyrmsofnyrus.block;
+package com.vetpetmon.wyrmsofnyrus.block.hivecreep;
 
+import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
+import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepBase;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;

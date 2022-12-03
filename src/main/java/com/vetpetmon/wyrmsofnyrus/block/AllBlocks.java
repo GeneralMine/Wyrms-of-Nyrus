@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.block.generic.*;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -55,6 +55,8 @@ subtitles.wyrmHiss=Hissing
 subtitles.wyrmRoar=Deep roar
 subtitles.wyrmlingClicks=High-pitched hisses
 subtitles.prober=Buzzing
+subtitles.wyrmfollygrowl=Wyrmfolly growls
+subtitles.wyrmfollyscreech=Wyrmfolly screeching
 
 tooltip.won.tile.metalcombpanelmimic=Fake metalcomb panels that mimic the properties of real metalcomb panels. Wyrms shouldn't be able to tell the difference... Right?
 tooltip.won.tile.wyrm_lights_orange=Not to be mistaken with the eggs, glowbulbs are hot to the touch. Handle with care.
