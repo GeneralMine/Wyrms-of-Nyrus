@@ -1,6 +1,5 @@
 package com.vetpetmon.wyrmsofnyrus;
 
-import com.vetpetmon.wyrmsofnyrus.invasion.HiveName;
 import com.vetpetmon.wyrmsofnyrus.synapselib.optiMath;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -15,7 +14,6 @@ import net.minecraft.client.Minecraft;
 
 public class wyrmVariables {
     public static String wyrmInvasionStatus = "";
-    public static String hiveName = "";
     public static int wyrmEvo;
 
     public static class MapVariables extends WorldSavedData {
@@ -62,7 +60,6 @@ public class wyrmVariables {
         public double wyrmInvasionPoints = 0;
         public double wyrmInvasionDifficulty = 1;
         public int wyrmEvo = 0;
-        public static String hiveName = "";
         public boolean invasionStarted = false;
         public WorldVariables() {
             super(DATA_NAME);
@@ -77,7 +74,6 @@ public class wyrmVariables {
             wyrmEvo                     =   nbt.getInteger("wyrmEvo");
             wyrmInvasionPoints			= 	optiMath.arcForm(nbt.getDouble("wyrmInvasionPoints"));
             wyrmInvasionDifficulty		= 	nbt.getDouble("wyrmInvasionDifficulty");
-            hiveName		            = 	nbt.getString("hiveName");
             invasionStarted		        = 	nbt.getBoolean("invasionStarted");
         }
 
@@ -87,10 +83,6 @@ public class wyrmVariables {
             nbt.setBoolean("invasionStarted", invasionStarted);
             nbt.setDouble("wyrmInvasionPoints", wyrmInvasionPoints);
             nbt.setDouble("wyrmInvasionDifficulty", optiMath.arcForm(wyrmInvasionDifficulty));
-            nbt.setString("hiveName", hiveName);
-            if (hiveName == ""){
-                hiveName = HiveName.HiveName();
-            }
             return nbt;
         }
 

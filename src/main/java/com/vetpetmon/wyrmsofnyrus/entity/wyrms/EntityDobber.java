@@ -6,12 +6,9 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,7 +17,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -116,14 +112,9 @@ public class EntityDobber extends EntityWyrmFlying implements IAnimatable {
 
     @Override
     protected void applyEntityAttributes() {
-        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         super.applyEntityAttributes();
+        this.setStats(wyrmStats.dobberHP,wyrmStats.dobberDEF,wyrmStats.dobberATK,wyrmStats.dobberSPD,1.0F);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(wyrmStats.dobberSPD);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(wyrmStats.dobberATK,difficulty));
-
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(wyrmStats.dobberDEF,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(wyrmStats.dobberHP,difficulty));
     }
 
     @Override
@@ -144,7 +135,7 @@ public class EntityDobber extends EntityWyrmFlying implements IAnimatable {
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(ItemCreepshard.block, 1).getItem();
+        return new ItemStack(AllItems.creepshard, 1).getItem();
     }
 
     @Override

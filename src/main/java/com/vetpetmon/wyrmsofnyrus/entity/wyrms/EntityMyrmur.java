@@ -2,12 +2,10 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -52,18 +50,13 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
 
     @Override
     protected void applyEntityAttributes() {
-        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(6,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(3,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.1D);
+        this.setStats(wyrmStats.myrmurHP,wyrmStats.myrmurDEF,wyrmStats.myrmurATK, wyrmStats.myrmurSPD,wyrmStats.myrmurKBR);
     }
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(wyrmArmorFragment.block, 2).getItem();
+        return new ItemStack(AllItems.wyrmarmorfrag, 2).getItem();
     }
 
     @Override

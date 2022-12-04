@@ -5,10 +5,11 @@ import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.voidwyrm;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.util.DamageSource;
@@ -24,8 +25,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import com.vetpetmon.wyrmsofnyrus.entity.ai.voidwyrm;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
@@ -52,10 +51,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(wyrmStats.visitorDEF);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(wyrmStats.visitorSPD);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(wyrmStats.visitorHP);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0D);
+        this.setStats(wyrmStats.visitorHP,wyrmStats.visitorDEF,0.0F,wyrmStats.visitorSPD,wyrmStats.visitorKBR);
     }
     @Override
     protected void initEntityAI() {
@@ -68,6 +64,18 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         super.onUpdate();
         this.setNoGravity(true);
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+    }
+
+    // Both methods are necessary for the boss healthbar to show up. This does NOT wait for the player to attack the Visitor.
+    @Override
+    public void addTrackingPlayer(EntityPlayerMP player) {
+        super.addTrackingPlayer(player);
+        bossInfo.addPlayer(player);
+    }
+    @Override
+    public void removeTrackingPlayer(EntityPlayerMP player) {
+        super.removeTrackingPlayer(player);
+        bossInfo.removePlayer(player);
     }
 
     @Override

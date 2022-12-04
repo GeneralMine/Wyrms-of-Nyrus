@@ -1,15 +1,14 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.item.ItemCreepshard;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -53,17 +52,13 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
 
     @Override
     protected void applyEntityAttributes() {
-        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.75D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(4,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(4,difficulty));
+        this.setStats(wyrmStats.roverHP,wyrmStats.roverDEF,wyrmStats.roverATK,wyrmStats.roverSPD,wyrmStats.roverKBR);
     }
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(ItemCreepshard.block, 3).getItem();
+        return new ItemStack(AllItems.creepshard, 3).getItem();
     }
 
     @Override

@@ -1,35 +1,22 @@
 
 package com.vetpetmon.wyrmsofnyrus.creativetab;
 
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.fml.relauncher.Side;
-
-import net.minecraft.item.ItemStack;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 
-import com.vetpetmon.wyrmsofnyrus.item.ItemWyrmico;
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
+import javax.annotation.Nonnull;
 
-@AutoReg.ModElement.Tag
-public class TabWyrms extends AutoReg.ModElement {
-	public TabWyrms(AutoReg instance) {
-		super(instance, 5);
+
+public class TabWyrms extends CreativeTabs {
+
+	public TabWyrms(int index, String label) {
+		super(index, label);
 	}
 
 	@Override
-	public void initElements() {
-		tab = new CreativeTabs("tabwyrms") {
-			@SideOnly(Side.CLIENT)
-			@Override
-			public ItemStack getTabIconItem() {
-				return new ItemStack(ItemWyrmico.block, 1);
-			}
-
-			@SideOnly(Side.CLIENT)
-			public boolean hasSearchBar() {
-				return false;
-			}
-		};
+	@Nonnull
+	public ItemStack getTabIconItem() {
+		return new ItemStack(AllItems.wyrmico, 1);
 	}
-	public static CreativeTabs tab;
 }

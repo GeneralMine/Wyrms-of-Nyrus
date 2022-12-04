@@ -1,16 +1,14 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.item.Item;
@@ -57,18 +55,14 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
 
     @Override
     protected void applyEntityAttributes() {
-        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(wyrmStats.infectoidSoldierDEF,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.52D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(wyrmStats.infectoidSoldierHP,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(wyrmStats.infectoidSoldierATK,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoSoldierInf)) this.setStatsEvo(wyrmStats.infectoidSoldierHP,wyrmStats.infectoidSoldierDEF,wyrmStats.infectoidSoldierATK,wyrmStats.infectoidSoldierSPD,wyrmStats.infectoidSoldierKBR,Evo.minEvoSoldierInf);
+        else this.setStats(wyrmStats.infectoidSoldierHP,wyrmStats.infectoidSoldierDEF,wyrmStats.infectoidSoldierATK,wyrmStats.infectoidSoldierSPD,wyrmStats.infectoidSoldierKBR);
     }
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(wyrmArmorFragment.block, 3).getItem();
+        return new ItemStack(AllItems.wyrmarmorfrag, 3).getItem();
     }
 
     @Override

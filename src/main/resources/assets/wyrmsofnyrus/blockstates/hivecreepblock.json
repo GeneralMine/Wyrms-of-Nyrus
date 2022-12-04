@@ -29,6 +29,66 @@
         "model": "wyrmsofnyrus:hivecreepblock3",
         "x": 180
       }
+    ],
+    "active=0": [
+      {
+        "model": "wyrmsofnyrus:hivecreepblock"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock",
+        "x": 180
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock1"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock1",
+        "x": 180
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock2"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock2",
+        "x": 180
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock3"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock3",
+        "x": 180
+      }
+    ],
+    "active=1": [
+      {
+        "model": "wyrmsofnyrus:hivecreepblock"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock",
+        "x": 180
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock1"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock1",
+        "x": 180
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock2"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock2",
+        "x": 180
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock3"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreepblock3",
+        "x": 180
+      }
     ]
   }
 }

@@ -2,17 +2,17 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.*;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMoveRandom;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -51,12 +51,9 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWarrior)) this.setStatsEvo(wyrmStats.warriorHP,wyrmStats.warriorDEF,wyrmStats.warriorATK,wyrmStats.warriorSPD,wyrmStats.warriorKBR, Evo.minEvoWarrior);
+        else this.setStats(wyrmStats.warriorHP,wyrmStats.warriorDEF,wyrmStats.warriorATK,wyrmStats.warriorSPD,wyrmStats.warriorKBR);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(wyrmStats.warriorATK,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(wyrmStats.warriorDEF,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(wyrmStats.warriorHP,difficulty));
     }
 
     @Override
@@ -92,7 +89,7 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(wyrmArmorFragment.block, 2).getItem();
+        return new ItemStack(AllItems.wyrmarmorfrag, 2).getItem();
     }
 
     @Override

@@ -4,13 +4,12 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.item.ItemMetalcombArray;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.synapselib.rangeCheck;
 import net.minecraft.block.Block;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,8 +45,7 @@ public class EntityWyrmWorker extends EntityWyrm {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        if (((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing))
-                || (Evo.evoEnabled && evoPoints.get(world) >= 150)) {
+        if (((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing))) {
             afterPlayers();
             this.targetTasks.addTask(4, new EntityAIHurtByTarget(this, true));
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
@@ -64,12 +62,9 @@ public class EntityWyrmWorker extends EntityWyrm {
 
     @Override
     protected void applyEntityAttributes() {
-        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(2.0d,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWorker)) this.setStatsEvo(wyrmStats.workerHP,wyrmStats.workerDEF,wyrmStats.workerATK, wyrmStats.workerSPD,wyrmStats.workerKBR,Evo.minEvoWorker);
+        else this.setStats(wyrmStats.workerHP,wyrmStats.workerDEF,wyrmStats.workerATK, wyrmStats.workerSPD,wyrmStats.workerKBR);
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -112,7 +107,7 @@ public class EntityWyrmWorker extends EntityWyrm {
             // Check if there's a hopper in range. If there is at least one in range, go to the "else" condition and just make funny noise instead.
             if (!rangeCheck.blocks(world,getPosition(),4,"minecraft:hopper")) {
                 this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-                this.dropItem(ItemMetalcombArray.block, 1);
+                this.dropItem(AllItems.metalcomb_array, 1);
             }
             else {
                 this.playSound(SoundRegistry.wyrmHissTwo, 1.0F, 0.25F);

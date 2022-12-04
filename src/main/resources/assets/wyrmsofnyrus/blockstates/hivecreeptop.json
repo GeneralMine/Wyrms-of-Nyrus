@@ -7,6 +7,22 @@
       {
         "model": "wyrmsofnyrus:hivecreeptop2"
       }
+    ],
+    "active=0": [
+      {
+        "model": "wyrmsofnyrus:hivecreeptop"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreeptop2"
+      }
+    ],
+    "active=1": [
+      {
+        "model": "wyrmsofnyrus:hivecreeptop"
+      },
+      {
+        "model": "wyrmsofnyrus:hivecreeptop2"
+      }
     ]
   }
 }

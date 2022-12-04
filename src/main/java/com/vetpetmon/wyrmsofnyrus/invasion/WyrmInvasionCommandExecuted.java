@@ -1,24 +1,17 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import net.minecraft.world.World;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.server.MinecraftServer;
-
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
-
-@AutoReg.ModElement.Tag
-public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
-	public WyrmInvasionCommandExecuted(AutoReg instance) {
-		super(instance, 15);
-	}
+public class WyrmInvasionCommandExecuted{
 
 	public static void executescript(Map<String, Object> dependencies) {
 		if (Invasion.invasionEnabled) {
@@ -63,11 +56,7 @@ public class WyrmInvasionCommandExecuted extends AutoReg.ModElement {
 				System.out.println("Invasion forced");
 				wyrmVariables.WorldVariables.get(world).syncData(world);
 				{
-					Map<String, Object> $_dependencies = new HashMap<>();
-					$_dependencies.put("x", x);
-					$_dependencies.put("y", y);
-					$_dependencies.put("z", z);
-					VisitorEvent.visitorEvent($_dependencies, true, world);
+					VisitorEvent.visitorEvent(true, world,x,y,z);
 				}
 			} else if ((((new Object() {
 				public String getText() {

@@ -1,33 +1,18 @@
 
 package com.vetpetmon.wyrmsofnyrus.command;
 
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-
-import net.minecraft.world.World;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.entity.Entity;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.command.ICommand;
-
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Arrays;
-import java.util.ArrayList;
-
 import com.vetpetmon.wyrmsofnyrus.invasion.WyrmInvasionCommandExecuted;
-import com.vetpetmon.wyrmsofnyrus.AutoReg;
+import net.minecraft.command.ICommand;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.Entity;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-@AutoReg.ModElement.Tag
-public class CommandWyrmInvasionCommand extends AutoReg.ModElement {
-	public CommandWyrmInvasionCommand(AutoReg instance) {
-		super(instance, 14);
-	}
+import java.util.*;
 
-	@Override
-	public void serverLoad(FMLServerStartingEvent event) {
-		event.registerServerCommand(new CommandHandler());
+public class CommandWyrmInvasionCommand {
+	public CommandWyrmInvasionCommand() {
 	}
 	public static class CommandHandler implements ICommand {
 		@Override

@@ -1,20 +1,15 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
 
-import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
+import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.createConfigBool;
+import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.createConfigInt;
 
 public class Debug {
-    @Config.Comment("Enable or disable console logging")
-    @Config.Name("Enable Debugging")
+
     public static boolean LOGGINGENABLED;
 
-    @Config.Comment("Effective range of 1 to 10, changes how much gets outputted to the log if logging is enabled.")
-    @Config.Name("Debug level")
-    @Config.RangeInt(min=1, max=10)
-    @Config.SlidingOption()
     public static int DEBUGLEVEL;
 
     public static void loadFromConfig(Configuration config) {

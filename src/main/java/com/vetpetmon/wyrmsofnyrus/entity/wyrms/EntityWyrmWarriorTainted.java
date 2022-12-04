@@ -5,18 +5,19 @@ import com.hbm.lib.ModDamageSource;
 import com.hbm.potion.HbmPotion;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.item.wyrmArmorFragment;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.*;
+import com.vetpetmon.wyrmsofnyrus.item.AllItems;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
+import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMoveRandom;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
@@ -56,13 +57,9 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        float difficulty = (float) (getInvasionDifficulty() + evoPoints.evoMilestone(world));
+        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWarriorTainted)) this.setStatsEvo(wyrmStats.taintedWarriorHP,wyrmStats.taintedWarriorDEF,wyrmStats.taintedWarriorATK,wyrmStats.taintedWarriorSPD,wyrmStats.taintedWarriorKBR, Evo.minEvoWarriorTainted);
+        else this.setStats(wyrmStats.taintedWarriorHP,wyrmStats.taintedWarriorDEF,wyrmStats.taintedWarriorATK,wyrmStats.taintedWarriorSPD,wyrmStats.taintedWarriorKBR);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.45D);
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(wyrmStats.taintedWarriorATK,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(wyrmStats.taintedWarriorDEF,difficulty));
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(wyrmStats.taintedWarriorHP,difficulty));
     }
 
     @Override
@@ -107,7 +104,7 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
 
     @Override
     protected Item getDropItem() {
-        return new ItemStack(wyrmArmorFragment.block, 4).getItem();
+        return new ItemStack(AllItems.wyrmarmorfrag, 4).getItem();
     }
 
     @Override
