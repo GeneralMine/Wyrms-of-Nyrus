@@ -28,36 +28,20 @@ public class ConfigBase {
             debug = createDirectory("debug", ConfigDirectory),
             evo = createDirectory("evolution", ConfigDirectory),
             invasion = createDirectory("invasion", ConfigDirectory),
-            clientside = createDirectory("client", ConfigDirectory),
-            compact = createDirectory("wyrms", (proxy.getDataDir().getPath() + "/config/") );
+            clientside = createDirectory("client", ConfigDirectory);
     private static final Configuration[] configs = {general, wyrms, debug, evo, invasion, clientside};
 
-    // Generates one config file with every config option inside it.
-    // Useful for sharing config files on sites like Discord without getting "SUS" slapped on their heads.
-    public static void compactConfigGen() {
-        AI.loadFromConfig(compact);
-        Radiogenetics.loadFromConfig(compact);
-        wyrmStats.loadFromConfig(compact);
-        Debug.loadFromConfig(compact);
-        Evo.loadFromConfig(compact);
-        Invasion.loadFromConfig(compact);
-    }
 
     // Specific for WoN.
     public static void reloadConfig() {
 
         for (Configuration i:configs) i.load();
-        if (Client.compactConfig) {
-            compactConfigGen();
-        }
-        else {
-            AI.loadFromConfig(general);
-            Radiogenetics.loadFromConfig(general);
-            wyrmStats.loadFromConfig(wyrms);
-            Debug.loadFromConfig(debug);
-            Evo.loadFromConfig(evo);
-            Invasion.loadFromConfig(invasion);
-        }
+        AI.loadFromConfig(general);
+        Radiogenetics.loadFromConfig(general);
+        wyrmStats.loadFromConfig(wyrms);
+        Debug.loadFromConfig(debug);
+        Evo.loadFromConfig(evo);
+        Invasion.loadFromConfig(invasion);
         Client.loadFromConfig(clientside);
 
         for (Configuration i:configs) i.save();
