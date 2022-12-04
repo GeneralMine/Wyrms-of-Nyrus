@@ -1,12 +1,12 @@
 package com.vetpetmon.wyrmsofnyrus.handlers;
 
-import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.invasion.*;
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionEvent;
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionScheduler;
+import com.vetpetmon.wyrmsofnyrus.invasion.VisitorEvent;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +24,7 @@ public class WoNHandler {
         int y = (int) entity.posY;
         int z = (int) entity.posZ;
         boolean invasionActive = wyrmVariables.WorldVariables.get(world).invasionStarted;
-        if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onPlayerTick was called successfully.");
+        //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onPlayerTick was called successfully.");
 
         // INVASION
         if (Invasion.invasionEnabled && (!entity.world.isRemote && event.phase == TickEvent.Phase.END)) {
@@ -57,7 +57,7 @@ public class WoNHandler {
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         World world = event.world;
-        if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onWorldTick was called successfully.");
+        //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onWorldTick was called successfully.");
         // EVOLUTION
         evoPoints.decay(world);
     }
