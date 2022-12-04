@@ -25,7 +25,6 @@ public class WoNHandler {
         int z = (int) entity.posZ;
         boolean invasionActive = wyrmVariables.WorldVariables.get(world).invasionStarted;
         //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onPlayerTick was called successfully.");
-
         // INVASION
         if (Invasion.invasionEnabled && (!entity.world.isRemote && event.phase == TickEvent.Phase.END)) {
             if (!invasionActive && Invasion.invasionStartsNaturally) {

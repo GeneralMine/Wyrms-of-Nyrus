@@ -70,6 +70,7 @@ public class CommandWyrmsTest{
 					Map<String, Object> $_dependencies = new HashMap<>();
 					$_dependencies.put("cmdparams", cmdparams);
 					$_dependencies.put("world", world);
+					$_dependencies.put("entity", entity);
 					WyrmsTestCommandExecuted.executescript($_dependencies);
 				}
 			}
