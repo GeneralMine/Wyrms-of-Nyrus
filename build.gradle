@@ -97,7 +97,7 @@ dependencies {
     //compile 'HBM-NTM'
 
 	implementation fg.deobf('software.bernie.geckolib:forge-1.12.2-geckolib:3.0.21')
-    implementation fg.deobf('curse.maven:hbms-nuclear-tech-mod-reloaded-435883:3835843')
+    implementation fg.deobf('curse.maven:hbms-nuclear-tech-mod-reloaded-435883:4120696')
 
 	//implementation fg.deobf('mezz.jei:jei_1.12.2:4.16.1.302')
 
