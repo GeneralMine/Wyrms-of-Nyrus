@@ -56,11 +56,7 @@ public class WyrmInvasionCommandExecuted{
 				System.out.println("Invasion forced");
 				wyrmVariables.WorldVariables.get(world).syncData(world);
 				{
-					Map<String, Object> $_dependencies = new HashMap<>();
-					$_dependencies.put("x", x);
-					$_dependencies.put("y", y);
-					$_dependencies.put("z", z);
-					VisitorEvent.visitorEvent($_dependencies, true, world);
+					VisitorEvent.visitorEvent(true, world,x,y,z);
 				}
 			} else if ((((new Object() {
 				public String getText() {

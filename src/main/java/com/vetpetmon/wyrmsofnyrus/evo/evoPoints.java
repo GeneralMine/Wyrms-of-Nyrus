@@ -6,8 +6,6 @@ import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 /**
  * A collection of functions used to mess with invasion points.
@@ -88,11 +86,5 @@ public class evoPoints{
      */
     private static void sync(World w) {
         wyrmVariables.WorldVariables.get(w).syncData(w);
-    }
-
-    @SubscribeEvent
-    public void onWorldTick(TickEvent.WorldTickEvent event) {
-        World world = event.world;
-        decay(world);
     }
 }

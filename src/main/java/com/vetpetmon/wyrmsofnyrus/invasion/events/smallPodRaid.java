@@ -11,10 +11,20 @@ import net.minecraft.world.World;
 import java.util.Map;
 
 public class smallPodRaid {
+    @Deprecated
     public static void Do(Map<String, Object> e){
         int x = (int) e.get("x");
         int z = (int) e.get("z");
         World world = (World) e.get("world");
+        Entity entityToSpawn = new EntityHexePod(world);
+        if (!world.isRemote) {
+            entityToSpawn.setLocationAndAngles((x + (RNG.PMRange(Invasion.maxEventDistance))), 280, (z + (RNG.PMRange(Invasion.maxEventDistance))), world.rand.nextFloat() * 360F,
+                    0.0F);
+            world.spawnEntity(entityToSpawn);
+        }
+        if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 2) wyrmsofnyrus.logger.info("A small hexepod was spawned.");
+    }
+    public static void callEvent(int x, int z, World world){
         Entity entityToSpawn = new EntityHexePod(world);
         if (!world.isRemote) {
             entityToSpawn.setLocationAndAngles((x + (RNG.PMRange(Invasion.maxEventDistance))), 280, (z + (RNG.PMRange(Invasion.maxEventDistance))), world.rand.nextFloat() * 360F,
