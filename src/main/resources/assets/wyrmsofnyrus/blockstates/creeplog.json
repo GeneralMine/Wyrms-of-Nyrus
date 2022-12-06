@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":  { "model": "wyrmsofnyrus:creeplog" },
+    "axis=z":   { "model": "wyrmsofnyrus:creeplog", "x": 90 },
+    "axis=x":   { "model": "wyrmsofnyrus:creeplog", "x": 90, "y": 90 },
+    "axis=none": { "model": "wyrmsofnyrus:creeplog" }
+  }
+}
