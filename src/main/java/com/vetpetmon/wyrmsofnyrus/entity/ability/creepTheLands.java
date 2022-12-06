@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepPillar;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStagedGrass;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
@@ -26,7 +27,7 @@ public class creepTheLands {
                 world.setBlockState(lookingBlock, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);
                 addPoints(world);
             }
-            else if ((blockLooking instanceof BlockLog) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(lookingBlock, AllBlocks.creeplog.getDefaultState(), 3);addPoints(world);} //MMD very helpful, thank you.
+            else if ((blockLooking instanceof BlockLog)|| (blockLooking == Block.getBlockFromName("minecraft:log")) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(lookingBlock, AllBlocks.creeplog.getDefaultState().withProperty(BlockHivecreepPillar.ACTIVE,0), 3);addPoints(world);} //MMD very helpful, thank you.
             else if (matLookingBlock(lookingBlock, Material.ROCK, world)) {world.setBlockState(lookingBlock, AllBlocks.creepedstone.getDefaultState().withProperty(creepStaged.STAGE,6), 3);addPoints(world);}
             else if ((matLookingBlock(lookingBlock, Material.GROUND, world))) {
                 world.setBlockState(lookingBlock, AllBlocks.creepeddirt.getDefaultState().withProperty(creepStaged.STAGE,6), 3);

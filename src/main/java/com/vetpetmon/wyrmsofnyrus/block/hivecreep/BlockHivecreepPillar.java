@@ -3,22 +3,27 @@ package com.vetpetmon.wyrmsofnyrus.block.hivecreep;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.synapselib.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockRotatedPillar;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
-import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.addPoints;
-import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.creepspreadRules;
-
 public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasModel {
+    // Going to need something hacky in order to fix this oh no
+    public static final PropertyInteger ACTIVE = PropertyInteger.create("active", 0, 1);
 
     public BlockHivecreepPillar(String name, float hardness, float blastresist) {
         super(BlockMaterials.CREEP);
@@ -42,7 +47,22 @@ public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasMode
         wyrmsofnyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
+    @Override
+    protected BlockStateContainer createBlockState() {return new BlockStateContainer(this, AXIS, ACTIVE);}
 
+    // Oh, this is hacky as all hell.
+    @Nonnull
+    @Override
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return this.getDefaultState().withProperty(AXIS, EnumFacing.Axis.values()[(meta % 3)]).withProperty(ACTIVE, ((meta >= 3) ? 1 : 0));
+    }
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        return state.getValue(AXIS).ordinal() * 4 + ((state.getValue(ACTIVE) == 1) ? 1 : 0);
+    }
+    
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
         super.onBlockAdded(world, pos, state);
@@ -51,10 +71,8 @@ public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasMode
 
     public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
         super.updateTick(world, pos, state, random);
-        //HiveCreepSpreadFurther.executescript(pos, world);
-        BlockPos posi = new BlockPos(pos.getX(), pos.getY()+1, pos.getZ());
-        Block blockLooking = (world.getBlockState(posi)).getBlock();
-        if ((creepspreadRules(posi, world, pos))) if ((blockLooking instanceof BlockLog) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(posi, AllBlocks.creeplog.getDefaultState(), 3);addPoints(world);}
+        int active = state.getValue(ACTIVE);
+        if(active == 1) {HiveCreepSpreadFurther.executescript(pos, world);}
         world.scheduleUpdate(pos, this, this.tickRate(world));
     }
 

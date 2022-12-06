@@ -5,7 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.synapselib.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -74,7 +74,7 @@ public class BlockHivecreepBase extends Block implements IHasModel {
         }
         if(active == 1) {
             HiveCreepSpreadFurther.executescript(pos, world);
-            world.scheduleUpdate(pos, this, this.tickRate(world));
         }
+        world.scheduleUpdate(pos, this, this.tickRate(world));
     }
 }
