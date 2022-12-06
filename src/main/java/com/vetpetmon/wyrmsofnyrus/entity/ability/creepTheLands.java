@@ -1,13 +1,14 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
-import com.vetpetmon.wyrmsofnyrus.block.*;
+import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStagedGrass;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import static com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged.STAGE;
 import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.*;
 
 public class creepTheLands {
@@ -16,22 +17,23 @@ public class creepTheLands {
         int y = (int) ((pos.getY()) + RNG.PMRange(Range));
         int z = (int) ((pos.getZ()) + RNG.PMRange(Range));
         BlockPos lookingBlock = new BlockPos(x,y,z);
+        Block blockLooking = (world.getBlockState(lookingBlock)).getBlock();
         if (creepspreadRules(lookingBlock, world, pos)) {
             assert false;
-            if (((world.getBlockState(lookingBlock))).getBlock() == (Block.getBlockFromName("minecraft:glowstone"))) {
+            if (blockLooking == (Block.getBlockFromName("minecraft:glowstone"))) {
                 world.setBlockState(lookingBlock, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);
                 addPoints(world);
-            } else if (matLookingBlock(lookingBlock, Material.ROCK, world)) {
-                world.setBlockState(lookingBlock, AllBlocks.creepedstone.getDefaultState().withProperty(STAGE,6), 3);
-                addPoints(world);
-            } else if ((matLookingBlock(lookingBlock, Material.GROUND, world))) {
-                world.setBlockState(lookingBlock, AllBlocks.creepeddirt.getDefaultState().withProperty(STAGE,6), 3);
+            }
+            //else if ((blockLooking instanceof BlockLog) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(lookingBlock, AllBlocks.creeplog.getDefaultState(), 3);addPoints(world);} //MMD very helpful, thank you.
+            else if (matLookingBlock(lookingBlock, Material.ROCK, world)) {world.setBlockState(lookingBlock, AllBlocks.creepedstone.getDefaultState().withProperty(creepStaged.STAGE,6), 3);addPoints(world);}
+            else if ((matLookingBlock(lookingBlock, Material.GROUND, world))) {
+                world.setBlockState(lookingBlock, AllBlocks.creepeddirt.getDefaultState().withProperty(creepStaged.STAGE,6), 3);
                 addPoints(world);
             } else if ((matLookingBlock(lookingBlock, Material.SAND, world))) {
-                world.setBlockState(lookingBlock, AllBlocks.creepedsand.getDefaultState().withProperty(STAGE, 6), 3);
+                world.setBlockState(lookingBlock, AllBlocks.creepedsand.getDefaultState().withProperty(creepStaged.STAGE, 6), 3);
                 addPoints(world);
             } else if ((matLookingBlock(lookingBlock, Material.GRASS, world))) {
-                world.setBlockState(lookingBlock, AllBlocks.creepedgrass.getDefaultState().withProperty(STAGE,6), 3);
+                world.setBlockState(lookingBlock, AllBlocks.creepedgrass.getDefaultState().withProperty(creepStagedGrass.STAGE,6), 3);
                 addPoints(world);
             }
         }
