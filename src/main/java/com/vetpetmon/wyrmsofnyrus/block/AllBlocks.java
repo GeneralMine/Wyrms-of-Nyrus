@@ -20,9 +20,10 @@ public class AllBlocks {
     public static final Block wyrm_lights_orange = new BlockBase(BlockMaterials.CREEP, "wyrm_lights_orange", SoundType.SLIME, 6, 7,true, 0, 1F);
     public static final Block wyrm_lights_yellow = new BlockBase(BlockMaterials.CREEP, "wyrm_lights_yellow", SoundType.SLIME, 6, 7,true, 0, 1F);
 
-    public static final Block hivecreepblock = new BlockHivecreepBase("hivecreepblock",1,2);
-    public static final Block hivecreeptop = new BlockHivecreepBase("hivecreeptop",1,2.25F);
+    public static final Block hivecreepblock = new BlockHivecreepBase("hivecreepblock",1,1);
+    public static final Block hivecreeptop = new BlockHivecreepBase("hivecreeptop",1,1.25F);
     public static final Block creepstone = new BlockHivecreepBase("creepstone",3,4);
+    public static final Block creeplog = new BlockHivecreepPillar("creeplog",2,2);
 
 
     public static final Block creepedgrass = new creepStagedGrass();
