@@ -49,7 +49,7 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: Operating systems
+    id: operating-systems
     attributes:
       label: What operarating system(s) are affected?
       multiple: true
