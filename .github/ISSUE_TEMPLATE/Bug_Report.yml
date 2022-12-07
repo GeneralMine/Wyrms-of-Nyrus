@@ -39,11 +39,13 @@ body:
     attributes:
       label: Type/Severity
       description: How severe was this issue?
+      multiple: true
       options:
         - Crash to desktop/Server crash
         - Memory leak
         - FPS drop/render lag
         - TPS drop/world lag
+        - Broke a mod mechanic
         - Unexpected log spam
         - Visual
     validations:
