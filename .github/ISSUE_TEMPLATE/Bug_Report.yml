@@ -38,7 +38,7 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: version
+    id: severity
     attributes:
       label: Type/Severity
       description: How severe was this issue?
