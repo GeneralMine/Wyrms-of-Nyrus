@@ -1,8 +1,12 @@
 {
   "variants": {
-    "axis=y":  { "model": "wyrmsofnyrus:creeplog" },
-    "axis=z":   { "model": "wyrmsofnyrus:creeplog", "x": 90 },
-    "axis=x":   { "model": "wyrmsofnyrus:creeplog", "x": 90, "y": 90 },
-    "axis=none": { "model": "wyrmsofnyrus:creeplog" }
+    "active=0,axis=y":  { "model": "wyrmsofnyrus:creeplog" },
+    "active=0,axis=z":   { "model": "wyrmsofnyrus:creeplog", "x": 90 },
+    "active=0,axis=x":   { "model": "wyrmsofnyrus:creeplog", "x": 90, "y": 90 },
+    "active=0,axis=none": { "model": "wyrmsofnyrus:creeplog" },
+    "active=1,axis=y":  { "model": "wyrmsofnyrus:creeplog" },
+    "active=1,axis=z":   { "model": "wyrmsofnyrus:creeplog", "x": 90 },
+    "active=1,axis=x":   { "model": "wyrmsofnyrus:creeplog", "x": 90, "y": 90 },
+    "active=1,axis=none": { "model": "wyrmsofnyrus:creeplog" }
   }
 }
