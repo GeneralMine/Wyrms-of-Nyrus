@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "normal": {
+      "model": "wyrmsofnyrus:creepsludge"
+    },
+    "active=0": {
+      "model": "wyrmsofnyrus:creepsludge"
+    },
+    "active=1": {
+      "model": "wyrmsofnyrus:creepsludge"
+    }
+  }
+}
