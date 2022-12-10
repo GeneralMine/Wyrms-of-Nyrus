@@ -2,7 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.block.generic;
 
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;

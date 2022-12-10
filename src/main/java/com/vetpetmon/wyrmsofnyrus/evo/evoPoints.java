@@ -2,7 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.evo;
 
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;

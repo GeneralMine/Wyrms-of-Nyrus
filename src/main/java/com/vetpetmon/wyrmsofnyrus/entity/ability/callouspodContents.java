@@ -4,7 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityCallousPod;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityDobber;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmProber;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 

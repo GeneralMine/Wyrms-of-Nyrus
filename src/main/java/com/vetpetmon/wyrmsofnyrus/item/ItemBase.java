@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.item;
 
-import com.vetpetmon.wyrmsofnyrus.synapselib.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

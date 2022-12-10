@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
-import com.vetpetmon.wyrmsofnyrus.synapselib.blacklistUtil;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.blacklistUtil;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Configuration;

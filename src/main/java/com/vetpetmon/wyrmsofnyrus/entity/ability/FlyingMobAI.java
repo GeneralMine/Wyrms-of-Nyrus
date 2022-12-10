@@ -1,11 +1,10 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
-import com.vetpetmon.wyrmsofnyrus.synapselib.synMath;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.synMath;
 import net.minecraft.util.math.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.ai.*;
-import net.minecraft.pathfinding.PathNavigateFlying;
 
 //  This is a custom AI for flight-capable mobs.
 //  They will try to avoid flying too high, and try to move in the air towards targets
