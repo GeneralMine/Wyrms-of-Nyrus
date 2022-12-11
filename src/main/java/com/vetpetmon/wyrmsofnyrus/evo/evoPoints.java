@@ -21,7 +21,7 @@ public class evoPoints{
     public static void set(World w, int i) {wyrmVariables.WorldVariables.get(w).wyrmEvo = i;}
     public static int getLevel() {return evoLevel;}
     public static void evoMilestone(World w){
-        evoLevel = (int) Math.floor(get(w) % Evo.evoPointsPerLevel);
+        evoLevel = (int) Math.floor((get(w) / Evo.evoPointsPerLevel));
     }
 
     /**
