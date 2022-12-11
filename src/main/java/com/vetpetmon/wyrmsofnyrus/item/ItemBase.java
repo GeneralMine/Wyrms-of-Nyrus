@@ -20,6 +20,13 @@ public class ItemBase extends Item implements IHasModel {
         AllItems.ALL_ITEMS.add(this);
         this.hastooltip = hastooltip;
     }
+    public ItemBase(String name, boolean hastooltip, boolean hidden) {
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        if (!hidden) setCreativeTab(wyrmsofnyrus.wyrmTabs);
+        AllItems.ALL_ITEMS.add(this);
+        this.hastooltip = hastooltip;
+    }
 
     @Override
     public void registerModels() {
