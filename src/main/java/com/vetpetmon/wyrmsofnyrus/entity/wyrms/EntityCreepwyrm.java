@@ -90,19 +90,6 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
 
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        /*int x = (int) this.posX;
-        int y = (int) this.posY;
-        int z = (int) this.posZ;
-        Entity entity = this;
-        {
-            Map<String, Object> $_d = new HashMap<>();
-            $_d.put("entity", entity);
-            $_d.put("x", x);
-            $_d.put("y", y);
-            $_d.put("z", z);
-            $_d.put("world", world);
-            staysStill($_d);
-        }*/
 
         if (!this.world.isRemote && --this.timeUntilNextCreep <= 0)
         {
