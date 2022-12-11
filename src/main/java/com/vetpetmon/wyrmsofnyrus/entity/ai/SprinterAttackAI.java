@@ -11,10 +11,18 @@ public class SprinterAttackAI extends EntityAIAttackMelee {
     protected double speed;
     protected double speedOG;
 
-    public SprinterAttackAI(EntityWyrm wyrmIn, double speedIn, boolean useLongMemory, double baseSpeed, double sprintSpeed) {
+    /**
+     * REQUIRES THE SPRINTING DATAPARAMETER TO BE PRESENT ALONG WITH setSprinting() METHOD.
+     * Enemies that do this task will rush up to & through targets at a temporary speed boost.
+     * @param wyrmIn Entity
+     * @param speedIn Entity's base speed
+     * @param useLongMemory
+     * @param sprintSpeed Entity's bonus speed
+     */
+    public SprinterAttackAI(EntityWyrm wyrmIn, double speedIn, boolean useLongMemory, double sprintSpeed) {
         super(wyrmIn, speedIn, useLongMemory);
         this.wyrm = wyrmIn;
-        this.speedOG = baseSpeed;
+        this.speedOG = speedIn;
         this.speed = speedOG + sprintSpeed;
     }
 
