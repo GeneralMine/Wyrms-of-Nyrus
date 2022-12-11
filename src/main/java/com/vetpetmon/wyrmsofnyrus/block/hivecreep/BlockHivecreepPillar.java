@@ -22,7 +22,6 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasModel {
-    // Going to need something hacky in order to fix this oh no
     public static final PropertyInteger ACTIVE = PropertyInteger.create("active", 0, 1);
 
     public BlockHivecreepPillar(String name, float hardness, float blastresist) {
@@ -50,7 +49,7 @@ public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasMode
     @Override
     protected BlockStateContainer createBlockState() {return new BlockStateContainer(this, AXIS, ACTIVE);}
 
-    // Oh, this is hacky as all hell.
+    // Oh, this is hacky as all hell. It works, however!
     @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta)
