@@ -187,6 +187,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntitySilverfish.class, true, false));
     }
 
+
     // HIVEMIND
     protected void hivemindFollow() {
         this.targetTasks.addTask(5, new EntityAINearestAttackableTarget<>(this, EntityHivemind.class, 2, false, false, new Predicate<EntityHivemind>() {
@@ -204,6 +205,16 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         waypoint.setLocationAndAngles((x), (y+3), (z), world.rand.nextFloat() * 360F, 0.0F);
         world.spawnEntity(waypoint);
     }
+
+    public byte getByteFromDataManager(DataParameter<Byte> key) {
+        try {
+            return this.getDataManager().get(key);
+        }
+        catch (Exception e) {
+            return 0;
+        }
+    }
+
 
 
 
@@ -244,6 +255,8 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
             return this.getAttackTarget() != null && !this.getAttackTarget().isDead;
         }
     }
+
+
 
     public void onLivingUpdate() {
         super.onLivingUpdate();
