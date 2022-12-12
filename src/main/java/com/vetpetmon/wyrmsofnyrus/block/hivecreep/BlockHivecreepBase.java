@@ -69,7 +69,7 @@ public class BlockHivecreepBase extends Block implements IHasModel {
         super.updateTick(world, pos, state, random);
         int active = state.getValue(ACTIVE);
         if (world.isAirBlock(new BlockPos(pos.getX(), pos.getY()+1,pos.getZ())) && (Objects.equals(this.getRegistryName(), new ResourceLocation("wyrmsofnyrus:hivecreepblock")))){
-            if (active == 0) world.setBlockState((pos), AllBlocks.hivecreeptop.getDefaultState().withProperty(ACTIVE, 0), 3);
+            if (active == 0) world.setBlockState((pos), AllBlocks.hivecreeptop.getDefaultState().withProperty(ACTIVE, active), 3);
             else world.setBlockState((pos), AllBlocks.hivecreeptop.getDefaultState().withProperty(ACTIVE, 1), 3);
         }
         if(active == 1) {

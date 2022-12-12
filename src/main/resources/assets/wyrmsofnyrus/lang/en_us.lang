@@ -28,6 +28,7 @@ item.metalcomb_array.name=Metalcomb Array
 item.wyrmico.name=Wyrms Icon
 item.wyrmarmorfrag.name=Armor Fragment
 item.creepedflesh.name=Creeped Flesh
+item.creepedbone.name=Creeped Bone
 
 tile.metal_comb_panel_hive_creep.name=Hive Creep Metal Combs
 tile.hivecreeptop.name=Hive Creep Surface
@@ -35,6 +36,8 @@ tile.wyrm_lights_orange.name=Orange Hive Lights
 tile.wyrm_lights_yellow.name=Yellow Hive Lights
 tile.hivecreepblock.name=Hive Creep Block
 tile.creepstone.name=Creepstone
+tile.creeplog.name=Creeped log
+tile.creepsludge.name=Creepsludge
 tile.creepeddirt.name=Creeped Dirt
 tile.creepedsand.name=Creeped Sand
 tile.creepedgravel.name=Creeped Gravel
@@ -66,6 +69,7 @@ tooltip.won.item.creepshard=A piece of inorganic Hive Creep off of one of the Cr
 tooltip.won.item.creepedflesh=The still-moving flesh of one of The Creeped. The main ingredient to a solution to this invasion...
 tooltip.won.item.creepedbulb=A gross cyst of melting flesh caused by radiation poisoning. The Creeped seem to eat off of the energies produced by this external organ.
 tooltip.won.item.creepedbrainmatter=Chunks of brain matter from The Creeped. The ultimate control center of the Creeped... It could be rewired to suit a different purpose.
+tooltip.won.item.creepedbone=Rough bone with out-of-control carcinoma growths. Despite how painful it looks to have, it's the structural support of The Creeped.
 
 tooltip.won.item.follyfleshpiece=Flesh from the wyrmfolly, mixed with alien and terrestrial DNA samples. Perfectly safe to eat!
 tooltip.won.item.follybones=Tough bones with indeterminate origins. Can be used in place of sticks for making tools.
