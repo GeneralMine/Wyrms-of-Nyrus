@@ -15,7 +15,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -63,7 +62,7 @@ public class BlockPillar extends BlockRotatedPillar implements IHasModel {
     @Override
     @ParametersAreNonnullByDefault
     public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, EntityLiving.SpawnPlacementType type) {
-        return (this.stopSpawns && isSideSolid(state, world, pos, EnumFacing.UP));
+        return this.stopSpawns;
     }
 
     @Override

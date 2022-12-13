@@ -75,7 +75,7 @@ public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasMode
     @Override
     @ParametersAreNonnullByDefault
     public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, EntityLiving.SpawnPlacementType type) {
-        return (!WorldConfig.creepBlocksStopSpawns && isSideSolid(state, world, pos, EnumFacing.UP)); // If, by either vanilla rules or config rules, that a block can not spawn mobs, it will always be set to false.
+        return WorldConfig.creepBlocksStopSpawns;
     }
 
     public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
