@@ -1,15 +1,14 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ai;
 
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.util.SoundEvent;
 
 public class SprinterAttackAI extends EntityAIAttackMelee {
 
     private EntityWyrm wyrm;
     private int attackingTicks;
-    protected double speed;
-    protected double speedOG;
+    protected SoundEvent sound;
 
     /**
      * REQUIRES THE SPRINTING DATAPARAMETER TO BE PRESENT ALONG WITH setSprinting() METHOD.
@@ -19,17 +18,17 @@ public class SprinterAttackAI extends EntityAIAttackMelee {
      * @param useLongMemory
      * @param sprintSpeed Entity's bonus speed
      */
-    public SprinterAttackAI(EntityWyrm wyrmIn, double speedIn, boolean useLongMemory, double sprintSpeed) {
-        super(wyrmIn, speedIn, useLongMemory);
+    public SprinterAttackAI(EntityWyrm wyrmIn, double speedIn, boolean useLongMemory, double sprintSpeed, SoundEvent sfx) {
+        super(wyrmIn, (speedIn + sprintSpeed), useLongMemory);
         this.wyrm = wyrmIn;
-        this.speedOG = speedIn;
-        this.speed = speedOG + sprintSpeed;
+        this.sound = sfx;
     }
 
     public void startExecuting()
     {
         super.startExecuting();
         this.attackingTicks = 0;
+        wyrm.playSound(sound,0.5F,1.0F);
     }
 
     public void resetTask()
@@ -46,12 +45,10 @@ public class SprinterAttackAI extends EntityAIAttackMelee {
         if (this.attackingTicks >= 5 && this.attackTick < 10)
         {
             this.wyrm.setSprinting(true);
-            this.wyrm.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(speed);
         }
         else
         {
             this.wyrm.setSprinting(false);
-            this.wyrm.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(speedOG);
         }
     }
 }

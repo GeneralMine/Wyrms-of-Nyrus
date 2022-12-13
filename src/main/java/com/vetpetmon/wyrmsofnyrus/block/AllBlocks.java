@@ -1,7 +1,12 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
-import com.vetpetmon.wyrmsofnyrus.block.generic.*;
-import com.vetpetmon.wyrmsofnyrus.block.hivecreep.*;
+import com.vetpetmon.wyrmsofnyrus.block.generic.BlockBase;
+import com.vetpetmon.wyrmsofnyrus.block.generic.BlockPillar;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepBase;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepPillar;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStagedGrass;
+import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,8 +19,8 @@ public class AllBlocks {
 
     public static final Block metalcombpanelmimic = new BlockBase(Material.IRON, "metalcombpanelmimic", SoundType.METAL, 4, 6, true);
     public static final Block metal_comb_panel_hive_creep = new BlockBase(Material.IRON, "metal_comb_panel_hive_creep", SoundType.METAL, 6, 7);
-    public static final Block follyflesh = new BlockBase(Material.CLAY, "follyflesh", SoundType.SLIME, 1, 1.5F);
-    public static final Block follybone = new BlockPillar(Material.ROCK, "follybone", SoundType.STONE, 4, 8);
+    public static final Block follyflesh = new BlockBase(Material.CLAY, "follyflesh", SoundType.SLIME, 1, 1.5F).setCanCreatureSpawn(WorldConfig.follyBlocksStopSpawns);
+    public static final Block follybone = new BlockPillar(Material.ROCK, "follybone", SoundType.STONE, 4, 8).setCanCreatureSpawn(WorldConfig.follyBlocksStopSpawns);
 
     public static final Block wyrm_lights_orange = new BlockBase(BlockMaterials.CREEP, "wyrm_lights_orange", SoundType.SLIME, 6, 7,true, 0, 1F);
     public static final Block wyrm_lights_yellow = new BlockBase(BlockMaterials.CREEP, "wyrm_lights_yellow", SoundType.SLIME, 6, 7,true, 0, 1F);

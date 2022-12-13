@@ -27,9 +27,10 @@ public class ConfigBase {
             wyrms = createDirectory("wyrms", ConfigDirectory),
             debug = createDirectory("debug", ConfigDirectory),
             evo = createDirectory("evolution", ConfigDirectory),
+            world = createDirectory("world", ConfigDirectory),
             invasion = createDirectory("invasion", ConfigDirectory),
             clientside = createDirectory("client", ConfigDirectory);
-    private static final Configuration[] configs = {general, wyrms, debug, evo, invasion, clientside};
+    private static final Configuration[] configs = {general, wyrms, debug, evo, world, invasion, clientside};
 
 
     // Specific for WoN.
@@ -41,6 +42,7 @@ public class ConfigBase {
         wyrmStats.loadFromConfig(wyrms);
         Debug.loadFromConfig(debug);
         Evo.loadFromConfig(evo);
+        WorldConfig.loadFromConfig(world);
         Invasion.loadFromConfig(invasion);
         Client.loadFromConfig(clientside);
 

@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.block.hivecreep;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.synapselib.rendering.IHasModel;
@@ -12,13 +13,16 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasModel {
@@ -66,6 +70,12 @@ public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasMode
     public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
         super.onBlockAdded(world, pos, state);
         world.scheduleUpdate(pos, this, this.tickRate(world));
+    }
+
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, EntityLiving.SpawnPlacementType type) {
+        return (!WorldConfig.creepBlocksStopSpawns && isSideSolid(state, world, pos, EnumFacing.UP)); // If, by either vanilla rules or config rules, that a block can not spawn mobs, it will always be set to false.
     }
 
     public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
