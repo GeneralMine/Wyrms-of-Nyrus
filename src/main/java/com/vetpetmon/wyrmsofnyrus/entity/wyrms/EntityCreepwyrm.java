@@ -7,11 +7,11 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -23,10 +23,15 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.creepTheLands.creepTheLands;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimationTickable {
+
+    public static final ResourceLocation CREEPWYRM_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/creepwyrm");
+
     private AnimationFactory factory = new AnimationFactory(this);
     private int timeUntilNextCreep;
     public EntityCreepwyrm(World world) {
@@ -77,27 +82,14 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
         }
     }
 
+    @Nullable
     @Override
-    protected void dropFewItems(boolean wasRecentlyHit, int lootingModifier) {
-        this.dropItem(AllItems.creepedflesh, 3+(lootingModifier*2));
-        this.dropItem(AllItems.creepshard, 4+(lootingModifier*2));
+    protected ResourceLocation getLootTable() {
+        return CREEPWYRM_LOOT_TABLE;
     }
 
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        /*int x = (int) this.posX;
-        int y = (int) this.posY;
-        int z = (int) this.posZ;
-        Entity entity = this;
-        {
-            Map<String, Object> $_d = new HashMap<>();
-            $_d.put("entity", entity);
-            $_d.put("x", x);
-            $_d.put("y", y);
-            $_d.put("z", z);
-            $_d.put("world", world);
-            staysStill($_d);
-        }*/
 
         if (!this.world.isRemote && --this.timeUntilNextCreep <= 0)
         {
@@ -109,6 +101,7 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
     @Override
     public boolean canBePushed()
     {
+        super.canBePushed();
         return false;
     }
 

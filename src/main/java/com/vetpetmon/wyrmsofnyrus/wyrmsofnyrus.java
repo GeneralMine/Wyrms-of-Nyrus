@@ -8,7 +8,7 @@ import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.item.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
 import com.vetpetmon.wyrmsofnyrus.synapselib.synapseLib;

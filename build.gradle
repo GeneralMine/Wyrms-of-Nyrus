@@ -16,7 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 //apply plugin: 'org.spongepowered.mixin'
 
-version = '1.12.2-0.2.11'
+version = '1.12.2-0.2.2'
 group = 'com.vetpetmon.wyrmsofnyrus' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'wyrmsofnyrus'
 
@@ -69,6 +69,10 @@ repositories{
         url = "https://github.com/TheOriginalGolem/Hbm-s-Nuclear-Tech-GIT"
     }
 
+    maven {
+        url 'https://dl.cloudsmith.io/public/vetpetmon-labs/synlib/maven/'
+    }
+
     /*maven {
         // for AutoRegLib
         name "blamejared"
@@ -96,6 +100,7 @@ dependencies {
 
     implementation fg.deobf('software.bernie.geckolib:forge-1.12.2-geckolib:3.0.21')
     implementation fg.deobf('curse.maven:hbms-nuclear-tech-mod-reloaded-435883:4120696')
+    implementation 'com.vetpetmon.synapselib:synlib:1.0' //I would seriously STILL just import the whole repo because this is bugged (note to self because my computer is being silly /neg)
 
 	//implementation fg.deobf('mezz.jei:jei_1.12.2:4.16.1.302')
 

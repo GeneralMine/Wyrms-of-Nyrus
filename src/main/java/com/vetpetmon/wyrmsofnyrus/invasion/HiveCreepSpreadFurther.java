@@ -2,19 +2,22 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
+import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepPillar;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
-import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStagedGrass;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
-import com.vetpetmon.wyrmsofnyrus.synapselib.blockUtils;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.blockUtils;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import static net.minecraft.block.BlockRotatedPillar.AXIS;
 
 public class HiveCreepSpreadFurther{
 
@@ -52,10 +55,10 @@ public class HiveCreepSpreadFurther{
 				Block blockLooking = (world.getBlockState(posi)).getBlock();
 				if ((creepspreadRules(posi, world, pos)) && canSpreadThisTick) {
 					if (blockLooking == (Block.getBlockFromName("minecraft:glowstone"))) {world.setBlockState(posi, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);addPoints(world);}
-					else if ((blockLooking instanceof BlockLog) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(posi, AllBlocks.creeplog.getDefaultState(), 3);addPoints(world);} //Apparently Minecraft has two different BlockLog classes and I don't know what mods like to use so there you go, cover both.
+					else if ((blockLooking instanceof BlockLog) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(posi, AllBlocks.creeplog.getDefaultState().withProperty(BlockHivecreepPillar.ACTIVE,1).withProperty(AXIS, EnumFacing.Axis.Y), 3);addPoints(world);} //Apparently Minecraft has two different BlockLog classes and I don't know what mods like to use so there you go, cover both.
 					else if ((matLookingBlock(posi, Material.SAND, world))) {world.setBlockState(posi, AllBlocks.creepedsand.getDefaultState().withProperty(creepStaged.STAGE, 0), 3);addPoints(world);}
 					else if (matLookingBlock(posi, Material.ROCK, world)) {world.setBlockState(posi, AllBlocks.creepedstone.getDefaultState().withProperty(creepStaged.STAGE, 0), 3);addPoints(world);}
-					else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {world.setBlockState(posi, AllBlocks.creepeddirt.getDefaultState().withProperty(creepStagedGrass.STAGE, 1), 3);addPoints(world);}
+					else if ((matLookingBlock(posi, Material.GROUND, world) || (matLookingBlock(posi, Material.GRASS, world)))) {world.setBlockState(posi, AllBlocks.creepeddirt.getDefaultState().withProperty(creepStaged.STAGE, 0), 3);addPoints(world);}
 				}
 			}
 		}

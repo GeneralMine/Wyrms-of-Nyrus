@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import net.minecraft.world.World;
 import net.minecraft.entity.Entity;
 

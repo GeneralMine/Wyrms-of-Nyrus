@@ -1,14 +1,10 @@
 package com.vetpetmon.wyrmsofnyrus.entity.hivemind;
 
-import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.creepTheLands;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

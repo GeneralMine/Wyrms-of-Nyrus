@@ -3,7 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityTheVisitor;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;

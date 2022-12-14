@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityCreepwyrm;
-import com.vetpetmon.wyrmsofnyrus.synapselib.synMath;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.synMath;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;

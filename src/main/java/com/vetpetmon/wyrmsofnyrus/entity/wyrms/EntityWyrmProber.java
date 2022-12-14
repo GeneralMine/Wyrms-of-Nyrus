@@ -11,7 +11,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
 import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

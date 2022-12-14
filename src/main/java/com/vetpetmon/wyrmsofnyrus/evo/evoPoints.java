@@ -2,7 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.evo;
 
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
@@ -21,7 +21,7 @@ public class evoPoints{
     public static void set(World w, int i) {wyrmVariables.WorldVariables.get(w).wyrmEvo = i;}
     public static int getLevel() {return evoLevel;}
     public static void evoMilestone(World w){
-        evoLevel = (int) Math.floor(get(w) % Evo.evoPointsPerLevel);
+        evoLevel = (int) Math.floor((get(w) / Evo.evoPointsPerLevel));
     }
 
     /**

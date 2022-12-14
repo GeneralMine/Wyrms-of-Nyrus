@@ -5,10 +5,7 @@ import net.minecraftforge.common.config.Configuration;
 import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
 
 public class AI {
-    public static boolean suicidalWyrms;
-    public static boolean attackMobs;
-    public static boolean attackAnimals;
-    public static boolean attackVillagers;
+    public static boolean suicidalWyrms, attackMobs, attackAnimals, attackVillagers;
 
     public static boolean niceToPlayers;
 

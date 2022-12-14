@@ -22,7 +22,7 @@ public class wyrmStats {
     public static float soldierKBR, infectoidSoldierKBR;
     public static float roverHP, roverDEF, roverATK, roverSPD, roverKBR;
     public static float roverUraniumHP, roverUraniumDEF, roverUraniumATK, roverUraniumSPD, roverUraniumKBR;
-    public static float myrmurHP, myrmurDEF, myrmurATK, myrmurSPD, myrmurKBR;
+    public static float myrmurHP, myrmurDEF, myrmurATK, myrmurSPD, myrmurSprintSPD, myrmurKBR;
     public static float proberHP, proberDEF, proberATK, proberSPD;
     public static float dobberHP, dobberDEF, dobberATK, dobberSPD;
     public static float workerHP, workerDEF, workerATK, workerSPD, workerKBR;
@@ -88,6 +88,7 @@ public class wyrmStats {
         myrmurATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
         myrmurSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.45", 0.45);
         myrmurKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.1", 0.1);
+        myrmurSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default: 0.1", 0.1);
     }
 
     public static void warriorStats(Configuration c) {

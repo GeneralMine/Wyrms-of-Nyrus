@@ -8,7 +8,7 @@ import com.vetpetmon.wyrmsofnyrus.invasion.events.creepwyrmDrop;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.massIncursion;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.scoutingPodRaid;
 import com.vetpetmon.wyrmsofnyrus.invasion.events.smallPodRaid;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RNG;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.world.World;

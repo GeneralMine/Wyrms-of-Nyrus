@@ -23,6 +23,34 @@
       }
     ]
   },
+  "entity.myrmur": {
+    "category": "hostile",
+    "subtitle": "subtitles.wyrmClicks",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/myrmur1",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/myrmur2",
+        "stream": false
+      }
+    ]
+  },
+  "entity.myrmurcharge": {
+    "category": "hostile",
+    "subtitle": "subtitles.wyrmCharge",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/myrmurcharge",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/myrmurcharge2",
+        "stream": false
+      }
+    ]
+  },
   "supercriticality": {
     "category": "neutral",
     "sounds": [

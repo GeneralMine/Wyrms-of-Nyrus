@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
-import com.vetpetmon.wyrmsofnyrus.synapselib.blacklistUtil;
+import com.vetpetmon.wyrmsofnyrus.synapselib.util.blacklistUtil;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Configuration;
@@ -49,7 +49,7 @@ public class Invasion {
         config.addCustomCategoryComment(CATEGORYTHREE,  "\nEverything involving wyrm spawns from the Invasion system.\n");
         config.setCategoryRequiresWorldRestart(CATEGORYTHREE, false);
 
-        callousPodIncludesDobbers = createConfigBool(config, CATEGORYTHREE,"Callous pod spawn dobbers" ,"Will dobber swarms spawn from callous pods? This option is here in case if the entity spam from swarms tanks performance. Default: true", true);
+        callousPodIncludesDobbers = createConfigBool(config, CATEGORYTHREE,"Callous pod spawn dobbers" ,"Will dobber swarms spawn from callous pods? This option is here in case if the entity spam from swarms tanks performance. Default: false", false);
         minWyrmsHexepod = createConfigInt(config, CATEGORYTHREE,"Hexe min spawns" ,"Minimum wyrms to spawn from Hexe pods. Will still always spawn at least 1 wyrm. Hexe pods always spawn wyrmlings that grow into various castes of wyrms except royals. Default: 1", 1);
         maxWyrmsHexepod = createConfigInt(config, CATEGORYTHREE,"Hexe max spawns" ,"Maximum wyrms to spawn from Hexe pods. Default: 3", 3);
         if (minWyrmsHexepod < 1) minWyrmsHexepod = 1;

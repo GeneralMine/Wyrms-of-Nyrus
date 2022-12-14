@@ -14,6 +14,8 @@ public class SoundRegistry {
     public static SoundEvent creepwyrmscream;
     public static SoundEvent deepwyrmclicks;
     public static SoundEvent slowwyrmsteps;
+    public static SoundEvent myrmur;
+    public static SoundEvent myrmurcharge;
     public static SoundEvent nukeClose;
     public static SoundEvent nukeFar;
     public static SoundEvent wyrmroars;
@@ -34,6 +36,9 @@ public class SoundRegistry {
         wyrmlingclicks = RegisterSound("entity.wyrmlingclicks");
         wyrmroars = RegisterSound("entity.wyrmroars");
         proberidle = RegisterSound("entity.prober");
+        myrmur = RegisterSound("entity.myrmur");
+        myrmurcharge = RegisterSound("entity.myrmurcharge");
+
     }
 
     public static SoundEvent RegisterSound(String name) {
