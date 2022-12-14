@@ -25,7 +25,7 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class BlockPillar extends BlockRotatedPillar implements IHasModel {
     private boolean hastooltip = false;
-    private boolean stopSpawns = false;
+    private boolean cantStopSpawns = true;
     public BlockPillar(Material m, String s, SoundType st, float hardness, float blastresist){
         super(m);
         this.setUnlocalizedName(s);
@@ -56,13 +56,13 @@ public class BlockPillar extends BlockRotatedPillar implements IHasModel {
     }
 
     public Block setCanCreatureSpawn(boolean flag) {
-        this.stopSpawns = flag;
+        this.cantStopSpawns = flag;
         return this;
     }
     @Override
     @ParametersAreNonnullByDefault
     public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, EntityLiving.SpawnPlacementType type) {
-        return this.stopSpawns;
+        return this.cantStopSpawns;
     }
 
     @Override
