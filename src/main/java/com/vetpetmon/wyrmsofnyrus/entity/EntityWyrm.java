@@ -44,8 +44,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     protected static float exdif = setExdif();
 
     public static float setExdif() {
-        if (Invasion.isEXCANON()) return exdif = Invasion.getEXCANONDIFFICULTY();
-        else return exdif = 1;
+        return Invasion.isEXCANON() ? Invasion.getEXCANONDIFFICULTY() : 1;
     }
 
     private String animationName;
