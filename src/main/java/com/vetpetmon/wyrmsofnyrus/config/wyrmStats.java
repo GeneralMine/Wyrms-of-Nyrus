@@ -83,12 +83,12 @@ public class wyrmStats {
     public static void myrmurStats(Configuration c) {
         final String CAT = "Myrmur Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Myrmurs.\n");
-        myrmurHP = createConfigDouble(c, CAT, "Normal HP", "Default: 6", 6);
+        myrmurHP = createConfigDouble(c, CAT, "Normal HP", "Default: 9", 9);
         myrmurDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3.5", 3.5);
-        myrmurATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
-        myrmurSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.45", 0.45);
+        myrmurATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
+        myrmurSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.35", 0.35);
         myrmurKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.1", 0.1);
-        myrmurSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default: 0.1", 0.1);
+        myrmurSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default: 0.2", 0.2);
     }
 
     public static void warriorStats(Configuration c) {
@@ -97,7 +97,7 @@ public class wyrmStats {
         warriorHP = createConfigDouble(c, CAT, "Normal HP", "Default: 26", 26);
         taintedWarriorHP = createConfigDouble(c, CAT, "Tainted Variant HP", "Default: 66", 66);
 
-        warriorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 6", 6);
+        warriorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 2", 2);
         taintedWarriorDEF = createConfigDouble(c, CAT, "Tainted Variant DEF", "Default: 16", 16);
 
         warriorATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
