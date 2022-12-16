@@ -23,6 +23,7 @@ public class wyrmStats {
     public static float roverHP, roverDEF, roverATK, roverSPD, roverKBR;
     public static float roverUraniumHP, roverUraniumDEF, roverUraniumATK, roverUraniumSPD, roverUraniumKBR;
     public static float myrmurHP, myrmurDEF, myrmurATK, myrmurSPD, myrmurSprintSPD, myrmurKBR;
+    public static float biterHP, biterDEF, biterATK, biterSPD, biterRollSPD, biterRollDMG, biterKBR;
     public static float proberHP, proberDEF, proberATK, proberSPD;
     public static float dobberHP, dobberDEF, dobberATK, dobberSPD;
     public static float workerHP, workerDEF, workerATK, workerSPD, workerKBR;
@@ -36,6 +37,7 @@ public class wyrmStats {
         startFile(c);
         roverStats(c);
         CreepwyrmStats(c);
+        biterStats(c);
         myrmurStats(c);
         warriorStats(c);
         soldierStats(c);
@@ -78,6 +80,18 @@ public class wyrmStats {
         creepwyrmHP = createConfigDouble(c, CAT, "Normal HP", "Default: 55", 55);
         creepwyrmDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 10", 10);
         creepwyrmATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2.5", 2.5);
+    }
+
+    public static void biterStats(Configuration c) {
+        final String CAT = "Biter Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Biters.\n");
+        biterHP = createConfigDouble(c, CAT, "Normal HP", "Default: 11", 11);
+        biterDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3", 3);
+        biterATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
+        biterSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
+        biterKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
+        biterRollSPD = createConfigDouble(c, CAT, "Normal Roll SPD", "Default: 2.0", 2.0);
+        biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 10", 10);
     }
 
     public static void myrmurStats(Configuration c) {

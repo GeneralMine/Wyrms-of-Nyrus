@@ -1,0 +1,11 @@
+These values are in bytes, and are used primarily by animation tools.
+AI functions will consistently switch the byte values to what is seen below:
+
+0 = no attack (idle, moving, etc)
+1 = regular melee
+2 = sprint attack
+3 = roll attack
+4 = summoning
+5 = spit attack
+6 = melee windup
+7 = warning

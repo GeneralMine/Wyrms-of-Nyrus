@@ -22,6 +22,7 @@ entity.wyrmqueenling.name=Queenling
 entity.wyrmmyrmur.name=Myrmur
 entity.wyrmwarrior.name=Warrior
 entity.wyrmwarriortainted.name=Warrior
+entity.creepedbiter.name=Biter
 
 item.creepshard.name=Creepshard
 item.metalcomb_array.name=Metalcomb Array
@@ -61,6 +62,8 @@ subtitles.wyrmlingClicks=High-pitched hisses
 subtitles.prober=Buzzing
 subtitles.wyrmfollygrowl=Wyrmfolly growls
 subtitles.wyrmfollyscreech=Wyrmfolly screeching
+subtitles.squelching=Squelching
+subtitles.squelchingscream=Squelching screams
 
 tooltip.won.tile.metalcombpanelmimic=Fake metalcomb panels that mimic the properties of real metalcomb panels. Wyrms shouldn't be able to tell the difference... Right?
 tooltip.won.tile.wyrm_lights_orange=Not to be mistaken with the eggs, glowbulbs are hot to the touch. Handle with care.
@@ -81,6 +84,7 @@ tooltip.won.item.metalcomb_array=An array of metalcombs packed closely together.
 tooltip.won.item.wyrmarmorfrag=The shell of a heavily-armored wyrm, still radioactive and potent.
 
 death.attack.prober=%s got probed
+death.attack.roll=%1$s was steamrolled!
 death.attack.strykerslash=%s was turned into chopped player
 death.attack.strykerbite=%s died to a fatal bite
 death.attack.strykerstab=%s took one too many stab wounds

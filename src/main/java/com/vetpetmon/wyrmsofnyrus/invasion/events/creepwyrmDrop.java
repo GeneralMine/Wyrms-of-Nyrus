@@ -2,7 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.invasion.events;
 
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityCreepwyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreepwyrm;
 import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.Entity;

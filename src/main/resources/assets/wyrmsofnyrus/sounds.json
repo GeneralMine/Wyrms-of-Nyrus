@@ -9,6 +9,26 @@
       }
     ]
   },
+  "entity.biter": {
+    "category": "hostile",
+    "subtitle": "subtitles.squelching",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/biter",
+        "stream": false
+      }
+    ]
+  },
+  "entity.biterroll": {
+    "category": "hostile",
+    "subtitle": "subtitles.squelchingscream",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/bitercharge",
+        "stream": false
+      }
+    ]
+  },
   "entity.prober": {
     "category": "hostile",
     "subtitle": "subtitles.prober",

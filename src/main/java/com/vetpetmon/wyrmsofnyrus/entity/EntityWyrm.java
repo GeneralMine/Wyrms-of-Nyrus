@@ -40,8 +40,9 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  */
 public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob {
 
-    private static DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
     protected static float exdif = setExdif();
+    private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.VARINT);
 
     public static float setExdif() {
         return Invasion.isEXCANON() ? Invasion.getEXCANONDIFFICULTY() : 1;
@@ -66,6 +67,28 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     private final AnimationFactory factory = new AnimationFactory(this);
     // SRP compatibility <3
     protected int srpcothimmunity;
+    // data management
+    public byte getByteFromDataManager(DataParameter<Byte> key) {
+        try {
+            return this.getDataManager().get(key);
+        }
+        catch (Exception e) {
+            return 0;
+        }
+    }
+
+
+    // Animation and AI util
+    public void setAttack(int attackID)
+    {
+        this.getDataManager().set(ATTACKID, attackID);
+    }
+
+    //@SideOnly(Side.CLIENT)
+    public int getAttack()
+    {
+        return this.getDataManager().get(ATTACKID);
+    }
 
     public EntityWyrm(final World worldIn) {
         super(worldIn);
@@ -73,7 +96,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         this.srpcothimmunity = 0;
     }
 
-    // Most wyrms don't need to despawn. Despawning breaks a lot of things, like Creepwyrms, for a prime example.
+        // Most wyrms don't need to despawn. Despawning breaks a lot of things, like Creepwyrms, for a prime example.
     protected boolean canDespawn() {return false;}
 
     // Getters for Wyrms.
@@ -205,17 +228,6 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         world.spawnEntity(waypoint);
     }
 
-    public byte getByteFromDataManager(DataParameter<Byte> key) {
-        try {
-            return this.getDataManager().get(key);
-        }
-        catch (Exception e) {
-            return 0;
-        }
-    }
-
-
-
 
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.
@@ -239,6 +251,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(HAS_TARGET, false);
+        this.dataManager.register(ATTACKID, 0);
     }
 
     /**
