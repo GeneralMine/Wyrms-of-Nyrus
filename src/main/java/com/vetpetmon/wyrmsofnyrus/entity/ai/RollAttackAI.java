@@ -36,11 +36,11 @@ public class RollAttackAI extends EntityAIAttackMelee {
         wyrm.playSound(sound,0.5F,1.0F);
     }
 
-    public boolean shouldContinueExecuting()
+    /*public boolean shouldContinueExecuting()
     {
         if (this.attackingTicks >= 200) return false;
         else return true;
-    }
+    }*/
 
     public void resetTask()
     {

@@ -23,6 +23,10 @@ entity.wyrmmyrmur.name=Myrmur
 entity.wyrmwarrior.name=Warrior
 entity.wyrmwarriortainted.name=Warrior
 entity.creepedbiter.name=Biter
+entity.creepedhumanoid.name=Vanitas
+entity.creepedmonster.name=Lyssa
+entity.creepedmonsteralpha.name=Maniae
+entity.bioscrew.name=Bioscrew
 
 item.creepshard.name=Creepshard
 item.metalcomb_array.name=Metalcomb Array
@@ -84,7 +88,10 @@ tooltip.won.item.metalcomb_array=An array of metalcombs packed closely together.
 tooltip.won.item.wyrmarmorfrag=The shell of a heavily-armored wyrm, still radioactive and potent.
 
 death.attack.prober=%s got probed
-death.attack.roll=%1$s was steamrolled!
+death.attack.roll=%s was steamrolled!
+death.attack.shred=%s was shredded into minced meat
+death.attack.tear=%s was torn into pieces
+death.attack.bite=%s perished to a fatal bite
 death.attack.strykerslash=%s was turned into chopped player
 death.attack.strykerbite=%s died to a fatal bite
 death.attack.strykerstab=%s took one too many stab wounds
