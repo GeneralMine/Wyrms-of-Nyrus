@@ -36,6 +36,11 @@ item.creepedflesh.name=Creeped Flesh
 item.creepedbone.name=Creeped Bone
 item.creepedbulb.name=Creepbulb
 item.creepedbrainmatter.name=Creeped-over Brain
+item.follyfleshpiece.name=Follyflesh
+item.follybones.name=Folly Bone
+item.follyskinpiece.name=Folly Skin
+item.follybulbpiece.name=Folly Cyst
+item.wyrmsample.name=Radioactive Life Form Sample
 
 tile.metal_comb_panel_hive_creep.name=Hive Creep Metal Combs
 tile.hivecreeptop.name=Hive Creep Surface
@@ -53,6 +58,8 @@ tile.creepedgrass.name=Creeped Grass
 tile.metalcombpanelmimic.name=Mimicked Metalcomb Panels
 tile.follybone.name=Wyrmfolly Bone
 tile.follyflesh.name=Wyrmfolly Flesh
+tile.creepfleshblock.name=Creeped Flesh block
+tile.creepbulbblock.name=Creepbulb block
 
 subtitles.visitormessage=Starship humming
 subtitles.wyrmClicks=Clicking
@@ -74,6 +81,7 @@ subtitles.squelchingscream=Squelching screams
 tooltip.won.tile.metalcombpanelmimic=Fake metalcomb panels that mimic the properties of real metalcomb panels. Wyrms shouldn't be able to tell the difference... Right?
 tooltip.won.tile.wyrm_lights_orange=Not to be mistaken with the eggs, glowbulbs are hot to the touch. Handle with care.
 tooltip.won.tile.wyrm_lights_yellow=Not to be mistaken with the eggs, glowbulbs are hot to the touch. Handle with care.
+tooltip.won.tile.creepfleshblock=A block of still-moving flesh. Warm to the touch, for all the wrong reasons.
 
 tooltip.won.item.creepshard=A piece of inorganic Hive Creep off of one of the Creeped. Despite being chipped off of its host, it is still alive.
 tooltip.won.item.creepedflesh=The still-moving flesh of one of The Creeped. The main ingredient to a solution to this invasion...
@@ -88,13 +96,22 @@ tooltip.won.item.follybulbpiece=A large, solidified cyst from a felled wyrmfolly
 
 tooltip.won.item.metalcomb_array=An array of metalcombs packed closely together. Place multiple of these arrays together in specific patterns to create hivetech. Can only be made by Workers.
 tooltip.won.item.wyrmarmorfrag=The shell of a heavily-armored wyrm, still radioactive and potent.
+tooltip.won.item.wyrmsample=A high-quality sample of the nuclear shell configuration of a Nyral Wyrm. Extremely rare and valuable.
 
 death.attack.prober=%s got probed
 death.attack.roll=%s was steamrolled!
+death.attack.rollspecial=Looks like fresh %s pancake is on the breakfast menu now...
 death.attack.shred=%s was shredded into minced meat
 death.attack.tear=%s was torn into pieces
 death.attack.bite=%s perished to a fatal bite
+death.attack.smash=Only mushed pulp remains of %s
+death.attack.livingweaponfueling=%s forgot to feed their living weapon
+death.attack.livingweaponmelee=%s was mauled by a living weapon
+death.attack.livingweaponranged=%s was blasted from afar by a living weapon
+death.attack.livingweaponexplosive=%s was blown into bits by a living weapon
+death.attack.instakill=%s was completely deleted from existence by an enraged gigawyrm.
 death.attack.strykerslash=%s was turned into chopped player
 death.attack.strykerbite=%s died to a fatal bite
 death.attack.strykerstab=%s took one too many stab wounds
 death.attack.strykernormal=%s messed around and found out
+death.attack.strykerscreech=The eardrums of %s were violently ruptured.
