@@ -34,6 +34,8 @@ item.wyrmico.name=Wyrms Icon
 item.wyrmarmorfrag.name=Armor Fragment
 item.creepedflesh.name=Creeped Flesh
 item.creepedbone.name=Creeped Bone
+item.creepedbulb.name=Creepbulb
+item.creepedbrainmatter.name=Creeped-over Brain
 
 tile.metal_comb_panel_hive_creep.name=Hive Creep Metal Combs
 tile.hivecreeptop.name=Hive Creep Surface
