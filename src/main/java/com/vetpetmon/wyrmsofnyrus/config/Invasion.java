@@ -13,7 +13,7 @@ public class Invasion {
     public static boolean invasionEnabled, invasionStartsNaturally, EXCANON;
     public static float EXCANONDIFFICULTY;
 
-    public static int invasionStartMode, invasionStartTime, invasionStartChance;
+    public static int invasionStartMode, invasionStartTime, invasionStartChance, invasionEventFrequency;
 
     public static boolean probingEnabled;
     public static int invasionPointsPerKill;
@@ -61,6 +61,8 @@ public class Invasion {
         invasionStartMode = createConfigInt(config, CATEGORY,"Invasion Start Mode" ,"0 = Random chance, 1 = after x days, 2 = hybrid (time & chance). Default: 2", 2);
         invasionStartTime = createConfigInt(config, CATEGORY,"Invasion Start Time" ,"Number of days until wyrms can start to invade. Default: 30", 30);
         invasionStartChance = createConfigInt(config, CATEGORY,"Invasion Start Chance" ,"1 in x chance to occur each day before wyrms start invading. Default: 50", 50);
+
+        invasionEventFrequency = createConfigInt(config, CATEGORY,"Invasion Event Frequency" ,"Every x minutes, an invasion event takes place. Default: 8", 8);
 
         visitorDropPodFrequency = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency" ,"Delay for each drop pod spawn from The Visitor. Default: 3500", 3500);
         visitorDropPodFrequencyVariation = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency variation" ,"Random variation added to the drop delays, adds -x to x ticks to delay. Default: 500", 500);
