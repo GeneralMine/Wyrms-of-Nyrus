@@ -15,7 +15,7 @@ public class VisitorEvent {
 		if (((!wyrmVariables.WorldVariables.get(world).invasionStarted) && InvasionScheduler.invasionStartCondition()) || (forced)) {
 			if (!world.isRemote) {
 				Entity entityToSpawn = new EntityTheVisitor(world);
-				entityToSpawn.setLocationAndAngles(x, y+120, z, world.rand.nextFloat() * 360F, 0.0F);
+				entityToSpawn.setLocationAndAngles(x, y+70, z, world.rand.nextFloat() * 360F, 0.0F);
 				world.spawnEntity(entityToSpawn);
 			}
 			world.playSound(null, x, y, z, SoundRegistry.theVisitor, SoundCategory.MASTER, (float) 200, (float) 0.5);
