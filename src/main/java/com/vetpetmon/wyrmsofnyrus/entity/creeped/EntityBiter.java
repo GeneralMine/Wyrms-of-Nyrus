@@ -11,6 +11,7 @@ import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -22,11 +23,13 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
-
+    public static final ResourceLocation BITER_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/biter");
 
     public EntityBiter(World worldIn) {
         super(worldIn);
@@ -54,6 +57,11 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
         }
     }
 
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return BITER_LOOT_TABLE;
+    }
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
     }
