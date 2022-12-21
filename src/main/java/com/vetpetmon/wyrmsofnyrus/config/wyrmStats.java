@@ -99,12 +99,12 @@ public class wyrmStats {
     public static void creepedhumanoidStats(Configuration c) {
         final String CAT = "Vanitas Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Vanitas (Creeped Humanoids).\n");
-        creepedhumanoidHP = createConfigDouble(c, CAT, "Normal HP", "Default: 11", 11);
-        creepedhumanoidDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3", 3);
-        creepedhumanoidATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
-        creepedhumanoidSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
-        creepedhumanoidKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
-        creepedhumanoidSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default: 0.3", 0.3);
+        creepedhumanoidHP = createConfigDouble(c, CAT, "Normal HP", "Default: 18", 18);
+        creepedhumanoidDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4", 4);
+        creepedhumanoidATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 6", 6);
+        creepedhumanoidSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.25", 0.25);
+        creepedhumanoidKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.4", 0.4);
+        creepedhumanoidSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default:1.5", 1.5);
     }
     public static void myrmurStats(Configuration c) {
         final String CAT = "Myrmur Base stats";

@@ -4,7 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.RollAttackAI;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.SprinterAttackAI;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -31,15 +31,15 @@ import javax.annotation.Nullable;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
-public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
-    public static final ResourceLocation BITER_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/biter");
+    public static final ResourceLocation CREEPEDHUMANOID_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/creepedhumanoid");
 
-    public EntityBiter(World worldIn) {
+    public EntityCreepedHumanoid(World worldIn) {
         super(worldIn);
         this.casteType = 0;
-        setSize(0.75f, 0.85f);
-        experienceValue = 5;
+        setSize(0.9f, 1.85f);
+        experienceValue = 16;
         enablePersistence();
         setNoAI(false);
     }
@@ -47,7 +47,7 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
     @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,4);
+        wyrmDeathSpecial(this,getPosition(),world,5);
     }
 
     @Override
@@ -69,13 +69,13 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
     @Nullable
     @Override
     protected ResourceLocation getLootTable() {
-        return BITER_LOOT_TABLE;
+        return CREEPEDHUMANOID_LOOT_TABLE;
     }
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
     }
     @Override
-    public SoundEvent getAmbientSound() {return SoundRegistry.biter;}
+    public SoundEvent getAmbientSound() {return SoundRegistry.creepedhumanoid;}
 
     @Override
     protected void initEntityAI() {
@@ -83,15 +83,15 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
         afterAnimals();
         afterVillagers();
         afterMobs();
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.75D, false));
-        this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.5D));
-        this.tasks.addTask(1, new RollAttackAI(this, 1.0, true, wyrmStats.biterRollSPD, wyrmStats.biterRollDMG, SoundRegistry.bitercharge));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 0.5D, false));
+        this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.45D));
+        this.tasks.addTask(1, new SprinterAttackAI(this, 1.0, true, wyrmStats.creepedhumanoidSprintSPD, SoundRegistry.creepedhumanoidroar));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.biterHP,wyrmStats.biterDEF,wyrmStats.biterATK, wyrmStats.biterSPD,wyrmStats.biterKBR);
+        this.setStats(wyrmStats.creepedhumanoidHP,wyrmStats.creepedhumanoidDEF,wyrmStats.creepedhumanoidATK, wyrmStats.creepedhumanoidSPD,wyrmStats.creepedhumanoidKBR);
     }
 
     @Override
@@ -110,10 +110,10 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            if (getAttack() == 3) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.biterwyrm.roll"));
-            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.biterwyrm.move"));
+            if (getAttack() == 2) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepedhumanoid.run"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepedhumanoid.walk"));
         }
-        else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.biterwyrm.idle"));
+        else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepedhumanoid.idle"));
         return PlayState.CONTINUE;
     }
 

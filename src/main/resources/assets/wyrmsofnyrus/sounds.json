@@ -29,6 +29,26 @@
       }
     ]
   },
+  "entity.creepedhumanoid": {
+    "category": "hostile",
+    "subtitle": "subtitles.distortedspeech",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/creepedhumanoid",
+        "stream": false
+      }
+    ]
+  },
+  "entity.creepedhumanoidroar": {
+    "category": "hostile",
+    "subtitle": "subtitles.distortedscreech",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/creepedhumanoidroar",
+        "stream": false
+      }
+    ]
+  },
   "entity.prober": {
     "category": "hostile",
     "subtitle": "subtitles.prober",

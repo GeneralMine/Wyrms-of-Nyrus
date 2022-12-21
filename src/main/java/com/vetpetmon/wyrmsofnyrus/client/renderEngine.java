@@ -26,6 +26,8 @@ public class renderEngine {
             RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWarriorTainted.class, WyrmWarriorTaintedGeoRenderer::new);
         }
         RenderingRegistry.registerEntityRenderingHandler(EntityBiter.class, BiterGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCreepedHumanoid.class, CreepedHumanoidGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCreepPod.class, CreepPodGeoRenderer::new);
     }
 
 }

@@ -8,7 +8,7 @@
     "url": "https://github.com/Vetpetmon-Labs/Wyrms-of-Nyrus",
     "updateUrl": "https://github.com/Vetpetmon-Labs/Wyrms-of-Nyrus/releases",
     "authorList": ["Iké (Ikae)"],
-    "credits": "Vetpetmon Labs",
+    "credits": "Vetpetmon Labs, Mazellmi (Youtube, SFX)",
     "logoFile": "wyrmslogo.png",
     "screenshots": [],
     "dependencies": ["geckolib3"]
