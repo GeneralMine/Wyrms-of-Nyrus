@@ -13,15 +13,10 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
@@ -36,8 +31,6 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
-    private static final DataParameter<Boolean> SPRINTING = EntityDataManager.<Boolean>createKey(EntityMyrmur.class, DataSerializers.BOOLEAN);
-
     public EntityMyrmur(World world) {
         super(world);
         this.casteType = 3;
@@ -45,23 +38,6 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
         experienceValue = 12;
         enablePersistence();
         setNoAI(false);
-    }
-
-    protected void entityInit()
-    {
-        super.entityInit();
-        this.getDataManager().register(SPRINTING, Boolean.valueOf(false));
-    }
-
-    public void setSprinting(boolean sprinting)
-    {
-        this.getDataManager().set(SPRINTING, Boolean.valueOf(sprinting));
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean isSprinting()
-    {
-        return this.getDataManager().get(SPRINTING).booleanValue();
     }
 
     @Override
@@ -96,10 +72,6 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
     public SoundEvent getHurtSound(DamageSource ds)  {
         return SoundRegistry.wyrmHissTwo;
     }
-    /*@Override
-    public SoundEvent getDeathSound() {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
-    }*/
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
@@ -133,10 +105,7 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            // TODO: If it's got a target, display special animation instead of the normal moving animation.
-            if (isSprinting()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.attacking"));
-            /*else */
-            //if (hasAttackTarget()) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.attacking"));
+            if (getAttack() == 3) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.attacking"));
             else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.moving"));
         }
         else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.myrmurwyrm.idle"));

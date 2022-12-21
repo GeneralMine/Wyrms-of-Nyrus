@@ -30,6 +30,7 @@ public class wyrmStats {
     public static float wyrmlingHP, wyrmlingDEF, wyrmlingSPD;
     public static float creepwyrmHP, creepwyrmDEF, creepwyrmATK;
     public static float visitorHP, visitorDEF, visitorSPD, visitorKBR;
+    public static float creepedhumanoidHP, creepedhumanoidDEF, creepedhumanoidATK, creepedhumanoidSPD, creepedhumanoidKBR, creepedhumanoidSprintSPD;
     public static float strykerfollyHP, strykerfollyATK, strykerfollyDEF, strykerfollySPD, strykerfollyKBR, strykerfollyPointsTillAscension;
     public static float strykerfollyAscendedHP, strykerfollyAscendedATK, strykerfollyAscendedDEF, strykerfollyAscendedSPD, strykerfollyAscendedKBR;
 
@@ -38,6 +39,7 @@ public class wyrmStats {
         roverStats(c);
         CreepwyrmStats(c);
         biterStats(c);
+        creepedhumanoidStats(c);
         myrmurStats(c);
         warriorStats(c);
         soldierStats(c);
@@ -94,6 +96,16 @@ public class wyrmStats {
         biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 10", 10);
     }
 
+    public static void creepedhumanoidStats(Configuration c) {
+        final String CAT = "Vanitas Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Vanitas (Creeped Humanoids).\n");
+        creepedhumanoidHP = createConfigDouble(c, CAT, "Normal HP", "Default: 11", 11);
+        creepedhumanoidDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3", 3);
+        creepedhumanoidATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
+        creepedhumanoidSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
+        creepedhumanoidKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
+        creepedhumanoidSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default: 0.3", 0.3);
+    }
     public static void myrmurStats(Configuration c) {
         final String CAT = "Myrmur Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Myrmurs.\n");

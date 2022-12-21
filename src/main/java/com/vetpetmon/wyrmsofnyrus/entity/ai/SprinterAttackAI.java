@@ -34,7 +34,7 @@ public class SprinterAttackAI extends EntityAIAttackMelee {
     public void resetTask()
     {
         super.resetTask();
-        this.wyrm.setSprinting(false);
+        this.wyrm.setAttack(0);
     }
 
     public void updateTask()
@@ -44,11 +44,11 @@ public class SprinterAttackAI extends EntityAIAttackMelee {
 
         if (this.attackingTicks >= 5 && this.attackTick < 10)
         {
-            this.wyrm.setSprinting(true);
+            this.wyrm.setAttack(2);
         }
         else
         {
-            this.wyrm.setSprinting(false);
+            this.wyrm.setAttack(0);
         }
     }
 }
