@@ -32,7 +32,8 @@ public class InvasionEvent {
 
 			if ( eventRolled <= 1) {scoutingPodRaid.call(dependencies);}
 			else if ( eventRolled == 4 && Invasion.isCreepEnabled()) {creepwyrmDrop.call(dependencies);}
-			else if ( eventRolled == 5) {massIncursion.call(dependencies, 1);}
+			else if ( eventRolled == 5) {massIncursion.call(dependencies, 1);
+				if (Invasion.isCreepEnabled())creepwyrmDrop.call(dependencies);}
 			else if ( eventRolled == 7) {scoutingPodRaid.call(dependencies);
 				if (Invasion.isCreepEnabled())creepwyrmDrop.call(dependencies);}
 			else if ( eventRolled == 8) {massIncursion.call(dependencies, 1);}
