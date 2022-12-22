@@ -81,7 +81,7 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     public boolean attackEntityAsMob(Entity entityIn) {
         boolean result = super.attackEntityAsMob(entityIn);
         if (result) {
-            difficultyStats.applyPotionEffect(entityIn, HbmPotion.taint, 60, 1);
+            difficultyStats.applyPotionEffect(entityIn, HbmPotion.taint, 240, 1);
         }
         return result;
     }

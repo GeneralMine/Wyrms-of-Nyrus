@@ -65,6 +65,9 @@ public class WyrmlingGrowUp {
                 if (Evo.evoVariantsEnabled && (evoPointsInWorld >= 50 && RNG.dBase(3) == 2)) {
                     entityToSpawn = new EntityWyrmSoldierInfectoid(world);
                 }
+                else if (Evo.evoVariantsEnabled && (evoPointsInWorld >= 150 && RNG.dBase(3) == 2)) {
+                    entityToSpawn = new EntityWyrmSoldierfrost(world);
+                }
                 else {
                     entityToSpawn = new EntityWyrmSoldier(world);
                 }

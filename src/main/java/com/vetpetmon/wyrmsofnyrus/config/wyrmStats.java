@@ -15,11 +15,11 @@ public class wyrmStats {
     public static float warriorKBR, taintedWarriorKBR;
     public static float warriorSPD, taintedWarriorSPD;
 
-    public static float soldierHP, infectoidSoldierHP;
-    public static float soldierDEF, infectoidSoldierDEF;
-    public static float soldierATK, infectoidSoldierATK;
-    public static float soldierSPD, infectoidSoldierSPD;
-    public static float soldierKBR, infectoidSoldierKBR;
+    public static float soldierHP, infectoidSoldierHP, frostSoldierHP;
+    public static float soldierDEF, infectoidSoldierDEF, frostSoldierDEF;
+    public static float soldierATK, infectoidSoldierATK, frostSoldierATK;
+    public static float soldierSPD, infectoidSoldierSPD, frostSoldierSPD;
+    public static float soldierKBR, infectoidSoldierKBR, frostSoldierKBR;
     public static float roverHP, roverDEF, roverATK, roverSPD, roverKBR;
     public static float roverUraniumHP, roverUraniumDEF, roverUraniumATK, roverUraniumSPD, roverUraniumKBR;
     public static float myrmurHP, myrmurDEF, myrmurATK, myrmurSPD, myrmurSprintSPD, myrmurKBR;
@@ -141,18 +141,23 @@ public class wyrmStats {
         c.addCustomCategoryComment(CAT,"\nStats for the Soldiers, including variants.\n");
         soldierHP = createConfigDouble(c, CAT, "Normal HP", "Default: 26", 26);
         infectoidSoldierHP = createConfigDouble(c, CAT, "Infectoid Variant HP", "Default: 20", 20);
+        frostSoldierHP = createConfigDouble(c, CAT, "Frost Variant HP", "Default: 6", 6);
 
         soldierDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 7", 7);
         infectoidSoldierDEF = createConfigDouble(c, CAT, "Infectoid Variant DEF", "Default: 5", 5);
+        frostSoldierDEF = createConfigDouble(c, CAT, "Frost Variant DEF", "Default: 15", 15);
 
         soldierATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
         infectoidSoldierATK = createConfigDouble(c, CAT, "Infectoid Variant ATK", "Default: 9", 9);
+        frostSoldierATK = createConfigDouble(c, CAT, "Frost Variant ATK", "Default: 6", 6);
 
         soldierSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.5", 0.5);
         infectoidSoldierSPD = createConfigDouble(c, CAT, "Infectoid Variant SPD", "Default: 0.52", 0.52);
+        frostSoldierSPD = createConfigDouble(c, CAT, "Frost Variant SPD", "Default: 0.42", 0.42);
 
         soldierKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.7", 0.7);
-        infectoidSoldierKBR = createConfigDouble(c, CAT, "Infectoid Variant KBR", "Default: 0.52", 0.8);
+        infectoidSoldierKBR = createConfigDouble(c, CAT, "Infectoid Variant KBR", "Default: 0.52", 0.52);
+        frostSoldierKBR = createConfigDouble(c, CAT, "Frost Variant KBR", "Default: 1.0", 1.0);
     }
 
     public static void proberStats(Configuration c) {

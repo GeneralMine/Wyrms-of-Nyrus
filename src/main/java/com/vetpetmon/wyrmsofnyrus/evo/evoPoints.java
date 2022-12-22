@@ -48,10 +48,10 @@ public class evoPoints{
     public static void minimum(){
         if (Evo.customEvoMinCap > 0) minEvoCap += Evo.customEvoMinCap;
         if (Evo.evoReadsModpack) {
-            if (Loader.isModLoaded("draconicevolution")) minEvoCap += 100;
-            if (Loader.isModLoaded("srparasites")) minEvoCap += 100;
-            if (hbm.isEnabled()) minEvoCap += 80;
-            if (Loader.isModLoaded("techguns")) minEvoCap += 50;
+            if (Loader.isModLoaded("draconicevolution")) minEvoCap += 300;
+            if (Loader.isModLoaded("srparasites")) minEvoCap += 200;
+            if (hbm.isEnabled()) minEvoCap += 100;
+            if (Loader.isModLoaded("techguns")) minEvoCap += 75;
             if (Loader.isModLoaded("immersiveintelligence")) minEvoCap += 50;
             if (Loader.isModLoaded("securitycraft")) minEvoCap += 45;
             if (Loader.isModLoaded("roughmobs")) minEvoCap += 30;
