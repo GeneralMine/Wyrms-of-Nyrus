@@ -23,7 +23,6 @@ public final class WyrmRegister {
         RegHelper.RegEntity("wyrmworker", EntityWyrmWorker.class, id++, 64, 2);
         RegHelper.RegEntity("wyrmrover", EntityWyrmRover.class, id++, 64, 2);
         RegHelper.RegEntity("wyrmroverevo", EntityWyrmRoverUranium.class, id++, 64, 2);
-        RegHelper.RegEntity("wyrmdobber", EntityDobber.class, id++, 32, 2);
         RegHelper.RegEntity("callouspod", EntityCallousPod.class, id++, 256, 1);
         RegHelper.RegEntity("wyrmsoldier", EntityWyrmSoldier.class, id++, 64, 2);
         if (Invasion.isCreepEnabled()) RegHelper.RegEntity("creepwyrm", EntityCreepwyrm.class, id++, 128, 1);

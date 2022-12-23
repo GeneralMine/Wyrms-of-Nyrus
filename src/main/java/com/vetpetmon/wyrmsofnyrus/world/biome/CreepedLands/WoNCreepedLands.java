@@ -2,7 +2,6 @@ package com.vetpetmon.wyrmsofnyrus.world.biome.CreepedLands;
 
 
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityDobber;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
 import com.vetpetmon.wyrmsofnyrus.world.biome.WoNBiome;
 import net.minecraft.util.ResourceLocation;
@@ -29,7 +28,6 @@ public class WoNCreepedLands extends WoNBiome {
         this.spawnableWaterCreatureList.clear();
         this.spawnableCaveCreatureList.clear();
         this.spawnableCreatureList.add(new SpawnListEntry(EntityWyrmling.class, 20, 1, 4));
-        this.spawnableCreatureList.add(new SpawnListEntry(EntityDobber.class, 20, 5, 6));
     }
 
 
