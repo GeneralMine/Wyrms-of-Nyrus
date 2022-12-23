@@ -141,11 +141,11 @@ public class wyrmStats {
         c.addCustomCategoryComment(CAT,"\nStats for the Soldiers, including variants.\n");
         soldierHP = createConfigDouble(c, CAT, "Normal HP", "Default: 26", 26);
         infectoidSoldierHP = createConfigDouble(c, CAT, "Infectoid Variant HP", "Default: 20", 20);
-        frostSoldierHP = createConfigDouble(c, CAT, "Frost Variant HP", "Default: 6", 6);
+        frostSoldierHP = createConfigDouble(c, CAT, "Frost Variant HP", "Default: 8", 8);
 
         soldierDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 7", 7);
         infectoidSoldierDEF = createConfigDouble(c, CAT, "Infectoid Variant DEF", "Default: 5", 5);
-        frostSoldierDEF = createConfigDouble(c, CAT, "Frost Variant DEF", "Default: 15", 15);
+        frostSoldierDEF = createConfigDouble(c, CAT, "Frost Variant DEF", "Default: 20", 20);
 
         soldierATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
         infectoidSoldierATK = createConfigDouble(c, CAT, "Infectoid Variant ATK", "Default: 9", 9);
