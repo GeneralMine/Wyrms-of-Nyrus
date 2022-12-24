@@ -6,12 +6,12 @@ import net.minecraft.entity.monster.EntityMob;
 
 import java.util.Random;
 
-public class voidwyrm extends EntityAIBase {
+public class VoidwyrmAI extends EntityAIBase {
     private final EntityMob parentEntity;
     private final double FlySpeed;
     private final int FlightLevel;
 
-    public voidwyrm(EntityMob entity, double FlySpeed, int FlightLevel)
+    public VoidwyrmAI(EntityMob entity, double FlySpeed, int FlightLevel)
     {
         this.parentEntity = entity;
         this.FlightLevel = FlightLevel;

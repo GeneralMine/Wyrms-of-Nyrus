@@ -5,7 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.voidwyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.VoidwyrmAI;
 import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
 import net.minecraft.entity.Entity;
@@ -56,7 +56,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(4, new voidwyrm(this, wyrmStats.visitorSPD, 200));
+        this.tasks.addTask(4, new VoidwyrmAI(this, wyrmStats.visitorSPD, 200));
     }
 
     @Override
