@@ -11,6 +11,7 @@ import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.init.MobEffects;
@@ -49,7 +50,6 @@ public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, I
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
-        //this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
         afterPlayers();
         hivemindFollow();
         if (getAttackVillagers()) afterVillagers();

@@ -307,7 +307,11 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         }
         //if (hbm.isEnabled()) hbmComp.makeRadImmune(compound);
     }
-    
+    @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true, new Class[0]));
+    }
     @Override
     public void writeEntityToNBT(NBTTagCompound compound)
     {
