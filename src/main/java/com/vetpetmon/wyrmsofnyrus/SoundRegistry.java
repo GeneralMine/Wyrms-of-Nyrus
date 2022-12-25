@@ -16,11 +16,15 @@ public class SoundRegistry {
     public static SoundEvent slowwyrmsteps;
     public static SoundEvent myrmur;
     public static SoundEvent myrmurcharge;
+    public static SoundEvent biter;
+    public static SoundEvent bitercharge;
     public static SoundEvent nukeClose;
     public static SoundEvent nukeFar;
     public static SoundEvent wyrmroars;
     public static SoundEvent wyrmlingclicks;
     public static SoundEvent proberidle;
+    public static SoundEvent creepedhumanoid;
+    public static SoundEvent creepedhumanoidroar;
 
     public static void RegisterSounds() {
         wyrmClicks = RegisterSound("entity.wyrmClicks");
@@ -38,7 +42,10 @@ public class SoundRegistry {
         proberidle = RegisterSound("entity.prober");
         myrmur = RegisterSound("entity.myrmur");
         myrmurcharge = RegisterSound("entity.myrmurcharge");
-
+        biter = RegisterSound("entity.biter");
+        bitercharge = RegisterSound("entity.biterroll");
+        creepedhumanoid = RegisterSound("entity.creepedhumanoid");
+        creepedhumanoidroar = RegisterSound("entity.creepedhumanoidroar");
     }
 
     public static SoundEvent RegisterSound(String name) {

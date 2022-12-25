@@ -7,10 +7,13 @@ import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
+import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -94,6 +97,14 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
         if (source == DamageSource.ON_FIRE)
             return super.attackEntityFrom(source, amount*3);
         return super.attackEntityFrom(source, amount);
+    }
+
+    public boolean attackEntityAsMob(Entity entityIn) {
+        boolean result = super.attackEntityAsMob(entityIn);
+        if (result) {
+            difficultyStats.applyPotionEffect(entityIn, MobEffects.POISON, 120, 2);
+        }
+        return result;
     }
 
     @Override

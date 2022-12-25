@@ -15,20 +15,22 @@ public class wyrmStats {
     public static float warriorKBR, taintedWarriorKBR;
     public static float warriorSPD, taintedWarriorSPD;
 
-    public static float soldierHP, infectoidSoldierHP;
-    public static float soldierDEF, infectoidSoldierDEF;
-    public static float soldierATK, infectoidSoldierATK;
-    public static float soldierSPD, infectoidSoldierSPD;
-    public static float soldierKBR, infectoidSoldierKBR;
+    public static float soldierHP, infectoidSoldierHP, frostSoldierHP;
+    public static float soldierDEF, infectoidSoldierDEF, frostSoldierDEF;
+    public static float soldierATK, infectoidSoldierATK, frostSoldierATK;
+    public static float soldierSPD, infectoidSoldierSPD, frostSoldierSPD;
+    public static float soldierKBR, infectoidSoldierKBR, frostSoldierKBR;
     public static float roverHP, roverDEF, roverATK, roverSPD, roverKBR;
     public static float roverUraniumHP, roverUraniumDEF, roverUraniumATK, roverUraniumSPD, roverUraniumKBR;
     public static float myrmurHP, myrmurDEF, myrmurATK, myrmurSPD, myrmurSprintSPD, myrmurKBR;
+    public static float biterHP, biterDEF, biterATK, biterSPD, biterRollSPD, biterRollDMG, biterKBR;
     public static float proberHP, proberDEF, proberATK, proberSPD;
     public static float dobberHP, dobberDEF, dobberATK, dobberSPD;
     public static float workerHP, workerDEF, workerATK, workerSPD, workerKBR;
     public static float wyrmlingHP, wyrmlingDEF, wyrmlingSPD;
     public static float creepwyrmHP, creepwyrmDEF, creepwyrmATK;
     public static float visitorHP, visitorDEF, visitorSPD, visitorKBR;
+    public static float creepedhumanoidHP, creepedhumanoidDEF, creepedhumanoidATK, creepedhumanoidSPD, creepedhumanoidKBR, creepedhumanoidSprintSPD;
     public static float strykerfollyHP, strykerfollyATK, strykerfollyDEF, strykerfollySPD, strykerfollyKBR, strykerfollyPointsTillAscension;
     public static float strykerfollyAscendedHP, strykerfollyAscendedATK, strykerfollyAscendedDEF, strykerfollyAscendedSPD, strykerfollyAscendedKBR;
 
@@ -36,6 +38,8 @@ public class wyrmStats {
         startFile(c);
         roverStats(c);
         CreepwyrmStats(c);
+        biterStats(c);
+        creepedhumanoidStats(c);
         myrmurStats(c);
         warriorStats(c);
         soldierStats(c);
@@ -80,15 +84,37 @@ public class wyrmStats {
         creepwyrmATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2.5", 2.5);
     }
 
+    public static void biterStats(Configuration c) {
+        final String CAT = "Biter Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Biters.\n");
+        biterHP = createConfigDouble(c, CAT, "Normal HP", "Default: 11", 11);
+        biterDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3", 3);
+        biterATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
+        biterSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
+        biterKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
+        biterRollSPD = createConfigDouble(c, CAT, "Normal Roll SPD", "Default: 2.0", 2.0);
+        biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 10", 10);
+    }
+
+    public static void creepedhumanoidStats(Configuration c) {
+        final String CAT = "Vanitas Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Vanitas (Creeped Humanoids).\n");
+        creepedhumanoidHP = createConfigDouble(c, CAT, "Normal HP", "Default: 18", 18);
+        creepedhumanoidDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4", 4);
+        creepedhumanoidATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 6", 6);
+        creepedhumanoidSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.25", 0.25);
+        creepedhumanoidKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.4", 0.4);
+        creepedhumanoidSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default:1.5", 1.5);
+    }
     public static void myrmurStats(Configuration c) {
         final String CAT = "Myrmur Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Myrmurs.\n");
-        myrmurHP = createConfigDouble(c, CAT, "Normal HP", "Default: 6", 6);
+        myrmurHP = createConfigDouble(c, CAT, "Normal HP", "Default: 9", 9);
         myrmurDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3.5", 3.5);
-        myrmurATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
-        myrmurSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.45", 0.45);
+        myrmurATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
+        myrmurSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.35", 0.35);
         myrmurKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.1", 0.1);
-        myrmurSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default: 0.1", 0.1);
+        myrmurSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default: 0.2", 0.2);
     }
 
     public static void warriorStats(Configuration c) {
@@ -97,7 +123,7 @@ public class wyrmStats {
         warriorHP = createConfigDouble(c, CAT, "Normal HP", "Default: 26", 26);
         taintedWarriorHP = createConfigDouble(c, CAT, "Tainted Variant HP", "Default: 66", 66);
 
-        warriorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 6", 6);
+        warriorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 2", 2);
         taintedWarriorDEF = createConfigDouble(c, CAT, "Tainted Variant DEF", "Default: 16", 16);
 
         warriorATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
@@ -115,18 +141,23 @@ public class wyrmStats {
         c.addCustomCategoryComment(CAT,"\nStats for the Soldiers, including variants.\n");
         soldierHP = createConfigDouble(c, CAT, "Normal HP", "Default: 26", 26);
         infectoidSoldierHP = createConfigDouble(c, CAT, "Infectoid Variant HP", "Default: 20", 20);
+        frostSoldierHP = createConfigDouble(c, CAT, "Frost Variant HP", "Default: 8", 8);
 
         soldierDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 7", 7);
         infectoidSoldierDEF = createConfigDouble(c, CAT, "Infectoid Variant DEF", "Default: 5", 5);
+        frostSoldierDEF = createConfigDouble(c, CAT, "Frost Variant DEF", "Default: 20", 20);
 
         soldierATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
         infectoidSoldierATK = createConfigDouble(c, CAT, "Infectoid Variant ATK", "Default: 9", 9);
+        frostSoldierATK = createConfigDouble(c, CAT, "Frost Variant ATK", "Default: 6", 6);
 
         soldierSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.5", 0.5);
         infectoidSoldierSPD = createConfigDouble(c, CAT, "Infectoid Variant SPD", "Default: 0.52", 0.52);
+        frostSoldierSPD = createConfigDouble(c, CAT, "Frost Variant SPD", "Default: 0.42", 0.42);
 
         soldierKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.7", 0.7);
-        infectoidSoldierKBR = createConfigDouble(c, CAT, "Infectoid Variant KBR", "Default: 0.52", 0.8);
+        infectoidSoldierKBR = createConfigDouble(c, CAT, "Infectoid Variant KBR", "Default: 0.52", 0.52);
+        frostSoldierKBR = createConfigDouble(c, CAT, "Frost Variant KBR", "Default: 1.0", 1.0);
     }
 
     public static void proberStats(Configuration c) {

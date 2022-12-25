@@ -38,7 +38,7 @@ public class WoNHandler {
                 // Detects events every x ticks, ----[|]                                                    |
                 // or x/20 seconds, x/20/60 minutes...|                                                     |
                 //                                    V                                                     V
-                if (InvasionScheduler.detectHalfDayChange(world) && (InvasionScheduler.getCurrentHalfDay() > 0)) {
+                if (InvasionScheduler.runSchedule(world)) {
                     java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
                     dependencies.put("x", x);
                     dependencies.put("y", y);

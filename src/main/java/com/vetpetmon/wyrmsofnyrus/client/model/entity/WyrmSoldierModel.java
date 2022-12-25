@@ -1,13 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityCreepwyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmSoldier;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 

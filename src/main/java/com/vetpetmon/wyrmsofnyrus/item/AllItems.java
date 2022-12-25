@@ -14,4 +14,5 @@ public class AllItems {
     public static final Item metalcomb_array = new ItemBase("metalcomb_array", true);
     public static final Item wyrmarmorfrag = new ItemBase("wyrmarmorfrag", true);
     public static final Item wyrmico = new ItemBase("wyrmico", false, true);
+    public static final Item creepedbulb = new ItemBase("creepedbulb", true);
 }

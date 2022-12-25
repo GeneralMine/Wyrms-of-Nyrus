@@ -40,7 +40,6 @@ public class EntityWyrmling extends EntityWyrm {
 
     @Override
     protected void initEntityAI() {
-        super.initEntityAI();
         hivemindAvoid();
         this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 3, 1, 1.2));
         this.tasks.addTask(2, new EntityAIFollow(this, (float) 1, 10, 5));

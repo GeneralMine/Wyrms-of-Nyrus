@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client;
 
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.*;
-import com.vetpetmon.wyrmsofnyrus.compat.hbm;
+import com.vetpetmon.wyrmsofnyrus.entity.creeped.*;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Loader;
@@ -15,9 +15,9 @@ public class renderEngine {
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWorker.class, WyrmWorkerGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmRover.class, WyrmRoverGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmRoverUranium.class, WyrmRoverUraniumGeoRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDobber.class, DobberGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCallousPod.class, CallousPodGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmSoldier.class, WyrmSoldierGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmSoldierfrost.class, WyrmSoldierFrostGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityWyrmSoldierInfectoid.class, WyrmSoldierInfectoidGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepwyrm.class, CreepwyrmGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMyrmur.class, MyrmurGeoRenderer::new);
@@ -25,6 +25,9 @@ public class renderEngine {
         if (Loader.isModLoaded("hbm")) {
             RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWarriorTainted.class, WyrmWarriorTaintedGeoRenderer::new);
         }
+        RenderingRegistry.registerEntityRenderingHandler(EntityBiter.class, BiterGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCreepedHumanoid.class, CreepedHumanoidGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCreepPod.class, CreepPodGeoRenderer::new);
     }
 
 }

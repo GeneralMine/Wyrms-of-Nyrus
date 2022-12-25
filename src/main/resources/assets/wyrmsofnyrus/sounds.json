@@ -9,6 +9,46 @@
       }
     ]
   },
+  "entity.biter": {
+    "category": "hostile",
+    "subtitle": "subtitles.squelching",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/biter",
+        "stream": false
+      }
+    ]
+  },
+  "entity.biterroll": {
+    "category": "hostile",
+    "subtitle": "subtitles.squelchingscream",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/bitercharge",
+        "stream": false
+      }
+    ]
+  },
+  "entity.creepedhumanoid": {
+    "category": "hostile",
+    "subtitle": "subtitles.distortedspeech",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/creepedhumanoid",
+        "stream": false
+      }
+    ]
+  },
+  "entity.creepedhumanoidroar": {
+    "category": "hostile",
+    "subtitle": "subtitles.distortedscreech",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/creepedhumanoidroar",
+        "stream": false
+      }
+    ]
+  },
   "entity.prober": {
     "category": "hostile",
     "subtitle": "subtitles.prober",

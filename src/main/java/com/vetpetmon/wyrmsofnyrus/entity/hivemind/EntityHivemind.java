@@ -112,7 +112,7 @@ public abstract class EntityHivemind extends EntityLiving {
                 entityPicked = new EntityWyrmWarrior(this.world);
                 break;
             default:
-                entityPicked = new EntityDobber(this.world);
+                entityPicked = new EntityWyrmRover(this.world);
                 break;
         }
         return entityPicked;

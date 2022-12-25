@@ -2,7 +2,6 @@ package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityCallousPod;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityDobber;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmProber;
 import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import net.minecraft.entity.Entity;
@@ -23,13 +22,6 @@ public class callouspodContents {
                     Entity entityToSpawn = new EntityWyrmProber(world);
                     entityToSpawn.setLocationAndAngles(x, y+2, z, world.rand.nextFloat() * 360F, 0.0F);
                     world.spawnEntity(entityToSpawn);
-                    if (Invasion.callousPodIncludesDobbers) {
-                        for (int i = 0; i < ((RNG.getIntRangeInclu(Invasion.minWyrmsCallouspod*2,Invasion.maxWyrmsCallouspod*2))); i++) {
-                            entityToSpawn = new EntityDobber(world);
-                            entityToSpawn.setLocationAndAngles(x, y + 2, z, world.rand.nextFloat() * 360F, 0.0F);
-                            world.spawnEntity(entityToSpawn);
-                        }
-                    }
                 }
             }
         }
