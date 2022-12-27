@@ -24,7 +24,7 @@ public class AllBlocks {
     public static final Block follyflesh = new BlockBase(Material.CLAY, "follyflesh", SoundType.SLIME, 1, 1.5F).setCanCreatureSpawn(WorldConfig.follyBlocksStopSpawns);
     public static final Block follybone = new BlockPillar(Material.ROCK, "follybone", SoundType.STONE, 4, 8).setCanCreatureSpawn(WorldConfig.follyBlocksStopSpawns);
 
-    public static final Block inertcorium = new BlockBase(Material.IRON, "inertcorium", SoundType.METAL, 25.0F, 20.0F, true);
+    public static final Block inertcorium = new BlockBase(Material.IRON, "inertcorium", SoundType.METAL, 25.0F, 20.0F, false);
     public static final Block corium = new BlockCorium(Material.IRON, "corium", SoundType.METAL, 80.0F, 20.0F, true);
     public static final Block radioactivegas = new BlockGasRadioactive("radioactivegas");
 

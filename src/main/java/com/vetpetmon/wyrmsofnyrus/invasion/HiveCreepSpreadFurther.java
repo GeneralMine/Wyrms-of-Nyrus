@@ -58,10 +58,7 @@ public class HiveCreepSpreadFurther{
 				Block blockLooking = (world.getBlockState(posi)).getBlock();
 				if ((creepspreadRules(posi, world, pos)) && canSpreadThisTick) {
 					if (srp.isEnabled() && WorldConfig.vileEnabled) {
-						for(Block block : srp.srpBlocks) {
-							if (blockLooking ==  block) world.setBlockState(posi, AllBlocks.corium.getDefaultState(), 3);addPoints(world);
-							break;
-						}
+						if (srp.srpBlocks.contains(blockLooking)) world.setBlockState(posi, AllBlocks.corium.getDefaultState(), 3);addPoints(world);
 					}
 					if (blockLooking == (Block.getBlockFromName("minecraft:glowstone"))) {world.setBlockState(posi, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);addPoints(world);}
 					else if ((blockLooking instanceof BlockLog) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(posi, AllBlocks.creeplog.getDefaultState().withProperty(BlockHivecreepPillar.ACTIVE,1).withProperty(AXIS, EnumFacing.Axis.Y), 3);addPoints(world);} //Apparently Minecraft has two different BlockLog classes and I don't know what mods like to use so there you go, cover both.
