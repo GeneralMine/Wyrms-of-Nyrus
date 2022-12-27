@@ -1,7 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.compat;
 
 import com.vetpetmon.wyrmsofnyrus.synapselib.util.blockUtils;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.Loader;
 
@@ -19,7 +18,7 @@ public class srp {
 
     public static void compatPostInt() {
         srpBlocks = blockUtils.getModBlocks("srparasites");
-        wyrmsofnyrus.logger.info("srpBlocks is now defined as:" + srpBlocks);
+        //wyrmsofnyrus.logger.info("srpBlocks is now defined as:" + srpBlocks);
     }
 
 
