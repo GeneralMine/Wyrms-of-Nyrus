@@ -4,6 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepPillar;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
+import com.vetpetmon.wyrmsofnyrus.compat.srp;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
@@ -36,6 +37,7 @@ public class HiveCreepSpreadFurther{
 				(Invasion.invalidBlocks.contains((world.getBlockState(i).getBlock())))
 				|| matLookingBlock(i,BlockMaterials.CREEP,world)
 				|| (world.getBlockState(i).getBlock() == (Block.getBlockFromName("wyrmsofnyrus:creepedgrass")))
+				|| (world.getBlockState(i).getBlock() == (Block.getBlockFromName("wyrmsofnyrus:corium")))
 		);
 		if ((Invasion.CSBlockBLEnabled) && !(i.equals(OG))) return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);
 		else return (!isAir) && (isSoft) && (isFullCube) && (!isUnAllowedBlock);
@@ -47,13 +49,19 @@ public class HiveCreepSpreadFurther{
 		if (Invasion.isCreepEnabled()) {
 			int Range = 1;
 			assert false;
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 3; i++) {
 				int x = (int) ((pos.getX()) + RNG.PMRange(Range));
 				int y = (int) ((pos.getY()) + RNG.PMRange(Range));
 				int z = (int) ((pos.getZ()) + RNG.PMRange(Range));
 				BlockPos posi = new BlockPos(x, y, z);
 				Block blockLooking = (world.getBlockState(posi)).getBlock();
 				if ((creepspreadRules(posi, world, pos)) && canSpreadThisTick) {
+					if (srp.isEnabled()) {
+						for(Block block : srp.srpBlocks) {
+							if (blockLooking ==  block) world.setBlockState(posi, AllBlocks.corium.getDefaultState(), 3);addPoints(world);
+							break;
+						}
+					}
 					if (blockLooking == (Block.getBlockFromName("minecraft:glowstone"))) {world.setBlockState(posi, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);addPoints(world);}
 					else if ((blockLooking instanceof BlockLog) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(posi, AllBlocks.creeplog.getDefaultState().withProperty(BlockHivecreepPillar.ACTIVE,1).withProperty(AXIS, EnumFacing.Axis.Y), 3);addPoints(world);} //Apparently Minecraft has two different BlockLog classes and I don't know what mods like to use so there you go, cover both.
 					else if ((matLookingBlock(posi, Material.SAND, world))) {world.setBlockState(posi, AllBlocks.creepedsand.getDefaultState().withProperty(creepStaged.STAGE, 0), 3);addPoints(world);}

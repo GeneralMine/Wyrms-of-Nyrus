@@ -4,6 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmInvasionCommand;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmsTest;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
+import com.vetpetmon.wyrmsofnyrus.compat.srp;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
@@ -73,6 +74,7 @@ public class wyrmsofnyrus {
         if(logger == null) logger = event.getModLog();
         wyrmsofnyrus.logger.info(synapseLib.initializeMSG());
         hbm.compatInit();
+        srp.compatInit();
 
         //threading.checkThreads(); //We know this works
 
@@ -155,6 +157,7 @@ public class wyrmsofnyrus {
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
         evoPoints.minimum();
+        if(srp.isEnabled()) srp.compatPostInt();
     }
 
     @Mod.EventHandler

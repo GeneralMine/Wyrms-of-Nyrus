@@ -106,7 +106,7 @@ public class RNG {
      * @return negative or positive position value
      */
     public static double PMRange(double range) {
-        return getDoubleRange(-range,range+1);
+        return getDoubleRange(-range - 1,range+1);
     }
 
     /**
