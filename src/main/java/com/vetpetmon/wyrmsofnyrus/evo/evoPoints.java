@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.evo;
 
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
+import com.vetpetmon.wyrmsofnyrus.compat.srp;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -49,7 +50,7 @@ public class evoPoints{
         if (Evo.customEvoMinCap > 0) minEvoCap += Evo.customEvoMinCap;
         if (Evo.evoReadsModpack) {
             if (Loader.isModLoaded("draconicevolution")) minEvoCap += 300;
-            if (Loader.isModLoaded("srparasites")) minEvoCap += 200;
+            if (srp.isEnabled()) minEvoCap += 200;
             if (hbm.isEnabled()) minEvoCap += 100;
             if (Loader.isModLoaded("techguns")) minEvoCap += 75;
             if (Loader.isModLoaded("immersiveintelligence")) minEvoCap += 50;

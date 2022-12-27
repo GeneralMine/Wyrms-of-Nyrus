@@ -7,6 +7,7 @@ import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
 import com.vetpetmon.wyrmsofnyrus.compat.srp;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.util.blockUtils;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
@@ -56,7 +57,7 @@ public class HiveCreepSpreadFurther{
 				BlockPos posi = new BlockPos(x, y, z);
 				Block blockLooking = (world.getBlockState(posi)).getBlock();
 				if ((creepspreadRules(posi, world, pos)) && canSpreadThisTick) {
-					if (srp.isEnabled()) {
+					if (srp.isEnabled() && WorldConfig.vileEnabled) {
 						for(Block block : srp.srpBlocks) {
 							if (blockLooking ==  block) world.setBlockState(posi, AllBlocks.corium.getDefaultState(), 3);addPoints(world);
 							break;
