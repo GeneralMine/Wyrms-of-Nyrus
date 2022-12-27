@@ -62,6 +62,7 @@ tile.follybone.name=Wyrmfolly Bone
 tile.follyflesh.name=Wyrmfolly Flesh
 tile.creepfleshblock.name=Creeped Flesh block
 tile.creepbulbblock.name=Creepbulb block
+tile.corium.name=Corium
 
 subtitles.visitormessage=Starship humming
 subtitles.wyrmClicks=Clicking
@@ -86,6 +87,7 @@ tooltip.won.tile.metalcombpanelmimic=Fake metalcomb panels that mimic the proper
 tooltip.won.tile.wyrm_lights_orange=Not to be mistaken with the eggs, glowbulbs are hot to the touch. Handle with care.
 tooltip.won.tile.wyrm_lights_yellow=Not to be mistaken with the eggs, glowbulbs are hot to the touch. Handle with care.
 tooltip.won.tile.creepfleshblock=A block of still-moving flesh. Warm to the touch, for all the wrong reasons.
+tooltip.won.tile.corium=The rarest material ever, made only by the worst of accidents.
 
 tooltip.won.item.creepshard=A piece of inorganic Hive Creep off of one of the Creeped. Despite being chipped off of its host, it is still alive.
 tooltip.won.item.creepedflesh=The still-moving flesh of one of The Creeped. The main ingredient to a solution to this invasion...

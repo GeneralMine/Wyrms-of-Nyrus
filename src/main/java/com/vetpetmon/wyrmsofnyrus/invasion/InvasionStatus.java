@@ -3,10 +3,6 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-
-import java.util.Map;
 
 
 public class InvasionStatus {
@@ -20,9 +16,7 @@ public class InvasionStatus {
 		return (baseDiff * dFactorTwo);
 	}
 
-	public static void executescript(Map<String, Object> dependencies) {
-		if (Invasion.invasionEnabled) {
-			World world = (World) dependencies.get("world");
+	public static void executescript(World world) {
 			double invasionP = invasionPoints.get(world);
 			if (invasionP <= (Invasion.iPointsIStage1Threshold)) {
 				wyrmVariables.wyrmInvasionStatus = "Arriving";
@@ -49,17 +43,5 @@ public class InvasionStatus {
 				wyrmVariables.wyrmInvasionStatus = "Unknown";
 				invasionPoints.setDifficulty(world,getDifficulty(1.0F));
 			}
-		}
-	}
-
-	@SubscribeEvent
-	public void onWorldTick(TickEvent.WorldTickEvent event) {
-		if (event.phase == TickEvent.Phase.END && Invasion.invasionEnabled) {
-			World world = event.world;
-			java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
-			dependencies.put("world", world);
-			dependencies.put("event", event);
-			executescript(dependencies);
-		}
 	}
 }

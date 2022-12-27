@@ -4,6 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionEvent;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionScheduler;
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionStatus;
 import com.vetpetmon.wyrmsofnyrus.invasion.VisitorEvent;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -59,5 +60,7 @@ public class WoNHandler {
         //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onWorldTick was called successfully.");
         // EVOLUTION
         evoPoints.decay(world);
+        // INVASION
+        if (Invasion.invasionEnabled) InvasionStatus.executescript(world);
     }
 }
