@@ -63,6 +63,7 @@ tile.follyflesh.name=Wyrmfolly Flesh
 tile.creepfleshblock.name=Creeped Flesh block
 tile.creepbulbblock.name=Creepbulb block
 tile.corium.name=Corium
+tile.inertcorium.name=Inert Corium
 
 subtitles.visitormessage=Starship humming
 subtitles.wyrmClicks=Clicking
