@@ -3,7 +3,6 @@ package com.vetpetmon.wyrmsofnyrus.block.vile;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.generic.BlockBase;
 import com.vetpetmon.wyrmsofnyrus.compat.srp;
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
@@ -60,8 +59,8 @@ public class BlockCorium extends BlockBase {
         int y = (int) ((pos.getY()) + RNG.PMRange(Range));
         int z = (int) ((pos.getZ()) + RNG.PMRange(Range));
         BlockPos posi = new BlockPos(x, y, z);
-        if (srp.isEnabled() && WorldConfig.vileEnabled && ((RNG.getIntRangeInclu(0, Invasion.creepSpreadRate)) == Invasion.creepSpreadRate)) {
-            if (world.getBlockState(posi).isFullCube() && (world.getBlockState(posi).getBlock() == (Block.getBlockFromName("wyrmsofnyrus:corium")))) world.setBlockState(posi, AllBlocks.corium.getDefaultState(), 3); HiveCreepSpreadFurther.addPoints(world);
+        if (srp.isEnabled() && WorldConfig.vileEnabled) {
+            if (world.getBlockState(posi).isFullCube() && !(world.getBlockState(posi).getBlock() == (Block.getBlockFromName("wyrmsofnyrus:corium")))) world.setBlockState(posi, AllBlocks.corium.getDefaultState(), 3); HiveCreepSpreadFurther.addPoints(world);
         }
     }
 }
