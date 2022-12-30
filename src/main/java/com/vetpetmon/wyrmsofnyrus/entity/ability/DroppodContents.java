@@ -17,12 +17,12 @@ public class DroppodContents {
                     entityToSpawn = new EntityCreepwyrm(world);
                     entityToSpawn.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), world.rand.nextFloat() * 360F, 0.0F);
                     world.spawnEntity(entityToSpawn);
-                    for (int i = 0; i < ((RNG.getIntRangeInclu(2, 2 + size))); i++) {
+                    for (int i = 0, m = ((RNG.getIntRangeInclu(2, 2 + size))); i < m; i++) {
                         entityToSpawn = new EntityBiter(world);
                         entityToSpawn.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), world.rand.nextFloat() * 360F, 0.0F);
                         world.spawnEntity(entityToSpawn);
                     }
-                    for (int i = 0; i < ((RNG.getIntRangeInclu(1, 1 + size))); i++) {
+                    for (int i = 0, m = ((RNG.getIntRangeInclu(1, 1 + size))); i < m; i++) {
                         entityToSpawn = new EntityCreepedHumanoid(world);
                         entityToSpawn.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), world.rand.nextFloat() * 360F, 0.0F);
                         world.spawnEntity(entityToSpawn);
