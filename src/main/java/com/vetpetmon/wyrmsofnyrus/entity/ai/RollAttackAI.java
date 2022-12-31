@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ai;
 
-import com.vetpetmon.wyrmsofnyrus.DamageSources.DamageSourceRoll;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.util.EnumHand;
@@ -71,7 +71,7 @@ public class RollAttackAI extends EntityAIAttackMelee {
             this.attackTick = 20;
             this.attacker.swingArm(EnumHand.MAIN_HAND);
             this.attacker.attackEntityAsMob(target);
-            target.attackEntityFrom(DamageSourceRoll.ROLL, (float) this.extraDamage);
+            target.attackEntityFrom(WoNDamageSources.ROLL, (float) this.extraDamage);
         }
     }
 }
