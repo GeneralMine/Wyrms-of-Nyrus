@@ -34,6 +34,7 @@ public final class WyrmRegister {
         RegHelper.RegEntity("creepedhumanoid", EntityCreepedHumanoid.class, id++, 64, 1);
         RegHelper.RegEntity("creeppod", EntityCreepPod.class, id++, 256, 1);
         RegHelper.RegEntity("wyrmsoldierfrost", EntityWyrmSoldierfrost.class, id++, 64, 2);
+        RegHelper.RegEntity("creepling", EntityCreepling.class, id++, 32, 1);
 
         id = 130;
 

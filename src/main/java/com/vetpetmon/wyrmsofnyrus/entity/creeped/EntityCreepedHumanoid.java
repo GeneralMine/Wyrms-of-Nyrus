@@ -3,17 +3,12 @@ package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.SprinterAttackAI;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -54,16 +49,7 @@ public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IA
     public void onKillEntity(EntityLivingBase entity) {
         super.onKillEntity(entity);
         wyrmKillBonuses.pointIncrease(world);
-        if (entity instanceof EntityAnimal) {
-            Entity entityToSpawn = new EntityBiter(world);
-            entityToSpawn.setLocationAndAngles(this.posX, this.posY, this.posZ, world.rand.nextFloat() * 360F, 0.0F);
-            world.spawnEntity(entityToSpawn);
-        }
-        else if ((entity instanceof EntityZombie) || (entity instanceof EntityPlayer) || ( entity instanceof EntityVillager) || ( entity instanceof EntityWitch)) {
-            Entity entityToSpawn = new EntityCreepedHumanoid(world);
-            entityToSpawn.setLocationAndAngles(this.posX, this.posY, this.posZ, world.rand.nextFloat() * 360F, 0.0F);
-            world.spawnEntity(entityToSpawn);
-        }
+        CreepedEvents.convertKill(entity,this);
     }
 
     @Nullable

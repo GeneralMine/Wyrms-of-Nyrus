@@ -28,6 +28,7 @@ public class renderEngine {
         RenderingRegistry.registerEntityRenderingHandler(EntityBiter.class, BiterGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepedHumanoid.class, CreepedHumanoidGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepPod.class, CreepPodGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityCreepling.class, CreeplingGeoRenderer::new);
     }
 
 }

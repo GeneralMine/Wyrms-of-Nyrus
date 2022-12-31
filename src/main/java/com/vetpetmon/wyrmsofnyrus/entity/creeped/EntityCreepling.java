@@ -5,10 +5,10 @@ import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.RollAttackAI;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -26,14 +26,14 @@ import javax.annotation.Nullable;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
-public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityCreepling extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     public static final ResourceLocation BITER_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/biter");
-
-    public EntityBiter(World worldIn) {
+    private int timer;
+    public EntityCreepling(World worldIn) {
         super(worldIn);
         this.casteType = 0;
-        setSize(0.75f, 0.85f);
+        setSize(0.4f, 0.6f);
         experienceValue = 5;
         enablePersistence();
         setNoAI(false);
@@ -42,7 +42,7 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
     @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,4);
+        wyrmDeathSpecial(this,getPosition(),world,1);
     }
 
     @Override
@@ -51,6 +51,15 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
         wyrmKillBonuses.pointIncrease(world);
         CreepedEvents.convertKill(entity,this);
     }
+    @Override
+    public void onLivingUpdate(){
+        super.onLivingUpdate();
+        if (!this.world.isRemote && --this.timer <= 0 && isGrounded()){
+            CreepedEvents.creepBlockBelow(this);
+            this.setDead();
+        }
+    }
+
 
     @Nullable
     @Override
@@ -69,15 +78,14 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
         afterAnimals();
         afterVillagers();
         afterMobs();
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.75D, false));
-        this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.5D));
-        this.tasks.addTask(1, new RollAttackAI(this, 1.0, true, wyrmStats.biterRollSPD, wyrmStats.biterRollDMG, SoundRegistry.bitercharge));
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.95D, false));
+        this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.75D));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.biterHP,wyrmStats.biterDEF,wyrmStats.biterATK, wyrmStats.biterSPD,wyrmStats.biterKBR);
+        this.setStats(wyrmStats.creeplingHP,wyrmStats.creeplingDEF,wyrmStats.creeplingATK, wyrmStats.creeplingSPD,wyrmStats.creeplingKBR);
     }
 
     @Override
@@ -93,13 +101,22 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
         return super.attackEntityFrom(source, amount);
     }
 
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if (compound.hasKey("timer")) this.timer = compound.getInteger("timer");
+    }
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("timer", this.timer);
+    }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            if (getAttack() == 3) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.biterwyrm.roll"));
-            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.biterwyrm.move"));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepling.move"));
         }
-        else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.biterwyrm.idle"));
+        else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepling.idle"));
         return PlayState.CONTINUE;
     }
 

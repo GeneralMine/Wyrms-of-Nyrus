@@ -24,6 +24,7 @@ public class wyrmStats {
     public static float roverUraniumHP, roverUraniumDEF, roverUraniumATK, roverUraniumSPD, roverUraniumKBR;
     public static float myrmurHP, myrmurDEF, myrmurATK, myrmurSPD, myrmurSprintSPD, myrmurKBR;
     public static float biterHP, biterDEF, biterATK, biterSPD, biterRollSPD, biterRollDMG, biterKBR;
+    public static float creeplingHP, creeplingDEF, creeplingATK, creeplingSPD, creeplingKBR;
     public static float proberHP, proberDEF, proberATK, proberSPD;
     public static float dobberHP, dobberDEF, dobberATK, dobberSPD;
     public static float workerHP, workerDEF, workerATK, workerSPD, workerKBR;
@@ -39,6 +40,7 @@ public class wyrmStats {
         roverStats(c);
         CreepwyrmStats(c);
         biterStats(c);
+        creeplingStats(c);
         creepedhumanoidStats(c);
         myrmurStats(c);
         warriorStats(c);
@@ -94,6 +96,16 @@ public class wyrmStats {
         biterKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
         biterRollSPD = createConfigDouble(c, CAT, "Normal Roll SPD", "Default: 2.0", 2.0);
         biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 10", 10);
+    }
+
+    public static void creeplingStats(Configuration c) {
+        final String CAT = "Creepling Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Creeplings.\n");
+        creeplingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 4", 4);
+        creeplingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 1", 1);
+        creeplingATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
+        creeplingSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
+        creeplingKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
     }
 
     public static void creepedhumanoidStats(Configuration c) {
