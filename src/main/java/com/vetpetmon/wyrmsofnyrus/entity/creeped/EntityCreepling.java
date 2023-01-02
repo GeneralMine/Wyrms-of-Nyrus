@@ -37,6 +37,7 @@ public class EntityCreepling extends EntityWyrm implements IAnimatable, IAnimati
         experienceValue = 5;
         enablePersistence();
         setNoAI(false);
+        this.timer = 3600; // Lives for ~3 minutes
     }
 
     @Override
