@@ -4,7 +4,6 @@
 		"animation.warriorwyrm.idle": {
 			"loop": true,
 			"animation_length": 2,
-			"loop_delay": "-2",
 			"bones": {
 				"Body": {
 					"position": {
@@ -30,6 +29,23 @@
 							"vector": [0, 0, 0],
 							"easing": "easeOutBack",
 							"easingArgs": [1]
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.625": {
+							"vector": [1, 1.1, 1],
+							"easing": "easeInOutQuad"
+						},
+						"1.375": {
+							"vector": [1, 0.9, 1],
+							"easing": "easeInOutQuad"
+						},
+						"2.0": {
+							"vector": [1, 1, 1],
+							"easing": "easeInOutQuad"
 						}
 					}
 				},
@@ -324,6 +340,27 @@
 							"vector": [0, 15, 0],
 							"easing": "easeInOutCirc"
 						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.375": {
+							"vector": [1, 1, 2],
+							"easing": "easeInOutBack"
+						},
+						"0.5833": {
+							"vector": [1, 1, 1],
+							"easing": "easeOutSine"
+						},
+						"1.375": {
+							"vector": [1, 1, 2],
+							"easing": "easeInOutBack"
+						},
+						"1.6667": {
+							"vector": [1, 1, 1],
+							"easing": "easeOutSine"
+						}
 					}
 				},
 				"Wsect3Right": {
@@ -434,6 +471,27 @@
 						"2.0": {
 							"vector": [0, -15, 0],
 							"easing": "easeInOutCirc"
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.375": {
+							"vector": [1, 1, 2],
+							"easing": "easeInOutBack"
+						},
+						"0.5833": {
+							"vector": [1, 1, 1],
+							"easing": "easeOutSine"
+						},
+						"1.375": {
+							"vector": [1, 1, 2],
+							"easing": "easeInOutBack"
+						},
+						"1.6667": {
+							"vector": [1, 1, 1],
+							"easing": "easeOutSine"
 						}
 					}
 				},
@@ -720,7 +778,6 @@
 		"animation.warriorwyrm.moving": {
 			"loop": true,
 			"animation_length": 2,
-			"loop_delay": "-2",
 			"bones": {
 				"Body": {
 					"rotation": {
@@ -749,6 +806,23 @@
 							"vector": [0, 0, 0],
 							"easing": "easeOutBack",
 							"easingArgs": [1]
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.625": {
+							"vector": [1, 1.1, 1],
+							"easing": "easeInOutQuad"
+						},
+						"1.375": {
+							"vector": [1, 0.9, 1],
+							"easing": "easeInOutQuad"
+						},
+						"2.0": {
+							"vector": [1, 1, 1],
+							"easing": "easeInOutQuad"
 						}
 					}
 				},
@@ -1509,6 +1583,43 @@
 							"easing": "easeInOutBack",
 							"easingArgs": [1]
 						},
+						"1.8333": {
+							"vector": [-34.6093, 4.27637, 6.16712],
+							"easing": "easeInOutSine"
+						},
+						"1.875": {
+							"vector": [-34.34537, -4.27628, -6.28698],
+							"easing": "easeInOutSine"
+						},
+						"1.9167": {
+							"vector": [-34.6093, 4.27637, 6.16712],
+							"easing": "easeInOutSine"
+						},
+						"1.9583": {
+							"vector": [-34.34537, -4.27628, -6.28698],
+							"easing": "easeInOutSine"
+						},
+						"2.0417": {
+							"vector": [-34.19803, 7.10271, 10.31252],
+							"easing": "easeInOutSine"
+						},
+						"2.125": {
+							"vector": [-33.64964, -8.47416, -12.54228],
+							"easing": "easeInOutSine"
+						},
+						"2.2083": {
+							"vector": [-34.19803, 7.10271, 10.31252],
+							"easing": "easeInOutSine"
+						},
+						"2.3333": {
+							"vector": [-33.64964, -8.47416, -12.54228],
+							"easing": "easeInOutSine"
+						},
+						"2.5417": {
+							"vector": [-35, 0, 0],
+							"easing": "easeInOutBack",
+							"easingArgs": [1]
+						},
 						"5.0": {
 							"vector": [-15, 0, 0],
 							"easing": "easeInOutQuad"
@@ -1524,6 +1635,30 @@
 						"10.0417": {
 							"vector": [-15, 0, 0],
 							"easing": "easeInOutQuad"
+						}
+					},
+					"scale": {
+						"1.7917": {
+							"vector": [1, 1, 1]
+						},
+						"1.9583": {
+							"vector": [1.4, 0.9, 1],
+							"easing": "easeInOutSine"
+						},
+						"2.125": {
+							"vector": [1, 1, 1],
+							"easing": "easeInOutSine"
+						},
+						"5.875": {
+							"vector": [1, 1, 1]
+						},
+						"6.75": {
+							"vector": [1, 1.1, 1],
+							"easing": "easeInOutSine"
+						},
+						"7.375": {
+							"vector": [1, 1, 1],
+							"easing": "easeInOutSine"
 						}
 					}
 				},
@@ -1576,7 +1711,7 @@
 				},
 				"Wsect1Right": {
 					"rotation": {
-						"vector": [9.35269, -34.1391, -15.21679]
+						"vector": [-3.88962, -24.07129, -1.516]
 					}
 				},
 				"Wsect2Right": {
@@ -2445,6 +2580,19 @@
 							"vector": [0, -4, 0],
 							"easing": "easeInOutBack"
 						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"3.0": {
+							"vector": [1, 1.04, 1],
+							"easing": "easeInOutSine"
+						},
+						"6.0": {
+							"vector": [1, 1, 1],
+							"easing": "easeInOutSine"
+						}
 					}
 				},
 				"Neck": {
@@ -2703,13 +2851,15 @@
 						"0.0": {
 							"vector": [75, 0, 0]
 						},
-						"0.5833": {
+						"0.5417": {
 							"vector": [80, 0, 0],
-							"easing": "easeInOutSine"
+							"easing": "easeInBack",
+							"easingArgs": [1]
 						},
 						"1.3333": {
 							"vector": [75, 0, 0],
-							"easing": "easeInOutSine"
+							"easing": "easeInOutBack",
+							"easingArgs": [11]
 						}
 					},
 					"position": {
@@ -2722,6 +2872,20 @@
 						},
 						"1.3333": {
 							"vector": [0, -3, 4],
+							"easing": "easeInOutSine"
+						}
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.9167": {
+							"vector": [1, 1.2, 0.8],
+							"easing": "easeInOutElastic",
+							"easingArgs": [2]
+						},
+						"1.3333": {
+							"vector": [1, 1, 1],
 							"easing": "easeInOutSine"
 						}
 					}
@@ -2784,6 +2948,20 @@
 				"Wsect1Right": {
 					"rotation": {
 						"vector": [-17.5, -37.5, 0]
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.9167": {
+							"vector": [1, 1.2, 0.8],
+							"easing": "easeInOutElastic",
+							"easingArgs": [2]
+						},
+						"1.3333": {
+							"vector": [1, 1, 1],
+							"easing": "easeInOutSine"
+						}
 					}
 				},
 				"Wsect2Right": {
@@ -2799,6 +2977,20 @@
 				"Wing2Left": {
 					"rotation": {
 						"vector": [0, 20, 0]
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1, 1, 1]
+						},
+						"0.9167": {
+							"vector": [1, 1.2, 0.8],
+							"easing": "easeInOutElastic",
+							"easingArgs": [2]
+						},
+						"1.3333": {
+							"vector": [1, 1, 1],
+							"easing": "easeInOutSine"
+						}
 					}
 				},
 				"Wsect4Left": {
