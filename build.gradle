@@ -16,7 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 //apply plugin: 'org.spongepowered.mixin'
 
-version = '1.12.2-0.2.38'
+version = '1.12.2-0.2.4'
 group = 'com.vetpetmon.wyrmsofnyrus' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'wyrmsofnyrus'
 

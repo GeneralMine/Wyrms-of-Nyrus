@@ -7,8 +7,7 @@ import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStagedGrass;
 import com.vetpetmon.wyrmsofnyrus.compat.srp;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
-import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreepedHumanoid;
-import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreepling;
+import com.vetpetmon.wyrmsofnyrus.entity.creeped.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockOldLog;
@@ -24,14 +23,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.*;
-import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.addPoints;
 import static net.minecraft.block.BlockRotatedPillar.AXIS;
 
 public class CreepedEvents {
     public static void convertKill(Entity entityKilled, Entity sourceEntity) {
         World world = sourceEntity.world;
         if (entityKilled instanceof EntityAnimal) {
-            Entity entityToSpawn = new EntityCreepling(sourceEntity.world);
+            Entity entityToSpawn = new EntityBiter(sourceEntity.world);
             entityToSpawn.setLocationAndAngles(sourceEntity.posX, sourceEntity.posY, sourceEntity.posZ, world.rand.nextFloat() * 360F, 0.0F);
             world.spawnEntity(entityToSpawn);
         }

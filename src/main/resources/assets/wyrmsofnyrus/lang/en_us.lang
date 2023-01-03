@@ -44,6 +44,8 @@ item.follybones.name=Folly Bone
 item.follyskinpiece.name=Folly Skin
 item.follybulbpiece.name=Folly Cyst
 item.wyrmsample.name=Radioactive Life Form Sample
+item.meatybase.name=Meaty Base
+item.strykerspawner.name=Unknown Specimen
 
 tile.metal_comb_panel_hive_creep.name=Hive Creep Metal Combs
 tile.hivecreeptop.name=Hive Creep Surface
@@ -105,6 +107,8 @@ tooltip.won.item.follybulbpiece=A large, solidified cyst from a felled wyrmfolly
 tooltip.won.item.metalcomb_array=An array of metalcombs packed closely together. Place multiple of these arrays together in specific patterns to create hivetech. Can only be made by Workers.
 tooltip.won.item.wyrmarmorfrag=The shell of a heavily-armored wyrm, still radioactive and potent.
 tooltip.won.item.wyrmsample=A high-quality sample of the nuclear shell configuration of a Nyral Wyrm. Extremely rare and valuable.
+tooltip.won.item.meatybase=A lump of various meats from overworld creatures.
+tooltip.won.item.unknownspecimen=This strange, larvae-like creature squirms, as if it wants to be set free on the ground. There's no telling what this gross thing will grow up into.
 
 death.attack.prober=%s got probed
 death.attack.roll=%s was steamrolled!
