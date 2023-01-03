@@ -1,0 +1,27 @@
+{
+  "group": "wyrmsofnyrus",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "&#$",
+    "#@#",
+    "$#&"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:beef"
+    },
+    "&": {
+      "item": "minecraft:chicken"
+    },
+    "$": {
+      "item": "minecraft:mutton"
+    },
+    "@": {
+      "item": "minecraft:egg"
+    }
+  },
+  "result": {
+    "item": "wyrmsofnyrus:meatybase",
+    "count": 1
+  }
+}

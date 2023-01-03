@@ -1,0 +1,27 @@
+{
+  "group": "wyrmsofnyrus",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "&#$",
+    "#@#",
+    "$#&"
+  ],
+  "key": {
+    "#": {
+      "item": "wyrmsofnyrus:meatybase"
+    },
+    "&": {
+      "item": "wyrmsofnyrus:creepedbone"
+    },
+    "$": {
+      "item": "wyrmsofnyrus:creepedflesh"
+    },
+    "@": {
+      "item": "wyrmsofnyrus:creepedbulb"
+    }
+  },
+  "result": {
+    "item": "wyrmsofnyrus:strykerspawner",
+    "count": 1
+  }
+}
