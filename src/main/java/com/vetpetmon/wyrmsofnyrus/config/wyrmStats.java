@@ -235,13 +235,13 @@ public class wyrmStats {
     public static void strykerfollyStats(Configuration c) {
         final String CAT = "Strykerfolly Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Strykerfolly.\n");
-        strykelingfollyHP = createConfigDouble(c, CAT, "Primordial HP", "Default: 90", 90);
-        strykelingfollyATK = createConfigDouble(c, CAT, "Primordial ATK", "Default: 10", 10);
-        strykelingfollyDEF = createConfigDouble(c, CAT, "Primordial DEF", "Default: 10", 10);
-        strykelingfollySPD = createConfigDouble(c, CAT, "Primordial SPD", "Default: 0.85", 0.85);
-        strykelingfollyKBR = createConfigDouble(c, CAT, "Primordial KBR", "Default: 0.5", 0.5);
+        strykelingfollyHP = createConfigDouble(c, CAT, "Primordial HP", "Default: 10", 10);
+        strykelingfollyATK = createConfigDouble(c, CAT, "Primordial ATK", "Default: 5", 5);
+        strykelingfollyDEF = createConfigDouble(c, CAT, "Primordial DEF", "Default: 0", 0);
+        strykelingfollySPD = createConfigDouble(c, CAT, "Primordial SPD", "Default: 0.55", 0.55);
+        strykelingfollyKBR = createConfigDouble(c, CAT, "Primordial KBR", "Default: 0.85", 0.85);
 
-        strykerfollyHP = createConfigDouble(c, CAT, "Middling HP", "Default: 90", 90);
+        strykerfollyHP = createConfigDouble(c, CAT, "Middling HP", "Default: 50", 50);
         strykerfollyATK = createConfigDouble(c, CAT, "Middling ATK", "Default: 10", 10);
         strykerfollyDEF = createConfigDouble(c, CAT, "Middling DEF", "Default: 10", 10);
         strykerfollySPD = createConfigDouble(c, CAT, "Middling SPD", "Default: 0.85", 0.85);

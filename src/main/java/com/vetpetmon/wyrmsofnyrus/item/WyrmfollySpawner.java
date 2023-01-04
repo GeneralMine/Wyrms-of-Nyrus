@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.item;
 
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
+import com.vetpetmon.wyrmsofnyrus.entity.follies.EntityStrykeling;
 import com.vetpetmon.wyrmsofnyrus.synapselib.rendering.IHasModel;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -54,7 +54,7 @@ public class WyrmfollySpawner extends ItemBase implements IHasModel {
         EntityLiving entity = new EntitySpider(worldIn); //Failsafe just in case
         switch(eType) {
             case(1):
-                entity = new EntityWyrmling(worldIn);
+                entity = new EntityStrykeling(worldIn);
         }
         return entity;
     }

@@ -2,17 +2,17 @@ package com.vetpetmon.wyrmsofnyrus.entity.follies;
 
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -29,18 +29,29 @@ import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.creepsp
 public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, IMob {
     private final AnimationFactory factory = new AnimationFactory(this);
     protected int srpcothimmunity;
-    protected int killCount; // Also known as ascension points
-    private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.VARINT);
+    protected int killCount, level; // Also known as ascension points
+    protected float HP, DEF, ATK, SPD, KBR; // Stats
+    private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.VARINT);
     // Animation and AI util
     public void setAttack(int attackID)
     {
         this.getDataManager().set(ATTACKID, attackID);
     }
 
+
     //@SideOnly(Side.CLIENT)
     public int getAttack()
     {
         return this.getDataManager().get(ATTACKID);
+    }
+
+    public void updateLevel(){
+        level = (int) (Math.floor((float)killCount/Radiogenetics.follyAscenSteps)+1);
+        wyrmsofnyrus.logger.info("Wyrmfolly level is:" + this.level); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
+        this.setHealth(this.getHealth() + (this.getMaxHealth()/2)); //Heals half of health for every kill.
+    }
+    public int getLevel(){
+        return this.level;
     }
 
     public EntityWyrmfolly(final World worldIn) {
@@ -53,7 +64,7 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     }
 
     public void setStats(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR) {
-        float diff = (float) (((float) Math.floor((float) this.killCount/Radiogenetics.follyAscenSteps)+1) * Radiogenetics.follyAscenBuffFactor);
+        float diff = (float) (this.getLevel() * Radiogenetics.follyAscenBuffFactor);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, diff));
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff));
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff));
@@ -64,7 +75,8 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     @Override
     public void onKillEntity(EntityLivingBase entity) {
         super.onKillEntity(entity);
-        this.killCount++;
+        this.setKillCount(getKillCount()+1);
+        this.updateLevel();
         World world = entity.world;
         BlockPos lookingBlock = new BlockPos(entity.posX, entity.posY - 1, entity.posZ);
         //Block blockLooking = (world.getBlockState(lookingBlock)).getBlock();
@@ -78,11 +90,11 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     protected void initEntityAI() {
         super.initEntityAI();
         makeAllTargets();
-        this.tasks.addTask(2, new wyrmBreakDoors(this, 300));
-        this.tasks.addTask(1, new EntityAIWander(this, 0.8));
-        this.tasks.addTask(1, new EntityAILeapAtTarget(this, 0.55F));
+        this.tasks.addTask(2, new wyrmBreakDoors(this, 200));
+        this.tasks.addTask(1, new EntityAIWander(this, 0.65));
+        this.tasks.addTask(1, new EntityAILeapAtTarget(this, 1.25F));
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.45D, true));
+        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.15D, true));
     }
 
     public void setKillCount(int num) {this.killCount = num;}
@@ -94,9 +106,7 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     protected void makeAllTargets() {
         this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityVillager.class, true, false));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityAnimal.class, true, false));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 2, true, false, target -> !(target instanceof EntityWyrmfolly)));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityLiving.class, 2, true, false, target -> !((target instanceof EntityWyrmfolly)||(target instanceof EntityCreeper))));
     }
 
     @Override
@@ -105,12 +115,15 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
         this.dataManager.register(ATTACKID, 0);
     }
 
+    protected abstract void StatMap();
+
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
 
         if (compound.hasKey("srpcothimmunity")) this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         if (compound.hasKey("killcount")) this.killCount = compound.getInteger("killcount");
+        if (compound.hasKey("level")) this.level = compound.getInteger("level");
     }
 
     @Override
@@ -119,6 +132,7 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
         super.writeEntityToNBT(compound);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
         compound.setInteger("killcount", this.killCount);
+        compound.setInteger("level", this.level);
     }
 
     @Override
