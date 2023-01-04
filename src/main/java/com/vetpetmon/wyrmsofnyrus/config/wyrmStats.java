@@ -92,7 +92,7 @@ public class wyrmStats {
         c.addCustomCategoryComment(CAT,"\nStats for the Biters.\n");
         biterHP = createConfigDouble(c, CAT, "Normal HP", "Default: 11", 11);
         biterDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3", 3);
-        biterATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
+        biterATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2", 2);
         biterSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
         biterKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
         biterRollSPD = createConfigDouble(c, CAT, "Normal Roll SPD", "Default: 2.0", 2.0);
@@ -115,7 +115,7 @@ public class wyrmStats {
         creepedhumanoidHP = createConfigDouble(c, CAT, "Normal HP", "Default: 18", 18);
         creepedhumanoidDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4", 4);
         creepedhumanoidATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 6", 6);
-        creepedhumanoidSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.25", 0.25);
+        creepedhumanoidSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.35", 0.35);
         creepedhumanoidKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.4", 0.4);
         creepedhumanoidSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default:1.5", 1.5);
     }
@@ -236,7 +236,7 @@ public class wyrmStats {
         final String CAT = "Strykerfolly Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Strykerfolly.\n");
         strykelingfollyHP = createConfigDouble(c, CAT, "Primordial HP", "Default: 10", 10);
-        strykelingfollyATK = createConfigDouble(c, CAT, "Primordial ATK", "Default: 5", 5);
+        strykelingfollyATK = createConfigDouble(c, CAT, "Primordial ATK", "Default: 4", 4);
         strykelingfollyDEF = createConfigDouble(c, CAT, "Primordial DEF", "Default: 0", 0);
         strykelingfollySPD = createConfigDouble(c, CAT, "Primordial SPD", "Default: 0.55", 0.55);
         strykelingfollyKBR = createConfigDouble(c, CAT, "Primordial KBR", "Default: 0.85", 0.85);

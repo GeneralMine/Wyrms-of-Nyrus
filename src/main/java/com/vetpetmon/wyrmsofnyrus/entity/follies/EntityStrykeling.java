@@ -2,9 +2,13 @@ package com.vetpetmon.wyrmsofnyrus.entity.follies;
 
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.FollyBiteAttackAI;
+import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -40,7 +44,7 @@ public class EntityStrykeling extends EntityWyrmfolly implements IAnimatable, IA
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.updateLevel();
+        this.StatMap();
     }
 
     @Override
@@ -56,7 +60,7 @@ public class EntityStrykeling extends EntityWyrmfolly implements IAnimatable, IA
         this.tasks.addTask(2, new wyrmBreakDoors(this, 200));
         this.tasks.addTask(1, new EntityAIWander(this, 0.45));
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(1, new FollyBiteAttackAI(this.ATK,this, 1.0D, true));
     }
 
     @Override
@@ -64,6 +68,13 @@ public class EntityStrykeling extends EntityWyrmfolly implements IAnimatable, IA
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("age", this.age);
+    }
+    @Override
+    public boolean attackEntityAsMob(Entity entityIn)
+    {
+        this.playSound(SoundEvents.ENTITY_RABBIT_ATTACK, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.05F);
+        if (getAttack() == 8) return attackEntityAsMobO(entityIn,entityIn.attackEntityFrom(WoNDamageSources.causeStrykerBiteDamage(this), (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
+        return super.attackEntityAsMob(entityIn);
     }
 
     public void registerControllers(AnimationData data) {

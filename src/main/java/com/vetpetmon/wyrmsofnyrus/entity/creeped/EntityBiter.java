@@ -5,9 +5,13 @@ import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.BiteAttackAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.RollAttackAI;
+import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -69,9 +73,17 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
         afterAnimals();
         afterVillagers();
         afterMobs();
-        this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.75D, false));
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new BiteAttackAI(wyrmStats.biterATK, this, 0.75D, false));
         this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.5D));
-        this.tasks.addTask(1, new RollAttackAI(this, 1.0, true, wyrmStats.biterRollSPD, wyrmStats.biterRollDMG, SoundRegistry.bitercharge));
+        this.tasks.addTask(2, new RollAttackAI(this, 1.0, true, wyrmStats.biterRollSPD, wyrmStats.biterRollDMG, SoundRegistry.bitercharge));
+    }
+
+    @Override
+    public boolean attackEntityAsMob(Entity entityIn)
+    {
+        if (getAttack() == 8) return attackEntityAsMobO(entityIn,entityIn.attackEntityFrom(WoNDamageSources.causeBiteDamage(this), (float)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
+        return super.attackEntityAsMob(entityIn);
     }
 
     @Override

@@ -9,3 +9,4 @@ AI functions will consistently switch the byte values to what is seen below:
 5 = spit attack
 6 = melee windup
 7 = warning
+8 = bite

@@ -13,6 +13,7 @@ public class RollAttackAI extends EntityAIAttackMelee {
     private int attackingTicks;
     protected SoundEvent sound;
     protected double extraDamage;
+    protected boolean didAttack = false;
 
     /**
      * REQUIRES THE SPRINTING DATAPARAMETER TO BE PRESENT ALONG WITH setSprinting() METHOD.
@@ -34,13 +35,18 @@ public class RollAttackAI extends EntityAIAttackMelee {
         super.startExecuting();
         this.attackingTicks = 0;
         wyrm.playSound(sound,0.5F,1.0F);
+        this.didAttack = false;
     }
 
-    /*public boolean shouldContinueExecuting()
+    @Override
+    public boolean shouldContinueExecuting()
     {
-        if (this.attackingTicks >= 200) return false;
-        else return true;
-    }*/
+        if (this.didAttack) return false;
+        else {
+            super.shouldContinueExecuting();
+            return true;
+        }
+    }
 
     public void resetTask()
     {
@@ -66,12 +72,13 @@ public class RollAttackAI extends EntityAIAttackMelee {
     protected void checkAndPerformAttack(EntityLivingBase target, double p_190102_2_) {
         double d0 = this.getAttackReachSqr(target);
 
-        if (p_190102_2_ <= d0 && this.attackTick <= 0)
+        if (p_190102_2_ <= d0)
         {
             this.attackTick = 20;
             this.attacker.swingArm(EnumHand.MAIN_HAND);
             this.attacker.attackEntityAsMob(target);
             target.attackEntityFrom(WoNDamageSources.ROLL, (float) this.extraDamage);
+            this.didAttack = true;
         }
     }
 }

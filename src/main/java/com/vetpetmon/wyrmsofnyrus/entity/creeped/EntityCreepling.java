@@ -7,6 +7,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -79,6 +80,7 @@ public class EntityCreepling extends EntityWyrm implements IAnimatable, IAnimati
         afterAnimals();
         afterVillagers();
         afterMobs();
+        this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.95D, false));
         this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.75D));
     }

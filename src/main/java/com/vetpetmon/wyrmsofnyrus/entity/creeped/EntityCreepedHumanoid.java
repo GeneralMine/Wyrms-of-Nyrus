@@ -8,6 +8,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuse
 import com.vetpetmon.wyrmsofnyrus.entity.ai.SprinterAttackAI;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -69,6 +70,7 @@ public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IA
         afterAnimals();
         afterVillagers();
         afterMobs();
+        this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 0.5D, false));
         this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.45D));
         this.tasks.addTask(1, new SprinterAttackAI(this, 1.0, true, wyrmStats.creepedhumanoidSprintSPD, SoundRegistry.creepedhumanoidroar));
