@@ -41,7 +41,6 @@ public class EntityStrykeling extends EntityWyrmfolly implements IAnimatable, IA
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.updateLevel();
-        this.StatMap();
     }
 
     @Override
