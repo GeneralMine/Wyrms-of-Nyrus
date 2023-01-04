@@ -30,6 +30,8 @@ entity.creepedmonsteralpha.name=Maniae
 entity.bioscrew.name=Bioscrew
 entity.creeppod.name=Creep Pod
 entity.creepling.name=Creepling
+entity.strykeling.name=Strykeling
+entity.strykerfolly.name=Strykerfolly
 
 item.creepshard.name=Creepshard
 item.metalcomb_array.name=Metalcomb Array

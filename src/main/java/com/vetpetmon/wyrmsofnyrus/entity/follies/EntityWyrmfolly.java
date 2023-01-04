@@ -1,9 +1,12 @@
-package com.vetpetmon.wyrmsofnyrus.entity;
+package com.vetpetmon.wyrmsofnyrus.entity.follies;
 
+import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
@@ -21,23 +24,13 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.creepspreadRules;
+
 public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, IMob {
     private final AnimationFactory factory = new AnimationFactory(this);
     protected int srpcothimmunity;
     protected int killCount; // Also known as ascension points
     private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.VARINT);
-
-    // data management
-    public byte getByteFromDataManager(DataParameter<Byte> key) {
-        try {
-            return this.getDataManager().get(key);
-        }
-        catch (Exception e) {
-            return 0;
-        }
-    }
-
-
     // Animation and AI util
     public void setAttack(int attackID)
     {
@@ -59,6 +52,28 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
         this.killCount = 0;
     }
 
+    public void setStats(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR) {
+        float diff = (float) (((float) Math.floor((float) this.killCount/Radiogenetics.follyAscenSteps)+1) * Radiogenetics.follyAscenBuffFactor);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
+    }
+
+    @Override
+    public void onKillEntity(EntityLivingBase entity) {
+        super.onKillEntity(entity);
+        this.killCount++;
+        World world = entity.world;
+        BlockPos lookingBlock = new BlockPos(entity.posX, entity.posY - 1, entity.posZ);
+        //Block blockLooking = (world.getBlockState(lookingBlock)).getBlock();
+        if (creepspreadRules(lookingBlock, world, lookingBlock)) {
+            assert false;
+            world.setBlockState(lookingBlock, AllBlocks.follyflesh.getDefaultState(), 3);
+        }
+    }
+
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
@@ -70,13 +85,8 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.45D, true));
     }
 
-    public void setStats(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR) {
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, 1));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, 1));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, 1));
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
-    }
+    public void setKillCount(int num) {this.killCount = num;}
+    public int getKillCount() {return this.killCount;}
 
     protected boolean canDespawn() {return false;}
 
@@ -99,10 +109,8 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     public void readEntityFromNBT(NBTTagCompound compound)
     {
 
-        if (compound.hasKey("srpcothimmunity"))
-        {
-            this.srpcothimmunity = compound.getInteger("srpcothimmunity");
-        }
+        if (compound.hasKey("srpcothimmunity")) this.srpcothimmunity = compound.getInteger("srpcothimmunity");
+        if (compound.hasKey("killcount")) this.killCount = compound.getInteger("killcount");
     }
 
     @Override
@@ -110,6 +118,7 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
+        compound.setInteger("killcount", this.killCount);
     }
 
     @Override

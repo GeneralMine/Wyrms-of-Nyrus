@@ -9,10 +9,11 @@ public class Radiogenetics {
     public static boolean immuneToFalling, immuneToCacti;
     public static boolean explodingWyrms;
 
-    public static int workerProductivity;
+    public static int follyAscenSteps, workerProductivity;
     public static int creepwyrmInfestRange;
 
     public static double wyrmStrength, wyrmResistance, wyrmVitality;
+    public static double follyAscenBuffFactor;
 
     public static void loadFromConfig(Configuration config) {
 
@@ -24,10 +25,13 @@ public class Radiogenetics {
         explodingWyrms = createConfigBool(config, CATEGORY, "Wyrms go supercritical", "Lore-wise, wyrms can undergo uncontrolled nuclear chain reactions when set on fire. This makes wyrms explode on death if they're on fire upon death. Default: true", true);
 
         workerProductivity = createConfigInt(config, CATEGORY, "Worker productivity", "As a baseline, workers make a product every x ticks. This value is the base time it will take, total time will vary based on RNG still. Default: 2500", 2500);
-        creepwyrmInfestRange= createConfigInt(config, CATEGORY, "Creepwyrm Infestation Range", "Creepwyrms can check a block within a x by x by x range and infest it. For example, a range of 8 makes creepwyrms add blocks in a 8x8x8 range. Default: 16", 16);
+        creepwyrmInfestRange = createConfigInt(config, CATEGORY, "Creepwyrm Infestation Range", "Creepwyrms can check a block within a x by x by x range and infest it. For example, a range of 8 makes creepwyrms add blocks in a 8x8x8 range. Default: 16", 16);
 
         wyrmStrength = createConfigDouble(config, CATEGORY, "Wyrm Strength", "The attack strength of wyrms. 1.0 = 100% Default: 1.0", 1.0);
         wyrmResistance = createConfigDouble(config, CATEGORY, "Wyrm Resistance", "The armor of wyrms. 1.0 = 100% Default: 1.0", 1.0);
         wyrmVitality = createConfigDouble(config, CATEGORY, "Wyrm Vitality", "The health of wyrms. 1.0 = 100% Default: 1.0", 1.0);
+
+        follyAscenBuffFactor = createConfigDouble(config, CATEGORY, "Wyrmfolly buff factor", "The factor of which wyrmfolly stats increase. Default: 1.05", 1.05);
+        follyAscenSteps= createConfigInt(config, CATEGORY, "Wyrmfolly level steps", "The number of kills before a folly levels up. Default: 5", 5);
     }
 }

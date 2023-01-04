@@ -32,6 +32,7 @@ public class wyrmStats {
     public static float creepwyrmHP, creepwyrmDEF, creepwyrmATK;
     public static float visitorHP, visitorDEF, visitorSPD, visitorKBR;
     public static float creepedhumanoidHP, creepedhumanoidDEF, creepedhumanoidATK, creepedhumanoidSPD, creepedhumanoidKBR, creepedhumanoidSprintSPD;
+    public static float strykelingfollyHP, strykelingfollyATK, strykelingfollyDEF, strykelingfollySPD, strykelingfollyKBR;
     public static float strykerfollyHP, strykerfollyATK, strykerfollyDEF, strykerfollySPD, strykerfollyKBR, strykerfollyPointsTillAscension;
     public static float strykerfollyAscendedHP, strykerfollyAscendedATK, strykerfollyAscendedDEF, strykerfollyAscendedSPD, strykerfollyAscendedKBR;
 
@@ -234,13 +235,19 @@ public class wyrmStats {
     public static void strykerfollyStats(Configuration c) {
         final String CAT = "Strykerfolly Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Strykerfolly.\n");
-        strykerfollyHP = createConfigDouble(c, CAT, "Normal HP", "Default: 90", 90);
-        strykerfollyATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 10", 10);
-        strykerfollyDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 10", 10);
-        strykerfollySPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.85", 0.85);
-        strykerfollyKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.5", 0.5);
+        strykelingfollyHP = createConfigDouble(c, CAT, "Primordial HP", "Default: 90", 90);
+        strykelingfollyATK = createConfigDouble(c, CAT, "Primordial ATK", "Default: 10", 10);
+        strykelingfollyDEF = createConfigDouble(c, CAT, "Primordial DEF", "Default: 10", 10);
+        strykelingfollySPD = createConfigDouble(c, CAT, "Primordial SPD", "Default: 0.85", 0.85);
+        strykelingfollyKBR = createConfigDouble(c, CAT, "Primordial KBR", "Default: 0.5", 0.5);
 
-        strykerfollyPointsTillAscension = createConfigInt(c, CAT, "Kills until Ascension", "Default: 400", 400);
+        strykerfollyHP = createConfigDouble(c, CAT, "Middling HP", "Default: 90", 90);
+        strykerfollyATK = createConfigDouble(c, CAT, "Middling ATK", "Default: 10", 10);
+        strykerfollyDEF = createConfigDouble(c, CAT, "Middling DEF", "Default: 10", 10);
+        strykerfollySPD = createConfigDouble(c, CAT, "Middling SPD", "Default: 0.85", 0.85);
+        strykerfollyKBR = createConfigDouble(c, CAT, "Middling KBR", "Default: 0.5", 0.5);
+
+        strykerfollyPointsTillAscension = createConfigInt(c, CAT, "Kills until Ascension", "Default: 200", 400);
 
         strykerfollyAscendedHP = createConfigDouble(c, CAT, "Ascended HP", "Default: 500", 500);
         strykerfollyAscendedATK = createConfigDouble(c, CAT, "Ascended ATK", "Default: 40", 40);
