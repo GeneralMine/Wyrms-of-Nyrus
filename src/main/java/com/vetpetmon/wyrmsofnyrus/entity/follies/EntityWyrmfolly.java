@@ -4,7 +4,6 @@ import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -51,7 +50,7 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
 
     public void updateLevel(){
         level = (int) (Math.floor((float)killCount/Radiogenetics.follyAscenSteps)+1);
-        wyrmsofnyrus.logger.info("Wyrmfolly level is:" + this.level); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
+        //wyrmsofnyrus.logger.info("Wyrmfolly level is:" + this.level); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
         this.setHealth(this.getHealth() + (this.getMaxHealth()/2)); //Heals half of health for every kill.
     }
     public int getLevel(){
