@@ -42,10 +42,7 @@ public class RollAttackAI extends EntityAIAttackMelee {
     public boolean shouldContinueExecuting()
     {
         if (this.didAttack) return false;
-        else {
-            super.shouldContinueExecuting();
-            return true;
-        }
+        return super.shouldContinueExecuting();
     }
 
     public void resetTask()
