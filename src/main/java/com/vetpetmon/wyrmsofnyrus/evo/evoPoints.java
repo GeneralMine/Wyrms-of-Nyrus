@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.Loader;
  * A collection of functions used to mess with invasion points.
  * I made this specifically because I hated writing so much code every
  * time I wanted to add points to the invasion
- *
  * Even worse, there's no dedicated getter. I'm fixing that as we speak.
  */
 public class evoPoints{
