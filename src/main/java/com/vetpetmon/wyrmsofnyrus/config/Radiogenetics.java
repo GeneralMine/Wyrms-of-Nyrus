@@ -2,7 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.config;
 
 import net.minecraftforge.common.config.Configuration;
 
-import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
+import static com.vetpetmon.synapselib.util.CFG.*;
 
 // The overall properties of wyrms.
 public class Radiogenetics {

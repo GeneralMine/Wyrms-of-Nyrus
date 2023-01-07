@@ -7,7 +7,7 @@ import net.minecraftforge.common.config.Configuration;
 
 import java.util.ArrayList;
 
-import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
+import static com.vetpetmon.synapselib.util.CFG.*;
 
 public class Invasion {
     public static boolean invasionEnabled, invasionStartsNaturally, EXCANON;

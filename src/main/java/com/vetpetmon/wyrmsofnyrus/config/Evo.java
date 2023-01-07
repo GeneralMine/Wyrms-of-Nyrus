@@ -3,7 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.config;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraftforge.common.config.Configuration;
 
-import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
+import static com.vetpetmon.synapselib.util.CFG.*;
 
 public class Evo {
     public static boolean evoEnabled, evoReadsModpack, evoVariantsEnabled;

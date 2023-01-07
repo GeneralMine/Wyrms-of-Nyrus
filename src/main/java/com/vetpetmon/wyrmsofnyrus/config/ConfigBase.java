@@ -13,8 +13,13 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import static com.vetpetmon.synapselib.util.CFG.createDirectory;
 import static com.vetpetmon.wyrmsofnyrus.config.Invasion.isEXCANON;
-import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
 import static com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus.proxy;
 
 public class ConfigBase {
@@ -35,6 +40,8 @@ public class ConfigBase {
 
     // Specific for WoN.
     public static void reloadConfig() {
+
+        //firstTime();
 
         for (Configuration i:configs) i.load();
         AI.loadFromConfig(general);
@@ -71,6 +78,45 @@ public class ConfigBase {
             AI.performanceAIMode = false;
             Radiogenetics.immuneToCacti = true;
             Radiogenetics.immuneToFalling = true;
+        }
+    }
+
+    /**
+     * Creates our mod's first time dialogue message, which asks the user what config presets they wish to use.
+     * Doesn't work yet, needs to pause FML's loading process to avoid nullPointerExceptions.
+     */
+    public static void firstTime() {
+        JFrame jf = new JFrame();
+        JDialog jd = new JDialog(jf);
+        jd.setLayout(new FlowLayout());
+        final boolean[] choiceSelected = {false};
+
+        jd.setBounds(500, 300, 500, 100);
+        JLabel jl = new JLabel("This appears to be your first time with Wyrms of Nyrus, or you have missing configurations. \n What difficulty preset would you like to use?");
+
+        JButton norm = new JButton("Regular");
+        JButton dw = new JButton("Death World");
+
+        norm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choiceSelected[0] = true;
+                jd.setVisible(false);
+            }
+        });
+        dw.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choiceSelected[0] = true;
+                jd.setVisible(false);
+            }
+        });
+
+        jd.add(jl); jd.add(norm);jd.add(dw);
+        jd.setVisible(true);
+
+        while(!choiceSelected[0]){
+
         }
     }
 

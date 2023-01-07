@@ -1,18 +1,16 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import com.vetpetmon.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmInvasionCommand;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmsTest;
-import com.vetpetmon.wyrmsofnyrus.compat.hbm;
-import com.vetpetmon.wyrmsofnyrus.compat.srp;
+import com.vetpetmon.wyrmsofnyrus.compat.*;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
-import com.vetpetmon.wyrmsofnyrus.synapselib.synapseLib;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -54,7 +52,7 @@ import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 import static com.vetpetmon.wyrmsofnyrus.config.ConfigBase.reloadConfig;
 import static com.vetpetmon.wyrmsofnyrus.config.ConfigBase.setCanon;
 
-@Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION, dependencies = "required-after:geckolib3")
+@Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION, dependencies = "required-after:geckolib3;required-after:synlib;")
 public class wyrmsofnyrus {
     public static final String MODID = libVars.ModID;
     public static final String NAME = libVars.ModName;
@@ -72,7 +70,8 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
-        wyrmsofnyrus.logger.info(synapseLib.initializeMSG());
+        synlib.init();
+
         hbm.compatInit();
         srp.compatInit();
 

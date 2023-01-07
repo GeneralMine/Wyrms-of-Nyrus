@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
-import com.vetpetmon.wyrmsofnyrus.synapselib.CFG;
+import com.vetpetmon.synapselib.util.CFG;
 import net.minecraftforge.common.config.Configuration;
 
 public class WorldConfig {

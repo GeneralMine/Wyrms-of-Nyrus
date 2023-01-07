@@ -2,7 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.config;
 
 import net.minecraftforge.common.config.Configuration;
 
-import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.*;
+import static com.vetpetmon.synapselib.util.CFG.*;
 
 //Giant list of wyrm stats for fine-tuning
 public class wyrmStats {

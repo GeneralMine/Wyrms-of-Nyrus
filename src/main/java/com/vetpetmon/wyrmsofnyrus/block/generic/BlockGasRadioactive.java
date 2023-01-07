@@ -2,7 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.block.generic;
 
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import com.vetpetmon.wyrmsofnyrus.synapselib.rendering.IHasModel;
+import com.vetpetmon.synapselib.rendering.IHasModel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
