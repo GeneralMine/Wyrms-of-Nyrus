@@ -2,7 +2,6 @@ package com.vetpetmon.wyrmsofnyrus.entity.ai;
 
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.util.EnumHand;
@@ -89,12 +88,12 @@ public class RollAttackAI extends EntityAIAttackMelee {
             target.motionZ = 0.0D;
             target.motionY = 0.0D;
             this.numberAttacks++;
-            wyrmsofnyrus.logger.info("Biter performed attack frame.");
+            //wyrmsofnyrus.logger.info("Biter performed attack frame.");
         }
         if (this.numberAttacks > 10 || this.rollTime > this.maxRollTime) {
             this.didAttack = true; //after 10 attack frames OR after attack time reaches maximum, cancel attack.
-            wyrmsofnyrus.logger.info("Biter canceled task, numATK: " + this.numberAttacks + " and RollTime: " + this.rollTime);
+            //wyrmsofnyrus.logger.info("Biter canceled task, numATK: " + this.numberAttacks + " and RollTime: " + this.rollTime);
         }
-        wyrmsofnyrus.logger.info("Biter did make an attack, numATK: " + this.numberAttacks + " and RollTime: " + this.rollTime);
+        //wyrmsofnyrus.logger.info("Biter did make an attack, numATK: " + this.numberAttacks + " and RollTime: " + this.rollTime);
     }
 }
