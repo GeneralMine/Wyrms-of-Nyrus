@@ -43,7 +43,7 @@ public class RollAttackAI extends EntityAIAttackMelee {
         this.didAttack = false;
         this.numberAttacks = 0; //1 second max of iframe-ignoring attack
         this.rollTime = 0;
-        this.maxRollTime = 10000; //5 seconds of AI task time
+        this.maxRollTime = 100; //5 seconds of AI task time
     }
 
     @Override
@@ -81,20 +81,19 @@ public class RollAttackAI extends EntityAIAttackMelee {
         if (attackerDistance <= d0 && this.attackTick <= 20)
         {
             this.attackTick = 0;
-            target.hurtTime = 0; //Ignore I-frames.
+            target.hurtResistantTime = 0; //Ignore I-frames.
             this.attacker.swingArm(EnumHand.MAIN_HAND);
             this.attacker.attackEntityAsMob(target);
             target.attackEntityFrom(WoNDamageSources.ROLL, (float) this.extraDamage);
-            target.hurtTime = 0; //Ignore I-frames.
             target.motionX = 0.0D; //Now cancel knockback
             target.motionZ = 0.0D;
             target.motionY = 0.0D;
             this.numberAttacks++;
             wyrmsofnyrus.logger.info("Biter performed attack frame.");
-            if (this.numberAttacks > 20 || this.rollTime > this.maxRollTime) {
-                this.didAttack = true; //after 20 attack frames OR after attack time reaches maximum, cancel attack.
-                wyrmsofnyrus.logger.info("Biter canceled task, numATK: " + this.numberAttacks + " and RollTime: " + this.rollTime);
-            }
+        }
+        if (this.numberAttacks > 10 || this.rollTime > this.maxRollTime) {
+            this.didAttack = true; //after 10 attack frames OR after attack time reaches maximum, cancel attack.
+            wyrmsofnyrus.logger.info("Biter canceled task, numATK: " + this.numberAttacks + " and RollTime: " + this.rollTime);
         }
         wyrmsofnyrus.logger.info("Biter did make an attack, numATK: " + this.numberAttacks + " and RollTime: " + this.rollTime);
     }
