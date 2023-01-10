@@ -26,6 +26,8 @@ public class ConfigBase {
 
     // Reorganization and code optimizations done by Byte and [NAME RETRACTED]
     // ConfigLib is now officially part of SynapseLib, you're welcome. -Byte
+
+    // TODO: Make this create folders of presets, with built-in presets defined by JSON files. Set the default to Death World on 0.2.6, preserve original defaults and give in-game config GUI via Forge's built-in configuration system instead of making users have to manually edit configuration files and restart the game. Leave Client configs out of presets. -[NAME REDACTED]
     private static final String ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
     private static final Configuration
             general = createDirectory("general", ConfigDirectory),
