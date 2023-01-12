@@ -8,14 +8,28 @@ import com.vetpetmon.wyrmsofnyrus.invasion.InvasionStatus;
 import com.vetpetmon.wyrmsofnyrus.invasion.VisitorEvent;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 @Mod.EventBusSubscriber(modid = libVars.ModID)
 public class WoNHandler {
+
+    @SubscribeEvent
+    public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if (event.getModID().equals(wyrmsofnyrus.MODID))
+        {
+            ConfigManager.sync(wyrmsofnyrus.MODID, Config.Type.INSTANCE);
+            wyrmsofnyrus.logger.info("Configuration loaded or changed.");
+        }
+    }
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {

@@ -7,11 +7,7 @@ package com.vetpetmon.wyrmsofnyrus.config;
 */
 
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
-import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +24,9 @@ public class ConfigBase {
     // ConfigLib is now officially part of SynapseLib, you're welcome. -Byte
 
     // TODO: Make this create folders of presets, with built-in presets defined by JSON files. Set the default to Death World on 0.2.6, preserve original defaults and give in-game config GUI via Forge's built-in configuration system instead of making users have to manually edit configuration files and restart the game. Leave Client configs out of presets. -[NAME REDACTED]
+    private static final int defaultConfig = 1; // 0 for Classic, 1 for Death World, 2 for Dark Forest.
+    private static String[] factoryConfigs = {"Classic","Death World","Dark Forest"};
+    public static int selectedPreset;
     private static final String ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
     private static final Configuration
             general = createDirectory("general", ConfigDirectory),
@@ -35,10 +34,11 @@ public class ConfigBase {
             debug = createDirectory("debug", ConfigDirectory),
             evo = createDirectory("evolution", ConfigDirectory),
             world = createDirectory("world", ConfigDirectory),
-            invasion = createDirectory("invasion", ConfigDirectory),
-            clientside = createDirectory("client", ConfigDirectory);
-    private static final Configuration[] configs = {general, wyrms, debug, evo, world, invasion, clientside};
+            invasion = createDirectory("invasion", ConfigDirectory);
+    private static final Configuration[] configs = {general, wyrms, debug, evo, world, invasion};
 
+    public static void setConfigPreset() {
+    }
 
     // Specific for WoN.
     public static void reloadConfig() {
@@ -53,17 +53,9 @@ public class ConfigBase {
         Evo.loadFromConfig(evo);
         WorldConfig.loadFromConfig(world);
         Invasion.loadFromConfig(invasion);
-        Client.loadFromConfig(clientside);
 
         for (Configuration i:configs) i.save();
         wyrmsofnyrus.logger.info("Configuration loaded or changed.");
-    }
-
-    public static void reloadClient() {
-        clientside.load();
-        Client.loadFromConfig(clientside);
-        clientside.save();
-        wyrmsofnyrus.logger.info("Client's configuration reloaded.");
     }
 
     public static void setCanon() {
@@ -119,19 +111,6 @@ public class ConfigBase {
 
         while(!choiceSelected[0]){
 
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = wyrmsofnyrus.MODID)
-    private static class EventHandler
-    {
-        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
-        {
-            if (event.getModID().equals(wyrmsofnyrus.MODID))
-            {
-                ConfigManager.sync(wyrmsofnyrus.MODID, Config.Type.INSTANCE);
-                wyrmsofnyrus.logger.info("Configuration loaded or changed.");
-            }
         }
     }
 

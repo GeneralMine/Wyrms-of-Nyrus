@@ -96,7 +96,7 @@ public class wyrmStats {
         biterSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
         biterKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
         biterRollSPD = createConfigDouble(c, CAT, "Normal Roll SPD", "Default: 2.0", 2.0);
-        biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 10", 10);
+        biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 2", 2);
     }
 
     public static void creeplingStats(Configuration c) {
