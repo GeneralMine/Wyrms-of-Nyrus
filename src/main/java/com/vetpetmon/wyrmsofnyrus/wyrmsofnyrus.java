@@ -5,6 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmInvasionCommand;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmsTest;
 import com.vetpetmon.wyrmsofnyrus.compat.*;
+import com.vetpetmon.wyrmsofnyrus.config.ConfigBase;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
@@ -71,6 +72,9 @@ public class wyrmsofnyrus {
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
         synlib.init();
+        ConfigBase.setConfigPreset(); //Preload configuration settings, this grabs current preset
+        // TODO: Put a check for factory folder presets, if it doesn't exist, regen them and let the user know
+        // TODO: Generate custom configs if the folder doesn't exist for the ID yet
 
         hbm.compatInit();
         srp.compatInit();
@@ -122,6 +126,7 @@ public class wyrmsofnyrus {
     public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(wyrmsofnyrus.MODID)) {
             ConfigManager.sync(wyrmsofnyrus.MODID, Config.Type.INSTANCE);
+            wyrmsofnyrus.logger.warn("Configuration settings were changed. If you didn't switch config presets, you may safely ignore this warning. If you did, restart your game.");
         }
     }
 
@@ -212,15 +217,10 @@ public class wyrmsofnyrus {
     @SideOnly(Side.CLIENT)
     public void registerModels(ModelRegistryEvent event) {
         for (Item item : AllItems.ALL_ITEMS) {
-            if (item instanceof IHasModel) {
-                ((IHasModel) item).registerModels();
-            }
+            if (item instanceof IHasModel) ((IHasModel) item).registerModels();
         }
-
         for (Block block : AllBlocks.ALL_BLOCKS) {
-            if (block instanceof IHasModel) {
-                ((IHasModel) block).registerModels();
-            }
+            if (block instanceof IHasModel) ((IHasModel) block).registerModels();
         }
     }
 

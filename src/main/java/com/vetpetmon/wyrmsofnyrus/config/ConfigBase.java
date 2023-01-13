@@ -38,6 +38,11 @@ public class ConfigBase {
     private static final Configuration[] configs = {general, wyrms, debug, evo, world, invasion};
 
     public static void setConfigPreset() {
+        selectedPreset = Client.configPreset;
+        if (Client.configPreset < 0) selectedPreset = defaultConfig;
+        if (selectedPreset >= 4) wyrmsofnyrus.logger.info("Using or creating user-defined config preset folder, configs are in folder: " + selectedPreset);
+        else wyrmsofnyrus.logger.info("Using factory preset: " + factoryConfigs[selectedPreset]);
+        wyrmsofnyrus.logger.info("Selected preset's ID: " + selectedPreset);
     }
 
     // Specific for WoN.
@@ -79,39 +84,28 @@ public class ConfigBase {
      * Creates our mod's first time dialogue message, which asks the user what config presets they wish to use.
      * Doesn't work yet, needs to pause FML's loading process to avoid nullPointerExceptions.
      */
-    public static void firstTime() {
+    public static void firstTimeDialogue() {
         JFrame jf = new JFrame();
         JDialog jd = new JDialog(jf);
         jd.setLayout(new FlowLayout());
-        final boolean[] choiceSelected = {false};
 
         jd.setBounds(500, 300, 500, 100);
-        JLabel jl = new JLabel("This appears to be your first time with Wyrms of Nyrus, or you have missing configurations. \n What difficulty preset would you like to use?");
+        JLabel jl = new JLabel("This appears to be your first time with Wyrms of Nyrus, or you have missing/outdated factory configurations. \n If your preset choice is unset or invalid, it will default back to this preset: "
+                + factoryConfigs[defaultConfig]
+                + "\nYou can safely disregard this message. If you wish to change the preset, there is an in-game"
+        );
 
-        JButton norm = new JButton("Regular");
-        JButton dw = new JButton("Death World");
+        JButton norm = new JButton("Yes");
 
         norm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                choiceSelected[0] = true;
-                jd.setVisible(false);
-            }
-        });
-        dw.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choiceSelected[0] = true;
                 jd.setVisible(false);
             }
         });
 
-        jd.add(jl); jd.add(norm);jd.add(dw);
+        jd.add(jl); jd.add(norm);
         jd.setVisible(true);
-
-        while(!choiceSelected[0]){
-
-        }
     }
 
 }

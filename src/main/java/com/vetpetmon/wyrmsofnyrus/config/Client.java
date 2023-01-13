@@ -11,7 +11,10 @@ public class Client {
     @Config.Comment({"Enables extensive animation value checks for situations like being in the air (for non-flying enemies) or being in water (for non-aquatic enemies).", "Disabling this can increase performance on clients."})
     public static boolean fancyAnimations = true;
     @Config.Name("Config Preset")
-    @Config.Comment({"The index of the configuration preset you wish to use.", "Setting this to -1 will make the mod use this version's default configurations.", "Factory presets are defined in a range from 0 to 2, with increasing difficulty. Any value above this will use user-defined configurations.", "The hard cap is because generating configurations increases loading times!"})
+    @Config.Comment({"The index of the configuration preset you wish to use.",
+            "Setting this to -1 will make the mod use this version's default configurations.",
+            "Factory presets are defined in a range from 0 to 2, with increasing difficulty. Any value above this will use user-defined configurations.",
+            "The hard cap is because excessive amounts of folders takes up disc or drive space!"})
     @Config.RequiresMcRestart
     @Config.RangeInt(min = -1, max = 10)
     public static int configPreset = -1;
