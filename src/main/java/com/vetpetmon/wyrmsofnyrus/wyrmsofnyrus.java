@@ -72,11 +72,9 @@ public class wyrmsofnyrus {
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
         synlib.init();
-        ConfigBase.setConfigPreset(); // Preload configuration settings, this grabs current preset
+        ConfigBase.setConfigPreset(); // Preload configuration settings, this grabs current presets. If a custom preset is selected, it will check and generate the files and directory if it exists.
         ConfigBase.checkFactorySettings(); // also runs firstTimeDialogue() if the checks fail
         ConfigBase.activatePreset(); // NOW activate configurations for real
-        // TODO: Put a check for factory folder presets, if it doesn't exist, regen them and let the user know
-        // TODO: Generate custom configs if the folder doesn't exist for the ID yet
 
         hbm.compatInit();
         srp.compatInit();
