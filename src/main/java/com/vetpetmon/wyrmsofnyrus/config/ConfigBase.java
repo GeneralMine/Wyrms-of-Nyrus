@@ -106,7 +106,7 @@ public class ConfigBase {
                 File[] files = folder.listFiles();
                 if(files!=null) { //some JVMs return null for empty dirs
                     for(File f: files) {
-                        wyrmsofnyrus.logger.info("deleted: " + f);
+                        wyrmsofnyrus.logger.debug("deleted: " + f);
                         f.delete();
                     }
                     folder.delete();
