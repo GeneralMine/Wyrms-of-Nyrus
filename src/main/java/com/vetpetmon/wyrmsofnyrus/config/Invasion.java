@@ -11,8 +11,6 @@ import static com.vetpetmon.synapselib.util.CFG.*;
 
 public class Invasion {
     public static boolean invasionEnabled, invasionStartsNaturally;
-    public static float EXCANONDIFFICULTY;
-
     public static int invasionStartMode, invasionStartTime, invasionStartChance, invasionEventFrequency;
 
     public static boolean probingEnabled;
@@ -101,10 +99,6 @@ public class Invasion {
         direCreepwyrmCreepSpeed = createConfigInt(config, CATEGORYTWO, "Dire Creepwyrm creep speed", "The speed at which Dire Creepwyrms spread The Creep. Every x entity updates, the creepwyrm runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creepwyrms do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
         creephiveCreepSpeed = createConfigInt(config, CATEGORYTWO, "Creep Hive creep speed", "The speed at which Creep Hives spread The Creep. Every x entity updates, the creep hive runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creep hives do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
 
-    }
-
-    public static float getEXCANONDIFFICULTY() {
-        return EXCANONDIFFICULTY;
     }
 
     public static boolean isCreepEnabled() {
