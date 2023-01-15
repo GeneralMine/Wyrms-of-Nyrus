@@ -116,7 +116,7 @@ public class Invasion {
      * Validates user input concerning phase thresholds.
      */
     public static void validatePhaseThresholds(){
-        wyrmsofnyrus.logger.info("Validating invasion stage point thresholds...");
+        if(Debug.LOGGINGENABLED)wyrmsofnyrus.logger.info("Validating invasion stage point thresholds...");
         boolean validationFailed = false;
             if (iPointsIStage1Threshold > iPointsIStage2Threshold) {
                 validationFailed = true;
@@ -147,6 +147,6 @@ public class Invasion {
                 iPointsIStage5Threshold = 100000;
                 iPointsIStage6Threshold = 2500000;
             }
-        wyrmsofnyrus.logger.info("All invasion stage point thresholds are validated.");
+        if(Debug.LOGGINGENABLED)wyrmsofnyrus.logger.info("All invasion stage point thresholds are validated.");
     }
 }

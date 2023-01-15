@@ -39,16 +39,12 @@ public class ConfigBase {
             customConfigGen();
         }
         else wyrmsofnyrus.logger.info("Using factory preset: " + selectedPreset);
-        wyrmsofnyrus.logger.info("Selected preset's ID: " + selectedPreset);
     }
 
     public static void activatePreset() {
-        ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" + selectedPreset +"/";
         wyrmsofnyrus.logger.info("Active preset: " + selectedPreset);
-        wyrmsofnyrus.logger.info("Opening preset file at: " + ConfigDirectory);
         createDirectories(selectedPreset); //Do this to avoid NullPointer Errors
         reloadConfig();
-        wyrmsofnyrus.logger.info("Test variable (creepSpreadRate): " + Invasion.creepSpreadRate);
     }
 
     // Specific for WoN.
@@ -56,11 +52,11 @@ public class ConfigBase {
         Configuration[] configs = {general, wyrms, debug, evo, world, invasion, manifest};
 
         for (Configuration i:configs) i.load();
+        Debug.loadFromConfig(debug); // load this first so that debug config messages can properly function
         ConfigManifest.createManifest(manifest);
         AI.loadFromConfig(general);
         Radiogenetics.loadFromConfig(general);
         wyrmStats.loadFromConfig(wyrms);
-        Debug.loadFromConfig(debug);
         Evo.loadFromConfig(evo);
         WorldConfig.loadFromConfig(world);
         Invasion.loadFromConfig(invasion);
