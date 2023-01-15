@@ -4,7 +4,9 @@ import com.vetpetmon.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmInvasionCommand;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmsTest;
-import com.vetpetmon.wyrmsofnyrus.compat.*;
+import com.vetpetmon.wyrmsofnyrus.compat.hbm;
+import com.vetpetmon.wyrmsofnyrus.compat.srp;
+import com.vetpetmon.wyrmsofnyrus.compat.synlib;
 import com.vetpetmon.wyrmsofnyrus.config.ConfigBase;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
@@ -50,7 +52,6 @@ import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
 import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
-import static com.vetpetmon.wyrmsofnyrus.config.ConfigBase.reloadConfig;
 
 @Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION, dependencies = "required-after:geckolib3;required-after:synlib;")
 public class wyrmsofnyrus {
@@ -71,7 +72,9 @@ public class wyrmsofnyrus {
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
         synlib.init();
-        ConfigBase.setConfigPreset(); //Preload configuration settings, this grabs current preset
+        ConfigBase.setConfigPreset(); // Preload configuration settings, this grabs current preset
+        ConfigBase.checkFactorySettings(); // also runs firstTimeDialogue() if the checks fail
+        ConfigBase.activatePreset(); // NOW activate configurations for real
         // TODO: Put a check for factory folder presets, if it doesn't exist, regen them and let the user know
         // TODO: Generate custom configs if the folder doesn't exist for the ID yet
 
@@ -79,8 +82,6 @@ public class wyrmsofnyrus {
         srp.compatInit();
 
         //threading.checkThreads(); //We know this works
-
-        reloadConfig();
 
         messageReg.init();
 

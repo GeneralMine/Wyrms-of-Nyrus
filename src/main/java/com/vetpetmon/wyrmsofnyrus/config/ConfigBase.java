@@ -13,6 +13,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static com.vetpetmon.synapselib.util.CFG.createDirectory;
 import static com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus.proxy;
@@ -26,15 +28,8 @@ public class ConfigBase {
     private static final int defaultConfig = 1; // 0 for Classic, 1 for Death World, 2 for Dark Forest.
     private static String[] factoryConfigs = {"Classic","Death World","Dark Forest"};
     public static int selectedPreset;
-    private static final String ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
-    private static final Configuration
-            general = createDirectory("general", ConfigDirectory),
-            wyrms = createDirectory("wyrms", ConfigDirectory),
-            debug = createDirectory("debug", ConfigDirectory),
-            evo = createDirectory("evolution", ConfigDirectory),
-            world = createDirectory("world", ConfigDirectory),
-            invasion = createDirectory("invasion", ConfigDirectory);
-    private static final Configuration[] configs = {general, wyrms, debug, evo, world, invasion};
+    private static String ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
+    private static Configuration general, wyrms, debug, evo, world, invasion;
 
     public static void setConfigPreset() {
         selectedPreset = Client.configPreset;
@@ -44,10 +39,18 @@ public class ConfigBase {
         wyrmsofnyrus.logger.info("Selected preset's ID: " + selectedPreset);
     }
 
+    public static void activatePreset() {
+        ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" + selectedPreset +"/";
+        wyrmsofnyrus.logger.info("Active preset: " + selectedPreset);
+        wyrmsofnyrus.logger.info("Opening preset file at: " + ConfigDirectory);
+        createDirectories(); //Do this to avoid NullPointer Errors
+        reloadConfig();
+        wyrmsofnyrus.logger.info("Test variable (creepSpreadRate): " + Invasion.creepSpreadRate);
+    }
+
     // Specific for WoN.
     public static void reloadConfig() {
-
-        //firstTime();
+        Configuration[] configs = {general, wyrms, debug, evo, world, invasion};
 
         for (Configuration i:configs) i.load();
         AI.loadFromConfig(general);
@@ -63,20 +66,17 @@ public class ConfigBase {
     }
 
     /**
-     * Creates our mod's first time dialogue message, which asks the user what config presets they wish to use.
-     * Doesn't work yet, needs to pause FML's loading process to avoid nullPointerExceptions.
+     * Creates our mod's first time or update configs dialogue message.
      */
     public static void firstTimeDialogue() {
         JFrame jf = new JFrame();
         JDialog jd = new JDialog(jf);
         jd.setLayout(new FlowLayout());
 
-        jd.setBounds(500, 300, 500, 100);
-        JLabel jl = new JLabel("This appears to be your first time with Wyrms of Nyrus, or you have missing/outdated factory configurations. \n If your preset choice is unset or invalid, it will default back to this preset: "
-                + factoryConfigs[defaultConfig]
-                + "\nYou can safely disregard this message. If you wish to change the preset, there is an in-game"
-        );
-
+        jd.setBounds(600, 500, 600, 300);
+        JLabel jl = new JLabel("This appears to be your first time with Wyrms of Nyrus, or you have missing/outdated factory configurations.");
+        JLabel jl2 = new JLabel("You can safely disregard this message. If you wish to change the preset, there is an in-game option to do so.");
+        JLabel jl3 = new JLabel("If your preset choice is unset or invalid, it will default back to this preset: "+ factoryConfigs[defaultConfig]);
         JButton norm = new JButton("Yes");
 
         norm.addActionListener(new ActionListener() {
@@ -86,8 +86,32 @@ public class ConfigBase {
             }
         });
 
-        jd.add(jl); jd.add(norm);
+        jd.add(jl);jd.add(jl2);jd.add(jl3); jd.add(norm);
         jd.setVisible(true);
+    }
+
+    public static void checkFactorySettings() {
+        boolean oneConfigInvalidated = false;
+        for (int i = 0; i< factoryConfigs.length;i++) {
+            wyrmsofnyrus.logger.info("Checking factory settings for " + i);
+            if (!Files.exists(Paths.get(proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" + i +"/"))) {
+                ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" + i+ "/";
+                wyrmsofnyrus.logger.info("Factory preset \"" + i + "\" does not exist, making it in the following directory: " + ConfigDirectory);
+                createDirectories();
+                reloadConfig();
+                oneConfigInvalidated = true;
+            }
+        }
+        if (oneConfigInvalidated) firstTimeDialogue();
+    }
+
+    private static void createDirectories() {
+        general = createDirectory("general", ConfigDirectory);
+        wyrms = createDirectory("wyrms", ConfigDirectory);
+        debug = createDirectory("debug", ConfigDirectory);
+        evo = createDirectory("evolution", ConfigDirectory);
+        world = createDirectory("world", ConfigDirectory);
+        invasion = createDirectory("invasion", ConfigDirectory);
     }
 
 }
