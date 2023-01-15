@@ -11,7 +11,6 @@ import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.init.MobEffects;
@@ -30,7 +29,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.config.Invasion.isEXCANON;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, IAnimationTickable {
@@ -53,7 +51,7 @@ public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, I
         afterPlayers();
         hivemindFollow();
         if (getAttackVillagers()) afterVillagers();
-        if (isEXCANON()) {afterMobs();afterAnimals();}
+        afterMobs();
     }
 
     @Override

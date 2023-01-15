@@ -51,7 +51,6 @@ import software.bernie.geckolib3.GeckoLib;
 
 import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
 import static com.vetpetmon.wyrmsofnyrus.config.ConfigBase.reloadConfig;
-import static com.vetpetmon.wyrmsofnyrus.config.ConfigBase.setCanon;
 
 @Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION, dependencies = "required-after:geckolib3;required-after:synlib;")
 public class wyrmsofnyrus {
@@ -82,7 +81,6 @@ public class wyrmsofnyrus {
         //threading.checkThreads(); //We know this works
 
         reloadConfig();
-        setCanon();
 
         messageReg.init();
 

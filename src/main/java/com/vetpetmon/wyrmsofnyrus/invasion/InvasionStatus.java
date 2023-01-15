@@ -9,11 +9,8 @@ public class InvasionStatus {
 
 	public static float getDifficulty(float baseDiff) {
 		// First factor: What's the basic invasion stage difficulty here?
-		// Second factor: Is this EXtended Canon and what is that difficulty option set too?
-		float dFactorTwo = 1;
-		if(Invasion.isEXCANON()) dFactorTwo = Invasion.getEXCANONDIFFICULTY();
 
-		return (baseDiff * dFactorTwo);
+		return (baseDiff);
 	}
 
 	public static void executescript(World world) {

@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static com.vetpetmon.synapselib.util.CFG.createDirectory;
-import static com.vetpetmon.wyrmsofnyrus.config.Invasion.isEXCANON;
 import static com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus.proxy;
 
 public class ConfigBase {
@@ -61,23 +60,6 @@ public class ConfigBase {
 
         for (Configuration i:configs) i.save();
         wyrmsofnyrus.logger.info("Configuration loaded or changed.");
-    }
-
-    public static void setCanon() {
-        if (isEXCANON()) {
-            wyrmsofnyrus.logger.info("We are in EX-tended canon mode!");
-            Invasion.invasionEnabled = true;
-            Invasion.probingEnabled = true;
-            Invasion.creepEnabled = true;
-            Invasion.creepSpreadRate = 5;
-            Invasion.creepSpreadPoints = 0.05F;
-            AI.attackMobs = true;
-            AI.attackAnimals = true;
-            AI.savageAIMode = true;
-            AI.performanceAIMode = false;
-            Radiogenetics.immuneToCacti = true;
-            Radiogenetics.immuneToFalling = true;
-        }
     }
 
     /**

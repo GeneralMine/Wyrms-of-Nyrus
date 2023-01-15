@@ -3,7 +3,6 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
@@ -44,12 +43,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob {
 
     private static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
-    protected static float exdif = setExdif();
     private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.VARINT);
 
-    public static float setExdif() {
-        return Invasion.isEXCANON() ? Invasion.getEXCANONDIFFICULTY() : 1;
-    }
 
     private String animationName;
 
@@ -118,8 +113,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
 
     public float genDifficulty() {
-        exdif = setExdif();
-        return (float) ((getInvasionDifficulty()) * exdif);
+        return (float) (getInvasionDifficulty());
     }
 
     public void setStats(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR) {
