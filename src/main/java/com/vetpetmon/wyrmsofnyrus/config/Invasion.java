@@ -32,7 +32,7 @@ public class Invasion {
 
     public static String[] iBdef = {"minecraft:furnace", "minecraft:brick_block", "minecraft:bone_block", "minecraft:bedrock", "minecraft:concrete", "minecraft:concrete_powder", "minecraft:end_bricks", "minecraft:end_stone", "minecraft:glass", "minecraft:jukebox", "minecraft:nether_brick", "minecraft:red_nether_brick", "minecraft:noteblock", "minecraft:observer", "minecraft:obsidian", "minecraft:packed_ice", "minecraft:prismarine", "minecraft:purpur_block", "minecraft:purpur_pillar", "minecraft:quartz_block", "minecraft:sponge", "minecraft:stained_glass", "minecraft:wool", "minecraft:stonebrick"};
 
-    public static void loadFromConfig(Configuration config) {
+    public static void loadFromConfig(Configuration config, int id) {
 
         final String CATEGORY = "Invasion";
         config.addCustomCategoryComment(CATEGORY,  "\nThe Wyrm Invasion is the main mechanic of this mod, with a fully-fledged event system with threats that keep players on edge.\n");
@@ -46,22 +46,22 @@ public class Invasion {
         config.addCustomCategoryComment(CATEGORYTHREE,  "\nEverything involving wyrm spawns from the Invasion system.\n");
         config.setCategoryRequiresWorldRestart(CATEGORYTHREE, false);
 
-        minWyrmsHexepod = createConfigInt(config, CATEGORYTHREE,"Hexe min spawns" ,"Minimum wyrms to spawn from Hexe pods. Will still always spawn at least 1 wyrm. Hexe pods always spawn wyrmlings that grow into various castes of wyrms except royals. Default: 1", 1);
-        maxWyrmsHexepod = createConfigInt(config, CATEGORYTHREE,"Hexe max spawns" ,"Maximum wyrms to spawn from Hexe pods. Default: 3", 3);
+        minWyrmsHexepod = createConfigInt(config, CATEGORYTHREE,"Hexe min spawns" ,"Minimum wyrms to spawn from Hexe pods. Will still always spawn at least 1 wyrm. Hexe pods always spawn wyrmlings that grow into various castes of wyrms except royals. Default: 1", ConfigBase.presetInts(1, 2, 3, id));
+        maxWyrmsHexepod = createConfigInt(config, CATEGORYTHREE,"Hexe max spawns" ,"Maximum wyrms to spawn from Hexe pods. Default: 3", ConfigBase.presetInts(3, 6, 7, id));
         if (minWyrmsHexepod < 1) minWyrmsHexepod = 1;
 
-        minWyrmsCallouspod = createConfigInt(config, CATEGORYTHREE,"Callous min spawns" ,"Minimum wyrms to spawn from Callous pods. Will still always spawn at least 1 wyrm. Callous pods spawn this number of probers, and double this number for dobbers, if they are enabled. Dobber swarms spawn alongside probers every roll, so if two probers spawn, dobber swarms are generated twice. Default: 1", 1);
-        maxWyrmsCallouspod = createConfigInt(config, CATEGORYTHREE,"Callous max spawns" ,"Maximum wyrms to spawn from Callous pods. Default: 2", 2);
+        minWyrmsCallouspod = createConfigInt(config, CATEGORYTHREE,"Callous min spawns" ,"Minimum wyrms to spawn from Callous pods. Default: 1", ConfigBase.presetInts(1, 2, 2, id));
+        maxWyrmsCallouspod = createConfigInt(config, CATEGORYTHREE,"Callous max spawns" ,"Maximum wyrms to spawn from Callous pods. Default: 2", ConfigBase.presetInts(2, 3, 4, id));
         if (minWyrmsCallouspod < 1) minWyrmsCallouspod = 1;
 
-        invasionStartMode = createConfigInt(config, CATEGORY,"Invasion Start Mode" ,"0 = Random chance, 1 = after x days, 2 = hybrid (time & chance). Default: 2", 2);
-        invasionStartTime = createConfigInt(config, CATEGORY,"Invasion Start Time" ,"Number of days until wyrms can start to invade. Default: 30", 30);
+        invasionStartMode = createConfigInt(config, CATEGORY,"Invasion Start Mode" ,"0 = Random chance, 1 = after x days, 2 = hybrid (time & chance). Default: 2", ConfigBase.presetInts(2, 1, 1, id));
+        invasionStartTime = createConfigInt(config, CATEGORY,"Invasion Start Time" ,"Number of days until wyrms can start to invade. Default: 20", ConfigBase.presetInts(20, 10, 10, id));
         invasionStartChance = createConfigInt(config, CATEGORY,"Invasion Start Chance" ,"1 in x chance to occur each day before wyrms start invading. Default: 50", 50);
 
-        invasionEventFrequency = createConfigInt(config, CATEGORY,"Invasion Event Frequency" ,"Every x minutes, an invasion event takes place. Default: 8", 8);
+        invasionEventFrequency = createConfigInt(config, CATEGORY,"Invasion Event Frequency" ,"Every x minutes, an invasion event takes place. Default: 8", ConfigBase.presetInts(8, 8, 7, id));
 
-        visitorDropPodFrequency = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency" ,"Delay for each drop pod spawn from The Visitor. Default: 3500", 3500);
-        visitorDropPodFrequencyVariation = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency variation" ,"Random variation added to the drop delays, adds -x to x ticks to delay. Default: 500", 500);
+        visitorDropPodFrequency = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency" ,"Delay for each drop pod spawn from The Visitor. Default: 3500", ConfigBase.presetInts(3500, 3050, 2500, id));
+        visitorDropPodFrequencyVariation = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency variation" ,"Random variation added to the drop delays, adds -x to x ticks to delay. Default: 500", ConfigBase.presetInts(500, 550, 250, id));
 
         invasionEnabled = createConfigBool(config, CATEGORY, "Invasion enabled", "Enables the invasion system. Many functions of the mod will not work if this is off, including other sub-systems. Default: true", true);
         if (!invasionEnabled) wyrmsofnyrus.logger.info("Invasion module has been disabled");
@@ -78,11 +78,11 @@ public class Invasion {
 
         maxEventDistance = createConfigInt(config, CATEGORY, "Max event distance", "All invasion events take place a certain distance away from the player. Increasing this range makes it less likely that events happen near the player, but may cause performance hitches due to potential chunkloading. Usually keep this number in increments of 16 (Chunk x/z size). Default is calculated for Minecraft's usual 12 chunk render radius. Default: 192", 192);
 
-        invasionPointsPerKill = createConfigInt(config, CATEGORY, "Invasion Points Per Kill", "Wyrms gain invasion points for every kill. Set this to 0 to disable this feature entirely. Default: 1", 1);
+        invasionPointsPerKill = createConfigInt(config, CATEGORY, "Invasion Points Per Kill", "Wyrms gain invasion points for every kill. Set this to 0 to disable this feature entirely. Default: 1", ConfigBase.presetInts(1,1,2,id));
 
-        probingEnabled = createConfigBool(config, CATEGORY, "Probing enabled", "Probers deal heavy damage and every kill advances the invasion by 5 points, compared to only one, IF the entity can be sampled (hit) more than once. One-shots or each hit adds 2 points. They also have longer aggro range and fly faster. Set to false to disable this feature and make probers less dangerous. Default: true", true);
+        probingEnabled = createConfigBool(config, CATEGORY, "Probing enabled", "Probers deal heavy damage and every kill advances the invasion by 5 points, compared to only one, IF the entity can be sampled (hit) more than once. One-shots or each hit adds 2 points. They also have longer aggro range and fly faster. Set to false to disable this feature and make probers less dangerous. Default: true", ConfigBase.presetBools(false, true, true, id));
 
-        creepTickRate = createConfigInt(config, CATEGORYTWO, "Creep tickrate", "Every n world ticks, hive creep blocks will tick and roll to see if they spread or not. 20 ticks = 1 second. Default: 500", 500);
+        creepTickRate = createConfigInt(config, CATEGORYTWO, "Creep tickrate", "Every n world ticks, hive creep blocks will tick and roll to see if they spread or not. 20 ticks = 1 second. Default: 500", ConfigBase.presetInts(500, 475,450, id));
         creepNewInactivity = createConfigBool(config, CATEGORYTWO, "Experimental creep inactivity algorithm", "By default, hive creep blocks just have a chance to turn inactive. The new algorithm checks all blocks in range for a non-creepable block. However, the new algorithm can be buggy and produce weird results, such as hive creep turning inactive ASAP, or it never turning inactive. Default: false", false);
         creepEnabled = createConfigBool(config, CATEGORYTWO, "Creep enabled", "If The Creep is enabled or not. This stops spread, and also renders Creepwyrms useless (Also disabling their spawning.) Default: true", true);
         if (!creepEnabled) wyrmsofnyrus.logger.info("Creep module has been disabled");
@@ -95,7 +95,7 @@ public class Invasion {
         FinalizeiBdef();
 
         // Creepwyrm creeping speeds
-        normCreepwyrmCreepSpeed = createConfigInt(config, CATEGORYTWO, "Creepwyrm creep speed", "The speed at which normal Creepwyrms spread The Creep. Every x entity updates, the creepwyrm runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creepwyrms do their thing a lot slower. Default: 200", 200);
+        normCreepwyrmCreepSpeed = createConfigInt(config, CATEGORYTWO, "Creepwyrm creep speed", "The speed at which normal Creepwyrms spread The Creep. Every x entity updates, the creepwyrm runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creepwyrms do their thing a lot slower. Default: 200", ConfigBase.presetInts(200, 150, 125, id));
         direCreepwyrmCreepSpeed = createConfigInt(config, CATEGORYTWO, "Dire Creepwyrm creep speed", "The speed at which Dire Creepwyrms spread The Creep. Every x entity updates, the creepwyrm runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creepwyrms do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
         creephiveCreepSpeed = createConfigInt(config, CATEGORYTWO, "Creep Hive creep speed", "The speed at which Creep Hives spread The Creep. Every x entity updates, the creep hive runs a check and creeps over a valid block if found. Lower this to make it faster, or increase it even further to make creep hives do their thing a lot slower./n(WARNING: AS THIS MOB CREATES ACTIVE CREEPED BLOCKS, KEEP THIS VALUE VERY HIGH TO AVOID BLOCK UPDATE SPAM BUILDUP) Default: 1800", 1800);
 

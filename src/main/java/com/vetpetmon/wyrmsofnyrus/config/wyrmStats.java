@@ -35,8 +35,9 @@ public class wyrmStats {
     public static float strykelingfollyHP, strykelingfollyATK, strykelingfollyDEF, strykelingfollySPD, strykelingfollyKBR;
     public static float strykerfollyHP, strykerfollyATK, strykerfollyDEF, strykerfollySPD, strykerfollyKBR, strykerfollyPointsTillAscension;
     public static float strykerfollyAscendedHP, strykerfollyAscendedATK, strykerfollyAscendedDEF, strykerfollyAscendedSPD, strykerfollyAscendedKBR;
-
-    public static void loadFromConfig(Configuration c) {
+    private static int presetID;
+    public static void loadFromConfig(Configuration c, int id) {
+        presetID = id;
         startFile(c);
         roverStats(c);
         CreepwyrmStats(c);

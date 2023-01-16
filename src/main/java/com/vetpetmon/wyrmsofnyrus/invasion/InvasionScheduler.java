@@ -24,9 +24,9 @@ public class InvasionScheduler {
             wyrmsofnyrus.logger.info("invasionStartChance is " + Invasion.invasionStartChance + ".");
         }
         if (Invasion.invasionStartMode > 1) {
-            return currentDay > Invasion.invasionStartTime && (RNG.getIntRangeInclu(0, Invasion.invasionStartChance) == 1);
+            return currentDay >= Invasion.invasionStartTime && (RNG.getIntRangeInclu(0, Invasion.invasionStartChance) == 1);
         } else if (Invasion.invasionStartMode == 1) {
-            return currentDay > Invasion.invasionStartTime;
+            return currentDay >= Invasion.invasionStartTime;
         } else {
             return RNG.getIntRangeInclu(0, Invasion.invasionStartChance) == 1;
         }

@@ -16,7 +16,7 @@ public class WorldConfig {
     // Folly variables
     public static boolean follyBlocksStopSpawns;
 
-    public static void loadFromConfig(Configuration config) {
+    public static void loadFromConfig(Configuration config, int id) {
 
         final String CATEGORY = "Creep Biome";
         config.addCustomCategoryComment(CATEGORY, "\n[CURRENTLY UNUSED] After creep blocks infect a certain number of blocks in the chunk, they turn the chunk they're in to a special biome.\n");

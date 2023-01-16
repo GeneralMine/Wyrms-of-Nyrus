@@ -27,7 +27,7 @@ public class ConfigBase {
 
     private static final int defaultConfig = 1; // 0 for Classic, 1 for Death World, 2 for Dark Forest.
     private static String[] factoryConfigs = {"Classic","Death World","Dark Forest"};
-    public static int selectedPreset, presetsVersion = 1;
+    public static int selectedPreset, presetsVersion = 1, tempPreset;
     private static String ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
     private static Configuration general, wyrms, debug, evo, world, invasion, manifest;
 
@@ -41,25 +41,48 @@ public class ConfigBase {
         else wyrmsofnyrus.logger.info("Using factory preset: " + selectedPreset);
     }
 
+    public static int presetInts(int normal, int deathWorld, int darkForest, int id) {
+        switch(id) {
+            case(1): return deathWorld;
+            case(2): return darkForest;
+            default: return normal;
+        }
+    }
+    public static float presetFloats(float normal, float deathWorld, float darkForest, int id) {
+        switch(id) {
+            case(1): return deathWorld;
+            case(2): return darkForest;
+            default: return normal;
+        }
+    }
+
+    public static boolean presetBools(boolean normal, boolean deathWorld, boolean darkForest, int id) {
+        switch(id) {
+            case(1): return deathWorld;
+            case(2): return darkForest;
+            default: return normal;
+        }
+    }
+
     public static void activatePreset() {
         wyrmsofnyrus.logger.info("Active preset: " + selectedPreset);
         createDirectories(selectedPreset); //Do this to avoid NullPointer Errors
-        reloadConfig();
+        reloadConfig(selectedPreset);
     }
 
     // Specific for WoN.
-    public static void reloadConfig() {
+    public static void reloadConfig(int id) {
         Configuration[] configs = {general, wyrms, debug, evo, world, invasion, manifest};
 
         for (Configuration i:configs) i.load();
         Debug.loadFromConfig(debug); // load this first so that debug config messages can properly function
         ConfigManifest.createManifest(manifest);
         AI.loadFromConfig(general);
-        Radiogenetics.loadFromConfig(general);
-        wyrmStats.loadFromConfig(wyrms);
-        Evo.loadFromConfig(evo);
-        WorldConfig.loadFromConfig(world);
-        Invasion.loadFromConfig(invasion);
+        Radiogenetics.loadFromConfig(general, id);
+        wyrmStats.loadFromConfig(wyrms, id);
+        Evo.loadFromConfig(evo, id);
+        WorldConfig.loadFromConfig(world, id);
+        Invasion.loadFromConfig(invasion, id);
 
         for (Configuration i:configs) i.save();
     }
@@ -98,22 +121,19 @@ public class ConfigBase {
                 wyrmsofnyrus.logger.info("Factory preset \"" + i + "\" does not exist, making it in the following directory: " + ConfigDirectory);
                 oneConfigInvalidated = true;
             }
-            createDirectories(i);
-            reloadConfig();
+            createDirectories(i); //Properly directs the next bit of code to check manifest
+            reloadConfig(i);
             if (ConfigManifest.compareVersion()) {
-                wyrmsofnyrus.logger.info("Factory preset \"" + i + "\" was outdated, regenerating preset directory...");
+                wyrmsofnyrus.logger.warn("Factory preset \"" + i + "\" has version mismatch.");
                 File folder = new File(ConfigDirectory);
                 File[] files = folder.listFiles();
-                if(files!=null) { //some JVMs return null for empty dirs
-                    for(File f: files) {
-                        wyrmsofnyrus.logger.debug("deleted: " + f);
-                        f.delete();
-                    }
+                if(files!=null) {
+                    for(File f: files) f.delete();
                     folder.delete();
                 }
                 wyrmsofnyrus.logger.info("Attempted to delete directory and update it.");
                 createDirectories(i);
-                reloadConfig();
+                reloadConfig(i);
             }
         }
         if (oneConfigInvalidated) firstTimeDialogue();
@@ -123,7 +143,8 @@ public class ConfigBase {
             ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" + selectedPreset + "/";
             wyrmsofnyrus.logger.info("Custom preset \"" + selectedPreset + "\" does not exist, making it in the following directory: " + ConfigDirectory);
             wyrmsofnyrus.logger.info("This is a custom preset. Once this generates, you are free to edit it as you wish.");
-            reloadConfig();
+            createDirectories(selectedPreset);
+            reloadConfig(selectedPreset);
         }
     }
 
