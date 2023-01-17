@@ -26,7 +26,6 @@ public class wyrmStats {
     public static float biterHP, biterDEF, biterATK, biterSPD, biterRollSPD, biterRollDMG, biterKBR;
     public static float creeplingHP, creeplingDEF, creeplingATK, creeplingSPD, creeplingKBR;
     public static float proberHP, proberDEF, proberATK, proberSPD;
-    public static float dobberHP, dobberDEF, dobberATK, dobberSPD;
     public static float workerHP, workerDEF, workerATK, workerSPD, workerKBR;
     public static float wyrmlingHP, wyrmlingDEF, wyrmlingSPD;
     public static float creepwyrmHP, creepwyrmDEF, creepwyrmATK;
@@ -49,7 +48,6 @@ public class wyrmStats {
         soldierStats(c);
         proberStats(c);
         workerStats(c);
-        dobberStats(c);
         wyrmlingStats(c);
         visitorStats(c);
         strykerfollyStats(c);
@@ -83,21 +81,21 @@ public class wyrmStats {
     public static void CreepwyrmStats(Configuration c) {
         final String CAT = "Creepwyrm Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Creepwyrms.\n");
-        creepwyrmHP = createConfigDouble(c, CAT, "Normal HP", "Default: 55", 55);
-        creepwyrmDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 10", 10);
+        creepwyrmHP = createConfigDouble(c, CAT, "Normal HP", "Default: 30", ConfigBase.presetFloats(30,48,55,presetID));
+        creepwyrmDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 8", ConfigBase.presetFloats(8,10,10,presetID));
         creepwyrmATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2.5", 2.5);
     }
 
     public static void biterStats(Configuration c) {
         final String CAT = "Biter Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Biters.\n");
-        biterHP = createConfigDouble(c, CAT, "Normal HP", "Default: 11", 11);
-        biterDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3", 3);
-        biterATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2", 2);
+        biterHP = createConfigDouble(c, CAT, "Normal HP", "Default: 8", ConfigBase.presetFloats(8,11,12,presetID));
+        biterDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3", ConfigBase.presetFloats(3,4,4,presetID));
+        biterATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2", ConfigBase.presetFloats(2,3,4,presetID));
         biterSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
         biterKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
         biterRollSPD = createConfigDouble(c, CAT, "Normal Roll SPD", "Default: 2.0", 2.0);
-        biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 2", 2);
+        biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 2", ConfigBase.presetFloats(2,2,4,presetID));
     }
 
     public static void creeplingStats(Configuration c) {
@@ -113,7 +111,7 @@ public class wyrmStats {
     public static void creepedhumanoidStats(Configuration c) {
         final String CAT = "Vanitas Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Vanitas (Creeped Humanoids).\n");
-        creepedhumanoidHP = createConfigDouble(c, CAT, "Normal HP", "Default: 18", 18);
+        creepedhumanoidHP = createConfigDouble(c, CAT, "Normal HP", "Default: 12", ConfigBase.presetFloats(12,18,20,presetID));
         creepedhumanoidDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4", 4);
         creepedhumanoidATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 6", 6);
         creepedhumanoidSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.35", 0.35);
@@ -123,11 +121,11 @@ public class wyrmStats {
     public static void myrmurStats(Configuration c) {
         final String CAT = "Myrmur Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Myrmurs.\n");
-        myrmurHP = createConfigDouble(c, CAT, "Normal HP", "Default: 9", 9);
-        myrmurDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3.5", 3.5);
-        myrmurATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
+        myrmurHP = createConfigDouble(c, CAT, "Normal HP", "Default: 9", ConfigBase.presetFloats(9,10,8,presetID));
+        myrmurDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3.5", ConfigBase.presetFloats(3.5F,3,4,presetID));
+        myrmurATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", ConfigBase.presetFloats(4,4,6,presetID));
         myrmurSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.35", 0.35);
-        myrmurKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.1", 0.1);
+        myrmurKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.1", ConfigBase.presetFloats(0.1F,0.1F,0.5F,presetID));
         myrmurSprintSPD = createConfigDouble(c, CAT, "Normal Sprint SPD", "Default: 0.2", 0.2);
     }
 
@@ -200,22 +198,10 @@ public class wyrmStats {
         workerKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
     }
 
-    public static void dobberStats(Configuration c) {
-        final String CAT = "Dobber Base stats";
-        c.addCustomCategoryComment(CAT,"\nStats for the dobbers.\n");
-        dobberHP = createConfigDouble(c, CAT, "Normal HP", "Default: 1", 1);
-
-        dobberDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 1", 1);
-
-        dobberSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.9", 0.9);
-
-        dobberATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 0.5", 0.5);
-    }
-
     public static void wyrmlingStats(Configuration c) {
         final String CAT = "Wyrmling Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the wyrmlings.\n");
-        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 4", 4);
+        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 4", ConfigBase.presetFloats(4,25,20,presetID));
 
         wyrmlingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 8", 8);
 
@@ -224,9 +210,9 @@ public class wyrmStats {
     public static void visitorStats(Configuration c) {
         final String CAT = "Visitor Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Visitor.\n");
-        visitorHP = createConfigDouble(c, CAT, "Normal HP", "Default: 600", 600);
+        visitorHP = createConfigDouble(c, CAT, "Normal HP", "Default: 250", ConfigBase.presetFloats(250,300,500,presetID));
 
-        visitorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 20", 20);
+        visitorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4", ConfigBase.presetFloats(4,7,8,presetID));
 
         visitorSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.15", 0.15);
 
@@ -236,24 +222,24 @@ public class wyrmStats {
     public static void strykerfollyStats(Configuration c) {
         final String CAT = "Strykerfolly Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Strykerfolly.\n");
-        strykelingfollyHP = createConfigDouble(c, CAT, "Primordial HP", "Default: 10", 10);
-        strykelingfollyATK = createConfigDouble(c, CAT, "Primordial ATK", "Default: 4", 4);
-        strykelingfollyDEF = createConfigDouble(c, CAT, "Primordial DEF", "Default: 0", 0);
-        strykelingfollySPD = createConfigDouble(c, CAT, "Primordial SPD", "Default: 0.55", 0.55);
+        strykelingfollyHP = createConfigDouble(c, CAT, "Primordial HP", "Default: 10", ConfigBase.presetFloats(10,25,20,presetID));
+        strykelingfollyATK = createConfigDouble(c, CAT, "Primordial ATK", "Default: 4", ConfigBase.presetFloats(4,5,6,presetID));
+        strykelingfollyDEF = createConfigDouble(c, CAT, "Primordial DEF", "Default: 0", ConfigBase.presetFloats(0,1,0,presetID));
+        strykelingfollySPD = createConfigDouble(c, CAT, "Primordial SPD", "Default: 0.42", ConfigBase.presetFloats(0.42F,0.55F,0.45F,presetID));
         strykelingfollyKBR = createConfigDouble(c, CAT, "Primordial KBR", "Default: 0.85", 0.85);
 
-        strykerfollyHP = createConfigDouble(c, CAT, "Middling HP", "Default: 50", 50);
-        strykerfollyATK = createConfigDouble(c, CAT, "Middling ATK", "Default: 10", 10);
-        strykerfollyDEF = createConfigDouble(c, CAT, "Middling DEF", "Default: 10", 10);
-        strykerfollySPD = createConfigDouble(c, CAT, "Middling SPD", "Default: 0.85", 0.85);
+        strykerfollyHP = createConfigDouble(c, CAT, "Middling HP", "Default: 50", ConfigBase.presetFloats(50,72,68,presetID));
+        strykerfollyATK = createConfigDouble(c, CAT, "Middling ATK", "Default: 6", ConfigBase.presetFloats(6,8,7,presetID));
+        strykerfollyDEF = createConfigDouble(c, CAT, "Middling DEF", "Default: 5", ConfigBase.presetFloats(5,10,6,presetID));
+        strykerfollySPD = createConfigDouble(c, CAT, "Middling SPD", "Default: 0.75", 0.75);
         strykerfollyKBR = createConfigDouble(c, CAT, "Middling KBR", "Default: 0.5", 0.5);
 
-        strykerfollyPointsTillAscension = createConfigInt(c, CAT, "Kills until Ascension", "Default: 200", 400);
+        strykerfollyPointsTillAscension = createConfigInt(c, CAT, "Kills until Ascension", "Default: 200", ConfigBase.presetInts(200,250,300,presetID));
 
-        strykerfollyAscendedHP = createConfigDouble(c, CAT, "Ascended HP", "Default: 500", 500);
-        strykerfollyAscendedATK = createConfigDouble(c, CAT, "Ascended ATK", "Default: 40", 40);
-        strykerfollyAscendedDEF = createConfigDouble(c, CAT, "Ascended DEF", "Default: 30", 30);
-        strykerfollyAscendedSPD = createConfigDouble(c, CAT, "Ascended SPD", "Default: 0.95", 0.95);
+        strykerfollyAscendedHP = createConfigDouble(c, CAT, "Ascended HP", "Default: 100", ConfigBase.presetFloats(100,120,200,presetID));
+        strykerfollyAscendedATK = createConfigDouble(c, CAT, "Ascended ATK", "Default: 7", ConfigBase.presetFloats(7,8,10,presetID));
+        strykerfollyAscendedDEF = createConfigDouble(c, CAT, "Ascended DEF", "Default: 5", ConfigBase.presetFloats(5,7,9,presetID));
+        strykerfollyAscendedSPD = createConfigDouble(c, CAT, "Ascended SPD", "Default: 0.85", 0.85);
         strykerfollyAscendedKBR = createConfigDouble(c, CAT, "Ascended KBR", "Default: 1.0", 1.0);
     }
 }

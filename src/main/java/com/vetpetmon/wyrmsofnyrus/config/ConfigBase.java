@@ -26,7 +26,7 @@ public class ConfigBase {
     // Might move more of this nonsense to SynapseLib
 
     private static final int defaultConfig = 1; // 0 for Classic, 1 for Death World, 2 for Dark Forest.
-    private static String[] factoryConfigs = {"Classic","Death World","Dark Forest"};
+    private static final String[] factoryConfigs = {"Classic","Death World","Dark Forest"};
     public static int selectedPreset, presetsVersion = 1, tempPreset;
     private static String ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
     private static Configuration general, wyrms, debug, evo, world, invasion, manifest;
@@ -95,7 +95,7 @@ public class ConfigBase {
         JDialog jd = new JDialog(jf);
         jd.setLayout(new FlowLayout());
 
-        jd.setBounds(600, 500, 800, 150);
+        jd.setBounds(600, 500, 800, 175);
         JLabel jl = new JLabel("This appears to be your first time with Wyrms of Nyrus, or you have missing/outdated factory configurations.");
         JLabel jl2 = new JLabel("You can safely disregard this message. If you wish to change the preset, there is an in-game option to do so.");
         JLabel jl3 = new JLabel("If your preset choice is unset or invalid, it will default back to this preset: "+ factoryConfigs[defaultConfig]);
@@ -108,7 +108,7 @@ public class ConfigBase {
             }
         });
 
-        jd.add(jl);jd.add(jl2);jd.add(jl3); jd.add(norm);
+        jd.add(jl);jd.add(jl2);jd.add(jl3);jd.add(norm);
         jd.setVisible(true);
     }
 
