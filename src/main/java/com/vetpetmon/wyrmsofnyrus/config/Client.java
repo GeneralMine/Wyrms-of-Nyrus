@@ -14,9 +14,12 @@ public class Client {
     @Config.Comment({"The index of the configuration preset you wish to use.",
             "Setting this to -1 will make the mod use this version's default configurations.",
             "Factory presets are defined in a range from 0 to 2, with increasing difficulty. Any value above this will use user-defined configurations.",
-            "The hard cap is because excessive amounts of folders takes up disc or drive space!"})
+            "0 = Classic, recommended for new players or nostalgia-fans, vanilla-friendly difficulty; evolution is weakest, Prober special abilities disabled",
+            "1 = Death World, medium difficulty, best suited for modpacks with multiple weapon/gear mods like Tinker's Construct; all features enabled, evolution is normal-strength",
+            "2 = Dark Forest, hardest difficulty, emulates the canonical power of the Nyral Wyrms. Balanced for mods like HBM's Nuclear Tech Mod; all destructive features enabled, evolution is extremely strong, all variants unlocked on first stage, etc."
+    })
     @Config.RequiresMcRestart
-    @Config.RangeInt(min = -1, max = 10)
+    @Config.RangeInt(min = -1, max = 255)
     public static int configPreset = -1;
 
     @Deprecated
