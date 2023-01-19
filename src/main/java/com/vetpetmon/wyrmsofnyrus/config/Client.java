@@ -10,6 +10,14 @@ public class Client {
     @Config.Name("Fancy Animations")
     @Config.Comment({"Enables extensive animation value checks for situations like being in the air (for non-flying enemies) or being in water (for non-aquatic enemies).", "Disabling this can increase performance on clients."})
     public static boolean fancyAnimations = true;
+
+    @Config.Name("Music Enabled")
+    @Config.Comment("Enables or disables the music that plays when various events happen, including invasion stage changes and Wyrmfollies hunting the player."
+    + "The music is streamed by Wyrms of Nyrus, so it is not pre-loaded into memory first thing. There may be lag when music tracks start, so this option is available for users."
+    + "Turn this off if you are a server, not a client. Calls to play tracks will still be sent out from servers to client, but the server itself will not play the songs."
+    + "This option should ONLY have a memory usage impact when music tracks are streamed. If the music tracks are eating your RAM, disable this and report the memory leak to VPML immediately.")
+    public static boolean MusicEnabled = true;
+
     @Config.Name("Config Preset")
     @Config.Comment({"The index of the configuration preset you wish to use.",
             "Setting this to -1 will make the mod use this version's default configurations.",

@@ -62,14 +62,14 @@ public class wyrmStats {
     public static void roverStats(Configuration c) {
         final String CAT = "Rover Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Rovers, including variants.\n");
-        roverHP = createConfigDouble(c, CAT, "Normal HP", "Default: 5", 5);
-        roverUraniumHP = createConfigDouble(c, CAT, "Uranium Variant HP", "Default: 8", 8);
+        roverHP = createConfigDouble(c, CAT, "Normal HP", "Default: 5", ConfigBase.presetFloats(5,6,6.5F,presetID));
+        roverUraniumHP = createConfigDouble(c, CAT, "Uranium Variant HP", "Default: 8", ConfigBase.presetFloats(8,10,15,presetID));
 
         roverDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3.5", 3.5);
         roverUraniumDEF = createConfigDouble(c, CAT, "Uranium Variant DEF", "Default: 6", 6);
 
-        roverATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
-        roverUraniumATK = createConfigDouble(c, CAT, "Uranium Variant ATK", "Default: 6", 6);
+        roverATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", ConfigBase.presetFloats(4,5,5,presetID));
+        roverUraniumATK = createConfigDouble(c, CAT, "Uranium Variant ATK", "Default: 6", ConfigBase.presetFloats(6,8,8,presetID));
 
         roverSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.75", 0.75);
         roverUraniumSPD = createConfigDouble(c, CAT, "Uranium Variant SPD", "Default: 0.75", 0.75);
@@ -95,15 +95,15 @@ public class wyrmStats {
         biterSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
         biterKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
         biterRollSPD = createConfigDouble(c, CAT, "Normal Roll SPD", "Default: 2.0", 2.0);
-        biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 2", ConfigBase.presetFloats(2,2,4,presetID));
+        biterRollDMG = createConfigDouble(c, CAT, "Normal Roll DMG", "Default: 2", ConfigBase.presetFloats(2,2.25F,4,presetID));
     }
 
     public static void creeplingStats(Configuration c) {
         final String CAT = "Creepling Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Creeplings.\n");
-        creeplingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 4", 4);
-        creeplingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 1", 1);
-        creeplingATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
+        creeplingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 1", ConfigBase.presetFloats(1,2,2,presetID));
+        creeplingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 0", ConfigBase.presetFloats(0,3,4,presetID));
+        creeplingATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2", ConfigBase.presetFloats(2,4,4,presetID));
         creeplingSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
         creeplingKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
     }
@@ -112,7 +112,7 @@ public class wyrmStats {
         final String CAT = "Vanitas Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Vanitas (Creeped Humanoids).\n");
         creepedhumanoidHP = createConfigDouble(c, CAT, "Normal HP", "Default: 12", ConfigBase.presetFloats(12,18,20,presetID));
-        creepedhumanoidDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4", 4);
+        creepedhumanoidDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4", ConfigBase.presetFloats(4,5,5,presetID));
         creepedhumanoidATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 6", 6);
         creepedhumanoidSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.35", 0.35);
         creepedhumanoidKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.4", 0.4);
@@ -132,13 +132,13 @@ public class wyrmStats {
     public static void warriorStats(Configuration c) {
         final String CAT = "Warrior Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Warriors, including variants.\n");
-        warriorHP = createConfigDouble(c, CAT, "Normal HP", "Default: 26", 26);
+        warriorHP = createConfigDouble(c, CAT, "Normal HP", "Default: 14", ConfigBase.presetFloats(14,18,18,presetID));
         taintedWarriorHP = createConfigDouble(c, CAT, "Tainted Variant HP", "Default: 66", 66);
 
         warriorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 2", 2);
         taintedWarriorDEF = createConfigDouble(c, CAT, "Tainted Variant DEF", "Default: 16", 16);
 
-        warriorATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", 4);
+        warriorATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", ConfigBase.presetFloats(4,5,5,presetID));
         taintedWarriorATK = createConfigDouble(c, CAT, "Tainted Variant ATK", "Default: 12", 12);
 
         warriorSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.45", 0.45);
@@ -153,15 +153,15 @@ public class wyrmStats {
         c.addCustomCategoryComment(CAT,"\nStats for the Soldiers, including variants.\n");
         soldierHP = createConfigDouble(c, CAT, "Normal HP", "Default: 26", 26);
         infectoidSoldierHP = createConfigDouble(c, CAT, "Infectoid Variant HP", "Default: 20", 20);
-        frostSoldierHP = createConfigDouble(c, CAT, "Frost Variant HP", "Default: 8", 8);
+        frostSoldierHP = createConfigDouble(c, CAT, "Frost Variant HP", "Default: 8", ConfigBase.presetFloats(8,10,14,presetID));
 
         soldierDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 7", 7);
         infectoidSoldierDEF = createConfigDouble(c, CAT, "Infectoid Variant DEF", "Default: 5", 5);
-        frostSoldierDEF = createConfigDouble(c, CAT, "Frost Variant DEF", "Default: 20", 20);
+        frostSoldierDEF = createConfigDouble(c, CAT, "Frost Variant DEF", "Default: 20", ConfigBase.presetFloats(20,30,30,presetID));
 
-        soldierATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", 3);
-        infectoidSoldierATK = createConfigDouble(c, CAT, "Infectoid Variant ATK", "Default: 9", 9);
-        frostSoldierATK = createConfigDouble(c, CAT, "Frost Variant ATK", "Default: 6", 6);
+        soldierATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 3", ConfigBase.presetFloats(3,4,4,presetID));
+        infectoidSoldierATK = createConfigDouble(c, CAT, "Infectoid Variant ATK", "Default: 9", ConfigBase.presetFloats(9,9.5F,12,presetID));
+        frostSoldierATK = createConfigDouble(c, CAT, "Frost Variant ATK", "Default: 6", ConfigBase.presetFloats(6,4,4,presetID));
 
         soldierSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.5", 0.5);
         infectoidSoldierSPD = createConfigDouble(c, CAT, "Infectoid Variant SPD", "Default: 0.52", 0.52);
