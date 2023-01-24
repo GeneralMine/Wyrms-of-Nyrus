@@ -3,7 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.ability;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityBiter;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreepedHumanoid;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreepwyrm;
-import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
+import com.vetpetmon.synapselib.util.RNG;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

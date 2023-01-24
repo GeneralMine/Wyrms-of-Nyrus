@@ -1,14 +1,13 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
+import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
-import net.minecraft.world.World;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
+import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
 import net.minecraft.entity.Entity;
+import net.minecraft.world.World;
 
 import java.util.Map;
-
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmling;
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityHexePod;
 
 public class hexepodContents {
     public static void doThis(Map<String, Object> dpnds) {

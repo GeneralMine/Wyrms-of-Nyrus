@@ -8,7 +8,7 @@ import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
 import com.vetpetmon.synapselib.rendering.IHasModel;
-import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
+import com.vetpetmon.synapselib.util.RNG;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;

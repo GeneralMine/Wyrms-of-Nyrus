@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.invasion.events;
 
-import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
+import com.vetpetmon.synapselib.util.RNG;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.world.World;
 

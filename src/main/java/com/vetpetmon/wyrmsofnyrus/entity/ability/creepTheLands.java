@@ -6,7 +6,7 @@ import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStagedGrass;
 import com.vetpetmon.wyrmsofnyrus.compat.srp;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
-import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
+import com.vetpetmon.synapselib.util.RNG;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockOldLog;
