@@ -14,7 +14,6 @@ import net.minecraft.client.Minecraft;
 
 public class wyrmVariables {
     public static String wyrmInvasionStatus = "";
-    public static int wyrmEvo;
 
     public static class MapVariables extends WorldSavedData {
         public static final String DATA_NAME = "wyrmsofnyrus_mapvars";
@@ -57,9 +56,8 @@ public class wyrmVariables {
 
     public static class WorldVariables extends WorldSavedData {
         public static final String DATA_NAME = "wyrmsofnyrus_worldvars";
-        public double wyrmInvasionPoints = 0;
-        public double wyrmInvasionDifficulty = 1;
-        public int wyrmEvo = 0;
+        public double wyrmInvasionPoints = 0, wyrmInvasionDifficulty = 1;
+        public int wyrmEvo = 0, eventSchedulerCurrentInstance = 0, eventSchedulerNextInstance = 0;
         public boolean invasionStarted = false;
         public WorldVariables() {
             super(DATA_NAME);
@@ -71,15 +69,19 @@ public class wyrmVariables {
 
         @Override
         public void readFromNBT(NBTTagCompound nbt) {
-            wyrmEvo                     =   nbt.getInteger("wyrmEvo");
-            wyrmInvasionPoints			= 	optiMath.arcForm(nbt.getDouble("wyrmInvasionPoints"));
-            wyrmInvasionDifficulty		= 	nbt.getDouble("wyrmInvasionDifficulty");
-            invasionStarted		        = 	nbt.getBoolean("invasionStarted");
+            wyrmEvo                             =   nbt.getInteger("wyrmEvo");
+            wyrmInvasionPoints		        	= 	optiMath.arcForm(nbt.getDouble("wyrmInvasionPoints"));
+            wyrmInvasionDifficulty		        = 	nbt.getDouble("wyrmInvasionDifficulty");
+            invasionStarted		                = 	nbt.getBoolean("invasionStarted");
+            eventSchedulerCurrentInstance       = 	nbt.getInteger("eventCurrentInst");
+            eventSchedulerNextInstance		    = 	nbt.getInteger("eventNextInst");
         }
 
         @Override
         public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
             nbt.setInteger("wyrmEvo", wyrmEvo);
+            nbt.setInteger("eventCurrentInst", eventSchedulerCurrentInstance);
+            nbt.setInteger("eventNextInst", eventSchedulerNextInstance);
             nbt.setBoolean("invasionStarted", invasionStarted);
             nbt.setDouble("wyrmInvasionPoints", wyrmInvasionPoints);
             nbt.setDouble("wyrmInvasionDifficulty", optiMath.arcForm(wyrmInvasionDifficulty));
