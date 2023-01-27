@@ -12,9 +12,9 @@ public class InvasionScheduler {
     public static int getWorldDays(World world) {
         return (int) Math.floor((int) (world.getWorldTime()/24000));
     }
-    public static int getWorldHalfDays(World world) {return (int) Math.floor((int) (world.getTotalWorldTime()/12000));}
-    public static int getWorldSchedule(World world) {return (int) Math.floor((int) (world.getTotalWorldTime()/(Invasion.invasionEventFrequency * 1200)));} //1,200 ticks is one minute.
-    public static int getWorldQuarterDays(World world) {return (int) Math.floor((int) (world.getTotalWorldTime()/6000));}
+    public static int getWorldHalfDays(World world) {return (int) Math.floor((int) (world.getWorldTime()/12000));}
+    public static int getWorldSchedule(World world) {return (int) Math.floor((int) (world.getWorldTime()/(Invasion.invasionEventFrequency * 1200)));} //1,200 ticks is one minute.
+    public static int getWorldQuarterDays(World world) {return (int) Math.floor((int) (world.getWorldTime()/6000));}
     private static int currentDay, currentHalfDay, currentEventTime;
 
     public static int getCurrentHalfDay() {return currentHalfDay;}
@@ -97,14 +97,14 @@ public class InvasionScheduler {
         //
         // Yes, GHSA-xwmh-4hmj-2vw4 could still happen, but it'd require more steps to perform. Part 2 addresses this by only allowing the server to execute
         // this function at runtime. This is to stop clients from creating the exploit, at least on a remote/networked scope.
-        if (nextEventTime != currentEventTime + 1) {
-            nextEventTime = currentEventTime + 1;
+        if (nextEventTime != currentEventTime+1) {
+            nextEventTime = currentEventTime+1;
             setScheduler(world);
         }
         currentEventTime = getWorldSchedule(world);
-        if (nextEventTime > currentEventTime + 1) nextEventTime = currentEventTime;
+        if (nextEventTime > currentEventTime+1) nextEventTime = currentEventTime;
         else if (currentEventTime >= nextEventTime) {
-            nextEventTime = currentEventTime + 1;
+            nextEventTime = currentEventTime+1;
             setScheduler(world); // update world variables and save them to the file
             if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 3) {
                 wyrmsofnyrus.logger.info("Current Event time schedule: " + currentEventTime + ".");
@@ -117,6 +117,11 @@ public class InvasionScheduler {
     private static void getScheduler(World w) {
         currentEventTime = wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance;
         nextEventTime = wyrmVariables.WorldVariables.get(w).eventSchedulerNextInstance;
+        if (currentEventTime > getWorldSchedule(w)) {
+            wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance = getWorldSchedule(w);
+            wyrmVariables.WorldVariables.get(w).syncData(w);
+            getScheduler(w);
+        }
     }
     private static void setScheduler(World w) {
         wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance = currentEventTime;
