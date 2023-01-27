@@ -4,10 +4,12 @@ import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionEvent;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionScheduler;
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionStatus;
 import com.vetpetmon.wyrmsofnyrus.invasion.VisitorEvent;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -16,7 +18,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 @Mod.EventBusSubscriber(modid = libVars.ModID)
 public class WoNHandler {
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         Entity entity = event.player;
         World world = entity.world;
@@ -51,7 +53,7 @@ public class WoNHandler {
             }
         }
 
-    }
+    }*/
 
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
@@ -59,5 +61,65 @@ public class WoNHandler {
         //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onWorldTick was called successfully.");
         // EVOLUTION
         evoPoints.decay(world);
+        // EVENTS
+
+        // EXPLANATION OF GHSA-xwmh-4hmj-2vw4 & patch:
+        // THIS IS PART 2. This patch moves the invasion checks and events from onPlayerTick to onWorldTick.
+        // onWorldTick is only invoked by the server-side jar, not client-side, as the client jar does NOT handle the world functions.
+        // GHSA-xwmh-4hmj-2vw4 happened because it's also the CLIENT that was invoking invasion events, when only the server
+        // should've been invoking the events in the first place.
+        //
+        // Without immediate access to the player entity, we have to look at the logged playerEntities in the world.
+        // Singleplayer will ALWAYS have 1 player active in it. At least, it should, otherwise something went horribly wrong.
+        // But in Multiplayer, the server may call for an event but NOT have any players, and instead, the code will try to look
+        // for null values. This will cause NullPointerException errors, and most likely crash the server. Let's fix that, shall we?
+        //
+        // We first check if there's even a player in the world in the first place, by using Minecraft's playerEntities.isEmpty() getter,
+        // which will return false if there is at least one player currently connected to the server. Thus, we check if isEmpty() does not
+        // return true. If it returns false, then we move into the code segments within the condition.
+        //
+        // Now, in singleplayer, there will always be 1 player. (At least, there should be 1. If not, we are in big trouble!)
+        // world.rand.nextInt() always returns at least 1, so if world.playerEntities.size() == 1, then it will always pick the player in
+        // singleplayer. In multiplayer, world.playerEntities.size() >= 1, as 0 is filtered out in the conditional test anyway.
+        // This means that if there are multiple players connected to the server at once, players have a 1 in N chance of having an event
+        // take place in their area, N being the total amount of players on the server. After we find this (un)lucky player, we set a
+        // temporary class as the variable, with the selected player being the object.
+        //
+        // Something-something, later versions insert MP-exclusive event features/mechanics here.
+        //
+        // After all of that is done, the mod will now run almost as identical as pre-patched versions do, but with
+        // GHSA-xwmh-4hmj-2vw4 completely fixed (in theory... It should be fixed.)
+        if (!world.playerEntities.isEmpty()) {
+            EntityPlayer chosenPlayer = world.playerEntities.get(world.rand.nextInt(world.playerEntities.size())); //Pick random player, always turns at least 1, in singleplayer, the one player is always selected for events
+            int x = (int) chosenPlayer.posX;
+            int y = (int) chosenPlayer.posY;
+            int z = (int) chosenPlayer.posZ;
+            boolean invasionActive = wyrmVariables.WorldVariables.get(world).invasionStarted;
+
+            if (!chosenPlayer.isDead && Invasion.invasionEnabled && (!chosenPlayer.world.isRemote && event.phase == TickEvent.Phase.END)) { // Check to make sure this player actually exists in the world LOL
+                if (!invasionActive && Invasion.invasionStartsNaturally) {
+                    if (InvasionScheduler.detectDayChange(world)) {
+                        VisitorEvent.visitorEvent(false, world, x, y, z);
+                    }
+                }
+                if (invasionActive) {
+                    // Check and see if this is not the world starting, as it starts at 0 before it is set ----[|]
+                    //                                                                                          |
+                    // Detects events every x ticks, ----[|]                                                    |
+                    // or x/20 seconds, x/20/60 minutes...|                                                     |
+                    //                                    V                                                     V
+                    if (InvasionScheduler.runSchedule(world)) {
+                        java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
+                        dependencies.put("x", x);
+                        dependencies.put("y", y);
+                        dependencies.put("z", z);
+                        dependencies.put("world", world);
+                        dependencies.put("entity", chosenPlayer);
+                        dependencies.put("event", event);
+                        InvasionEvent.invasionEvent(dependencies);
+                    }
+                }
+            }
+        }
     }
 }
