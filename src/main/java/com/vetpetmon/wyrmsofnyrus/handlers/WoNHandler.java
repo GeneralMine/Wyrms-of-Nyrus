@@ -9,7 +9,6 @@ import com.vetpetmon.wyrmsofnyrus.invasion.VisitorEvent;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Config;
@@ -39,6 +38,8 @@ public class WoNHandler {
         //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onWorldTick was called successfully.");
         // EVOLUTION
         evoPoints.decay(world);
+        // INVASION
+        if (Invasion.invasionEnabled) InvasionStatus.executescript(world);
 
         // EVENTS
 
