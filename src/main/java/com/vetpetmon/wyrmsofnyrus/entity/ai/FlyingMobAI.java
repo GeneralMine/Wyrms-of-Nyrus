@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ai;
 
-import com.vetpetmon.wyrmsofnyrus.synapselib.util.synMath;
+import com.vetpetmon.synapselib.util.synMath;
 import net.minecraft.util.math.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.*;

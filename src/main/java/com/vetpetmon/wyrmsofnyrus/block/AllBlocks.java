@@ -1,11 +1,13 @@
 package com.vetpetmon.wyrmsofnyrus.block;
 
 import com.vetpetmon.wyrmsofnyrus.block.generic.BlockBase;
+import com.vetpetmon.wyrmsofnyrus.block.generic.BlockGasRadioactive;
 import com.vetpetmon.wyrmsofnyrus.block.generic.BlockPillar;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepBase;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepPillar;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStagedGrass;
+import com.vetpetmon.wyrmsofnyrus.block.vile.BlockCorium;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -21,6 +23,10 @@ public class AllBlocks {
     public static final Block metal_comb_panel_hive_creep = new BlockBase(Material.IRON, "metal_comb_panel_hive_creep", SoundType.METAL, 6, 7);
     public static final Block follyflesh = new BlockBase(Material.CLAY, "follyflesh", SoundType.SLIME, 1, 1.5F).setCanCreatureSpawn(WorldConfig.follyBlocksStopSpawns);
     public static final Block follybone = new BlockPillar(Material.ROCK, "follybone", SoundType.STONE, 4, 8).setCanCreatureSpawn(WorldConfig.follyBlocksStopSpawns);
+
+    public static final Block inertcorium = new BlockBase(Material.IRON, "inertcorium", SoundType.METAL, 25.0F, 20.0F, false);
+    public static final Block corium = new BlockCorium(Material.IRON, "corium", SoundType.METAL, 80.0F, 20.0F, true);
+    public static final Block radioactivegas = new BlockGasRadioactive("radioactivegas");
 
     public static final Block wyrm_lights_orange = new BlockBase(BlockMaterials.CREEP, "wyrm_lights_orange", SoundType.SLIME, 6, 7,true, 0, 1F);
     public static final Block wyrm_lights_yellow = new BlockBase(BlockMaterials.CREEP, "wyrm_lights_yellow", SoundType.SLIME, 6, 7,true, 0, 1F);

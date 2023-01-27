@@ -2,8 +2,8 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.world.World;
 
@@ -25,9 +25,9 @@ public class InvasionScheduler {
             wyrmsofnyrus.logger.info("invasionStartChance is " + Invasion.invasionStartChance + ".");
         }
         if (Invasion.invasionStartMode > 1) {
-            return currentDay > Invasion.invasionStartTime && (RNG.getIntRangeInclu(0, Invasion.invasionStartChance) == 1);
+            return currentDay >= Invasion.invasionStartTime && (RNG.getIntRangeInclu(0, Invasion.invasionStartChance) == 1);
         } else if (Invasion.invasionStartMode == 1) {
-            return currentDay > Invasion.invasionStartTime;
+            return currentDay >= Invasion.invasionStartTime;
         } else {
             return RNG.getIntRangeInclu(0, Invasion.invasionStartChance) == 1;
         }

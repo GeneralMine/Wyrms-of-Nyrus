@@ -1,0 +1,31 @@
+{
+  "group": "wyrmsofnyrus",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "&#$",
+    "#@#",
+    "$#&"
+  ],
+  "key": {
+    "#": {
+      "type": "forge:ore_dict",
+      "ore": "listAllMeatRaw"
+    },
+    "&": {
+      "type": "forge:ore_dict",
+      "ore": "listAllBeefRaw"
+    },
+    "$": {
+      "type": "forge:ore_dict",
+      "ore": "listAllMuttonRaw"
+    },
+    "@": {
+      "type": "forge:ore_dict",
+      "ore": "egg"
+    }
+  },
+  "result": {
+    "item": "wyrmsofnyrus:meatybase",
+    "count": 1
+  }
+}

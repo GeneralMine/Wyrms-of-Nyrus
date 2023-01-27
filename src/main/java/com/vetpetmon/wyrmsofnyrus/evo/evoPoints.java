@@ -1,8 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.evo;
 
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
+import com.vetpetmon.wyrmsofnyrus.compat.srp;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.synapselib.util.RNG;
+import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
@@ -11,7 +12,6 @@ import net.minecraftforge.fml.common.Loader;
  * A collection of functions used to mess with invasion points.
  * I made this specifically because I hated writing so much code every
  * time I wanted to add points to the invasion
- *
  * Even worse, there's no dedicated getter. I'm fixing that as we speak.
  */
 public class evoPoints{
@@ -49,7 +49,7 @@ public class evoPoints{
         if (Evo.customEvoMinCap > 0) minEvoCap += Evo.customEvoMinCap;
         if (Evo.evoReadsModpack) {
             if (Loader.isModLoaded("draconicevolution")) minEvoCap += 300;
-            if (Loader.isModLoaded("srparasites")) minEvoCap += 200;
+            if (srp.isEnabled()) minEvoCap += 200;
             if (hbm.isEnabled()) minEvoCap += 100;
             if (Loader.isModLoaded("techguns")) minEvoCap += 75;
             if (Loader.isModLoaded("immersiveintelligence")) minEvoCap += 50;

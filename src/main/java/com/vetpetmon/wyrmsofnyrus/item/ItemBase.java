@@ -1,11 +1,13 @@
 package com.vetpetmon.wyrmsofnyrus.item;
 
-import com.vetpetmon.wyrmsofnyrus.synapselib.rendering.IHasModel;
+import com.vetpetmon.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -26,6 +28,15 @@ public class ItemBase extends Item implements IHasModel {
         if (!hidden) setCreativeTab(wyrmsofnyrus.wyrmTabs);
         AllItems.ALL_ITEMS.add(this);
         this.hastooltip = hastooltip;
+    }
+
+    //Shortcut used for usable items that need to be removed upon use.
+    public static void onUseShrink(EntityPlayer player, EnumHand hand) {
+        ItemStack is = player.getHeldItem(hand);
+        if (!player.capabilities.isCreativeMode) {
+            is.shrink(1);
+            if (is.getCount() <= 0) player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+        }
     }
 
     @Override

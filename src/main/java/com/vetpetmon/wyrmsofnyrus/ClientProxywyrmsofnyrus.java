@@ -1,7 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus;
 
 import com.google.common.collect.Lists;
-import com.vetpetmon.wyrmsofnyrus.item.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

@@ -4,6 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.compat.hbm;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.*;
+import com.vetpetmon.wyrmsofnyrus.entity.follies.EntityStrykeling;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.*;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 
@@ -34,6 +35,8 @@ public final class WyrmRegister {
         RegHelper.RegEntity("creepedhumanoid", EntityCreepedHumanoid.class, id++, 64, 1);
         RegHelper.RegEntity("creeppod", EntityCreepPod.class, id++, 256, 1);
         RegHelper.RegEntity("wyrmsoldierfrost", EntityWyrmSoldierfrost.class, id++, 64, 2);
+        RegHelper.RegEntity("creepling", EntityCreepling.class, id++, 16, 1);
+        RegHelper.RegEntity("strykeling", EntityStrykeling.class, id++, 32);
 
         id = 130;
 

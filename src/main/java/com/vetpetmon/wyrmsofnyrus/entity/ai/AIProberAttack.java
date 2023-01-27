@@ -1,7 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ai;
 
-import com.vetpetmon.wyrmsofnyrus.DamageSources.DamageSourceProbed;
-//import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
+import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -153,7 +152,7 @@ public class AIProberAttack extends EntityAIBase
             this.attackTick = 20;
             this.attacker.swingArm(EnumHand.MAIN_HAND);
             this.attacker.attackEntityAsMob(target);
-            target.attackEntityFrom(DamageSourceProbed.PROBER, 50);
+            target.attackEntityFrom(WoNDamageSources.PROBER, 50);
             //invasionPoints.add(world, 2);
         }
     }

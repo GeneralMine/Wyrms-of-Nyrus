@@ -1,17 +1,19 @@
 package com.vetpetmon.wyrmsofnyrus;
 
+import com.vetpetmon.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmInvasionCommand;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmsTest;
 import com.vetpetmon.wyrmsofnyrus.compat.hbm;
+import com.vetpetmon.wyrmsofnyrus.compat.srp;
+import com.vetpetmon.wyrmsofnyrus.compat.synlib;
+import com.vetpetmon.wyrmsofnyrus.config.ConfigBase;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
-import com.vetpetmon.wyrmsofnyrus.synapselib.synapseLib;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -50,10 +52,8 @@ import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
 import static com.vetpetmon.wyrmsofnyrus.client.renderEngine.renderEngine;
-import static com.vetpetmon.wyrmsofnyrus.config.ConfigBase.reloadConfig;
-import static com.vetpetmon.wyrmsofnyrus.config.ConfigBase.setCanon;
 
-@Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION, dependencies = "required-after:geckolib3")
+@Mod(modid = wyrmsofnyrus.MODID, name = wyrmsofnyrus.NAME, version = wyrmsofnyrus.VERSION, dependencies = "required-after:geckolib3;required-after:synlib;")
 public class wyrmsofnyrus {
     public static final String MODID = libVars.ModID;
     public static final String NAME = libVars.ModName;
@@ -71,13 +71,15 @@ public class wyrmsofnyrus {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         if(logger == null) logger = event.getModLog();
-        wyrmsofnyrus.logger.info(synapseLib.initializeMSG());
+        synlib.init();
+        ConfigBase.setConfigPreset(); // Preload configuration settings, this grabs current presets. If a custom preset is selected, it will check and generate the files and directory if it exists.
+        ConfigBase.checkFactorySettings(); // also runs firstTimeDialogue() if the checks fail
+        ConfigBase.activatePreset(); // NOW activate configurations for real
+
         hbm.compatInit();
+        srp.compatInit();
 
         //threading.checkThreads(); //We know this works
-
-        reloadConfig();
-        setCanon();
 
         messageReg.init();
 
@@ -121,6 +123,7 @@ public class wyrmsofnyrus {
     public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(wyrmsofnyrus.MODID)) {
             ConfigManager.sync(wyrmsofnyrus.MODID, Config.Type.INSTANCE);
+            wyrmsofnyrus.logger.warn("Configuration settings were changed. If you didn't switch config presets, you may safely ignore this warning. If you did, restart your game.");
         }
     }
 
@@ -155,6 +158,7 @@ public class wyrmsofnyrus {
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
         evoPoints.minimum();
+        if(srp.isEnabled()) srp.compatPostInt();
     }
 
     @Mod.EventHandler
@@ -210,15 +214,10 @@ public class wyrmsofnyrus {
     @SideOnly(Side.CLIENT)
     public void registerModels(ModelRegistryEvent event) {
         for (Item item : AllItems.ALL_ITEMS) {
-            if (item instanceof IHasModel) {
-                ((IHasModel) item).registerModels();
-            }
+            if (item instanceof IHasModel) ((IHasModel) item).registerModels();
         }
-
         for (Block block : AllBlocks.ALL_BLOCKS) {
-            if (block instanceof IHasModel) {
-                ((IHasModel) block).registerModels();
-            }
+            if (block instanceof IHasModel) ((IHasModel) block).registerModels();
         }
     }
 

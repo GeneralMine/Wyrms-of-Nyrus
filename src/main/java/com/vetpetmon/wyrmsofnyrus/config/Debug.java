@@ -3,8 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.config;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraftforge.common.config.Configuration;
 
-import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.createConfigBool;
-import static com.vetpetmon.wyrmsofnyrus.synapselib.CFG.createConfigInt;
+import static com.vetpetmon.synapselib.util.CFG.*;
 
 public class Debug {
 

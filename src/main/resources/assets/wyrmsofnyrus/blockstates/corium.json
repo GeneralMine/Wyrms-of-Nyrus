@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "normal": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=0": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=1": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=2": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=3": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=4": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=5": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=6": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=7": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=8": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=9": {
+      "model": "wyrmsofnyrus:corium"
+    },
+    "age=10": {
+      "model": "wyrmsofnyrus:corium"
+    }
+  }
+}

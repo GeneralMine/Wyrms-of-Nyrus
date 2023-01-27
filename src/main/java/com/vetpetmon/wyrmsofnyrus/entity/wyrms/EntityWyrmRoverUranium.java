@@ -24,7 +24,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.config.Invasion.isEXCANON;
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, IAnimationTickable {
@@ -47,7 +46,7 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
         hivemindFollow();
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
         afterPlayers();
-        if (isEXCANON()) {afterVillagers();}
+        afterVillagers();
     }
 
     @Override

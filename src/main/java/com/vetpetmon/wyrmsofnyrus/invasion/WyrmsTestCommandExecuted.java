@@ -1,6 +1,5 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
-import com.vetpetmon.wyrmsofnyrus.config.ConfigBase;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
@@ -29,7 +28,11 @@ public class WyrmsTestCommandExecuted {
 				return "";
 			}
 		}.getText())).equals("reloadClient"))) {
-			ConfigBase.reloadClient();
+			//ConfigBase.reloadClient();
+			if (mcserv != null &&(entity instanceof EntityPlayer))
+				entity.sendMessage(new TextComponentString(
+						"This command parameter is obsolete, please edit the Client configs in the in-game Mods menu instead."));
+
 		} else {
 			if ((world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
 				{

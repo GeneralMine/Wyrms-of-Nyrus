@@ -3,14 +3,14 @@
     "modid": "wyrmsofnyrus",
     "name": "Wyrms of Nyrus",
     "description": "Adds the invasive Nyral Wyrms into Minecraft!",
-    "version": "0.2.3 ALPHA",
+    "version": "0.2.5 ALPHA",
     "mcversion": "1.12.2",
     "url": "https://github.com/Vetpetmon-Labs/Wyrms-of-Nyrus",
     "updateUrl": "https://github.com/Vetpetmon-Labs/Wyrms-of-Nyrus/releases",
-    "authorList": ["Iké (Ikae)"],
-    "credits": "Vetpetmon Labs, Mazellmi (Youtube, SFX)",
+    "authorList": ["Iké (E-kay)"],
+    "credits": "Vetpetmon Labs, Mazellmi (Youtube, SFX), Carver (Russian i18n)",
     "logoFile": "wyrmslogo.png",
     "screenshots": [],
-    "dependencies": ["geckolib3"]
+    "dependencies": ["geckolib3","synlib"]
   }
 ]
