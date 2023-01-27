@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.world.World;
@@ -11,9 +12,9 @@ public class InvasionScheduler {
     public static int getWorldDays(World world) {
         return (int) Math.floor((int) (world.getWorldTime()/24000));
     }
-    public static int getWorldHalfDays(World world) {return (int) Math.floor((int) (world.getTotalWorldTime()/12000));}
-    public static int getWorldSchedule(World world) {return (int) Math.floor((int) (world.getTotalWorldTime()/(Invasion.invasionEventFrequency * 1200)));} //1,200 ticks is one minute.
-    public static int getWorldQuarterDays(World world) {return (int) Math.floor((int) (world.getTotalWorldTime()/6000));}
+    public static int getWorldHalfDays(World world) {return (int) Math.floor((int) (world.getWorldTime()/12000));}
+    public static int getWorldSchedule(World world) {return (int) Math.floor((int) (world.getWorldTime()/(Invasion.invasionEventFrequency * 1200)));} //1,200 ticks is one minute.
+    public static int getWorldQuarterDays(World world) {return (int) Math.floor((int) (world.getWorldTime()/6000));}
     private static int currentDay, currentHalfDay, currentEventTime;
 
     public static int getCurrentHalfDay() {return currentHalfDay;}
@@ -61,10 +62,50 @@ public class InvasionScheduler {
     }
 
     public static boolean runSchedule(World world) {
+        getScheduler(world); // RUN THIS FIRST. Checks world for existing variables before it just takes the values at face-value. This updates both variables that are stored to disk.
+        // EXPLANATION OF GHSA-xwmh-4hmj-2vw4 & patch:
+        // Because the currentEventTime and nextEventTime variables aren't stored in the world data files, every time this class is initialized,
+        // it will take whatever values the two variables have in this class and just run the event scheduler. This is part 1 of the fix.
+        // Those who know how to edit class variables in Memory could easily exploit this with automation.
+        //
+        // By checking what is in the world data files first before changing this class's variables, let's say, World A has these:
+        // eventSchedulerCurrentInstance    =   1
+        // eventSchedulerNextInstance       =   2
+        // And World B hase these:
+        // eventSchedulerCurrentInstance    =   3
+        // eventSchedulerNextInstance       =   0
+        // World A sees this when loaded:
+        // currentEventTime     =   1
+        // nextEventTime        =   2
+        // After that, getWorldSchedule(world) is then ran, but instead of skipping up a lot of numbers on existing worlds, currentEventTime remains unchanged
+        // Because currentEventTime is unchanged, it is still less than nextEventTime, and thus does not return true.
+        // Player unloads World A and loads World B, variables update accordingly:
+        // currentEventTime     =   3
+        // nextEventTime        =   0
+        //
+        // Right after getScheduler(world), an if-statement checks if nextEventTime is not 1 over currentEventTime. If it detects such an issue, it will set
+        // nextEventTime to currentEventTime + 1, like so:
+        //
+        // 1. nextEventTime is at 0
+        // 2. currentEventTime is at 3
+        // 3. nextEventTime is expected to have a value of 4
+        // 3. if nextEventTime is not 4, then set it to 4 and update the world data file
+        // 4. currentEventTime is still 3, but nextEventTime was corrected to 4 when sanity check failed.
+        // 5. THEN run getWorldSchedule(world), which can potentially update to 4 and trip the next conditional
+        //
+        // setScheduler(world) is only called once a change is detected, and it saves to the world file. This hopefully stops some variable de-sync.
+        //
+        // Yes, GHSA-xwmh-4hmj-2vw4 could still happen, but it'd require more steps to perform. Part 2 addresses this by only allowing the server to execute
+        // this function at runtime. This is to stop clients from creating the exploit, at least on a remote/networked scope.
+        if (nextEventTime != currentEventTime+1) {
+            nextEventTime = currentEventTime+1;
+            setScheduler(world);
+        }
         currentEventTime = getWorldSchedule(world);
-        if (nextEventTime > currentEventTime + 1) nextEventTime = currentEventTime;
+        if (nextEventTime > currentEventTime+1) nextEventTime = currentEventTime;
         else if (currentEventTime >= nextEventTime) {
-            nextEventTime = currentEventTime + 1;
+            nextEventTime = currentEventTime+1;
+            setScheduler(world); // update world variables and save them to the file
             if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 3) {
                 wyrmsofnyrus.logger.info("Current Event time schedule: " + currentEventTime + ".");
                 wyrmsofnyrus.logger.info("Next Event scheduled for: " + nextEventTime + ".");
@@ -72,5 +113,19 @@ public class InvasionScheduler {
             return true;
         }
         return false;
+    }
+    private static void getScheduler(World w) {
+        currentEventTime = wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance;
+        nextEventTime = wyrmVariables.WorldVariables.get(w).eventSchedulerNextInstance;
+        if (currentEventTime > getWorldSchedule(w)) {
+            wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance = getWorldSchedule(w);
+            wyrmVariables.WorldVariables.get(w).syncData(w);
+            getScheduler(w);
+        }
+    }
+    private static void setScheduler(World w) {
+        wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance = currentEventTime;
+        wyrmVariables.WorldVariables.get(w).eventSchedulerNextInstance = nextEventTime;
+        wyrmVariables.WorldVariables.get(w).syncData(w);
     }
 }
