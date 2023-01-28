@@ -114,7 +114,7 @@ public class InvasionScheduler {
         }
         return false;
     }
-    private static void getScheduler(World w) {
+    public static void getScheduler(World w) {
         currentEventTime = wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance;
         nextEventTime = wyrmVariables.WorldVariables.get(w).eventSchedulerNextInstance;
         if (currentEventTime > getWorldSchedule(w)) {

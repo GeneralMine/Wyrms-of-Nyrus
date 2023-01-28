@@ -201,7 +201,7 @@ public class wyrmStats {
     public static void wyrmlingStats(Configuration c) {
         final String CAT = "Wyrmling Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the wyrmlings.\n");
-        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 4", ConfigBase.presetFloats(4,25,20,presetID));
+        wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 4", ConfigBase.presetFloats(4,10,20,presetID));
 
         wyrmlingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 8", 8);
 

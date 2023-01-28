@@ -8,9 +8,7 @@ import net.minecraft.world.World;
 public class InvasionStatus {
 
 	public static float getDifficulty(float baseDiff) {
-		// First factor: What's the basic invasion stage difficulty here?
-
-		return (baseDiff);
+		return baseDiff;
 	}
 
 	public static void executescript(World world) {
