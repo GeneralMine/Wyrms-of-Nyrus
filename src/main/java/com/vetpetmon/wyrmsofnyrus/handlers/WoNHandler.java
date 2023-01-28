@@ -83,11 +83,6 @@ public class WoNHandler {
                     }
                 }
                 if (invasionActive) {
-                    // Check and see if this is not the world starting, as it starts at 0 before it is set ----[|]
-                    //                                                                                          |
-                    // Detects events every x ticks, ----[|]                                                    |
-                    // or x/20 seconds, x/20/60 minutes...|                                                     |
-                    //                                    V                                                     V
                     if (InvasionScheduler.runSchedule(world)) {
                         java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
                         dependencies.put("x", x);
