@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.VoidwyrmAI;
@@ -171,7 +172,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source.isProjectile())
-            return super.attackEntityFrom(source, amount * 2);
+            return super.attackEntityFrom(source, (float) (amount * Radiogenetics.voidwyrmProjWeakness));
         return super.attackEntityFrom(source, amount);
     }
 

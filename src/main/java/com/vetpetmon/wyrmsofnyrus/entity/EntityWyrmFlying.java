@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
+import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -31,7 +32,7 @@ public abstract class EntityWyrmFlying extends EntityWyrm implements IAnimatable
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source.isProjectile())
-            return super.attackEntityFrom(source, amount * 2);
+            return super.attackEntityFrom(source, (float) (amount * Radiogenetics.flyingWyrmProjWeakness));
         if (source == DamageSource.FALL)
             return false;
         return super.attackEntityFrom(source, amount);
