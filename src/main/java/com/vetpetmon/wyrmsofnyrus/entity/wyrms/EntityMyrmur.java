@@ -1,7 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.SprinterAttackAI;
@@ -80,14 +79,6 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (source.isProjectile()) amount *= 0.75F;
-        if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
-            return false;
-        if (source == DamageSource.DROWN)
-            return false;
-        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
-            return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
         if (source == DamageSource.GENERIC)
             return super.attackEntityFrom(source, (float) (amount*0.75));
         return super.attackEntityFrom(source, amount);

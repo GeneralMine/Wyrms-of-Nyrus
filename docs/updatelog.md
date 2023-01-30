@@ -1,0 +1,59 @@
+## Death World Update
+### 0.2.6
+**NOW REQUIRES SYNAPSELIB AS A SEPARATE FILE**
+- Uses SynLib 1.0 now
+- Added Creeplings
+- Active creep blocks now legitimately show up in worlds
+- Creep spread is slower now
+- Corium is now made by Creepwyrms
+- Improved codebase
+- Prober damage is now absolute
+- New damagetypes added
+- Warrior wyrm animation(s) updated
+- Strykelings added
+- Russian translation added thanks to Carver!
+- Added Meaty Base
+- Added Unknown Specimen(s)
+- Biter melee now replaced with rapid, but weak bite attack.
+- Biter normal attack damage decreased from 3 to 2
+- Biter roll attack will cancel once damage is done
+- Biter roll attack damage reduced from 10 to 2
+- Biter roll attack now ignores immunity frames
+- Biter now deals bite damage on default
+- Vanitas base speed increased from 0.25 to 0.35
+- Fixed the Creeped not swimming.
+- Fixed Wyrms of Nyrus not using Forge's Dependencies checker properly
+- Removed EXCANON
+- Config presets
+- The initial 3 config presets, "factory" presets, are added
+- Default config for this update is 1.
+- Moving onto config ID 3 and above (up to 10) will make custom user configurations
+- Wyrms of Nyrus will now check if factory settings are outdated
+- If factory configuration presets are outdated, it will delete all the files in the directory, and regenerate new configs. No need to reset configs any longer (custom configs excluded)
+- Normal mode now spawns Visitor on a chance after 20 days instead of 30 days
+- Fixed Invasion Scheduler waiting for the NEXT DAY OVER instead of THE DAY on modes 1 & 2
+- Normal preset changes:
+  - Visitor HP 600 -> 250
+  - Visitor DEF 20 -> 4
+  - Vanitas HP 18 -> 12
+  - Biter HP 11 -> 8
+  - Creepwyrm HP 55 -> 30
+  - Creepwyrm DEF 10 -> 8
+  - Warrior HP 26 -> 14
+- Fixed an exploit that allowed for event spam which could take out servers
+ - Prevented world data from being easy to modify in weird ways in order to break stuff -- Event scheduler now uses world data instead of memory data.
+- New Wyrmling noises (Death & Hurt)
+- Redone how wyrms take damage
+  - Report if drop pods don't take fall damage
+  - Wyrms should now inherit these specific rules:
+    - 3x damage from fire
+    - no damage from drowning
+    - If immune to falling, is immune to falling.
+    - If immune to cactus/thorns, is immune to cactus/thorns.
+    - If immune to explosions, is immune to explosions.
+- Visitors now take 2x damage from projectiles (Commonly requested)
+
+## MULTIPLAYER IMPROVEMENTS
+- Invasion events now select a random player to target
+  -- Singleplayer: This will always select the player.
+- Invasion events will not take place when no one is on the server

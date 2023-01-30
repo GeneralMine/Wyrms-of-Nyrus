@@ -4,9 +4,6 @@ import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.callouspodContents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -32,22 +29,11 @@ public class EntityCallousPod extends EntityWyrm implements IAnimatable{
         enablePersistence();
         setNoAI(false);
     }
-
-    @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source.getImmediateSource() instanceof EntityArrow)
-            return false;
-        if (source.getImmediateSource() instanceof EntityPlayer)
-            return false;
-        if (source.getImmediateSource() instanceof EntityPotion)
-            return false;
-        if (source == DamageSource.CACTUS)
-            return false;
-        if (source == DamageSource.LIGHTNING_BOLT)
-            return false;
+        if (source == DamageSource.FALL)
+            return true;
         return super.attackEntityFrom(source, amount);
     }
-
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

@@ -176,11 +176,8 @@ public class wyrmStats {
         final String CAT = "Prober Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Probers.\n");
         proberHP = createConfigDouble(c, CAT, "Normal HP", "Default: 5", 5);
-
         proberDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3.25", 3.25);
-
         proberSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.55", 0.55);
-
         proberATK = createConfigDouble(c, CAT, "Normal ATK", "Only used if probing is disabled. Default: 4", 4);
     }
 
@@ -188,13 +185,9 @@ public class wyrmStats {
         final String CAT = "Worker Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Workers.\n");
         workerHP = createConfigDouble(c, CAT, "Normal HP", "Default: 14", 14);
-
         workerDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4.5", 4.5);
-
         workerSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.35", 0.35);
-
         workerATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 2", 2);
-
         workerKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
     }
 
@@ -202,20 +195,15 @@ public class wyrmStats {
         final String CAT = "Wyrmling Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the wyrmlings.\n");
         wyrmlingHP = createConfigDouble(c, CAT, "Normal HP", "Default: 4", ConfigBase.presetFloats(4,10,20,presetID));
-
         wyrmlingDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 8", 8);
-
         wyrmlingSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.55", 0.55);
     }
     public static void visitorStats(Configuration c) {
         final String CAT = "Visitor Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Visitor.\n");
         visitorHP = createConfigDouble(c, CAT, "Normal HP", "Default: 250", ConfigBase.presetFloats(250,300,500,presetID));
-
         visitorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 4", ConfigBase.presetFloats(4,7,8,presetID));
-
         visitorSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.15", 0.15);
-
         visitorKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 1.0", 1.0);
     }
 

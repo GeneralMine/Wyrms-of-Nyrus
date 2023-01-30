@@ -28,6 +28,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -65,6 +66,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     private final AnimationFactory factory = new AnimationFactory(this);
     // SRP compatibility <3
     protected int srpcothimmunity;
+
     // data management
     public byte getByteFromDataManager(DataParameter<Byte> key) {
         try {
@@ -337,6 +339,22 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     public void onKillEntity(EntityLivingBase entity) {
         super.onKillEntity(entity);
         wyrmKillBonuses.pointIncrease(world);
+    }
+
+    // Controls how all wyrms respond to damage.
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
+            return false;
+        if (source.isExplosion() && Radiogenetics.immuneToExplosions)
+            return false;
+        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
+            return false;
+        if (source == DamageSource.DROWN)
+            return false;
+        if (source == DamageSource.ON_FIRE)
+            return super.attackEntityFrom(source, amount*3);
+        return super.attackEntityFrom(source,amount);
     }
 
     // Gives all wyrms COTH (from Scape & Run: Parasites) immunity so that way pack makers and unknowing players DON'T have to add it themselves.

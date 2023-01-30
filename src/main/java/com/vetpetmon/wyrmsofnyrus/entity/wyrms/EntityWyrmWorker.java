@@ -67,18 +67,6 @@ public class EntityWyrmWorker extends EntityWyrm {
         else this.setStats(wyrmStats.workerHP,wyrmStats.workerDEF,wyrmStats.workerATK, wyrmStats.workerSPD,wyrmStats.workerKBR);
     }
 
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
-            return false;
-        if (source == DamageSource.DROWN)
-            return false;
-        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
-            return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
-        return super.attackEntityFrom(source, amount);
-    }
-
     @Override
     public SoundEvent getAmbientSound() {
         return SoundRegistry.wyrmClicks;
