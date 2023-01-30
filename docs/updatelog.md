@@ -45,14 +45,16 @@
 - New Wyrmling noises (Death & Hurt)
 - Redone how wyrms take damage
   - Report if drop pods don't take fall damage
-  - All flying wyrms should take doubled projectile damage and should always be resistant against fall damage
+  - All flying wyrms should take increased projectile damage and should always be resistant against fall damage
   - Wyrms should now inherit these specific rules:
     - 3x damage from fire
     - no damage from drowning or suffocation
     - If immune to falling, is immune to falling.
     - If immune to cactus/thorns, is immune to cactus/thorns.
     - If immune to explosions, is immune to explosions.
-- Visitors now take 2x damage from projectiles (Commonly requested)
+- Visitors now take extra damage from projectiles (Commonly requested)
+- New config option: Flying Wyrm Projectile Weakness
+- New config option: Voidwyrm Projectile Weakness
 
 ## MULTIPLAYER IMPROVEMENTS
 - Invasion events now select a random player to target
