@@ -101,12 +101,6 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.bat.takeoff"));
     }
 
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return true;
-        return super.attackEntityFrom(source, amount);
-    }
-
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 3F, this::predicate));
     }

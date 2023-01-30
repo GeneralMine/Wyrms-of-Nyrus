@@ -4,8 +4,8 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -28,6 +28,14 @@ public abstract class EntityWyrmFlying extends EntityWyrm implements IAnimatable
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.
     public AnimationFactory getFactory() {return this.factory;}
+
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source.isProjectile())
+            return super.attackEntityFrom(source, amount * 2);
+        if (source == DamageSource.FALL)
+            return false;
+        return super.attackEntityFrom(source, amount);
+    }
 
     // Shared by all flying entities.
     @Override

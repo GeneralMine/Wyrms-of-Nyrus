@@ -45,6 +45,7 @@
 - New Wyrmling noises (Death & Hurt)
 - Redone how wyrms take damage
   - Report if drop pods don't take fall damage
+  - All flying wyrms should take doubled projectile damage and should always be resistant against fall damage
   - Wyrms should now inherit these specific rules:
     - 3x damage from fire
     - no damage from drowning or suffocation

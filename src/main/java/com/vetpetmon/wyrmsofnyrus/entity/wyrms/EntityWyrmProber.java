@@ -221,11 +221,6 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.bat.takeoff"));
     }
 
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return false;
-        return super.attackEntityFrom(source, amount);
-    }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
