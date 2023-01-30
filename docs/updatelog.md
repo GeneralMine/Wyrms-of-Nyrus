@@ -47,7 +47,7 @@
   - Report if drop pods don't take fall damage
   - Wyrms should now inherit these specific rules:
     - 3x damage from fire
-    - no damage from drowning
+    - no damage from drowning or suffocation
     - If immune to falling, is immune to falling.
     - If immune to cactus/thorns, is immune to cactus/thorns.
     - If immune to explosions, is immune to explosions.

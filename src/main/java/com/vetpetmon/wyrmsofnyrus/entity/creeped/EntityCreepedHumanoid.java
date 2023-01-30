@@ -82,18 +82,6 @@ public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IA
         this.setStats(wyrmStats.creepedhumanoidHP,wyrmStats.creepedhumanoidDEF,wyrmStats.creepedhumanoidATK, wyrmStats.creepedhumanoidSPD,wyrmStats.creepedhumanoidKBR);
     }
 
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return super.attackEntityFrom(source, (amount/2));
-        if (source == DamageSource.CACTUS)
-            return false;
-        if (source == DamageSource.LIGHTNING_BOLT)
-            return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
-        return super.attackEntityFrom(source, amount);
-    }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {

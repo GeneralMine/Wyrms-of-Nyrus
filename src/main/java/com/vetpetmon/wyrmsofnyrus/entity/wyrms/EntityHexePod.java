@@ -29,11 +29,6 @@ public class EntityHexePod extends EntityWyrm implements IAnimatable{
         enablePersistence();
         setNoAI(false);
     }
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return true;
-        return super.attackEntityFrom(source, amount);
-    }
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

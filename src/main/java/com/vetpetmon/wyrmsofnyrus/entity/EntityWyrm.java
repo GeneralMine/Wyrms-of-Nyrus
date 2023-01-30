@@ -344,13 +344,15 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     // Controls how all wyrms respond to damage.
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
+        if (source == DamageSource.FALL && (Radiogenetics.immuneToFalling && !(this.casteType==9)))
             return false;
         if (source.isExplosion() && Radiogenetics.immuneToExplosions)
             return false;
         if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
             return false;
         if (source == DamageSource.DROWN)
+            return false;
+        if (source == DamageSource.IN_WALL)
             return false;
         if (source == DamageSource.ON_FIRE)
             return super.attackEntityFrom(source, amount*3);

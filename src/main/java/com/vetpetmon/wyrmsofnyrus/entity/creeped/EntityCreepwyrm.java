@@ -52,16 +52,8 @@ public class EntityCreepwyrm extends EntityWyrm implements IAnimatable, IAnimati
                 (int) ((getPosition().getY()) + RNG.PMRange(10)),
                 (int) ((getPosition().getZ()) + RNG.PMRange(10)) );
         */
-        if (source == DamageSource.FALL)
-            return false;
         if (source.getImmediateSource() instanceof EntityPotion)
             return super.attackEntityFrom(source, (amount/2));
-        if (source == DamageSource.CACTUS)
-            return false;
-        if (source == DamageSource.LIGHTNING_BOLT)
-            return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
         return super.attackEntityFrom(source, amount);
     }
 
