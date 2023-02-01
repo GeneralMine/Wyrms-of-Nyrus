@@ -3,7 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.follies;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -33,8 +33,17 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     private final AnimationFactory factory = new AnimationFactory(this);
     protected int srpcothimmunity;
     protected int killCount, level; // Also known as ascension points
-    protected float HP, DEF, ATK, SPD, KBR; // Stats
+    protected float HP, DEF, ATK, SPD, KBRR; // Stats
     private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> LEVEL = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.VARINT);
+    private static final DataParameter<Float>
+            FOLLYHEALTH = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.FLOAT),
+            FOLLYARMOR = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.FLOAT),
+            FOLLYBASEDAMAGE = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.FLOAT),
+            FOLLYSPEED = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.FLOAT),
+            FOLLYKBR = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.FLOAT);
+
+
     // Animation and AI util
     public void setAttack(int attackID)
     {
@@ -49,15 +58,12 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     }
 
     public void updateLevel(){
-        level = (int) (Math.floor((float)killCount/Radiogenetics.follyAscenSteps)+1);
-        //wyrmsofnyrus.logger.info("Wyrmfolly level is:" + this.level); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
-        this.setHealth(this.getHealth() + (this.getMaxHealth()/2)); //Heals half of health for every kill.
-    }
-    public int getLevel(){
-        return this.level;
+        this.setLevel((int) (Math.floor((float)killCount/Radiogenetics.follyAscenSteps)+1));
+        wyrmsofnyrus.logger.info("Wyrmfolly level is:" + this.getLevel()); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
+        this.setHealth(this.getHealth() + (this.getMaxHealth()/8)); //Heals 1/8 of health for every kill.
     }
 
-    public EntityWyrmfolly(final World worldIn) {
+    public EntityWyrmfolly(World worldIn) { //, float health, float armor, float damage, float speed, float knockbackResist
         super(worldIn);
         this.isImmuneToFire = false;
         this.srpcothimmunity = 0;
@@ -67,12 +73,12 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     }
 
     public void setStats(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR) {
-        float diff = (float) (this.getLevel() * Radiogenetics.follyAscenBuffFactor);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff));
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
+        float diff = (float) ((float)this.getLevel() * Radiogenetics.follyAscenBuffFactor);
+        this.setFollyKBR(entityKBR);
+        this.setFollySpeed(entitySpeed);
+        this.setFollyATK(entityDamage + (entityDamage * diff));
+        this.setFollyArmor(entityArmor + (entityArmor * diff));
+        this.setFollyHealth(entityHealth + (entityHealth * diff));
     }
 
     @Override
@@ -88,6 +94,21 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
             world.setBlockState(lookingBlock, AllBlocks.follyflesh.getDefaultState(), 3);
         }
     }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        updateAttributes();
+    }
+
+    protected void updateAttributes() {
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.getFollyHealth());
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(this.getFollyArmor());
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(this.getFollyATK());
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(this.getFollySpeed());
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(this.getFollyKBR());
+    }
+
 
     @Override
     protected void initEntityAI() {
@@ -165,17 +186,44 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(ATTACKID, 0);
+        this.dataManager.register(LEVEL, Integer.valueOf(0));
+        this.dataManager.register(FOLLYHEALTH, Float.valueOf(0));
+        this.dataManager.register(FOLLYARMOR, Float.valueOf(0));
+        this.dataManager.register(FOLLYBASEDAMAGE, Float.valueOf(0));
+        this.dataManager.register(FOLLYSPEED, Float.valueOf(0));
+        this.dataManager.register(FOLLYKBR, Float.valueOf(0));
     }
 
     protected abstract void StatMap();
+
+    public int getLevel() {return dataManager.get(LEVEL).intValue();}
+    public void setLevel(int level) {this.dataManager.set(LEVEL,level);}
+    public float getFollyHealth() {return dataManager.get(FOLLYHEALTH).floatValue();}
+    public void setFollyHealth(float input) {this.dataManager.set(FOLLYHEALTH,input);}
+    public float getFollyArmor() {return dataManager.get(FOLLYARMOR).floatValue();}
+    public void setFollyArmor(float input) {this.dataManager.set(FOLLYARMOR,input);}
+    public float getFollyATK() {return dataManager.get(FOLLYBASEDAMAGE).floatValue();}
+    public void setFollyATK(float input) {this.dataManager.set(FOLLYBASEDAMAGE,input);}
+    public float getFollySpeed() {return dataManager.get(FOLLYSPEED).floatValue();}
+    public void setFollySpeed(float input) {this.dataManager.set(FOLLYSPEED,input);}
+    public float getFollyKBR() {return dataManager.get(FOLLYKBR).floatValue();}
+    public void setFollyKBR(float input) {this.dataManager.set(FOLLYKBR,input);}
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
 
+        super.readEntityFromNBT(compound);
         if (compound.hasKey("srpcothimmunity")) this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         if (compound.hasKey("killcount")) this.killCount = compound.getInteger("killcount");
-        if (compound.hasKey("level")) this.level = compound.getInteger("level");
+
+        compound.setInteger("level", this.getLevel());
+        compound.setFloat("follyhealth", this.getFollyHealth());
+        compound.setFloat("follyarmor", this.getFollyArmor());
+        compound.setFloat("follydamage", this.getFollyATK());
+        compound.setFloat("follyspeed", this.getFollySpeed());
+        compound.setFloat("follykbr", this.getFollyKBR());
+
     }
 
     @Override
@@ -184,7 +232,13 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
         super.writeEntityToNBT(compound);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
         compound.setInteger("killcount", this.killCount);
-        compound.setInteger("level", this.level);
+        // this is terrible there needs to be a better way
+        this.setLevel(compound.getInteger("level"));
+        this.setFollyHealth(compound.getFloat("follyhealth"));
+        this.setFollyArmor(compound.getFloat("follyarmor"));
+        this.setFollyATK(compound.getFloat("follydamage"));
+        this.setFollySpeed(compound.getFloat("follyspeed"));
+        this.setFollyKBR(compound.getFloat("follykbr"));
     }
 
     @Override
