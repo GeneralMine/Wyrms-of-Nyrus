@@ -84,14 +84,7 @@ public class WoNHandler {
                 }
                 if (invasionActive) {
                     if (InvasionScheduler.runSchedule(world)) {
-                        java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
-                        dependencies.put("x", x);
-                        dependencies.put("y", y);
-                        dependencies.put("z", z);
-                        dependencies.put("world", world);
-                        dependencies.put("entity", chosenPlayer);
-                        dependencies.put("event", event);
-                        InvasionEvent.invasionEvent(dependencies);
+                        InvasionEvent.invasionEvent(chosenPlayer,world);
                     }
                 }
             }

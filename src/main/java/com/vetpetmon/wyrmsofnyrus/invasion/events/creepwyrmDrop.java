@@ -1,20 +1,15 @@
 package com.vetpetmon.wyrmsofnyrus.invasion.events;
 
+import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreepPod;
-import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
-import java.util.Map;
-
 public class creepwyrmDrop {
-    public static void call(Map<String, Object> e){
-        int x = (int) e.get("x");
-        int z = (int) e.get("z");
-        World world = (World) e.get("world");
+    public static void callEvent(double x, double z, World world){
         Entity entityToSpawn = new EntityCreepPod(world);
         if (!world.isRemote) {
             entityToSpawn.setLocationAndAngles((x + (RNG.PMRange(Invasion.maxEventDistance))), 280, (z + (RNG.PMRange(Invasion.maxEventDistance))), world.rand.nextFloat() * 360F,

@@ -4,21 +4,18 @@ import com.vetpetmon.synapselib.util.RNG;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.world.World;
 
-import java.util.Map;
-
 public class massIncursion {
-    public static void call(Map<String, Object> e, int level) {
-        World world = (World) e.get("world");
+    public static void callEvent(double x, double z, World world, int level) {
         int raidSize = (RNG.getIntRangeInclu((4 + level),(6 + (level*2))));
-        world.addWeatherEffect(new EntityLightningBolt(world, (Double) e.get("x"), 200, (Double) e.get("z"), false));
-        world.addWeatherEffect(new EntityLightningBolt(world, (Double) e.get("x") - 6, 200, (Double) e.get("z") - 10, true));
+        world.addWeatherEffect(new EntityLightningBolt(world, x, 200, z, false));
+        world.addWeatherEffect(new EntityLightningBolt(world, x - 6, 200, z - 10, true));
         for (int i = 0; i < raidSize; i++) {
-            scoutingPodRaid.call(e);
+            scoutingPodRaid.callEvent(x,z,world);
         }
-        world.addWeatherEffect(new EntityLightningBolt(world, (Double) e.get("x") + 20, 200, (Double) e.get("z") + 30, true));
+        world.addWeatherEffect(new EntityLightningBolt(world, x + 20, 200, z + 30, true));
         for (int i = 0; i < raidSize; i = i+2) {
-            smallPodRaid.Do(e);
+            smallPodRaid.callEvent(x,z,world);
         }
-        world.addWeatherEffect(new EntityLightningBolt(world, (Double) e.get("x") - 26, 200, (Double) e.get("z") + 3, true));
+        world.addWeatherEffect(new EntityLightningBolt(world, x - 26, 200, z + 3, true));
     }
 }
