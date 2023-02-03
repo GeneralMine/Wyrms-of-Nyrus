@@ -44,7 +44,6 @@
  - Prevented world data from being easy to modify in weird ways in order to break stuff -- Event scheduler now uses world data instead of memory data.
 - New Wyrmling noises (Death & Hurt)
 - Redone how wyrms take damage
-  - Report if drop pods don't take fall damage
   - All flying wyrms should take increased projectile damage and should always be resistant against fall damage
   - Wyrms should now inherit these specific rules:
     - 3x damage from fire
@@ -55,6 +54,8 @@
 - Visitors now take extra damage from projectiles (Commonly requested)
 - New config option: Flying Wyrm Projectile Weakness
 - New config option: Voidwyrm Projectile Weakness
+- Vanitas now has swiming animations
+- Now uses vanilla water detection for animations
 
 ## MULTIPLAYER IMPROVEMENTS
 - Invasion events now select a random player to target

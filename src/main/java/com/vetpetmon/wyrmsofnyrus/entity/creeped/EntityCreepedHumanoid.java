@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.config.Client;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
@@ -86,9 +87,11 @@ public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IA
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            if (getAttack() == 2) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepedhumanoid.run"));
+            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepedhumanoid.swim"));
+            else if (getAttack() == 2) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepedhumanoid.run"));
             else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepedhumanoid.walk"));
         }
+        else if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepedhumanoid.swimidle"));
         else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepedhumanoid.idle"));
         return PlayState.CONTINUE;
     }

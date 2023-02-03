@@ -307,14 +307,14 @@
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, -8, 11]
+							"vector": [0, -5, 11]
 						},
 						"0.3333": {
-							"vector": [0, -9, 11],
+							"vector": [0, -6, 11],
 							"easing": "easeInOutSine"
 						},
 						"0.6667": {
-							"vector": [0, -8, 11],
+							"vector": [0, -5, 11],
 							"easing": "easeInOutSine"
 						}
 					}
@@ -481,14 +481,14 @@
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, -13, 11]
+							"vector": [0, -8, 11]
 						},
 						"0.5": {
-							"vector": [0, -12.6, 11],
+							"vector": [0, -7.6, 11],
 							"easing": "easeInSine"
 						},
 						"1.0": {
-							"vector": [0, -13, 11],
+							"vector": [0, -8, 11],
 							"easing": "easeInSine"
 						}
 					}

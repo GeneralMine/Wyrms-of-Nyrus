@@ -389,11 +389,6 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     {
         return world.getBlockState(pos).getMaterial() == Material.WATER;
     }
-
-    public boolean isInWater(){
-        return (blockIsWater(new BlockPos(getPosition().getX(), getPosition().getY(),getPosition().getZ())));
-    }
-
     public boolean isGrounded(){
         return (world.isBlockFullCube(new BlockPos(getPosition().getX(), getPosition().getY()-1,getPosition().getZ())));
     }
