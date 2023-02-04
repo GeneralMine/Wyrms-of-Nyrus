@@ -76,9 +76,9 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
         float diff = (float) ((float)this.getLevel() * Radiogenetics.follyAscenBuffFactor);
         this.setFollyKBR(entityKBR);
         this.setFollySpeed(entitySpeed);
-        this.setFollyATK(entityDamage + (entityDamage * diff));
-        this.setFollyArmor(entityArmor + (entityArmor * diff));
-        this.setFollyHealth(entityHealth + (entityHealth * diff));
+        this.setFollyATK(entityDamage + ((entityDamage/2) * diff));
+        this.setFollyArmor(entityArmor + (entityArmor  * diff));
+        this.setFollyHealth(entityHealth + ((entityHealth/4) * diff));
     }
 
     @Override
