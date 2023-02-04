@@ -41,7 +41,8 @@
   - Creepwyrm DEF 10 -> 8
   - Warrior HP 26 -> 14
 - Fixed an exploit that allowed for event spam which could take out servers
- - Prevented world data from being easy to modify in weird ways in order to break stuff -- Event scheduler now uses world data instead of memory data.
+  - Prevented world data from being easy to modify in weird ways in order to break stuff 
+  - Event scheduler now uses world data instead of memory data.
 - New Wyrmling noises (Death & Hurt)
 - Redone how wyrms take damage
   - All flying wyrms should take increased projectile damage and should always be resistant against fall damage

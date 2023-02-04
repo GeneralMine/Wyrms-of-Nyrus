@@ -5,9 +5,11 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors
 import com.vetpetmon.wyrmsofnyrus.entity.ai.FollyBiteAttackAI;
 import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -35,6 +37,13 @@ public class EntityStrykeling extends EntityWyrmfolly implements IAnimatable, IA
                 wyrmStats.strykelingfollySPD,
                 wyrmStats.strykelingfollyKBR
         );
+    }
+
+    @Override
+    protected void makeAllTargets() {
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityStryker.class, 3, 1, 1.2));
+        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
+        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityLiving.class, 2, true, false, target -> !((target instanceof EntityStryker)||(target instanceof EntityStrykeling)||(target instanceof EntityCreeper))));
     }
 
     @Override
