@@ -20,8 +20,9 @@ public class Radiogenetics {
         final String CATEGORY = "Radiogenetics";
         config.addCustomCategoryComment(CATEGORY,"\nGeneral mob properties for Wyrms & The Creeped. Doesn't affect non-wyrms.\n");
 
+        immuneToExplosions = createConfigBool(config, CATEGORY, "Immune to explosions", "Makes wyrms and Creeped immune to explosions. Default: false", ConfigBase.presetBools(false, true, true, id));
         immuneToFalling = createConfigBool(config, CATEGORY, "Immune to falling", "Makes certain wyrms immune to fall damage. Obviously doesn't apply to any kind of droppod if true, and doesn't do anything to flying wyrms if set to false. Default: true", true);
-        immuneToCacti = createConfigBool(config, CATEGORY, "Immune to cacti", "Makes certain wyrms immune to cactus damage. Set this to true if you want a closer to canon defense strategy. Default: false", ConfigBase.presetBools(false, true, true, id));
+        immuneToCacti = createConfigBool(config, CATEGORY, "Immune to cacti", "Makes certain wyrms immune to cactus damage. Default: false", ConfigBase.presetBools(false, true, true, id));
         explodingWyrms = createConfigBool(config, CATEGORY, "Wyrms go supercritical", "Lore-wise, wyrms can undergo uncontrolled nuclear chain reactions when set on fire. This makes wyrms explode on death if they're on fire upon death. Default: true", true);
 
         workerProductivity = createConfigInt(config, CATEGORY, "Worker productivity", "As a baseline, workers make a product every x ticks. This value is the base time it will take, total time will vary based on RNG still. Default: 2500", 2500);

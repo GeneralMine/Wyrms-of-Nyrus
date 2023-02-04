@@ -88,7 +88,6 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
         this.updateLevel();
         World world = entity.world;
         BlockPos lookingBlock = new BlockPos(entity.posX, entity.posY - 1, entity.posZ);
-        //Block blockLooking = (world.getBlockState(lookingBlock)).getBlock();
         if (creepspreadRules(lookingBlock, world, lookingBlock)) {
             assert false;
             world.setBlockState(lookingBlock, AllBlocks.follyflesh.getDefaultState(), 3);

@@ -62,6 +62,8 @@
 - Evo min points:
   - Now detects ICBM-Classic
 - Wyrms no longer drown
+- Wyrms can now resist explosion damage in Death World and above difficulty presets
+- New config option: **Immune to explosions**
 
 ## MULTIPLAYER IMPROVEMENTS
 - Invasion events now select a random player to target
