@@ -210,10 +210,10 @@ public class wyrmStats {
     public static void strykerfollyStats(Configuration c) {
         final String CAT = "Strykerfolly Base stats";
         c.addCustomCategoryComment(CAT,"\nStats for the Strykerfolly.\n");
-        strykelingfollyHP = createConfigDouble(c, CAT, "Primordial HP", "Default: 10", ConfigBase.presetFloats(10,25,20,presetID));
+        strykelingfollyHP = createConfigDouble(c, CAT, "Primordial HP", "Default: 10", ConfigBase.presetFloats(10,12.5F,16,presetID));
         strykelingfollyATK = createConfigDouble(c, CAT, "Primordial ATK", "Default: 4", ConfigBase.presetFloats(4,5,6,presetID));
         strykelingfollyDEF = createConfigDouble(c, CAT, "Primordial DEF", "Default: 0", ConfigBase.presetFloats(0,1,0,presetID));
-        strykelingfollySPD = createConfigDouble(c, CAT, "Primordial SPD", "Default: 0.42", ConfigBase.presetFloats(0.42F,0.55F,0.45F,presetID));
+        strykelingfollySPD = createConfigDouble(c, CAT, "Primordial SPD", "Default: 0.42", ConfigBase.presetFloats(0.42F,0.45F,0.47F,presetID));
         strykelingfollyKBR = createConfigDouble(c, CAT, "Primordial KBR", "Default: 0.85", 0.85);
 
         strykerfollyHP = createConfigDouble(c, CAT, "Middling HP", "Default: 50", ConfigBase.presetFloats(50,72,68,presetID));
