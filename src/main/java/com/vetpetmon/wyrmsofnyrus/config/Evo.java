@@ -8,13 +8,11 @@ import static com.vetpetmon.synapselib.util.CFG.*;
 public class Evo {
     public static boolean evoEnabled, evoReadsModpack, evoVariantsEnabled;
     public static boolean evoFromKilled;
-
     public static boolean evoHBMVariantsEnabled;
-
     public static float evoFactor, evoPowerHP, evoPowerDEF, evoPowerATK;
     public static int customEvoMinCap, evoPointsPerLevel;
-
     public static int minEvoCreepwyrm, minEvoWyrmling, minEvoWorker, minEvoSoldier, minEvoSoldierInf, minEvoSoldierFrost, minEvoWarrior, minEvoWarriorTainted;
+    public static String[] modEvo, modEvoDef = {"draconicevolution;400","srparasites;300","hbm;250","icbmclassic;150","securitycraft;80","techguns;75","roughmobsrevamped;75","immersiveintelligence;65","roughmobs;60","ic2;50"};
 
 
     public static void loadFromConfig(Configuration config, int id) {
@@ -24,6 +22,8 @@ public class Evo {
 
         evoEnabled = createConfigBool(config, CATEGORY, "Evolution enabled", "Enables the evolution system. Default: true", true);
         if (!evoEnabled) wyrmsofnyrus.logger.info("Evolution module has been disabled");
+
+        modEvo = createConfigStringList(config,CATEGORY, "Modlist detector strings", "uwu", modEvoDef);
 
         evoPowerHP = createConfigDouble(config,CATEGORY,"Evolution HP power","The overall health boost given to wyrms at certain stages of evolution. Default: 0.15",ConfigBase.presetFloats(0.15F, 0.19F, 0.25F, id));
         evoPowerDEF = createConfigDouble(config,CATEGORY,"Evolution DEF power","The overall armor boost given to wyrms at certain stages of evolution. Default: 0.1",ConfigBase.presetFloats(0.1F, 0.11F, 0.13F, id));

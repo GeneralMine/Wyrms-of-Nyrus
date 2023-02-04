@@ -24,12 +24,12 @@
 - Fixed the Creeped not swimming.
 - Fixed Wyrms of Nyrus not using Forge's Dependencies checker properly
 - Removed EXCANON
-- Config presets
-- The initial 3 config presets, "factory" presets, are added
-- Default config for this update is 1.
-- Moving onto config ID 3 and above (up to 10) will make custom user configurations
-- Wyrms of Nyrus will now check if factory settings are outdated
-- If factory configuration presets are outdated, it will delete all the files in the directory, and regenerate new configs. No need to reset configs any longer (custom configs excluded)
+- Replaced EXCANON with **_config presets_**:
+  - The initial 3 config presets, "factory" presets, are added
+  - Default config for this update is 1.
+  - Moving onto config ID 3 and above (up to 10) will make custom user configurations
+  - Wyrms of Nyrus will now check if factory settings are outdated
+  - If factory configuration presets are outdated, it will delete all the files in the directory, and regenerate new configs. No need to reset configs any longer (custom configs excluded)
 - Normal mode now spawns Visitor on a chance after 20 days instead of 30 days
 - Fixed Invasion Scheduler waiting for the NEXT DAY OVER instead of THE DAY on modes 1 & 2
 - Normal preset changes:
@@ -52,12 +52,16 @@
     - If immune to cactus/thorns, is immune to cactus/thorns.
     - If immune to explosions, is immune to explosions.
 - Visitors now take extra damage from projectiles (Commonly requested)
-- New config option: Flying Wyrm Projectile Weakness
-- New config option: Voidwyrm Projectile Weakness
+- New config option: **Flying Wyrm Projectile Weakness**
+- New config option: **Voidwyrm Projectile Weakness**
 - Vanitas now has swiming animations
 - Now uses vanilla water detection for animations
+- New Evolution modlist reader for minimum evolution
+- New config option: **Modlist detector strings**
+- Evo min points:
+  - Now detects ICBM-Classic
 
 ## MULTIPLAYER IMPROVEMENTS
 - Invasion events now select a random player to target
-  -- Singleplayer: This will always select the player.
+  - Singleplayer: This will always select the player.
 - Invasion events will not take place when no one is on the server
