@@ -60,6 +60,7 @@
 - New config option: **Modlist detector strings**
 - Evo min points:
   - Now detects ICBM-Classic
+- Wyrms no longer drown
 
 ## MULTIPLAYER IMPROVEMENTS
 - Invasion events now select a random player to target

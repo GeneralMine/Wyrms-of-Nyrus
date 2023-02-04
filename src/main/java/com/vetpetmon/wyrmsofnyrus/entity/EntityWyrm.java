@@ -95,6 +95,10 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         this.isImmuneToFire = false;
         this.srpcothimmunity = 0;
     }
+    public boolean canBreatheUnderwater()
+    {
+        return true;
+    }
 
         // Most wyrms don't need to despawn. Despawning breaks a lot of things, like Creepwyrms, for a prime example.
     protected boolean canDespawn() {return false;}
