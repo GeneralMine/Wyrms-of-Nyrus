@@ -2,7 +2,6 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
@@ -63,7 +62,11 @@ public class EntityWyrmling extends EntityWyrm {
     }
     @Override
     public SoundEvent getHurtSound(DamageSource ds) {
-        return SoundRegistry.wyrmHissTwo;
+        return SoundRegistry.wyrmlinghurt;
+    }
+    @Override
+    public SoundEvent getDeathSound() {
+        return SoundRegistry.wyrmlingdeath;
     }
 
     public void onLivingUpdate()
@@ -129,18 +132,6 @@ public class EntityWyrmling extends EntityWyrm {
     public void onDeath(DamageSource source) {
         super.onDeath(source);
         wyrmDeathSpecial(this,getPosition(),world,1);
-    }
-
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL && Radiogenetics.immuneToFalling)
-            return false;
-        if (source == DamageSource.DROWN)
-            return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
-        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
-            return false;
-        return super.attackEntityFrom(source, amount);
     }
 
 }

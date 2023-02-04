@@ -1,12 +1,12 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
+import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.VoidwyrmAI;
-import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -171,14 +171,8 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     }
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return false;
-        if (source == DamageSource.DROWN)
-            return false;
-        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
-            return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
+        if (source.isProjectile())
+            return super.attackEntityFrom(source, (float) (amount * Radiogenetics.voidwyrmProjWeakness));
         return super.attackEntityFrom(source, amount);
     }
 

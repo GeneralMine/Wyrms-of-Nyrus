@@ -1,17 +1,16 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
+import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.AIProberAttack;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.FlyingMobAI;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
 import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.synapselib.util.RNG;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -222,17 +221,6 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.bat.takeoff"));
     }
 
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return false;
-        if (source == DamageSource.DROWN)
-            return false;
-        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
-            return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
-        return super.attackEntityFrom(source, amount);
-    }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)

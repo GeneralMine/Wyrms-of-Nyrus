@@ -1,17 +1,16 @@
 package com.vetpetmon.wyrmsofnyrus.evo;
 
-import com.vetpetmon.wyrmsofnyrus.compat.hbm;
-import com.vetpetmon.wyrmsofnyrus.compat.srp;
-import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.synapselib.util.RNG;
+import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 
 /**
- * A collection of functions used to mess with invasion points.
+ * A collection of functions used to mess with evolution points.
  * I made this specifically because I hated writing so much code every
- * time I wanted to add points to the invasion
+ * time I wanted to add points to the wyrms' evolution
  * Even worse, there's no dedicated getter. I'm fixing that as we speak.
  */
 public class evoPoints{
@@ -25,7 +24,7 @@ public class evoPoints{
     }
 
     /**
-     * Adds invasion points to the world.
+     * Adds evolution points to the world.
      * Syncs automatically. Now you can do this in one line.
      * @param w World
      * @param i Value to add
@@ -48,20 +47,23 @@ public class evoPoints{
     public static void minimum(){
         if (Evo.customEvoMinCap > 0) minEvoCap += Evo.customEvoMinCap;
         if (Evo.evoReadsModpack) {
-            if (Loader.isModLoaded("draconicevolution")) minEvoCap += 300;
-            if (srp.isEnabled()) minEvoCap += 200;
-            if (hbm.isEnabled()) minEvoCap += 100;
-            if (Loader.isModLoaded("techguns")) minEvoCap += 75;
-            if (Loader.isModLoaded("immersiveintelligence")) minEvoCap += 50;
-            if (Loader.isModLoaded("securitycraft")) minEvoCap += 45;
-            if (Loader.isModLoaded("roughmobs")) minEvoCap += 30;
-            if (Loader.isModLoaded("roughmobsrevamped")) minEvoCap += 30;
-            if (Loader.isModLoaded("ic2")) minEvoCap += 30;
+            String[] splitStr;String modName;int evoAddition;
+            wyrmsofnyrus.logger.info("uwu");
+            for (String base : Evo.modEvo) {
+                splitStr = base.split(";");
+                modName = ((splitStr[0].length() > 0) ? splitStr[0] : "null");
+                evoAddition = ((splitStr[0].length() > 0) ? Integer.parseInt(splitStr[1]) : 0);
+                if (Loader.isModLoaded(modName)) {
+                    minEvoCap += evoAddition;
+                    wyrmsofnyrus.logger.info("Detected mod with name: " + modName + ", now adding " + evoAddition + " points to minimum evolution");
+                }
+            }
         }
+        wyrmsofnyrus.logger.info("Min evo finalization: " + minEvoCap);
     }
 
     /**
-     * Removes invasion points from the world.
+     * Removes evolution points from the world.
      * Syncs automatically. Now you can do this in one line.
      * @param w World
      * @param i Value to add

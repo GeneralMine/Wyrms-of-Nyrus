@@ -21,10 +21,9 @@ public class SoundRegistry {
     public static SoundEvent nukeClose;
     public static SoundEvent nukeFar;
     public static SoundEvent wyrmroars;
-    public static SoundEvent wyrmlingclicks;
+    public static SoundEvent wyrmlingclicks, wyrmlinghurt, wyrmlingdeath;
     public static SoundEvent proberidle;
-    public static SoundEvent creepedhumanoid;
-    public static SoundEvent creepedhumanoidroar;
+    public static SoundEvent creepedhumanoid, creepedhumanoidroar;
 
     public static void RegisterSounds() {
         wyrmClicks = RegisterSound("entity.wyrmClicks");
@@ -38,6 +37,8 @@ public class SoundRegistry {
         nukeClose = RegisterSound("supercriticality");
         nukeFar = RegisterSound("supercriticalitydistant");
         wyrmlingclicks = RegisterSound("entity.wyrmlingclicks");
+        wyrmlinghurt = RegisterSound("entity.wyrmlinghurt");
+        wyrmlingdeath = RegisterSound("entity.wyrmlingdeath");
         wyrmroars = RegisterSound("entity.wyrmroars");
         proberidle = RegisterSound("entity.prober");
         myrmur = RegisterSound("entity.myrmur");

@@ -92,19 +92,6 @@ public class EntityCreepling extends EntityWyrm implements IAnimatable, IAnimati
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return super.attackEntityFrom(source, (amount/2));
-        if (source == DamageSource.CACTUS)
-            return false;
-        if (source == DamageSource.LIGHTNING_BOLT)
-            return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
-        return super.attackEntityFrom(source, amount);
-    }
-
-    @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         if (compound.hasKey("timer")) this.timer = compound.getInteger("timer");

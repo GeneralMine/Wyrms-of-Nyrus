@@ -217,6 +217,26 @@
       }
     ]
   },
+  "entity.wyrmlinghurt": {
+    "category": "neutral",
+    "subtitle": "subtitles.wyrmlingHurt",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/wyrmlinghurt",
+        "stream": false
+      }
+    ]
+  },
+  "entity.wyrmlingdeath": {
+    "category": "neutral",
+    "subtitle": "subtitles.wyrmlingDeath",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/wyrmlingdeath",
+        "stream": false
+      }
+    ]
+  },
   "grubhurt": {
     "category": "hostile",
     "sounds": [

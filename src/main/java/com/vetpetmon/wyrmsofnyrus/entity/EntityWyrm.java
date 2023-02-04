@@ -28,6 +28,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -65,6 +66,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     private final AnimationFactory factory = new AnimationFactory(this);
     // SRP compatibility <3
     protected int srpcothimmunity;
+
     // data management
     public byte getByteFromDataManager(DataParameter<Byte> key) {
         try {
@@ -92,6 +94,10 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         super(worldIn);
         this.isImmuneToFire = false;
         this.srpcothimmunity = 0;
+    }
+    public boolean canBreatheUnderwater()
+    {
+        return true;
     }
 
         // Most wyrms don't need to despawn. Despawning breaks a lot of things, like Creepwyrms, for a prime example.
@@ -339,6 +345,24 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         wyrmKillBonuses.pointIncrease(world);
     }
 
+    // Controls how all wyrms respond to damage.
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+        if (source == DamageSource.FALL && (Radiogenetics.immuneToFalling && !(this.casteType==9)))
+            return false;
+        if (source.isExplosion() && Radiogenetics.immuneToExplosions)
+            return false;
+        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
+            return false;
+        if (source == DamageSource.DROWN)
+            return false;
+        if (source == DamageSource.IN_WALL)
+            return false;
+        if (source == DamageSource.ON_FIRE)
+            return super.attackEntityFrom(source, amount*3);
+        return super.attackEntityFrom(source,amount);
+    }
+
     // Gives all wyrms COTH (from Scape & Run: Parasites) immunity so that way pack makers and unknowing players DON'T have to add it themselves.
     // Credit to Dhantry for helping me figure this out <3 turns out it's not a boolean, it's an integer. I feel stupid but then again SRP is closed-source, so I can't blame myself for being clueless.
     // Other modders are 100% free to use this knowledge to make their entities SRP-compatible too, such as a few mobs in Mowzie's Mobs that are also inorganic. You don't need to credit me, just Dhan for SRP.
@@ -369,11 +393,6 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     {
         return world.getBlockState(pos).getMaterial() == Material.WATER;
     }
-
-    public boolean isInWater(){
-        return (blockIsWater(new BlockPos(getPosition().getX(), getPosition().getY(),getPosition().getZ())));
-    }
-
     public boolean isGrounded(){
         return (world.isBlockFullCube(new BlockPos(getPosition().getX(), getPosition().getY()-1,getPosition().getZ())));
     }

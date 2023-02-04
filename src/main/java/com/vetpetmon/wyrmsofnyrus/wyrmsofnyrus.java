@@ -11,6 +11,7 @@ import com.vetpetmon.wyrmsofnyrus.config.ConfigBase;
 import com.vetpetmon.wyrmsofnyrus.creativetab.TabWyrms;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionScheduler;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.messageReg;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
@@ -170,6 +171,7 @@ public class wyrmsofnyrus {
     public void serverStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandWyrmInvasionCommand.CommandHandler());
         event.registerServerCommand(new CommandWyrmsTest.CommandHandler());
+        InvasionScheduler.getScheduler(event.getServer().getEntityWorld());
     }
 
     public static ResourceLocation getResource(final String name)

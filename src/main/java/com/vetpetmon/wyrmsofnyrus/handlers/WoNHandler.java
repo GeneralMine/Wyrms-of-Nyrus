@@ -9,7 +9,6 @@ import com.vetpetmon.wyrmsofnyrus.invasion.VisitorEvent;
 import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Config;
@@ -39,6 +38,8 @@ public class WoNHandler {
         //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onWorldTick was called successfully.");
         // EVOLUTION
         evoPoints.decay(world);
+        // INVASION
+        if (Invasion.invasionEnabled) InvasionStatus.executescript(world);
 
         // EVENTS
 
@@ -82,20 +83,8 @@ public class WoNHandler {
                     }
                 }
                 if (invasionActive) {
-                    // Check and see if this is not the world starting, as it starts at 0 before it is set ----[|]
-                    //                                                                                          |
-                    // Detects events every x ticks, ----[|]                                                    |
-                    // or x/20 seconds, x/20/60 minutes...|                                                     |
-                    //                                    V                                                     V
                     if (InvasionScheduler.runSchedule(world)) {
-                        java.util.HashMap<String, Object> dependencies = new java.util.HashMap<>();
-                        dependencies.put("x", x);
-                        dependencies.put("y", y);
-                        dependencies.put("z", z);
-                        dependencies.put("world", world);
-                        dependencies.put("entity", chosenPlayer);
-                        dependencies.put("event", event);
-                        InvasionEvent.invasionEvent(dependencies);
+                        InvasionEvent.invasionEvent(chosenPlayer,world);
                     }
                 }
             }

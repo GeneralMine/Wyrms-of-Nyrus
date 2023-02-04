@@ -3,7 +3,6 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
@@ -100,18 +99,6 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
     @Override
     public SoundEvent getHurtSound(DamageSource ds) {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.bat.takeoff"));
-    }
-
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL)
-            return false;
-        if (source == DamageSource.DROWN)
-            return false;
-        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
-            return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
-        return super.attackEntityFrom(source, amount);
     }
 
     public void registerControllers(AnimationData data) {

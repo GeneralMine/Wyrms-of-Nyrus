@@ -5,13 +5,10 @@ import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors
 import com.vetpetmon.wyrmsofnyrus.entity.ai.FollyBiteAttackAI;
 import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -21,51 +18,31 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
-public class EntityStrykeling extends EntityWyrmfolly implements IAnimatable, IAnimationTickable {
-    protected int age; // currently unused
-    public EntityStrykeling(World worldIn) {
+public class EntityStryker extends EntityWyrmfolly implements IAnimatable, IAnimationTickable {
+    public EntityStryker(World worldIn) {
         super(worldIn);
-        this.age = 0;
-        this.StatMap();
     }
 
     public void StatMap() {
         this.setStats(
-                wyrmStats.strykelingfollyHP,
-                wyrmStats.strykelingfollyDEF,
-                wyrmStats.strykelingfollyATK,
-                wyrmStats.strykelingfollySPD,
-                wyrmStats.strykelingfollyKBR
+                wyrmStats.strykerfollyHP,
+                wyrmStats.strykerfollyDEF,
+                wyrmStats.strykerfollyATK,
+                wyrmStats.strykerfollySPD,
+                wyrmStats.strykerfollyKBR
         );
-    }
-
-    @Override
-    protected void makeAllTargets() {
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityStryker.class, 3, 1, 1.2));
-        this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
-        this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityLiving.class, 2, true, false, target -> !((target instanceof EntityStryker)||(target instanceof EntityStrykeling)||(target instanceof EntityCreeper))));
     }
 
     @Override
     public void updateLevel(){
         super.updateLevel();
         this.StatMap();
-        updateAttributes();
     }
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.StatMap();
-        updateAttributes();
     }
-
-    @Override
-    public void readEntityFromNBT(NBTTagCompound compound)
-    {
-        super.readEntityFromNBT(compound);
-        if (compound.hasKey("age")) this.age = compound.getInteger("age");
-    }
-
     @Override
     protected void initEntityAI() { //AYO YOUR LEAPING IS GOOFY!!! override the whole thing
         makeAllTargets();
@@ -73,13 +50,6 @@ public class EntityStrykeling extends EntityWyrmfolly implements IAnimatable, IA
         this.tasks.addTask(1, new EntityAIWander(this, 0.45));
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new FollyBiteAttackAI(this.ATK,this, 1.0D, true));
-    }
-
-    @Override
-    public void writeEntityToNBT(NBTTagCompound compound)
-    {
-        super.writeEntityToNBT(compound);
-        compound.setInteger("age", this.age);
     }
     @Override
     public boolean attackEntityAsMob(Entity entityIn)
