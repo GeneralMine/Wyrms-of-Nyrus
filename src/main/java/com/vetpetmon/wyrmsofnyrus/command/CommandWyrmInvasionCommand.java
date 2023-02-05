@@ -24,7 +24,7 @@ public class CommandWyrmInvasionCommand extends CommandBase {
 
 	@Override
 	public String getName() {
-		return "wyrms";
+		return "won_invasion";
 	}
 
 	@Override
