@@ -136,7 +136,7 @@ public class ConfigBase {
                 reloadConfig(i);
             }
         }
-        if (oneConfigInvalidated) firstTimeDialogue();
+        if (oneConfigInvalidated && !GraphicsEnvironment.isHeadless()) firstTimeDialogue();
     }
     public static void customConfigGen() {
         if (!Files.exists(Paths.get(proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" + selectedPreset +"/"))) {
