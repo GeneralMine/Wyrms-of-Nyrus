@@ -12,7 +12,7 @@ public class Evo {
     public static float evoFactor, evoPowerHP, evoPowerDEF, evoPowerATK;
     public static int customEvoMinCap, evoPointsPerLevel;
     public static int minEvoCreepwyrm, minEvoWyrmling, minEvoWorker, minEvoSoldier, minEvoSoldierInf, minEvoSoldierFrost, minEvoWarrior, minEvoWarriorTainted;
-    public static String[] modEvo, modEvoDef = {"draconicevolution;400","srparasites;300","hbm;250","icbmclassic;150","securitycraft;80","techguns;75","roughmobsrevamped;75","immersiveintelligence;65","roughmobs;60","ic2;50"};
+    public static String[] modEvo, modEvoDef = {"draconicevolution;400","srparasites;300","hbm;250","icbmclassic;150","lycanitesmobs;125","securitycraft;80","techguns;75","roughmobsrevamped;75","immersiveintelligence;65","roughmobs;60","ic2;50"};
 
 
     public static void loadFromConfig(Configuration config, int id) {

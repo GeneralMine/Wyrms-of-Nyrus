@@ -1,18 +1,18 @@
 package com.vetpetmon.wyrmsofnyrus;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 import java.io.File;
 
 public class ServerProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 	@Override
 	public File getDataDir() {
-		return Minecraft.getMinecraft().mcDataDir;
+		return FMLCommonHandler.instance().getMinecraftServerInstance().getDataDirectory();
 	}
 
 	@Override

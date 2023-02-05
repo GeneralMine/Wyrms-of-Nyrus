@@ -40,7 +40,7 @@ public class evoPoints{
      * Looks at your modpack and sees what mods are currently loaded. Does not throw
      * an error if a mod isn't detected, and instead just doesn't add to the minimum.
      *
-     * MUST BE RUN AT PRE-INT. Minimum evo points cap is remembered until the game
+     * MUST BE RUN AT POST-INT. Minimum evo points cap is remembered until the game
      * is unloaded from RAM. minEvoCap is always reset to 0 when first loaded, so
      * no need to make another setter for that.
      */
