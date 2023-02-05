@@ -169,8 +169,8 @@ public class wyrmsofnyrus {
 
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
-        event.registerServerCommand(new CommandWyrmInvasionCommand.CommandHandler());
-        event.registerServerCommand(new CommandWyrmsTest.CommandHandler());
+        event.registerServerCommand(new CommandWyrmInvasionCommand());
+        event.registerServerCommand(new CommandWyrmsTest());
         InvasionScheduler.getScheduler(event.getServer().getEntityWorld());
     }
 
