@@ -3,11 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.SprinterAttackAI;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
@@ -28,7 +24,7 @@ import javax.annotation.Nullable;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
-public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityCreepedHumanoid extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     public static final ResourceLocation CREEPEDHUMANOID_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/creepedhumanoid");
 
@@ -45,13 +41,6 @@ public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IA
     public void onDeath(DamageSource source) {
         super.onDeath(source);
         wyrmDeathSpecial(this,getPosition(),world,5);
-    }
-
-    @Override
-    public void onKillEntity(EntityLivingBase entity) {
-        super.onKillEntity(entity);
-        wyrmKillBonuses.pointIncrease(world);
-        CreepedEvents.convertKill(entity,this);
     }
 
     @Nullable

@@ -6,6 +6,7 @@ import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
+import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreeped;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityHivemind;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityOverseerWaypoint;
@@ -348,12 +349,22 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     // Controls how all wyrms respond to damage.
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL && (Radiogenetics.immuneToFalling && !(this.casteType==9)))
-            return false;
-        if (source.isExplosion() && Radiogenetics.immuneToExplosions)
-            return false;
-        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
-            return false;
+        if (this instanceof EntityCreeped) {
+            if (source == DamageSource.FALL && (Radiogenetics.creepedImmuneToFalling && !(this.casteType == 9)))
+                return false;
+            if (source.isExplosion() && Radiogenetics.creepedImmuneToExplosions)
+                return false;
+            if (source == DamageSource.CACTUS && Radiogenetics.creepedImmuneToCacti)
+                return false;
+        }
+        else {
+            if (source == DamageSource.FALL && (Radiogenetics.immuneToFalling && !(this.casteType == 9)))
+                return false;
+            if (source.isExplosion() && Radiogenetics.immuneToExplosions)
+                return false;
+            if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
+                return false;
+        }
         if (source == DamageSource.DROWN)
             return false;
         if (source == DamageSource.IN_WALL)

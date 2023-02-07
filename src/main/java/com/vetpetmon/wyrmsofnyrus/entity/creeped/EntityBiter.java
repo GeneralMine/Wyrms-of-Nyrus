@@ -2,14 +2,10 @@ package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.BiteAttackAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.RollAttackAI;
 import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
@@ -30,7 +26,7 @@ import javax.annotation.Nullable;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
-public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityBiter extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     public static final ResourceLocation BITER_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/biter");
 
@@ -47,13 +43,6 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
     public void onDeath(DamageSource source) {
         super.onDeath(source);
         wyrmDeathSpecial(this,getPosition(),world,4);
-    }
-
-    @Override
-    public void onKillEntity(EntityLivingBase entity) {
-        super.onKillEntity(entity);
-        wyrmKillBonuses.pointIncrease(world);
-        CreepedEvents.convertKill(entity,this);
     }
 
     @Nullable
