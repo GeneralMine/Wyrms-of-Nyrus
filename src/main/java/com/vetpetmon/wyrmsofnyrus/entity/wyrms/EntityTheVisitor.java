@@ -43,7 +43,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         this.casteType = 8;
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new flierMoveHelperGhastlike(this, 200, wyrmStats.visitorSPD, 0.0D);
-        this.dropTimer = (this.rand.nextInt( Invasion.visitorDropPodFrequencyVariation) + Invasion.visitorDropPodFrequency);
+        this.dropTimer = (20*45); //48 seconds until first cymbal crash, so give 3 seconds to spawn and fall..
         setNoAI(false);
         enablePersistence();
     }
