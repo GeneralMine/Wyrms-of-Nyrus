@@ -1,8 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.callouspodContents;
-import net.minecraft.entity.Entity;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.DroppodContents;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -16,11 +15,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class EntityCallousPod extends EntityWyrm implements IAnimatable{
     private AnimationFactory factory = new AnimationFactory(this);
+    private int droppodType = 4, droppodSize = 2;
     public EntityCallousPod(World world) {
         super(world);
         this.casteType = 9;
@@ -28,6 +25,11 @@ public class EntityCallousPod extends EntityWyrm implements IAnimatable{
         experienceValue = 0;
         enablePersistence();
         setNoAI(false);
+    }
+
+    public void setPodType(int type, int size){
+        this.droppodType = type;
+        this.droppodSize = size;
     }
     @Override
     protected void applyEntityAttributes() {
@@ -51,19 +53,7 @@ public class EntityCallousPod extends EntityWyrm implements IAnimatable{
     @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);
-        int x = (int) this.posX;
-        int y = (int) this.posY;
-        int z = (int) this.posZ;
-        Entity entity = this;
-        {
-            Map<String, Object> $_dmap = new HashMap<>();
-            $_dmap.put("entity", entity);
-            $_dmap.put("x", x);
-            $_dmap.put("y", y);
-            $_dmap.put("z", z);
-            $_dmap.put("world", world);
-            callouspodContents.onDeath($_dmap);
-        }
+        DroppodContents.DropPodEventSequence(this.getPosition(),this.droppodSize,this.droppodType,getEntityWorld());
     }
 
     public void registerControllers(AnimationData data) {

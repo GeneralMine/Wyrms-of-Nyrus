@@ -159,6 +159,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
                 }
                 else {
                     entityToSpawn = new EntityCallousPod(world);
+                    ((EntityCallousPod) entityToSpawn).setPodType(2,3);
                 }
                 entityToSpawn.setLocationAndAngles(spawnX, y, spawnZ, world.rand.nextFloat() * 360F, 0.0F);
                 world.spawnEntity(entityToSpawn);

@@ -19,3 +19,6 @@ Reading these (x/y/z) statements are the default config values that are differen
     - **Mob Easter Eggs** (true/true/true)
 - Wyrms in classic mode are now only immune to falling
 - Creeped mobs made into a unified class
+- Drop pods can now destroy blocks upon landing in Death World and above difficulties
+- Unified more drop pod code for consistency
+- Visitor-originating Callous Landing Pods now spawn rovers and soldiers instead of probers

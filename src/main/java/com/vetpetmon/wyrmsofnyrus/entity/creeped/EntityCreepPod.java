@@ -46,7 +46,7 @@ public class EntityCreepPod extends EntityWyrm implements IAnimatable{
 
     @Override
     public void onDeath(DamageSource source) {
-        DroppodContents.droppodContents(this.getPosition(),4,3,this.world);
+        DroppodContents.DropPodEventSequence(this.getPosition(),4,3,this.world);
     }
 
     public void registerControllers(AnimationData data) {
