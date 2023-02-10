@@ -179,6 +179,7 @@ public class wyrmsofnyrus {
         return new ResourceLocation(wyrmsofnyrus.MODID, name);
     }
 
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
         for (Item item : AllItems.ALL_ITEMS) {

@@ -77,7 +77,7 @@ public class evoPoints{
     }
 
     public static void decay(World w) {
-        if (RNG.dBase(30000) == 5) {
+        if (RNG.dBase(10000) == 5) {
             subtract(w, (int) (1 * Evo.evoFactor));
             evoMilestone(w);
         }

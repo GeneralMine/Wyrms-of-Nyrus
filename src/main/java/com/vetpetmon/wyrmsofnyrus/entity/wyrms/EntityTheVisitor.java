@@ -43,7 +43,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         this.casteType = 8;
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new flierMoveHelperGhastlike(this, 200, wyrmStats.visitorSPD, 0.0D);
-        this.dropTimer = (20*45); //48 seconds until first cymbal crash, so give 3 seconds to spawn and fall..
+        this.dropTimer = (20*45); //48 seconds until first cymbal crash, so give 3 seconds to spawn and fall.
         setNoAI(false);
         enablePersistence();
     }
@@ -151,17 +151,17 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         int spawnZ;
         Entity entityToSpawn;
         for (int index0 = 0; index0 < (RNG.getIntRangeInclu(2,5)); index0++) {
-            spawnX = x + RNG.getIntRangeInclu(-3,3);
-            spawnZ = z + RNG.getIntRangeInclu(-3,3);
+            spawnX = x + RNG.getIntRangeInclu(-5,5);
+            spawnZ = z + RNG.getIntRangeInclu(-5,5);
             if (!world.isRemote) {
                 if (RNG.getIntRangeInclu(1,2) == 1){
                     entityToSpawn = new EntityHexePod(world);
                 }
                 else {
                     entityToSpawn = new EntityCallousPod(world);
-                    ((EntityCallousPod) entityToSpawn).setPodType(2,3);
+                    ((EntityCallousPod) entityToSpawn).setPodType(2,1);
                 }
-                entityToSpawn.setLocationAndAngles(spawnX, y, spawnZ, world.rand.nextFloat() * 360F, 0.0F);
+                entityToSpawn.setLocationAndAngles(spawnX, y-5, spawnZ, world.rand.nextFloat() * 360F, 0.0F);
                 world.spawnEntity(entityToSpawn);
             }
         }
