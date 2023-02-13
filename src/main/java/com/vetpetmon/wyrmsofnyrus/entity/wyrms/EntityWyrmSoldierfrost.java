@@ -28,8 +28,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmSoldierfrost(World world) {
@@ -39,6 +37,7 @@ public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, I
         experienceValue = 20;
         enablePersistence();
         setNoAI(false);
+        setPotency(15);
     }
 
     @Override
@@ -96,13 +95,6 @@ public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, I
         }
         return result;
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,3);
-    }
-
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
     }

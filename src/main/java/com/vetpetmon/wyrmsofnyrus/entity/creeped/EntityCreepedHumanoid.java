@@ -7,7 +7,6 @@ import com.vetpetmon.wyrmsofnyrus.entity.ai.SprinterAttackAI;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -22,8 +21,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 public class EntityCreepedHumanoid extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     public static final ResourceLocation CREEPEDHUMANOID_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/creepedhumanoid");
@@ -35,12 +32,7 @@ public class EntityCreepedHumanoid extends EntityCreeped implements IAnimatable,
         experienceValue = 16;
         enablePersistence();
         setNoAI(false);
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,5);
+        setPotency(6);
     }
 
     @Nullable

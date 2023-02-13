@@ -19,7 +19,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.WyrmlingGrowUp.growUp;
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmling extends EntityWyrm {
     private int timeUntilGrowth;
@@ -34,6 +33,7 @@ public class EntityWyrmling extends EntityWyrm {
         this.isImmuneToFire = false;
         enablePersistence();
         setNoAI(false);
+        setPotency(1.5);
         this.timeUntilGrowth = this.rand.nextInt(6000) + 2000;
     }
 
@@ -127,11 +127,4 @@ public class EntityWyrmling extends EntityWyrm {
 
         return PlayState.CONTINUE;
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,1);
-    }
-
 }

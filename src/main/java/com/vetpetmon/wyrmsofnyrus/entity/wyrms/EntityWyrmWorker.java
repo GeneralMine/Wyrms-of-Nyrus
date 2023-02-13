@@ -24,8 +24,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 public class EntityWyrmWorker extends EntityWyrm {
     public int timeUntilNextProduct;
     public boolean unionizing;
@@ -40,6 +38,7 @@ public class EntityWyrmWorker extends EntityWyrm {
         this.setCanPickUpLoot(true);
         this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
         this.unionizing = false;
+        setPotency(3.5);
     }
 
     @Override
@@ -80,13 +79,6 @@ public class EntityWyrmWorker extends EntityWyrm {
     {
         this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,2);
-    }
-
     public void onLivingUpdate()
     {
         super.onLivingUpdate();

@@ -25,7 +25,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.creepTheLands.creepTheLands;
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnimationTickable {
 
@@ -41,6 +40,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
         enablePersistence();
         setNoAI(false);
         this.timeUntilNextCreep = Invasion.normCreepwyrmCreepSpeed;
+        setPotency(45);
     }
 
     @Override
@@ -98,12 +98,6 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
 
     @Override
     public SoundEvent getAmbientSound() {return SoundRegistry.creepSpread;}
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,21);
-    }
 
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));

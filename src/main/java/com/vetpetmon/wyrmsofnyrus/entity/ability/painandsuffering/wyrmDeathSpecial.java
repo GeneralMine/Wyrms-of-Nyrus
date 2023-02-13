@@ -12,18 +12,20 @@ import net.minecraft.world.World;
 
 public class wyrmDeathSpecial {
     public static void wyrmDeathSpecial(Entity entityIn, BlockPos pos, World world, double power) {
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
-        evoPoints.add(world,(int) (1 * Evo.evoFactor));
-        if ((entityIn.isBurning()) && Radiogenetics.explodingWyrms) {
-            if (!world.isRemote) {
-                world.createExplosion(null, x, y, z, (float) (power), true);
-            }
-            if (((power) >= 20)) {
-                world.addWeatherEffect(new EntityLightningBolt(world, x, y, z, false));
-                world.playSound(null, x, y, z, SoundRegistry.nukeClose, SoundCategory.AMBIENT, (float) (100.0 * power), 1.00F);
-                world.playSound(null, x, y, z, SoundRegistry.nukeFar, SoundCategory.AMBIENT, (float) (1000.0 * power), 1.00F);
+        int x = pos.getX(), y = pos.getY(), z = pos.getZ();
+        if (power > 0) {
+            int evoPointBonus = (power > 20) ? (int) Math.floor((power - 20) / 20) : 0;
+            if ((entityIn.isBurning()) && Radiogenetics.explodingWyrms) {
+                float explosionPower = (float) power / 2;
+                evoPoints.add(world, (int) ((1 + evoPointBonus) * Evo.evoFactor));
+                if (!world.isRemote) {
+                    world.createExplosion(null, x, y, z, explosionPower, true);
+                }
+                if ((explosionPower >= 20)) {
+                    world.addWeatherEffect(new EntityLightningBolt(world, x, y, z, false));
+                    world.playSound(null, x, y, z, SoundRegistry.nukeClose, SoundCategory.AMBIENT, (float) (100.0 * explosionPower), 1.00F);
+                    world.playSound(null, x, y, z, SoundRegistry.nukeFar, SoundCategory.AMBIENT, (float) (1000.0 * explosionPower), 1.00F);
+                }
             }
         }
     }

@@ -25,8 +25,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
@@ -37,6 +35,7 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
         experienceValue = 12;
         enablePersistence();
         setNoAI(false);
+        setPotency(4);
     }
 
     @Override
@@ -82,12 +81,6 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
         if (source == DamageSource.GENERIC)
             return super.attackEntityFrom(source, (float) (amount*0.75));
         return super.attackEntityFrom(source, amount);
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,3);
     }
 
     public void registerControllers(AnimationData data) {

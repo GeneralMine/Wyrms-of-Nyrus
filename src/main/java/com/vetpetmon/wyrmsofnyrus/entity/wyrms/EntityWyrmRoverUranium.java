@@ -23,8 +23,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmRoverUranium(World world) {
@@ -34,6 +32,7 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
         experienceValue = 4;
         enablePersistence();
         setNoAI(false);
+        setPotency(3);
     }
 
     @Override
@@ -67,20 +66,10 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
     public SoundEvent getHurtSound(DamageSource ds)  {
         return SoundRegistry.wyrmHissTwo;
     }
-    /*@Override
-    public SoundEvent getDeathSound() {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
-    }*/
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
         this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,10);
     }
 
     public void registerControllers(AnimationData data) {

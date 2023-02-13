@@ -33,8 +33,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 
 public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnimatable, IAnimationTickable, IRadiationImmune {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -50,6 +48,7 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
         this.moveHelper = new flierMoveHelperGhastlike(this, 20, 1.0, 0.8);
         enablePersistence();
         setNoAI(false);
+        setPotency(10);
     }
 
 
@@ -83,12 +82,6 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
             difficultyStats.applyPotionEffect(entityIn, HbmPotion.taint, 240, 1);
         }
         return result;
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,7);
     }
     @Override
     public void onLivingUpdate(){

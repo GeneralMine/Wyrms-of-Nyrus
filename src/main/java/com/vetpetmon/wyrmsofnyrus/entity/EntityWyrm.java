@@ -37,6 +37,8 @@ import net.minecraftforge.fml.common.Loader;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
+
 /**
  * Abstract class that all Wyrms of Nyrus entities are built from.
  * Handles a lot of the hot nonsense of class inheritance for you.
@@ -46,7 +48,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
 
     private static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.VARINT);
-
+    private double potency = 0.0;
 
     private String animationName;
 
@@ -78,6 +80,8 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         }
     }
 
+    public double getPotency() {return potency;}
+    public void setPotency(double potency) {this.potency = potency;}
 
     // Animation and AI util
     public void setAttack(int attackID)
@@ -95,6 +99,11 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         super(worldIn);
         this.isImmuneToFire = false;
         this.srpcothimmunity = 0;
+    }
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,getPotency());
     }
     public boolean canBreatheUnderwater()
     {

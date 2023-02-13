@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -24,8 +23,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 public class EntityBiter extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     public static final ResourceLocation BITER_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/biter");
@@ -37,14 +34,8 @@ public class EntityBiter extends EntityCreeped implements IAnimatable, IAnimatio
         experienceValue = 5;
         enablePersistence();
         setNoAI(false);
+        setPotency(4);
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,4);
-    }
-
     @Nullable
     @Override
     protected ResourceLocation getLootTable() {

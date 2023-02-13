@@ -26,8 +26,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 
 public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -46,6 +44,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         this.dropTimer = (20*45); //48 seconds until first cymbal crash, so give 3 seconds to spawn and fall.
         setNoAI(false);
         enablePersistence();
+        setPotency(100);
     }
 
     @Override
@@ -176,13 +175,6 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
             return super.attackEntityFrom(source, (float) (amount * Radiogenetics.voidwyrmProjWeakness));
         return super.attackEntityFrom(source, amount);
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,100);
-    }
-
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.visitor.Idle"));

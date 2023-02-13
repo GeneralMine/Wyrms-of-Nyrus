@@ -27,3 +27,26 @@ Reading these (x/y/z) statements are the default config values that are differen
 - Removed some unused code
 - Visitor no longer gets pushed by its own drop pods
 - Visitor drops pods further away from each other
+- Improved code for wyrms exploding on death while on fire
+  - This should reduce the amount of code in the mod
+  - Added internal (invisible) potency stat.
+  - Wyrms with 0 potency will not violently explode at death, but provide no evolution points upon death as well.
+  - Wyrms, regardless of the configuration rules, will still contribute evolution points on death, so long as they have potency.
+- New "potency" stat in wyrms
+  - Determines if the mob explodes on death via fire
+  - Also determines if the entity has (and how much) evolution points to contribute upon death.
+    - If potency is at least 20 or more, every 20 points and after is +1 evolution point added.
+  - Potency stats of wyrms:
+    - Visitor: 100 (5 evo points on death)
+    - Creepwyrm: 45 (2 evo points on death)
+    - Soldier: 15
+    - Warrior: 10
+    - Vanitas: 6
+    - Myrmur & Biter: 4
+    - Worker: 3.5
+    - Rover: 3
+    - Wyrmling: 1.5
+    - Creepling: 1.25
+    - Prober: 1
+  - All drop pods have a potency of zero
+  - Wyrm explosion power decreased in most cases

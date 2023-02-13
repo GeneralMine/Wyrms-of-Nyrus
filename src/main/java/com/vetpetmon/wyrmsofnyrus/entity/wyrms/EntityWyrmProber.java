@@ -35,8 +35,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 
 public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -55,6 +53,7 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         setNoAI(false);
         this.proberTimer = 2500; // Lives for ~2 two minutes
         this.probingpoints = 0;
+        setPotency(1);
     }
 
     @Override
@@ -182,12 +181,6 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         boolean result = super.attackEntityAsMob(entityIn);
         if (result) this.probingpoints += 2;
         return result;
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,1);
     }
     @Override
     public void onLivingUpdate(){
