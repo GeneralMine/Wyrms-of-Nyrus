@@ -50,3 +50,7 @@ Reading these (x/y/z) statements are the default config values that are differen
     - Prober: 1
   - All drop pods have a potency of zero
   - Wyrm explosion power decreased in most cases
+- Redone how entities are registered into the game
+- Warrior tracking (and render) distance increased from 64 to 128
+- Fixed soldier infectoid variant having lower tracking distance
+- Increased Creepling tracking distance from 16 to 32

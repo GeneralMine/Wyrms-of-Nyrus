@@ -17,4 +17,5 @@ public class AllItems {
     public static final Item creepedbulb = new ItemBase("creepedbulb", true);
     public static final Item meatybase = new ItemBase("meatybase", true);
     public static final Item strykerspawner = new WyrmfollySpawner("strykerspawner", (byte) 1);
+    public static final Item wyrmlingspawner = new WyrmSpawner("wyrmlingspawner", (byte) 1);
 }
