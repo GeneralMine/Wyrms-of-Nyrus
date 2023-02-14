@@ -16,10 +16,10 @@ import java.util.Objects;
 
 public final class WyrmRegister {
     public static String[][] wyrmIDs = {
-            {"hexe_pod","true","256"}, {"wyrmling","true","32"}, {"wyrmprober","true","64"}, {"thevisitor","true","512"}, {"wyrmrover","true","64"}, {"wyrmroverevo","true","64"}, {"callouspod","true","256"}, {"wyrmsoldier","true","64"}, {"creepwyrm",Boolean.toString(Invasion.isCreepEnabled()),"128"}, {"wyrmmyrmur","true","32"}, {"wyrmsoldierevo","true","64"}, {"wyrmwarrior","true","128"}, {"wyrmwarriortainted",Boolean.toString(Evo.evoHBMVariantsEnabled && hbm.isEnabled()),"128"}, {"creepedbiter","true","64"}, {"creepedhumanoid","true","64"}, {"creeppod","true","256"}, {"wyrmsoldierfrost","true","64"}, {"creepling","true","32"}, {"strykeling","true","64"},
+            {"hexe_pod","true","256"}, {"wyrmling","true","32"}, {"wyrmprober","true","64"}, {"thevisitor","true","512"}, {"wyrmrover","true","64"}, {"wyrmroverevo","true","64"}, {"callouspod","true","256"}, {"wyrmsoldier","true","64"}, {"creepwyrm",Boolean.toString(Invasion.isCreepEnabled()),"128"}, {"wyrmmyrmur","true","32"}, {"wyrmsoldierevo","true","64"}, {"wyrmwarrior","true","128"}, {"creepedbiter","true","64"}, {"creepedhumanoid","true","64"}, {"creeppod","true","256"}, {"wyrmsoldierfrost","true","64"}, {"creepling","true","32"}, {"strykeling","true","64"},
     };
     public static Class[] wyrmClasses = {
-            EntityHexePod.class, EntityWyrmling.class, EntityWyrmProber.class, EntityTheVisitor.class, EntityWyrmWorker.class, EntityWyrmRover.class, EntityWyrmRoverUranium.class, EntityCallousPod.class, EntityWyrmSoldier.class, EntityCreepwyrm.class, EntityMyrmur.class, EntityWyrmSoldierInfectoid.class, EntityWyrmWarrior.class, EntityWyrmWarriorTainted.class, EntityBiter.class, EntityCreepedHumanoid.class, EntityCreepPod.class, EntityWyrmSoldierfrost.class, EntityCreepling.class, EntityStrykeling.class
+            EntityHexePod.class, EntityWyrmling.class, EntityWyrmProber.class, EntityTheVisitor.class, EntityWyrmWorker.class, EntityWyrmRover.class, EntityWyrmRoverUranium.class, EntityCallousPod.class, EntityWyrmSoldier.class, EntityCreepwyrm.class, EntityMyrmur.class, EntityWyrmSoldierInfectoid.class, EntityWyrmWarrior.class, EntityBiter.class, EntityCreepedHumanoid.class, EntityCreepPod.class, EntityWyrmSoldierfrost.class, EntityCreepling.class, EntityStrykeling.class
     };
     public static void register() {
         int id = 0;
@@ -29,6 +29,7 @@ public final class WyrmRegister {
             // To deal with the fact some wyrms can be skipped from registry, we must include a checker
             if(Objects.equals(wyrmIDs[i][1], "true")) RegHelper.RegEntity(wyrmIDs[i][0], wyrmClasses[i], i, Integer.parseInt(wyrmIDs[i][2]), 1);
         }
+        if (Evo.evoHBMVariantsEnabled && hbm.isEnabled()) {RegHelper.RegEntity("wyrmwarriortainted", EntityWyrmWarriorTainted.class, id++, 64, 2);}
 
         id = 130;
         // Register Waypoints
