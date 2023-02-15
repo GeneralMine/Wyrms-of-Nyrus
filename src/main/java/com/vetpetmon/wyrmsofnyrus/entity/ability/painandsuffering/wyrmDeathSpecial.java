@@ -15,9 +15,9 @@ public class wyrmDeathSpecial {
         int x = pos.getX(), y = pos.getY(), z = pos.getZ();
         if (power > 0) {
             int evoPointBonus = (power > 20) ? (int) Math.floor((power - 20) / 20) : 0;
+            evoPoints.add(world, (int) ((1 + evoPointBonus) * Evo.evoFactor));
             if ((entityIn.isBurning()) && Radiogenetics.explodingWyrms) {
                 float explosionPower = (float) power / 2;
-                evoPoints.add(world, (int) ((1 + evoPointBonus) * Evo.evoFactor));
                 if (!world.isRemote) {
                     world.createExplosion(null, x, y, z, explosionPower, true);
                 }
