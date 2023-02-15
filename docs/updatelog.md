@@ -1,5 +1,5 @@
 ## Dark Skies Update
-### 0.2.7
+### 0.3
 
 Reading these (x/y/z) statements are the default config values that are different across the new preset systems. X = Classic, Y = Death World, and Z = Dark Forest.
 
