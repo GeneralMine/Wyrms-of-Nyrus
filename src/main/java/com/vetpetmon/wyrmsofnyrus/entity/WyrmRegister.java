@@ -22,13 +22,14 @@ public final class WyrmRegister {
             EntityHexePod.class, EntityWyrmling.class, EntityWyrmProber.class, EntityTheVisitor.class, EntityWyrmWorker.class, EntityWyrmRover.class, EntityWyrmRoverUranium.class, EntityCallousPod.class, EntityWyrmSoldier.class, EntityCreepwyrm.class, EntityMyrmur.class, EntityWyrmSoldierInfectoid.class, EntityWyrmWarrior.class, EntityBiter.class, EntityCreepedHumanoid.class, EntityCreepPod.class, EntityWyrmSoldierfrost.class, EntityCreepling.class, EntityStrykeling.class
     };
     public static void register() {
-        int id = 0;
-
-        //Replace the wall of code with a single loop AND make the spawn item in the same go! Awesome! ☆ Smiles.png .x. ☆
+        //Replace the wall of code with a single loop! Awesome! ☆ Smiles.png .x. ☆
         for (int i = 0; i < wyrmIDs.length; i++) {
             // To deal with the fact some wyrms can be skipped from registry, we must include a checker
-            if(Objects.equals(wyrmIDs[i][1], "true")) RegHelper.RegEntity(wyrmIDs[i][0], wyrmClasses[i], i, Integer.parseInt(wyrmIDs[i][2]), 1);
+            if(Objects.equals(wyrmIDs[i][1], "true")) {
+                RegHelper.RegEntity(wyrmIDs[i][0], wyrmClasses[i], i, Integer.parseInt(wyrmIDs[i][2]));
+            }
         }
+        int id = 100;
         if (Evo.evoHBMVariantsEnabled && hbm.isEnabled()) {RegHelper.RegEntity("wyrmwarriortainted", EntityWyrmWarriorTainted.class, id++, 64, 2);}
 
         id = 130;

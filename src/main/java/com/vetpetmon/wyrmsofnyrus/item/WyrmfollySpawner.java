@@ -43,7 +43,7 @@ public class WyrmfollySpawner extends ItemBase implements IHasModel {
         }
         else {
             EntityLiving spawn = toSpawn(this.type, worldIn);
-            spawn.setLocationAndAngles(pos.getX(), pos.getY() + 1, pos.getZ(), worldIn.rand.nextFloat() * 360F, 0.0F);
+            spawn.setLocationAndAngles(pos.getX()+0.5, pos.getY() + 1, pos.getZ()+0.5, worldIn.rand.nextFloat() * 360F, 0.0F);
             if (!worldIn.isRemote) worldIn.spawnEntity(spawn);
             onUseShrink(player,hand);
             return EnumActionResult.SUCCESS;
@@ -55,6 +55,7 @@ public class WyrmfollySpawner extends ItemBase implements IHasModel {
         switch(eType) {
             case(1):
                 entity = new EntityStrykeling(worldIn);
+                break;
         }
         return entity;
     }

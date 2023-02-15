@@ -54,3 +54,10 @@ Reading these (x/y/z) statements are the default config values that are differen
 - Warrior tracking (and render) distance increased from 64 to 128
 - Fixed soldier infectoid variant having lower tracking distance
 - Increased Creepling tracking distance from 16 to 32
+- New spawner items for wyrms
+- Pod & Voidwyrm spawner items spawn their entities in the air
+- Strykelings now spawn in the center of blocks
+- Spawner items that fail to spawn an entity will spawn a Spider instead.
+- Removed vanilla-style spawn eggs for wyrm mobs (with a few exceptions at the moment)
+- Massive English language file update
+- New descriptions for mobs
