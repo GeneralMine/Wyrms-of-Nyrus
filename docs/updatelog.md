@@ -61,3 +61,5 @@ Reading these (x/y/z) statements are the default config values that are differen
 - Removed vanilla-style spawn eggs for wyrm mobs (with a few exceptions at the moment)
 - Massive English language file update
 - New descriptions for mobs
+- Creepwyrms can no longer be pushed around and actually stay stationary on blocks.
+- New debug mode messages related to evolution points being added and natural decay of evolution points. (Lever 5 debug mode or above needed)

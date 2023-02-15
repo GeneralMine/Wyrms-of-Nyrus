@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.evo;
 
 import com.vetpetmon.synapselib.util.RNG;
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
@@ -34,6 +35,7 @@ public class evoPoints{
         wyrmVariables.WorldVariables.get(w).wyrmEvo += i;
         evoMilestone(w);
         sync(w);
+        if(Debug.LOGGINGENABLED && Debug.DEBUGLEVEL > 4)wyrmsofnyrus.logger.info("Added " + i + " evolution points into world data.");
     }
 
     /**
@@ -80,6 +82,7 @@ public class evoPoints{
         if (RNG.dBase(10000) == 5) {
             subtract(w, (int) (1 * Evo.evoFactor));
             evoMilestone(w);
+            if(Debug.LOGGINGENABLED && Debug.DEBUGLEVEL > 4)wyrmsofnyrus.logger.info("World's wyrm evolution was decreased by " + (1*Evo.evoFactor) + " from natural decay.s");
         }
     }
 

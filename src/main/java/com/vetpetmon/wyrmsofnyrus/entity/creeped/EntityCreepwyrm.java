@@ -87,6 +87,11 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
             creepTheLands(getPosition(),this.world, Radiogenetics.creepwyrmInfestRange);
             this.timeUntilNextCreep = Invasion.normCreepwyrmCreepSpeed;
         }
+        //Keeps them in one spot once spawned.
+        if(!this.world.isRemote) {
+            this.motionX = 0.0D;
+            this.motionZ = 0.0D;
+        }
     }
 
     @Override
