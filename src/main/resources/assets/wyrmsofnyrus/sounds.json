@@ -1,5 +1,5 @@
 {
-  "creepwyrmscream": {
+  "entity.creepwyrmscream": {
     "category": "hostile",
     "subtitle": "subtitles.creepwyrmscream",
     "sounds": [

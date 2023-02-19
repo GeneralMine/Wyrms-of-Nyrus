@@ -1,6 +1,8 @@
 ## Dark Skies Update
 ### 0.3
 
+This update is potentially incompatible with old worlds or may cause a few issues when updating.
+
 Reading these (x/y/z) statements are the default config values that are different across the new preset systems. X = Classic, Y = Death World, and Z = Dark Forest.
 
 - Split Radiogenics Config into 4 categories:
@@ -63,3 +65,17 @@ Reading these (x/y/z) statements are the default config values that are differen
 - New descriptions for mobs
 - Creepwyrms can no longer be pushed around and actually stay stationary on blocks.
 - New debug mode messages related to evolution points being added and natural decay of evolution points. (Lever 5 debug mode or above needed)
+- Killing wyrms with fire increases evo points gained by 2x (Dark Forest only, configurable in Evolution configurations)
+- Updated Strykeling animations
+- Wyrm stats are now persistent across world loads, including across sessions.
+  - Fixed wyrm stats (health, armor, damage, etc.) only being saved to memory (RAM)
+  - Before, just follies would do this.
+  - Creeped also remember their stats
+- Improved animation functions built upon Geckolib
+  - Wyrms now use an Animation Array to define and pick out animations, therefore reducing the amount of work needed to define new animations
+  - I thought the current system was a bit messy and hard to look at, so I fixed it (somewhat.)
+- Creepwyrms that infest a certain number of blocks will now summon a new Creeped unit.
+  - Classic difficulty: Will summon only biters
+  - Death World difficulty: Will summon tier 1 Creeped (Biters, Creeplings)
+  - Dark Forest difficulty: Will summon any Creeped
+- Creepwyrms that make (10/8/5) successful summons will call forth (1/2/5) Creep Pods from the sky in a (30/45/200)-block radius.

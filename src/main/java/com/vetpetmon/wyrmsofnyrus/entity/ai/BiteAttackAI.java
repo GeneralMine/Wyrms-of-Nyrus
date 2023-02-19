@@ -1,16 +1,16 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ai;
 
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 
 public class BiteAttackAI extends EntityAIAttackMelee {
 
     protected float damage;
-    private EntityWyrm wyrm;
+    private MobEntityBase wyrm;
     private int attackingTicks;
 
     // Use follyType 0 to make it just a regular bite attack.
-    public BiteAttackAI(float DMG, EntityWyrm creature, double speedIn, boolean useLongMemory) {
+    public BiteAttackAI(float DMG, MobEntityBase creature, double speedIn, boolean useLongMemory) {
         super(creature, speedIn, useLongMemory);
         this.damage = DMG;
         this.wyrm = creature;

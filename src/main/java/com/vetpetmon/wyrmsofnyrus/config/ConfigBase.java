@@ -27,7 +27,7 @@ public class ConfigBase {
 
     private static final int defaultConfig = 1; // 0 for Classic, 1 for Death World, 2 for Dark Forest.
     private static final String[] factoryConfigs = {"Classic","Death World","Dark Forest"};
-    public static int selectedPreset, presetsVersion = 6, tempPreset;
+    public static int selectedPreset, presetsVersion = 7, tempPreset;
     private static String ConfigDirectory = proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
     private static Configuration general, wyrms, debug, evo, world, invasion, manifest;
 
@@ -136,7 +136,7 @@ public class ConfigBase {
                 reloadConfig(i);
             }
         }
-        if (oneConfigInvalidated && !GraphicsEnvironment.isHeadless()) firstTimeDialogue();
+        if (oneConfigInvalidated && !GraphicsEnvironment.isHeadless()) firstTimeDialogue(); //Check if the environment is not a terminal before calling to create a new window, as terminal interfaces aren't capable of bringing up graphical interfaces like windows and will otherwise crash. Dedicated server fix.
     }
     public static void customConfigGen() {
         if (!Files.exists(Paths.get(proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" + selectedPreset +"/"))) {

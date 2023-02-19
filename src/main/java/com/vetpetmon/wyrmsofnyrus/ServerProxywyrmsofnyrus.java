@@ -40,4 +40,6 @@ public class ServerProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 	public void registerItemRenderer(Item item, int meta, String id) {
 
 	}
+	@Override
+	public boolean isServer() {return true;}
 }

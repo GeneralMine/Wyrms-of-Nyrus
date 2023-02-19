@@ -95,7 +95,8 @@ public class EntityStrykeling extends EntityWyrmfolly implements IAnimatable, IA
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.strykling.moving"));
+            if (getAttack() == 8) event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.strykling.movingagro"));
+            else event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.strykling.moving"));
         }
         else {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.strykling.idle"));

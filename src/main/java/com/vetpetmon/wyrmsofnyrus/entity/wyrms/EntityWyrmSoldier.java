@@ -19,7 +19,6 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -35,6 +34,7 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
         enablePersistence();
         setNoAI(false);
         setPotency(15);
+        this.setAnimationNames(new String[]{"soldierwyrm.idle","soldierwyrm.moving"});
     }
 
     @Override
@@ -84,12 +84,8 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.soldierwyrm.moving"));
-        }
-        else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.soldierwyrm.idle"));
-        }
+        if (event.isMoving()) event.getController().setAnimation(getAnimation(1));
+        else event.getController().setAnimation(getAnimation(0));
         return PlayState.CONTINUE;
     }
 

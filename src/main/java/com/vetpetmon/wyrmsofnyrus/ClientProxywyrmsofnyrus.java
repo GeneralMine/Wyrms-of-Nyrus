@@ -50,4 +50,6 @@ public class ClientProxywyrmsofnyrus implements IProxywyrmsofnyrus {
 	@Override
 	public void serverLoad(FMLServerStartingEvent event) {
 	}
+	@Override
+	public boolean isServer() {return false;}
 }

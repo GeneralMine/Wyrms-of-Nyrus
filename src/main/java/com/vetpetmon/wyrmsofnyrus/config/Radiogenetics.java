@@ -10,7 +10,7 @@ public class Radiogenetics {
     public static boolean explodingWyrms, explodingDropPods;
 
     public static int follyAscenSteps, workerProductivity;
-    public static int creepwyrmInfestRange;
+    public static int creepwyrmInfestRange, creepwyrmSpawnTiers, creepwyrmSpawnThreshhold, creepwyrmPodCallThreshhold, creepwyrmPodCallAmount, creepwyrmDropPodCallRadius;
 
     public static double wyrmStrength, wyrmResistance, wyrmVitality, flyingWyrmProjWeakness, voidwyrmProjWeakness;
     public static double follyAscenBuffFactor;
@@ -49,6 +49,12 @@ public class Radiogenetics {
         creepedImmuneToExplosions = createConfigBool(config, CATEGORYTWO, "Immune to explosions", "Makes the Creeped immune to explosions. Default: false", ConfigBase.presetBools(false, true, true, id));
         creepedImmuneToFalling = createConfigBool(config, CATEGORYTWO, "Immune to falling", "Makes the Creeped immune to fall damage. Flying Creeped always ignore fall damage. Default: false", ConfigBase.presetBools(false, false, true, id));
         creepedImmuneToCacti = createConfigBool(config, CATEGORYTWO, "Immune to cacti", "Makes the Creeped immune to cactus damage. Default: false", ConfigBase.presetBools(false, false, false, id));
+
+        creepwyrmSpawnTiers = createConfigInt(config, CATEGORYTWO, "Creepwyrm Maximum Spawn Tier", "Maximum tier of Creeped that Creepwyrms can spawn. Default: 0", ConfigBase.presetInts(0, 1, 5, id));
+        creepwyrmSpawnThreshhold = createConfigInt(config, CATEGORYTWO, "Creepwyrm Spawn Threshold", "Amount of blocks Creepwyrms need to infest in order to spawn something. Default: 10", 10);
+        creepwyrmPodCallThreshhold = createConfigInt(config, CATEGORYTWO, "Creepwyrm Pod Call Threshold", "Creepwyrms must summon x amount of times before they call a creeped pod to spread their influence. Default: 10", ConfigBase.presetInts(10, 8, 5, id));
+        creepwyrmPodCallAmount =createConfigInt(config, CATEGORYTWO, "Creepwyrm Pod Call Threshold", "The number of Creeped Pods Creepwyrms will summon. Default: 1", ConfigBase.presetInts(1, 2, 5, id));
+        creepwyrmDropPodCallRadius = createConfigInt(config, CATEGORYTWO, "Creepwyrm Pod Call Radius", "How far up Creepwyrms can call in Creeped Pods. Default: 30", ConfigBase.presetInts(30, 45, 100, id));
 
         // Follies
         follyAscenBuffFactor = createConfigDouble(config, CATEGORYTHREE, "Wyrmfolly buff factor", "The factor of which wyrmfolly stats increase. Default: 1.05", ConfigBase.presetFloats(1.05F, 1.15F, 1.3F, id));

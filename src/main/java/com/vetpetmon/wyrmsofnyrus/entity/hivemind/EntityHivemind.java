@@ -68,7 +68,7 @@ public abstract class EntityHivemind extends EntityLiving {
         BlockPos pos;
         switch(goal){
             case INFEST:
-                creepTheLands.creepTheLands(getPosition(),this.world, 4);
+                creepTheLands.creepTheLands(getPosition(),this.world, 4, this);
                 setAlertStrength(getAlertStrength() - (RNG.getIntRangeInclu(0,1)));
                 break;
             case BECKON:

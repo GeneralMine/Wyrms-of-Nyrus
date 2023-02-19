@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -33,6 +32,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
         enablePersistence();
         setNoAI(false);
         setPotency(3);
+        this.setAnimationNames(new String[]{"wyrmrover.idle","wyrmrover.moving"});
     }
 
     @Override
@@ -82,10 +82,10 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmrover.move"));
+            event.getController().setAnimation(getAnimation(1));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmrover.idle"));
+            event.getController().setAnimation(getAnimation(0));
         }
         return PlayState.CONTINUE;
     }

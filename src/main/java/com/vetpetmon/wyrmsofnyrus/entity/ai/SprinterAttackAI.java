@@ -1,12 +1,12 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ai;
 
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.util.SoundEvent;
 
 public class SprinterAttackAI extends EntityAIAttackMelee {
 
-    private EntityWyrm wyrm;
+    private MobEntityBase wyrm;
     private int attackingTicks;
     protected SoundEvent sound;
 
@@ -18,7 +18,7 @@ public class SprinterAttackAI extends EntityAIAttackMelee {
      * @param useLongMemory
      * @param sprintSpeed Entity's bonus speed
      */
-    public SprinterAttackAI(EntityWyrm wyrmIn, double speedIn, boolean useLongMemory, double sprintSpeed, SoundEvent sfx) {
+    public SprinterAttackAI(MobEntityBase wyrmIn, double speedIn, boolean useLongMemory, double sprintSpeed, SoundEvent sfx) {
         super(wyrmIn, (speedIn + sprintSpeed), useLongMemory);
         this.wyrm = wyrmIn;
         this.sound = sfx;

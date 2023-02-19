@@ -44,13 +44,10 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
  * Handles a lot of the hot nonsense of class inheritance for you.
  * You're welcome. <3
  */
-public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob {
+public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, IMob {
 
     private static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.VARINT);
     private double potency = 0.0;
-
-    private String animationName;
 
     // TODO: FIX THIS.
     //  LIST OF CASTE TYPES:
@@ -82,18 +79,6 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
 
     public double getPotency() {return potency;}
     public void setPotency(double potency) {this.potency = potency;}
-
-    // Animation and AI util
-    public void setAttack(int attackID)
-    {
-        this.getDataManager().set(ATTACKID, attackID);
-    }
-
-    //@SideOnly(Side.CLIENT)
-    public int getAttack()
-    {
-        return this.getDataManager().get(ATTACKID);
-    }
 
     public EntityWyrm(final World worldIn) {
         super(worldIn);
@@ -264,7 +249,6 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(HAS_TARGET, false);
-        this.dataManager.register(ATTACKID, 0);
     }
 
     /**
@@ -294,7 +278,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         {
             if (i > 0 && entityIn instanceof EntityLivingBase)
             {
-                ((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(this.rotationYaw * 0.017453292F)));
+                ((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, MathHelper.sin(this.rotationYaw * 0.017453292F), -MathHelper.cos(this.rotationYaw * 0.017453292F));
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
@@ -389,7 +373,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
-
+        super.readEntityFromNBT(compound);
         if (compound.hasKey("srpcothimmunity"))
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");

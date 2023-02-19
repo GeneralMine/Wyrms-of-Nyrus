@@ -29,7 +29,6 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -54,6 +53,7 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         this.proberTimer = 2500; // Lives for ~2 two minutes
         this.probingpoints = 0;
         setPotency(1);
+        this.setAnimationNames(new String[]{"wyrmprober.Moving","wyrmprober.flying"});
     }
 
     @Override
@@ -254,10 +254,10 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprober.Moving"));
+            event.getController().setAnimation(getAnimation(0));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprober.flying"));
+            event.getController().setAnimation(getAnimation(1));
         }
 
         return PlayState.CONTINUE;

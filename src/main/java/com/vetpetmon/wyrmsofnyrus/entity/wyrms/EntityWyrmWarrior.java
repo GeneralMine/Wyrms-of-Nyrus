@@ -22,7 +22,6 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -32,7 +31,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     //private boolean isCharging;
-    private String animationName = "animation.warriorwyrm";
     public EntityWyrmWarrior(World world) {
         super(world);
         this.casteType = 2;
@@ -44,6 +42,7 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
         enablePersistence();
         setNoAI(false);
         setPotency(10);
+        this.setAnimationNames(new String[]{"warriorwyrm.groundedIdle","warriorwyrm.groundedRun","warriorwyrm.idle","warriorwyrm.moving","warriorwyrm.inWater","warriorwyrm.swim"});
     }
 
     @Override
@@ -100,14 +99,14 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".swim"));
-            else if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedRun"));
-            else event.getController().setAnimation(new AnimationBuilder().addAnimation((animationName + ".moving")));
+            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(getAnimation(5));
+            else if (isGrounded()) event.getController().setAnimation(getAnimation(1));
+            else event.getController().setAnimation(getAnimation(3));
         }
         else {
-            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".inWater"));
-            else if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedIdle"));
-            else event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".idle"));
+            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(getAnimation(4));
+            else if (isGrounded()) event.getController().setAnimation(getAnimation(0));
+            else event.getController().setAnimation(getAnimation(2));
         }
 
         return PlayState.CONTINUE;

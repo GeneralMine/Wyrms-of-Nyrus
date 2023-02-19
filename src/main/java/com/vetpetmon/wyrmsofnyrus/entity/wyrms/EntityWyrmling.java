@@ -13,7 +13,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -34,6 +33,7 @@ public class EntityWyrmling extends EntityWyrm {
         enablePersistence();
         setNoAI(false);
         setPotency(1.5);
+        this.setAnimationNames(new String[]{"wyrmling.idle","wyrmling.moving"});
         this.timeUntilGrowth = this.rand.nextInt(6000) + 2000;
     }
 
@@ -120,10 +120,10 @@ public class EntityWyrmling extends EntityWyrm {
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmling.moving"));
+            event.getController().setAnimation(getAnimation(1));
             return PlayState.CONTINUE;
         }
-        else {event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmling.idle"));}
+        else {event.getController().setAnimation(getAnimation(0));}
 
         return PlayState.CONTINUE;
     }

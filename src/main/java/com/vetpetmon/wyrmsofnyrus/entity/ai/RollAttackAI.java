@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ai;
 
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
 import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -9,7 +9,7 @@ import net.minecraft.util.SoundEvent;
 
 public class RollAttackAI extends EntityAIAttackMelee {
 
-    private EntityWyrm wyrm;
+    private MobEntityBase wyrm;
     private int attackingTicks;
     protected SoundEvent sound;
     protected double extraDamage;
@@ -24,7 +24,7 @@ public class RollAttackAI extends EntityAIAttackMelee {
      * @param useLongMemory
      * @param rollSpeed Entity's bonus speed
      */
-    public RollAttackAI(EntityWyrm wyrmIn, double speedIn, boolean useLongMemory, double rollSpeed, double rollDMG, SoundEvent sfx) {
+    public RollAttackAI(MobEntityBase wyrmIn, double speedIn, boolean useLongMemory, double rollSpeed, double rollDMG, SoundEvent sfx) {
         super(wyrmIn, rollSpeed, useLongMemory);
         this.wyrm = wyrmIn;
         this.sound = sfx;
