@@ -151,14 +151,14 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
                     world.spawnEntity(entityToSpawn);
                 }
             }
-            this.playSound(SoundRegistry.creepwyrmscream, 200, 0.5F);
+            this.playSound(SoundRegistry.creepwyrmscream, 50, 0.5F);
         }
 
         if (this.getBlocksConverted() >= Radiogenetics.creepwyrmSpawnThreshhold) {
             this.setSummons(getSummons() + 1);
             this.setBlocksConverted(0);
             if (!world.isRemote) spawnMob(this.getPosition(), this.getEntityWorld());
-            this.playSound(SoundRegistry.creepwyrmscream, 20, 1);
+            this.playSound(SoundRegistry.creepwyrmscream, 10, 1);
         }
     }
 
