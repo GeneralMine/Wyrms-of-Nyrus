@@ -80,3 +80,4 @@ Reading these (x/y/z) statements are the default config values that are differen
   - Dark Forest difficulty: Will summon any Creeped
 - Creepwyrms that make (10/8/7) successful summons will call forth (1/2/3) Creep Pods from the sky in a (30/45/100)-block radius.
 - Increased the size of the Creepwyrm hitbox
+- Creepwyrms now use their summoning animation

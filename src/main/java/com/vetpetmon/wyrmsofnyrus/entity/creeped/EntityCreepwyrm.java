@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
@@ -39,7 +38,8 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
 
     public static final ResourceLocation CREEPWYRM_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/creepwyrm");
     private static final DataParameter<Integer> SUMMONS = EntityDataManager.createKey(EntityCreepwyrm.class, DataSerializers.VARINT),
-            BLOCKSCONVERTED = EntityDataManager.createKey(EntityCreepwyrm.class, DataSerializers.VARINT);
+            BLOCKSCONVERTED = EntityDataManager.createKey(EntityCreepwyrm.class, DataSerializers.VARINT),
+            ANIMATIONTIMER = EntityDataManager.createKey(EntityCreepwyrm.class, DataSerializers.VARINT);
 
     private AnimationFactory factory = new AnimationFactory(this);
     private int timeUntilNextCreep;
@@ -52,6 +52,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
         setNoAI(false);
         this.timeUntilNextCreep = Invasion.normCreepwyrmCreepSpeed;
         setPotency(45);
+        this.setAnimationNames(new String[]{"creepwyrm.idle","creepwyrm.summon"});
     }
 
     @Override
@@ -59,11 +60,20 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
         super.entityInit();
         this.dataManager.register(SUMMONS, Integer.valueOf(0));
         this.dataManager.register(BLOCKSCONVERTED, Integer.valueOf(0));
+        this.dataManager.register(ANIMATIONTIMER, Integer.valueOf(0));
     }
 
     public int getSummons() {
         return dataManager.get(SUMMONS).intValue();
     }
+    private int getAnimTimer() {
+        return dataManager.get(ANIMATIONTIMER).intValue();
+    }
+
+    public void setAnimTimer(int animTimer) {
+        this.dataManager.set(ANIMATIONTIMER,animTimer);
+    }
+
     public void setSummons(int count) {
         this.dataManager.set(SUMMONS,count);
         wyrmsofnyrus.logger.info("Creepwyrm has summoned " + getSummons() + " Creeped.");
@@ -83,6 +93,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
         super.readEntityFromNBT(compound);
         this.setBlocksConverted(compound.getInteger("blocksconverted"));
         this.setSummons(compound.getInteger("summons"));
+        this.setAnimTimer(compound.getInteger("summonanimtimer"));
     }
     @Override
     public void writeEntityToNBT(NBTTagCompound compound)
@@ -90,6 +101,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
         super.writeEntityToNBT(compound);
         compound.setInteger("blocksconverted", this.getBlocksConverted());
         compound.setInteger("summons", this.getSummons());
+        compound.setInteger("summonanimtimer", this.getAnimTimer());
     }
 
     @Override
@@ -132,6 +144,8 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
+        this.setAnimTimer(this.getAnimTimer()-1);
+
         if (!this.world.isRemote && --this.timeUntilNextCreep <= 0) {
             creepTheLands(getPosition(), this.world, Radiogenetics.creepwyrmInfestRange, this);
             this.timeUntilNextCreep = Invasion.normCreepwyrmCreepSpeed;
@@ -144,6 +158,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
         if (this.getSummons() >= Radiogenetics.creepwyrmPodCallThreshhold) {
             this.setSummons(0);
             wyrmsofnyrus.logger.info("Now attempting to summon " + Radiogenetics.creepwyrmPodCallAmount + " Creep Pods.");
+            this.setAnimTimer(200);
             for (int i = 0; i < Radiogenetics.creepwyrmPodCallAmount; i++) {
                 Entity entityToSpawn = new EntityCreepPod(world);
                 if (!world.isRemote) {
@@ -153,10 +168,10 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
             }
             this.playSound(SoundRegistry.creepwyrmscream, 50, 0.5F);
         }
-
-        if (this.getBlocksConverted() >= Radiogenetics.creepwyrmSpawnThreshhold) {
+        else if (this.getBlocksConverted() >= Radiogenetics.creepwyrmSpawnThreshhold) {
             this.setSummons(getSummons() + 1);
             this.setBlocksConverted(0);
+            this.setAnimTimer(200);
             if (!world.isRemote) spawnMob(this.getPosition(), this.getEntityWorld());
             this.playSound(SoundRegistry.creepwyrmscream, 10, 1);
         }
@@ -194,12 +209,13 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
     public SoundEvent getAmbientSound() {return SoundRegistry.creepSpread;}
 
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
+        data.addAnimationController(new AnimationController(this, "controller", 1F, this::predicate));
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.creepwyrm.idle"));
+        if(this.getAnimTimer() > 0) event.getController().setAnimation(getAnimation(1));
+        else event.getController().setAnimation(getAnimation(0));
         return PlayState.CONTINUE;
     }
 
