@@ -46,7 +46,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
     public EntityCreepwyrm(World world) {
         super(world);
         this.casteType = 0;
-        setSize(1f, 5f);
+        setSize(1.5f, 5f);
         experienceValue = 30;
         enablePersistence();
         setNoAI(false);
@@ -147,7 +147,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
             for (int i = 0; i < Radiogenetics.creepwyrmPodCallAmount; i++) {
                 Entity entityToSpawn = new EntityCreepPod(world);
                 if (!world.isRemote) {
-                    entityToSpawn.setLocationAndAngles(this.getPosition().getX() + (RNG.PMRange(Radiogenetics.creepwyrmDropPodCallRadius)), 500, this.getPosition().getZ() + (RNG.PMRange(Radiogenetics.creepwyrmDropPodCallRadius)), world.rand.nextFloat() * 360F, 0.0F);
+                    entityToSpawn.setLocationAndAngles(this.getPosition().getX() + (RNG.PMRange(Radiogenetics.creepwyrmDropPodCallRadius)), 280, this.getPosition().getZ() + (RNG.PMRange(Radiogenetics.creepwyrmDropPodCallRadius)), world.rand.nextFloat() * 360F, 0.0F);
                     world.spawnEntity(entityToSpawn);
                 }
             }

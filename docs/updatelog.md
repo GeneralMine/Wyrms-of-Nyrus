@@ -78,4 +78,5 @@ Reading these (x/y/z) statements are the default config values that are differen
   - Classic difficulty: Will summon only biters
   - Death World difficulty: Will summon tier 1 Creeped (Biters, Creeplings)
   - Dark Forest difficulty: Will summon any Creeped
-- Creepwyrms that make (10/8/5) successful summons will call forth (1/2/5) Creep Pods from the sky in a (30/45/200)-block radius.
+- Creepwyrms that make (10/8/7) successful summons will call forth (1/2/3) Creep Pods from the sky in a (30/45/100)-block radius.
+- Increased the size of the Creepwyrm hitbox
