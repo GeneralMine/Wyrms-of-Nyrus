@@ -32,7 +32,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
         enablePersistence();
         setNoAI(false);
         setPotency(3);
-        this.setAnimationNames(new String[]{"wyrmrover.idle","wyrmrover.moving"});
+        this.setAnimationNames(new String[]{"wyrmrover.idle","wyrmrover.move"});
     }
 
     @Override
