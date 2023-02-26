@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.synapselib.rendering.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmInvasionCommand;
 import com.vetpetmon.wyrmsofnyrus.command.CommandWyrmsTest;
@@ -172,6 +173,7 @@ public class wyrmsofnyrus {
         event.registerServerCommand(new CommandWyrmInvasionCommand());
         event.registerServerCommand(new CommandWyrmsTest());
         InvasionScheduler.getScheduler(event.getServer().getEntityWorld());
+        Advancements.init(event.getServer());
     }
 
     public static ResourceLocation getResource(final String name)

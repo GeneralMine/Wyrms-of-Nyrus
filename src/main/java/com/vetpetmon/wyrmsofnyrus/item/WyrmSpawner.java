@@ -4,6 +4,7 @@ import com.vetpetmon.synapselib.rendering.IHasModel;
 import com.vetpetmon.wyrmsofnyrus.entity.WyrmRegister;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.*;
 import com.vetpetmon.wyrmsofnyrus.entity.follies.EntityStrykeling;
+import com.vetpetmon.wyrmsofnyrus.entity.nonwyrms.EntityNKAgent;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.client.resources.I18n;
@@ -140,6 +141,9 @@ public class WyrmSpawner extends ItemBase implements IHasModel {
                     break;
                 case (18):
                     entity = new EntityStrykeling(worldIn);
+                    break;
+                case (19):
+                    entity = new EntityNKAgent(worldIn);
                     break;
             }
         }

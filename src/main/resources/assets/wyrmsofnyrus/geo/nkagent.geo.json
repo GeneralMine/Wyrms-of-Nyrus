@@ -1,0 +1,161 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.nkagent",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "Body",
+					"pivot": [0, 19, 0]
+				},
+				{
+					"name": "Torso",
+					"parent": "Body",
+					"pivot": [0, 15, 0],
+					"cubes": [
+						{"origin": [-4, 15, -2], "size": [8, 9, 4], "uv": [0, 40]}
+					]
+				},
+				{
+					"name": "Waist",
+					"parent": "Torso",
+					"pivot": [0, 12, 0],
+					"cubes": [
+						{"origin": [-4, 11, -2], "size": [8, 4, 4], "uv": [38, 24]}
+					]
+				},
+				{
+					"name": "LegUpper1",
+					"parent": "Waist",
+					"pivot": [2, 11, 0],
+					"cubes": [
+						{"origin": [0, 5, -2], "size": [4, 6, 4], "uv": [0, 53], "mirror": true}
+					]
+				},
+				{
+					"name": "LegLower1",
+					"parent": "LegUpper1",
+					"pivot": [2, 5, -2],
+					"cubes": [
+						{"origin": [0, 0, -2], "size": [4, 5, 5], "uv": [41, 50], "mirror": true}
+					]
+				},
+				{
+					"name": "LegUpper2",
+					"parent": "Waist",
+					"pivot": [-2, 11, 0],
+					"cubes": [
+						{"origin": [-4, 5, -2], "size": [4, 6, 4], "uv": [0, 53]}
+					]
+				},
+				{
+					"name": "LegLower2",
+					"parent": "LegUpper2",
+					"pivot": [-2, 5, -2],
+					"cubes": [
+						{"origin": [-4, 0, -2], "size": [4, 5, 5], "uv": [41, 50]}
+					]
+				},
+				{
+					"name": "Neck",
+					"parent": "Torso",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-6, 23, -4], "size": [12, 2, 8], "uv": [29, 14]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "Neck",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-4, 24, -3], "size": [8, 8, 6], "uv": [34, 0]},
+						{"origin": [-5, 24, -3.25], "size": [10, 9, 9], "uv": [0, 22]}
+					]
+				},
+				{
+					"name": "ArmUpper1",
+					"parent": "Torso",
+					"pivot": [-4, 23, 0],
+					"cubes": [
+						{"origin": [-7, 17, -2], "size": [3, 7, 4], "uv": [37, 60], "mirror": true}
+					]
+				},
+				{
+					"name": "ArmLower1",
+					"parent": "ArmUpper1",
+					"pivot": [-6, 17, 0],
+					"cubes": [
+						{"origin": [-7, 10, -2], "size": [3, 7, 4], "uv": [60, 28]}
+					]
+				},
+				{
+					"name": "ArmUpper2",
+					"parent": "Torso",
+					"pivot": [4, 23, 0],
+					"cubes": [
+						{"origin": [4, 17, -2], "size": [3, 7, 4], "uv": [37, 60]}
+					]
+				},
+				{
+					"name": "ArmLower2",
+					"parent": "ArmUpper2",
+					"pivot": [6, 17, 0],
+					"cubes": [
+						{"origin": [4, 10, -2], "size": [3, 7, 4], "uv": [60, 28], "mirror": true}
+					]
+				},
+				{
+					"name": "Cloak",
+					"parent": "Torso",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-5, 9, -3], "size": [10, 15, 7], "pivot": [0, 24, 0], "rotation": [2.5, 0, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "CloakShoulder1",
+					"parent": "Cloak",
+					"pivot": [5, 24, 0.25],
+					"cubes": [
+						{"origin": [2, 18.25, -2.25], "size": [6, 7, 5], "uv": [19, 50], "mirror": true}
+					]
+				},
+				{
+					"name": "CloakShoulder2",
+					"parent": "Cloak",
+					"pivot": [-5, 24, 0.25],
+					"cubes": [
+						{"origin": [-8, 18.25, -2.25], "size": [6, 7, 5], "uv": [19, 50]}
+					]
+				},
+				{
+					"name": "CloakLower",
+					"parent": "Cloak",
+					"pivot": [0, 11, 3.75],
+					"cubes": [
+						{"origin": [-5.5, 3, -2.25], "size": [11, 10, 7], "pivot": [0, 11, 3.75], "rotation": [12.5, 0, 0], "uv": [31, 33]}
+					]
+				},
+				{
+					"name": "Scythe",
+					"pivot": [-5.5, 11.5, -1],
+					"cubes": [
+						{"origin": [-6, 11, -20], "size": [1, 1, 26], "uv": [43, 45]},
+						{"origin": [-5.5, 6, -29], "size": [0, 11, 10], "uv": [77, 50]},
+						{"origin": [-6, 10.5, 6], "size": [1, 2, 7], "uv": [21, 62]},
+						{"origin": [-6.5, 10.5, -22], "size": [2, 2, 2], "uv": [0, 27]},
+						{"origin": [-5.5, -6.5, -19], "size": [0, 18, 10], "uv": [0, 53]}
+					]
+				}
+			]
+		}
+	]
+}

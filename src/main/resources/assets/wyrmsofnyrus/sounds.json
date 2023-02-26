@@ -29,6 +29,30 @@
       }
     ]
   },
+  "entity.nkagentidle": {
+    "category": "hostile",
+    "subtitle": "subtitles.alienchattering",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/nk1",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/nk2",
+        "stream": false
+      }
+    ]
+  },
+  "entity.banishment": {
+    "category": "hostile",
+    "subtitle": "subtitles.vwoop",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/banishment",
+        "stream": false
+      }
+    ]
+  },
   "entity.creepedhumanoid": {
     "category": "hostile",
     "subtitle": "subtitles.distortedspeech",

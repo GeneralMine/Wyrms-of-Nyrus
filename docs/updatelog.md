@@ -81,3 +81,12 @@ Reading these (x/y/z) statements are the default config values that are differen
 - Creepwyrms that make (10/8/7) successful summons will call forth (1/2/3) Creep Pods from the sky in a (30/45/100)-block radius.
 - Increased the size of the Creepwyrm hitbox
 - Creepwyrms now use their summoning animation
+- New secrets
+- Removed despawn timer references for Visitor
+  - *Why was that still there?*
+- Introducing new advancements:
+  - **"How did we get here?"** 
+  - **"KILL IT WITH FIRE!"**
+  - **"A Splitting Migraine"**
+  - **"Not Today!"**
+  - **"Californium's Witness"**

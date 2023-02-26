@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity.follies;
 
+import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
@@ -15,11 +16,13 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -229,6 +232,13 @@ public abstract class EntityWyrmfolly extends MobEntityBase implements IAnimatab
     @Override
     public void registerControllers(AnimationData animationData) {
 
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        Entity entity = source.getTrueSource();
+        if (entity instanceof EntityPlayerMP && this.isBurning()) Advancements.grantAchievement((EntityPlayerMP) entity, Advancements.killitwithfire);
     }
 
     @Override

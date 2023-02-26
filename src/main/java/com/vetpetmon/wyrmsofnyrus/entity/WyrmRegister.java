@@ -7,6 +7,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.creeped.*;
 import com.vetpetmon.wyrmsofnyrus.entity.follies.EntityStrykeling;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityOverseerWaypoint;
+import com.vetpetmon.wyrmsofnyrus.entity.nonwyrms.EntityNKAgent;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 import com.vetpetmon.wyrmsofnyrus.synapselib.RegHelper;
 
@@ -16,10 +17,10 @@ import java.util.Objects;
 
 public final class WyrmRegister {
     public static String[][] wyrmIDs = {
-            {"hexe_pod","true","256"}, {"wyrmling","true","32"}, {"wyrmprober","true","64"}, {"thevisitor","true","512"}, {"wyrmworker","true","64"}, {"wyrmrover","true","64"}, {"wyrmroverevo","true","64"}, {"callouspod","true","256"}, {"wyrmsoldier","true","64"}, {"creepwyrm",Boolean.toString(Invasion.isCreepEnabled()),"128"}, {"wyrmmyrmur","true","32"}, {"wyrmsoldierevo","true","64"}, {"wyrmwarrior","true","128"}, {"creepedbiter","true","64"}, {"creepedhumanoid","true","64"}, {"creeppod","true","256"}, {"wyrmsoldierfrost","true","64"}, {"creepling","true","32"}, {"strykeling","true","64"},
+            {"hexe_pod","true","256"}, {"wyrmling","true","32"}, {"wyrmprober","true","64"}, {"thevisitor","true","512"}, {"wyrmworker","true","64"}, {"wyrmrover","true","64"}, {"wyrmroverevo","true","64"}, {"callouspod","true","256"}, {"wyrmsoldier","true","64"}, {"creepwyrm",Boolean.toString(Invasion.isCreepEnabled()),"128"}, {"wyrmmyrmur","true","32"}, {"wyrmsoldierevo","true","64"}, {"wyrmwarrior","true","128"}, {"creepedbiter","true","64"}, {"creepedhumanoid","true","64"}, {"creeppod","true","256"}, {"wyrmsoldierfrost","true","64"}, {"creepling","true","32"}, {"strykeling","true","64"}, {"nkagent","true","128"}
     };
     public static Class[] wyrmClasses = {
-            EntityHexePod.class, EntityWyrmling.class, EntityWyrmProber.class, EntityTheVisitor.class, EntityWyrmWorker.class, EntityWyrmRover.class, EntityWyrmRoverUranium.class, EntityCallousPod.class, EntityWyrmSoldier.class, EntityCreepwyrm.class, EntityMyrmur.class, EntityWyrmSoldierInfectoid.class, EntityWyrmWarrior.class, EntityBiter.class, EntityCreepedHumanoid.class, EntityCreepPod.class, EntityWyrmSoldierfrost.class, EntityCreepling.class, EntityStrykeling.class
+            EntityHexePod.class, EntityWyrmling.class, EntityWyrmProber.class, EntityTheVisitor.class, EntityWyrmWorker.class, EntityWyrmRover.class, EntityWyrmRoverUranium.class, EntityCallousPod.class, EntityWyrmSoldier.class, EntityCreepwyrm.class, EntityMyrmur.class, EntityWyrmSoldierInfectoid.class, EntityWyrmWarrior.class, EntityBiter.class, EntityCreepedHumanoid.class, EntityCreepPod.class, EntityWyrmSoldierfrost.class, EntityCreepling.class, EntityStrykeling.class, EntityNKAgent.class
     };
     public static void register() {
         //Replace the wall of code with a single loop! Awesome! ☆ Smiles.png .x. ☆

@@ -1,5 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.network.datasync.DataParameter;
@@ -13,6 +14,7 @@ import software.bernie.geckolib3.core.builder.AnimationBuilder;
 public abstract class MobEntityBase extends EntityMob implements IAnimatable, IMob {
 
     private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(MobEntityBase.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(MobEntityBase.class, DataSerializers.BOOLEAN);
     // Animation and AI util
     public void setAttack(int attackID)
     {
@@ -32,6 +34,14 @@ public abstract class MobEntityBase extends EntityMob implements IAnimatable, IM
         return animationNames;
     }
 
+    public Boolean getHasTarget() {
+        return this.getDataManager().get(HAS_TARGET);
+    }
+    public void getHasTarget(boolean state)
+    {
+        this.getDataManager().set(HAS_TARGET, state);
+    }
+
     public AnimationBuilder getAnimation(int index){
         String[] anims = getAnimationNames();
         return new AnimationBuilder().addAnimation("animation." + anims[index]);
@@ -45,5 +55,9 @@ public abstract class MobEntityBase extends EntityMob implements IAnimatable, IM
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(ATTACKID, 0);
+        this.dataManager.register(HAS_TARGET, false);
     }
+
+    // Targetting
+    protected void afterWyrms() {this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityWyrm.class, true, false));}
 }

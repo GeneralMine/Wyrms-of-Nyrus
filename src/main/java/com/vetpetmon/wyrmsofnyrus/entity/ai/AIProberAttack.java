@@ -1,10 +1,12 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ai;
 
+import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -153,7 +155,7 @@ public class AIProberAttack extends EntityAIBase
             this.attacker.swingArm(EnumHand.MAIN_HAND);
             this.attacker.attackEntityAsMob(target);
             target.attackEntityFrom(WoNDamageSources.PROBER, 50);
-            //invasionPoints.add(world, 2);
+            if (target instanceof EntityPlayerMP) Advancements.grantAchievement((EntityPlayerMP) target, Advancements.probed);
         }
     }
 

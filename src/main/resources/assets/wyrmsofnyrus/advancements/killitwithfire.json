@@ -1,0 +1,19 @@
+{
+    "display": {
+        "icon": {
+            "item": "wyrmsofnyrus:strykerspawner"
+        },
+        "title": {
+            "translate": "advancements.killitwithfire.title"
+        },
+        "description": {
+            "translate": "advancements.killitwithfire.description"
+        }
+    },
+    "parent": "wyrmsofnyrus:root",
+    "criteria": {
+        "impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

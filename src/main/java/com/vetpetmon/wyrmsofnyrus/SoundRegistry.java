@@ -6,24 +6,24 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class SoundRegistry {
 
-    public static SoundEvent wyrmClicks;
+    public static SoundEvent wyrmClicks, deepwyrmclicks;
+    public static SoundEvent wyrmSteps, slowwyrmsteps;
     public static SoundEvent wyrmHissTwo;
     public static SoundEvent theVisitor;
     public static SoundEvent creepSpread;
-    public static SoundEvent wyrmSteps;
     public static SoundEvent creepwyrmscream;
-    public static SoundEvent deepwyrmclicks;
-    public static SoundEvent slowwyrmsteps;
     public static SoundEvent myrmur;
     public static SoundEvent myrmurcharge;
-    public static SoundEvent biter;
-    public static SoundEvent bitercharge;
+    public static SoundEvent biter, bitercharge;
     public static SoundEvent nukeClose;
     public static SoundEvent nukeFar;
     public static SoundEvent wyrmroars;
     public static SoundEvent wyrmlingclicks, wyrmlinghurt, wyrmlingdeath;
     public static SoundEvent proberidle;
+    public static SoundEvent nkagentidle;
     public static SoundEvent creepedhumanoid, creepedhumanoidroar;
+    //Attacks
+    public static SoundEvent banishment;
 
     public static void RegisterSounds() {
         wyrmClicks = RegisterSound("entity.wyrmClicks");
@@ -47,6 +47,8 @@ public class SoundRegistry {
         bitercharge = RegisterSound("entity.biterroll");
         creepedhumanoid = RegisterSound("entity.creepedhumanoid");
         creepedhumanoidroar = RegisterSound("entity.creepedhumanoidroar");
+        nkagentidle = RegisterSound("entity.nkagentidle");
+        banishment = RegisterSound("entity.banishment");
     }
 
     public static SoundEvent RegisterSound(String name) {

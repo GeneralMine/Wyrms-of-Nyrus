@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
@@ -28,8 +29,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private int timeUntilDespawn;
-    private int dropTimer;
+    private int dropTimer, timesdropped;
 
     private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
@@ -59,6 +59,13 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     }
 
     @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        Entity entity = source.getTrueSource();
+        if (entity instanceof EntityPlayerMP && this.timesdropped == 0) Advancements.grantAchievement((EntityPlayerMP) entity, Advancements.nottoday);
+    }
+
+    @Override
     public void onUpdate() {
         super.onUpdate();
         this.setNoGravity(true);
@@ -70,6 +77,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
         bossInfo.addPlayer(player);
+        Advancements.grantAchievement(player, Advancements.witness);
     }
     @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
@@ -98,21 +106,16 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
-
-        if (compound.hasKey("GrowthTime"))
-        {
-            this.timeUntilDespawn = compound.getInteger("DespawnTime");
-        }
-
         if (compound.hasKey("dropTimer"))
         {
-            this.timeUntilDespawn = compound.getInteger("dropTimer");
+            this.dropTimer = compound.getInteger("dropTimer");
         }
 
         if (compound.hasKey("srpcothimmunity"))
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
+        this.timesdropped=compound.getInteger("timesdropped");
         if (this.hasCustomName()) this.bossInfo.setName(this.getDisplayName());
     }
 
@@ -130,8 +133,8 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         this.srpcothimmunity = 0;
 
         compound.setInteger("dropTimer", this.dropTimer);
+        compound.setInteger("timesdropped", this.timesdropped);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
-        compound.setInteger("DespawnTime", this.timeUntilDespawn);
     }
 
     public void onLivingUpdate()

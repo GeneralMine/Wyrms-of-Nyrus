@@ -1,12 +1,14 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -45,6 +47,13 @@ public abstract class EntityWyrmFlying extends EntityWyrm implements IAnimatable
     @Override
     public void setNoGravity(boolean ignored) {
         super.setNoGravity(true);
+    }
+
+    public void fall(float distance, float damageMultiplier)
+    {
+    }
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos)
+    {
     }
 
 }

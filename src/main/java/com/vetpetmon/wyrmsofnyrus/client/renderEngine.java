@@ -3,6 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.client;
 import com.vetpetmon.wyrmsofnyrus.client.renderer.entity.*;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.*;
 import com.vetpetmon.wyrmsofnyrus.entity.follies.*;
+import com.vetpetmon.wyrmsofnyrus.entity.nonwyrms.EntityNKAgent;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Loader;
@@ -31,6 +32,7 @@ public class renderEngine {
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepPod.class, CreepPodGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepling.class, CreeplingGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityStrykeling.class, StrykelingGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityNKAgent.class, NKAgentGeoRenderer::new);
     }
 
 }

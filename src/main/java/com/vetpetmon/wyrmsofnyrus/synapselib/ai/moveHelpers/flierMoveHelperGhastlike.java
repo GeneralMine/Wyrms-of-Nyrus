@@ -1,6 +1,5 @@
 package com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers;
 
-import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmWarrior;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -29,7 +28,7 @@ public class flierMoveHelperGhastlike extends EntityMoveHelper {
             d3 = MathHelper.sqrt(d3);
 
             if (this.courseChangeCooldown-- <= 0) {
-                this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(20) + this.minCCC;
+                this.courseChangeCooldown += this.parentEntity.getRNG().nextInt(10) + this.minCCC;
 
                 if (this.isNotColliding(this.posX, this.posY, this.posZ, d3)) {
                     this.parentEntity.motionX += d0 / d3 * this.vSPD;
