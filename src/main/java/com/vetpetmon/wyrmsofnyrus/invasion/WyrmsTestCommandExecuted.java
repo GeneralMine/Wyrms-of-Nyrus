@@ -58,7 +58,7 @@ public class WyrmsTestCommandExecuted {
 										("Current Wyrm invasion status: ")
 												+ ((WyrmVariables.wyrmInvasionStatus))
 												+ (" || Points: ")
-												+ (invasionPoints.get(world))
+												+ (InvasionPoints.get(world))
 												+ (" || Evolution: ")
 												+ (EvoPoints.get(world))
 												+ (" || Min Evolution: ")

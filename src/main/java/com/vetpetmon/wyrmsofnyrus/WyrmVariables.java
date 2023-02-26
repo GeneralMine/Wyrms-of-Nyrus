@@ -1,16 +1,17 @@
 package com.vetpetmon.wyrmsofnyrus;
 
 import com.vetpetmon.wyrmsofnyrus.locallib.OptiMath;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-
-import net.minecraft.world.storage.WorldSavedData;
-import net.minecraft.world.World;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraft.world.storage.WorldSavedData;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
+
+import java.util.Random;
 
 public class WyrmVariables {
     public static String wyrmInvasionStatus = "";
@@ -57,7 +58,8 @@ public class WyrmVariables {
     public static class WorldVariables extends WorldSavedData {
         public static final String DATA_NAME = "wyrmsofnyrus_worldvars";
         public double wyrmInvasionPoints = 0, wyrmInvasionDifficulty = 1;
-        public int wyrmEvo = 0, eventSchedulerCurrentInstance = 0, eventSchedulerNextInstance = 0;
+        public String distressCode;
+        public int wyrmEvo = 0, eventSchedulerCurrentInstance = 0, eventSchedulerNextInstance = 0, pastDistressCall;
         public boolean invasionStarted = false;
         public WorldVariables() {
             super(DATA_NAME);
@@ -65,6 +67,13 @@ public class WyrmVariables {
 
         public WorldVariables(String s) {
             super(s);
+        }
+
+        public static String generateDistressCode(Random rng, String characters, int length)
+        {
+            char[] text = new char[length];
+            for (int i = 0; i < length; i++) {text[i] = characters.charAt(rng.nextInt(characters.length()));}
+            return new String(text);
         }
 
         @Override
@@ -75,6 +84,8 @@ public class WyrmVariables {
             invasionStarted		                = 	nbt.getBoolean("invasionStarted");
             eventSchedulerCurrentInstance       = 	nbt.getInteger("eventCurrentInst");
             eventSchedulerNextInstance		    = 	nbt.getInteger("eventNextInst");
+            distressCode		                = 	nbt.getString("distressCode");
+            pastDistressCall		            = 	nbt.getInteger("pastDistressCall");
         }
 
         @Override
@@ -82,9 +93,12 @@ public class WyrmVariables {
             nbt.setInteger("wyrmEvo", wyrmEvo);
             nbt.setInteger("eventCurrentInst", eventSchedulerCurrentInstance);
             nbt.setInteger("eventNextInst", eventSchedulerNextInstance);
+            nbt.setInteger("pastDistressCall", pastDistressCall);
             nbt.setBoolean("invasionStarted", invasionStarted);
             nbt.setDouble("wyrmInvasionPoints", wyrmInvasionPoints);
             nbt.setDouble("wyrmInvasionDifficulty", OptiMath.arcForm(wyrmInvasionDifficulty));
+            nbt.setString("distressCode", distressCode);
+            if (distressCode.length() < 20) nbt.setString("distressCode", generateDistressCode(new Random(), "_...",20));
             return nbt;
         }
 

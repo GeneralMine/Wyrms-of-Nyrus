@@ -57,6 +57,8 @@ public abstract class MobEntityBase extends EntityMob implements IAnimatable, IM
         this.dataManager.register(ATTACKID, 0);
         this.dataManager.register(HAS_TARGET, false);
     }
+    //Override this in drop pods and such.
+    protected boolean canEnrage(){return true;}
 
     // Targetting
     protected void afterWyrms() {this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityWyrm.class, true, false));}

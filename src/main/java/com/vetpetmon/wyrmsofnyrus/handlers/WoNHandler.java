@@ -1,22 +1,30 @@
 package com.vetpetmon.wyrmsofnyrus.handlers;
 
-import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
-import com.vetpetmon.wyrmsofnyrus.invasion.InvasionEvent;
-import com.vetpetmon.wyrmsofnyrus.invasion.InvasionScheduler;
-import com.vetpetmon.wyrmsofnyrus.invasion.InvasionStatus;
-import com.vetpetmon.wyrmsofnyrus.invasion.VisitorEvent;
 import com.vetpetmon.wyrmsofnyrus.Constants;
 import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
+import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.entity.nonwyrms.EntityNKAgent;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
+import com.vetpetmon.wyrmsofnyrus.invasion.*;
+import com.vetpetmon.wyrmsofnyrus.locallib.ChatUtils;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = Constants.ModID)
 public class WoNHandler {
@@ -87,6 +95,32 @@ public class WoNHandler {
                         InvasionEvent.invasionEvent(chosenPlayer,world);
                     }
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onChatMessage(final ServerChatEvent event) {
+        String code = WyrmVariables.WorldVariables.get(event.getPlayer().getEntityWorld()).distressCode, input = event.getMessage();
+        EntityPlayerMP player = event.getPlayer();
+        if (input.equals(code) && player.isEntityAlive()) {
+            World world = player.getEntityWorld();
+            EntityLivingBase spawn = new EntityNKAgent(world);
+            BlockPos playerPos = player.getPosition();
+            if (((20*60)*60) <= ((int) world.getTotalWorldTime() - WyrmVariables.WorldVariables.get(world).pastDistressCall)) {
+                WyrmVariables.WorldVariables.get(world).pastDistressCall = (int) world.getTotalWorldTime();
+                spawn.setLocationAndAngles(playerPos.getX() + 0.5, playerPos.getY() + 10, playerPos.getZ() + 0.5, world.rand.nextFloat() * 360F, 0.0F);
+                if (!world.isRemote) world.spawnEntity(spawn);
+                world.addWeatherEffect(new EntityLightningBolt(spawn.world, spawn.posX, spawn.posY, spawn.posZ, true));
+                if (player.getName().equals("Vetpetmon"))
+                    player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I've got your back."));
+                else if (!WyrmVariables.WorldVariables.get(world).invasionStarted)
+                    player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ∴⍑ᔑℸ ̣ ℸ ̣ ⍑ᒷǁ∷ᒷ リ\uD835\uDE79ℸ ̣ ⍑ᒷ∷ᒷ ǁᒷℸ ̣ ∴⍑ᔑℸ ̣ ⟍̅\uD835\uDE79 ǁ\uD835\uDE79⚍ ∴ᔑリℸ ̣ "));
+                else if (InvasionPoints.getDifficulty(world) == 1.0)
+                    player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ∷ᒷᔑꖎꖎǁ ǁ\uD835\uDE79⚍ リᒷᒷ⟍̅ ᒲǁ ⍑ᒷꖎ!¡ ℸ ̣ ⍑¦ᓭ ᒷᔑ∷ꖎǁ ǁ\uD835\uDE79⚍ ᓭ⍑\uD835\uDE79⚍ꖎ⟍̅ ¦リ⍊ᒷᓭℸ ̣ ¦リ ᓭ\uD835\uDE79ᒲᒷ ℸ ̣ ∷ᔑ!¡ᓭ."));
+                WyrmVariables.WorldVariables.get(world).distressCode = WyrmVariables.WorldVariables.generateDistressCode(new Random(), "_...", 20);
+                WyrmVariables.WorldVariables.get(world).syncData(world);
+                event.setCanceled(true); //HIDE THE PLAYER'S MESSAGE!
             }
         }
     }

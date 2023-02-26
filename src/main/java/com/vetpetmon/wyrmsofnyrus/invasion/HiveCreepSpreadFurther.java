@@ -71,7 +71,7 @@ public class HiveCreepSpreadFurther{
 	}
 
 	public static void addPoints(World world){
-		invasionPoints.add(world, Invasion.creepSpreadPoints);
+		InvasionPoints.add(world, Invasion.creepSpreadPoints);
 		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 8) WyrmsOfNyrus.logger.info("Invasion points increased by " + Invasion.creepSpreadPoints + " from creep spread");
 	}
 

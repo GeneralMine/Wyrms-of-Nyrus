@@ -9,7 +9,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.ProberAttackAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.FlyingMobAI;
-import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -186,7 +186,7 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
     public void onLivingUpdate(){
         super.onLivingUpdate();
         if (!this.world.isRemote && --this.proberTimer <= 0){
-            invasionPoints.add(world, this.probingpoints);
+            InvasionPoints.add(world, this.probingpoints);
             this.setDead();
         }
         chanceToBreak = RNG.dBase(20);

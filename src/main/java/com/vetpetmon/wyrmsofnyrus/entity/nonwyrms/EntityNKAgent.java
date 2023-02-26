@@ -63,8 +63,8 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(1, new WideRangeAttackAI(1000000,this, 1.15D, false,4.0F, 48));
-        this.tasks.addTask(3, new BanishmentAI(1000000,this, 1.15D, false,6.0F));
-        this.tasks.addTask(2, new SmiteAI(this, 1.15D, false,6.0F, 3));
+        this.tasks.addTask(2, new BanishmentAI(1000000,this, 1.15D, false,6.0F));
+        this.tasks.addTask(1, new SmiteAI(this, 1.15D, false,6.0F, 3));
         this.tasks.addTask(4, new EntityAIFlierMob(this, 1.0, 200));
         this.tasks.addTask(5, new EntityAIWanderAvoidWaterFlying(this, 0.15D));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
@@ -83,8 +83,8 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         Entity entity = source.getTrueSource();
         if (entity instanceof EntityLivingBase) {
             this.setAttackTarget((EntityLivingBase) entity);
-            DifficultyStats.applyPotionEffect(entity, MobEffects.LEVITATION, 1, 50, true);
-            DifficultyStats.applyPotionEffect(entity, MobEffects.GLOWING, 1, 1, true);
+            DifficultyStats.applyPotionEffect(entity, MobEffects.LEVITATION, 10, 50, false);
+            DifficultyStats.applyPotionEffect(entity, MobEffects.GLOWING, 10, 1, false);
             DifficultyStats.applyPotionEffect(entity, MobEffects.WITHER, 40, 1, false);
         }
         if (source == DamageSource.FALL || (getAttack()>=9 )) return false;

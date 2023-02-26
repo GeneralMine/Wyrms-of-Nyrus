@@ -10,7 +10,7 @@ import net.minecraft.world.World;
  *
  * Even worse, there's no dedicated getter. I'm fixing that as we speak.
  */
-public class invasionPoints {
+public class InvasionPoints {
     private static double pointBuffer;
     public static double get(World w) {return WyrmVariables.WorldVariables.get(w).wyrmInvasionPoints;}
     public static double getDifficulty(World w) {return WyrmVariables.WorldVariables.get(w).wyrmInvasionDifficulty;}

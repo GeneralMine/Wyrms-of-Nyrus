@@ -33,7 +33,8 @@ public class EntityHexePod extends EntityWyrm implements IAnimatable{
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3D);
     }
-
+    @Override
+    protected boolean canEnrage(){return true;}
     @Override
     public SoundEvent getAmbientSound() {
         return null;

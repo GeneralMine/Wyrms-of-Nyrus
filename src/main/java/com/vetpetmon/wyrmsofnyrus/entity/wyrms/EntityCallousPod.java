@@ -26,6 +26,8 @@ public class EntityCallousPod extends EntityWyrm implements IAnimatable{
         enablePersistence();
         setNoAI(false);
     }
+    @Override
+    protected boolean canEnrage(){return true;}
 
     public void setPodType(int type, int size){
         this.droppodType = type;
