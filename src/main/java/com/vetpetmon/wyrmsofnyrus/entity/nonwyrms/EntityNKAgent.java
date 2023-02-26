@@ -9,8 +9,11 @@ import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMob;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.movehelpers.FlierMoveHelperGhastlike;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
 import net.minecraft.pathfinding.PathNavigateFlying;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
@@ -73,6 +76,8 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         if (source == DamageSource.FALL || (getAttack()==9 || getAttack()==10)) return false;
         return super.attackEntityFrom(source,0.000001F);
     }
+
+    public boolean isPotionApplicable(final PotionEffect potion) {return false;} //Total potion effect immunity.
 
     @Override
     public void setNoGravity(boolean ignored) {
