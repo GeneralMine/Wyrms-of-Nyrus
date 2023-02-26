@@ -352,12 +352,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         Entity entity = source.getTrueSource();
-        if (entity instanceof EntityLivingBase && entity != this.getAttackingEntity()) {
-            this.setAttackTarget((EntityLivingBase) entity);
-            DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 30, 2);
-            DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 30, 4);
-            this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
-        }
+        EntityLivingBase ogEntity = this.getAttackTarget();
         if (this instanceof EntityCreeped) {
             if (source == DamageSource.FALL && (Radiogenetics.creepedImmuneToFalling && !(this.casteType == 9)))
                 return false;
@@ -367,6 +362,13 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
                 return false;
         }
         else {
+            if (entity instanceof EntityLivingBase && entity != ogEntity && (entity.getDistance(entity) < 5)) {
+                if (ogEntity!= null) ogEntity.knockBack(ogEntity,3,2,2);
+                this.setAttackTarget((EntityLivingBase) entity);
+                DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 30, 2);
+                DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 30, 4);
+                this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
+            }
             if (source == DamageSource.FALL && (Radiogenetics.immuneToFalling && !(this.casteType == 9)))
                 return false;
             if (source.isExplosion() && Radiogenetics.immuneToExplosions)

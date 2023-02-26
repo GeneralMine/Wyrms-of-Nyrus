@@ -100,3 +100,4 @@ Reading these (x/y/z) statements are the default config values that are differen
   - This means if something interrupts them from chasing and attacking their current target, they will switch to another target.
   - Wyrms will be less forgiving when swarmed/interrupted
     - Wyrms gain positive potion effects
+    - They will knock back the original target in order to clear the way to the new target

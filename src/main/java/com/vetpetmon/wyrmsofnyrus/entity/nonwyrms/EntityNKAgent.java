@@ -83,9 +83,9 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         Entity entity = source.getTrueSource();
         if (entity instanceof EntityLivingBase) {
             this.setAttackTarget((EntityLivingBase) entity);
-            DifficultyStats.applyPotionEffect(entity, MobEffects.LEVITATION, 1, 50, false);
-            DifficultyStats.applyPotionEffect(entity, MobEffects.GLOWING, 1, 1, false);
-            DifficultyStats.applyPotionEffect(entity, MobEffects.WITHER, 1, 1, false);
+            DifficultyStats.applyPotionEffect(entity, MobEffects.LEVITATION, 1, 50, true);
+            DifficultyStats.applyPotionEffect(entity, MobEffects.GLOWING, 1, 1, true);
+            DifficultyStats.applyPotionEffect(entity, MobEffects.WITHER, 40, 1, false);
         }
         if (source == DamageSource.FALL || (getAttack()>=9 )) return false;
         return super.attackEntityFrom(source,0.000001F);
