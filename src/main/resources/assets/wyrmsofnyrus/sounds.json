@@ -143,6 +143,16 @@
       }
     ]
   },
+  "entity.wyrmannoyed": {
+    "category": "neutral",
+    "subtitle": "subtitles.wyrmannoyed",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/wyrmannoyed",
+        "stream": false
+      }
+    ]
+  },
   "entity.hiveCreepSpread": {
     "category": "neutral",
     "subtitle": "subtitles.hiveCreepSpread",

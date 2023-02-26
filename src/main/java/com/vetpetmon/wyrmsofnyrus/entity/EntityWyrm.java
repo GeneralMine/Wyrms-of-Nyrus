@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
+import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
@@ -350,6 +351,13 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     // Controls how all wyrms respond to damage.
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
+        Entity entity = source.getTrueSource();
+        if (entity instanceof EntityLivingBase && entity != this.getAttackingEntity()) {
+            this.setAttackTarget((EntityLivingBase) entity);
+            DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 30, 2);
+            DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 30, 4);
+            this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
+        }
         if (this instanceof EntityCreeped) {
             if (source == DamageSource.FALL && (Radiogenetics.creepedImmuneToFalling && !(this.casteType == 9)))
                 return false;

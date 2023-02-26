@@ -90,3 +90,13 @@ Reading these (x/y/z) statements are the default config values that are differen
   - **"A Splitting Migraine"**
   - **"Not Today!"**
   - **"Californium's Witness"**
+- New AI abilities
+  - Banishment
+  - Smite
+  - Wide-area Attack
+- Soldiers now use a wide-range swipe attack
+  - No animation for it yet!
+- Wyrms now use an even more aggressive AI
+  - This means if something interrupts them from chasing and attacking their current target, they will switch to another target.
+  - Wyrms will be less forgiving when swarmed/interrupted
+    - Wyrms gain positive potion effects

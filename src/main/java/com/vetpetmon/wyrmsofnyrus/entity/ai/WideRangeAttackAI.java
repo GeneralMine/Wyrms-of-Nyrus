@@ -10,6 +10,7 @@ public class WideRangeAttackAI extends EntityAIAttackMelee {
     protected float damage, range;
     private MobEntityBase entity;
     private int attackingTicks, animDur;
+    protected boolean didAttack = false;
 
     public WideRangeAttackAI(float DMG, MobEntityBase creature, double speedIn, boolean useLongMemory, float attackRange, int animationDuration) {
         super(creature, speedIn, useLongMemory);
@@ -18,16 +19,24 @@ public class WideRangeAttackAI extends EntityAIAttackMelee {
         this.range = attackRange;
         this.animDur = animationDuration;
     }
+    @Override
+    public boolean shouldContinueExecuting()
+    {
+        if (this.didAttack) return false;
+        return super.shouldContinueExecuting();
+    }
     public void resetTask()
     {
         super.resetTask();
         this.entity.setAttack(0);
+        this.didAttack = false;
     }
 
     public void startExecuting()
     {
         super.startExecuting();
         this.attackingTicks = 0;
+        this.didAttack = false;
     }
 
     public void updateTask()
@@ -46,6 +55,7 @@ public class WideRangeAttackAI extends EntityAIAttackMelee {
             this.attacker.swingArm(EnumHand.MAIN_HAND);
             this.attacker.attackEntityAsMob(p_190102_1_);
             this.entity.setAttack(9);
+            this.didAttack = true;
         }
         if (this.attackTick > 0) this.entity.setAttack(9);
         else this.entity.setAttack(0);

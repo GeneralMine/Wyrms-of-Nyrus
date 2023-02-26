@@ -4,6 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.WideRangeAttackAI;
 import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
@@ -46,6 +47,7 @@ public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, I
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
+        this.tasks.addTask(2, new WideRangeAttackAI(WyrmStats.soldierATK, this, 0.5, true, 3.0F,30));
         afterPlayers();
         hivemindFollow();
         if (getAttackVillagers()) afterVillagers();

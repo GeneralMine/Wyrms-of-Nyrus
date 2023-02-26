@@ -47,6 +47,10 @@ public class DifficultyStats {
 
         ((EntityLivingBase) inputE).addPotionEffect(new PotionEffect(effect, duration + (inputE.world.getDifficulty().ordinal() * 30), lvl));
     }
+    public static void applyPotionEffect(Entity inputE, Potion effect, int duration, int lvl, boolean considerWorldDifficulty) {
+        if (considerWorldDifficulty) applyPotionEffect(inputE,effect,duration,lvl);
+        else ((EntityLivingBase) inputE).addPotionEffect(new PotionEffect(effect, duration, lvl));
+    }
 
     /**
      * Calculates the AMR of the entity in the fastest way possible.

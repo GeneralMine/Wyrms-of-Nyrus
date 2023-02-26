@@ -4,14 +4,19 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.BanishmentAI;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.SmiteAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.WideRangeAttackAI;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMob;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.movehelpers.FlierMoveHelperGhastlike;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
+import net.minecraft.init.MobEffects;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -36,7 +41,8 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         experienceValue = 5;
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new FlierMoveHelperGhastlike(this, 1, 0.5, 0.5); //No cooldown = most lag, but smoothest movement. Realistically, only one agent will be in the world at a time.
-        this.setAnimationNames(new String[]{"nkagent.idle","nkagent.idleAgro","nkagent.move","nkagent.attack"});
+        this.setAnimationNames(new String[]{"nkagent.idle","nkagent.idleAgro","nkagent.move","nkagent.attack","nkagent.magic"});
+        this.isImmuneToFire = true;
     }
 
     @Override
@@ -58,6 +64,7 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         super.initEntityAI();
         this.tasks.addTask(1, new WideRangeAttackAI(1000000,this, 1.15D, false,4.0F, 48));
         this.tasks.addTask(3, new BanishmentAI(1000000,this, 1.15D, false,6.0F));
+        this.tasks.addTask(2, new SmiteAI(this, 1.15D, false,6.0F, 3));
         this.tasks.addTask(4, new EntityAIFlierMob(this, 1.0, 200));
         this.tasks.addTask(5, new EntityAIWanderAvoidWaterFlying(this, 0.15D));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
@@ -73,7 +80,14 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         this.setHealth(getMaxHealth());
-        if (source == DamageSource.FALL || (getAttack()==9 || getAttack()==10)) return false;
+        Entity entity = source.getTrueSource();
+        if (entity instanceof EntityLivingBase) {
+            this.setAttackTarget((EntityLivingBase) entity);
+            DifficultyStats.applyPotionEffect(entity, MobEffects.LEVITATION, 1, 50, false);
+            DifficultyStats.applyPotionEffect(entity, MobEffects.GLOWING, 1, 1, false);
+            DifficultyStats.applyPotionEffect(entity, MobEffects.WITHER, 1, 1, false);
+        }
+        if (source == DamageSource.FALL || (getAttack()>=9 )) return false;
         return super.attackEntityFrom(source,0.000001F);
     }
 
@@ -99,12 +113,12 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     public void onLivingUpdate()
     {
         particleCooldown--;
-        if((getAttack()==9 || getAttack()==10) && particleCooldown <=0){
-            particleCooldown = 2;
+        if((getAttack()>=9) && particleCooldown <=0){
+            particleCooldown = 1;
             this.world.spawnParticle(EnumParticleTypes.PORTAL, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
         }
         else if(particleCooldown <=0) {
-            particleCooldown = 10;
+            particleCooldown = 5;
             this.world.spawnParticle(EnumParticleTypes.END_ROD, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
         }
         super.onLivingUpdate();
@@ -117,6 +131,10 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     {
         if (getAttack() == 9) {
             event.getController().setAnimation(getAnimation(3));
+            return PlayState.CONTINUE;
+        }
+        if (getAttack() == 10 || getAttack() == 11) {
+            event.getController().setAnimation(getAnimation(4));
             return PlayState.CONTINUE;
         }
         else if (event.isMoving()) {
