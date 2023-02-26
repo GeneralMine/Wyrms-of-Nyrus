@@ -1,15 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.world.biome;
 
-import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.INewChunk;
-import com.vetpetmon.wyrmsofnyrus.synapselib.NetworkMessages.biomeChange;
+import com.vetpetmon.wyrmsofnyrus.locallib.networkmessages.BiomeChange;
 import com.vetpetmon.wyrmsofnyrus.world.biome.CreepedLands.WoNCreepedLands;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class SpreadingBiome {
     public static WoNCreepedLands biomeCreeped;
@@ -27,7 +23,7 @@ public class SpreadingBiome {
         //((INewChunk) chunk).getBiomeIDList()[(pos.getZ() & 15) << 4 | pos.getX() & 15] = Biome.getIdForBiome(biome);
         if (!(Biome.REGISTRY.getNameForObject(world.getBiome(pos))).equals(new ResourceLocation("wyrmsofnyrus:creeped_lands"))) {
             if (!world.isRemote) {
-                new biomeChange(pos.getX(),pos.getZ(),Biome.getIdForBiome(biome));
+                new BiomeChange(pos.getX(),pos.getZ(),Biome.getIdForBiome(biome));
             }
         }
     }

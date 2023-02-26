@@ -2,11 +2,11 @@ package com.vetpetmon.wyrmsofnyrus.block.vile;
 
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.generic.BlockBase;
-import com.vetpetmon.wyrmsofnyrus.compat.srp;
+import com.vetpetmon.wyrmsofnyrus.compat.SRP;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import com.vetpetmon.synapselib.rendering.IHasModel;
 import com.vetpetmon.synapselib.util.RNG;
 import net.minecraft.block.Block;
@@ -50,7 +50,7 @@ public class BlockCorium extends BlockBase implements IHasModel {
             entityIn.attackEntityFrom(DamageSource.HOT_FLOOR, 2.0F);
             entityIn.setFire(10);
         }
-        difficultyStats.applyPotionEffect(entityIn, MobEffects.WITHER, 600, 2);
+        DifficultyStats.applyPotionEffect(entityIn, MobEffects.WITHER, 600, 2);
 
         super.onEntityWalk(worldIn, pos, entityIn);
     }
@@ -84,7 +84,7 @@ public class BlockCorium extends BlockBase implements IHasModel {
             int y = (int) ((pos.getY()) + RNG.PMRange(Range));
             int z = (int) ((pos.getZ()) + RNG.PMRange(Range));
             BlockPos posi = new BlockPos(x, y, z);
-            if (srp.isEnabled() && WorldConfig.vileEnabled && ((RNG.getIntRangeInclu(0, Invasion.creepSpreadRate)) == Invasion.creepSpreadRate)) {
+            if (SRP.isEnabled() && WorldConfig.vileEnabled && ((RNG.getIntRangeInclu(0, Invasion.creepSpreadRate)) == Invasion.creepSpreadRate)) {
                 if (world.getBlockState(posi).isFullCube() && !(world.getBlockState(posi).getBlock() == (Block.getBlockFromName("wyrmsofnyrus:corium")))) {
                     world.setBlockState(posi, AllBlocks.corium.getDefaultState().withProperty(AGE, age), 3);
                     HiveCreepSpreadFurther.addPoints(world);

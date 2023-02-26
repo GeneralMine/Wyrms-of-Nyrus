@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.BiteAttackAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.RollAttackAI;
 import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
@@ -54,9 +54,9 @@ public class EntityBiter extends EntityCreeped implements IAnimatable, IAnimatio
         afterVillagers();
         afterMobs();
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new BiteAttackAI(wyrmStats.biterATK, this, 0.75D, false));
+        this.tasks.addTask(1, new BiteAttackAI(WyrmStats.biterATK, this, 0.75D, false));
         this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.5D));
-        this.tasks.addTask(2, new RollAttackAI(this, 1.0, true, wyrmStats.biterRollSPD, wyrmStats.biterRollDMG, SoundRegistry.bitercharge));
+        this.tasks.addTask(2, new RollAttackAI(this, 1.0, true, WyrmStats.biterRollSPD, WyrmStats.biterRollDMG, SoundRegistry.bitercharge));
     }
 
     @Override
@@ -69,7 +69,7 @@ public class EntityBiter extends EntityCreeped implements IAnimatable, IAnimatio
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.biterHP,wyrmStats.biterDEF,wyrmStats.biterATK, wyrmStats.biterSPD,wyrmStats.biterKBR);
+        this.setStats(WyrmStats.biterHP, WyrmStats.biterDEF, WyrmStats.biterATK, WyrmStats.biterSPD, WyrmStats.biterKBR);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)

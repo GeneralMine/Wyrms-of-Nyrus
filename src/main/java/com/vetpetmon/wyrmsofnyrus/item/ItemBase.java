@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.item;
 
 import com.vetpetmon.synapselib.rendering.IHasModel;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,14 +18,14 @@ public class ItemBase extends Item implements IHasModel {
     public ItemBase(String name, boolean hastooltip) {
         setUnlocalizedName(name);
         setRegistryName(name);
-        setCreativeTab(wyrmsofnyrus.wyrmTabs);
+        setCreativeTab(WyrmsOfNyrus.wyrmTabs);
         AllItems.ALL_ITEMS.add(this);
         this.hastooltip = hastooltip;
     }
     public ItemBase(String name, boolean hastooltip, boolean hidden) {
         setUnlocalizedName(name);
         setRegistryName(name);
-        if (!hidden) setCreativeTab(wyrmsofnyrus.wyrmTabs);
+        if (!hidden) setCreativeTab(WyrmsOfNyrus.wyrmTabs);
         AllItems.ALL_ITEMS.add(this);
         this.hastooltip = hastooltip;
     }
@@ -41,7 +41,7 @@ public class ItemBase extends Item implements IHasModel {
 
     @Override
     public void registerModels() {
-        wyrmsofnyrus.proxy.registerItemRenderer(this, 0, "inventory");
+        WyrmsOfNyrus.proxy.registerItemRenderer(this, 0, "inventory");
     }
 
     @Override

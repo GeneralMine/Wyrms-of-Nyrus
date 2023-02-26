@@ -4,7 +4,7 @@ import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepPillar;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStagedGrass;
-import com.vetpetmon.wyrmsofnyrus.compat.srp;
+import com.vetpetmon.wyrmsofnyrus.compat.SRP;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.*;
@@ -52,7 +52,7 @@ public class CreepedEvents {
             Block blockLooking = (world.getBlockState(lookingBlock)).getBlock();
             if (creepspreadRules(lookingBlock, world, lookingBlock)) {
                 assert false;
-                if (srp.isEnabled() && WorldConfig.vileEnabled) {if (srp.srpBlocks.contains(blockLooking)) world.setBlockState(lookingBlock, AllBlocks.corium.getDefaultState(), 3);addPoints(world);}
+                if (SRP.isEnabled() && WorldConfig.vileEnabled) {if (SRP.srpBlocks.contains(blockLooking)) world.setBlockState(lookingBlock, AllBlocks.corium.getDefaultState(), 3);addPoints(world);}
                 if (blockLooking == (Block.getBlockFromName("minecraft:glowstone"))) {world.setBlockState(lookingBlock, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);addPoints(world);}
                 else if ((blockLooking instanceof BlockLog) || (blockLooking == Block.getBlockFromName("minecraft:log")) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(lookingBlock, AllBlocks.creeplog.getDefaultState().withProperty(BlockHivecreepPillar.ACTIVE, 1).withProperty(AXIS, EnumFacing.Axis.Y), 3);addPoints(world);}
                 else if (matLookingBlock(lookingBlock, Material.ROCK, world)) {world.setBlockState(lookingBlock, AllBlocks.creepedstone.getDefaultState().withProperty(creepStaged.STAGE, 0), 3);addPoints(world);}

@@ -4,13 +4,13 @@ import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepPillar;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
-import com.vetpetmon.wyrmsofnyrus.compat.srp;
+import com.vetpetmon.wyrmsofnyrus.compat.SRP;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.synapselib.util.blockUtils;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockOldLog;
@@ -57,8 +57,8 @@ public class HiveCreepSpreadFurther{
 				BlockPos posi = new BlockPos(x, y, z);
 				Block blockLooking = (world.getBlockState(posi)).getBlock();
 				if ((creepspreadRules(posi, world, pos)) && canSpreadThisTick) {
-					if (srp.isEnabled() && WorldConfig.vileEnabled) {
-						if (srp.srpBlocks.contains(blockLooking)) world.setBlockState(posi, AllBlocks.corium.getDefaultState(), 3);addPoints(world);
+					if (SRP.isEnabled() && WorldConfig.vileEnabled) {
+						if (SRP.srpBlocks.contains(blockLooking)) world.setBlockState(posi, AllBlocks.corium.getDefaultState(), 3);addPoints(world);
 					}
 					if (blockLooking == (Block.getBlockFromName("minecraft:glowstone"))) {world.setBlockState(posi, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);addPoints(world);}
 					else if ((blockLooking instanceof BlockLog) || (blockLooking instanceof BlockOldLog)) {world.setBlockState(posi, AllBlocks.creeplog.getDefaultState().withProperty(BlockHivecreepPillar.ACTIVE,1).withProperty(AXIS, EnumFacing.Axis.Y), 3);addPoints(world);} //Apparently Minecraft has two different BlockLog classes and I don't know what mods like to use so there you go, cover both.
@@ -72,7 +72,7 @@ public class HiveCreepSpreadFurther{
 
 	public static void addPoints(World world){
 		invasionPoints.add(world, Invasion.creepSpreadPoints);
-		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 8) wyrmsofnyrus.logger.info("Invasion points increased by " + Invasion.creepSpreadPoints + " from creep spread");
+		if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 8) WyrmsOfNyrus.logger.info("Invasion points increased by " + Invasion.creepSpreadPoints + " from creep spread");
 	}
 
 	public static boolean matLookingBlock(BlockPos pos, Material mat, World world) {return (blockUtils.getLookingBlockMat(pos,world) == mat);}

@@ -1,8 +1,8 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
+import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
@@ -56,13 +56,13 @@ public class WyrmsTestCommandExecuted {
 						new TextComponentString(
 								(
 										("Current Wyrm invasion status: ")
-												+ ((wyrmVariables.wyrmInvasionStatus))
+												+ ((WyrmVariables.wyrmInvasionStatus))
 												+ (" || Points: ")
 												+ (invasionPoints.get(world))
 												+ (" || Evolution: ")
-												+ (evoPoints.get(world))
+												+ (EvoPoints.get(world))
 												+ (" || Min Evolution: ")
-												+ (evoPoints.minEvoCap)
+												+ (EvoPoints.minEvoCap)
 								)
 						)
 				);

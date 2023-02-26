@@ -2,9 +2,9 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,8 +52,8 @@ public class EntityWyrmling extends EntityWyrm {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWyrmling)) this.setStatsEvo(wyrmStats.wyrmlingHP,wyrmStats.wyrmlingDEF,0F,wyrmStats.wyrmlingSPD,0F, Evo.minEvoWyrmling);
-        else this.setStats(wyrmStats.wyrmlingHP,wyrmStats.wyrmlingDEF,0F,wyrmStats.wyrmlingSPD,0F);
+        if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoWyrmling)) this.setStatsEvo(WyrmStats.wyrmlingHP, WyrmStats.wyrmlingDEF,0F, WyrmStats.wyrmlingSPD,0F, Evo.minEvoWyrmling);
+        else this.setStats(WyrmStats.wyrmlingHP, WyrmStats.wyrmlingDEF,0F, WyrmStats.wyrmlingSPD,0F);
     }
 
     @Override

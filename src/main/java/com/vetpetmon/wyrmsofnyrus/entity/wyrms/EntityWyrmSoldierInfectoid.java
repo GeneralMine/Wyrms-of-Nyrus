@@ -2,11 +2,11 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -56,8 +56,8 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoSoldierInf)) this.setStatsEvo(wyrmStats.infectoidSoldierHP,wyrmStats.infectoidSoldierDEF,wyrmStats.infectoidSoldierATK,wyrmStats.infectoidSoldierSPD,wyrmStats.infectoidSoldierKBR,Evo.minEvoSoldierInf);
-        else this.setStats(wyrmStats.infectoidSoldierHP,wyrmStats.infectoidSoldierDEF,wyrmStats.infectoidSoldierATK,wyrmStats.infectoidSoldierSPD,wyrmStats.infectoidSoldierKBR);
+        if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoSoldierInf)) this.setStatsEvo(WyrmStats.infectoidSoldierHP, WyrmStats.infectoidSoldierDEF, WyrmStats.infectoidSoldierATK, WyrmStats.infectoidSoldierSPD, WyrmStats.infectoidSoldierKBR,Evo.minEvoSoldierInf);
+        else this.setStats(WyrmStats.infectoidSoldierHP, WyrmStats.infectoidSoldierDEF, WyrmStats.infectoidSoldierATK, WyrmStats.infectoidSoldierSPD, WyrmStats.infectoidSoldierKBR);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
     public boolean attackEntityAsMob(Entity entityIn) {
         boolean result = super.attackEntityAsMob(entityIn);
         if (result) {
-            difficultyStats.applyPotionEffect(entityIn, MobEffects.POISON, 120, 2);
+            DifficultyStats.applyPotionEffect(entityIn, MobEffects.POISON, 120, 2);
         }
         return result;
     }

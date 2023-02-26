@@ -4,10 +4,10 @@ import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.AIProberAttack;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.ProberAttackAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.FlyingMobAI;
 import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
@@ -139,10 +139,10 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.proberHP,wyrmStats.proberDEF,wyrmStats.proberATK,wyrmStats.proberSPD,1.0F);
+        this.setStats(WyrmStats.proberHP, WyrmStats.proberDEF, WyrmStats.proberATK, WyrmStats.proberSPD,1.0F);
         if (Invasion.probingEnabled) {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
-            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(wyrmStats.proberSPD+0.25D);
+            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(WyrmStats.proberSPD+0.25D);
         }
         else {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
@@ -156,7 +156,7 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         //this.tasks.addTask(4, new AIFlyingMobCharge(2.0));
         // Bypass configs entirely if probing is enabled, else make probers respect the optimizations players want.
         if (Invasion.probingEnabled) {
-            this.tasks.addTask(2, new AIProberAttack(this, 1.5D, true));
+            this.tasks.addTask(2, new ProberAttackAI(this, 1.5D, true));
             this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 256, 10));
             this.afterPlayers(true, true);
             this.afterVillagers();

@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmSoldierfrost;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -14,19 +14,19 @@ public class WyrmSoldierFrostModel extends AnimatedTickingGeoModel<EntityWyrmSol
     @Override
     public ResourceLocation getModelLocation(EntityWyrmSoldierfrost EntityWyrmSoldierfrost)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/soldierwyrm.geo.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "geo/soldierwyrm.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityWyrmSoldierfrost EntityWyrmSoldierfrost)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/soldierwyrmfrost.png");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "textures/soldierwyrmfrost.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityWyrmSoldierfrost EntityWyrmSoldierfrost)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/soldierwyrm.animation.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "animations/soldierwyrm.animation.json");
     }
 
     @Override

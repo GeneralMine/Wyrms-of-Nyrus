@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraftforge.common.config.Configuration;
 
 import static com.vetpetmon.synapselib.util.CFG.*;
@@ -21,7 +21,7 @@ public class Evo {
         config.setCategoryRequiresWorldRestart(CATEGORY, true);
 
         evoEnabled = createConfigBool(config, CATEGORY, "Evolution enabled", "Enables the evolution system. Default: true", true);
-        if (!evoEnabled) wyrmsofnyrus.logger.info("Evolution module has been disabled");
+        if (!evoEnabled) WyrmsOfNyrus.logger.info("Evolution module has been disabled");
 
         modEvo = createConfigStringList(config,CATEGORY, "Modlist detector strings", "uwu", modEvoDef);
 

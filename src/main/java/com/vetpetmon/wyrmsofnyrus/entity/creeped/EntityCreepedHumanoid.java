@@ -2,7 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.SprinterAttackAI;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -55,13 +55,13 @@ public class EntityCreepedHumanoid extends EntityCreeped implements IAnimatable,
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 0.5D, false));
         this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.45D));
-        this.tasks.addTask(1, new SprinterAttackAI(this, 1.0, true, wyrmStats.creepedhumanoidSprintSPD, SoundRegistry.creepedhumanoidroar));
+        this.tasks.addTask(1, new SprinterAttackAI(this, 1.0, true, WyrmStats.creepedhumanoidSprintSPD, SoundRegistry.creepedhumanoidroar));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.creepedhumanoidHP,wyrmStats.creepedhumanoidDEF,wyrmStats.creepedhumanoidATK, wyrmStats.creepedhumanoidSPD,wyrmStats.creepedhumanoidKBR);
+        this.setStats(WyrmStats.creepedhumanoidHP, WyrmStats.creepedhumanoidDEF, WyrmStats.creepedhumanoidATK, WyrmStats.creepedhumanoidSPD, WyrmStats.creepedhumanoidKBR);
     }
 
 

@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
@@ -50,7 +50,7 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.roverUraniumHP,wyrmStats.roverUraniumDEF,wyrmStats.roverUraniumATK,wyrmStats.roverUraniumSPD,wyrmStats.roverUraniumKBR);
+        this.setStats(WyrmStats.roverUraniumHP, WyrmStats.roverUraniumDEF, WyrmStats.roverUraniumATK, WyrmStats.roverUraniumSPD, WyrmStats.roverUraniumKBR);
     }
 
     @Override

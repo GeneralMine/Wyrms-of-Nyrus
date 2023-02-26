@@ -2,11 +2,11 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -55,8 +55,8 @@ public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, I
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoSoldierFrost)) this.setStatsEvo(wyrmStats.frostSoldierHP,wyrmStats.frostSoldierDEF,wyrmStats.frostSoldierATK,wyrmStats.frostSoldierSPD,wyrmStats.frostSoldierKBR,Evo.minEvoSoldierFrost);
-        else this.setStats(wyrmStats.frostSoldierHP,wyrmStats.frostSoldierDEF,wyrmStats.frostSoldierATK,wyrmStats.frostSoldierSPD,wyrmStats.frostSoldierKBR);
+        if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoSoldierFrost)) this.setStatsEvo(WyrmStats.frostSoldierHP, WyrmStats.frostSoldierDEF, WyrmStats.frostSoldierATK, WyrmStats.frostSoldierSPD, WyrmStats.frostSoldierKBR,Evo.minEvoSoldierFrost);
+        else this.setStats(WyrmStats.frostSoldierHP, WyrmStats.frostSoldierDEF, WyrmStats.frostSoldierATK, WyrmStats.frostSoldierSPD, WyrmStats.frostSoldierKBR);
     }
 
     @Override
@@ -90,8 +90,8 @@ public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, I
     public boolean attackEntityAsMob(Entity entityIn) {
         boolean result = super.attackEntityAsMob(entityIn);
         if (result) {
-            difficultyStats.applyPotionEffect(entityIn, MobEffects.SLOWNESS, 40, 4);
-            difficultyStats.applyPotionEffect(entityIn, MobEffects.WEAKNESS, 60, 1);
+            DifficultyStats.applyPotionEffect(entityIn, MobEffects.SLOWNESS, 40, 4);
+            DifficultyStats.applyPotionEffect(entityIn, MobEffects.WEAKNESS, 60, 1);
         }
         return result;
     }

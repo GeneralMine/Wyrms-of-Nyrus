@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.advancements;
 
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,16 +13,16 @@ public class Advancements {
     public static void init(MinecraftServer serv){
         net.minecraft.advancements.AdvancementManager adv = serv.getAdvancementManager();
 
-        playerroot = adv.getAdvancement(new ResourceLocation(wyrmsofnyrus.MODID, "root"));
-        howdidwegethere = adv.getAdvancement(new ResourceLocation(wyrmsofnyrus.MODID, "how_did_we_get_here"));
-        killitwithfire = adv.getAdvancement(new ResourceLocation(wyrmsofnyrus.MODID, "killitwithfire"));
-        probed = adv.getAdvancement(new ResourceLocation(wyrmsofnyrus.MODID, "probed"));
-        nottoday = adv.getAdvancement(new ResourceLocation(wyrmsofnyrus.MODID, "nottoday"));
-        witness = adv.getAdvancement(new ResourceLocation(wyrmsofnyrus.MODID, "witness"));
+        playerroot = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "root"));
+        howdidwegethere = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "how_did_we_get_here"));
+        killitwithfire = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "killitwithfire"));
+        probed = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "probed"));
+        nottoday = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "nottoday"));
+        witness = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "witness"));
     }
     public static void grantAchievement(EntityPlayerMP player, Advancement a){
         if(a == null){
-            wyrmsofnyrus.logger.error("Tried to give a player a null advancement. Blame Modrome.");
+            WyrmsOfNyrus.logger.error("Tried to give a player a null advancement. Blame Modrome.");
             return;
         }
         for(String s : player.getAdvancements().getProgress(a).getRemaningCriteria()){
@@ -31,7 +31,7 @@ public class Advancements {
     }
     public static boolean hasAdvancement(EntityPlayer player, Advancement a){
         if(a == null){
-            wyrmsofnyrus.logger.error("Tried to check for an advancement, but no such advancement exists!");
+            WyrmsOfNyrus.logger.error("Tried to check for an advancement, but no such advancement exists!");
             return false;
         }
         if(player instanceof EntityPlayerMP){

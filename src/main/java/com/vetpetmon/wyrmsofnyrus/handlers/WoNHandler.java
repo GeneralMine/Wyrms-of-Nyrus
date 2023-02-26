@@ -1,14 +1,14 @@
 package com.vetpetmon.wyrmsofnyrus.handlers;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionEvent;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionScheduler;
 import com.vetpetmon.wyrmsofnyrus.invasion.InvasionStatus;
 import com.vetpetmon.wyrmsofnyrus.invasion.VisitorEvent;
-import com.vetpetmon.wyrmsofnyrus.synapselib.libVars;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.Constants;
+import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Config;
@@ -18,26 +18,26 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-@Mod.EventBusSubscriber(modid = libVars.ModID)
+@Mod.EventBusSubscriber(modid = Constants.ModID)
 public class WoNHandler {
 
 
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
     {
-        if (event.getModID().equals(wyrmsofnyrus.MODID))
+        if (event.getModID().equals(WyrmsOfNyrus.MODID))
         {
-            ConfigManager.sync(wyrmsofnyrus.MODID, Config.Type.INSTANCE);
-            wyrmsofnyrus.logger.info("Configuration loaded or changed.");
+            ConfigManager.sync(WyrmsOfNyrus.MODID, Config.Type.INSTANCE);
+            WyrmsOfNyrus.logger.info("Configuration loaded or changed.");
         }
     }
     
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         World world = event.world;
-        //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) wyrmsofnyrus.logger.info("[WONHANDLER] onWorldTick was called successfully.");
+        //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) WyrmsOfNyrus.logger.info("[WONHANDLER] onWorldTick was called successfully.");
         // EVOLUTION
-        evoPoints.decay(world);
+        EvoPoints.decay(world);
         // INVASION
         if (Invasion.invasionEnabled) InvasionStatus.executescript(world);
 
@@ -74,7 +74,7 @@ public class WoNHandler {
             int x = (int) chosenPlayer.posX;
             int y = (int) chosenPlayer.posY;
             int z = (int) chosenPlayer.posZ;
-            boolean invasionActive = wyrmVariables.WorldVariables.get(world).invasionStarted;
+            boolean invasionActive = WyrmVariables.WorldVariables.get(world).invasionStarted;
 
             if (!chosenPlayer.isDead && Invasion.invasionEnabled && (!chosenPlayer.world.isRemote && event.phase == TickEvent.Phase.END)) { // Check to make sure this player actually exists in the world LOL
                 if (!invasionActive && Invasion.invasionStartsNaturally) {

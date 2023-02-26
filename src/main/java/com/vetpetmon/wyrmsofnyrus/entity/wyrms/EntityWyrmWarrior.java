@@ -3,13 +3,13 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMoveRandom;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMob;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMoveRandom;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.movehelpers.FlierMoveHelperGhastlike;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.item.Item;
@@ -37,7 +37,7 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
         setSize(0.9f, 2.0f);
         experienceValue = 5;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new flierMoveHelperGhastlike(this, 30, 1.0, 0.8);
+        this.moveHelper = new FlierMoveHelperGhastlike(this, 30, 1.0, 0.8);
         //this.moveHelper = new EntityWyrmWarrior.WyrmWarriorMoveHelper(this);
         enablePersistence();
         setNoAI(false);
@@ -48,8 +48,8 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWarrior)) this.setStatsEvo(wyrmStats.warriorHP,wyrmStats.warriorDEF,wyrmStats.warriorATK,wyrmStats.warriorSPD,wyrmStats.warriorKBR, Evo.minEvoWarrior);
-        else this.setStats(wyrmStats.warriorHP,wyrmStats.warriorDEF,wyrmStats.warriorATK,wyrmStats.warriorSPD,wyrmStats.warriorKBR);
+        if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoWarrior)) this.setStatsEvo(WyrmStats.warriorHP, WyrmStats.warriorDEF, WyrmStats.warriorATK, WyrmStats.warriorSPD, WyrmStats.warriorKBR, Evo.minEvoWarrior);
+        else this.setStats(WyrmStats.warriorHP, WyrmStats.warriorDEF, WyrmStats.warriorATK, WyrmStats.warriorSPD, WyrmStats.warriorKBR);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
     }
 

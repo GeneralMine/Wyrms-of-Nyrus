@@ -5,10 +5,10 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.VoidwyrmAI;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.movehelpers.FlierMoveHelperGhastlike;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,7 +39,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         experienceValue = 100;
         this.casteType = 8;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new flierMoveHelperGhastlike(this, 200, wyrmStats.visitorSPD, 0.0D);
+        this.moveHelper = new FlierMoveHelperGhastlike(this, 200, WyrmStats.visitorSPD, 0.0D);
         this.dropTimer = (20*45); //48 seconds until first cymbal crash, so give 3 seconds to spawn and fall.
         setNoAI(false);
         enablePersistence();
@@ -50,12 +50,12 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.visitorHP,wyrmStats.visitorDEF,0.0F,wyrmStats.visitorSPD,wyrmStats.visitorKBR);
+        this.setStats(WyrmStats.visitorHP, WyrmStats.visitorDEF,0.0F, WyrmStats.visitorSPD, WyrmStats.visitorKBR);
     }
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(4, new VoidwyrmAI(this, wyrmStats.visitorSPD, 200));
+        this.tasks.addTask(4, new VoidwyrmAI(this, WyrmStats.visitorSPD, 200));
     }
 
     @Override

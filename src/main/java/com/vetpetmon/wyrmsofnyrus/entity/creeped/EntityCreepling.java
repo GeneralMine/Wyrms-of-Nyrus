@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -70,7 +70,7 @@ public class EntityCreepling extends EntityCreeped implements IAnimatable, IAnim
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.creeplingHP,wyrmStats.creeplingDEF,wyrmStats.creeplingATK, wyrmStats.creeplingSPD,wyrmStats.creeplingKBR);
+        this.setStats(WyrmStats.creeplingHP, WyrmStats.creeplingDEF, WyrmStats.creeplingATK, WyrmStats.creeplingSPD, WyrmStats.creeplingKBR);
     }
 
     @Override

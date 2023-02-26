@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.follies.EntityStrykeling;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -12,19 +12,19 @@ public class StrykelingModel extends AnimatedTickingGeoModel<EntityStrykeling>
     @Override
     public ResourceLocation getModelLocation(EntityStrykeling EntityStrykeling)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/strykling.geo.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "geo/strykling.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityStrykeling EntityStrykeling)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/strykling.png");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "textures/strykling.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityStrykeling EntityStrykeling)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/strykling.animation.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "animations/strykling.animation.json");
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.vetpetmon.wyrmsofnyrus.block.hivecreep;
 
+import com.vetpetmon.synapselib.rendering.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.synapselib.rendering.IHasModel;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
@@ -35,7 +35,7 @@ public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasMode
         this.setHardness(hardness);
         this.setResistance(blastresist);
         this.setSoundType(SoundType.SLIME);
-        setCreativeTab(wyrmsofnyrus.wyrmTabs);
+        setCreativeTab(WyrmsOfNyrus.wyrmTabs);
         AllBlocks.ALL_BLOCKS.add(this);
         AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
@@ -47,7 +47,7 @@ public class BlockHivecreepPillar extends BlockRotatedPillar implements IHasMode
 
     @Override
     public void registerModels() {
-        wyrmsofnyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+        WyrmsOfNyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     @Override

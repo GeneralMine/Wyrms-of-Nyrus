@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import net.minecraft.world.World;
 
 /**
@@ -12,10 +12,10 @@ import net.minecraft.world.World;
  */
 public class invasionPoints {
     private static double pointBuffer;
-    public static double get(World w) {return wyrmVariables.WorldVariables.get(w).wyrmInvasionPoints;}
-    public static double getDifficulty(World w) {return wyrmVariables.WorldVariables.get(w).wyrmInvasionDifficulty;}
+    public static double get(World w) {return WyrmVariables.WorldVariables.get(w).wyrmInvasionPoints;}
+    public static double getDifficulty(World w) {return WyrmVariables.WorldVariables.get(w).wyrmInvasionDifficulty;}
     public static void setDifficulty(World w, float input) {
-        wyrmVariables.WorldVariables.get(w).wyrmInvasionDifficulty = input;
+        WyrmVariables.WorldVariables.get(w).wyrmInvasionDifficulty = input;
         sync(w);
     }
 
@@ -35,7 +35,7 @@ public class invasionPoints {
     }
 
     public static void updatePoints(World w, double buffer){
-        wyrmVariables.WorldVariables.get(w).wyrmInvasionPoints += (int) buffer;
+        WyrmVariables.WorldVariables.get(w).wyrmInvasionPoints += (int) buffer;
         pointBuffer = 0;
         sync(w);
     }
@@ -48,11 +48,11 @@ public class invasionPoints {
      * @param i Value to add
      */
     public static void subtract(World w, int i){
-        wyrmVariables.WorldVariables.get(w).wyrmInvasionPoints -= i;
+        WyrmVariables.WorldVariables.get(w).wyrmInvasionPoints -= i;
         sync(w);
     }
     public static void subtract(World w, double i){
-        wyrmVariables.WorldVariables.get(w).wyrmInvasionPoints -= i;
+        WyrmVariables.WorldVariables.get(w).wyrmInvasionPoints -= i;
         sync(w);
     }
 
@@ -60,6 +60,6 @@ public class invasionPoints {
      * Syncs the variable change to the world.
      */
     private static void sync(World w) {
-        wyrmVariables.WorldVariables.get(w).syncData(w);
+        WyrmVariables.WorldVariables.get(w).syncData(w);
     }
 }

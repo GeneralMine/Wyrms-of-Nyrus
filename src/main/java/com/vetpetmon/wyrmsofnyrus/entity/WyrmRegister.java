@@ -1,6 +1,6 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
-import com.vetpetmon.wyrmsofnyrus.compat.hbm;
+import com.vetpetmon.wyrmsofnyrus.compat.HBM;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.*;
@@ -9,7 +9,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityOverseerWaypoint;
 import com.vetpetmon.wyrmsofnyrus.entity.nonwyrms.EntityNKAgent;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
-import com.vetpetmon.wyrmsofnyrus.synapselib.RegHelper;
+import com.vetpetmon.wyrmsofnyrus.locallib.RegHelper;
 
 import java.util.Objects;
 
@@ -31,7 +31,7 @@ public final class WyrmRegister {
             }
         }
         int id = 100;
-        if (Evo.evoHBMVariantsEnabled && hbm.isEnabled()) {RegHelper.RegEntity("wyrmwarriortainted", EntityWyrmWarriorTainted.class, id++, 64, 2);}
+        if (Evo.evoHBMVariantsEnabled && HBM.isEnabled()) {RegHelper.RegEntity("wyrmwarriortainted", EntityWyrmWarriorTainted.class, id++, 64, 2);}
 
         id = 130;
         // Register Waypoints

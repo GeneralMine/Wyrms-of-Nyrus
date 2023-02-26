@@ -1,9 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.block.hivecreep;
 
+import com.vetpetmon.synapselib.rendering.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.synapselib.rendering.IHasModel;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
@@ -37,13 +37,13 @@ public class creepStagedGrass extends BlockGrass implements IHasModel{
         setResistance(0.75F);
         setLightLevel(0F);
         setLightOpacity(255);
-        setCreativeTab(wyrmsofnyrus.wyrmTabs);
+        setCreativeTab(WyrmsOfNyrus.wyrmTabs);
         AllBlocks.ALL_BLOCKS.add(this);
         AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
     @Override
     public void registerModels() {
-        wyrmsofnyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+        WyrmsOfNyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
     @Override
     public void addInformation(ItemStack itemstack, World world, List<String> list, ITooltipFlag flag) {

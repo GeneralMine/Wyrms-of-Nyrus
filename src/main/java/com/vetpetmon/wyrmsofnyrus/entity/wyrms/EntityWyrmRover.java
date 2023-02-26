@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
@@ -50,7 +50,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.roverHP,wyrmStats.roverDEF,wyrmStats.roverATK,wyrmStats.roverSPD,wyrmStats.roverKBR);
+        this.setStats(WyrmStats.roverHP, WyrmStats.roverDEF, WyrmStats.roverATK, WyrmStats.roverSPD, WyrmStats.roverKBR);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import net.minecraft.world.World;
 
 
@@ -14,28 +14,28 @@ public class InvasionStatus {
 	public static void executescript(World world) {
 			double invasionP = invasionPoints.get(world);
 			if (invasionP <= (Invasion.iPointsIStage1Threshold)) {
-				wyrmVariables.wyrmInvasionStatus = "Arriving";
+				WyrmVariables.wyrmInvasionStatus = "Arriving";
 				invasionPoints.setDifficulty(world,getDifficulty(1.0F));
 			} else if (invasionP <= (Invasion.iPointsIStage2Threshold)) {
-				wyrmVariables.wyrmInvasionStatus = "Scouting";
+				WyrmVariables.wyrmInvasionStatus = "Scouting";
 				invasionPoints.setDifficulty(world,getDifficulty(1.5F));
 			} else if (invasionP <= (Invasion.iPointsIStage3Threshold)) {
-				wyrmVariables.wyrmInvasionStatus = "Establishing hive";
+				WyrmVariables.wyrmInvasionStatus = "Establishing hive";
 				invasionPoints.setDifficulty(world,getDifficulty(2.0F));
 			} else if (invasionP <= (Invasion.iPointsIStage4Threshold)) {
-				wyrmVariables.wyrmInvasionStatus = "Expanding";
+				WyrmVariables.wyrmInvasionStatus = "Expanding";
 				invasionPoints.setDifficulty(world,getDifficulty(3.0F));
 			} else if (invasionP <= (Invasion.iPointsIStage5Threshold)) {
-				wyrmVariables.wyrmInvasionStatus = "Invading";
+				WyrmVariables.wyrmInvasionStatus = "Invading";
 				invasionPoints.setDifficulty(world,getDifficulty(4.5F));
 			} else if (invasionP <= (Invasion.iPointsIStage6Threshold)) {
-				wyrmVariables.wyrmInvasionStatus = "Dominant species";
+				WyrmVariables.wyrmInvasionStatus = "Dominant species";
 				invasionPoints.setDifficulty(world,getDifficulty(5.5F));
 			} else if (invasionP > (Invasion.iPointsIStage6Threshold)) {
-				wyrmVariables.wyrmInvasionStatus = "Terraforming";
+				WyrmVariables.wyrmInvasionStatus = "Terraforming";
 				invasionPoints.setDifficulty(world,getDifficulty(6.0F));
 			} else {
-				wyrmVariables.wyrmInvasionStatus = "Unknown";
+				WyrmVariables.wyrmInvasionStatus = "Unknown";
 				invasionPoints.setDifficulty(world,getDifficulty(1.0F));
 			}
 	}

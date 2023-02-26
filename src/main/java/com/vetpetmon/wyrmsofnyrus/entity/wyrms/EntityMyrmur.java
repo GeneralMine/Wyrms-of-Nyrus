@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.SprinterAttackAI;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
@@ -46,7 +46,7 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
         this.tasks.addTask(5, new EntityAIAvoidEntity(this, EntityMyrmur.class, 30, 1, 1.2));
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(1, new SprinterAttackAI(this, 2.0, true, wyrmStats.myrmurSprintSPD, SoundRegistry.myrmurcharge));
+        this.tasks.addTask(1, new SprinterAttackAI(this, 2.0, true, WyrmStats.myrmurSprintSPD, SoundRegistry.myrmurcharge));
         afterPlayers();
         afterInsectoids();
     }
@@ -54,7 +54,7 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.myrmurHP,wyrmStats.myrmurDEF,wyrmStats.myrmurATK, wyrmStats.myrmurSPD,wyrmStats.myrmurKBR);
+        this.setStats(WyrmStats.myrmurHP, WyrmStats.myrmurDEF, WyrmStats.myrmurATK, WyrmStats.myrmurSPD, WyrmStats.myrmurKBR);
     }
 
     @Override

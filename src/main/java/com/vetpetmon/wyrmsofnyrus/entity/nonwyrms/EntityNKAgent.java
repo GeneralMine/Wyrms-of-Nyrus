@@ -5,8 +5,8 @@ import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.BanishmentAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.WideRangeAttackAI;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMob;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.movehelpers.FlierMoveHelperGhastlike;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -32,7 +32,7 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         setSize(0.8f, 1.8f);
         experienceValue = 5;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new flierMoveHelperGhastlike(this, 1, 0.5, 0.5); //No cooldown = most lag, but smoothest movement. Realistically, only one agent will be in the world at a time.
+        this.moveHelper = new FlierMoveHelperGhastlike(this, 1, 0.5, 0.5); //No cooldown = most lag, but smoothest movement. Realistically, only one agent will be in the world at a time.
         this.setAnimationNames(new String[]{"nkagent.idle","nkagent.idleAgro","nkagent.move","nkagent.attack"});
     }
 

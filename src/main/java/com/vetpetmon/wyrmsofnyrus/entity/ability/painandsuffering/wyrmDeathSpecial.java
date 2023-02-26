@@ -3,7 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.util.SoundCategory;
@@ -27,7 +27,7 @@ public class wyrmDeathSpecial {
                     world.playSound(null, x, y, z, SoundRegistry.nukeFar, SoundCategory.AMBIENT, (float) (1000.0 * explosionPower), 1.00F);
                 }
             }
-            evoPoints.add(world, (int) ((1 + evoPointBonus) * Evo.evoFactor));
+            EvoPoints.add(world, (int) ((1 + evoPointBonus) * Evo.evoFactor));
         }
     }
 }

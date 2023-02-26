@@ -5,7 +5,7 @@ import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.BlockHivecreepPillar;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStaged;
 import com.vetpetmon.wyrmsofnyrus.block.hivecreep.creepStagedGrass;
-import com.vetpetmon.wyrmsofnyrus.compat.srp;
+import com.vetpetmon.wyrmsofnyrus.compat.SRP;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreepwyrm;
 import net.minecraft.block.Block;
@@ -29,8 +29,8 @@ public class creepTheLands {
         Block blockLooking = (world.getBlockState(lookingBlock)).getBlock();
         if (creepspreadRules(lookingBlock, world, pos)) {
             assert false;
-            if (srp.isEnabled() && WorldConfig.vileEnabled) {
-                if (srp.srpBlocks.contains(blockLooking)) world.setBlockState(lookingBlock, AllBlocks.corium.getDefaultState(), 3);addPoints(world);
+            if (SRP.isEnabled() && WorldConfig.vileEnabled) {
+                if (SRP.srpBlocks.contains(blockLooking)) world.setBlockState(lookingBlock, AllBlocks.corium.getDefaultState(), 3);addPoints(world);
             }
             if (blockLooking == (Block.getBlockFromName("minecraft:glowstone"))) {
                 world.setBlockState(lookingBlock, AllBlocks.wyrm_lights_yellow.getDefaultState(), 3);

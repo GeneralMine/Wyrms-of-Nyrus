@@ -1,10 +1,10 @@
 package com.vetpetmon.wyrmsofnyrus.entity.ability;
 
-import com.vetpetmon.wyrmsofnyrus.compat.hbm;
+import com.vetpetmon.wyrmsofnyrus.compat.HBM;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.synapselib.util.RNG;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
@@ -21,7 +21,7 @@ public class WyrmlingGrowUp {
         Entity entityToSpawn;
         int entityToGrowTo = RNG.dBase(18);
         World world = (World) e.get("world");
-        int evoPointsInWorld = evoPoints.get(world);
+        int evoPointsInWorld = EvoPoints.get(world);
         switch(entityToGrowTo) {
             case(11):
                 if (Evo.evoEnabled && evoPointsInWorld >= 100) {
@@ -44,7 +44,7 @@ public class WyrmlingGrowUp {
                 break;
             case(15):
             case(16):
-                if (hbm.isEnabled() && Evo.evoVariantsEnabled)
+                if (HBM.isEnabled() && Evo.evoVariantsEnabled)
                 {
                     if (evoPointsInWorld >= 1800){
                         entityToSpawn = HBMwyrms.getWyrm("Warrior",world);

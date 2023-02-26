@@ -4,8 +4,8 @@ import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.WyrmBreakDoors;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -49,7 +49,7 @@ public abstract class EntityWyrmfolly extends MobEntityBase implements IAnimatab
 
     public void updateLevel(){
         this.setLevel((int) (Math.floor((float)killCount/Radiogenetics.follyAscenSteps)+1));
-        wyrmsofnyrus.logger.info("Wyrmfolly level is:" + this.getLevel()); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
+        WyrmsOfNyrus.logger.info("Wyrmfolly level is:" + this.getLevel()); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
         this.setHealth(this.getHealth() + (this.getMaxHealth()/8)); //Heals 1/8 of health for every kill.
     }
 
@@ -103,7 +103,7 @@ public abstract class EntityWyrmfolly extends MobEntityBase implements IAnimatab
     protected void initEntityAI() {
         super.initEntityAI();
         makeAllTargets();
-        this.tasks.addTask(2, new wyrmBreakDoors(this, 200));
+        this.tasks.addTask(2, new WyrmBreakDoors(this, 200));
         this.tasks.addTask(1, new EntityAIWander(this, 0.65));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 1.25F));
         this.tasks.addTask(0, new EntityAISwimming(this));

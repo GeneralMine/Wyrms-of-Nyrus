@@ -1,10 +1,10 @@
 package com.vetpetmon.wyrmsofnyrus.block.generic;
 
+import com.vetpetmon.synapselib.rendering.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.synapselib.rendering.IHasModel;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -32,7 +32,7 @@ public class BlockGas extends Block implements IHasModel {
 
     @Override
     public void registerModels() {
-        wyrmsofnyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+        WyrmsOfNyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     @Override

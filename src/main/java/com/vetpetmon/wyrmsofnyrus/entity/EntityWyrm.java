@@ -4,15 +4,15 @@ import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.WyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreeped;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityHivemind;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityOverseerWaypoint;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
+import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -111,7 +111,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
      * Handles the world dependency for you. I love it.
      * @return The invasion difficulty of the world.
      */
-    public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
+    public double getInvasionDifficulty() {return WyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
 
     public float genDifficulty() {
         return (float) (getInvasionDifficulty());
@@ -119,19 +119,19 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
 
     public void setStats(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR) {
         float diff = genDifficulty();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(DifficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(DifficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(DifficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
     }
     public void setStatsEvo(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR, int minLevel) {
         float diff = genDifficulty();
-        int level = ((evoPoints.getLevel() - minLevel)+1);
+        int level = ((EvoPoints.getLevel() - minLevel)+1);
         double HP = (entityHealth * Radiogenetics.wyrmVitality), DEF = (entityArmor * Radiogenetics.wyrmResistance), ATK = (entityDamage * Radiogenetics.wyrmStrength);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health((HP+(HP*(Evo.evoPowerHP*level))), diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor((DEF+ (DEF*(Evo.evoPowerDEF*level))), diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage((ATK+(ATK*(Evo.evoPowerATK*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(DifficultyStats.health((HP+(HP*(Evo.evoPowerHP*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(DifficultyStats.armor((DEF+ (DEF*(Evo.evoPowerDEF*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(DifficultyStats.damage((ATK+(ATK*(Evo.evoPowerATK*level))), diff));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
     }
@@ -154,7 +154,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
      * They're given better AI and can ruin the player's day. Nuff said.
      */
     protected void isSapient() {
-        this.tasks.addTask(2, new wyrmBreakDoors(this, 200));
+        this.tasks.addTask(2, new WyrmBreakDoors(this, 200));
         this.tasks.addTask(1, new EntityAIWander(this, 0.8));
     }
 

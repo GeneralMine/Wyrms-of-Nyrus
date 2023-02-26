@@ -6,7 +6,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.creeped.*;
 import com.vetpetmon.wyrmsofnyrus.entity.follies.EntityStrykeling;
 import com.vetpetmon.wyrmsofnyrus.entity.nonwyrms.EntityNKAgent;
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.*;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLiving;
@@ -148,7 +148,7 @@ public class WyrmSpawner extends ItemBase implements IHasModel {
             }
         }
         else {
-            wyrmsofnyrus.logger.warn("Tried to spawn an entity that doesn't currently exist in registry. Did you disable it?");
+            WyrmsOfNyrus.logger.warn("Tried to spawn an entity that doesn't currently exist in registry. Did you disable it?");
         }
         return entity;
     }

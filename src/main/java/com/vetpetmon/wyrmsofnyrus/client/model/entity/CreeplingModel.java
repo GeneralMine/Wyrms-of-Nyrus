@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreepling;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -12,19 +12,19 @@ public class CreeplingModel extends AnimatedTickingGeoModel<EntityCreepling>
     @Override
     public ResourceLocation getModelLocation(EntityCreepling EntityCreepling)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/creepling.geo.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "geo/creepling.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityCreepling EntityCreepling)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/creepling.png");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "textures/creepling.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityCreepling EntityCreepling)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/creepling.animation.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "animations/creepling.animation.json");
     }
 
     @Override

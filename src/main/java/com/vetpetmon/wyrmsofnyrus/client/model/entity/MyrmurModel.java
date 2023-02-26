@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityMyrmur;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -14,19 +14,19 @@ public class MyrmurModel extends AnimatedTickingGeoModel<EntityMyrmur>
     @Override
     public ResourceLocation getModelLocation(EntityMyrmur EntityMyrmur)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/myrmur.geo.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "geo/myrmur.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityMyrmur EntityMyrmur)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/myrmurwyrm.png");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "textures/myrmurwyrm.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityMyrmur EntityMyrmur)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/myrmurwyrm.animation.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "animations/myrmurwyrm.animation.json");
     }
 
     @Override
