@@ -46,7 +46,8 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         setPotency(100);
         this.setAnimationNames(new String[]{"visitor.Idle"});
     }
-
+    @Override
+    protected boolean canEnrage(){return true;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

@@ -101,3 +101,9 @@ Reading these (x/y/z) statements are the default config values that are differen
   - Wyrms will be less forgiving when swarmed/interrupted
     - Wyrms gain positive potion effects
     - They will knock back the original target in order to clear the way to the new target
+    - Certain wyrms can not enrage:
+      - Wyrmlings
+      - Workers
+      - All drop pods
+      - All Creeped
+      - The Visitor

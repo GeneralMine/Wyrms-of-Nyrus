@@ -48,7 +48,8 @@ public class EntityWyrmling extends EntityWyrm {
         this.tasks.addTask(6, new EntityAIPanic(this, 1.5));
         simpleAI();
     }
-
+    @Override
+    protected boolean canEnrage(){return true;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
