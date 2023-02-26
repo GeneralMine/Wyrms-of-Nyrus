@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
+import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
@@ -12,7 +13,6 @@ import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityHivemind;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityOverseerWaypoint;
 import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
-import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -24,11 +24,13 @@ import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -85,6 +87,12 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
         this.isImmuneToFire = false;
         this.srpcothimmunity = 0;
     }
+
+    public boolean isPotionApplicable(final PotionEffect potion) {
+        if (potion.getPotion() == MobEffects.POISON) return false;
+        return super.isPotionApplicable(potion);
+    }
+
     @Override
     public void onDeath(DamageSource source) {
         super.onDeath(source);
