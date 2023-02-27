@@ -17,6 +17,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.potion.PotionEffect;
@@ -66,7 +67,7 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(1, new WideRangeAttackAI(1000000,this, 1.15D, false,4.0F, 48));
-        this.tasks.addTask(2, new BanishmentAI(1000000,this, 1.15D, false,6.0F));
+        this.tasks.addTask(1, new BanishmentAI(1000000,this, 1.15D, false,6.0F));
         this.tasks.addTask(1, new SmiteAI(this, 1.15D, false,6.0F, 3));
         this.tasks.addTask(4, new EntityAIFlierMob(this, 1.0, 200));
         this.tasks.addTask(5, new EntityAIWanderAvoidWaterFlying(this, 0.15D));
@@ -84,7 +85,7 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     public boolean attackEntityFrom(DamageSource source, float amount) {
         this.setHealth(getMaxHealth());
         Entity entity = source.getTrueSource();
-        if (entity instanceof EntityLivingBase) {
+        if (entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer)) {
             this.setAttackTarget((EntityLivingBase) entity);
             DifficultyStats.applyPotionEffect(entity, MobEffects.LEVITATION, 10, 50, false);
             DifficultyStats.applyPotionEffect(entity, MobEffects.GLOWING, 10, 1, false);
