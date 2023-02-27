@@ -58,8 +58,8 @@ public class WyrmVariables {
     public static class WorldVariables extends WorldSavedData {
         public static final String DATA_NAME = "wyrmsofnyrus_worldvars";
         public double wyrmInvasionPoints = 0, wyrmInvasionDifficulty = 1;
-        public String distressCode;
-        public int wyrmEvo = 0, eventSchedulerCurrentInstance = 0, eventSchedulerNextInstance = 0, pastDistressCall;
+        public String distressCode = "_.._.";
+        public int wyrmEvo = 0, eventSchedulerCurrentInstance = 0, eventSchedulerNextInstance = 0, pastDistressCall = 0;
         public boolean invasionStarted = false;
         public WorldVariables() {
             super(DATA_NAME);
