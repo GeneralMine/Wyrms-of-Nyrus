@@ -1,7 +1,7 @@
 ## Dark Skies Update
 ### 0.3
 
-![Early beta promo image](https://media.discordapp.net/attachments/961745719981658172/1079612844150104094/WoN_0.3_update_promo.png?width=998&height=561)
+![Early beta promo image](https://media.discordapp.net/attachments/961745719981658172/1079612844150104094/WoN_0.3_update_promo.png)
 
 This update is potentially incompatible with old worlds or may cause a few issues when updating.
 
