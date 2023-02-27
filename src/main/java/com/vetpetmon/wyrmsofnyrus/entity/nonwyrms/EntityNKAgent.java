@@ -42,7 +42,7 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         enablePersistence();
         setSize(0.8f, 1.8f);
         experienceValue = 5;
-        this.energy = (500 * (this.world.getDifficulty().ordinal() * 30));
+        this.energy = (2000 + (this.world.getDifficulty().ordinal() * 75));
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new FlierMoveHelperGhastlike(this, 1, 0.5, 0.5); //No cooldown = most lag, but smoothest movement. Realistically, only one agent will be in the world at a time.
         this.setAnimationNames(new String[]{"nkagent.idle","nkagent.idleAgro","nkagent.move","nkagent.attack","nkagent.magic"});
@@ -130,10 +130,8 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
             this.world.spawnParticle(EnumParticleTypes.END_ROD, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
         }
         if (this.energy <=0) {
-            if (!world.playerEntities.isEmpty()) {
-                if (world.getPlayerEntityByName("Vetpetmon") != null) this.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I must go, I am needed somewhere else."));
-                this.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ¦ ᒲ⚍ᓭℸ ̣ ˧\uD835\uDE79 ¦ ᔑᒲ リᒷᒷ⟍̅ᒷ⟍̅ ᓭ\uD835\uDE79ᒲᒷ∴⍑ᒷ∷ᒷ ᒷꖎᓭᒷ."));
-            }
+            if (world.getPlayerEntityByName("Vetpetmon") != null) this.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I must go, I am needed somewhere else."));
+            else this.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ¦ ᒲ⚍ᓭℸ ̣ ˧\uD835\uDE79 ¦ ᔑᒲ リᒷᒷ⟍̅ᒷ⟍̅ ᓭ\uD835\uDE79ᒲᒷ∴⍑ᒷ∷ᒷ ᒷꖎᓭᒷ."));
             this.setDead();
         }
         super.onLivingUpdate();
