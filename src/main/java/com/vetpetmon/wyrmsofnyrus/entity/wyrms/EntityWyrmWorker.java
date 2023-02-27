@@ -59,7 +59,7 @@ public class EntityWyrmWorker extends EntityWyrm {
         hivemindAvoid();
     }
     @Override
-    protected boolean canEnrage(){return true;}
+    protected boolean canEnrage(){return false;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

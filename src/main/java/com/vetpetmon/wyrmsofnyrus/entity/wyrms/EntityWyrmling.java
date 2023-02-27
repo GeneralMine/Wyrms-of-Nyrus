@@ -49,7 +49,7 @@ public class EntityWyrmling extends EntityWyrm {
         simpleAI();
     }
     @Override
-    protected boolean canEnrage(){return true;}
+    protected boolean canEnrage(){return false;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

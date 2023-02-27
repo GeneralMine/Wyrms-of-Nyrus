@@ -107,8 +107,8 @@ public class WoNHandler {
             World world = player.getEntityWorld();
             EntityLivingBase spawn = new EntityNKAgent(world);
             BlockPos playerPos = player.getPosition();
-            if (((20*60)*60) <= ((int) world.getTotalWorldTime() - WyrmVariables.WorldVariables.get(world).pastDistressCall)) {
-                WyrmVariables.WorldVariables.get(world).pastDistressCall = (int) world.getTotalWorldTime();
+            if (WyrmVariables.WorldVariables.get(world).pastDistressCall == 0) {
+                WyrmVariables.WorldVariables.get(world).pastDistressCall = 1;
                 spawn.setLocationAndAngles(playerPos.getX() + 0.5, playerPos.getY() + 10, playerPos.getZ() + 0.5, world.rand.nextFloat() * 360F, 0.0F);
                 if (!world.isRemote) world.spawnEntity(spawn);
                 world.addWeatherEffect(new EntityLightningBolt(spawn.world, spawn.posX, spawn.posY, spawn.posZ, true));

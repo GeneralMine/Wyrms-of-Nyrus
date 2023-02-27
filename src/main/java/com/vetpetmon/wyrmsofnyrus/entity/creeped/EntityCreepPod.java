@@ -34,7 +34,7 @@ public class EntityCreepPod extends EntityWyrm implements IAnimatable{
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
     }
     @Override
-    protected boolean canEnrage(){return true;}
+    protected boolean canEnrage(){return false;}
     @Override
     public SoundEvent getAmbientSound(){return null;}
 

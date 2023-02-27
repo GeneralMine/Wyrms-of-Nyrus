@@ -365,8 +365,8 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
             if (this.canEnrage() && entity instanceof EntityLivingBase && entity != ogEntity && (entity.getDistance(entity) < 5)) {
                 if (ogEntity!= null) ogEntity.knockBack(ogEntity,3,2,2);
                 this.setAttackTarget((EntityLivingBase) entity);
-                DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 30, 2);
-                DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 30, 4);
+                DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 3, 2);
+                DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 3, 1);
                 this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
             }
             if (source == DamageSource.FALL && (Radiogenetics.immuneToFalling && !(this.casteType == 9)))

@@ -55,7 +55,8 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         setPotency(1);
         this.setAnimationNames(new String[]{"wyrmprober.Moving","wyrmprober.flying"});
     }
-
+    @Override
+    protected boolean canEnrage(){return false;}
     @Override
     public int tickTimer() {
         return ticksExisted;

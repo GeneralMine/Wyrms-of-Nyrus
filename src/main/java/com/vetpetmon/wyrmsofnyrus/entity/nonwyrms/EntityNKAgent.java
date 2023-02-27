@@ -6,6 +6,7 @@ import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.BanishmentAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.SmiteAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.WideRangeAttackAI;
+import com.vetpetmon.wyrmsofnyrus.locallib.ChatUtils;
 import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMob;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.movehelpers.FlierMoveHelperGhastlike;
@@ -23,6 +24,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -33,12 +35,13 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private int particleCooldown;
+    private int particleCooldown, energy;
     public EntityNKAgent(World worldIn) {
         super(worldIn);
         enablePersistence();
         setSize(0.8f, 1.8f);
         experienceValue = 5;
+        this.energy = (500 * (this.world.getDifficulty().ordinal() * 30));
         this.navigator = new PathNavigateFlying(this, this.world);
         this.moveHelper = new FlierMoveHelperGhastlike(this, 1, 0.5, 0.5); //No cooldown = most lag, but smoothest movement. Realistically, only one agent will be in the world at a time.
         this.setAnimationNames(new String[]{"nkagent.idle","nkagent.idleAgro","nkagent.move","nkagent.attack","nkagent.magic"});
@@ -86,8 +89,10 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
             DifficultyStats.applyPotionEffect(entity, MobEffects.LEVITATION, 10, 50, false);
             DifficultyStats.applyPotionEffect(entity, MobEffects.GLOWING, 10, 1, false);
             DifficultyStats.applyPotionEffect(entity, MobEffects.WITHER, 40, 1, false);
+            this.energy-=4;
         }
         if (source == DamageSource.FALL || (getAttack()>=9 )) return false;
+        this.energy--;
         return super.attackEntityFrom(source,0.000001F);
     }
 
@@ -115,11 +120,17 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         particleCooldown--;
         if((getAttack()>=9) && particleCooldown <=0){
             particleCooldown = 1;
+            this.energy -= 2;
             this.world.spawnParticle(EnumParticleTypes.PORTAL, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, 0.0D, 0.0D, 0.0D);
         }
         else if(particleCooldown <=0) {
             particleCooldown = 5;
+            this.energy--;
             this.world.spawnParticle(EnumParticleTypes.END_ROD, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
+        }
+        if (this.energy <=0) {
+            this.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ¦ ᒲ⚍ᓭℸ ̣ ˧\uD835\uDE79 ¦ ᔑᒲ リᒷᒷ⟍̅ᒷ⟍̅ ᓭ\uD835\uDE79ᒲᒷ∴⍑ᒷ∷ᒷ ᒷꖎᓭᒷ."));
+            this.setDead();
         }
         super.onLivingUpdate();
     }
