@@ -18,6 +18,7 @@ import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.pathfinding.PathNavigateFlying;
 import net.minecraft.potion.PotionEffect;
@@ -130,8 +131,13 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
             this.world.spawnParticle(EnumParticleTypes.END_ROD, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
         }
         if (this.energy <=0) {
-            if (world.getPlayerEntityByName("Vetpetmon") != null) this.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I must go, I am needed somewhere else."));
-            else this.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ¦ ᒲ⚍ᓭℸ ̣ ˧\uD835\uDE79 ¦ ᔑᒲ リᒷᒷ⟍̅ᒷ⟍̅ ᓭ\uD835\uDE79ᒲᒷ∴⍑ᒷ∷ᒷ ᒷꖎᓭᒷ."));
+            if (!world.playerEntities.isEmpty()) {
+                EntityPlayerMP nearestPlayer = (EntityPlayerMP) world.getClosestPlayerToEntity(this, 100);
+                if (nearestPlayer != null) {
+                    if (world.getPlayerEntityByName("Vetpetmon") != null) nearestPlayer.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I must go, I am needed somewhere else."));
+                    else nearestPlayer.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ¦ ᒲ⚍ᓭℸ ̣ ˧\uD835\uDE79 ¦ ᔑᒲ リᒷᒷ⟍̅ᒷ⟍̅ ᓭ\uD835\uDE79ᒲᒷ∴⍑ᒷ∷ᒷ ᒷꖎᓭᒷ."));
+                }
+            }
             this.setDead();
         }
         super.onLivingUpdate();
