@@ -8,7 +8,6 @@ import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
 import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
-import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -76,7 +75,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
 
     public void setSummons(int count) {
         this.dataManager.set(SUMMONS,count);
-        WyrmsOfNyrus.logger.info("Creepwyrm has summoned " + getSummons() + " Creeped.");
+        //WyrmsOfNyrus.logger.info("Creepwyrm has summoned " + getSummons() + " Creeped.");
     }
 
     public int getBlocksConverted() {
@@ -84,7 +83,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
     }
     public void setBlocksConverted(int count) {
         this.dataManager.set(BLOCKSCONVERTED,count);
-        WyrmsOfNyrus.logger.info("Creepwyrm has infested " + getBlocksConverted() + " blocks.");
+        //WyrmsOfNyrus.logger.info("Creepwyrm has infested " + getBlocksConverted() + " blocks.");
     }
 
     @Override
@@ -157,7 +156,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
         }
         if (this.getSummons() >= Radiogenetics.creepwyrmPodCallThreshhold) {
             this.setSummons(0);
-            WyrmsOfNyrus.logger.info("Now attempting to summon " + Radiogenetics.creepwyrmPodCallAmount + " Creep Pods.");
+            //WyrmsOfNyrus.logger.info("Now attempting to summon " + Radiogenetics.creepwyrmPodCallAmount + " Creep Pods.");
             this.setAnimTimer(200);
             for (int i = 0; i < Radiogenetics.creepwyrmPodCallAmount; i++) {
                 Entity entityToSpawn = new EntityCreepPod(world);
