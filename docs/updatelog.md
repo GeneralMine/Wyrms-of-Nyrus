@@ -107,3 +107,4 @@ Reading these (x/y/z) statements are the default config values that are differen
       - All drop pods
       - All Creeped
       - The Visitor
+- A number of new sound effects 
