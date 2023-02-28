@@ -8,7 +8,6 @@ import com.vetpetmon.wyrmsofnyrus.entity.nonwyrms.EntityNKAgent;
 import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.invasion.*;
 import com.vetpetmon.wyrmsofnyrus.locallib.ChatUtils;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -105,7 +104,8 @@ public class WoNHandler {
         EntityPlayerMP player = event.getPlayer();
         if (input.equals(code) && player.isEntityAlive()) {
             World world = player.getEntityWorld();
-            EntityLivingBase spawn = new EntityNKAgent(world);
+            EntityNKAgent spawn = new EntityNKAgent(world);
+            spawn.setSummoner(player);
             BlockPos playerPos = player.getPosition();
             if (WyrmVariables.WorldVariables.get(world).pastDistressCall == 0) {
                 WyrmVariables.WorldVariables.get(world).pastDistressCall = 1;

@@ -3,9 +3,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.nonwyrms;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.BanishmentAI;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.SmiteAI;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.WideRangeAttackAI;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.*;
 import com.vetpetmon.wyrmsofnyrus.locallib.ChatUtils;
 import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMob;
@@ -35,8 +33,11 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import java.util.Objects;
+
 public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    private EntityPlayerMP summoner;
     private int particleCooldown, energy;
     public EntityNKAgent(World worldIn) {
         super(worldIn);
@@ -48,6 +49,14 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         this.moveHelper = new FlierMoveHelperGhastlike(this, 1, 0.5, 0.5); //No cooldown = most lag, but smoothest movement. Realistically, only one agent will be in the world at a time.
         this.setAnimationNames(new String[]{"nkagent.idle","nkagent.idleAgro","nkagent.move","nkagent.attack","nkagent.magic"});
         this.isImmuneToFire = true;
+    }
+
+    public void setSummoner(EntityPlayerMP summoner) {
+        this.summoner = summoner;
+    }
+
+    public EntityPlayerMP getSummoner() {
+        return summoner;
     }
 
     @Override
@@ -132,13 +141,12 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         }
         if (this.energy <=0) {
             if (!world.playerEntities.isEmpty()) {
-                EntityPlayer nearestPlayer = world.getClosestPlayerToEntity(this, 100);
-                if (nearestPlayer != null) {
-                    if (nearestPlayer instanceof EntityPlayerMP){
-                        EntityPlayerMP player = (EntityPlayerMP) nearestPlayer;
-                        if (world.getPlayerEntityByName("Vetpetmon") != null) player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I must go, I am needed somewhere else."));
-                        else player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ¦ ᒲ⚍ᓭℸ ̣ ˧\uD835\uDE79 ¦ ᔑᒲ リᒷᒷ⟍̅ᒷ⟍̅ ᓭ\uD835\uDE79ᒲᒷ∴⍑ᒷ∷ᒷ ᒷꖎᓭᒷ."));
-                    }
+                EntityPlayerMP[] players = Objects.requireNonNull(this.getServer()).getPlayerList().getPlayers().toArray(new EntityPlayerMP[0]);
+                for (EntityPlayerMP player:players) {
+                    if (world.getPlayerEntityByName("Vetpetmon") != null)
+                        player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I must go, I am needed somewhere else."));
+                    else
+                        player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ¦ ᒲ⚍ᓭℸ ̣ ˧\uD835\uDE79 ¦ ᔑᒲ リᒷᒷ⟍̅ᒷ⟍̅ ᓭ\uD835\uDE79ᒲᒷ∴⍑ᒷ∷ᒷ ᒷꖎᓭᒷ."));
                 }
             }
             this.setDead();
