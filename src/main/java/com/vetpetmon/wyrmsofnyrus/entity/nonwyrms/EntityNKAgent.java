@@ -37,7 +37,6 @@ import java.util.Objects;
 
 public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private EntityPlayerMP summoner;
     private int particleCooldown, energy;
     public EntityNKAgent(World worldIn) {
         super(worldIn);
@@ -49,14 +48,6 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         this.moveHelper = new FlierMoveHelperGhastlike(this, 1, 0.5, 0.5); //No cooldown = most lag, but smoothest movement. Realistically, only one agent will be in the world at a time.
         this.setAnimationNames(new String[]{"nkagent.idle","nkagent.idleAgro","nkagent.move","nkagent.attack","nkagent.magic"});
         this.isImmuneToFire = true;
-    }
-
-    public void setSummoner(EntityPlayerMP summoner) {
-        this.summoner = summoner;
-    }
-
-    public EntityPlayerMP getSummoner() {
-        return summoner;
     }
 
     @Override

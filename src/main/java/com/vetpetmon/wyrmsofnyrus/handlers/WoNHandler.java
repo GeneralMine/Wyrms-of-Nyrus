@@ -105,7 +105,6 @@ public class WoNHandler {
         if (input.equals(code) && player.isEntityAlive()) {
             World world = player.getEntityWorld();
             EntityNKAgent spawn = new EntityNKAgent(world);
-            spawn.setSummoner(player);
             BlockPos playerPos = player.getPosition();
             if (WyrmVariables.WorldVariables.get(world).pastDistressCall == 0) {
                 WyrmVariables.WorldVariables.get(world).pastDistressCall = 1;
