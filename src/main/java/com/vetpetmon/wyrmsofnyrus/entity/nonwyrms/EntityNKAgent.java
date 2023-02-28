@@ -69,7 +69,7 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         super.initEntityAI();
         this.tasks.addTask(1, new WideRangeAttackAI(1000000,this, 1.15D, false,4.0F, 48));
         this.tasks.addTask(1, new BanishmentAI(1000000,this, 1.15D, false,6.0F));
-        this.tasks.addTask(1, new SmiteAI(this, 1.15D, false,6.0F, 3));
+        this.tasks.addTask(1, new SmiteAI(this, 1.15D, false,24.0F, 3));
         this.tasks.addTask(4, new EntityAIFlierMob(this, 1.0, 200));
         this.tasks.addTask(5, new EntityAIWanderAvoidWaterFlying(this, 0.15D));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
