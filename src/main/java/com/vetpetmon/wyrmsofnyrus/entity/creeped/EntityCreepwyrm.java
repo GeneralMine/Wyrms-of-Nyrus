@@ -172,7 +172,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
             this.setBlocksConverted(0);
             this.setAnimTimer(200);
             if (!world.isRemote) spawnMob(this.getPosition(), this.getEntityWorld());
-            this.playSound(SoundRegistry.creepwyrmscream, 10, 1);
+            this.playSound(SoundRegistry.creepwyrmscream, 5, 1);
         }
     }
 

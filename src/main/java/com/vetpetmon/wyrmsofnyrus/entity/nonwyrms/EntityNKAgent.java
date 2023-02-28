@@ -3,7 +3,9 @@ package com.vetpetmon.wyrmsofnyrus.entity.nonwyrms;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.*;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.BanishmentAI;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.SmiteAI;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.WideRangeAttackAI;
 import com.vetpetmon.wyrmsofnyrus.locallib.ChatUtils;
 import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMob;
@@ -32,8 +34,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import java.util.Objects;
 
 public class EntityNKAgent extends MobEntityBase implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -131,8 +131,8 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
             this.world.spawnParticle(EnumParticleTypes.END_ROD, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, 0.0D, 0.0D, 0.0D);
         }
         if (this.energy <=0) {
-            if (!world.playerEntities.isEmpty()) {
-                EntityPlayerMP[] players = Objects.requireNonNull(this.getServer()).getPlayerList().getPlayers().toArray(new EntityPlayerMP[0]);
+            if (!world.playerEntities.isEmpty() && this.getServer().getPlayerList().getPlayers().toArray(new EntityPlayerMP[0]) != null) {
+                EntityPlayerMP[] players = this.getServer().getPlayerList().getPlayers().toArray(new EntityPlayerMP[0]);
                 for (EntityPlayerMP player:players) {
                     if (world.getPlayerEntityByName("Vetpetmon") != null)
                         player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I must go, I am needed somewhere else."));
