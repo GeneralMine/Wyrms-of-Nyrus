@@ -132,10 +132,13 @@ public class EntityNKAgent extends MobEntityBase implements IAnimatable {
         }
         if (this.energy <=0) {
             if (!world.playerEntities.isEmpty()) {
-                EntityPlayerMP nearestPlayer = (EntityPlayerMP) world.getClosestPlayerToEntity(this, 100);
+                EntityPlayer nearestPlayer = world.getClosestPlayerToEntity(this, 100);
                 if (nearestPlayer != null) {
-                    if (world.getPlayerEntityByName("Vetpetmon") != null) nearestPlayer.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I must go, I am needed somewhere else."));
-                    else nearestPlayer.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ¦ ᒲ⚍ᓭℸ ̣ ˧\uD835\uDE79 ¦ ᔑᒲ リᒷᒷ⟍̅ᒷ⟍̅ ᓭ\uD835\uDE79ᒲᒷ∴⍑ᒷ∷ᒷ ᒷꖎᓭᒷ."));
+                    if (nearestPlayer instanceof EntityPlayerMP){
+                        EntityPlayerMP player = (EntityPlayerMP) nearestPlayer;
+                        if (world.getPlayerEntityByName("Vetpetmon") != null) player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> I must go, I am needed somewhere else."));
+                        else player.sendMessage(new TextComponentString(ChatUtils.PURPLE + "<???> ¦ ᒲ⚍ᓭℸ ̣ ˧\uD835\uDE79 ¦ ᔑᒲ リᒷᒷ⟍̅ᒷ⟍̅ ᓭ\uD835\uDE79ᒲᒷ∴⍑ᒷ∷ᒷ ᒷꖎᓭᒷ."));
+                    }
                 }
             }
             this.setDead();
