@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
@@ -17,13 +17,10 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -34,6 +31,8 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
         experienceValue = 4;
         enablePersistence();
         setNoAI(false);
+        setPotency(3);
+        this.setAnimationNames(new String[]{"wyrmrover.idle","wyrmrover.move"});
     }
 
     @Override
@@ -51,7 +50,7 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.roverUraniumHP,wyrmStats.roverUraniumDEF,wyrmStats.roverUraniumATK,wyrmStats.roverUraniumSPD,wyrmStats.roverUraniumKBR);
+        this.setStats(WyrmStats.roverUraniumHP, WyrmStats.roverUraniumDEF, WyrmStats.roverUraniumATK, WyrmStats.roverUraniumSPD, WyrmStats.roverUraniumKBR);
     }
 
     @Override
@@ -67,20 +66,10 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
     public SoundEvent getHurtSound(DamageSource ds)  {
         return SoundRegistry.wyrmHissTwo;
     }
-    /*@Override
-    public SoundEvent getDeathSound() {
-        return SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.enderdragon_fireball.explode"));
-    }*/
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
         this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,10);
     }
 
     public void registerControllers(AnimationData data) {
@@ -89,10 +78,10 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmrover.move"));
+            event.getController().setAnimation(getAnimation(1));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmrover.idle"));
+            event.getController().setAnimation(getAnimation(0));
         }
         return PlayState.CONTINUE;
     }

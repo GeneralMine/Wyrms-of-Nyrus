@@ -1,9 +1,11 @@
 package com.vetpetmon.wyrmsofnyrus.entity.follies;
 
+import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.WyrmBreakDoors;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -12,14 +14,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -29,13 +32,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import static com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther.creepspreadRules;
 
-public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, IMob {
+public abstract class EntityWyrmfolly extends MobEntityBase implements IAnimatable, IMob {
     private final AnimationFactory factory = new AnimationFactory(this);
     protected int srpcothimmunity;
+    private static final DataParameter<Integer> LEVEL = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.VARINT);
     protected int killCount, level; // Also known as ascension points
     protected float HP, DEF, ATK, SPD, KBRR; // Stats
-    private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> LEVEL = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.VARINT);
     private static final DataParameter<Float>
             FOLLYHEALTH = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.FLOAT),
             FOLLYARMOR = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.FLOAT),
@@ -44,22 +46,10 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
             FOLLYKBR = EntityDataManager.createKey(EntityWyrmfolly.class, DataSerializers.FLOAT);
 
 
-    // Animation and AI util
-    public void setAttack(int attackID)
-    {
-        this.getDataManager().set(ATTACKID, attackID);
-    }
-
-
-    //@SideOnly(Side.CLIENT)
-    public int getAttack()
-    {
-        return this.getDataManager().get(ATTACKID);
-    }
 
     public void updateLevel(){
         this.setLevel((int) (Math.floor((float)killCount/Radiogenetics.follyAscenSteps)+1));
-        wyrmsofnyrus.logger.info("Wyrmfolly level is:" + this.getLevel()); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
+        WyrmsOfNyrus.logger.info("Wyrmfolly level is:" + this.getLevel()); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
         this.setHealth(this.getHealth() + (this.getMaxHealth()/8)); //Heals 1/8 of health for every kill.
     }
 
@@ -113,7 +103,7 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     protected void initEntityAI() {
         super.initEntityAI();
         makeAllTargets();
-        this.tasks.addTask(2, new wyrmBreakDoors(this, 200));
+        this.tasks.addTask(2, new WyrmBreakDoors(this, 200));
         this.tasks.addTask(1, new EntityAIWander(this, 0.65));
         this.tasks.addTask(1, new EntityAILeapAtTarget(this, 1.25F));
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -184,7 +174,6 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(ATTACKID, 0);
         this.dataManager.register(LEVEL, Integer.valueOf(0));
         this.dataManager.register(FOLLYHEALTH, Float.valueOf(0));
         this.dataManager.register(FOLLYARMOR, Float.valueOf(0));
@@ -243,6 +232,13 @@ public abstract class EntityWyrmfolly extends EntityMob implements IAnimatable, 
     @Override
     public void registerControllers(AnimationData animationData) {
 
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        Entity entity = source.getTrueSource();
+        if (entity instanceof EntityPlayerMP && this.isBurning()) Advancements.grantAchievement((EntityPlayerMP) entity, Advancements.killitwithfire);
     }
 
     @Override

@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "wyrmsofnyrus:thevisitorspawner"
+        },
+        "title": {
+            "translate": "advancements.nottoday.title"
+        },
+        "description": {
+            "translate": "advancements.nottoday.description"
+        },
+        "frame": "challenge"
+    },
+    "parent": "wyrmsofnyrus:root",
+    "criteria": {
+        "impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

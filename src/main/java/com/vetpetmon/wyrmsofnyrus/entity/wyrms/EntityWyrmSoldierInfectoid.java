@@ -2,11 +2,12 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.WideRangeAttackAI;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -22,13 +23,10 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -39,6 +37,8 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
         experienceValue = 12;
         enablePersistence();
         setNoAI(false);
+        setPotency(15);
+        this.setAnimationNames(new String[]{"soldierwyrm.idle","soldierwyrm.moving"});
     }
 
     @Override
@@ -47,7 +47,7 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
-        //this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true));
+        this.tasks.addTask(2, new WideRangeAttackAI(WyrmStats.soldierATK, this, 0.5, true, 3.0F,30));
         afterPlayers();
         hivemindFollow();
         if (getAttackVillagers()) afterVillagers();
@@ -57,8 +57,8 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoSoldierInf)) this.setStatsEvo(wyrmStats.infectoidSoldierHP,wyrmStats.infectoidSoldierDEF,wyrmStats.infectoidSoldierATK,wyrmStats.infectoidSoldierSPD,wyrmStats.infectoidSoldierKBR,Evo.minEvoSoldierInf);
-        else this.setStats(wyrmStats.infectoidSoldierHP,wyrmStats.infectoidSoldierDEF,wyrmStats.infectoidSoldierATK,wyrmStats.infectoidSoldierSPD,wyrmStats.infectoidSoldierKBR);
+        if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoSoldierInf)) this.setStatsEvo(WyrmStats.infectoidSoldierHP, WyrmStats.infectoidSoldierDEF, WyrmStats.infectoidSoldierATK, WyrmStats.infectoidSoldierSPD, WyrmStats.infectoidSoldierKBR,Evo.minEvoSoldierInf);
+        else this.setStats(WyrmStats.infectoidSoldierHP, WyrmStats.infectoidSoldierDEF, WyrmStats.infectoidSoldierATK, WyrmStats.infectoidSoldierSPD, WyrmStats.infectoidSoldierKBR);
     }
 
     @Override
@@ -92,28 +92,17 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
     public boolean attackEntityAsMob(Entity entityIn) {
         boolean result = super.attackEntityAsMob(entityIn);
         if (result) {
-            difficultyStats.applyPotionEffect(entityIn, MobEffects.POISON, 120, 2);
+            DifficultyStats.applyPotionEffect(entityIn, MobEffects.POISON, 120, 2);
         }
         return result;
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,4);
-    }
-
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.soldierwyrm.moving"));
-        }
-        else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.soldierwyrm.idle"));
-        }
+        if (event.isMoving()) event.getController().setAnimation(getAnimation(1));
+        else event.getController().setAnimation(getAnimation(0));
         return PlayState.CONTINUE;
     }
     @Override

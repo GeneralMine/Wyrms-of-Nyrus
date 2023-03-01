@@ -2,16 +2,11 @@ package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.SprinterAttackAI;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -26,9 +21,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
-public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityCreepedHumanoid extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     public static final ResourceLocation CREEPEDHUMANOID_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/creepedhumanoid");
 
@@ -39,19 +32,7 @@ public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IA
         experienceValue = 16;
         enablePersistence();
         setNoAI(false);
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,5);
-    }
-
-    @Override
-    public void onKillEntity(EntityLivingBase entity) {
-        super.onKillEntity(entity);
-        wyrmKillBonuses.pointIncrease(world);
-        CreepedEvents.convertKill(entity,this);
+        setPotency(6);
     }
 
     @Nullable
@@ -74,13 +55,13 @@ public class EntityCreepedHumanoid extends EntityWyrm implements IAnimatable, IA
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 0.5D, false));
         this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.45D));
-        this.tasks.addTask(1, new SprinterAttackAI(this, 1.0, true, wyrmStats.creepedhumanoidSprintSPD, SoundRegistry.creepedhumanoidroar));
+        this.tasks.addTask(1, new SprinterAttackAI(this, 1.0, true, WyrmStats.creepedhumanoidSprintSPD, SoundRegistry.creepedhumanoidroar));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.creepedhumanoidHP,wyrmStats.creepedhumanoidDEF,wyrmStats.creepedhumanoidATK, wyrmStats.creepedhumanoidSPD,wyrmStats.creepedhumanoidKBR);
+        this.setStats(WyrmStats.creepedhumanoidHP, WyrmStats.creepedhumanoidDEF, WyrmStats.creepedhumanoidATK, WyrmStats.creepedhumanoidSPD, WyrmStats.creepedhumanoidKBR);
     }
 
 

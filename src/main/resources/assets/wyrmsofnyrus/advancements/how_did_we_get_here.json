@@ -1,0 +1,20 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:bucket"
+        },
+        "title": {
+            "translate": "advancements.player.howdidthishappen.title"
+        },
+        "description": {
+            "translate": "advancements.player.howdidthishappen.description"
+        },
+        "frame": "challenge"
+    },
+    "parent": "wyrmsofnyrus:root",
+    "criteria": {
+        "impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

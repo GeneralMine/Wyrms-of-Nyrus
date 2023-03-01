@@ -2,9 +2,9 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,13 +13,11 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.WyrmlingGrowUp.growUp;
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmling extends EntityWyrm {
     private int timeUntilGrowth;
@@ -34,6 +32,8 @@ public class EntityWyrmling extends EntityWyrm {
         this.isImmuneToFire = false;
         enablePersistence();
         setNoAI(false);
+        setPotency(1.5);
+        this.setAnimationNames(new String[]{"wyrmling.idle","wyrmling.moving"});
         this.timeUntilGrowth = this.rand.nextInt(6000) + 2000;
     }
 
@@ -48,12 +48,13 @@ public class EntityWyrmling extends EntityWyrm {
         this.tasks.addTask(6, new EntityAIPanic(this, 1.5));
         simpleAI();
     }
-
+    @Override
+    protected boolean canEnrage(){return false;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWyrmling)) this.setStatsEvo(wyrmStats.wyrmlingHP,wyrmStats.wyrmlingDEF,0F,wyrmStats.wyrmlingSPD,0F, Evo.minEvoWyrmling);
-        else this.setStats(wyrmStats.wyrmlingHP,wyrmStats.wyrmlingDEF,0F,wyrmStats.wyrmlingSPD,0F);
+        if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoWyrmling)) this.setStatsEvo(WyrmStats.wyrmlingHP, WyrmStats.wyrmlingDEF,0F, WyrmStats.wyrmlingSPD,0F, Evo.minEvoWyrmling);
+        else this.setStats(WyrmStats.wyrmlingHP, WyrmStats.wyrmlingDEF,0F, WyrmStats.wyrmlingSPD,0F);
     }
 
     @Override
@@ -120,18 +121,11 @@ public class EntityWyrmling extends EntityWyrm {
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmling.moving"));
+            event.getController().setAnimation(getAnimation(1));
             return PlayState.CONTINUE;
         }
-        else {event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmling.idle"));}
+        else {event.getController().setAnimation(getAnimation(0));}
 
         return PlayState.CONTINUE;
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,1);
-    }
-
 }

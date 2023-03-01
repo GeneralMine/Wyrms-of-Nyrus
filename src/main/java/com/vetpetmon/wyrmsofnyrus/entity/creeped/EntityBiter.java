@@ -1,19 +1,14 @@
 package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.BiteAttackAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.RollAttackAI;
 import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -28,9 +23,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
-public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityBiter extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     public static final ResourceLocation BITER_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/biter");
 
@@ -41,21 +34,8 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
         experienceValue = 5;
         enablePersistence();
         setNoAI(false);
+        setPotency(4);
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,4);
-    }
-
-    @Override
-    public void onKillEntity(EntityLivingBase entity) {
-        super.onKillEntity(entity);
-        wyrmKillBonuses.pointIncrease(world);
-        CreepedEvents.convertKill(entity,this);
-    }
-
     @Nullable
     @Override
     protected ResourceLocation getLootTable() {
@@ -74,9 +54,9 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
         afterVillagers();
         afterMobs();
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new BiteAttackAI(wyrmStats.biterATK, this, 0.75D, false));
+        this.tasks.addTask(1, new BiteAttackAI(WyrmStats.biterATK, this, 0.75D, false));
         this.tasks.addTask(1, new EntityAIWanderAvoidWater(this, 0.5D));
-        this.tasks.addTask(2, new RollAttackAI(this, 1.0, true, wyrmStats.biterRollSPD, wyrmStats.biterRollDMG, SoundRegistry.bitercharge));
+        this.tasks.addTask(2, new RollAttackAI(this, 1.0, true, WyrmStats.biterRollSPD, WyrmStats.biterRollDMG, SoundRegistry.bitercharge));
     }
 
     @Override
@@ -89,7 +69,7 @@ public class EntityBiter extends EntityWyrm implements IAnimatable, IAnimationTi
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.biterHP,wyrmStats.biterDEF,wyrmStats.biterATK, wyrmStats.biterSPD,wyrmStats.biterKBR);
+        this.setStats(WyrmStats.biterHP, WyrmStats.biterDEF, WyrmStats.biterATK, WyrmStats.biterSPD, WyrmStats.biterKBR);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)

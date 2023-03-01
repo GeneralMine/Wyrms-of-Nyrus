@@ -33,11 +33,10 @@ public class EntityCreepPod extends EntityWyrm implements IAnimatable{
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1D);
     }
-
     @Override
-    public SoundEvent getAmbientSound() {
-        return null;
-    }
+    protected boolean canEnrage(){return false;}
+    @Override
+    public SoundEvent getAmbientSound(){return null;}
 
     @Override
     public SoundEvent getDeathSound() {
@@ -46,7 +45,7 @@ public class EntityCreepPod extends EntityWyrm implements IAnimatable{
 
     @Override
     public void onDeath(DamageSource source) {
-        DroppodContents.droppodContents(this.getPosition(),4,3,this.world);
+        DroppodContents.DropPodEventSequence(this.getPosition(),4,3,this.world);
     }
 
     public void registerControllers(AnimationData data) {

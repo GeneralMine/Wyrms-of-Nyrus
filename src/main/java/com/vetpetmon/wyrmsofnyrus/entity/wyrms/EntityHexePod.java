@@ -1,8 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.hexepodContents;
-import net.minecraft.entity.Entity;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.DroppodContents;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -15,9 +14,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class EntityHexePod extends EntityWyrm implements IAnimatable{
     private AnimationFactory factory = new AnimationFactory(this);
@@ -37,7 +33,8 @@ public class EntityHexePod extends EntityWyrm implements IAnimatable{
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(2D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3D);
     }
-
+    @Override
+    protected boolean canEnrage(){return false;}
     @Override
     public SoundEvent getAmbientSound() {
         return null;
@@ -50,20 +47,7 @@ public class EntityHexePod extends EntityWyrm implements IAnimatable{
 
     @Override
     public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        int x = (int) this.posX;
-        int y = (int) this.posY;
-        int z = (int) this.posZ;
-        Entity entity = this;
-        {
-            Map<String, Object> $_dmap = new HashMap<>();
-            $_dmap.put("entity", entity);
-            $_dmap.put("x", x);
-            $_dmap.put("y", y);
-            $_dmap.put("z", z);
-            $_dmap.put("world", world);
-            hexepodContents.doThis($_dmap);
-        }
+        DroppodContents.DropPodEventSequence(this.getPosition(),2,1,this.getEntityWorld());
     }
 
     public void registerControllers(AnimationData data) {

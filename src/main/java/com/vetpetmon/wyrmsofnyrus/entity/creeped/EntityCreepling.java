@@ -1,16 +1,12 @@
 package com.vetpetmon.wyrmsofnyrus.entity.creeped;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
-import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.CreepedEvents;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -25,9 +21,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
-public class EntityCreepling extends EntityWyrm implements IAnimatable, IAnimationTickable {
+public class EntityCreepling extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
     public static final ResourceLocation BITER_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/biter");
     private int timer;
@@ -39,19 +33,7 @@ public class EntityCreepling extends EntityWyrm implements IAnimatable, IAnimati
         enablePersistence();
         setNoAI(false);
         this.timer = 3600; // Lives for ~3 minutes
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,1);
-    }
-
-    @Override
-    public void onKillEntity(EntityLivingBase entity) {
-        super.onKillEntity(entity);
-        wyrmKillBonuses.pointIncrease(world);
-        CreepedEvents.convertKill(entity,this);
+        setPotency(1.25);
     }
     @Override
     public void onLivingUpdate(){
@@ -88,7 +70,7 @@ public class EntityCreepling extends EntityWyrm implements IAnimatable, IAnimati
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.creeplingHP,wyrmStats.creeplingDEF,wyrmStats.creeplingATK, wyrmStats.creeplingSPD,wyrmStats.creeplingKBR);
+        this.setStats(WyrmStats.creeplingHP, WyrmStats.creeplingDEF, WyrmStats.creeplingATK, WyrmStats.creeplingSPD, WyrmStats.creeplingKBR);
     }
 
     @Override

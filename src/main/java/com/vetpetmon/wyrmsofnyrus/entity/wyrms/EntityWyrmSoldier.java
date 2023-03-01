@@ -2,9 +2,10 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.WideRangeAttackAI;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -19,13 +20,10 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -36,6 +34,8 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
         experienceValue = 8;
         enablePersistence();
         setNoAI(false);
+        setPotency(15);
+        this.setAnimationNames(new String[]{"soldierwyrm.idle","soldierwyrm.moving"});
     }
 
     @Override
@@ -44,6 +44,7 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
+        this.tasks.addTask(2, new WideRangeAttackAI(WyrmStats.soldierATK, this, 0.5, true, 3.0F,30));
         afterPlayers();
         hivemindFollow();
         if (getAttackVillagers()) afterVillagers();
@@ -53,8 +54,8 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoSoldier)) this.setStatsEvo(wyrmStats.soldierHP,wyrmStats.soldierDEF,wyrmStats.soldierATK,wyrmStats.soldierSPD,wyrmStats.soldierKBR,Evo.minEvoSoldier);
-        else this.setStats(wyrmStats.soldierHP,wyrmStats.soldierDEF,wyrmStats.soldierATK,wyrmStats.soldierSPD,wyrmStats.soldierKBR);
+        if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoSoldier)) this.setStatsEvo(WyrmStats.soldierHP, WyrmStats.soldierDEF, WyrmStats.soldierATK, WyrmStats.soldierSPD, WyrmStats.soldierKBR,Evo.minEvoSoldier);
+        else this.setStats(WyrmStats.soldierHP, WyrmStats.soldierDEF, WyrmStats.soldierATK, WyrmStats.soldierSPD, WyrmStats.soldierKBR);
     }
 
     @Override
@@ -80,23 +81,13 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
         this.playSound(SoundRegistry.slowwyrmsteps, 1.0F, 1.0F);
     }
 
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,4);
-    }
-
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 2F, this::predicate));
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.soldierwyrm.moving"));
-        }
-        else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.soldierwyrm.idle"));
-        }
+        if (event.isMoving()) event.getController().setAnimation(getAnimation(1));
+        else event.getController().setAnimation(getAnimation(0));
         return PlayState.CONTINUE;
     }
 

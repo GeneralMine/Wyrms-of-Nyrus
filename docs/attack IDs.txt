@@ -10,3 +10,6 @@ AI functions will consistently switch the byte values to what is seen below:
 6 = melee windup
 7 = warning
 8 = bite
+9 = swipe (WideRangeAttack)
+10 = Extreme special (Banishment, Core Eject)
+11 = Smite (Magic)

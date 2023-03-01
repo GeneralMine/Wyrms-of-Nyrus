@@ -1,9 +1,9 @@
 package com.vetpetmon.wyrmsofnyrus.block.generic;
 
+import com.vetpetmon.synapselib.rendering.IHasModel;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.synapselib.rendering.IHasModel;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
@@ -33,7 +33,7 @@ public class BlockPillar extends BlockRotatedPillar implements IHasModel {
         this.setSoundType(st);
         this.setHardness(hardness);
         this.setResistance(blastresist);
-        setCreativeTab(wyrmsofnyrus.wyrmTabs);
+        setCreativeTab(WyrmsOfNyrus.wyrmTabs);
         AllBlocks.ALL_BLOCKS.add(this);
         AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
@@ -46,13 +46,13 @@ public class BlockPillar extends BlockRotatedPillar implements IHasModel {
         this.setHardness(hardness);
         this.setResistance(blastresist);
         this.hastooltip = hastooltip;
-        setCreativeTab(wyrmsofnyrus.wyrmTabs);
+        setCreativeTab(WyrmsOfNyrus.wyrmTabs);
         AllBlocks.ALL_BLOCKS.add(this);
         AllItems.ALL_ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
     @Override
     public void registerModels() {
-        wyrmsofnyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+        WyrmsOfNyrus.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     public Block setCanCreatureSpawn(boolean flag) {

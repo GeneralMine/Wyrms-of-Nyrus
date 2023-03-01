@@ -1,17 +1,19 @@
 package com.vetpetmon.wyrmsofnyrus.entity;
 
 import com.google.common.base.Predicate;
+import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.WyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
+import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreeped;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityHivemind;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityOverseerWaypoint;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -23,11 +25,13 @@ import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -36,18 +40,17 @@ import net.minecraftforge.fml.common.Loader;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
+
 /**
  * Abstract class that all Wyrms of Nyrus entities are built from.
  * Handles a lot of the hot nonsense of class inheritance for you.
  * You're welcome. <3
  */
-public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob {
+public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, IMob {
 
     private static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> ATTACKID = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.VARINT);
-
-
-    private String animationName;
+    private double potency = 0.0;
 
     // TODO: FIX THIS.
     //  LIST OF CASTE TYPES:
@@ -77,23 +80,24 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         }
     }
 
-
-    // Animation and AI util
-    public void setAttack(int attackID)
-    {
-        this.getDataManager().set(ATTACKID, attackID);
-    }
-
-    //@SideOnly(Side.CLIENT)
-    public int getAttack()
-    {
-        return this.getDataManager().get(ATTACKID);
-    }
+    public double getPotency() {return potency;}
+    public void setPotency(double potency) {this.potency = potency;}
 
     public EntityWyrm(final World worldIn) {
         super(worldIn);
         this.isImmuneToFire = false;
         this.srpcothimmunity = 0;
+    }
+
+    public boolean isPotionApplicable(final PotionEffect potion) {
+        if (potion.getPotion() == MobEffects.POISON) return false;
+        return super.isPotionApplicable(potion);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        wyrmDeathSpecial(this,getPosition(),world,getPotency());
     }
     public boolean canBreatheUnderwater()
     {
@@ -116,7 +120,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
      * Handles the world dependency for you. I love it.
      * @return The invasion difficulty of the world.
      */
-    public double getInvasionDifficulty() {return wyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
+    public double getInvasionDifficulty() {return WyrmVariables.WorldVariables.get(world).wyrmInvasionDifficulty;}
 
     public float genDifficulty() {
         return (float) (getInvasionDifficulty());
@@ -124,19 +128,19 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
 
     public void setStats(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR) {
         float diff = genDifficulty();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(DifficultyStats.health(entityHealth * Radiogenetics.wyrmVitality, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(DifficultyStats.armor(entityArmor * Radiogenetics.wyrmResistance, diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(DifficultyStats.damage(entityDamage * Radiogenetics.wyrmStrength, diff));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
     }
     public void setStatsEvo(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR, int minLevel) {
         float diff = genDifficulty();
-        int level = ((evoPoints.getLevel() - minLevel)+1);
+        int level = ((EvoPoints.getLevel() - minLevel)+1);
         double HP = (entityHealth * Radiogenetics.wyrmVitality), DEF = (entityArmor * Radiogenetics.wyrmResistance), ATK = (entityDamage * Radiogenetics.wyrmStrength);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(difficultyStats.health((HP+(HP*(Evo.evoPowerHP*level))), diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(difficultyStats.armor((DEF+ (DEF*(Evo.evoPowerDEF*level))), diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(difficultyStats.damage((ATK+(ATK*(Evo.evoPowerATK*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(DifficultyStats.health((HP+(HP*(Evo.evoPowerHP*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(DifficultyStats.armor((DEF+ (DEF*(Evo.evoPowerDEF*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(DifficultyStats.damage((ATK+(ATK*(Evo.evoPowerATK*level))), diff));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
     }
@@ -159,7 +163,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
      * They're given better AI and can ruin the player's day. Nuff said.
      */
     protected void isSapient() {
-        this.tasks.addTask(2, new wyrmBreakDoors(this, 200));
+        this.tasks.addTask(2, new WyrmBreakDoors(this, 200));
         this.tasks.addTask(1, new EntityAIWander(this, 0.8));
     }
 
@@ -254,7 +258,6 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(HAS_TARGET, false);
-        this.dataManager.register(ATTACKID, 0);
     }
 
     /**
@@ -284,7 +287,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
         {
             if (i > 0 && entityIn instanceof EntityLivingBase)
             {
-                ((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, (double) MathHelper.sin(this.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(this.rotationYaw * 0.017453292F)));
+                ((EntityLivingBase)entityIn).knockBack(this, (float)i * 0.5F, MathHelper.sin(this.rotationYaw * 0.017453292F), -MathHelper.cos(this.rotationYaw * 0.017453292F));
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
@@ -348,12 +351,31 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     // Controls how all wyrms respond to damage.
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source == DamageSource.FALL && (Radiogenetics.immuneToFalling && !(this.casteType==9)))
-            return false;
-        if (source.isExplosion() && Radiogenetics.immuneToExplosions)
-            return false;
-        if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
-            return false;
+        Entity entity = source.getTrueSource();
+        EntityLivingBase ogEntity = this.getAttackTarget();
+        if (this instanceof EntityCreeped) {
+            if (source == DamageSource.FALL && (Radiogenetics.creepedImmuneToFalling && !(this.casteType == 9)))
+                return false;
+            if (source.isExplosion() && Radiogenetics.creepedImmuneToExplosions)
+                return false;
+            if (source == DamageSource.CACTUS && Radiogenetics.creepedImmuneToCacti)
+                return false;
+        }
+        else {
+            if (this.canEnrage() && entity instanceof EntityLivingBase && entity != ogEntity && (entity.getDistance(entity) < 5)) {
+                if (ogEntity!= null) ogEntity.knockBack(ogEntity,3,2,2);
+                this.setAttackTarget((EntityLivingBase) entity);
+                DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 3, 2);
+                DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 3, 1);
+                this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
+            }
+            if (source == DamageSource.FALL && (Radiogenetics.immuneToFalling && !(this.casteType == 9)))
+                return false;
+            if (source.isExplosion() && Radiogenetics.immuneToExplosions)
+                return false;
+            if (source == DamageSource.CACTUS && Radiogenetics.immuneToCacti)
+                return false;
+        }
         if (source == DamageSource.DROWN)
             return false;
         if (source == DamageSource.IN_WALL)
@@ -369,7 +391,7 @@ public abstract class EntityWyrm extends EntityMob implements IAnimatable, IMob 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
-
+        super.readEntityFromNBT(compound);
         if (compound.hasKey("srpcothimmunity"))
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");

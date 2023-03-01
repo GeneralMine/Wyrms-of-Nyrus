@@ -1,18 +1,18 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraftforge.common.config.Configuration;
 
 import static com.vetpetmon.synapselib.util.CFG.*;
 
 public class Evo {
     public static boolean evoEnabled, evoReadsModpack, evoVariantsEnabled;
-    public static boolean evoFromKilled;
+    public static boolean evoFromKilled, bonusEvofromFireKill;
     public static boolean evoHBMVariantsEnabled;
-    public static float evoFactor, evoPowerHP, evoPowerDEF, evoPowerATK;
+    public static float evoFactor, evoPowerHP, evoPowerDEF, evoPowerATK, bonusFromFireKill;
     public static int customEvoMinCap, evoPointsPerLevel;
     public static int minEvoCreepwyrm, minEvoWyrmling, minEvoWorker, minEvoSoldier, minEvoSoldierInf, minEvoSoldierFrost, minEvoWarrior, minEvoWarriorTainted;
-    public static String[] modEvo, modEvoDef = {"draconicevolution;400","srparasites;300","hbm;250","icbmclassic;150","securitycraft;80","techguns;75","roughmobsrevamped;75","immersiveintelligence;65","roughmobs;60","ic2;50"};
+    public static String[] modEvo, modEvoDef = {"draconicevolution;400","srparasites;300","hbm;250","icbmclassic;150","lycanitesmobs;125","securitycraft;80","techguns;75","roughmobsrevamped;75","immersiveintelligence;65","roughmobs;60","ic2;50"};
 
 
     public static void loadFromConfig(Configuration config, int id) {
@@ -21,7 +21,7 @@ public class Evo {
         config.setCategoryRequiresWorldRestart(CATEGORY, true);
 
         evoEnabled = createConfigBool(config, CATEGORY, "Evolution enabled", "Enables the evolution system. Default: true", true);
-        if (!evoEnabled) wyrmsofnyrus.logger.info("Evolution module has been disabled");
+        if (!evoEnabled) WyrmsOfNyrus.logger.info("Evolution module has been disabled");
 
         modEvo = createConfigStringList(config,CATEGORY, "Modlist detector strings", "uwu", modEvoDef);
 
@@ -38,6 +38,8 @@ public class Evo {
 
         evoFactor = createConfigDouble(config,CATEGORY,"Evolution factor","Determines how powerful evolution gets. Do not touch this if you intend on keeping closer to what would be expected in vanilla Mineccraft. Higher values speeds up the evolution system growth faster, lower values slow it down. Default: 1.0",1.0);
         evoFromKilled = createConfigBool(config, CATEGORY, "Evolution from wyrm deaths", "When wyrms die, they gain more evolutionary pressure to evolve and adapt against dying. Improvise. Overcome. Adapt. Default: true", true);
+        bonusEvofromFireKill =  createConfigBool(config, CATEGORY, "Bonus from wyrm deaths by fire", "Wyrms add more evo points if killed by fire. Default: false", ConfigBase.presetBools(false,false,true, id));
+        bonusFromFireKill =  createConfigDouble(config, CATEGORY, "Multiplier from wyrm deaths by fire", "Multiplier for the bonus from wyrm deaths by fire. Default: 2.0", 2.0F);
         evoVariantsEnabled = createConfigBool(config, CATEGORY, "Evolution variants", "As evolution increases, so does the chance of meeting an evolved variant of wyrm. Default: true", true);
 
         evoHBMVariantsEnabled = createConfigBool(config, CATEGORY, "HBM evolution variants", "Enable/disable the HBM Taint evo variations. Requires variants to be enabled, does nothing if HBM is not installed. Default: true", true);

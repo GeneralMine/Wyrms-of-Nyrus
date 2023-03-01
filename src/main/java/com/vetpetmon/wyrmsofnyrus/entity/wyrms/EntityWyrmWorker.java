@@ -4,11 +4,11 @@ import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.rangeCheck;
+import com.vetpetmon.wyrmsofnyrus.locallib.RangeCheck;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.*;
 import net.minecraft.init.SoundEvents;
@@ -24,8 +24,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 public class EntityWyrmWorker extends EntityWyrm {
     public int timeUntilNextProduct;
     public boolean unionizing;
@@ -40,6 +38,7 @@ public class EntityWyrmWorker extends EntityWyrm {
         this.setCanPickUpLoot(true);
         this.timeUntilNextProduct = (this.rand.nextInt(6000) + (Radiogenetics.workerProductivity));
         this.unionizing = false;
+        setPotency(3.5);
     }
 
     @Override
@@ -59,12 +58,13 @@ public class EntityWyrmWorker extends EntityWyrm {
         this.tasks.addTask(1, new EntityAISwimming(this));
         hivemindAvoid();
     }
-
+    @Override
+    protected boolean canEnrage(){return false;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWorker)) this.setStatsEvo(wyrmStats.workerHP,wyrmStats.workerDEF,wyrmStats.workerATK, wyrmStats.workerSPD,wyrmStats.workerKBR,Evo.minEvoWorker);
-        else this.setStats(wyrmStats.workerHP,wyrmStats.workerDEF,wyrmStats.workerATK, wyrmStats.workerSPD,wyrmStats.workerKBR);
+        if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoWorker)) this.setStatsEvo(WyrmStats.workerHP, WyrmStats.workerDEF, WyrmStats.workerATK, WyrmStats.workerSPD, WyrmStats.workerKBR,Evo.minEvoWorker);
+        else this.setStats(WyrmStats.workerHP, WyrmStats.workerDEF, WyrmStats.workerATK, WyrmStats.workerSPD, WyrmStats.workerKBR);
     }
 
     @Override
@@ -80,20 +80,13 @@ public class EntityWyrmWorker extends EntityWyrm {
     {
         this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,2);
-    }
-
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
         if (!this.world.isRemote && --this.timeUntilNextProduct <= 0)
         {
             // Check if there's a hopper in range. If there is at least one in range, go to the "else" condition and just make funny noise instead.
-            if (!rangeCheck.blocks(world,getPosition(),4,"minecraft:hopper")) {
+            if (!RangeCheck.blocks(world,getPosition(),4,"minecraft:hopper")) {
                 this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
                 this.dropItem(AllItems.metalcomb_array, 1);
             }

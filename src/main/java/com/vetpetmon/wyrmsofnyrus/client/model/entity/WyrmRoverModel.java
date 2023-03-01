@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmRover;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -14,19 +14,19 @@ public class WyrmRoverModel extends AnimatedTickingGeoModel<EntityWyrmRover>
     @Override
     public ResourceLocation getModelLocation(EntityWyrmRover EntityWyrmRover)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/wyrmrover.geo.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "geo/wyrmrover.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityWyrmRover EntityWyrmRover)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/wyrmrover.png");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "textures/wyrmrover.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityWyrmRover EntityWyrmRover)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/wyrmrover.animation.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "animations/wyrmrover.animation.json");
     }
     @Override
     public void setLivingAnimations(EntityWyrmRover entity, Integer uniqueID, AnimationEvent customPredicate)

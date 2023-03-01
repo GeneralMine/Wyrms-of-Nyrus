@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreepedHumanoid;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -14,19 +14,19 @@ public class CreepedHumanoidModel extends AnimatedTickingGeoModel<EntityCreepedH
     @Override
     public ResourceLocation getModelLocation(EntityCreepedHumanoid EntityCreepedHumanoid)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/creepedhumanoid.geo.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "geo/creepedhumanoid.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityCreepedHumanoid EntityCreepedHumanoid)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/creepedhumanoid.png");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "textures/creepedhumanoid.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityCreepedHumanoid EntityCreepedHumanoid)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/creepedhumanoid.animation.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "animations/creepedhumanoid.animation.json");
     }
 
     @Override

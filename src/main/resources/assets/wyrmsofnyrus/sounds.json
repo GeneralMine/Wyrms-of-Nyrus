@@ -1,5 +1,5 @@
 {
-  "creepwyrmscream": {
+  "entity.creepwyrmscream": {
     "category": "hostile",
     "subtitle": "subtitles.creepwyrmscream",
     "sounds": [
@@ -25,6 +25,30 @@
     "sounds": [
       {
         "name": "wyrmsofnyrus:entity/bitercharge",
+        "stream": false
+      }
+    ]
+  },
+  "entity.nkagentidle": {
+    "category": "hostile",
+    "subtitle": "subtitles.alienchattering",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/nk1",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/nk2",
+        "stream": false
+      }
+    ]
+  },
+  "entity.banishment": {
+    "category": "hostile",
+    "subtitle": "subtitles.vwoop",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/banishment",
         "stream": false
       }
     ]
@@ -115,6 +139,16 @@
     "sounds": [
       {
         "name": "wyrmsofnyrus:entity/deepclicking1",
+        "stream": false
+      }
+    ]
+  },
+  "entity.wyrmannoyed": {
+    "category": "neutral",
+    "subtitle": "subtitles.wyrmannoyed",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/wyrmannoyed",
         "stream": false
       }
     ]

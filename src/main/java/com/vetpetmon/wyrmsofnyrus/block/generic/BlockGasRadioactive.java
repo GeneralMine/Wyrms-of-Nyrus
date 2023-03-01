@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.block.generic;
 
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import com.vetpetmon.synapselib.rendering.IHasModel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -24,7 +24,7 @@ public class BlockGasRadioactive extends BlockGas implements IHasModel {
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (entityIn instanceof EntityLivingBase && !(entityIn instanceof EntityWyrm)) {
-            difficultyStats.applyPotionEffect(entityIn, MobEffects.WITHER, 30, 1);
+            DifficultyStats.applyPotionEffect(entityIn, MobEffects.WITHER, 30, 1);
         }
     }
 

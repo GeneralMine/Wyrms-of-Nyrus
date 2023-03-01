@@ -1,71 +1,113 @@
-## Death World Update
-### 0.2.6
-**NOW REQUIRES SYNAPSELIB AS A SEPARATE FILE**
-- Uses SynLib 1.0 now
-- Added Creeplings
-- Active creep blocks now legitimately show up in worlds
-- Creep spread is slower now
-- Corium is now made by Creepwyrms
-- Improved codebase
-- Prober damage is now absolute
-- New damagetypes added
-- Warrior wyrm animation(s) updated
-- Strykelings added
-- Russian translation added thanks to Carver!
-- Added Meaty Base
-- Added Unknown Specimen(s)
-- Biter melee now replaced with rapid, but weak bite attack.
-- Biter normal attack damage decreased from 3 to 2
-- Biter roll attack will cancel once damage is done
-- Biter roll attack damage reduced from 10 to 2
-- Biter roll attack now ignores immunity frames
-- Biter now deals bite damage on default
-- Vanitas base speed increased from 0.25 to 0.35
-- Fixed the Creeped not swimming.
-- Fixed Wyrms of Nyrus not using Forge's Dependencies checker properly
-- Removed EXCANON
-- Replaced EXCANON with **_config presets_**:
-  - The initial 3 config presets, "factory" presets, are added
-  - Default config for this update is 1.
-  - Moving onto config ID 3 and above (up to 10) will make custom user configurations
-  - Wyrms of Nyrus will now check if factory settings are outdated
-  - If factory configuration presets are outdated, it will delete all the files in the directory, and regenerate new configs. No need to reset configs any longer (custom configs excluded)
-- Normal mode now spawns Visitor on a chance after 20 days instead of 30 days
-- Fixed Invasion Scheduler waiting for the NEXT DAY OVER instead of THE DAY on modes 1 & 2
-- Normal preset changes:
-  - Visitor HP 600 -> 250
-  - Visitor DEF 20 -> 4
-  - Vanitas HP 18 -> 12
-  - Biter HP 11 -> 8
-  - Creepwyrm HP 55 -> 30
-  - Creepwyrm DEF 10 -> 8
-  - Warrior HP 26 -> 14
-- Fixed an exploit that allowed for event spam which could take out servers
-  - Prevented world data from being easy to modify in weird ways in order to break stuff 
-  - Event scheduler now uses world data instead of memory data.
-- New Wyrmling noises (Death & Hurt)
-- Redone how wyrms take damage
-  - All flying wyrms should take increased projectile damage and should always be resistant against fall damage
-  - Wyrms should now inherit these specific rules:
-    - 3x damage from fire
-    - no damage from drowning or suffocation
-    - If immune to falling, is immune to falling.
-    - If immune to cactus/thorns, is immune to cactus/thorns.
-    - If immune to explosions, is immune to explosions.
-- Visitors now take extra damage from projectiles (Commonly requested)
-- New config option: **Flying Wyrm Projectile Weakness**
-- New config option: **Voidwyrm Projectile Weakness**
-- Vanitas now has swiming animations
-- Now uses vanilla water detection for animations
-- New Evolution modlist reader for minimum evolution
-- New config option: **Modlist detector strings**
-- Evo min points:
-  - Now detects ICBM-Classic
-- Wyrms no longer drown
-- Wyrms can now resist explosion damage in Death World and above difficulty presets
-- New config option: **Immune to explosions**
+## Dark Skies Update
+### 0.3
 
-## MULTIPLAYER IMPROVEMENTS
-- Invasion events now select a random player to target
-  - Singleplayer: This will always select the player.
-- Invasion events will not take place when no one is on the server
+![Early beta promo image](https://media.discordapp.net/attachments/961745719981658172/1079612844150104094/WoN_0.3_update_promo.png)
+
+This update is potentially incompatible with old worlds or may cause a few issues when updating.
+
+Reading these (x/y/z) statements are the default config values that are different across the new preset systems. X = Classic, Y = Death World, and Z = Dark Forest.
+
+- Split Radiogenics Config into 4 categories:
+  - Wyrms
+  - Creeped
+  - Follies
+  - Global (Affects Wyrms, Creeped, and Follies alike)
+- New config options for Radiogenics:
+  - Wyrms:
+    - **Drop pods cause block damage** (false/true/true)
+  - Creeped:
+    - **Immune to Explosions** (false/true/true)
+    - **Immune to Cacti** (false/false/false)
+    - **Immune to Falling** (false/false/true)
+  - Global:
+    - **Mob Easter Eggs** (true/true/true)
+- Wyrms in classic mode are now only immune to falling
+- Creeped mobs made into a unified class (That is technical speak for "they now have their own properties")
+- Drop pods can now destroy blocks upon landing in Death World and above difficulties
+- Unified more drop pod code for consistency
+- Visitor-originating Callous Landing Pods now spawn rovers and soldiers instead of probers
+- Moved more rendering code to be client-side only
+- Evolution decays ~66% faster (but still respects minimum evolution rules)
+- Removed some unused code
+- Visitor no longer gets pushed by its own drop pods
+- Visitor drops pods further away from each other
+- Improved code for wyrms exploding on death while on fire
+  - This should reduce the amount of code in the mod
+  - Added internal (invisible) potency stat.
+  - Wyrms with 0 potency will not violently explode at death, but provide no evolution points upon death as well.
+  - Wyrms, regardless of the configuration rules, will still contribute evolution points on death, so long as they have potency.
+- New "potency" stat in wyrms
+  - Determines if the mob explodes on death via fire
+  - Also determines if the entity has (and how much) evolution points to contribute upon death.
+    - If potency is at least 20 or more, every 20 points and after is +1 evolution point added.
+  - Potency stats of wyrms:
+    - Visitor: 100 (5 evo points on death)
+    - Creepwyrm: 45 (2 evo points on death)
+    - Soldier: 15
+    - Warrior: 10
+    - Vanitas: 6
+    - Myrmur & Biter: 4
+    - Worker: 3.5
+    - Rover: 3
+    - Wyrmling: 1.5
+    - Creepling: 1.25
+    - Prober: 1
+  - All drop pods have a potency of zero
+  - Wyrm explosion power decreased in most cases
+- Redone how entities are registered into the game
+- Warrior tracking (and render) distance increased from 64 to 128
+- Fixed soldier infectoid variant having lower tracking distance
+- Increased Creepling tracking distance from 16 to 32
+- New spawner items for wyrms
+- Pod & Voidwyrm spawner items spawn their entities in the air
+- Strykelings now spawn in the center of blocks
+- Spawner items that fail to spawn an entity will spawn a Spider instead.
+- Removed vanilla-style spawn eggs for wyrm mobs (with a few exceptions at the moment)
+- Massive English language file update
+- New descriptions for mobs
+- Creepwyrms can no longer be pushed around and actually stay stationary on blocks.
+- New debug mode messages related to evolution points being added and natural decay of evolution points. (Lever 5 debug mode or above needed)
+- Killing wyrms with fire increases evo points gained by 2x (Dark Forest only, configurable in Evolution configurations)
+- Updated Strykeling animations
+- Wyrm stats are now persistent across world loads, including across sessions.
+  - Fixed wyrm stats (health, armor, damage, etc.) only being saved to memory (RAM)
+  - Before, just follies would do this.
+  - Creeped also remember their stats
+- Improved animation functions built upon Geckolib
+  - Wyrms now use an Animation Array to define and pick out animations, therefore reducing the amount of work needed to define new animations
+  - I thought the current system was a bit messy and hard to look at, so I fixed it (somewhat.)
+- Creepwyrms that infest a certain number of blocks will now summon a new Creeped unit.
+  - Classic difficulty: Will summon only biters
+  - Death World difficulty: Will summon tier 1 Creeped (Biters, Creeplings)
+  - Dark Forest difficulty: Will summon any Creeped
+- Creepwyrms that make (10/8/7) successful summons will call forth (1/2/3) Creep Pods from the sky in a (30/45/100)-block radius.
+- Increased the size of the Creepwyrm hitbox
+- Creepwyrms now use their summoning animation
+- New secrets
+- Removed despawn timer references for Visitor
+  - *Why was that still there?*
+- Introducing new advancements:
+  - **"How did we get here?"** 
+  - **"KILL IT WITH FIRE!"**
+  - **"A Splitting Migraine"**
+  - **"Not Today!"**
+  - **"Californium's Witness"**
+- New AI abilities
+  - Banishment
+  - Smite
+  - Wide-area Attack
+- Soldiers now use a wide-range swipe attack
+  - No animation for it yet!
+- Wyrms now use an even more aggressive AI
+  - This means if something interrupts them from chasing and attacking their current target, they will switch to another target.
+  - Wyrms will be less forgiving when swarmed/interrupted
+    - Wyrms gain positive potion effects
+    - They will knock back the original target in order to clear the way to the new target
+    - Certain wyrms can not enrage:
+      - Wyrmlings
+      - Workers
+      - All drop pods
+      - All Creeped
+      - The Visitor
+      - Probers
+- A number of new sound effects 

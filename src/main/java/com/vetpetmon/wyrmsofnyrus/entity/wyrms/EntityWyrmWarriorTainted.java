@@ -6,14 +6,14 @@ import com.hbm.potion.HbmPotion;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
-import com.vetpetmon.wyrmsofnyrus.evo.evoPoints;
+import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMob;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.EntityAIFlierMoveRandom;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
-import com.vetpetmon.wyrmsofnyrus.synapselib.difficultyStats;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMob;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMoveRandom;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.movehelpers.FlierMoveHelperGhastlike;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -27,19 +27,14 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 
 public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnimatable, IAnimationTickable, IRadiationImmune {
     private final AnimationFactory factory = new AnimationFactory(this);
-
-    private String animationName = "animation.warriorwyrm";
     //private boolean isCharging;
     public EntityWyrmWarriorTainted(World world) {
         super(world);
@@ -47,17 +42,19 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
         setSize(0.9f, 2.0f);
         experienceValue = 30;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new flierMoveHelperGhastlike(this, 20, 1.0, 0.8);
+        this.moveHelper = new FlierMoveHelperGhastlike(this, 20, 1.0, 0.8);
         enablePersistence();
         setNoAI(false);
+        setPotency(10);
+        this.setAnimationNames(new String[]{"warriorwyrm.groundedIdle","warriorwyrm.groundedRun","warriorwyrm.idle","warriorwyrm.moving","warriorwyrm.inWater","warriorwyrm.swim"});
     }
 
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        if (Evo.evoEnabled && (evoPoints.getLevel() >= Evo.minEvoWarriorTainted)) this.setStatsEvo(wyrmStats.taintedWarriorHP,wyrmStats.taintedWarriorDEF,wyrmStats.taintedWarriorATK,wyrmStats.taintedWarriorSPD,wyrmStats.taintedWarriorKBR, Evo.minEvoWarriorTainted);
-        else this.setStats(wyrmStats.taintedWarriorHP,wyrmStats.taintedWarriorDEF,wyrmStats.taintedWarriorATK,wyrmStats.taintedWarriorSPD,wyrmStats.taintedWarriorKBR);
+        if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoWarriorTainted)) this.setStatsEvo(WyrmStats.taintedWarriorHP, WyrmStats.taintedWarriorDEF, WyrmStats.taintedWarriorATK, WyrmStats.taintedWarriorSPD, WyrmStats.taintedWarriorKBR, Evo.minEvoWarriorTainted);
+        else this.setStats(WyrmStats.taintedWarriorHP, WyrmStats.taintedWarriorDEF, WyrmStats.taintedWarriorATK, WyrmStats.taintedWarriorSPD, WyrmStats.taintedWarriorKBR);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
     }
 
@@ -80,15 +77,9 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     public boolean attackEntityAsMob(Entity entityIn) {
         boolean result = super.attackEntityAsMob(entityIn);
         if (result) {
-            difficultyStats.applyPotionEffect(entityIn, HbmPotion.taint, 240, 1);
+            DifficultyStats.applyPotionEffect(entityIn, HbmPotion.taint, 240, 1);
         }
         return result;
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,7);
     }
     @Override
     public void onLivingUpdate(){
@@ -132,14 +123,14 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".swim"));
-            else if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedRun"));
-            else event.getController().setAnimation(new AnimationBuilder().addAnimation((animationName + ".moving")));
+            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(getAnimation(5));
+            else if (isGrounded()) event.getController().setAnimation(getAnimation(1));
+            else event.getController().setAnimation(getAnimation(3));
         }
         else {
-            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".inWater"));
-            else if (isGrounded()) event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".groundedIdle"));
-            else event.getController().setAnimation(new AnimationBuilder().addAnimation(animationName + ".idle"));
+            if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(getAnimation(4));
+            else if (isGrounded()) event.getController().setAnimation(getAnimation(0));
+            else event.getController().setAnimation(getAnimation(2));
         }
         return PlayState.CONTINUE;
     }

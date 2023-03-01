@@ -2,12 +2,13 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
+import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.VoidwyrmAI;
-import com.vetpetmon.wyrmsofnyrus.synapselib.ai.moveHelpers.flierMoveHelperGhastlike;
+import com.vetpetmon.wyrmsofnyrus.locallib.ai.movehelpers.FlierMoveHelperGhastlike;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,19 +21,15 @@ import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
-
 
 public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private int timeUntilDespawn;
-    private int dropTimer;
+    private int dropTimer, timesdropped;
 
     private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.YELLOW, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
@@ -42,21 +39,31 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         experienceValue = 100;
         this.casteType = 8;
         this.navigator = new PathNavigateFlying(this, this.world);
-        this.moveHelper = new flierMoveHelperGhastlike(this, 200, wyrmStats.visitorSPD, 0.0D);
-        this.dropTimer = (this.rand.nextInt( Invasion.visitorDropPodFrequencyVariation) + Invasion.visitorDropPodFrequency);
+        this.moveHelper = new FlierMoveHelperGhastlike(this, 200, WyrmStats.visitorSPD, 0.0D);
+        this.dropTimer = (20*45); //48 seconds until first cymbal crash, so give 3 seconds to spawn and fall.
         setNoAI(false);
         enablePersistence();
+        setPotency(100);
+        this.setAnimationNames(new String[]{"visitor.Idle"});
     }
-
+    @Override
+    protected boolean canEnrage(){return false;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.visitorHP,wyrmStats.visitorDEF,0.0F,wyrmStats.visitorSPD,wyrmStats.visitorKBR);
+        this.setStats(WyrmStats.visitorHP, WyrmStats.visitorDEF,0.0F, WyrmStats.visitorSPD, WyrmStats.visitorKBR);
     }
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(4, new VoidwyrmAI(this, wyrmStats.visitorSPD, 200));
+        this.tasks.addTask(4, new VoidwyrmAI(this, WyrmStats.visitorSPD, 200));
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        Entity entity = source.getTrueSource();
+        if (entity instanceof EntityPlayerMP && this.timesdropped == 0) Advancements.grantAchievement((EntityPlayerMP) entity, Advancements.nottoday);
     }
 
     @Override
@@ -71,6 +78,7 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     public void addTrackingPlayer(EntityPlayerMP player) {
         super.addTrackingPlayer(player);
         bossInfo.addPlayer(player);
+        Advancements.grantAchievement(player, Advancements.witness);
     }
     @Override
     public void removeTrackingPlayer(EntityPlayerMP player) {
@@ -99,21 +107,16 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
-
-        if (compound.hasKey("GrowthTime"))
-        {
-            this.timeUntilDespawn = compound.getInteger("DespawnTime");
-        }
-
         if (compound.hasKey("dropTimer"))
         {
-            this.timeUntilDespawn = compound.getInteger("dropTimer");
+            this.dropTimer = compound.getInteger("dropTimer");
         }
 
         if (compound.hasKey("srpcothimmunity"))
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
+        this.timesdropped=compound.getInteger("timesdropped");
         if (this.hasCustomName()) this.bossInfo.setName(this.getDisplayName());
     }
 
@@ -131,8 +134,8 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         this.srpcothimmunity = 0;
 
         compound.setInteger("dropTimer", this.dropTimer);
+        compound.setInteger("timesdropped", this.timesdropped);
         compound.setInteger("srpcothimmunity", this.srpcothimmunity);
-        compound.setInteger("DespawnTime", this.timeUntilDespawn);
     }
 
     public void onLivingUpdate()
@@ -151,16 +154,17 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
         int spawnZ;
         Entity entityToSpawn;
         for (int index0 = 0; index0 < (RNG.getIntRangeInclu(2,5)); index0++) {
-            spawnX = x + RNG.getIntRangeInclu(-3,3);
-            spawnZ = z + RNG.getIntRangeInclu(-3,3);
+            spawnX = x + RNG.getIntRangeInclu(-5,5);
+            spawnZ = z + RNG.getIntRangeInclu(-5,5);
             if (!world.isRemote) {
                 if (RNG.getIntRangeInclu(1,2) == 1){
                     entityToSpawn = new EntityHexePod(world);
                 }
                 else {
                     entityToSpawn = new EntityCallousPod(world);
+                    ((EntityCallousPod) entityToSpawn).setPodType(2,1);
                 }
-                entityToSpawn.setLocationAndAngles(spawnX, y, spawnZ, world.rand.nextFloat() * 360F, 0.0F);
+                entityToSpawn.setLocationAndAngles(spawnX, y-5, spawnZ, world.rand.nextFloat() * 360F, 0.0F);
                 world.spawnEntity(entityToSpawn);
             }
         }
@@ -175,16 +179,9 @@ public class EntityTheVisitor extends EntityWyrm implements IAnimatable {
             return super.attackEntityFrom(source, (float) (amount * Radiogenetics.voidwyrmProjWeakness));
         return super.attackEntityFrom(source, amount);
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,100);
-    }
-
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.visitor.Idle"));
+        event.getController().setAnimation(getAnimation(0));
 
         return PlayState.CONTINUE;
     }

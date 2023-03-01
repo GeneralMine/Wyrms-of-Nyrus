@@ -4,12 +4,12 @@ import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.BreakGlass;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.AIProberAttack;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.ProberAttackAI;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.FlyingMobAI;
-import com.vetpetmon.wyrmsofnyrus.invasion.invasionPoints;
+import com.vetpetmon.wyrmsofnyrus.invasion.InvasionPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,13 +29,10 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 
 public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, IAnimationTickable {
@@ -55,8 +52,11 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         setNoAI(false);
         this.proberTimer = 2500; // Lives for ~2 two minutes
         this.probingpoints = 0;
+        setPotency(1);
+        this.setAnimationNames(new String[]{"wyrmprober.Moving","wyrmprober.flying"});
     }
-
+    @Override
+    protected boolean canEnrage(){return false;}
     @Override
     public int tickTimer() {
         return ticksExisted;
@@ -140,10 +140,10 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.proberHP,wyrmStats.proberDEF,wyrmStats.proberATK,wyrmStats.proberSPD,1.0F);
+        this.setStats(WyrmStats.proberHP, WyrmStats.proberDEF, WyrmStats.proberATK, WyrmStats.proberSPD,1.0F);
         if (Invasion.probingEnabled) {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
-            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(wyrmStats.proberSPD+0.25D);
+            this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(WyrmStats.proberSPD+0.25D);
         }
         else {
             this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
@@ -157,7 +157,7 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         //this.tasks.addTask(4, new AIFlyingMobCharge(2.0));
         // Bypass configs entirely if probing is enabled, else make probers respect the optimizations players want.
         if (Invasion.probingEnabled) {
-            this.tasks.addTask(2, new AIProberAttack(this, 1.5D, true));
+            this.tasks.addTask(2, new ProberAttackAI(this, 1.5D, true));
             this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 256, 10));
             this.afterPlayers(true, true);
             this.afterVillagers();
@@ -183,17 +183,11 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         if (result) this.probingpoints += 2;
         return result;
     }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,1);
-    }
     @Override
     public void onLivingUpdate(){
         super.onLivingUpdate();
         if (!this.world.isRemote && --this.proberTimer <= 0){
-            invasionPoints.add(world, this.probingpoints);
+            InvasionPoints.add(world, this.probingpoints);
             this.setDead();
         }
         chanceToBreak = RNG.dBase(20);
@@ -261,10 +255,10 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprober.Moving"));
+            event.getController().setAnimation(getAnimation(0));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmprober.flying"));
+            event.getController().setAnimation(getAnimation(1));
         }
 
         return PlayState.CONTINUE;

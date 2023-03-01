@@ -1,8 +1,8 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -30,8 +30,8 @@ public class WyrmInvasionCommandExecuted{
 					return "";
 				}
 			}.getText())).equals("reset"))) {
-				wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints = 0.0D;
-				wyrmVariables.WorldVariables.get(world).syncData(world);
+				WyrmVariables.WorldVariables.get(world).wyrmInvasionPoints = 0.0D;
+				WyrmVariables.WorldVariables.get(world).syncData(world);
 				System.out.println("Wyrm invasion points set to 0");
 			} else if ((((new Object() {
 				public String getText() {
@@ -42,7 +42,7 @@ public class WyrmInvasionCommandExecuted{
 					return "";
 				}
 			}.getText())).equals("print"))) {
-				System.out.println((("Points: ") + "" + ((wyrmVariables.WorldVariables.get(world).wyrmInvasionPoints))));
+				System.out.println((("Points: ") + "" + ((WyrmVariables.WorldVariables.get(world).wyrmInvasionPoints))));
 			} else if ((((new Object() {
 				public String getText() {
 					String param = (String) cmdparams.get("0");
@@ -52,9 +52,9 @@ public class WyrmInvasionCommandExecuted{
 					return "";
 				}
 			}.getText())).equals("forceVisit"))) {
-				wyrmVariables.WorldVariables.get(world).invasionStarted = false;
+				WyrmVariables.WorldVariables.get(world).invasionStarted = false;
 				System.out.println("Invasion forced");
-				wyrmVariables.WorldVariables.get(world).syncData(world);
+				WyrmVariables.WorldVariables.get(world).syncData(world);
 				{
 					VisitorEvent.visitorEvent(true, world,x,y,z);
 				}
@@ -67,9 +67,9 @@ public class WyrmInvasionCommandExecuted{
 					return "";
 				}
 			}.getText())).equals("startInvasion"))) {
-				wyrmVariables.WorldVariables.get(world).invasionStarted = true;
-				wyrmVariables.WorldVariables.get(world).syncData(world);
-				wyrmsofnyrus.logger.info("Wyrm invasion started by command usage.");
+				WyrmVariables.WorldVariables.get(world).invasionStarted = true;
+				WyrmVariables.WorldVariables.get(world).syncData(world);
+				WyrmsOfNyrus.logger.info("Wyrm invasion started by command usage.");
 			}else if ((((new Object() {
 				public String getText() {
 					String param = (String) cmdparams.get("0");
@@ -79,9 +79,9 @@ public class WyrmInvasionCommandExecuted{
 					return "";
 				}
 			}.getText())).equals("stopInvasion"))) {
-				wyrmVariables.WorldVariables.get(world).invasionStarted = false;
-				wyrmVariables.WorldVariables.get(world).syncData(world);
-				wyrmsofnyrus.logger.info("Wyrm invasion ended by command usage.");
+				WyrmVariables.WorldVariables.get(world).invasionStarted = false;
+				WyrmVariables.WorldVariables.get(world).syncData(world);
+				WyrmsOfNyrus.logger.info("Wyrm invasion ended by command usage.");
 			}else {
 				{
 					MinecraftServer mcserv = FMLCommonHandler.instance().getMinecraftServerInstance();

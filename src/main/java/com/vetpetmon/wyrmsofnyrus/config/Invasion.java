@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.config;
 
 import com.vetpetmon.synapselib.util.blacklistUtil;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Configuration;
 
@@ -64,7 +64,7 @@ public class Invasion {
         visitorDropPodFrequencyVariation = createConfigInt(config, CATEGORYTHREE,"Visitor drop pod frequency variation" ,"Random variation added to the drop delays, adds -x to x ticks to delay. Default: 500", ConfigBase.presetInts(500, 550, 250, id));
 
         invasionEnabled = createConfigBool(config, CATEGORY, "Invasion enabled", "Enables the invasion system. Many functions of the mod will not work if this is off, including other sub-systems. Default: true", true);
-        if (!invasionEnabled) wyrmsofnyrus.logger.info("Invasion module has been disabled");
+        if (!invasionEnabled) WyrmsOfNyrus.logger.info("Invasion module has been disabled");
         invasionStartsNaturally = createConfigBool(config, CATEGORY, "Invasion starts naturally", "Allows the invasion to start naturally without needing admin commands. Default: true", true);
 
         //invasion stage point thresholds
@@ -80,13 +80,13 @@ public class Invasion {
 
         invasionPointsPerKill = createConfigInt(config, CATEGORY, "Invasion Points Per Kill", "Wyrms gain invasion points for every kill. Set this to 0 to disable this feature entirely. Default: 1", ConfigBase.presetInts(1,1,2,id));
 
-        probingEnabled = createConfigBool(config, CATEGORY, "Probing enabled", "Probers deal heavy damage and every kill advances the invasion by 5 points, compared to only one, IF the entity can be sampled (hit) more than once. One-shots or each hit adds 2 points. They also have longer aggro range and fly faster. Set to false to disable this feature and make probers less dangerous. Default: true", ConfigBase.presetBools(false, true, true, id));
+        probingEnabled = createConfigBool(config, CATEGORY, "Probing enabled", "Probers deal heavy damage and every kill advances the invasion by 5 points, compared to only one, IF the entity can be sampled (hit) more than once. One-shots or each hit adds 2 points. They also have longer aggro range and fly faster. Set to false to disable this feature and make probers less dangerous.", ConfigBase.presetBools(false, true, true, id));
 
         creepTickRate = createConfigInt(config, CATEGORYTWO, "Creep tickrate", "Every n world ticks, hive creep blocks will tick and roll to see if they spread or not. 20 ticks = 1 second. Default: 500", ConfigBase.presetInts(500, 475,450, id));
         creepNewInactivity = createConfigBool(config, CATEGORYTWO, "Experimental creep inactivity algorithm", "By default, hive creep blocks just have a chance to turn inactive. The new algorithm checks all blocks in range for a non-creepable block. However, the new algorithm can be buggy and produce weird results, such as hive creep turning inactive ASAP, or it never turning inactive. Default: false", false);
         creepEnabled = createConfigBool(config, CATEGORYTWO, "Creep enabled", "If The Creep is enabled or not. This stops spread, and also renders Creepwyrms useless (Also disabling their spawning.) Default: true", true);
-        if (!creepEnabled) wyrmsofnyrus.logger.info("Creep module has been disabled");
-        if (creepNewInactivity) wyrmsofnyrus.logger.warn("We are using the new Creep inactivity algorithm. May the suns be on your sides. (This is EXPERIMENTAL)");
+        if (!creepEnabled) WyrmsOfNyrus.logger.info("Creep module has been disabled");
+        if (creepNewInactivity) WyrmsOfNyrus.logger.warn("We are using the new Creep inactivity algorithm. May the suns be on your sides. (This is EXPERIMENTAL)");
         creepSpreadRate = createConfigInt(config, CATEGORYTWO, "Creep spread speed", "1 to n chance every tick that a hive creep blocks actually does something. Some blocks will tick much slower, like creepstone. Increase this number if you're seeing TPS drops. Default: 10", 10);
         creepSpreadPoints = createConfigDouble(config, CATEGORYTWO, "Creep spread points", "Every time a creep block is created, the invasion points increase. If Invasion is not enabled, this won't work at all. It is recommended you should keep this number as a decimal unless if you want pain... Default: 0.015", 0.015);
         creepSpreadMaxHardness = createConfigDouble(config, CATEGORYTWO, "Creep spread max hardness", "Maximum hardness of a block that can be infested. Can automatically generate a blacklist this way for other mods if you're too lazy to add to the blacklist below. Default: 2.45", 2.45);
@@ -116,30 +116,30 @@ public class Invasion {
      * Validates user input concerning phase thresholds.
      */
     public static void validatePhaseThresholds(){
-        if(Debug.LOGGINGENABLED)wyrmsofnyrus.logger.info("Validating invasion stage point thresholds...");
+        if(Debug.LOGGINGENABLED)WyrmsOfNyrus.logger.info("Validating invasion stage point thresholds...");
         boolean validationFailed = false;
             if (iPointsIStage1Threshold > iPointsIStage2Threshold) {
                 validationFailed = true;
-                wyrmsofnyrus.logger.warn("Stage 1 Invasion Point threshold was more than Stage 2 Invasion Point threshold, resetting to default...");
+                WyrmsOfNyrus.logger.warn("Stage 1 Invasion Point threshold was more than Stage 2 Invasion Point threshold, resetting to default...");
             }
             else if (iPointsIStage2Threshold > iPointsIStage3Threshold) {
                 validationFailed = true;
-                wyrmsofnyrus.logger.warn("Stage 2 Invasion Point threshold was more than Stage 3 Invasion Point threshold, resetting to default...");
+                WyrmsOfNyrus.logger.warn("Stage 2 Invasion Point threshold was more than Stage 3 Invasion Point threshold, resetting to default...");
             }
             else if (iPointsIStage3Threshold > iPointsIStage4Threshold) {
                 validationFailed = true;
-                wyrmsofnyrus.logger.warn("Stage 3 Invasion Point threshold was more than Stage 4 Invasion Point threshold, resetting to default...");
+                WyrmsOfNyrus.logger.warn("Stage 3 Invasion Point threshold was more than Stage 4 Invasion Point threshold, resetting to default...");
             }
             else if (iPointsIStage4Threshold > iPointsIStage5Threshold) {
                 validationFailed = true;
-                wyrmsofnyrus.logger.warn("Stage 4 Invasion Point threshold was more than Stage 5 Invasion Point threshold, resetting to default...");
+                WyrmsOfNyrus.logger.warn("Stage 4 Invasion Point threshold was more than Stage 5 Invasion Point threshold, resetting to default...");
             }
             else if (iPointsIStage5Threshold > iPointsIStage6Threshold) {
                 validationFailed = true;
-                wyrmsofnyrus.logger.warn("Stage 5 Invasion Point threshold was more than Stage 6 Invasion Point threshold, resetting both to default...");
+                WyrmsOfNyrus.logger.warn("Stage 5 Invasion Point threshold was more than Stage 6 Invasion Point threshold, resetting both to default...");
             }
             if (validationFailed) {
-                wyrmsofnyrus.logger.warn("Had to fall back to default point thresholds to avoid logic errors. Please fix your configuration file to use custom thresholds again.");
+                WyrmsOfNyrus.logger.warn("Had to fall back to default point thresholds to avoid logic errors. Please fix your configuration file to use custom thresholds again.");
                 iPointsIStage1Threshold = 1000;
                 iPointsIStage2Threshold = 5000;
                 iPointsIStage3Threshold = 10000;
@@ -147,6 +147,6 @@ public class Invasion {
                 iPointsIStage5Threshold = 100000;
                 iPointsIStage6Threshold = 2500000;
             }
-        if(Debug.LOGGINGENABLED)wyrmsofnyrus.logger.info("All invasion stage point thresholds are validated.");
+        if(Debug.LOGGINGENABLED)WyrmsOfNyrus.logger.info("All invasion stage point thresholds are validated.");
     }
 }

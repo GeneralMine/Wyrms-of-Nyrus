@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.follies;
 
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
-import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmBreakDoors;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
+import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.WyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.FollyBiteAttackAI;
 import com.vetpetmon.wyrmsofnyrus.handlers.WoNDamageSources;
 import net.minecraft.entity.Entity;
@@ -25,11 +25,11 @@ public class EntityStryker extends EntityWyrmfolly implements IAnimatable, IAnim
 
     public void StatMap() {
         this.setStats(
-                wyrmStats.strykerfollyHP,
-                wyrmStats.strykerfollyDEF,
-                wyrmStats.strykerfollyATK,
-                wyrmStats.strykerfollySPD,
-                wyrmStats.strykerfollyKBR
+                WyrmStats.strykerfollyHP,
+                WyrmStats.strykerfollyDEF,
+                WyrmStats.strykerfollyATK,
+                WyrmStats.strykerfollySPD,
+                WyrmStats.strykerfollyKBR
         );
     }
 
@@ -46,7 +46,7 @@ public class EntityStryker extends EntityWyrmfolly implements IAnimatable, IAnim
     @Override
     protected void initEntityAI() { //AYO YOUR LEAPING IS GOOFY!!! override the whole thing
         makeAllTargets();
-        this.tasks.addTask(2, new wyrmBreakDoors(this, 200));
+        this.tasks.addTask(2, new WyrmBreakDoors(this, 200));
         this.tasks.addTask(1, new EntityAIWander(this, 0.45));
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new FollyBiteAttackAI(this.ATK,this, 1.0D, true));

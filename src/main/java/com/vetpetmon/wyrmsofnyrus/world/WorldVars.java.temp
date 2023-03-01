@@ -1,0 +1,30 @@
+package com.vetpetmon.wyrmsofnyrus.world;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraft.world.storage.WorldSavedData;
+
+public class WorldVars extends WorldSavedData {
+    int wyrmEvo;
+    private static WorldVars instance;
+    public WorldVars() {
+        super("wyrmWorldVars");
+    }
+
+    public static WorldVars get(World worldIn) {
+        return WorldVars.instance;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        wyrmEvo                     =   nbt.getInteger("wyrmEvo");
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+
+        nbt.setInteger("wyrmEvo", wyrmEvo);
+
+        return nbt;
+    }
+}

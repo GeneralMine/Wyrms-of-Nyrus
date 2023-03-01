@@ -2,9 +2,9 @@ package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
-import com.vetpetmon.wyrmsofnyrus.wyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import com.vetpetmon.synapselib.util.RNG;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.world.World;
 
 public class InvasionScheduler {
@@ -21,8 +21,8 @@ public class InvasionScheduler {
 
     public static boolean invasionStartCondition() {
         if (Debug.LOGGINGENABLED) {
-            wyrmsofnyrus.logger.info("invasionStartTime is " + Invasion.invasionStartTime + ".");
-            wyrmsofnyrus.logger.info("invasionStartChance is " + Invasion.invasionStartChance + ".");
+            WyrmsOfNyrus.logger.info("invasionStartTime is " + Invasion.invasionStartTime + ".");
+            WyrmsOfNyrus.logger.info("invasionStartChance is " + Invasion.invasionStartChance + ".");
         }
         if (Invasion.invasionStartMode > 1) {
             return currentDay >= Invasion.invasionStartTime && (RNG.getIntRangeInclu(0, Invasion.invasionStartChance) == 1);
@@ -39,8 +39,8 @@ public class InvasionScheduler {
         else if (currentDay >= nextDay) {
             nextDay = currentDay + 1;
             if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 3) {
-                wyrmsofnyrus.logger.info("Day changed detected, current day is now " + currentDay + ".");
-                wyrmsofnyrus.logger.info("Day changed detected, next day is now " + nextDay + ".");
+                WyrmsOfNyrus.logger.info("Day changed detected, current day is now " + currentDay + ".");
+                WyrmsOfNyrus.logger.info("Day changed detected, next day is now " + nextDay + ".");
             }
             return true;
         }
@@ -53,8 +53,8 @@ public class InvasionScheduler {
         else if (currentHalfDay >= nextHalfDay) {
             nextHalfDay = currentHalfDay + 1;
             if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 3) {
-                wyrmsofnyrus.logger.info("Half-day changed detected, current half-day is now " + currentHalfDay + ".");
-                wyrmsofnyrus.logger.info("Half-day changed detected, next half-day is now " + nextHalfDay + ".");
+                WyrmsOfNyrus.logger.info("Half-day changed detected, current half-day is now " + currentHalfDay + ".");
+                WyrmsOfNyrus.logger.info("Half-day changed detected, next half-day is now " + nextHalfDay + ".");
             }
             return true;
         }
@@ -107,25 +107,25 @@ public class InvasionScheduler {
             nextEventTime = currentEventTime+1;
             setScheduler(world); // update world variables and save them to the file
             if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 3) {
-                wyrmsofnyrus.logger.info("Current Event time schedule: " + currentEventTime + ".");
-                wyrmsofnyrus.logger.info("Next Event scheduled for: " + nextEventTime + ".");
+                WyrmsOfNyrus.logger.info("Current Event time schedule: " + currentEventTime + ".");
+                WyrmsOfNyrus.logger.info("Next Event scheduled for: " + nextEventTime + ".");
             }
             return true;
         }
         return false;
     }
     public static void getScheduler(World w) {
-        currentEventTime = wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance;
-        nextEventTime = wyrmVariables.WorldVariables.get(w).eventSchedulerNextInstance;
+        currentEventTime = WyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance;
+        nextEventTime = WyrmVariables.WorldVariables.get(w).eventSchedulerNextInstance;
         if (currentEventTime > getWorldSchedule(w)) {
-            wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance = getWorldSchedule(w);
-            wyrmVariables.WorldVariables.get(w).syncData(w);
+            WyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance = getWorldSchedule(w);
+            WyrmVariables.WorldVariables.get(w).syncData(w);
             getScheduler(w);
         }
     }
     private static void setScheduler(World w) {
-        wyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance = currentEventTime;
-        wyrmVariables.WorldVariables.get(w).eventSchedulerNextInstance = nextEventTime;
-        wyrmVariables.WorldVariables.get(w).syncData(w);
+        WyrmVariables.WorldVariables.get(w).eventSchedulerCurrentInstance = currentEventTime;
+        WyrmVariables.WorldVariables.get(w).eventSchedulerNextInstance = nextEventTime;
+        WyrmVariables.WorldVariables.get(w).syncData(w);
     }
 }

@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
-import com.vetpetmon.wyrmsofnyrus.config.wyrmStats;
+import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
@@ -17,13 +17,10 @@ import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
 public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -34,6 +31,8 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
         experienceValue = 4;
         enablePersistence();
         setNoAI(false);
+        setPotency(3);
+        this.setAnimationNames(new String[]{"wyrmrover.idle","wyrmrover.move"});
     }
 
     @Override
@@ -51,7 +50,7 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setStats(wyrmStats.roverHP,wyrmStats.roverDEF,wyrmStats.roverATK,wyrmStats.roverSPD,wyrmStats.roverKBR);
+        this.setStats(WyrmStats.roverHP, WyrmStats.roverDEF, WyrmStats.roverATK, WyrmStats.roverSPD, WyrmStats.roverKBR);
     }
 
     @Override
@@ -77,21 +76,16 @@ public class EntityWyrmRover extends EntityWyrm implements IAnimatable, IAnimati
         this.playSound(SoundRegistry.wyrmSteps, 1.0F, 1.0F);
     }
 
-    @Override
-    public void onDeath(DamageSource source) {
-        super.onDeath(source);
-        wyrmDeathSpecial(this,getPosition(),world,6);
-    }
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 1F, this::predicate));
     }
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmrover.move"));
+            event.getController().setAnimation(getAnimation(1));
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.wyrmrover.idle"));
+            event.getController().setAnimation(getAnimation(0));
         }
         return PlayState.CONTINUE;
     }

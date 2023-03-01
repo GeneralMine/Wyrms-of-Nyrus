@@ -1,7 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.client.model.entity;
 
 import com.vetpetmon.wyrmsofnyrus.entity.wyrms.EntityWyrmWarriorTainted;
-import com.vetpetmon.wyrmsofnyrus.wyrmsofnyrus;
+import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -14,19 +14,19 @@ public class WyrmWarriorTaintedModel extends AnimatedTickingGeoModel<EntityWyrmW
     @Override
     public ResourceLocation getModelLocation(EntityWyrmWarriorTainted EntityWyrmWarriorTainted)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "geo/warriorwyrm.geo.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "geo/warriorwyrm.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(EntityWyrmWarriorTainted EntityWyrmWarriorTainted)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "textures/warriorwyrmt.png");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "textures/warriorwyrmt.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(EntityWyrmWarriorTainted EntityWyrmWarriorTainted)
     {
-        return new ResourceLocation(wyrmsofnyrus.MODID, "animations/warriorwyrm.animation.json");
+        return new ResourceLocation(WyrmsOfNyrus.MODID, "animations/warriorwyrm.animation.json");
     }
 
     @Override
