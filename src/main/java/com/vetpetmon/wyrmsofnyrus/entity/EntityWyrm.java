@@ -369,7 +369,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
                 return false;
         }
         else {
-            if (this.canEnrage() && entity instanceof EntityLivingBase && entity != ogEntity && (entity.getDistance(entity) < 5)) {
+            if (this.canEnrage() && entity != null && entity != ogEntity && (entity.getDistance(entity) < 5)) {
                 if (ogEntity!= null) ogEntity.knockBack(ogEntity,3,2,2);
                 this.setAttackTarget(entity);
                 DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 3, 2);

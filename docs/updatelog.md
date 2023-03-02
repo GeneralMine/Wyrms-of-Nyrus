@@ -8,3 +8,4 @@
     - Attacked by another player
     - Haven't seen original player in a moderate amount of time
     - Targeted player dies
+- Potential fix for wyrms randomly enraging
