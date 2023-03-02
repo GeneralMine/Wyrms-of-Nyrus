@@ -8,6 +8,8 @@ import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.WyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.gestalt.Gestalt;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.gestalt.GestaltHostMind;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreeped;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
 import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityHivemind;
@@ -16,10 +18,7 @@ import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -50,6 +49,7 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, IMob {
 
     private static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
+    public static EntityLiving kollectiveTarget;
     private double potency = 0.0;
 
     // TODO: FIX THIS.
@@ -235,6 +235,11 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
         world.spawnEntity(waypoint);
     }
 
+    // Collective Consciousness, AKA Gestalt
+    protected void enabledGestalt() {
+        this.targetTasks.addTask(0, new Gestalt<>(this));
+    }
+
 
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.
@@ -351,8 +356,10 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     // Controls how all wyrms respond to damage.
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        Entity entity = source.getTrueSource();
+        EntityLivingBase entity = (EntityLivingBase) source.getTrueSource();
         EntityLivingBase ogEntity = this.getAttackTarget();
+        if (entity instanceof EntityPlayer) GestaltHostMind.setKollectiveTarget(entity);
+        else GestaltHostMind.addToLastSeen();
         if (this instanceof EntityCreeped) {
             if (source == DamageSource.FALL && (Radiogenetics.creepedImmuneToFalling && !(this.casteType == 9)))
                 return false;
@@ -364,7 +371,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
         else {
             if (this.canEnrage() && entity instanceof EntityLivingBase && entity != ogEntity && (entity.getDistance(entity) < 5)) {
                 if (ogEntity!= null) ogEntity.knockBack(ogEntity,3,2,2);
-                this.setAttackTarget((EntityLivingBase) entity);
+                this.setAttackTarget(entity);
                 DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 3, 2);
                 DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 3, 1);
                 this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
@@ -401,6 +408,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
+        enabledGestalt();
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true, new Class[0]));
     }
     @Override
