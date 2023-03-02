@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.entity.player.EntityPlayer;
 
 /* Collective Consciousness system
  *
@@ -31,7 +32,28 @@ public class Gestalt<T extends EntityLivingBase> extends EntityAITarget {
             GestaltHostMind.setKollectiveTarget(null); // Forget it exists
             return false;
         }
-        else return this.taskOwner.getAttackTarget() == null;
+        else
+        {
+            double d0 = this.getTargetDistance();
+
+            if (this.taskOwner.getDistanceSq(entitylivingbase) > d0 * d0)
+            {
+                return false;
+            }
+            else
+            {
+                if (entitylivingbase instanceof EntityPlayer && ((EntityPlayer)entitylivingbase).capabilities.disableDamage)
+                {
+                    return false;
+                }
+                else
+                {
+                    this.taskOwner.setAttackTarget(entitylivingbase);
+                    return true;
+                }
+            }
+        }
+        //else return this.taskOwner.getAttackTarget() == null;
     }
 
     public void startExecuting()
@@ -44,6 +66,8 @@ public class Gestalt<T extends EntityLivingBase> extends EntityAITarget {
 
     @Override
     public void resetTask() {
+        EntityLivingBase entitylivingbase = GestaltHostMind.getKollectiveTarget();
+        if (entitylivingbase != null || GestaltHostMind.getLastSeen() > 300) GestaltHostMind.setKollectiveTarget(null);
         super.resetTask();
     }
 }
