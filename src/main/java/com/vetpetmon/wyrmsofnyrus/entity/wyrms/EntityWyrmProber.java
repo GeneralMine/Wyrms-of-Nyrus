@@ -144,7 +144,7 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         super.applyEntityAttributes();
         this.setStats(WyrmStats.proberHP, WyrmStats.proberDEF, WyrmStats.proberATK, WyrmStats.proberSPD,1.0F);
         if (Invasion.probingEnabled) {
-            this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(WyrmStats.proberSPD+0.25D);
         }
         else {

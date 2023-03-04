@@ -149,6 +149,12 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
     }
 
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(60.0D);
+    }
+
     /**
      * If we are not running with Simple AI (config option), then add Entity AI LookIdle & WanderAvoidWater.
      * The reason being is these add random entity updates 24/7, and with 400 wyrms in loaded chunks, this makes a difference of ~300 ms processing time. AKA: With hundreds of wyrms, this saves TPS.

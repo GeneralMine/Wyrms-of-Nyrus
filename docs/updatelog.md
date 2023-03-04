@@ -25,6 +25,8 @@
   - Hive Creep will respond to calls from Nyral Wyrms, and Nyral Wyrms will respond to calls from Hive Creep.
 
 - Wyrms will try to intelligently pathfind through locations
+- Wyrms can now follow from 60 blocks away
+- Creeped can now follow from 100 blocks away
 
 ### Other Changes:
 
