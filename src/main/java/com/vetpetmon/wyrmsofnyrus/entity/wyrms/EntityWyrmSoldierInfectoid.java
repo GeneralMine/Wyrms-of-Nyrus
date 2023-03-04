@@ -11,8 +11,6 @@ import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -44,12 +42,9 @@ public class EntityWyrmSoldierInfectoid extends EntityWyrm implements IAnimatabl
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(2, new WideRangeAttackAI(WyrmStats.soldierATK, this, 0.5, true, 3.0F,30));
         afterPlayers();
-        hivemindFollow();
         if (getAttackVillagers()) afterVillagers();
         afterMobs();
     }

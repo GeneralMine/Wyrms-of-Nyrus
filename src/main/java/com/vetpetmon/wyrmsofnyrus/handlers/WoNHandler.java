@@ -1,9 +1,13 @@
 package com.vetpetmon.wyrmsofnyrus.handlers;
 
+import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.Constants;
+import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
+import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.gestalt.GestaltHostMind;
 import com.vetpetmon.wyrmsofnyrus.entity.nonwyrms.EntityNKAgent;
 import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.invasion.*;
@@ -11,6 +15,7 @@ import com.vetpetmon.wyrmsofnyrus.locallib.ChatUtils;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
@@ -28,6 +33,8 @@ import java.util.Random;
 @Mod.EventBusSubscriber(modid = Constants.ModID)
 public class WoNHandler {
 
+    public static int infamyDecay=5;
+
 
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
@@ -43,6 +50,25 @@ public class WoNHandler {
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         World world = event.world;
         //if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 10) WyrmsOfNyrus.logger.info("[WONHANDLER] onWorldTick was called successfully.");
+        // GESTALT
+        if (AI.gestaltUseInfamy && GestaltHostMind.getAttentionLevel(world) > 1) {
+            if ((GestaltHostMind.getAttentionLevel(world) == 100)) {
+                if (RNG.getIntRangeInclu(1, (AI.gestaltInfamyDecayChance/(1 + (GestaltHostMind.getAttentionLevel(world)/3)))) == 1){
+                    if (infamyDecay == 0) GestaltHostMind.decreaseAttentionLevel(world);
+                    else infamyDecay--;
+                    //WyrmsOfNyrus.logger.info("Infamy decay countdown: " + infamyDecay);
+                    // Next line of code looks extremely evil, but I promise it's completely fine, you don't need curly braces for everything! (:
+                    if (!world.playerEntities.isEmpty()) for (EntityPlayer player: world.playerEntities) {
+                        if(AI.maxInfamySummonsPods) InvasionEvent.invasionEvent(player,world);
+                        world.playSound(null, player.getPosition(), SoundRegistry.maxinfamy, SoundCategory.HOSTILE, 4, 0.5F);
+                    }
+                }
+            }
+            else if (RNG.getIntRangeInclu(1, (AI.gestaltInfamyDecayChance/(1 + (GestaltHostMind.getAttentionLevel(world)/2)))) == 1) {
+                GestaltHostMind.decreaseAttentionLevel(world);
+                infamyDecay = 5;
+            }
+        }
         // EVOLUTION
         EvoPoints.decay(world);
         // INVASION

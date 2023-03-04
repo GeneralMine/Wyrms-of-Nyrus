@@ -10,7 +10,7 @@
             "translate": "advancements.probed.description"
         }
     },
-    "parent": "wyrmsofnyrus:root",
+    "parent": "wyrmsofnyrus:witness",
     "criteria": {
         "impossible": {
             "trigger": "minecraft:impossible"

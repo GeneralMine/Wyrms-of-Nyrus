@@ -26,7 +26,7 @@ public class ConfigBase {
 
     private static final int defaultConfig = 1; // 0 for Classic, 1 for Death World, 2 for Dark Forest.
     private static final String[] factoryConfigs = {"Classic","Death World","Dark Forest"};
-    public static int selectedPreset, presetsVersion = 7;
+    public static int selectedPreset, presetsVersion = 9;
     private static String ConfigDirectory = WyrmsOfNyrus.proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
     private static Configuration general, wyrms, debug, evo, world, invasion, manifest;
 
@@ -76,7 +76,7 @@ public class ConfigBase {
         for (Configuration i:configs) i.load();
         Debug.loadFromConfig(debug); // load this first so that debug config messages can properly function
         ConfigManifest.createManifest(manifest);
-        AI.loadFromConfig(general);
+        AI.loadFromConfig(general, id);
         Radiogenetics.loadFromConfig(general, id);
         WyrmStats.loadFromConfig(wyrms, id);
         Evo.loadFromConfig(evo, id);
@@ -92,6 +92,7 @@ public class ConfigBase {
     public static void firstTimeDialogue() {
         JFrame jf = new JFrame();
         JDialog jd = new JDialog(jf);
+        jf.setTitle("Wyrms of Nyrus");
         jd.setLayout(new FlowLayout());
 
         jd.setBounds(600, 500, 800, 175);
@@ -107,7 +108,11 @@ public class ConfigBase {
             }
         });
 
-        jd.add(jl);jd.add(jl2);jd.add(jl3);jd.add(norm);
+        jd.add(jl);
+        jd.add(jl2);
+        jd.add(jl3);
+        jf.pack();
+        jd.add(norm);
         jd.setVisible(true);
     }
 

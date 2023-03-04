@@ -3,8 +3,10 @@ package com.vetpetmon.wyrmsofnyrus.evo;
 import com.vetpetmon.synapselib.util.RNG;
 import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import com.vetpetmon.wyrmsofnyrus.WyrmsOfNyrus;
+import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.gestalt.GestaltHostMind;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 
@@ -81,9 +83,12 @@ public class EvoPoints {
 
     public static void decay(World w) {
         if (RNG.dBase(10000) == 5) {
-            subtract(w, (int) (1 * Evo.evoFactor));
-            evoMilestone(w);
-            if(Debug.LOGGINGENABLED && Debug.DEBUGLEVEL > 4)WyrmsOfNyrus.logger.info("World's wyrm evolution was decreased by " + (1*Evo.evoFactor) + " from natural decay.s");
+            if (AI.gestaltUseInfamy && GestaltHostMind.infamyIsMaxed) if(Debug.LOGGINGENABLED && Debug.DEBUGLEVEL > 4)WyrmsOfNyrus.logger.info("Failed to decrease wyrm evo due to maximum infamy.");
+            else {
+                subtract(w, (int) (1 * Evo.evoFactor));
+                evoMilestone(w);
+                if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL > 4) WyrmsOfNyrus.logger.info("World's wyrm evolution was decreased by " + (1 * Evo.evoFactor) + " from natural decay.s");
+            }
         }
     }
 

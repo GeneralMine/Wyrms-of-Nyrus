@@ -39,7 +39,6 @@ public class EntityWyrmling extends EntityWyrm {
 
     @Override
     protected void initEntityAI() {
-        hivemindAvoid();
         this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 3, 1, 1.2));
         this.tasks.addTask(2, new EntityAIFollow(this, (float) 1, 10, 5));
         this.tasks.addTask(3, new EntityAIWander(this, 0.8));
@@ -50,6 +49,8 @@ public class EntityWyrmling extends EntityWyrm {
     }
     @Override
     protected boolean canEnrage(){return false;}
+    @Override
+    protected boolean partakesInGestalt(){return false;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

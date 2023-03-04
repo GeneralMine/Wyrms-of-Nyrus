@@ -6,6 +6,7 @@ import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
 import com.vetpetmon.wyrmsofnyrus.block.BlockMaterials;
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
 import com.vetpetmon.wyrmsofnyrus.config.WorldConfig;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.gestalt.GestaltHostMind;
 import com.vetpetmon.wyrmsofnyrus.invasion.HiveCreepSpreadFurther;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
@@ -42,6 +43,7 @@ public class BlockHivecreepBase extends Block implements IHasModel {
     }
 
     public int tickRate(World world) {
+        if (GestaltHostMind.infamyIsMaxed) return Invasion.creepTickRate*2;
         return Invasion.creepTickRate;
     }
 

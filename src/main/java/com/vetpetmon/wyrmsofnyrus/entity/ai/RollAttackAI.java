@@ -48,6 +48,7 @@ public class RollAttackAI extends EntityAIAttackMelee {
     @Override
     public boolean shouldContinueExecuting()
     {
+        if (this.wyrm.getAttackTarget() == null) return false;
         if (this.didAttack) return false;
         return super.shouldContinueExecuting();
     }

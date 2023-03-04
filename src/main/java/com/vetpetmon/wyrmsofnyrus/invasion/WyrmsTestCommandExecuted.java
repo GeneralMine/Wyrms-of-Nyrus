@@ -1,6 +1,7 @@
 package com.vetpetmon.wyrmsofnyrus.invasion;
 
 import com.vetpetmon.wyrmsofnyrus.config.Invasion;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.gestalt.GestaltHostMind;
 import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
 import net.minecraft.entity.Entity;
@@ -51,7 +52,7 @@ public class WyrmsTestCommandExecuted {
 			}
 		}
 		{
-			if (mcserv != null && Invasion.invasionEnabled)
+			if (mcserv != null)
 				entity.sendMessage(
 						new TextComponentString(
 								(
@@ -63,12 +64,11 @@ public class WyrmsTestCommandExecuted {
 												+ (EvoPoints.get(world))
 												+ (" || Min Evolution: ")
 												+ (EvoPoints.minEvoCap)
+												+ (" || Infamy: ")
+												+ (GestaltHostMind.getAttentionLevel(world))
 								)
 						)
 				);
-			else {
-				System.out.println("Invasions are disabled, nothing to output.");
-			}
 		}
 	}
 }

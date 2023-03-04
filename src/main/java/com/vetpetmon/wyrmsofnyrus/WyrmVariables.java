@@ -59,7 +59,7 @@ public class WyrmVariables {
         public static final String DATA_NAME = "wyrmsofnyrus_worldvars";
         public double wyrmInvasionPoints = 0, wyrmInvasionDifficulty = 1;
         public String distressCode = "_.._.";
-        public int wyrmEvo = 0, eventSchedulerCurrentInstance = 0, eventSchedulerNextInstance = 0, pastDistressCall = 0;
+        public int wyrmEvo = 0, eventSchedulerCurrentInstance = 0, eventSchedulerNextInstance = 0, pastDistressCall = 0, infamy = 0;
         public boolean invasionStarted = false;
         public WorldVariables() {
             super(DATA_NAME);
@@ -86,10 +86,12 @@ public class WyrmVariables {
             eventSchedulerNextInstance		    = 	nbt.getInteger("eventNextInst");
             distressCode		                = 	nbt.getString("distressCode");
             pastDistressCall		            = 	nbt.getInteger("pastDistressCall");
+            infamy                              =   nbt.getInteger("infamy");
         }
 
         @Override
         public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+            nbt.setInteger("infamy", infamy);
             nbt.setInteger("wyrmEvo", wyrmEvo);
             nbt.setInteger("eventCurrentInst", eventSchedulerCurrentInstance);
             nbt.setInteger("eventNextInst", eventSchedulerNextInstance);

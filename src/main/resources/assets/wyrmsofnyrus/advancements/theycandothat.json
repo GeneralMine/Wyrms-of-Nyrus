@@ -1,15 +1,14 @@
 {
     "display": {
         "icon": {
-            "item": "wyrmsofnyrus:thevisitorspawner"
+            "item": "wyrmsofnyrus:wyrmsoldierspawner"
         },
         "title": {
-            "translate": "advancements.nottoday.title"
+            "translate": "advancements.theycandothat.title"
         },
         "description": {
-            "translate": "advancements.nottoday.description"
-        },
-        "frame": "challenge"
+            "translate": "advancements.theycandothat.description"
+        }
     },
     "parent": "wyrmsofnyrus:witness",
     "criteria": {

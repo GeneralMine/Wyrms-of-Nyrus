@@ -49,6 +49,7 @@ public class EntityBiter extends EntityCreeped implements IAnimatable, IAnimatio
 
     @Override
     protected void initEntityAI() {
+        super.initEntityAI();
         afterPlayers();
         afterAnimals();
         afterVillagers();

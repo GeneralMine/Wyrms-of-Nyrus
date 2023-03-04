@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class Advancements {
     public static Advancement playerroot;
-    public static Advancement howdidwegethere, killitwithfire, probed, nottoday, witness;
+    public static Advancement howdidwegethere,killitwithfire,probed,nottoday,witness,theycandothat;
     public static void init(MinecraftServer serv){
         net.minecraft.advancements.AdvancementManager adv = serv.getAdvancementManager();
 
@@ -19,6 +19,7 @@ public class Advancements {
         probed = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "probed"));
         nottoday = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "nottoday"));
         witness = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "witness"));
+        theycandothat = adv.getAdvancement(new ResourceLocation(WyrmsOfNyrus.MODID, "theycandothat"));
     }
     public static void grantAchievement(EntityPlayerMP player, Advancement a){
         if(a == null){

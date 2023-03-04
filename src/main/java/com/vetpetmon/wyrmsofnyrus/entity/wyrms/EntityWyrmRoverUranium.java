@@ -7,7 +7,6 @@ import com.vetpetmon.wyrmsofnyrus.item.AllItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -39,14 +38,13 @@ public class EntityWyrmRoverUranium extends EntityWyrm implements IAnimatable, I
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         simpleAI();
-        hivemindFollow();
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
         afterPlayers();
         afterVillagers();
     }
-
+    @Override
+    protected boolean partakesInGestalt(){return false;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

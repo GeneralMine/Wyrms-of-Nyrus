@@ -3,26 +3,31 @@ package com.vetpetmon.wyrmsofnyrus.entity.wyrms;
 import com.hbm.interfaces.IRadiationImmune;
 import com.hbm.lib.ModDamageSource;
 import com.hbm.potion.HbmPotion;
+import com.hbm.tileentity.machine.TileEntityTesla;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.config.Client;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.WyrmStats;
+import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrm;
 import com.vetpetmon.wyrmsofnyrus.entity.EntityWyrmFlying;
 import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.item.AllItems;
+import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMob;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.EntityAIFlierMoveRandom;
 import com.vetpetmon.wyrmsofnyrus.locallib.ai.movehelpers.FlierMoveHelperGhastlike;
-import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateFlying;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -32,9 +37,13 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnimatable, IAnimationTickable, IRadiationImmune {
     private final AnimationFactory factory = new AnimationFactory(this);
+    public List<double[]> targets = new ArrayList<double[]>();
     //private boolean isCharging;
     public EntityWyrmWarriorTainted(World world) {
         super(world);
@@ -62,28 +71,30 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     protected void initEntityAI() {
         super.initEntityAI();
         simpleAI();
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.05D, false));
+        this.tasks.addTask(10, new EntityAIAttackMelee(this, 1.05D, true));
         this.tasks.addTask(4, new EntityAIFlierMob(this, 3.05, 200));
         this.tasks.addTask(8, new EntityAIFlierMoveRandom(this));
-        //this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         this.afterPlayers();
         this.afterVillagers();
         this.afterAnimals();
         this.afterMobs();
-        hivemindFollow();
     }
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
         boolean result = super.attackEntityAsMob(entityIn);
         if (result) {
-            DifficultyStats.applyPotionEffect(entityIn, HbmPotion.taint, 240, 1);
+            DifficultyStats.applyPotionEffect(entityIn, HbmPotion.taint, 240, 3);
         }
         return result;
     }
     @Override
     public void onLivingUpdate(){
         super.onLivingUpdate();
+        if (!(this.getAttackTarget() instanceof EntityWyrm)) targets = TileEntityTesla.zap(world, posX, posY + 1.25, posZ, 10, this);
+
+        List<EntityLivingBase> targets = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 5, posY - 5, posZ - 5, posX + 5, posY + 5, posZ + 5));
+        for(EntityLivingBase e : targets) if(!(e instanceof EntityWyrm)) e.addPotionEffect(new PotionEffect(HbmPotion.radiation, 10, 15));
     }
 
     @Override
@@ -142,4 +153,5 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
 
     @Override
     public void tick() {super.onUpdate();}
+
 }

@@ -3,17 +3,15 @@ package com.vetpetmon.wyrmsofnyrus.entity;
 import com.google.common.base.Predicate;
 import com.vetpetmon.wyrmsofnyrus.SoundRegistry;
 import com.vetpetmon.wyrmsofnyrus.WyrmVariables;
+import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.config.AI;
 import com.vetpetmon.wyrmsofnyrus.config.Evo;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.WyrmBreakDoors;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmKillBonuses;
-import com.vetpetmon.wyrmsofnyrus.entity.ai.gestalt.Gestalt;
+import com.vetpetmon.wyrmsofnyrus.entity.ai.gestalt.GestaltFollow;
 import com.vetpetmon.wyrmsofnyrus.entity.ai.gestalt.GestaltHostMind;
 import com.vetpetmon.wyrmsofnyrus.entity.creeped.EntityCreeped;
-import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityCreepwyrmWaypoint;
-import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityHivemind;
-import com.vetpetmon.wyrmsofnyrus.entity.hivemind.EntityOverseerWaypoint;
 import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import com.vetpetmon.wyrmsofnyrus.locallib.DifficultyStats;
 import net.minecraft.block.material.Material;
@@ -24,6 +22,7 @@ import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,12 +31,15 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import java.util.List;
 
 import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDeathSpecial.wyrmDeathSpecial;
 
@@ -49,6 +51,8 @@ import static com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.wyrmDea
 public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, IMob {
 
     private static final DataParameter<Boolean> HAS_TARGET = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> RAGECOOLDOWN = EntityDataManager.createKey(EntityWyrm.class, DataSerializers.VARINT);
+
     public static EntityLiving kollectiveTarget;
     private double potency = 0.0;
 
@@ -207,7 +211,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     protected void afterPlayers() {
         if (!getWillNotAttackPlayers()){
             this.targetTasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, (float) 64));
-            this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true, false));
+            this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, 0, false, false, e -> true));
         }
     }
     protected void afterInsectoids() {
@@ -216,31 +220,27 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntitySilverfish.class, true, false));
     }
 
-
-    // HIVEMIND
-    protected void hivemindFollow() {
-        this.targetTasks.addTask(5, new EntityAINearestAttackableTarget<>(this, EntityHivemind.class, 2, false, false, new Predicate<EntityHivemind>() {
-            public boolean apply(EntityHivemind target) {
-                return (target != null);
-            }
-        }));
-    }
-    protected void hivemindAvoid() {
-        this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, (EntityCreepwyrmWaypoint.class), 30, 1, 2.2));
-        this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, (EntityOverseerWaypoint.class), 30, 1, 2.2));
-    }
-
-    protected void createWaypoint(Entity waypoint, int x, int y, int z) {
-        waypoint.setLocationAndAngles((x), (y+3), (z), world.rand.nextFloat() * 360F, 0.0F);
-        world.spawnEntity(waypoint);
-    }
-
     // Collective Consciousness, AKA Gestalt
+    protected boolean partakesInGestalt(){return true;}
+
+    /**
+     * MAKES WYRMS SLOWLY GRAVITATE TOWARDS PLAYERS
+     * ABSOLUTELY BRILLIANT!
+     */
     protected void enabledGestalt() {
-        this.targetTasks.addTask(0, new Gestalt<>(this));
+        if (this.partakesInGestalt()) this.tasks.addTask(6, new GestaltFollow(this, (EntityPlayer.class), 1.0D, 128, 24));
+        //this.targetTasks.addTask(0, new Gestalt<>(this));
     }
 
+    // Rage
 
+
+    public int getRageCooldown() {
+        return this.getDataManager().get(RAGECOOLDOWN);
+    }
+    public void setRageCooldown(int input) {
+        this.getDataManager().set(RAGECOOLDOWN, input);
+    }
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.
     public AnimationFactory getFactory() {return this.factory;}
@@ -263,6 +263,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(HAS_TARGET, false);
+        this.dataManager.register(RAGECOOLDOWN, 0);
     }
 
     /**
@@ -337,14 +338,8 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
         else {
             this.dataManager.set(HAS_TARGET, true);
         }
+        this.setRageCooldown(getRageCooldown() - 1);
     }
-
-    //@Override
-    //public void onUpdate() {
-        // Silly NTM wants to kill wyrms using radiation. This fixes that by setting the value to 0 every update. Might be laggy but that's the only fix that HBM provides. Don't look at me, look at the source code. https://github.com/Drillgon200/Hbm-s-Nuclear-Tech-GIT/blob/1.12.2_test/src/main/java/com/hbm/entity/mob/EntityMaskMan.java#L88
-        // I would use IRadiationImmune, but I'm not too sure if making a duplicate interface is safe.
-        //if (Loader.isModLoaded("hbm")) getEntityData().setFloat("hfr_radiation", 0);
-    //}
 
     // Wyrms now earn points when they kill something.
     @Override
@@ -356,10 +351,39 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     // Controls how all wyrms respond to damage.
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        EntityLivingBase entity = (EntityLivingBase) source.getTrueSource();
-        EntityLivingBase ogEntity = this.getAttackTarget();
-        if (entity instanceof EntityPlayer) GestaltHostMind.setKollectiveTarget(entity);
-        else GestaltHostMind.addToLastSeen();
+        if (source.getTrueSource() instanceof EntityLivingBase) {
+            EntityLivingBase entity = (EntityLivingBase) source.getTrueSource();
+            EntityLivingBase ogEntity = this.getAttackTarget();
+            if (entity != null && ogEntity != null && !(entity instanceof EntityWyrm)) {
+                int attentionAdded = 0;
+                if (entity instanceof EntityPlayer && attentionAdded == 0 && AI.gestaltUseInfamy) { //Ignore 2nd run of this, so that only 1 infamy is added at a time
+                    GestaltHostMind.increaseAttentionLevel(this.world);
+                    attentionAdded++;
+                }
+                // Notify other wyrms
+                List nearbyWyrms = this.world.getEntitiesWithinAABB(EntityWyrm.class, new AxisAlignedBB(
+                        this.posX - 30, this.posY - 10, this.posZ - 30, this.posX + 30, this.posY + 10, this.posZ + 30));
+                if (!nearbyWyrms.isEmpty()) {
+                    for (Object ent : nearbyWyrms) {
+                        if (ent instanceof EntityWyrm) ((EntityWyrm) ent).setAttackTarget(entity);
+                    }
+                }
+                this.setAttackTarget(entity);
+
+                if (!(this instanceof EntityCreeped) && this.getRageCooldown() <= 0 && this.canEnrage() && AI.rageEnabled && entity != ogEntity && this.getDistance(entity) < 5) {
+                    ogEntity.knockBack(ogEntity,3,2,2);
+                    DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 3, 2);
+                    DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 3, 1);
+                    this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
+                    if (ogEntity instanceof EntityPlayerMP && !(ogEntity instanceof EntityCreature)) {
+                        EntityPlayerMP playerEntity = (EntityPlayerMP) ogEntity;
+                        Advancements.grantAchievement(playerEntity, Advancements.theycandothat);
+                    }
+                    this.setRageCooldown(200);
+                }
+            }
+        }
+
         if (this instanceof EntityCreeped) {
             if (source == DamageSource.FALL && (Radiogenetics.creepedImmuneToFalling && !(this.casteType == 9)))
                 return false;
@@ -369,13 +393,6 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
                 return false;
         }
         else {
-            if (this.canEnrage() && entity != null && entity != ogEntity && (entity.getDistance(entity) < 5)) {
-                if (ogEntity!= null) ogEntity.knockBack(ogEntity,3,2,2);
-                this.setAttackTarget(entity);
-                DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 3, 2);
-                DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 3, 1);
-                this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
-            }
             if (source == DamageSource.FALL && (Radiogenetics.immuneToFalling && !(this.casteType == 9)))
                 return false;
             if (source.isExplosion() && Radiogenetics.immuneToExplosions)
@@ -403,13 +420,14 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
         {
             this.srpcothimmunity = compound.getInteger("srpcothimmunity");
         }
-        //if (hbm.isEnabled()) hbmComp.makeRadImmune(compound);
     }
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
         enabledGestalt();
-        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, true, new Class[0]));
+        this.tasks.addTask(2, new EntityAIMoveTowardsRestriction(this, 1));
+        this.tasks.addTask(6, new EntityAIWander(this, 0.85D));
+        this.tasks.addTask(0, new EntityAISwimming(this));
     }
     @Override
     public void writeEntityToNBT(NBTTagCompound compound)

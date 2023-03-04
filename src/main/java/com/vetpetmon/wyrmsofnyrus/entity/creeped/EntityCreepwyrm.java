@@ -10,7 +10,6 @@ import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
 import com.vetpetmon.wyrmsofnyrus.evo.EvoPoints;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -120,7 +119,6 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
     protected void initEntityAI() {
         afterPlayers();
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 0.5D, false));
-        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
     }
     @Override
     protected void applyEntityAttributes() {
@@ -152,6 +150,7 @@ public class EntityCreepwyrm extends EntityCreeped implements IAnimatable, IAnim
         //Keeps them in one spot once spawned.
         if (!this.world.isRemote) {
             this.motionX = 0.0D;
+            this.motionY = -2.0D;
             this.motionZ = 0.0D;
         }
         if (this.getSummons() >= Radiogenetics.creepwyrmPodCallThreshhold) {

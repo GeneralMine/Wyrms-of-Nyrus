@@ -65,7 +65,6 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
         this.afterVillagers();
         this.afterAnimals();
         this.afterMobs();
-        hivemindFollow();
     }
     @Override
     public void onLivingUpdate(){

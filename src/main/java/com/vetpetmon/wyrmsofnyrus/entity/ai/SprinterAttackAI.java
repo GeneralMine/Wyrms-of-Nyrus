@@ -24,6 +24,13 @@ public class SprinterAttackAI extends EntityAIAttackMelee {
         this.sound = sfx;
     }
 
+    @Override
+    public boolean shouldContinueExecuting()
+    {
+        if (this.wyrm.getAttackTarget() == null) return false;
+        return super.shouldContinueExecuting();
+    }
+
     public void startExecuting()
     {
         super.startExecuting();

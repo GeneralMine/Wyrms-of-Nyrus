@@ -27,7 +27,7 @@ public class Gestalt<T extends EntityLivingBase> extends EntityAITarget {
         {
             return false;
         }
-        else if (!entitylivingbase.isEntityAlive() || GestaltHostMind.getLastSeen() > 300)
+        else if (!entitylivingbase.isEntityAlive())
         {
             GestaltHostMind.setKollectiveTarget(null); // Forget it exists
             return false;
@@ -67,7 +67,7 @@ public class Gestalt<T extends EntityLivingBase> extends EntityAITarget {
     @Override
     public void resetTask() {
         EntityLivingBase entitylivingbase = GestaltHostMind.getKollectiveTarget();
-        if (entitylivingbase != null || GestaltHostMind.getLastSeen() > 300) GestaltHostMind.setKollectiveTarget(null);
+        if (entitylivingbase != null) GestaltHostMind.setKollectiveTarget(null);
         super.resetTask();
     }
 }

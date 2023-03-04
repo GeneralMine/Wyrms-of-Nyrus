@@ -63,6 +63,15 @@
       }
     ]
   },
+  "maxinfamy": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:maxinfamy",
+        "stream": false
+      }
+    ]
+  },
   "entity.creepedhumanoidroar": {
     "category": "hostile",
     "subtitle": "subtitles.distortedscreech",

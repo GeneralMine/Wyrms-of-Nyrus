@@ -9,7 +9,7 @@ public class SoundRegistry {
     public static SoundEvent wyrmClicks, deepwyrmclicks;
     public static SoundEvent wyrmSteps, slowwyrmsteps;
     public static SoundEvent wyrmHissTwo, wyrmannoyed;
-    public static SoundEvent theVisitor;
+    public static SoundEvent theVisitor, maxinfamy;
     public static SoundEvent creepSpread, creepwyrmscream;
     public static SoundEvent myrmur, myrmurcharge;
     public static SoundEvent biter, bitercharge;
@@ -47,6 +47,7 @@ public class SoundRegistry {
         nkagentidle = RegisterSound("entity.nkagentidle");
         banishment = RegisterSound("entity.banishment");
         wyrmannoyed = RegisterSound("entity.wyrmannoyed");
+        maxinfamy = RegisterSound("maxinfamy");
     }
 
     public static SoundEvent RegisterSound(String name) {

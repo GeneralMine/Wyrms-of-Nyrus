@@ -56,7 +56,6 @@ public class EntityWyrmWorker extends EntityWyrm {
         }
         this.tasks.addTask(2, new EntityAIWander(this, 1.0));
         this.tasks.addTask(1, new EntityAISwimming(this));
-        hivemindAvoid();
     }
     @Override
     protected boolean canEnrage(){return false;}

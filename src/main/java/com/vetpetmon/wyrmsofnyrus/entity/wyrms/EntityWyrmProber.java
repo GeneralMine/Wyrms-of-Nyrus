@@ -58,6 +58,8 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
     @Override
     protected boolean canEnrage(){return false;}
     @Override
+    protected boolean partakesInGestalt(){return false;}
+    @Override
     public int tickTimer() {
         return ticksExisted;
     }

@@ -43,14 +43,15 @@ public class EntityMyrmur extends EntityWyrm implements IAnimatable, IAnimationT
         super.initEntityAI();
         isSapient();
         this.tasks.addTask(2, new EntityAILeapAtTarget(this, 0.55F));
-        this.tasks.addTask(5, new EntityAIAvoidEntity(this, EntityMyrmur.class, 30, 1, 1.2));
+        this.tasks.addTask(5, new EntityAIAvoidEntity<>(this, EntityMyrmur.class, 30, 1, 1.2));
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(1, new SprinterAttackAI(this, 2.0, true, WyrmStats.myrmurSprintSPD, SoundRegistry.myrmurcharge));
         afterPlayers();
         afterInsectoids();
     }
-
+    @Override
+    protected boolean partakesInGestalt(){return false;}
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
