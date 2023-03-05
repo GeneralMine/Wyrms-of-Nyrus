@@ -44,3 +44,8 @@
   - A Splitting Migraine now requires Californium's Witness
 - Tainted Warrior zaps nearby enemies
 - Tainted Warrior applied Taint effect buffed to level 3
+- Invasion events now properly block Creeped from showing up at 1st invasion stage
+- DRASTICALLY lowered creep pod spawns from invasion events, that was a glitch
+- Lowered chances of callous pod spawns.
+- Callous pods will never spawn after stage 2 of the invasion
+- Default preset set to Classic

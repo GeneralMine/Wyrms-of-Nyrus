@@ -357,7 +357,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     // Controls how all wyrms respond to damage.
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source.getTrueSource() instanceof EntityLivingBase) {
+        if (source.getTrueSource() instanceof EntityLivingBase && source.getTrueSource() != null) {
             EntityLivingBase entity = (EntityLivingBase) source.getTrueSource();
             EntityLivingBase ogEntity = this.getAttackTarget();
             if (entity != null && ogEntity != null && !(entity instanceof EntityWyrm)) {
@@ -367,14 +367,30 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
                     attentionAdded++;
                 }
                 // Notify other wyrms
-                List nearbyWyrms = this.world.getEntitiesWithinAABB(EntityWyrm.class, new AxisAlignedBB(
-                        this.posX - 30, this.posY - 10, this.posZ - 30, this.posX + 30, this.posY + 10, this.posZ + 30));
-                if (!nearbyWyrms.isEmpty()) {
-                    for (Object ent : nearbyWyrms) {
-                        if (ent instanceof EntityWyrm) ((EntityWyrm) ent).setAttackTarget(entity);
+
+                if (entity instanceof EntityPlayer) {
+                    EntityPlayerMP playerEn = (EntityPlayerMP) entity;
+                    if (playerEn.isSpectator() || playerEn.isCreative()) {
+                        this.setAttackTarget(playerEn);
+                        List nearbyWyrms = this.world.getEntitiesWithinAABB(EntityWyrm.class, new AxisAlignedBB(
+                                this.posX - 30, this.posY - 10, this.posZ - 30, this.posX + 30, this.posY + 10, this.posZ + 30));
+                        if (!nearbyWyrms.isEmpty()) {
+                            for (Object ent : nearbyWyrms) {
+                                if (ent instanceof EntityWyrm) ((EntityWyrm) ent).setAttackTarget(entity);
+                            }
+                        }
                     }
                 }
-                this.setAttackTarget(entity);
+                else {
+                    this.setAttackTarget(entity);
+                    List nearbyWyrms = this.world.getEntitiesWithinAABB(EntityWyrm.class, new AxisAlignedBB(
+                            this.posX - 10, this.posY - 10, this.posZ - 10, this.posX + 10, this.posY + 10, this.posZ + 10));
+                    if (!nearbyWyrms.isEmpty()) {
+                        for (Object ent : nearbyWyrms) {
+                            if (ent instanceof EntityWyrm) ((EntityWyrm) ent).setAttackTarget(entity);
+                        }
+                    }
+                }
 
                 if (!(this instanceof EntityCreeped) && this.getRageCooldown() <= 0 && this.canEnrage() && AI.rageEnabled && entity != ogEntity && this.getDistance(entity) < 5) {
                     ogEntity.knockBack(ogEntity,3,2,2);
