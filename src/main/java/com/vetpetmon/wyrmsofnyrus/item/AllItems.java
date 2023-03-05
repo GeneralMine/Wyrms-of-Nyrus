@@ -40,4 +40,5 @@ public class AllItems {
     public static final Item creeplingspawner = new WyrmSpawner(WyrmRegister.wyrmIDs[wyrmID][0]+"spawner", wyrmID++);
     public static final Item strykelingspawner = new WyrmSpawner(WyrmRegister.wyrmIDs[wyrmID][0]+"spawner", wyrmID++, true);
     public static final Item nkagentspawner = new WyrmSpawner(WyrmRegister.wyrmIDs[wyrmID][0]+"spawner", wyrmID++, true);
+    public static final Item orowarriorspawner = new WyrmSpawner(WyrmRegister.wyrmIDs[wyrmID][0]+"spawner", wyrmID++);
 }

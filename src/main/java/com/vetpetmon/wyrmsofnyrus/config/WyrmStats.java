@@ -9,11 +9,11 @@ public class WyrmStats {
 
     private static final String advNotice = "\n\n WIP section! This configuration file isn't fully fleshed out and is subject to change in future versions. \n\n These values are part of advanced configuration for more precise user tuning. Good for modpack developers.";
 
-    public static float warriorHP, taintedWarriorHP;
-    public static float warriorDEF, taintedWarriorDEF;
-    public static float warriorATK, taintedWarriorATK;
-    public static float warriorKBR, taintedWarriorKBR;
-    public static float warriorSPD, taintedWarriorSPD;
+    public static float warriorHP, taintedWarriorHP, oroWarriorHP;
+    public static float warriorDEF, taintedWarriorDEF, oroWarriorDEF;
+    public static float warriorATK, taintedWarriorATK, oroWarriorATK;
+    public static float warriorKBR, taintedWarriorKBR, oroWarriorKBR;
+    public static float warriorSPD, taintedWarriorSPD, oroWarriorSPD;
 
     public static float soldierHP, infectoidSoldierHP, frostSoldierHP;
     public static float soldierDEF, infectoidSoldierDEF, frostSoldierDEF;
@@ -134,18 +134,23 @@ public class WyrmStats {
         c.addCustomCategoryComment(CAT,"\nStats for the Warriors, including variants.\n");
         warriorHP = createConfigDouble(c, CAT, "Normal HP", "Default: 14", ConfigBase.presetFloats(14,18,18,presetID));
         taintedWarriorHP = createConfigDouble(c, CAT, "Tainted Variant HP", "Default: 66", 66);
+        oroWarriorHP = createConfigDouble(c, CAT, "Oro-Infected Variant HP", "Default: 20", 20);
 
         warriorDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 2", 2);
         taintedWarriorDEF = createConfigDouble(c, CAT, "Tainted Variant DEF", "Default: 16", 16);
+        oroWarriorDEF = createConfigDouble(c, CAT, "Oro-Infected Variant DF", "Default: 5", 5);
 
         warriorATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 4", ConfigBase.presetFloats(4,5,5,presetID));
         taintedWarriorATK = createConfigDouble(c, CAT, "Tainted Variant ATK", "Default: 12", 12);
+        oroWarriorATK = createConfigDouble(c, CAT, "Oro-Infected Variant ATK", "Default: 2", 2);
 
         warriorSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.45", 0.45);
         taintedWarriorSPD = createConfigDouble(c, CAT, "Tainted Variant SPD", "Default: 0.45", 0.45);
+        oroWarriorSPD = createConfigDouble(c, CAT, "Oro-Infected Variant SPD", "Default: 0.35", 0.35);
 
         warriorKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
         taintedWarriorKBR = createConfigDouble(c, CAT, "Tainted Variant KBR", "Default: 0.5", 0.5);
+        oroWarriorKBR = createConfigDouble(c, CAT, "Oro-Infected Variant HP", "Default: 0", 0);
     }
 
     public static void soldierStats(Configuration c) {

@@ -14,6 +14,12 @@ public class DroppodContents {
     private static void dropPodContents(BlockPos pos, int size, int type, World world) {
         if (!world.isRemote) {
             switch (type) {
+                case (5):
+                    for (int i = 0; i < (RNG.getIntRangeInclu(1,2 + size)); i++) {
+                        if ((RNG.getIntRangeInclu(1, 50))==2) spawnMob(pos, new EntityWyrmWarriorOro(world), world);
+                        else spawnMob(pos, new EntityWyrmWarrior(world), world);
+                    }
+                    break;
                 case (4):
                     for (int i = 0; i < (RNG.getIntRangeInclu(Invasion.minWyrmsCallouspod,Invasion.maxWyrmsCallouspod + size)); i++) {spawnMob(pos, new EntityWyrmProber(world), world);}
                     break;

@@ -19,6 +19,16 @@
       }
     ]
   },
+  "entity.ororoar": {
+    "category": "hostile",
+    "subtitle": "subtitles.wyrmRoar",
+    "sounds": [
+      {
+        "name": "wyrmsofnyrus:entity/ororoar",
+        "stream": false
+      }
+    ]
+  },
   "entity.biterroll": {
     "category": "hostile",
     "subtitle": "subtitles.squelchingscream",

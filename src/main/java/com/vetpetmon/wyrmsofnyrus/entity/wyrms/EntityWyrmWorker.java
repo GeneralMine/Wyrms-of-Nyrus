@@ -46,7 +46,6 @@ public class EntityWyrmWorker extends EntityWyrm {
         super.initEntityAI();
         if (((getInvasionDifficulty() >= 3.0 && AI.savageAIMode) || (this.unionizing))) {
             afterPlayers();
-            this.targetTasks.addTask(4, new EntityAIHurtByTarget(this, true));
             this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
             simpleAI();
         }

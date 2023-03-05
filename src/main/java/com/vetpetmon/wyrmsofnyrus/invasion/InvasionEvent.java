@@ -36,14 +36,14 @@ public class InvasionEvent {
 			Incursion.callEvent(player.posX,player.posZ,world,1);
 			if (Invasion.isCreepEnabled()) CreepPodDrop.callEvent(player.posX,player.posZ,world);}
 		else if ( eventRolled == 8) {
-			Incursion.callEvent(player.posX,player.posZ,world,2);
+			ScoutingPodRaid.callEvent(player.posX,player.posZ,world,5,1); //Spawn warriors instead
 			if (Invasion.isCreepEnabled()) CreepPodDrop.callEvent(player.posX,player.posZ,world);}
 		else if ( eventRolled == 10) {
 			Incursion.callEvent(player.posX,player.posZ,world,2);}
 		else if ( eventRolled == 12) {
 			Incursion.callEvent(player.posX,player.posZ,world,3);}
 		else if ( eventRolled == 15) {
-			ScoutingPodRaid.callEvent(player.posX, player.posZ, world);
+			ScoutingPodRaid.callEvent(player.posX,player.posZ,world,5,2);
 			if (Invasion.isCreepEnabled()){
 				CreepPodDrop.callEvent(player.posX,player.posZ,world);
 			}

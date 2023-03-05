@@ -49,3 +49,5 @@
 - Lowered chances of callous pod spawns.
 - Callous pods will never spawn after stage 2 of the invasion
 - Default preset set to Classic
+- New Warrior variant: Oro
+- New sounds for Oro Warrior Variant

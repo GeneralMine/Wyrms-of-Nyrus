@@ -145,6 +145,9 @@ public class WyrmSpawner extends ItemBase implements IHasModel {
                 case (19):
                     entity = new EntityNKAgent(worldIn);
                     break;
+                case (20):
+                    entity = new EntityWyrmWarriorOro(worldIn);
+                    break;
             }
         }
         else {

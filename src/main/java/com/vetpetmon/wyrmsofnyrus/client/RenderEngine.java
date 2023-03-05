@@ -33,6 +33,7 @@ public class RenderEngine {
         RenderingRegistry.registerEntityRenderingHandler(EntityCreepling.class, CreeplingGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityStrykeling.class, StrykelingGeoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityNKAgent.class, NKAgentGeoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityWyrmWarriorOro.class, OroWarriorGeoRenderer::new);
     }
 
 }

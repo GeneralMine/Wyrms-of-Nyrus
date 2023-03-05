@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class SoundRegistry {
 
-    public static SoundEvent wyrmClicks, deepwyrmclicks;
+    public static SoundEvent wyrmClicks, deepwyrmclicks, wyrmroars, ororoar;
     public static SoundEvent wyrmSteps, slowwyrmsteps;
     public static SoundEvent wyrmHissTwo, wyrmannoyed;
     public static SoundEvent theVisitor, maxinfamy;
@@ -14,7 +14,6 @@ public class SoundRegistry {
     public static SoundEvent myrmur, myrmurcharge;
     public static SoundEvent biter, bitercharge;
     public static SoundEvent nukeClose, nukeFar;
-    public static SoundEvent wyrmroars;
     public static SoundEvent wyrmlingclicks, wyrmlinghurt, wyrmlingdeath;
     public static SoundEvent proberidle;
     public static SoundEvent nkagentidle;
@@ -48,6 +47,7 @@ public class SoundRegistry {
         banishment = RegisterSound("entity.banishment");
         wyrmannoyed = RegisterSound("entity.wyrmannoyed");
         maxinfamy = RegisterSound("maxinfamy");
+        ororoar = RegisterSound("entity.ororoar");
     }
 
     public static SoundEvent RegisterSound(String name) {
