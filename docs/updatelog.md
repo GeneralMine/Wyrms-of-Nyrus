@@ -51,3 +51,4 @@
 - Default preset set to Classic
 - New Warrior variant: Oro
 - New sounds for Oro Warrior Variant
+- Added Tips mod interaction in the form of 29 new tips! (Thanks for 300 downloads!)
