@@ -28,5 +28,5 @@ public abstract class EntityCreeped extends EntityWyrm {
     @Override
     protected boolean canEnrage(){return false;}
     @Override
-    protected boolean partakesInGestalt(){return false;}
+    protected boolean partakesInGestalt(){return true;}
 }

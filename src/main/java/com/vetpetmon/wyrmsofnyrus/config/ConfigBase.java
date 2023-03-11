@@ -26,7 +26,7 @@ public class ConfigBase {
 
     private static final int defaultConfig = 0; // 0 for Classic, 1 for Death World, 2 for Dark Forest.
     private static final String[] factoryConfigs = {"Classic","Death World","Dark Forest"};
-    public static int selectedPreset, presetsVersion = 10;
+    public static int selectedPreset, presetsVersion = 11;
     private static String ConfigDirectory = WyrmsOfNyrus.proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
     private static Configuration general, wyrms, debug, evo, world, invasion, manifest;
 

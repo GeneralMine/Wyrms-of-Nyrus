@@ -13,7 +13,7 @@ public class AI {
 
     public static boolean gestaltTotalAwareness, gestaltUseInfamy, maxInfamyDoublesCreepedSpawns, maxInfamySummonsPods, maxInfamyTotalWar;
     public static double gestaltTotalAwarenessRange;
-    public static int gestaltInfamyDecayChance;
+    public static int gestaltInfamyDecayChance, rageCooldownMax;
 
     public static void loadFromConfig(Configuration config, int id) {
 
@@ -33,6 +33,7 @@ public class AI {
         performanceAIMode = createConfigBool(config, CATEGORY, "Enable Performance AI", "Reduces the amount of AI tasks given to wyrms. Enable this if the AI lags you, but keep in mind this may cause a few glitches or oddities. Mainly disables EntityAILookIdle. Default: false", false);
 
         rageEnabled = createConfigBool(config, CATEGORY, "Rage Enabled", "Rage is applied when wyrms had a target, but had to switch priorities. This causes wyrms to get annoyed and switch targets, causing them to knock their original target away, gain short buffs, and go after the being that interrupted them. Default: true", true);
+        rageCooldownMax = createConfigInt(config, CATEGORY, "Rage Cooldown", "The time in seconds between when wyrms can enrage. Default: 20", ConfigBase.presetInts(20,20,10, id));
 
         config.addCustomCategoryComment(CATEGORYTWO,"\nGESTALT\n");
         config.setCategoryRequiresMcRestart(CATEGORYTWO,true);

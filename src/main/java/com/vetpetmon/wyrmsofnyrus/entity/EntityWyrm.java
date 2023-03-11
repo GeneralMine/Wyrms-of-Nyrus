@@ -234,8 +234,13 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
      * ABSOLUTELY BRILLIANT!
      */
     protected void enabledGestalt() {
-        if (this.partakesInGestalt()) this.tasks.addTask(6, new GestaltFollow(this, (EntityPlayer.class), 1.0D, 128, 24));
+        if (this.partakesInGestalt()) {
+            this.tasks.addTask(6, new GestaltFollow(this, EntityPlayer.class, 1.0D, 128, 24));
+        }
         //this.targetTasks.addTask(0, new Gestalt<>(this));
+    }
+    protected boolean gestaltTargetsMobs() {
+        return false;
     }
 
     // Rage
@@ -370,7 +375,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
 
                 if (entity instanceof EntityPlayer) {
                     EntityPlayerMP playerEn = (EntityPlayerMP) entity;
-                    if (playerEn.isSpectator() || playerEn.isCreative()) {
+                    if (!playerEn.isSpectator() && !playerEn.isCreative()) {
                         this.setAttackTarget(playerEn);
                         List nearbyWyrms = this.world.getEntitiesWithinAABB(EntityWyrm.class, new AxisAlignedBB(
                                 this.posX - 30, this.posY - 10, this.posZ - 30, this.posX + 30, this.posY + 10, this.posZ + 30));
@@ -401,7 +406,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
                         EntityPlayerMP playerEntity = (EntityPlayerMP) ogEntity;
                         Advancements.grantAchievement(playerEntity, Advancements.theycandothat);
                     }
-                    this.setRageCooldown(200);
+                    this.setRageCooldown(AI.rageCooldownMax * 20);
                 }
             }
         }
