@@ -142,9 +142,9 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
         float diff = genDifficulty();
         int level = ((EvoPoints.getLevel() - minLevel)+1);
         double HP = (entityHealth * Radiogenetics.wyrmVitality), DEF = (entityArmor * Radiogenetics.wyrmResistance), ATK = (entityDamage * Radiogenetics.wyrmStrength);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(DifficultyStats.health((HP+(HP*(Evo.evoPowerHP*level))), diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(DifficultyStats.armor((DEF+ (DEF*(Evo.evoPowerDEF*level))), diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(DifficultyStats.damage((ATK+(ATK*(Evo.evoPowerATK*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(DifficultyStats.health((HP+(HP*((1+Evo.evoPowerHP)*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(DifficultyStats.armor((DEF+ (DEF*((1+Evo.evoPowerDEF)*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(DifficultyStats.damage((ATK+(ATK*(1+Evo.evoPowerATK*level))), diff));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
     }

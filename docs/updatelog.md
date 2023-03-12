@@ -58,6 +58,7 @@
   - Evolution in classic mode has effects reduced by 90%
   - Evolution stats in Death World have been set to the previous values of Classic
   - Evolution stats nerfed in Dark Forest slightly (Health was reduced the most)
+- Fixed evolution system having faulty math and making wyrms have 1753868726586735 HP at only 10 or so evolution steps
 - Fixed invasion events trying to happen in peaceful mode (Thanks to the MFC MC server for catching this one!)
 - Fixed events happening in non-surface dimensions like The Nether (Thanks to Harbinger for finding this!)
 - Fixed Warrior reach distance on their special ability reaching too far out.
