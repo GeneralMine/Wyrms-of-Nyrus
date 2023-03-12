@@ -40,7 +40,7 @@ public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnima
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
-        this.tasks.addTask(2, new WideRangeAttackAI(WyrmStats.soldierATK, this, 0.5, true, 3.0F,30));
+        this.tasks.addTask(2, new WideRangeAttackAI(WyrmStats.soldierATK, this, 0.5, true, 1.5F,30));
         afterPlayers();
         if (getAttackVillagers()) afterVillagers();
         afterMobs();

@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
 
@@ -131,7 +130,7 @@ public class GestaltFollow<T extends EntityLivingBase> extends EntityAITarget {
         target = null;
     }
 
-    private AxisAlignedBB getPlayerRange() {
+    private AxisAlignedBB getDetectionRange() {
         int multiplier = 1;
         if (AI.maxInfamyTotalWar && GestaltHostMind.infamyIsMaxed) multiplier = 2;
         return new AxisAlignedBB(
@@ -144,34 +143,13 @@ public class GestaltFollow<T extends EntityLivingBase> extends EntityAITarget {
         );
     }
 
-    private AxisAlignedBB getOtherRange() {
-        return new AxisAlignedBB(
-                host.posX - range,
-                host.posY - vert,
-                host.posZ - range,
-                host.posX + range,
-                host.posY + vert,
-                host.posZ + range
-        );
-    }
-
     //scans the area and determines a new target entity
     private void findTarget() {
-        List list;
-        if (target instanceof EntityPlayer) {
-            list = host.world.getEntitiesWithinAABB(
-                    targetClass,
-                    getPlayerRange(),
-                    this.targetEntitySelector
-            );
-        }
-        else {
-            list = host.world.getEntitiesWithinAABB(
-                    targetClass,
-                    getOtherRange(),
-                    this.targetEntitySelector
-            );
-        }
+        List list = host.world.getEntitiesWithinAABB(
+                targetClass,
+                getDetectionRange(),
+                this.targetEntitySelector
+        );
 
         Collections.sort(list, targetSorter);
 

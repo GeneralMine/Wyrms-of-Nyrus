@@ -28,7 +28,7 @@ public class ConfigBase {
     private static final String[] factoryConfigs = {"Classic","Death World","Dark Forest"};
     public static int selectedPreset, presetsVersion = 11;
     private static String ConfigDirectory = WyrmsOfNyrus.proxy.getDataDir().getPath() + "/config/WyrmsOfNyrus/" ;
-    private static Configuration general, wyrms, debug, evo, world, invasion, manifest;
+    private static Configuration general, wyrms, debug, evo, world, invasion, addons, manifest;
 
     public static void setConfigPreset() {
         selectedPreset = Client.configPreset;
@@ -47,7 +47,21 @@ public class ConfigBase {
             default: return normal;
         }
     }
+    public static int[] presetIntArrays(int[] normal, int[] deathWorld, int[] darkForest, int id) {
+        switch(id) {
+            case(1): return deathWorld;
+            case(2): return darkForest;
+            default: return normal;
+        }
+    }
     public static float presetFloats(float normal, float deathWorld, float darkForest, int id) {
+        switch(id) {
+            case(1): return deathWorld;
+            case(2): return darkForest;
+            default: return normal;
+        }
+    }
+    public static float[] presetFloatArrays(float[] normal, float[] deathWorld, float[] darkForest, int id) {
         switch(id) {
             case(1): return deathWorld;
             case(2): return darkForest;
@@ -56,6 +70,21 @@ public class ConfigBase {
     }
 
     public static boolean presetBools(boolean normal, boolean deathWorld, boolean darkForest, int id) {
+        switch(id) {
+            case(1): return deathWorld;
+            case(2): return darkForest;
+            default: return normal;
+        }
+    }
+    public static String presetStrings(String normal, String deathWorld, String darkForest, int id) {
+        switch(id) {
+            case(1): return deathWorld;
+            case(2): return darkForest;
+            default: return normal;
+        }
+    }
+
+    public static String[] presetStringArrays(String[] normal, String[] deathWorld, String[] darkForest, int id) {
         switch(id) {
             case(1): return deathWorld;
             case(2): return darkForest;
@@ -71,7 +100,7 @@ public class ConfigBase {
 
     // Specific for WoN.
     public static void reloadConfig(int id) {
-        Configuration[] configs = {general, wyrms, debug, evo, world, invasion, manifest};
+        Configuration[] configs = {general, wyrms, debug, evo, world, invasion, addons, manifest};
 
         for (Configuration i:configs) i.load();
         Debug.loadFromConfig(debug); // load this first so that debug config messages can properly function
@@ -82,6 +111,7 @@ public class ConfigBase {
         Evo.loadFromConfig(evo, id);
         WorldConfig.loadFromConfig(world, id);
         Invasion.loadFromConfig(invasion, id);
+        Addons.loadFromConfig(addons, id);
 
         for (Configuration i:configs) i.save();
     }
@@ -160,6 +190,7 @@ public class ConfigBase {
         evo = createDirectory("evolution", ConfigDirectory);
         world = createDirectory("world", ConfigDirectory);
         invasion = createDirectory("invasion", ConfigDirectory);
+        addons = createDirectory("addons", ConfigDirectory + "addons/");
         manifest = createDirectory("manifest", ConfigDirectory);
     }
 

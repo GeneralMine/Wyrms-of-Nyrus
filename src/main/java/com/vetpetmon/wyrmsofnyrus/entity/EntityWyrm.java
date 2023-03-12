@@ -152,7 +152,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(60.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
     }
 
     /**
@@ -235,22 +235,28 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
      */
     protected void enabledGestalt() {
         if (this.partakesInGestalt()) {
-            this.tasks.addTask(6, new GestaltFollow(this, EntityPlayer.class, 1.0D, 128, 24));
+            this.tasks.addTask(8, new GestaltFollow(this, EntityPlayer.class, 1.0D, 128, 24, e -> true));
         }
         //this.targetTasks.addTask(0, new Gestalt<>(this));
     }
-    protected boolean gestaltTargetsMobs() {
-        return false;
-    }
 
     // Rage
-
-
     public int getRageCooldown() {
         return this.getDataManager().get(RAGECOOLDOWN);
     }
     public void setRageCooldown(int input) {
         this.getDataManager().set(RAGECOOLDOWN, input);
+    }
+    public void rageEffect(EntityLivingBase ogEntity) {
+        ogEntity.knockBack(ogEntity,3,2,2);
+        DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 3, 2);
+        DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 3, 1);
+        this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
+        if (ogEntity instanceof EntityPlayerMP && !(ogEntity instanceof EntityCreature)) {
+            EntityPlayerMP playerEntity = (EntityPlayerMP) ogEntity;
+            Advancements.grantAchievement(playerEntity, Advancements.theycandothat);
+        }
+        this.setRageCooldown(AI.rageCooldownMax * 20);
     }
 
     // GeckoLib thing so that way all wyrms share this code automatically. Saves some time.
@@ -389,7 +395,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
                 else {
                     this.setAttackTarget(entity);
                     List nearbyWyrms = this.world.getEntitiesWithinAABB(EntityWyrm.class, new AxisAlignedBB(
-                            this.posX - 10, this.posY - 10, this.posZ - 10, this.posX + 10, this.posY + 10, this.posZ + 10));
+                            this.posX - 30, this.posY - 30, this.posZ - 30, this.posX + 30, this.posY + 30, this.posZ + 30));
                     if (!nearbyWyrms.isEmpty()) {
                         for (Object ent : nearbyWyrms) {
                             if (ent instanceof EntityWyrm) ((EntityWyrm) ent).setAttackTarget(entity);
@@ -397,17 +403,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
                     }
                 }
 
-                if (!(this instanceof EntityCreeped) && this.getRageCooldown() <= 0 && this.canEnrage() && AI.rageEnabled && entity != ogEntity && this.getDistance(entity) < 5) {
-                    ogEntity.knockBack(ogEntity,3,2,2);
-                    DifficultyStats.applyPotionEffect(this, MobEffects.STRENGTH, 3, 2);
-                    DifficultyStats.applyPotionEffect(this, MobEffects.RESISTANCE, 3, 1);
-                    this.playSound(SoundRegistry.wyrmannoyed,0.9F,(this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F + 1.0F);
-                    if (ogEntity instanceof EntityPlayerMP && !(ogEntity instanceof EntityCreature)) {
-                        EntityPlayerMP playerEntity = (EntityPlayerMP) ogEntity;
-                        Advancements.grantAchievement(playerEntity, Advancements.theycandothat);
-                    }
-                    this.setRageCooldown(AI.rageCooldownMax * 20);
-                }
+                if (!(this instanceof EntityCreeped) && this.getRageCooldown() <= 0 && this.canEnrage() && AI.rageEnabled && entity != ogEntity && this.getDistance(entity) < 5) rageEffect(ogEntity);
             }
         }
 

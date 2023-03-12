@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -103,21 +104,23 @@ public class WoNHandler {
         // After all of that is done, the mod will now run almost as identical as pre-patched versions do, but with
         // GHSA-xwmh-4hmj-2vw4 completely fixed (in theory... It should be fixed.)
         if (!world.playerEntities.isEmpty()) {
-            EntityPlayer chosenPlayer = world.playerEntities.get(world.rand.nextInt(world.playerEntities.size())); //Pick random player, always turns at least 1, in singleplayer, the one player is always selected for events
-            int x = (int) chosenPlayer.posX;
-            int y = (int) chosenPlayer.posY;
-            int z = (int) chosenPlayer.posZ;
-            boolean invasionActive = WyrmVariables.WorldVariables.get(world).invasionStarted;
+            if (world.getDifficulty() != EnumDifficulty.PEACEFUL && world.provider.isSurfaceWorld()) { //Fixes events trying to happen in peaceful mode and events happening outside of the nether
+                EntityPlayer chosenPlayer = world.playerEntities.get(world.rand.nextInt(world.playerEntities.size())); //Pick random player, always turns at least 1, in singleplayer, the one player is always selected for events
+                int x = (int) chosenPlayer.posX;
+                int y = (int) chosenPlayer.posY;
+                int z = (int) chosenPlayer.posZ;
+                boolean invasionActive = WyrmVariables.WorldVariables.get(world).invasionStarted;
 
-            if (!chosenPlayer.isDead && Invasion.invasionEnabled && (!chosenPlayer.world.isRemote && event.phase == TickEvent.Phase.END)) { // Check to make sure this player actually exists in the world LOL
-                if (!invasionActive && Invasion.invasionStartsNaturally) {
-                    if (InvasionScheduler.detectDayChange(world)) {
-                        VisitorEvent.visitorEvent(false, world, x, y, z);
+                if (!chosenPlayer.isDead && Invasion.invasionEnabled && (!chosenPlayer.world.isRemote && event.phase == TickEvent.Phase.END)) { // Check to make sure this player actually exists in the world LOL
+                    if (!invasionActive && Invasion.invasionStartsNaturally) {
+                        if (InvasionScheduler.detectDayChange(world)) {
+                            VisitorEvent.visitorEvent(false, world, x, y, z);
+                        }
                     }
-                }
-                if (invasionActive) {
-                    if (InvasionScheduler.runSchedule(world)) {
-                        InvasionEvent.invasionEvent(chosenPlayer,world);
+                    if (invasionActive) {
+                        if (InvasionScheduler.runSchedule(world)) {
+                            InvasionEvent.invasionEvent(chosenPlayer, world);
+                        }
                     }
                 }
             }

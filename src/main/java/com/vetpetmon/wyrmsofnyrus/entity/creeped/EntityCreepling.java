@@ -58,7 +58,7 @@ public class EntityCreepling extends EntityCreeped implements IAnimatable, IAnim
 
     @Override
     protected void initEntityAI() {
-        afterPlayers();
+        afterPlayers(true);
         afterAnimals();
         afterVillagers();
         afterMobs();

@@ -49,6 +49,7 @@ public class EntityCreepedHumanoid extends EntityCreeped implements IAnimatable,
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
+        afterPlayers(true);
         afterAnimals();
         afterVillagers();
         afterMobs();

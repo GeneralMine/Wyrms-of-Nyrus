@@ -161,7 +161,7 @@ public class EntityWyrmProber extends EntityWyrmFlying implements IAnimatable, I
         if (Invasion.probingEnabled) {
             this.tasks.addTask(2, new ProberAttackAI(this, 1.5D, true));
             this.tasks.addTask(4, new FlyingMobAI(this, 7.75, 256, 10));
-            this.afterPlayers(true, true);
+            this.afterPlayers(false, true);
             this.afterVillagers();
             this.afterAnimals();
             this.afterMobs();
