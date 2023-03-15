@@ -42,5 +42,7 @@ public class AllBlocks {
     public static final Block creepeddirt = new creepStaged("creepeddirt",0.7F,0.9F, hivecreepblock);
     public static final Block creepedsand = new creepStaged("creepedsand",0.5F,0.5F, creepsludge);
     public static final Block creepedstone = new creepStaged("creepedstone",1.5F,7.5F, creepstone);
+    // COMPACT BLOCKS
+    public static final Block creepbulbblock = new BlockBase(Material.CLAY, "creepbulbblock", SoundType.SLIME, 1,1,true);
 
 }

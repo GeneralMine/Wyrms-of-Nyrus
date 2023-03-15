@@ -1,0 +1,18 @@
+{
+  "group": "wyrmsofnyrus",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "wyrmsofnyrus:creepedbulb"
+    }
+  },
+  "result": {
+    "item": "wyrmsofnyrus:creepbulbblock",
+    "count": 1
+  }
+}
