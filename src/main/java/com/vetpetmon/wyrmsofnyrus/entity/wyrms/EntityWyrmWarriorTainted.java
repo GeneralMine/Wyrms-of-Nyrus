@@ -55,7 +55,7 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
         enablePersistence();
         setNoAI(false);
         setPotency(10);
-        this.setAnimationNames(new String[]{"warriorwyrm.groundedIdle","warriorwyrm.groundedRun","warriorwyrm.idle","warriorwyrm.moving","warriorwyrm.inWater","warriorwyrm.swim"});
+        this.setAnimationNames(new String[]{"warriorwyrm.groundedIdle","warriorwyrm.groundedRun","warriorwyrm.idle","warriorwyrm.moving","warriorwyrm.inWater","warriorwyrm.swim", "warriorwyrm.dive"});
     }
 
 
@@ -135,11 +135,13 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
     {
         if (event.isMoving()) {
             if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(getAnimation(5));
+            if (this.motionY < -0.6d && Client.fancyAnimations) event.getController().setAnimation(getAnimation(6));
             else if (isGrounded()) event.getController().setAnimation(getAnimation(1));
             else event.getController().setAnimation(getAnimation(3));
         }
         else {
             if (isInWater() && Client.fancyAnimations) event.getController().setAnimation(getAnimation(4));
+            if (this.motionY < -0.6d && Client.fancyAnimations) event.getController().setAnimation(getAnimation(6));
             else if (isGrounded()) event.getController().setAnimation(getAnimation(0));
             else event.getController().setAnimation(getAnimation(2));
         }
