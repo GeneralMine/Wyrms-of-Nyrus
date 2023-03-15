@@ -65,6 +65,8 @@
 - New texture variant for Follyflesh block
 - Made Unknown Specimens slightly more expensive
 - New Creeped Bulb Block
+- Brand-new animation set for Warriors
+- Warriors now have a diving animation
 
 ### Technical changes for addon developers:
 

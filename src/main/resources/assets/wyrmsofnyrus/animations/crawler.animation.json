@@ -348,6 +348,92 @@
 							"easing": "easeInOutSine"
 						}
 					}
+				},
+				"leg6": {
+					"rotation": {
+						"1.2917": {
+							"vector": [0, 0, 0]
+						},
+						"1.3333": {
+							"vector": [-25.58193, -4.28158, 54.28293],
+							"easing": "easeInSine"
+						},
+						"1.375": {
+							"vector": [11.36111, -8.38108, -6.80033],
+							"easing": "easeInSine"
+						},
+						"1.4583": {
+							"vector": [37.08831, -8.60831, -21.57926],
+							"easing": "easeInSine"
+						},
+						"1.5": {
+							"vector": [36.13012, -10.90584, -20.20463],
+							"easing": "easeInSine"
+						},
+						"1.5417": {
+							"vector": [37.08831, -8.60831, -21.57926],
+							"easing": "easeInSine"
+						},
+						"1.5833": {
+							"vector": [36.13012, -10.90584, -20.20463],
+							"easing": "easeInSine"
+						},
+						"1.6667": {
+							"vector": [37.08831, -8.60831, -21.57926],
+							"easing": "easeInSine"
+						},
+						"1.7083": {
+							"vector": [-25.58193, -4.28158, 54.28293],
+							"easing": "easeInSine"
+						},
+						"1.75": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						}
+					}
+				},
+				"leg3": {
+					"rotation": {
+						"1.3333": {
+							"vector": [0, 0, 0]
+						},
+						"1.375": {
+							"vector": [-25.58193, 4.28158, -54.28293],
+							"easing": "easeInSine"
+						},
+						"1.4167": {
+							"vector": [11.36111, 8.38108, 6.80033],
+							"easing": "easeInSine"
+						},
+						"1.5": {
+							"vector": [37.08831, 8.60831, 21.57926],
+							"easing": "easeInSine"
+						},
+						"1.5417": {
+							"vector": [36.13012, 10.90584, 20.20463],
+							"easing": "easeInSine"
+						},
+						"1.5833": {
+							"vector": [37.08831, 8.60831, 21.57926],
+							"easing": "easeInSine"
+						},
+						"1.625": {
+							"vector": [36.13012, 10.90584, 20.20463],
+							"easing": "easeInSine"
+						},
+						"1.7083": {
+							"vector": [37.08831, 8.60831, 21.57926],
+							"easing": "easeInSine"
+						},
+						"1.75": {
+							"vector": [-25.58193, 4.28158, -54.28293],
+							"easing": "easeInSine"
+						},
+						"1.7917": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						}
+					}
 				}
 			}
 		},
@@ -356,16 +442,19 @@
 			"animation_length": 0.5,
 			"bones": {
 				"bone": {
+					"rotation": {
+						"vector": [-7.5, 0, 0]
+					},
 					"position": {
 						"0.0": {
-							"vector": [0, 1, 0]
+							"vector": [0, 2, 0]
 						},
 						"0.125": {
 							"vector": [0, 1.5, 0],
 							"easing": "easeInOutSine"
 						},
 						"0.25": {
-							"vector": [0, 1, 0],
+							"vector": [0, 2, 0],
 							"easing": "easeInOutSine"
 						},
 						"0.375": {
@@ -373,7 +462,7 @@
 							"easing": "easeInOutSine"
 						},
 						"0.5": {
-							"vector": [0, 1, 0],
+							"vector": [0, 2, 0],
 							"easing": "easeInOutSine"
 						}
 					}
@@ -420,7 +509,8 @@
 				"leg6": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, 20, 0]
+							"vector": [0, 40, 0],
+							"easing": "easeInQuart"
 						},
 						"0.0833": {
 							"vector": [0, 0, 67.5],
@@ -431,7 +521,7 @@
 							"easing": "easeInQuart"
 						},
 						"0.25": {
-							"vector": [0, 20, 0],
+							"vector": [0, 40, 0],
 							"easing": "easeInQuart"
 						},
 						"0.3333": {
@@ -443,7 +533,7 @@
 							"easing": "easeInQuart"
 						},
 						"0.5": {
-							"vector": [0, 20, 0],
+							"vector": [0, 40, 0],
 							"easing": "easeInQuart"
 						}
 					}
@@ -637,7 +727,8 @@
 				"leg3": {
 					"rotation": {
 						"0.0": {
-							"vector": [0, -17.5, 0]
+							"vector": [0, -40, 0],
+							"easing": "easeInQuart"
 						},
 						"0.0417": {
 							"vector": [0, 0, -67.5],
@@ -648,7 +739,7 @@
 							"easing": "easeInQuart"
 						},
 						"0.25": {
-							"vector": [0, -17.5, 0],
+							"vector": [0, -40, 0],
 							"easing": "easeInQuart"
 						},
 						"0.3333": {
@@ -660,7 +751,7 @@
 							"easing": "easeInQuart"
 						},
 						"0.5": {
-							"vector": [0, -17.5, 0],
+							"vector": [0, -40, 0],
 							"easing": "easeInQuart"
 						}
 					}
