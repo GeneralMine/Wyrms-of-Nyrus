@@ -159,6 +159,10 @@
       {
         "name": "wyrmsofnyrus:entity/deepclicking1",
         "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/deepclicking2",
+        "stream": false
       }
     ]
   },
@@ -168,6 +172,10 @@
     "sounds": [
       {
         "name": "wyrmsofnyrus:entity/wyrmannoyed",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/wyrmannoyed1",
         "stream": false
       }
     ]
@@ -252,6 +260,10 @@
     "sounds": [
       {
         "name": "wyrmsofnyrus:entity/hiss2",
+        "stream": false
+      },
+      {
+        "name": "wyrmsofnyrus:entity/hiss1",
         "stream": false
       }
     ]

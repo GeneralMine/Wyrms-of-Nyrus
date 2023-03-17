@@ -67,7 +67,10 @@
 - Made Unknown Specimens slightly more expensive
 - New Creeped Bulb Block
 - Brand-new animation set for Warriors
-- Warriors now have a diving/rising animations (fancy animations)
+- Warriors now have diving/rising animations (fancy animations)
+- New sounds for Soldiers
+- New hurt sounds for wyrms
+- New additional wyrm enrage sound
 
 ### Technical changes for addon developers:
 
