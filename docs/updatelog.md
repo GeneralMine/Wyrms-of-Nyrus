@@ -62,11 +62,12 @@
 - Fixed invasion events trying to happen in peaceful mode (Thanks to the MFC MC server for catching this one!)
 - Fixed events happening in non-surface dimensions like The Nether (Thanks to Harbinger for finding this!)
 - Fixed Warrior reach distance on their special ability reaching too far out.
+- Fixed configs around creepwyrms
 - New texture variant for Follyflesh block
 - Made Unknown Specimens slightly more expensive
 - New Creeped Bulb Block
 - Brand-new animation set for Warriors
-- Warriors now have a diving animation
+- Warriors now have a diving/rising animations (fancy animations)
 
 ### Technical changes for addon developers:
 

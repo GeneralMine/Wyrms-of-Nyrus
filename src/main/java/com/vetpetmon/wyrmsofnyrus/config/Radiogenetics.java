@@ -52,7 +52,7 @@ public class Radiogenetics {
 
         creepwyrmSpawnTiers = createConfigInt(config, CATEGORYTWO, "Creepwyrm Maximum Spawn Tier", "Maximum tier of Creeped that Creepwyrms can spawn. Default: 0", ConfigBase.presetInts(0, 1, 5, id));
         creepwyrmSpawnThreshhold = createConfigInt(config, CATEGORYTWO, "Creepwyrm Spawn Threshold", "Amount of blocks Creepwyrms need to infest in order to spawn something. Default: 20", 20);
-        creepwyrmPodCallThreshhold = createConfigInt(config, CATEGORYTWO, "Creepwyrm Pod Call Threshold", "Creepwyrms must summon x amount of times before they call a creeped pod to spread their influence. Default: 10", ConfigBase.presetInts(10, 8, 7, id));
+        creepwyrmPodCallThreshhold = createConfigInt(config, CATEGORYTWO, "Creepwyrm Pod Call Threshold Spawn", "Creepwyrms must summon x amount of times before they call a creeped pod to spread their influence. Default: 10", ConfigBase.presetInts(10, 8, 7, id));
         creepwyrmPodCallAmount =createConfigInt(config, CATEGORYTWO, "Creepwyrm Pod Call Threshold", "The number of Creeped Pods Creepwyrms will summon. Default: 1", ConfigBase.presetInts(1, 2, 3, id));
         creepwyrmDropPodCallRadius = createConfigInt(config, CATEGORYTWO, "Creepwyrm Pod Call Radius", "How far up Creepwyrms can call in Creeped Pods. Default: 30", ConfigBase.presetInts(30, 45, 100, id));
 
