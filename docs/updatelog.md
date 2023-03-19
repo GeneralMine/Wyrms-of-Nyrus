@@ -1,4 +1,4 @@
-## Kollective Update
+## The Gestalt Update
 ### 0.3.7
 
 
@@ -28,6 +28,7 @@
 - Wyrms can now follow from 40 blocks away
 - Creeped can now follow from 25 blocks away (To avoid massive swarm issues)
 
+
 ### Other Changes:
 
 - Fix for wyrms randomly enraging
@@ -56,9 +57,9 @@
 - Large nerf to evolution:
   - Steps increased to 100/95/90
   - Evolution in classic mode has effects reduced by 90%
-  - Evolution stats in Death World have been set to the previous values of Classic
-  - Evolution stats nerfed in Dark Forest slightly (Health was reduced the most)
-- Fixed evolution system having faulty math and making wyrms have 1753868726586735 HP at only 10 or so evolution steps
+  - Evolution stats in Death World have been reduced
+  - Evolution stats nerfed in Dark Forest (Health was reduced the most)
+- **Fixed evolution system having faulty math and making wyrms have 1753868726586735 HP at only 10 or so evolution steps**
 - Fixed invasion events trying to happen in peaceful mode (Thanks to the MFC MC server for catching this one!)
 - Fixed events happening in non-surface dimensions like The Nether (Thanks to Harbinger for finding this!)
 - Fixed Warrior reach distance on their special ability reaching too far out.
@@ -66,11 +67,13 @@
 - New texture variant for Follyflesh block
 - Made Unknown Specimens slightly more expensive
 - New Creeped Bulb Block
+- New Creeped Flesh Block
 - Brand-new animation set for Warriors
-- Warriors now have diving/rising animations (fancy animations)
+- Warriors now have diving/rising animations (fancy animations, can be disabled)
 - New sounds for Soldiers
 - New hurt sounds for wyrms
 - New additional wyrm enrage sound
+- Moved log output for Folly leveling to debug level 3
 
 ### Technical changes for addon developers:
 

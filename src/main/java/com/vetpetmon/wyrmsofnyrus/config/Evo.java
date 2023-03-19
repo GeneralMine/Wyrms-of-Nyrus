@@ -25,9 +25,9 @@ public class Evo {
 
         modEvo = createConfigStringList(config,CATEGORY, "Modlist detector strings", "uwu", modEvoDef);
 
-        evoPowerHP = createConfigDouble(config,CATEGORY,"Evolution HP power","The overall health boost given to wyrms at certain stages of evolution. Default: 0.15",ConfigBase.presetFloats(0.015F, 0.1F, 0.15F, id));
-        evoPowerDEF = createConfigDouble(config,CATEGORY,"Evolution DEF power","The overall armor boost given to wyrms at certain stages of evolution. Default: 0.1",ConfigBase.presetFloats(0.01F, 0.01F, 0.5F, id));
-        evoPowerATK = createConfigDouble(config,CATEGORY,"Evolution ATK power","The overall damage boost given to wyrms at certain stages of evolution. Default: 0.05",ConfigBase.presetFloats(0.005F, 0.05F, 0.15F, id));
+        evoPowerHP = createConfigDouble(config,CATEGORY,"Evolution HP power","The overall health boost given to wyrms at certain stages of evolution. Default: 0.15",ConfigBase.presetFloats(0.015F, 0.1F, 0.05F, id));
+        evoPowerDEF = createConfigDouble(config,CATEGORY,"Evolution DEF power","The overall armor boost given to wyrms at certain stages of evolution. Default: 0.1",ConfigBase.presetFloats(0.01F, 0.01F, 0.05F, id));
+        evoPowerATK = createConfigDouble(config,CATEGORY,"Evolution ATK power","The overall damage boost given to wyrms at certain stages of evolution. Default: 0.05",ConfigBase.presetFloats(0.005F, 0.025F, 0.05F, id));
         if (evoPowerHP < 0.05) evoPowerHP = 0.05F;
         if (evoPowerDEF < 0.05) evoPowerDEF = 0.05F;
         if (evoPowerATK < 0.05) evoPowerATK = 0.05F;

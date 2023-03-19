@@ -2,6 +2,7 @@ package com.vetpetmon.wyrmsofnyrus.entity.follies;
 
 import com.vetpetmon.wyrmsofnyrus.advancements.Advancements;
 import com.vetpetmon.wyrmsofnyrus.block.AllBlocks;
+import com.vetpetmon.wyrmsofnyrus.config.Debug;
 import com.vetpetmon.wyrmsofnyrus.config.Radiogenetics;
 import com.vetpetmon.wyrmsofnyrus.entity.MobEntityBase;
 import com.vetpetmon.wyrmsofnyrus.entity.ability.painandsuffering.WyrmBreakDoors;
@@ -49,7 +50,7 @@ public abstract class EntityWyrmfolly extends MobEntityBase implements IAnimatab
 
     public void updateLevel(){
         this.setLevel((int) (Math.floor((float)killCount/Radiogenetics.follyAscenSteps)+1));
-        WyrmsOfNyrus.logger.info("Wyrmfolly level is:" + this.getLevel()); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
+        if (Debug.LOGGINGENABLED && Debug.DEBUGLEVEL >= 3) WyrmsOfNyrus.logger.info("Wyrmfolly level is:" + this.getLevel()); //https://media.discordapp.net/attachments/1043999806038757406/1047202044227878912/unknown.png?width=604&height=702
         this.setHealth(this.getHealth() + (this.getMaxHealth()/8)); //Heals 1/8 of health for every kill.
     }
 
