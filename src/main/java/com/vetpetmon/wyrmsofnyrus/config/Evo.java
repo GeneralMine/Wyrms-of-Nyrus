@@ -7,10 +7,10 @@ import static com.vetpetmon.synapselib.util.CFG.*;
 
 public class Evo {
     public static boolean evoEnabled, evoReadsModpack, evoVariantsEnabled;
-    public static boolean evoFromKilled, bonusEvofromFireKill;
+    public static boolean evoFromKilled, bonusEvofromFireKill, cappedEvo;
     public static boolean evoHBMVariantsEnabled;
     public static float evoFactor, evoPowerHP, evoPowerDEF, evoPowerATK, bonusFromFireKill;
-    public static int customEvoMinCap, evoPointsPerLevel;
+    public static int customEvoMinCap, evoPointsPerLevel, maxWyrmEvolutionLevel;
     public static int minEvoCreepwyrm, minEvoWyrmling, minEvoWorker, minEvoSoldier, minEvoSoldierInf, minEvoSoldierFrost, minEvoWarrior, minEvoWarriorTainted;
     public static String[] modEvo, modEvoDef = {"draconicevolution;400","srparasites;300","hbm;250","icbmclassic;150","lycanitesmobs;125","securitycraft;80","techguns;75","roughmobsrevamped;75","immersiveintelligence;65","roughmobs;60","ic2;50"};
 
@@ -25,9 +25,9 @@ public class Evo {
 
         modEvo = createConfigStringList(config,CATEGORY, "Modlist detector strings", "uwu", modEvoDef);
 
-        evoPowerHP = createConfigDouble(config,CATEGORY,"Evolution HP power","The overall health boost given to wyrms at certain stages of evolution. Default: 0.15",ConfigBase.presetFloats(0.015F, 0.1F, 0.05F, id));
-        evoPowerDEF = createConfigDouble(config,CATEGORY,"Evolution DEF power","The overall armor boost given to wyrms at certain stages of evolution. Default: 0.1",ConfigBase.presetFloats(0.01F, 0.01F, 0.05F, id));
-        evoPowerATK = createConfigDouble(config,CATEGORY,"Evolution ATK power","The overall damage boost given to wyrms at certain stages of evolution. Default: 0.05",ConfigBase.presetFloats(0.005F, 0.025F, 0.05F, id));
+        evoPowerHP = createConfigDouble(config,CATEGORY,"Evolution HP power","The overall health boost given to wyrms at certain stages of evolution. Default: 0.015",ConfigBase.presetFloats(0.015F, 0.1F, 0.05F, id));
+        evoPowerDEF = createConfigDouble(config,CATEGORY,"Evolution DEF power","The overall armor boost given to wyrms at certain stages of evolution. Default: 0.01",ConfigBase.presetFloats(0.01F, 0.01F, 0.05F, id));
+        evoPowerATK = createConfigDouble(config,CATEGORY,"Evolution ATK power","The overall damage boost given to wyrms at certain stages of evolution. Default: 0.005",ConfigBase.presetFloats(0.005F, 0.025F, 0.05F, id));
         if (evoPowerHP < 0.05) evoPowerHP = 0.05F;
         if (evoPowerDEF < 0.05) evoPowerDEF = 0.05F;
         if (evoPowerATK < 0.05) evoPowerATK = 0.05F;
@@ -41,6 +41,8 @@ public class Evo {
         bonusEvofromFireKill =  createConfigBool(config, CATEGORY, "Bonus from wyrm deaths by fire", "Wyrms add more evo points if killed by fire. Default: false", ConfigBase.presetBools(false,false,true, id));
         bonusFromFireKill =  createConfigDouble(config, CATEGORY, "Multiplier from wyrm deaths by fire", "Multiplier for the bonus from wyrm deaths by fire. Default: 2.0", 2.0F);
         evoVariantsEnabled = createConfigBool(config, CATEGORY, "Evolution variants", "As evolution increases, so does the chance of meeting an evolved variant of wyrm. Default: true", true);
+        maxWyrmEvolutionLevel = createConfigInt(config, CATEGORY, "Maximum Applied Evolution", "The maximum evolution levels that can be applied to wyrms. Default: 10", ConfigBase.presetInts(10,12,20, id));
+        cappedEvo = createConfigBool(config, CATEGORY, "Enable Maximum Applied Evolution", "Enables or disables Maximum Applied Evolution. Default: true", ConfigBase.presetBools(true,true,false, id));
 
         evoHBMVariantsEnabled = createConfigBool(config, CATEGORY, "HBM evolution variants", "Enable/disable the HBM Taint evo variations. Requires variants to be enabled, does nothing if HBM is not installed. Default: true", true);
 

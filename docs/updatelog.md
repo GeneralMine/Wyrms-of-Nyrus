@@ -1,3 +1,37 @@
+## The Hiveshell Update
+### 0.3.8
+
+
+
+
+#### FIXES:
+
+- Evolution stats curve too steep
+- Added evolution level caps to wyrms except in Dark Forest
+- "Maximum Applied Evolution" config option (10/12/20)
+- "Enable Maximum Applied Evolution" config option (true/true/false)
+
+
+
+
+==================================
+        Planned features:
+==================================
+- Wyrm Armor Fragments renamed to Hiveshell
+- Compact Hiveshell block added
+- Decompression recipes added for compacted creepbulb & creepflesh blocks
+- Loot tables added for Warriors, Workers, Soldiers, and Myrmurs
+- Hiveshell armor added
+- Improved Warrior movement
+- Added Crawlers (Thanks to UndeadMonkey for the model!)
+- Soldiers now have a shielding ability
+
+
+
+
+
+
+
 ## The Gestalt Update
 ### 0.3.7
 

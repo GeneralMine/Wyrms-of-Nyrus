@@ -140,11 +140,13 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
     }
     public void setStatsEvo(float entityHealth, float entityArmor, float entityDamage,  float entitySpeed, float entityKBR, int minLevel) {
         float diff = genDifficulty();
-        int level = ((EvoPoints.getLevel() - minLevel)+1);
+        int level;
+        if (Evo.cappedEvo) level = Math.min(((EvoPoints.getLevel() - minLevel)+1),Evo.maxWyrmEvolutionLevel);
+        else level = ((EvoPoints.getLevel() - minLevel)+1);
         double HP = (entityHealth * Radiogenetics.wyrmVitality), DEF = (entityArmor * Radiogenetics.wyrmResistance), ATK = (entityDamage * Radiogenetics.wyrmStrength);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(DifficultyStats.health((HP+(HP*((1+Evo.evoPowerHP)*level))), diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(DifficultyStats.armor((DEF+ (DEF*((1+Evo.evoPowerDEF)*level))), diff));
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(DifficultyStats.damage((ATK+(ATK*(1+Evo.evoPowerATK*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(DifficultyStats.health((HP+((HP/4)*((1+Evo.evoPowerHP)*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(DifficultyStats.armor((DEF+ ((DEF/3)*((1+Evo.evoPowerDEF)*level))), diff));
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(DifficultyStats.damage(((ATK/2)+(ATK*(1+Evo.evoPowerATK*level))), diff));
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(entitySpeed);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(entityKBR);
     }
