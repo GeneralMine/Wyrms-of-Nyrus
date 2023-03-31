@@ -6,7 +6,9 @@
   - Wyrms can now take damage multipliers from both projectile and fire damage at the same time
 - Decompression recipes added for compacted creepbulb & creepflesh blocks
 - Loot tables added for Soldiers
-- Added Crawlers (Thanks to UndeadMonkey for the model!)
+- Loot tables added for Warriors
+- Added Crawlers (Thanks to UndeadMonkey for the model! Animations and texture by Modrome)
+- Technical: Loot tables moved to one single, collective class
 
 
 #### FIXES & REBALANCES:
@@ -18,6 +20,8 @@
 - Added evolution level caps to wyrms except in Dark Forest
 - "Maximum Applied Evolution" config option (10/12/20)
 - "Enable Maximum Applied Evolution" config option (true/true/false)
+- Wyrmfollies rebalanced
+  - Wyrmfolly buff factor increased from (105%/115%/130%) to (115%/125%/140%)
 
 
 

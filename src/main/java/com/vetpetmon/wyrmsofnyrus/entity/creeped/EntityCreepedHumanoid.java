@@ -21,9 +21,10 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
+import static com.vetpetmon.wyrmsofnyrus.handlers.LootTables.CREEPEDHUMANOID_LOOT_TABLE;
+
 public class EntityCreepedHumanoid extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
-    public static final ResourceLocation CREEPEDHUMANOID_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/creepedhumanoid");
 
     public EntityCreepedHumanoid(World worldIn) {
         super(worldIn);

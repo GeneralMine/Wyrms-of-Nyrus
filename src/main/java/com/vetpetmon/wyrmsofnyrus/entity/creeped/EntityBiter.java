@@ -23,10 +23,10 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
+import static com.vetpetmon.wyrmsofnyrus.handlers.LootTables.BITER_LOOT_TABLE;
+
 public class EntityBiter extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
-    public static final ResourceLocation BITER_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/biter");
-
     public EntityBiter(World worldIn) {
         super(worldIn);
         this.casteType = 0;

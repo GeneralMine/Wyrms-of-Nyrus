@@ -57,7 +57,7 @@ public class Radiogenetics {
         creepwyrmDropPodCallRadius = createConfigInt(config, CATEGORYTWO, "Creepwyrm Pod Call Radius", "How far up Creepwyrms can call in Creeped Pods. Default: 30", ConfigBase.presetInts(30, 45, 100, id));
 
         // Follies
-        follyAscenBuffFactor = createConfigDouble(config, CATEGORYTHREE, "Wyrmfolly buff factor", "The factor of which wyrmfolly stats increase. Default: 1.05", ConfigBase.presetFloats(1.05F, 1.15F, 1.3F, id));
+        follyAscenBuffFactor = createConfigDouble(config, CATEGORYTHREE, "Wyrmfolly buff factor", "The factor of which wyrmfolly stats increase. Default: 1.05", ConfigBase.presetFloats(1.15F, 1.25F, 1.4F, id));
         follyAscenSteps= createConfigInt(config, CATEGORYTHREE, "Wyrmfolly level steps", "The number of kills before a folly levels up. Default: 5", ConfigBase.presetInts(5, 4, 6, id));
 
         // Global

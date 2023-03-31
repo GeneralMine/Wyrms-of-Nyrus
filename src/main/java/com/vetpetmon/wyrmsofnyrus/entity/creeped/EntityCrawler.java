@@ -34,9 +34,10 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
+import static com.vetpetmon.wyrmsofnyrus.handlers.LootTables.CRAWLER_LOOT_TABLE;
+
 public class EntityCrawler extends EntityCreeped implements IAnimatable, IAnimationTickable {
     private AnimationFactory factory = new AnimationFactory(this);
-    public static final ResourceLocation BITER_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/biter");
     private static final DataParameter<Byte> CLIMBING = EntityDataManager.<Byte>createKey(EntityCrawler.class, DataSerializers.BYTE);
 
     public EntityCrawler(World worldIn) {
@@ -52,7 +53,7 @@ public class EntityCrawler extends EntityCreeped implements IAnimatable, IAnimat
     @Nullable
     @Override
     protected ResourceLocation getLootTable() {
-        return BITER_LOOT_TABLE;
+        return CRAWLER_LOOT_TABLE;
     }
     public void registerControllers(AnimationData data) {
         data.addAnimationController(new AnimationController(this, "controller", 1F, this::predicate));

@@ -27,6 +27,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+
+import static com.vetpetmon.wyrmsofnyrus.handlers.LootTables.WARRIOR_LOOT_TABLE;
+
 
 public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -51,6 +55,12 @@ public class EntityWyrmWarrior extends EntityWyrmFlying implements IAnimatable, 
         if (Evo.evoEnabled && (EvoPoints.getLevel() >= Evo.minEvoWarrior)) this.setStatsEvo(WyrmStats.warriorHP, WyrmStats.warriorDEF, WyrmStats.warriorATK, WyrmStats.warriorSPD, WyrmStats.warriorKBR, Evo.minEvoWarrior);
         else this.setStats(WyrmStats.warriorHP, WyrmStats.warriorDEF, WyrmStats.warriorATK, WyrmStats.warriorSPD, WyrmStats.warriorKBR);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
+    }
+
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return WARRIOR_LOOT_TABLE;
     }
 
     @Override

@@ -20,6 +20,10 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+
+import static com.vetpetmon.wyrmsofnyrus.handlers.LootTables.WARRIOR_LOOT_TABLE;
+
 
 public class EntityWyrmWarriorOro extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -37,6 +41,12 @@ public class EntityWyrmWarriorOro extends EntityWyrm implements IAnimatable, IAn
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.setStats(WyrmStats.oroWarriorHP, WyrmStats.oroWarriorDEF, WyrmStats.oroWarriorATK, WyrmStats.oroWarriorSPD, WyrmStats.oroWarriorKBR);
+    }
+
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return WARRIOR_LOOT_TABLE;
     }
 
     @Override

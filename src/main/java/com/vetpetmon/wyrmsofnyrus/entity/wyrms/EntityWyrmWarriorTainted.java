@@ -37,8 +37,11 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.vetpetmon.wyrmsofnyrus.handlers.LootTables.WARRIOR_LOOT_TABLE;
 
 
 public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnimatable, IAnimationTickable, IRadiationImmune {
@@ -58,6 +61,11 @@ public class EntityWyrmWarriorTainted extends EntityWyrmFlying implements IAnima
         this.setAnimationNames(new String[]{"warriorwyrm.groundedIdle","warriorwyrm.groundedRun","warriorwyrm.idle","warriorwyrm.moving","warriorwyrm.inWater","warriorwyrm.swim", "warriorwyrm.dive", "warriorwyrm.rise"});
     }
 
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return WARRIOR_LOOT_TABLE;
+    }
 
     @Override
     protected void applyEntityAttributes() {

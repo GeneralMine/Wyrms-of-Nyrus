@@ -29,6 +29,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
 
+import static com.vetpetmon.wyrmsofnyrus.handlers.LootTables.SOLDIER_LOOT_TABLE;
+
 public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
     public EntityWyrmSoldierfrost(World world) {
@@ -44,7 +46,7 @@ public class EntityWyrmSoldierfrost extends EntityWyrm implements IAnimatable, I
     @Nullable
     @Override
     protected ResourceLocation getLootTable() {
-        return EntityWyrmSoldier.WYRM_LOOT_TABLE;
+        return SOLDIER_LOOT_TABLE;
     }
 
     @Override
