@@ -1,12 +1,20 @@
 ## The Hiveshell Update
 ### 0.3.8
 
+- Wyrm Armor Fragments renamed to Hiveshell
+- Adjusted how wyrms receive damage
+  - Wyrms can now take damage multipliers from both projectile and fire damage at the same time
+- Decompression recipes added for compacted creepbulb & creepflesh blocks
+- Loot tables added for Soldiers
+- Added Crawlers (Thanks to UndeadMonkey for the model!)
 
 
-
-#### FIXES:
-
+#### FIXES & REBALANCES:
 - Evolution stats curve too steep
+- Evolution not notably going down
+  - Made evolution go down ~2x faster
+- Made evo steps 50 points per level for all presets
+- Adjusted Soldier size to reduce hitbox size for all melee attacks.
 - Added evolution level caps to wyrms except in Dark Forest
 - "Maximum Applied Evolution" config option (10/12/20)
 - "Enable Maximum Applied Evolution" config option (true/true/false)
@@ -17,13 +25,10 @@
 ==================================
         Planned features:
 ==================================
-- Wyrm Armor Fragments renamed to Hiveshell
 - Compact Hiveshell block added
-- Decompression recipes added for compacted creepbulb & creepflesh blocks
 - Loot tables added for Warriors, Workers, Soldiers, and Myrmurs
 - Hiveshell armor added
 - Improved Warrior movement
-- Added Crawlers (Thanks to UndeadMonkey for the model!)
 - Soldiers now have a shielding ability
 
 

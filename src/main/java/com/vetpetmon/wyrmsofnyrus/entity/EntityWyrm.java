@@ -409,6 +409,9 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
             }
         }
 
+        float totalDamage = amount;
+        if (source == DamageSource.ON_FIRE) totalDamage *= 3;
+
         if (this instanceof EntityCreeped) {
             if (source == DamageSource.FALL && (Radiogenetics.creepedImmuneToFalling && !(this.casteType == 9)))
                 return false;
@@ -429,9 +432,7 @@ public abstract class EntityWyrm extends MobEntityBase implements IAnimatable, I
             return false;
         if (source == DamageSource.IN_WALL)
             return false;
-        if (source == DamageSource.ON_FIRE)
-            return super.attackEntityFrom(source, amount*3);
-        return super.attackEntityFrom(source,amount);
+        return super.attackEntityFrom(source,totalDamage);
     }
 
     // Gives all wyrms COTH (from Scape & Run: Parasites) immunity so that way pack makers and unknowing players DON'T have to add it themselves.

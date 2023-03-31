@@ -1,0 +1,16 @@
+{
+  "group": "wyrmsofnyrus",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "wyrmsofnyrus:creepfleshblock"
+    }
+  },
+  "result": {
+    "item": "wyrmsofnyrus:creepedflesh",
+    "count": 9
+  }
+}

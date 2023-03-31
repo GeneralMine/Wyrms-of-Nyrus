@@ -82,7 +82,7 @@ public class EvoPoints {
     }
 
     public static void decay(World w) {
-        if (RNG.dBase(10000) == 5) {
+        if (RNG.dBase(5000) == 5) {
             if (AI.gestaltUseInfamy && GestaltHostMind.infamyIsMaxed) if(Debug.LOGGINGENABLED && Debug.DEBUGLEVEL > 4)WyrmsOfNyrus.logger.info("Failed to decrease wyrm evo due to maximum infamy.");
             else {
                 subtract(w, (int) (1 * Evo.evoFactor));

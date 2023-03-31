@@ -34,7 +34,7 @@ public class Evo {
 
         evoReadsModpack = createConfigBool(config, CATEGORY, "Read Your Modpack", "By default, Wyrms of Nyrus will do a one-time check at the initialization of the game to determine the minimum evolution based on certain mods in your modlist. If you have any privacy concerns, you can disable this feature, even though this feature doesn't send anything out into the internet as it is all localized within your MC instance. Or, if you prefer not to have this feature enabled, this option exists. Default: true", true);
         customEvoMinCap = createConfigInt(config, CATEGORY, "Custom minimum evo cap", "If you're a pack dev and disabled the Read Your Modpack feature but still want to use a starting evo cap, this is for you.", 0);
-        evoPointsPerLevel = createConfigInt(config, CATEGORY, "Evo Points per Level", "How many points is a level? Default: 50", ConfigBase.presetInts(100,95,90, id));
+        evoPointsPerLevel = createConfigInt(config, CATEGORY, "Evo Points per Level", "How many points is a level? Default: 50", 50);
 
         evoFactor = createConfigDouble(config,CATEGORY,"Evolution factor","Determines how powerful evolution gets. Do not touch this if you intend on keeping closer to what would be expected in vanilla Mineccraft. Higher values speeds up the evolution system growth faster, lower values slow it down. Default: 1.0",1.0);
         evoFromKilled = createConfigBool(config, CATEGORY, "Evolution from wyrm deaths", "When wyrms die, they gain more evolutionary pressure to evolve and adapt against dying. Improvise. Overcome. Adapt. Default: true", true);

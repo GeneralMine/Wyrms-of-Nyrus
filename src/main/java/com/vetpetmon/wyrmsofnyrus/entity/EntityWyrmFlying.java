@@ -33,11 +33,11 @@ public abstract class EntityWyrmFlying extends EntityWyrm implements IAnimatable
     public AnimationFactory getFactory() {return this.factory;}
 
     public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (source.isProjectile())
-            return super.attackEntityFrom(source, (float) (amount * Radiogenetics.flyingWyrmProjWeakness));
+        float totalDamage = amount;
+        if (source.isProjectile()) totalDamage *= Radiogenetics.flyingWyrmProjWeakness;
         if (source == DamageSource.FALL)
             return false;
-        return super.attackEntityFrom(source, amount);
+        return super.attackEntityFrom(source, totalDamage);
     }
 
     // Shared by all flying entities.

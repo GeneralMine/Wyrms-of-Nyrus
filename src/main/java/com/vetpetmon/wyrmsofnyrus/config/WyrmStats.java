@@ -24,6 +24,8 @@ public class WyrmStats {
     public static float roverUraniumHP, roverUraniumDEF, roverUraniumATK, roverUraniumSPD, roverUraniumKBR;
     public static float myrmurHP, myrmurDEF, myrmurATK, myrmurSPD, myrmurSprintSPD, myrmurKBR;
     public static float biterHP, biterDEF, biterATK, biterSPD, biterRollSPD, biterRollDMG, biterKBR;
+    public static float crawlerHP, crawlerDEF, crawlerATK, crawlerSPD, crawlerKBR;
+    public static int crawlerPoisonStrength;
     public static float creeplingHP, creeplingDEF, creeplingATK, creeplingSPD, creeplingKBR;
     public static float proberHP, proberDEF, proberATK, proberSPD;
     public static float workerHP, workerDEF, workerATK, workerSPD, workerKBR;
@@ -51,6 +53,7 @@ public class WyrmStats {
         wyrmlingStats(c);
         visitorStats(c);
         strykerfollyStats(c);
+        crawlerStats(c);
 
     }
 
@@ -234,5 +237,16 @@ public class WyrmStats {
         strykerfollyAscendedDEF = createConfigDouble(c, CAT, "Ascended DEF", "Default: 5", ConfigBase.presetFloats(5,7,9,presetID));
         strykerfollyAscendedSPD = createConfigDouble(c, CAT, "Ascended SPD", "Default: 0.85", 0.85);
         strykerfollyAscendedKBR = createConfigDouble(c, CAT, "Ascended KBR", "Default: 1.0", 1.0);
+    }
+
+    public static void crawlerStats(Configuration c) {
+        final String CAT = "Biter Base stats";
+        c.addCustomCategoryComment(CAT,"\nStats for the Crawlers.\n");
+        crawlerHP = createConfigDouble(c, CAT, "Normal HP", "Default: 12", ConfigBase.presetFloats(12,15,22,presetID));
+        crawlerDEF = createConfigDouble(c, CAT, "Normal DEF", "Default: 3", ConfigBase.presetFloats(3,5,6,presetID));
+        crawlerATK = createConfigDouble(c, CAT, "Normal ATK", "Default: 1", ConfigBase.presetFloats(1,3.85F,6,presetID));
+        crawlerSPD = createConfigDouble(c, CAT, "Normal SPD", "Default: 0.6", 0.6);
+        crawlerKBR = createConfigDouble(c, CAT, "Normal KBR", "Default: 0.05", 0.05);
+        crawlerPoisonStrength = createConfigInt(c, CAT, "Poison effect level", "Default: 3", ConfigBase.presetInts(3,3,4,presetID));
     }
 }

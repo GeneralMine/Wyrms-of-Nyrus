@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,19 +24,27 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nullable;
+
 public class EntityWyrmSoldier extends EntityWyrm implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
+    public static final ResourceLocation WYRM_LOOT_TABLE = new ResourceLocation("wyrmsofnyrus", "entities/soldiers");
+
     public EntityWyrmSoldier(World world) {
         super(world);
         this.casteType = 3;
-        setSize(2.5f, 1.5f);
+        setSize(1.75f, 1.0f);
         experienceValue = 8;
         enablePersistence();
         setNoAI(false);
         setPotency(15);
         this.setAnimationNames(new String[]{"soldierwyrm.idle","soldierwyrm.moving"});
     }
-
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return WYRM_LOOT_TABLE;
+    }
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
